@@ -1,0 +1,8 @@
+= Bibliography - Book Catalog App
+
+home :: https://github.com/dklisiaris/bibliography
+bugs :: https://github.com/dklisiaris/bibliography/issues
+
+== Description
+Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services. 
+On top of that, libraries or individual users can create collections of their books and users can see where they can loan the book they want.
