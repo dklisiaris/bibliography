@@ -1,8 +1,19 @@
-<%# add navigation links to this file %>
+<li><%= link_to 'Categories', categories_path %></li>
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+      <span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+      <li><%= link_to 'Profile', '#' %></li>
+      <li><%= link_to 'Account Settings', edit_user_registration_path %></li>
+
+      <li class="divider"></li>
+      <li><%= link_to 'Log out', destroy_user_session_path, :method=>'delete' %></li>
+    </ul>
+    <!-- /.dropdown-user -->
+  </li>
 <% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
+  <li><%= link_to 'Log in', new_user_session_path %></li>
   <li><%= link_to 'Sign up', new_user_registration_path %></li>
 <% end %>

@@ -1,0 +1,27 @@
+<div class="row">
+
+  <div class="col-md-9">
+    <%= link_to "#{category.id}, #{category.name}, Slug: #{category.slug}, DDC: [#{category.ddc}], B_id: #{category.biblionet_id} Parent: [#{category.parent_id}]", category, 
+          class: 'btn btn-default btn-md btn-block', id: "category_#{category.id}"  %>
+  </div>
+
+  <div class="col-md-1">              
+    <%= link_to category, class: "btn btn-success btn-block", role:"button" do %>
+      <span class="glyphicon glyphicon-zoom-in"></span>
+    <% end %>
+  </div>    
+
+  <div class="col-md-1">    
+    <%= link_to edit_category_path(category), class: "btn btn-success btn-block", role:"button" do  %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>                
+  </div>
+
+  <div class="col-md-1">     
+      <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, 
+      class: "btn btn-danger btn-block", role:"button" do %>
+        <span class="glyphicon glyphicon-trash"></span>
+      <% end %>
+  </div>
+
+</div>

@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_tree (2.1.0)
+      activerecord (>= 3.0.0)
     addressable (2.3.6)
     arel (6.0.0)
     autoprefixer-rails (4.0.2.1)
@@ -217,6 +219,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_tree (~> 2.1.0)
   autoprefixer-rails
   bootstrap-sass
   byebug

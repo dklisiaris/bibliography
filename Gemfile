@@ -64,3 +64,5 @@ group :development do
 end
 
 gem 'devise'
+
+gem 'acts_as_tree', '~> 2.1.0'
