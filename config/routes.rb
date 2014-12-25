@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # get 'import/index'
+  get 'import', to: 'import#index'
+  # post 'import', to: 'import#upload'
+  post 'import/url', to: 'import#import_from_url'
+  post 'import/text', to: 'import#import_from_text'
+  post 'import/file', to: 'import#import_from_file'
+
   resources :categories
 
   devise_for :users

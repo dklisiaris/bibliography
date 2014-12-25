@@ -1,0 +1,35 @@
+<ul id="tabs" class="nav nav-pills" data-tabs="tabs">
+    <li class="active"><a href="#file" data-toggle="tab">From File</a></li>
+    <li><a href="#url" data-toggle="tab">From URL</a></li>
+    <li><a href="#text" data-toggle="tab">From Text</a></li>
+</ul>
+
+<div id="my-tab-content" class="tab-content">  
+    <div class="tab-pane active" id="file">
+      <%= form_tag({:action => "import_from_file"},:multipart => true)  do %>
+        <p>
+          <%= label_tag(:uploaded_file, "Import from file:") %></br>
+          <%= file_field_tag 'uploaded_file' %>
+        </p>
+        <%= submit_tag("Import") %>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="url">
+      <%= form_tag({:action => "import_from_url"}) do %>
+        <p>
+          <%= label_tag(:url, "Import data from url:") %></br>
+          <%= text_field_tag(:url) %>
+        </p>
+        <%= submit_tag("Import") %>
+      <% end %>        
+    </div>
+    <div class="tab-pane" id="text">
+      <%= form_tag({:action => "import_from_text"}) do %>
+        <p>
+          <%= label_tag(:content, "Import from text:") %> </br>
+          <%= text_area_tag(:content, "Write/Paste data to import", size: "32x12") %> 
+        </p>
+        <%= submit_tag("Import") %>
+      <% end %>        
+    </div>
+</div>
