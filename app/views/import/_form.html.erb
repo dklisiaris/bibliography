@@ -18,7 +18,7 @@
       <%= form_tag({:action => "import_from_url"}) do %>
         <p>
           <%= label_tag(:url, "Import data from url:") %></br>
-          <%= text_field_tag(:url) %>
+          <%= text_field_tag(:url, nil, :size => 80) %>
         </p>
         <%= submit_tag("Import") %>
       <% end %>        
@@ -27,7 +27,7 @@
       <%= form_tag({:action => "import_from_text"}) do %>
         <p>
           <%= label_tag(:content, "Import from text:") %> </br>
-          <%= text_area_tag(:content, "Write/Paste data to import", size: "32x12") %> 
+          <%= text_area_tag(:content, nil, placeholder: "Write/Paste data to import", size: "42x16") %> 
         </p>
         <%= submit_tag("Import") %>
       <% end %>        

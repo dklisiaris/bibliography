@@ -238,6 +238,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.0)
   jquery-rails
+  json
   launchy
   mysql2
   rails (= 4.2.0)
