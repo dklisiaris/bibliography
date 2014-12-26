@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :category do
-    name "MyString"
-ddc "MyString"
-slug "MyString"
-biblionet_id 1
-parent_id 1
+    name {Faker::Lorem.sentence}
+    ddc {Faker::Number.number(3)}
+    slug {Faker::Internet.slug(Faker::Lorem.sentence, '-')}
+    biblionet_id {Faker::Number.number(4).to_i}
+    parent_id nil
   end
 
 end
