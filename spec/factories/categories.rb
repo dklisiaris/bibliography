@@ -5,6 +5,11 @@ FactoryGirl.define do
     slug {Faker::Internet.slug(Faker::Lorem.sentence, '-')}
     biblionet_id {Faker::Number.number(4).to_i}
     parent_id nil
-  end
 
+    factory :invalid_category do
+      name nil
+    end
+
+  end
+  
 end

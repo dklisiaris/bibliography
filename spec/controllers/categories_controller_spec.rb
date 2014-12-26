@@ -37,121 +37,161 @@ RSpec.describe CategoriesController, :type => :controller do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all categories as @categories" do
-      category = Category.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:categories)).to eq([category])
+    it "assigns root categories sorted by ddc as @categories" do
+      category1 = create(:category)
+      child = create(:category, parent_id: category1.id)
+      category2 = create(:category)
+      get :index
+      expect(assigns(:categories)).to eq [category1,category2].sort_by!{ |item| item[:ddc] }
     end
+
+    it "renders the :index template" do
+      get :index
+      expect(response).to render_template :index
+    end      
   end
 
   describe "GET show" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
-      get :show, {:id => category.to_param}, valid_session
-      expect(assigns(:category)).to eq(category)
+      category = create(:category)
+      get :show, id: category
+      expect(assigns(:category)).to eq category
+    end
+
+    it "assigns the requested category's children as @children and sorts them by ddc" do
+      category = create(:category)
+      child1 = create(:category, parent_id: category.id)
+      child2 = create(:category, parent_id: category.id)
+      
+      get :show, id: category
+      expect(assigns(:children)).to eq [child1, child2].sort_by!{ |item| item[:ddc] }
+    end    
+
+    it "renders the show template" do
+      category = create(:category)
+      get :show, id: category
+      expect(response).to render_template :show
     end
   end
 
   describe "GET new" do
     it "assigns a new category as @category" do
-      get :new, {}, valid_session
+      get :new
       expect(assigns(:category)).to be_a_new(Category)
     end
+
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template :new
+    end
+
   end
 
   describe "GET edit" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
-      get :edit, {:id => category.to_param}, valid_session
+      category = create(:category)
+      get :edit, id: category
       expect(assigns(:category)).to eq(category)
     end
+
+    it "renders the edit template" do
+      category = create(:category)
+      get :edit, id: category
+      expect(response).to render_template :edit
+    end    
   end
 
   describe "POST create" do
-    describe "with valid params" do
+    context "with valid params" do
       it "creates a new Category" do
         expect {
-          post :create, {:category => valid_attributes}, valid_session
+          post :create, category: attributes_for(:category)
         }.to change(Category, :count).by(1)
       end
 
       it "assigns a newly created category as @category" do
-        post :create, {:category => valid_attributes}, valid_session
+        post :create, category: attributes_for(:category)
         expect(assigns(:category)).to be_a(Category)
         expect(assigns(:category)).to be_persisted
       end
 
       it "redirects to the created category" do
-        post :create, {:category => valid_attributes}, valid_session
+        post :create, category: attributes_for(:category)
         expect(response).to redirect_to(Category.last)
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
+      it "does not save the new category in the database" do
+        expect {
+          post :create, category: attributes_for(:invalid_category)
+        }.not_to change(Category, :count)
+      end      
+
       it "assigns a newly created but unsaved category as @category" do
-        post :create, {:category => invalid_attributes}, valid_session
+        post :create, category: attributes_for(:invalid_category)
         expect(assigns(:category)).to be_a_new(Category)
+        expect(assigns(:category)).not_to be_persisted
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:category => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        post :create, category: attributes_for(:invalid_category)
+        expect(response).to render_template :new
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe "PATCH update" do
+    before :each do
+      @category = create(:category, name: "Applied Sciences")
+    end    
+
+    context "with valid params" do
+      it "locates the requested @category" do
+        patch :update, id: @category, category: attributes_for(:category)
+        expect(assigns(:category)).to eq(@category)
+      end
 
       it "updates the requested category" do
-        category = Category.create! valid_attributes
-        put :update, {:id => category.to_param, :category => new_attributes}, valid_session
-        category.reload
-        skip("Add assertions for updated state")
+        patch :update, id: @category, category: attributes_for(:category, name: "History and arts")
+        @category.reload
+        expect(@category.name).to eq("History and arts")
       end
 
-      it "assigns the requested category as @category" do
-        category = Category.create! valid_attributes
-        put :update, {:id => category.to_param, :category => valid_attributes}, valid_session
-        expect(assigns(:category)).to eq(category)
-      end
 
       it "redirects to the category" do
-        category = Category.create! valid_attributes
-        put :update, {:id => category.to_param, :category => valid_attributes}, valid_session
-        expect(response).to redirect_to(category)
+        patch :update, id: @category, category: attributes_for(:category)
+        expect(response).to redirect_to(@category)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the category as @category" do
-        category = Category.create! valid_attributes
-        put :update, {:id => category.to_param, :category => invalid_attributes}, valid_session
-        expect(assigns(:category)).to eq(category)
+    context "with invalid params" do
+      it "does not change the category's attributes" do
+        patch :update, id: @category, category: attributes_for(:invalid_category)
+        @category.reload
+        expect(@category.name).to eq("Applied Sciences")
       end
 
-      it "re-renders the 'edit' template" do
-        category = Category.create! valid_attributes
-        put :update, {:id => category.to_param, :category => invalid_attributes}, valid_session
+      it "re-renders the 'edit' template" do        
+        patch :update, id: @category, category: attributes_for(:invalid_category)
         expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested category" do
-      category = Category.create! valid_attributes
+    before :each do
+      @category = create(:category)
+    end
+
+    it "destroys the requested category" do      
       expect {
-        delete :destroy, {:id => category.to_param}, valid_session
+        delete :destroy, id: @category
       }.to change(Category, :count).by(-1)
     end
 
-    it "redirects to the categories list" do
-      category = Category.create! valid_attributes
-      delete :destroy, {:id => category.to_param}, valid_session
+    it "redirects to the categories list" do      
+      delete :destroy, id: @category
       expect(response).to redirect_to(categories_url)
     end
   end

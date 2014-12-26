@@ -32,6 +32,14 @@ RSpec.describe Category, :type => :model do
     expect(category).to be_valid
   end
 
+  it "is valid with a parent which exists" do
+    parent = create(:category) 
+    child  = build(:category, parent_id: parent.id) 
+      
+    child.valid?
+    expect(child).to be_valid       
+  end  
+
   it "is invalid with a parent which doesn't exist" do
     category = build(:category, parent_id: 999999)  
       
