@@ -38,8 +38,11 @@ class ImportController < ApplicationController
     categories_hash = JSON.parse(json_content)
 
     categories_copy = categories_hash.clone
-    categories_hash.each do |key, value|  
-      create_category_and_anchestors!(key, value, categories_copy)         
+    
+    ActiveRecord::Base.transaction do
+      categories_hash.each do |key, value|  
+        create_category_and_anchestors!(key, value, categories_copy)         
+      end
     end
    
     flash.now[:notice] = "Successfully imported #{@imported_records} records (categories)."
@@ -62,6 +65,7 @@ class ImportController < ApplicationController
       cat.name = value['text']   
       cat.ddc = value['ddc']
       cat.biblionet_id = key
+      puts YAML::dump(cat) if cat.parent_id.nil?
       cat.save! 
 
       @imported_records += 1
