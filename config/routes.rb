@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :authors
+
   # get 'import/index'
   get 'import', to: 'import#index'
   # post 'import', to: 'import#upload'
