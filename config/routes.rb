@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :authors
+  
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
 
+  resources :authors, :concerns => :paginatable
+  
   # get 'import/index'
   get 'import', to: 'import#index'
   # post 'import', to: 'import#upload'

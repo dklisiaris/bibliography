@@ -2,6 +2,8 @@
 
 <h1>Listing Authors</h1>
 
+<%= paginate @authors %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,6 +12,7 @@
       <th>Lifetime</th>
       <th>Biography</th>
       <th>Image</th>
+      <th>Biblionet_id</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,6 +25,7 @@
         <td><%= author.lifetime %></td>
         <td><%= author.biography %></td>
         <td><%= author.image %></td>
+        <td><%= author.biblionet_id %></td>      
         <td><%= link_to 'Show', author %></td>
         <td><%= link_to 'Edit', edit_author_path(author) %></td>
         <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>

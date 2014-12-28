@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
   respond_to :html
 
   def index
-    @authors = Author.all
+    @authors = Author.all.page(params[:page])
     respond_with(@authors)
   end
 
@@ -42,6 +42,6 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:firstname, :lastname, :lifetime, :biography, :image)
+      params.require(:author).permit(:firstname, :lastname, :lifetime, :biography, :image, :biblionet_id)
     end
 end
