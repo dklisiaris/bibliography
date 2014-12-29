@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Firstname:</strong>
@@ -24,6 +23,15 @@
   <strong>Image:</strong>
   <%= @author.image %>
 </p>
+
+<h3>Awards</h3>
+<div id="awards">
+  <% @author.author_awards.each do |award| %>
+  <%= award.prize.name %>
+  <%= award.year %><br/>
+  <% end %>
+</div>
+
 
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>

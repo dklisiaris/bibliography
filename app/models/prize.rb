@@ -1,5 +1,5 @@
 class Prize < ActiveRecord::Base
 
-  has_many :awards
-  has_many :awards, through: :prizes
+  has_many :author_awards
+  has_many :authors, through: :author_awards
 end
