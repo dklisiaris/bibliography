@@ -1,9 +1,14 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
   <%= @prize.name %>
 </p>
+
+<h3>Awarded authors</h3>
+<div id="awards">
+  <%= render :partial => "author_awards/authors_in_prize", :collection => @prize.author_awards, :as => :award %>
+</div>
+
 
 <%= link_to 'Edit', edit_prize_path(@prize) %> |
 <%= link_to 'Back', prizes_path %>

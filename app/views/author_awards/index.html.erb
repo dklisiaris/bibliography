@@ -10,24 +10,17 @@
       <th>Author</th>
       <th>Prize</th>
       <th>Year</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @author_awards.each do |author_award| %>
       <tr>
-        <td><%= author_award.author.fullname %></td>
-        <td><%= author_award.prize.name %></td>
+        <td><%= link_to "#{author_award.author.fullname}", author_award.author %></td>
+        <td><%= link_to "#{author_award.prize.name}", author_award.prize %></td>
         <td><%= author_award.year %></td>
-        <td><%= link_to 'Show', author_award %></td>
-        <td><%= link_to 'Edit', edit_author_award_path(author_award) %></td>
-        <td><%= link_to 'Destroy', author_award, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Author award', new_author_award_path %>

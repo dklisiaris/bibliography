@@ -4,9 +4,13 @@ Rails.application.routes.draw do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
 
-  resources :authors, :concerns => :paginatable
+  resources :authors, :concerns => :paginatable do
+    resources :author_awards, path: :awards, only: [:create, :edit, :update, :destroy]
+  end
+  resources :author_awards, only: [:index], :concerns => :paginatable
+
   resources :prizes, :concerns => :paginatable
-  resources :author_awards, :concerns => :paginatable
+  
   
   # get 'import/index'
   get 'import', to: 'import#index'

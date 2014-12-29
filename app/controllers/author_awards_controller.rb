@@ -12,28 +12,32 @@ class AuthorAwardsController < ApplicationController
     respond_with(@author_award)
   end
 
-  def new
-    @author_award = AuthorAward.new
-    respond_with(@author_award)
-  end
+  # def new
+  #   @author_award = AuthorAward.new
+  #   respond_with(@author_award)
+  # end
 
   def edit
+    @author = @author_award.author    
   end
 
   def create
     @author_award = AuthorAward.new(author_award_params)
-    @author_award.save
-    respond_with(@author_award)
+    flash[:notice] = "Award created successfully." if @author_award.save
+    respond_with(@author_award.author)
   end
 
   def update
-    @author_award.update(author_award_params)
-    respond_with(@author_award)
+    if @author_award.update(author_award_params)
+      flash[:notice] = "Award updated successfully."
+    end
+    respond_with(@author_award.author)
   end
 
-  def destroy
-    @author_award.destroy
-    respond_with(@author_award)
+  def destroy    
+    author = @author_award.author
+    flash[:notice] = "Award deleted successfully." if @author_award.destroy
+    respond_with(author)
   end
 
   private

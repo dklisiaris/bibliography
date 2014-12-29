@@ -1,3 +1,4 @@
+<h1><%= @author.fullname %></h1>
 
 <p>
   <strong>Firstname:</strong>
@@ -26,12 +27,10 @@
 
 <h3>Awards</h3>
 <div id="awards">
-  <% @author.author_awards.each do |award| %>
-  <%= award.prize.name %>
-  <%= award.year %><br/>
-  <% end %>
+  <%= render :partial => "author_awards/prizes_in_author", :collection => @author.author_awards, :as => :award %>
 </div>
 
+<%= render :file => 'author_awards/new' %>
 
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>
