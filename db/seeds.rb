@@ -8,7 +8,15 @@
 require 'faker'
 
 # Generate 100 authors
-100.times { Author.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name, biography: Faker::Lorem.sentences(3).join ) }
+10000.times { Author.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name, biography: Faker::Lorem.sentences(3).join ) }
 
 # Generate 50 prices
-50.times { Prize.create(name: Faker::Lorem.sentence(3)) } 
+500.times { Prize.create(name: Faker::Lorem.sentence(3)) } 
+
+Author.all.each do |author|
+  num = rand(0..3)
+  num.times do
+    prize = Prize.all.to_a.sample
+    AuthorAward.create(author_id: author.id, prize_id: prize.id, year: rand(1900..2014))
+  end
+end

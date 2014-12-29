@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :authors, :concerns => :paginatable
   resources :prizes, :concerns => :paginatable
+  resources :author_awards, :concerns => :paginatable
   
   # get 'import/index'
   get 'import', to: 'import#index'

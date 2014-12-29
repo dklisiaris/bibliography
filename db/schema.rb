@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228221925) do
+ActiveRecord::Schema.define(version: 20141228234255) do
+
+  create_table "author_awards", force: :cascade do |t|
+    t.integer  "author_id",  limit: 4
+    t.integer  "prize_id",   limit: 4
+    t.integer  "year",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "author_awards", ["author_id"], name: "index_author_awards_on_author_id", using: :btree
+  add_index "author_awards", ["prize_id"], name: "index_author_awards_on_prize_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -63,4 +74,6 @@ ActiveRecord::Schema.define(version: 20141228221925) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "author_awards", "authors"
+  add_foreign_key "author_awards", "prizes"
 end

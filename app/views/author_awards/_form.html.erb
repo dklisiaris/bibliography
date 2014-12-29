@@ -1,0 +1,29 @@
+<%= form_for(@author_award) do |f| %>
+  <% if @author_award.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@author_award.errors.count, "error") %> prohibited this author_award from being saved:</h2>
+
+      <ul>
+      <% @author_award.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field col-xs-12 form-group">
+    <%= f.label :author_id %><br>
+    <%= f.text_field :author_id, class: 'form-control'  %>
+  </div>
+  <div class="field col-xs-12 form-group">
+    <%= f.label :prize_id %><br>
+    <%= f.text_field :prize_id, class: 'form-control'  %>
+  </div>
+  <div class="field col-xs-12 form-group">
+    <%= f.label :year %><br>
+    <%= f.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), class: 'form-control' %>
+  </div>
+  <div class="actions col-xs-12 form-group">
+    <%= f.submit 'Save', :class => 'form-control btn-success'  %>
+  </div>
+<% end %>
