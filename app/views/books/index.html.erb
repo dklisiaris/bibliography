@@ -1,0 +1,70 @@
+
+<h1>Listing Books</h1>
+
+<%= paginate @books %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Subtitle</th>
+      <th>Publisher</th>      
+      <th>Image</th>
+      <th>Isbn</th>
+      <th>Series</th>
+      <th>Price</th>
+      <th>Physical desc.</th>
+      <th>Availability</th>
+      <th>Format</th>
+      <th>Original</th>          
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.subtitle %></td>
+        <td>
+          <%= book.publisher.name %><br>
+          <%= book.publication_place %><br>
+          <%= book.publication_year %>
+        </td>        
+        <td><%= image_tag(book.image, height: '64', width: '64') %></td>
+        <td>
+          <%= book.isbn %><br>
+          <%= book.isbn13 %><br>
+          <%= book.ismn %><br>
+          <%= book.issn %>
+        </td>
+        <td><%= book.series %></td>        
+        <td>
+          <%= book.price %><br>
+          <%= book.price_updated_at %>
+        </td>
+        <td>          
+          Pages:
+          <%= book.pages %><br>
+          <%= book.cover_type.humanize %><br>
+          <%= book.physical_description %>
+        </td>
+        <td><%= book.availability.humanize %></td>
+        <td><%= book.format.humanize %></td>
+        <td>
+          <%= book.original_language.humanize %><br>
+          <%= book.original_title %>
+        </td>                      
+        <td>
+          <%= link_to 'Show', book %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+          <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Book', new_book_path %>

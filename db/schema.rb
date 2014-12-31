@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231145234) do
+ActiveRecord::Schema.define(version: 20141231181733) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -35,6 +35,39 @@ ActiveRecord::Schema.define(version: 20141231145234) do
 
   add_index "awards", ["awardable_id", "awardable_type"], name: "index_awards_on_awardable_id_and_awardable_type", using: :btree
   add_index "awards", ["prize_id"], name: "index_awards_on_prize_id", using: :btree
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title",                limit: 255
+    t.string   "subtitle",             limit: 255
+    t.text     "description",          limit: 65535
+    t.string   "image",                limit: 255
+    t.string   "isbn",                 limit: 255
+    t.string   "isbn13",               limit: 255
+    t.string   "ismn",                 limit: 255
+    t.string   "issn",                 limit: 255
+    t.string   "series",               limit: 255
+    t.integer  "pages",                limit: 4
+    t.integer  "publication_year",     limit: 4
+    t.string   "publication_place",    limit: 255
+    t.decimal  "price",                              precision: 6, scale: 2
+    t.date     "price_updated_at"
+    t.string   "physical_description", limit: 255
+    t.integer  "cover_type",           limit: 4,                             default: 0
+    t.integer  "availability",         limit: 4,                             default: 0
+    t.integer  "format",               limit: 4,                             default: 0
+    t.integer  "original_language",    limit: 4
+    t.string   "original_title",       limit: 255
+    t.integer  "publisher_id",         limit: 4
+    t.string   "extra",                limit: 255
+    t.integer  "biblionet_id",         limit: 4
+    t.datetime "created_at",                                                             null: false
+    t.datetime "updated_at",                                                             null: false
+  end
+
+  add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
+  add_index "books", ["isbn13"], name: "index_books_on_isbn13", unique: true, using: :btree
+  add_index "books", ["ismn"], name: "index_books_on_ismn", unique: true, using: :btree
+  add_index "books", ["publisher_id"], name: "index_books_on_publisher_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -101,4 +134,5 @@ ActiveRecord::Schema.define(version: 20141231145234) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "awards", "prizes"
+  add_foreign_key "books", "publishers"
 end
