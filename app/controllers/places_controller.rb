@@ -13,11 +13,6 @@ class PlacesController < ApplicationController
     respond_with(@place)
   end
 
-  def new
-    @place = @placeable.places.new
-    respond_with(@place)
-  end
-
   def edit
     
   end

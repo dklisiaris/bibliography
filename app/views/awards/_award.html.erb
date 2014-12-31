@@ -1,0 +1,7 @@
+<tr>
+<% if award.awardable_type == 'Author' %>
+<td><%= link_to "#{award.awardable.fullname}", award.awardable %></td>
+<td><%= link_to "#{award.prize.name}", award.prize %></td>
+<td><%= award.year %></td>
+<% end %>
+</tr>

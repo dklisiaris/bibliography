@@ -9,6 +9,9 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    @awardable = @author
+    @awards = @awardable.awards
+    @award = Award.new
     respond_with(@author)
   end
 

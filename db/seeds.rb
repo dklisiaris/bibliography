@@ -16,8 +16,8 @@ require 'faker'
 Author.all.each do |author|
   num = rand(0..3)
   num.times do
-    prize = Prize.all.to_a.sample
-    AuthorAward.create(author_id: author.id, prize_id: prize.id, year: rand(1900..2014))
+    prize = Prize.all.to_a.sample    
+    author.awards.create(prize: prize, year: rand(1900..2015))
   end
 end
 

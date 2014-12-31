@@ -6,7 +6,7 @@
 
 <h3>Awarded authors</h3>
 <div id="awards">
-  <%= render :partial => "author_awards/authors_in_prize", :collection => @prize.author_awards, :as => :award %>
+  <%= render :partial =>  "prizes/awardee", :collection => @prize.awards, :as => :award %>
 </div>
 
 

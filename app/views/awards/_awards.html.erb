@@ -1,0 +1,28 @@
+<h1>Listing Awards</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Prize</th>
+      <th>Year</th>
+      <th>Awardable</th>
+      <th>Awardable type</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @awards.each do |award| %>
+      <tr>
+        <td><%= link_to "#{award.prize.name}", award.prize %></td>
+        <td><%= award.year %></td>
+        <td><%= award.awardable_id %></td>
+        <td><%= award.awardable_type %></td>
+        <td><%= link_to 'Edit', [:edit, @awardable, award]  unless @awardable.nil? %></td>
+        <td><%= link_to 'Destroy', [@awardable, award], method: :delete, data: { confirm: 'Are you sure?' } unless @awardable.nil? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

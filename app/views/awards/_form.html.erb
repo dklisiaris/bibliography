@@ -1,10 +1,10 @@
-<%= form_for([@author, @author_award = setup_award(@author, @author_award)]) do |f| %>
-  <% if @author_award.errors.any? %>
+<%= form_for [@awardable, @award] do |f| %>
+  <% if @award.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@author_award.errors.count, "error") %> prohibited this pin from being saved:</h2>
+      <h2><%= pluralize(@award.errors.count, "error") %> prohibited this award from being saved:</h2>
 
       <ul>
-      <% @author_award.errors.full_messages.each do |message| %>
+      <% @award.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -19,8 +19,6 @@
     <%= f.label :year %><br>
     <%= f.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), class: 'form-control' %>
   </div>
-
-  <%= f.hidden_field :author_id, :value => @author_award.author_id unless @author_award.author_id.nil? %>
 
   <div class="actions col-xs-12 form-group">
     <%= f.submit 'Save', :class => 'form-control btn-success'  %>

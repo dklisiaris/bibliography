@@ -26,11 +26,10 @@
 </p>
 
 <h3>Awards</h3>
-<div id="awards">
-  <%= render :partial => "author_awards/prizes_in_author", :collection => @author.author_awards, :as => :award %>
-</div>
 
-<%= render :file => 'author_awards/new' %>
+<%= render 'awards/awards' %>
+<%= render 'awards/form' %>
 
+<br>
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>

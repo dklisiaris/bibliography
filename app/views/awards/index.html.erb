@@ -1,0 +1,21 @@
+
+<h1>Awards</h1>
+
+<%= paginate @awards %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Awardee</th>
+      <th>Prize</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  <%= render :partial =>  "awards/award", :collection => @awards, :as => :award %>
+
+  </tbody>
+</table>
+

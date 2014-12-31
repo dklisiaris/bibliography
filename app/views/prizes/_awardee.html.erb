@@ -1,0 +1,4 @@
+<% if award.awardable_type == 'Author' %>
+<%= link_to "#{award.awardable.fullname}", award.awardable %>
+<%= award.year %><br/>
+<% end %>
