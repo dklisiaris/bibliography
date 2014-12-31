@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228234255) do
+ActiveRecord::Schema.define(version: 20141231014554) do
 
   create_table "author_awards", force: :cascade do |t|
     t.integer  "author_id",  limit: 4
@@ -48,6 +48,24 @@ ActiveRecord::Schema.define(version: 20141228234255) do
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
+  create_table "places", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "role",           limit: 255
+    t.string   "address",        limit: 255
+    t.string   "telephone",      limit: 255
+    t.string   "fax",            limit: 255
+    t.string   "email",          limit: 255
+    t.string   "website",        limit: 255
+    t.decimal  "latitude",                   precision: 10, scale: 6
+    t.decimal  "longitude",                  precision: 10, scale: 6
+    t.integer  "placeable_id",   limit: 4
+    t.string   "placeable_type", limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
+
+  add_index "places", ["placeable_id", "placeable_type"], name: "index_places_on_placeable_id_and_placeable_type", using: :btree
+
   create_table "prizes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -55,6 +73,13 @@ ActiveRecord::Schema.define(version: 20141228234255) do
   end
 
   add_index "prizes", ["name"], name: "index_prizes_on_name", unique: true, using: :btree
+
+  create_table "publishers", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "owner",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

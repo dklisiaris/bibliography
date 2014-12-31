@@ -7,10 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 
-# Generate 100 authors
+# Generate 10000 authors
 10000.times { Author.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name, biography: Faker::Lorem.sentences(3).join ) }
 
-# Generate 50 prices
+# Generate 500 prizes
 500.times { Prize.create(name: Faker::Lorem.sentence(3)) } 
 
 Author.all.each do |author|
@@ -18,5 +18,22 @@ Author.all.each do |author|
   num.times do
     prize = Prize.all.to_a.sample
     AuthorAward.create(author_id: author.id, prize_id: prize.id, year: rand(1900..2014))
+  end
+end
+
+500.times{ Publisher.create(name: Faker::Company.name, owner: Faker::Name.name ) }
+
+Publisher.all.each do |publisher|
+  num = rand(1..3)
+  num.times do
+    publisher.places.create(:name => Faker::Company.name,
+     :role => Faker::Lorem.sentence,
+      :address => [Faker::Address.street_address,Faker::Address.postcode,Faker::Address.city].join(', '),
+       :telephone => Faker::PhoneNumber.phone_number,
+        :fax => Faker::PhoneNumber.cell_phone,
+         :email => Faker::Internet.email,
+          :website => Faker::Internet.url,
+           :latitude => Faker::Address.latitude,
+            :longitude => Faker::Address.longitude)
   end
 end

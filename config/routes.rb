@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   resources :prizes, :concerns => :paginatable
   
+  resources :publishers, :concerns => :paginatable do
+    resources :places, only: [:create, :edit, :update, :destroy]
+  end
   
   # get 'import/index'
   get 'import', to: 'import#index'

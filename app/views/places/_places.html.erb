@@ -1,0 +1,38 @@
+<h1>Listing Places</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Address</th>
+      <th>Telephone</th>
+      <th>Fax</th>
+      <th>Email</th>
+      <th>Website</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.name %></td>
+        <td><%= place.role %></td>
+        <td><%= place.address %></td>
+        <td><%= place.telephone %></td>
+        <td><%= place.fax %></td>
+        <td><%= place.email %></td>
+        <td><%= place.website %></td>
+        <td><%= place.latitude %></td>
+        <td><%= place.longitude %></td>
+        <td><%= link_to 'Edit', [:edit, @placeable, place] %></td>
+        <td><%= link_to 'Destroy', [@placeable, place], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
