@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231181733) do
+ActiveRecord::Schema.define(version: 20141231214257) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -64,10 +64,15 @@ ActiveRecord::Schema.define(version: 20141231181733) do
     t.datetime "updated_at",                                                             null: false
   end
 
-  add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
-  add_index "books", ["isbn13"], name: "index_books_on_isbn13", unique: true, using: :btree
-  add_index "books", ["ismn"], name: "index_books_on_ismn", unique: true, using: :btree
   add_index "books", ["publisher_id"], name: "index_books_on_publisher_id", using: :btree
+
+  create_table "books_categories", id: false, force: :cascade do |t|
+    t.integer "book_id",     limit: 4
+    t.integer "category_id", limit: 4
+  end
+
+  add_index "books_categories", ["book_id"], name: "index_books_categories_on_book_id", using: :btree
+  add_index "books_categories", ["category_id"], name: "index_books_categories_on_category_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -134,5 +139,6 @@ ActiveRecord::Schema.define(version: 20141231181733) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "awards", "prizes"
-  add_foreign_key "books", "publishers"
+  add_foreign_key "books_categories", "books"
+  add_foreign_key "books_categories", "categories"
 end
