@@ -114,5 +114,12 @@
   <%= @book.biblionet_id %>
 </p>
 
+<p>
+  <strong>Genres:</strong><br>
+  <% @book.categories.each do |category| %>
+  <%= category.name %><br>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

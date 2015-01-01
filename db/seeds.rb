@@ -52,17 +52,17 @@ publishers = Publisher.all.to_a
     description: Faker::Lorem.paragraph,
     isbn: Faker::Code.isbn,
     image: Faker::Avatar.image,
-    series:Faker::Lorem.sentence(1),
-    pages: rand(30..3000),
-    publication_year: rand(1900..2015),
-    publication_place: Faker::Address.city,
-    publisher: publishers.sample,
-    physical_description: Faker::Lorem.sentence(1),
-    price: rand(3.0..80.5),
-    price_updated_at: Faker::Date.between(5.years.ago, Date.today),
-    cover_type: rand(0..2),
-    availability: rand(0..4),
-    format: rand(0..12),
-    original_language: rand(0..20),
-    original_title: Faker::Lorem.sentence)
+
+Book.all.each do |book|
+  rand(1..5).times do
+    book.categories << categories.sample
+  end
 end
+
+books = Book.all.to_a
+
+Category.all.each do |category|
+  rand(1..3).times do
+    category.books << books.sample
+  end
+end  
