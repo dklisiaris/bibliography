@@ -65,4 +65,18 @@ Category.all.each do |category|
   rand(1..3).times do
     category.books << books.sample
   end
-end  
+end
+
+Author.all.each do |author|
+  author.contributions.create(job: rand(0..18), book: books.sample) 
+end 
+
+
+authors = Author.all.to_a
+
+Book.all.each do |book|
+  book.contributions.create(job: 0, author: authors.sample)
+  rand(2..5).times do
+    book.contributions.create(job: rand(0..18), author: authors.sample) 
+  end
+end

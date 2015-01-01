@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231214257) do
+ActiveRecord::Schema.define(version: 20150101180825) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(version: 20141231214257) do
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
+  create_table "contributions", force: :cascade do |t|
+    t.integer  "job",        limit: 4
+    t.integer  "book_id",    limit: 4
+    t.integer  "author_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "contributions", ["author_id"], name: "index_contributions_on_author_id", using: :btree
+  add_index "contributions", ["book_id"], name: "index_contributions_on_book_id", using: :btree
+
   create_table "places", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.string   "role",           limit: 255
@@ -141,4 +152,6 @@ ActiveRecord::Schema.define(version: 20141231214257) do
   add_foreign_key "awards", "prizes"
   add_foreign_key "books_categories", "books"
   add_foreign_key "books_categories", "categories"
+  add_foreign_key "contributions", "authors"
+  add_foreign_key "contributions", "books"
 end

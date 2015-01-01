@@ -1,6 +1,9 @@
 class Book < ActiveRecord::Base
-  belongs_to :publisher
+  
   has_and_belongs_to_many :categories
+  has_many :contributions
+  has_many :authors, through: :contributions
+  belongs_to :publisher
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)

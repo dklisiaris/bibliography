@@ -1,0 +1,29 @@
+<%= form_for(@contribution) do |f| %>
+  <% if @contribution.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contribution.errors.count, "error") %> prohibited this contribution from being saved:</h2>
+
+      <ul>
+      <% @contribution.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field col-xs-12 form-group">
+    <%= f.label :job %><br>
+    <%= f.select :job, options_for_select(@jobs.collect { |s| [s[0].humanize, s[0]] }, selected: @contribution.job), {}, class: 'form-control' %>    
+  </div>
+  <div class="field col-xs-6 form-group">
+    <%= f.label :book_id %><br>
+    <%= f.text_field :book_id, class: 'form-control'  %>
+  </div>
+  <div class="field col-xs-6 form-group">
+    <%= f.label :author_id %><br>
+    <%= f.text_field :author_id, class: 'form-control'  %>
+  </div>
+  <div class="actions col-xs-6 form-group">
+    <%= f.submit 'Save', class: 'form-control btn-success'  %>
+  </div>
+<% end %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :awards, only: [:index], :concerns => :paginatable 
 
-  resources :prizes, :books,  :concerns => :paginatable
+  resources :prizes, :books, :contributions, :concerns => :paginatable
   
   resources :publishers, :concerns => :paginatable do
     resources :places, only: [:create, :edit, :update, :destroy]
