@@ -28,8 +28,8 @@
         <td><%= place.website %></td>
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
-        <td><%= link_to 'Edit', [:edit, @placeable, place] %></td>
-        <td><%= link_to 'Destroy', [@placeable, place], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', [:edit, @placeable, place] if policy(place).update? %></td>
+        <td><%= link_to 'Destroy', [@placeable, place], method: :delete, data: { confirm: 'Are you sure?' } if policy(place).destroy? %></td>
       </tr>
     <% end %>
   </tbody>

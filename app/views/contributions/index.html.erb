@@ -20,8 +20,8 @@
         <td><%= contribution.author.fullname %></td>
         <td><%= contribution.book.title %></td>        
         <td><%= link_to 'Show', contribution %></td>
-        <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
-        <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_contribution_path(contribution) if policy(contribution).update? %></td>
+        <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } if policy(contribution).destroy? %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Contribution', new_contribution_path %>
+<%= link_to 'New Contribution', new_contribution_path if policy(Contribution).new? %>

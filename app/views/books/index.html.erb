@@ -27,7 +27,7 @@
         <td><%= book.title %></td>
         <td><%= book.subtitle %></td>
         <td>
-          <%= book.publisher.name %><br>
+          <%= book.publisher.name unless book.publisher.nil? %><br>
           <%= book.publication_place %><br>
           <%= book.publication_year %>
         </td>        
@@ -57,8 +57,12 @@
         </td>                      
         <td>
           <%= link_to 'Show', book %>
+          <% if policy(book).update? %>
           <%= link_to 'Edit', edit_book_path(book) %>
+          <% end %>
+          <% if policy(book).destroy? %>
           <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
         </td>
       </tr>
     <% end %>
@@ -67,4 +71,4 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+<%= link_to 'New Book', new_book_path if policy(Book).new? %>

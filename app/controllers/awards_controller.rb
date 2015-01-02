@@ -5,7 +5,7 @@ class AwardsController < ApplicationController
   respond_to :html
 
   def index
-    @awards = Award.all.page(params[:page])
+    @awards = policy_scope(Award).page(params[:page])
     respond_with(@awards)
   end
 
@@ -19,6 +19,8 @@ class AwardsController < ApplicationController
 
   def create
     @award = @awardable.awards.new(award_params)
+    authorize @award
+    
     flash[:notice] = "Award created successfully!" if @award.save
     respond_with(@awardable)
   end
@@ -36,6 +38,7 @@ class AwardsController < ApplicationController
   private
     def set_award
       @award = Award.find(params[:id])
+      authorize @award
     end
 
     def award_params

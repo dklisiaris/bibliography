@@ -4,7 +4,8 @@ class PrizesController < ApplicationController
   respond_to :html
 
   def index
-    @prizes = Prize.all.page(params[:page])
+    @prizes = policy_scope(Prize).page(params[:page])
+
     respond_with(@prizes)
   end
 
@@ -14,6 +15,8 @@ class PrizesController < ApplicationController
 
   def new
     @prize = Prize.new
+    authorize @prize
+
     respond_with(@prize)
   end
 
@@ -22,23 +25,28 @@ class PrizesController < ApplicationController
 
   def create
     @prize = Prize.new(prize_params)
+    authorize @prize
     @prize.save
+
     respond_with(@prize)
   end
 
   def update
     @prize.update(prize_params)
+
     respond_with(@prize)
   end
 
   def destroy
     @prize.destroy
+
     respond_with(@prize)
   end
 
   private
     def set_prize
       @prize = Prize.find(params[:id])
+      authorize @prize
     end
 
     def prize_params

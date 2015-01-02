@@ -14,12 +14,13 @@
   <tbody>
     <% @awards.each do |award| %>
       <tr>
-        <td><%= link_to "#{award.prize.name}", award.prize %></td>
+        <td><%= link_to "#{award.prize.name}", award.prize unless award.prize.nil? %></td>
         <td><%= award.year %></td>
         <td><%= award.awardable_id %></td>
         <td><%= award.awardable_type %></td>
-        <td><%= link_to 'Edit', [:edit, @awardable, award]  unless @awardable.nil? %></td>
-        <td><%= link_to 'Destroy', [@awardable, award], method: :delete, data: { confirm: 'Are you sure?' } unless @awardable.nil? %></td>
+        <td><%= link_to 'Edit', [:edit, @awardable, award]  unless @awardable.nil? or not policy(award).update? %></td>
+        <td><%= link_to 'Destroy', [@awardable, award],
+           method: :delete, data: { confirm: 'Are you sure?' } unless @awardable.nil? or not policy(award).destroy? %></td>
       </tr>
     <% end %>
   </tbody>

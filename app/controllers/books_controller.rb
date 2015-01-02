@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   respond_to :html
 
   def index
-    @books = Book.all.page(params[:page])
+    @books = policy_scope(Book).page(params[:page])
     respond_with(@books)
   end
 
@@ -15,31 +15,38 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    authorize @book
+
     respond_with(@book)
   end
 
-  def edit
+  def edit    
   end
 
   def create
     @book = Book.new(book_params)
+    authorize @book
     @book.save
+
     respond_with(@book)
   end
 
-  def update
+  def update    
     @book.update(book_params)
+
     respond_with(@book)
   end
 
-  def destroy
+  def destroy    
     @book.destroy
+
     respond_with(@book)
   end
 
   private
-    def set_book
+    def set_book          
       @book = Book.find(params[:id])
+      authorize @book
     end
 
     def book_params

@@ -18,9 +18,9 @@
       <tr>
         <td><%= publisher.name %></td>
         <td><%= publisher.owner %></td>
-        <td><%= link_to 'Show', publisher %></td>
-        <td><%= link_to 'Edit', edit_publisher_path(publisher) %></td>
-        <td><%= link_to 'Destroy', publisher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', publisher %></td>        
+        <td><%= link_to 'Edit', edit_publisher_path(publisher) if policy(publisher).update? %></td>
+        <td><%= link_to 'Destroy', publisher, method: :delete, data: { confirm: 'Are you sure?' } if policy(publisher).destroy? %></td>        
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Publisher', new_publisher_path %>
+<%= link_to 'New Publisher', new_publisher_path  if policy(Publisher).update? %>

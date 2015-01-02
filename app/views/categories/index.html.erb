@@ -3,4 +3,4 @@
 
 <%= render @categories %>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'New Category', new_category_path if policy(Category).new? %>

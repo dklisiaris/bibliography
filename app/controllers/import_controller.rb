@@ -1,5 +1,8 @@
-class ImportController < ApplicationController  
-  def index    
+class ImportController < ApplicationController 
+  skip_after_action :verify_policy_scoped, only: :index 
+  
+  def index
+    authorize :import, :index?    
   end
 
   def import_from_file

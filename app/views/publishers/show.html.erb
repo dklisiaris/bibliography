@@ -2,9 +2,11 @@
 
 <%= render 'publisher' %>
 
-<%= link_to 'Edit', edit_publisher_path(@placeable) %> |
+<%= link_to 'Edit', edit_publisher_path(@placeable) if policy(@placeable).update? %> <br>
 <%= link_to 'Back', publishers_path %>
 
 
 <%= render 'places/places' %>
-<%= render 'places/form' %>
+
+
+<%= render 'places/form' if policy(Place).new? %>

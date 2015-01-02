@@ -24,8 +24,12 @@
         <td><%= author.image %></td>
         <td><%= author.biblionet_id %></td>      
         <td><%= link_to 'Show', author %></td>
+        <% if policy(author).update? %>
         <td><%= link_to 'Edit', edit_author_path(author) %></td>
+        <% end %>
+        <% if policy(author).destroy? %>
         <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

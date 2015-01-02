@@ -27,9 +27,10 @@
 
 <h3>Awards</h3>
 
-<%= render 'awards/awards' %>
-<%= render 'awards/form' %>
+<%= render 'awards/awards' unless @awards.nil? or @awards.empty? %>
+
+<%= render 'awards/form' if policy(Award).new? %>
 
 <br>
-<%= link_to 'Edit', edit_author_path(@author) %> |
+<%= link_to 'Edit', edit_author_path(@author) if policy(@author).update? %> <br>
 <%= link_to 'Back', authors_path %>

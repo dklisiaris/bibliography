@@ -24,10 +24,17 @@
   <%= @category.parent_id %>
 </p>
 
-<%= link_to "..", @category.parent_id.nil? ? categories_path : @category.parent, 
-      class: 'btn btn-default btn-md btn-block', id: "@category_#{@category.id}"  %>
-<%= render @children %>
+<div class="row">
+  <div class="col-md-10">
+  <%= link_to "..", @category.parent_id.nil? ? categories_path : @category.parent, 
+        class: 'col-md-10 btn btn-default btn-md btn-block', id: "@category_#{@category.id}"  %>  
+  </div>    
+  <%= render @children %>
+</div>
 
+<% if policy(@category).update? %>
 <%= link_to 'New Subcategory', new_category_path(:parent_id => @category.id) %> |
 <%= link_to 'Edit', edit_category_path(@category) %> |
+<% end %>
+
 <%= link_to 'Back', categories_path %>

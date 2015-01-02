@@ -4,7 +4,7 @@ class PublishersController < ApplicationController
   respond_to :html
 
   def index
-    @publishers = Publisher.all.page(params[:page])
+    @publishers = policy_scope(Publisher).page(params[:page])
     respond_with(@publishers)
   end
 
@@ -17,6 +17,7 @@ class PublishersController < ApplicationController
 
   def new
     @publisher = Publisher.new
+    authorize @publisher
     respond_with(@publisher)
   end
 
@@ -25,6 +26,7 @@ class PublishersController < ApplicationController
 
   def create
     @publisher = Publisher.new(publisher_params)
+    authorize @publisher
     @publisher.save
     respond_with(@publisher)
   end
@@ -42,6 +44,7 @@ class PublishersController < ApplicationController
   private
     def set_publisher
       @publisher = Publisher.find(params[:id])
+      authorize @publisher
     end
 
     def publisher_params

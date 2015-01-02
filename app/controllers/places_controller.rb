@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :load_placeable
+  skip_after_action :verify_policy_scoped, only: :index
   
   respond_to :html
 
@@ -19,6 +20,7 @@ class PlacesController < ApplicationController
 
   def create
     @place = @placeable.places.new(place_params)
+    authorize @place
     flash[:notice] = "Place created successfully!" if @place.save
 
     respond_with(@placeable)
@@ -37,6 +39,7 @@ class PlacesController < ApplicationController
   private
     def set_place
       @place = Place.find(params[:id])
+      authorize @place
     end
 
     def place_params

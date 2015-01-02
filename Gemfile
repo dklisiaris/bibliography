@@ -65,6 +65,7 @@ end
 
 gem 'devise'
 gem 'royce'
+gem "pundit"
 
 gem 'acts_as_tree', '~> 2.1.0'
 
