@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101180825) do
+ActiveRecord::Schema.define(version: 20150102131342) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -130,6 +130,25 @@ ActiveRecord::Schema.define(version: 20150101180825) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "royce_connector", force: :cascade do |t|
+    t.integer  "roleable_id",   limit: 4,   null: false
+    t.string   "roleable_type", limit: 255, null: false
+    t.integer  "role_id",       limit: 4,   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "royce_connector", ["role_id"], name: "index_royce_connector_on_role_id", using: :btree
+  add_index "royce_connector", ["roleable_id", "roleable_type"], name: "index_royce_connector_on_roleable_id_and_roleable_type", using: :btree
+
+  create_table "royce_role", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "royce_role", ["name"], name: "index_royce_role_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

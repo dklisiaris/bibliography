@@ -159,6 +159,8 @@ GEM
       json (~> 1.4)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
+    royce (1.0.6)
+      rails (>= 4.1.4)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -247,6 +249,7 @@ DEPENDENCIES
   mysql2
   rails (= 4.2.0)
   rails_layout
+  royce
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -1,16 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake d seed (or created alongside the db with : d
-  setup): .
-#
-# Example 
-#
-#   cities = City.create([{ na: m
-   'Chicago' }, { na: m
-     'Copenhagen' }]: )
-#   Mayor.create(nam
-   'Emanuel', ci: t
-   cities.first: )
+
 require 'faker'
+
+admin_user = User.create(:email => 'admin@bibliography.gr', :password => '12345678', :password_confirmation => '12345678') 
+admin_user.editor!
+admin_user.admin!
+
+editor_user = User.create(:email => 'editor@bibliography.gr', :password => '12345678', :password_confirmation => '12345678') 
+editor_user.editor!
+
+100.times{User.create(:email => Faker::Internet.email, :password => '12345678', :password_confirmation => '12345678') }
 
 # Generate 10000 authors
 10000.times { Author.create(firstnam
