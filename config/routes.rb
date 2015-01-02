@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
       
+  get 'home/index'
+
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
@@ -30,7 +32,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: 'categories#index'
+  root to: 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
