@@ -1,6 +1,15 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
+<%= render 'home/search_form' %>
+
+<%= paginate @search_results %><br>
+
+<% @search_results.each do |book| %>
+<%= book.title%><br>
+<% end %>
+<%= "Nothing was found..." if @search_results.empty? and !params[:search].nil? %><br>
+
 
 <% @latest_books.each do |book| %>
 <%= book.title%><br>
