@@ -2,6 +2,7 @@
 
 home :: https://github.com/dklisiaris/bibliography
 bugs :: https://github.com/dklisiaris/bibliography/issues
+bugs :: http://www.rubydoc.info/github/dklisiaris/bibliography/master
 
 == Description
 Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services. 
