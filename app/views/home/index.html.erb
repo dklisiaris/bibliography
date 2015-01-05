@@ -3,12 +3,12 @@
 
 <%= render 'home/search_form' %>
 
-<%= paginate @search_results %><br>
+<%= paginate @search_results unless @search_results.nil? %><br>
 
 <% @search_results.each do |book| %>
 <%= book.title%><br>
-<% end %>
-<%= "Nothing was found..." if @search_results.empty? and !params[:search].nil? %><br>
+<% end unless @search_results.nil? %>
+<%= "Nothing was found..." if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
 
 <% @latest_books.each do |book| %>

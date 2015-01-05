@@ -72,3 +72,6 @@ gem 'acts_as_tree', '~> 2.1.0'
 gem 'carrierwave'
 gem 'json'
 gem 'kaminari'
+
+# Search engine gem on top of elasticsearch
+gem 'searchkick'
