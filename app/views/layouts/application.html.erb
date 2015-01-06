@@ -6,6 +6,8 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Bibliography" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js" %>
+    
     <%= csrf_meta_tags %>
   </head>
   <body>
