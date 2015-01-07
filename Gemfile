@@ -63,15 +63,29 @@ group :development do
   gem 'rails_layout'
 end
 
+# Authentication
 gem 'devise'
+
+# User roles
 gem 'royce'
+
+# Authorization
 gem "pundit"
 
+# For models with tree parent-child associations
 gem 'acts_as_tree', '~> 2.1.0'
 
+# Uploaders
 gem 'carrierwave'
+
+# Json support
 gem 'json'
+
+# Pagination
 gem 'kaminari'
 
 # Search engine gem on top of elasticsearch
 gem 'searchkick'
+
+# jQuery plugin for drop-in fix binded events problem caused by Turbolinks
+gem 'jquery-turbolinks'

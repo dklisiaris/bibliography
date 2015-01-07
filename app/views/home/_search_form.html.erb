@@ -1,13 +1,18 @@
 <%= form_tag home_index_path, :method => 'get' do %>
-  <p class="field col-xs-6 input-group">
-  	<% if params[:search].present? %>
+  <div class="col-xs-6 input-group">
+  	<% if params[:query].present? %>
     <span class="input-group-btn">
     	<%= link_to "clear", home_index_path, class: "btn btn-default" %>
     </span>  
-    <% end %>	
-    <%= text_field_tag :search, params[:search], class: 'typeahead form-control', id: "search_bar", :placeholder => "Write search terms...", autocomplete: "off" %>
+    <% end %>
+
+    <span id="remote">      
+      <%= text_field_tag :query, params[:query], class: 'typeahead form-control', :placeholder => "Write search terms...", autocomplete: "off" %> 
+    </span>     	
+
     <span class="input-group-btn">
     	<%= submit_tag "Search", :name => nil, class: 'form-control btn btn-primary' %>
     </span>
-  </p>
+  </div>
 <% end %>
+
