@@ -89,3 +89,6 @@ gem 'searchkick'
 
 # jQuery plugin for drop-in fix binded events problem caused by Turbolinks
 gem 'jquery-turbolinks'
+
+# Runs HTTP requests in parallel while cleanly encapsulating handling logic.
+gem 'typhoeus'
