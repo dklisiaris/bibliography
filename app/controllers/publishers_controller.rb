@@ -41,6 +41,27 @@ class PublishersController < ApplicationController
     respond_with(@publisher)
   end
 
+  def search
+    authorize :publisher, :search?
+    if params[:query].present?
+      respond_to do |format|
+
+        format.html do
+          @publishers = Publisher.search(params[:query],fields: [{'name' => :word_start}, 'owner'], page: params[:page], per_page: 25)                
+          render :index          
+        end
+
+        format.json do
+          @publishers = Publisher.search(params[:query],fields: [{'name' => :word_start}], limit: 10).map(&:name)
+          render json: @publishers 
+        end
+
+      end  
+    else
+      redirect_to(publishers_url)
+    end
+  end  
+
   private
     def set_publisher
       @publisher = Publisher.find(params[:id])

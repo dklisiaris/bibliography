@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   
   resources :publishers, :concerns => :paginatable do
     resources :places, only: [:create, :edit, :update, :destroy]
+    collection do
+      get 'search'
+    end
   end 
   
   # get 'import/index'

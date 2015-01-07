@@ -1,0 +1,17 @@
+<%= form_tag(search_publishers_path, method: 'get') do %>
+  <div class="col-xs-6 input-group">
+  	<% if params[:query].present? %>
+    <span class="input-group-btn">
+    	<%= link_to "clear", publishers_path, class: "btn btn-default" %>
+    </span>  
+    <% end %>
+
+    <span id="remote">      
+      <%= text_field_tag :query, params[:query], class: 'typeahead form-control', :placeholder => "Search publishers..." %> 
+    </span>     	
+
+    <span class="input-group-btn">
+    	<%= submit_tag "Search", :name => nil, class: 'form-control btn btn-primary' %>
+    </span>
+  </div>
+<% end %>
