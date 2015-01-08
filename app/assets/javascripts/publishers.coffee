@@ -30,31 +30,7 @@ $(".publishers").ready ->
   )
 
   # Initialize the Bloodhound suggestion engine
-  engine.initialize()
-
-  query = $("input:text[name=query]").val()
-
-  # engine.get myQuery, (suggestions) ->
-  #   suggestions.each (suggestion) ->
-  #     console.log suggestion
-  #     return
-  #   return 
-
-  # orig_get = engine.get
-  # engine.get = (query, cb) ->
-  #   orig_get.apply engine, [
-  #     query
-  #     (suggestions) ->
-  #       return cb(suggestions)  unless suggestions
-  #       suggestions.forEach (s) ->
-  #         s.exact_match = (if query.toLowerCase() is s.name.toLowerCase() then 1 else 0)
-  #         return
-
-  #       suggestions.sort (a, b) ->
-  #         (if a.exact_match > b.exact_match then -1 else (if a.exact_match < b.exact_match then 1 else 0))
-
-  #       cb suggestions
-  #   ]   
+  engine.initialize()  
 
   # Instantiate the Typeahead UI
   $("#remote .typeahead").typeahead

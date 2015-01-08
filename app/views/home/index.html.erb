@@ -11,6 +11,7 @@
 <%= "Nothing was found..." if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
 
+<h3>Latest books</h3>
 <% @latest_books.each do |book| %>
 <%= book.title%><br>
 <% end %>
