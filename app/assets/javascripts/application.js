@@ -18,4 +18,4 @@
 //= require jquery.readyselector
 //= require_tree .
 //= require typeahead.bundle.min
-//= require pages/readyDashboard
+

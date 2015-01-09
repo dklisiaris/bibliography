@@ -1,7 +1,16 @@
+<div class="content-header content-media">
+  <div class="row">
+    <div class="col-sm-offset-3">
+      <div class="header-section">
+        <%= render 'home/search_form' %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-<%= render 'home/search_form' %>
 
 <%= paginate @search_results unless @search_results.nil? %><br>
 
@@ -10,6 +19,9 @@
 <% end unless @search_results.nil? %>
 <%= "Nothing was found..." if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
+<i class="fa fa-trophy sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Frontend Template</span><i class="fa fa-institution"></i>
+
+<i class="gi gi-beer"></i>
 
 <h3>Latest books</h3>
 <% @latest_books.each do |book| %>

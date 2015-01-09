@@ -1,0 +1,75 @@
+          <!-- BEGIN HEADER -->
+          <header class="navbar navbar-inverse navbar-fixed-top">
+            <ul class="nav navbar-nav-custom">
+              <li>
+                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                <i class="fa fa-ellipsis-v fa-fw animation-fadeInRight" id="sidebar-toggle-mini"></i>
+                <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
+                </a>
+              </li>
+              <li class="hidden-xs animation-fadeInQuick">
+                <a href=""><strong>WELCOME</strong></a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav-custom pull-right">
+              <li>
+                <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search">
+                  <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                </form>
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
+                <i class="gi gi-settings"></i>
+                </a>
+              </li>
+              <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                
+                <%= image_tag("placeholders/avatars/avatar9.jpg", alt: "avatar")  %>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    <strong>ADMINISTRATOR</strong>
+                  </li>
+                  <li>
+                    <a href="page_app_email.php">
+                    <i class="fa fa-inbox fa-fw pull-right"></i>
+                    Inbox
+                    </a>
+                  </li>
+                  <li>
+                    <a href="page_app_social.php">
+                    <i class="fa fa-pencil-square fa-fw pull-right"></i>
+                    Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="page_app_media.php">
+                    <i class="fa fa-picture-o fa-fw pull-right"></i>
+                    Media Manager
+                    </a>
+                  </li>
+                  <li class="divider">
+                  <li>
+                  <li>
+                    <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
+                    <i class="gi gi-settings fa-fw pull-right"></i>
+                    Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a href="page_ready_lock_screen.php">
+                    <i class="gi gi-lock fa-fw pull-right"></i>
+                    Lock Account
+                    </a>
+                  </li>
+                  <li>
+                    <a href="page_ready_login.php">
+                    <i class="fa fa-power-off fa-fw pull-right"></i>
+                    Log out
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </header>
+          <!-- END HEADER -->

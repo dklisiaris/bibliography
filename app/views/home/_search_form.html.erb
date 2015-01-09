@@ -1,5 +1,5 @@
 <%= form_tag({controller: 'home', action: 'index'}, method: 'get') do %>
-  <div class="col-xs-6 input-group">
+  <div class="col-xs-7 input-group">
   	<% if params[:query].present? %>
     <span class="input-group-btn">
     	<%= link_to "clear", {controller: 'home', action: 'index'}, class: "btn btn-default" %>
@@ -7,12 +7,14 @@
     <% end %>
 
     <span id="remote">      
-      <%= text_field_tag :query, params[:query], class: 'typeahead form-control', :placeholder => "Write search terms...", autocomplete: "off" %> 
+      <%= text_field_tag :query, params[:query], class: 'typeahead form-control input-lg', :placeholder => "Write search terms...", autocomplete: "off" %> 
     </span>     	
 
-    <span class="input-group-btn">
-    	<%= submit_tag "Search", :name => nil, class: 'form-control btn btn-primary' %>
+    <span class="input-group-btn">    	
+      <%= button_tag(type: "submit", class: "btn btn-lg btn-effect-ripple btn-primary") do %>
+          <i class="fa fa-search"></i> Search
+      <% end %>      
     </span>
+
   </div>
 <% end %>
-
