@@ -1,19 +1,138 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign up</h3>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+
+<div id="login-container">
+  <h1 class="h2 text-center push-top-bottom animation-slideDown">
+    <i class="fa fa-plus"></i> <strong>Create Account</strong>
+  </h1>
+  <div class="block animation-fadeInQuickInv">
+    <div class="block-title">
+      <div class="block-options pull-right">
+        <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: "Back to login"} %>
+        <%= link_to new_user_session_path, opts do %>                           
+          <i class="fa fa-user"></i>
+        <% end %>         
+      </div>
+      <h2>Register</h2>
     </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-     <%= f.submit 'Sign up', :class => 'button right' %>
-  <% end %>
+
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form', class: "form-horizontal"}) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <%= f.label :email %>
+          <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: "Enter your Email" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control', placeholder: "Enter a password" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm your password" %>
+        </div>
+      </div>
+      <div class="form-group form-actions">
+        <div class="col-xs-6">
+          <label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Agree to the terms">
+          <input type="checkbox" id="register-terms" name="register-terms">
+          <span></span>
+          </label>
+          <a href="#modal-terms" data-toggle="modal">Terms</a>
+        </div>      
+        <div class="col-xs-6 text-right">    
+          <%= button_tag(type: "submit", class: "btn btn-effect-ripple btn-success disabled", id: "submit-btn") do %>
+              <i class="fa fa-plus"></i> Create Account
+          <% end %>   
+        </div>      
+      </div>        
+    <% end %>
+
+  </div>
+  <footer class="text-muted text-center animation-pullUp">
+    <small><span id="year-copy"></span> &copy; <a href="#" target="_blank">Bibliography Foundation</a></small>
+  </footer>
 </div>
+
+<div id="modal-terms" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center"><strong>Terms and Conditions ("Terms")</strong></h3>
+      </div>
+      <div class="modal-body" style="overflow-y: scroll; height:500px;">
+        <h4 class="page-header"><strong>General</strong></h4>
+        <p>Last updated: January 10, 2015</p>
+
+        <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the http://www.bibliography.gr website (the "Service") operated by Bibliography GR ("us", "we", or "our").</p>
+
+        <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+
+        <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</p>
+
+        <h4 class="page-header"><strong>Accounts</strong></p>
+
+        <p>When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.</p>
+
+        <p>You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password, whether your password is with our Service or a third-party service.</p>
+
+        <p>You agree not to disclose your password to any third party. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p>    
+
+        <h4 class="page-header"><strong>Links To Other Web Sites</strong></p>
+
+        <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Bibliography GR.</p>
+
+        <p>Bibliography GR has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Bibliography GR shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+
+        <p>We strongly advise you to read the terms and conditions and privacy policies of any third-party web sites or services that you visit.</p>
+
+        <h4 class="page-header"><strong>Termination</strong></p>
+
+        <p>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+
+        <p>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</p>
+
+        <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+
+        <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply discontinue using the Service.</p>
+
+        <p>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</p>
+
+        <h4 class="page-header"><strong>Governing Law</strong></p>
+
+        <p>These Terms shall be governed and construed in accordance with the laws of Greece, without regard to its conflict of law provisions.</p>
+
+        <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have between us regarding the Service.</p>
+
+        <h4 class="page-header"><strong>Changes</strong></p>
+
+        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+
+        <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
+
+        <p>Created with permission from TermsFeed Generator.</p>
+
+        <h4 class="page-header"><strong>Contact Us</strong></p>
+
+        <p>If you have any questions about these Terms, please contact us.</p>        
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <button type="button" class="btn btn-effect-ripple btn-sm btn-primary" data-dismiss="modal">I've read them!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"> 
+$( document ).ready(function() {
+  $('#register-terms').click(function () {
+    var checked = $('#register-terms').prop('checked')
+    $("#submit-btn").toggleClass('disabled', !checked);
+
+  });
+});
+</script> 
