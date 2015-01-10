@@ -1,12 +1,15 @@
-<div class="content-header content-media">
-  <div class="row">
-    <div class="col-sm-offset-3">
-      <div class="header-section">
-        <%= render 'home/search_form' %>
+
+<% content_for :content_header do %>
+  <div class="content-header">
+    <div class="row">
+      <div class="col-sm-offset-3">
+        <div class="header-section">
+          <%= render 'home/search_form' %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>

@@ -7,16 +7,11 @@
                 <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
                 </a>
               </li>
-              <li class="hidden-xs animation-fadeInQuick">
-                <a href=""><strong>WELCOME</strong></a>
-              </li>
+              <%= top_nav_li("Home", root_path) %> 
+
             </ul>
             <ul class="nav navbar-nav-custom pull-right">
-              <li>
-                <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search">
-                  <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
-                </form>
-              </li>
+              <% if user_signed_in? %>                           
               <li>
                 <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
                 <i class="gi gi-settings"></i>
@@ -48,13 +43,11 @@
                     Media Manager
                     </a>
                   </li>
-                  <li class="divider">
-                  <li>
-                  <li>
-                    <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
-                    <i class="gi gi-settings fa-fw pull-right"></i>
-                    Settings
-                    </a>
+                  <li class="divider"></li>
+                  <li>                    
+                    <%= link_to edit_user_registration_path do %>                    
+                      <i class="gi gi-settings fa-fw pull-right"></i>Account Settings
+                    <% end %>                                           
                   </li>
                   <li>
                     <a href="page_ready_lock_screen.php">
@@ -63,13 +56,16 @@
                     </a>
                   </li>
                   <li>
-                    <a href="page_ready_login.php">
-                    <i class="fa fa-power-off fa-fw pull-right"></i>
-                    Log out
-                    </a>
+                    <%= link_to destroy_user_session_path, :method=>'delete' do %>                    
+                      <i class="fa fa-power-off fa-fw pull-right"></i>Log out
+                    <% end %> 
                   </li>
                 </ul>
               </li>
+              <% else %>            
+                <%= top_nav_li("Log in", new_user_session_path) %>                 
+                <%= top_nav_li("Sign up", new_user_registration_path) %> 
+              <% end %>              
             </ul>
           </header>
           <!-- END HEADER -->
