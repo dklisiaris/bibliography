@@ -15,12 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar
-    if profile.avatar and not profile.avatar.empty?
-      profile.avatar
-    else
-      gravatar_id = Digest::MD5::hexdigest(email).downcase
-      "http://gravatar.com/avatar/#{gravatar_id}.png"
-    end
+    profile.gravatar
   end
 
   private

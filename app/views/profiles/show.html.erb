@@ -1,3 +1,126 @@
+<% content_for :content_header do %>
+    <div id="page-content-sidebar">
+      <a href="javascript:void(0)" class="btn btn-block btn-effect-ripple btn-primary visible-xs" data-toggle="collapse" data-target="#people-nav" style="overflow: hidden; position: relative;">People</a>
+      <div id="people-nav" class="collapse navbar-collapse remove-padding">
+         <div class="block-section">
+            <h4 class="inner-sidebar-header">
+               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-default pull-right" style="overflow: hidden; position: relative;"><i class="fa fa-cog"></i></a>
+               Online
+            </h4>
+            <ul class="nav-users nav-users-online">
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar6.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="label label-success nav-users-indicator">5</span>
+                  <span class="nav-users-heading">Olivia Rogers</span>
+                  <span class="text-muted">Graphic Designer</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar5.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="label label-success nav-users-indicator">3</span>
+                  <span class="nav-users-heading">Joe Jones</span>
+                  <span class="text-muted">Web Designer</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar12.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="label label-success nav-users-indicator">2</span>
+                  <span class="nav-users-heading">Nancy Cruz</span>
+                  <span class="text-muted">Writer</span>
+                  </a>
+               </li>
+
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar14.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Ethan Hayes</span>
+                  <span class="text-muted">Web Developer</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar10.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Julie Bennett</span>
+                  <span class="text-muted">Photographer</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+         <div class="block-section">
+            <h4 class="inner-sidebar-header">
+               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-default pull-right" style="overflow: hidden; position: relative;"><i class="fa fa-cog"></i></a>
+               Away
+            </h4>
+            <ul class="nav-users nav-users-away">
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar14.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Harold Green</span>
+                  <span class="text-muted">Product Manager</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar15.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Alan George</span>
+                  <span class="text-muted">Freelancer</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+         <div class="block-section">
+            <h4 class="inner-sidebar-header">
+               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-default pull-right" style="overflow: hidden; position: relative;"><i class="fa fa-cog"></i></a>
+               Offline
+            </h4>
+            <ul class="nav-users nav-users-offline">
+               <li>
+                  <a href="javascript:void(0)">                  
+                  <%= image_tag("placeholders/avatars/avatar7.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Nathan Moore</span>
+                  <span class="text-muted">UX Designer</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="javascript:void(0)">
+                  <%= image_tag("placeholders/avatars/avatar16.jpg", alt: "avatar", class: "nav-users-avatar")  %>
+                  <span class="nav-users-heading">Jason Gomez</span>
+                  <span class="text-muted">CEO</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div class="content-header content-header-media">
+      <div class="header-section">
+         <div class="row">
+            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">               
+               <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-avatar pull-left")  %>
+               <h1><%= @profile.name %> (<%= @profile.username %>)</h1>
+               <h2 class="text-light-op"> Total Books in library: 0</h2>
+            </div>
+            <% if @profile.user != current_user %>
+              <div class="col-sm-5 col-md-4 col-lg-3 text-right push-bit-top-bottom">
+                 <div class="row">                  
+                    <div class="col-xs-6 col-sm-12">
+                       <a href="javascript:void(0)" class="btn btn-block btn-effect-ripple btn-default" style="overflow: hidden; position: relative;"><i class="fa fa-user"></i> Friend Request</a>
+                    </div>
+                    <div class="col-xs-6 col-sm-12">
+                       <a href="javascript:void(0)" class="btn btn-block btn-effect-ripple btn-default" style="overflow: hidden; position: relative;"><i class="fa fa-plus"></i> Add to Intresting Libraries</a>
+                    </div>                    
+                 </div>
+              </div>
+            <% end %>
+         </div>
+      </div>      
+      <%= image_tag("placeholders/layout/cover.jpg", alt: "cover")  %>
+   </div>
+<% end %>
+
 
 <p>
   <strong>Username:</strong>
