@@ -5,6 +5,11 @@ class Book < ActiveRecord::Base
   has_many :authors, through: :contributions
   belongs_to :publisher
 
+  has_many  :writers, -> { where contributions: { job: 0 } },
+            :through => :contributions,
+            :class_name => "Author", 
+            :source => :author
+
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)
   enum format: %i(Βιβλίο CD-ROM CD-Audio Κασέτα Χάρτης Επιτραπέζιο\ παιχνίδι Κασέτα\ VHS Παιχνίδια-Κατασκευές DVD-ROM Video\ DVD Video\ CD e-book Άλλο )

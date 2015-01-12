@@ -1,0 +1,69 @@
+
+<p>
+  <strong>Username:</strong>
+  <%= @profile.username %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @profile.name %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @profile.avatar %>
+</p>
+
+<p>
+  <strong>About me:</strong>
+  <%= @profile.about_me %>
+</p>
+
+<p>
+  <strong>About library:</strong>
+  <%= @profile.about_library %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @profile.account_type %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @profile.privacy %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @profile.language %>
+</p>
+
+<p>
+  <strong>Allow comments:</strong>
+  <%= @profile.allow_comments %>
+</p>
+
+<p>
+  <strong>Allow friends:</strong>
+  <%= @profile.allow_friends %>
+</p>
+
+<p>
+  <strong>Email privacy:</strong>
+  <%= @profile.email_privacy %>
+</p>
+
+<p>
+  <strong>Discoverable by email:</strong>
+  <%= @profile.discoverable_by_email %>
+</p>
+
+<p>
+  <strong>Receive newsletters:</strong>
+  <%= @profile.receive_newsletters %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path if policy(@profile).update? %>
+

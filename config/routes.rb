@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
       
+  # resources :profiles, only: [:show, :edit, :update]
+
   # get 'home/index'
   get '/autocomplete', to: 'home#autocomplete'
 
@@ -20,6 +22,19 @@ Rails.application.routes.draw do
       get 'search'
     end
   end 
+
+  
+  # resource :profile, only: [:update]
+  # get "profile/:id", :to => "profiles#show", as: 'user_profile'
+  resource :profile, only: [:edit, :update]
+  get "profile/(:id)", :to => "profiles#show", as: 'public_profile'
+
+  
+  # get "profile/edit", :to => "profile#edit", as: 'edit_profile'
+  # patch "profile", :to => "profile#update", as: 'update_profile'
+  # get '/:permalink',      to: 'users#show', as: 'custom_user'
+  # get 'profile/:id', to: 'profiles#show'
+  
   
   # get 'import/index'
   get 'import', to: 'import#index'
@@ -30,7 +45,8 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  devise_for :users  
+  devise_for :users
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

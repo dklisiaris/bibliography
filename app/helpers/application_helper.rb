@@ -21,4 +21,12 @@ def top_nav_li(text, path, icon=nil)
   end
 end
 
+def top_nav_dropdown_li(text, path, icon=nil)
+  content_tag(:li) do                                      
+    link_to path do  
+      content_tag(:i, nil, { class: "#{icon} fa-fw pull-right" }) + text                             
+    end                                                            
+  end
+end
+
 end

@@ -21,7 +21,7 @@
 
 <div class="row">
 
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <div class="widget">
       <div class="widget-content themed-background-dark-flat text-light-op text-center border-bottom">
         Latest books
@@ -32,10 +32,10 @@
           <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
             <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
             <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.authors.first.fullname%></span>
+            <span class="text-muted"><%= book.writers.first.fullname%></span>
             
           <% end %> 
-
+ 
       <% end %>
 
     </div>   

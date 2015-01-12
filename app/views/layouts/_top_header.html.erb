@@ -11,7 +11,8 @@
 
             </ul>
             <ul class="nav navbar-nav-custom pull-right">
-              <% if user_signed_in? %>                           
+              <% if user_signed_in? %> 
+              <%= top_nav_li(current_user.screen_name, public_profile_path(current_user.profile.id)) %>                           
               <li>
                 <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
                 <i class="gi gi-settings"></i>
@@ -19,7 +20,7 @@
               </li>
               <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                
-                <%= image_tag("placeholders/avatars/avatar9.jpg", alt: "avatar")  %>
+                <%= image_tag(current_user.avatar, alt: "avatar")  %>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
@@ -31,12 +32,9 @@
                     Inbox
                     </a>
                   </li>
-                  <li>
-                    <a href="page_app_social.php">
-                    <i class="fa fa-pencil-square fa-fw pull-right"></i>
-                    Profile
-                    </a>
-                  </li>
+
+                  <%= top_nav_dropdown_li("Edit Profile", edit_profile_path, "fa fa-pencil-square") %> 
+                  
                   <li>
                     <a href="page_app_media.php">
                     <i class="fa fa-picture-o fa-fw pull-right"></i>

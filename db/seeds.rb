@@ -8,7 +8,10 @@ admin_user.admin!
 editor_user = User.create(:email => 'editor@bibliography.gr', :password => '12345678', :password_confirmation => '12345678') 
 editor_user.editor!
 
-100.times{User.create(:email => Faker::Internet.email, :password => '12345678', :password_confirmation => '12345678') }
+100.times do 
+  u = User.create(:email => Faker::Internet.email, :password => '12345678', :password_confirmation => '12345678') 
+  u.create_profile(name: Faker::Name.name, username: Faker::Internet.user_name, avatar: Faker::Avatar.image, about_me: Faker::Lorem.sentences(3).join, about_library: Faker::Lorem.sentences(3).join)
+end
 
 # Generate 10000 authors
 10000.times { Author.create(firstnam

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102131342) do
+ActiveRecord::Schema.define(version: 20150111185403) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -124,6 +124,29 @@ ActiveRecord::Schema.define(version: 20150102131342) do
 
   add_index "prizes", ["name"], name: "index_prizes_on_name", unique: true, using: :btree
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "username",              limit: 255
+    t.string   "name",                  limit: 255
+    t.string   "avatar",                limit: 255
+    t.string   "cover",                 limit: 255
+    t.text     "about_me",              limit: 65535
+    t.text     "about_library",         limit: 65535
+    t.integer  "account_type",          limit: 4,     default: 0
+    t.integer  "privacy",               limit: 4,     default: 0
+    t.integer  "language",              limit: 4,     default: 0
+    t.boolean  "allow_comments",        limit: 1,     default: true
+    t.boolean  "allow_friends",         limit: 1,     default: true
+    t.integer  "email_privacy",         limit: 4,     default: 0
+    t.boolean  "discoverable_by_email", limit: 1,     default: true
+    t.boolean  "receive_newsletters",   limit: 1,     default: true
+    t.integer  "user_id",               limit: 4
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+  add_index "profiles", ["username"], name: "index_profiles_on_username", unique: true, using: :btree
+
   create_table "publishers", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "owner",      limit: 255
@@ -173,4 +196,5 @@ ActiveRecord::Schema.define(version: 20150102131342) do
   add_foreign_key "books_categories", "categories"
   add_foreign_key "contributions", "authors"
   add_foreign_key "contributions", "books"
+  add_foreign_key "profiles", "users"
 end
