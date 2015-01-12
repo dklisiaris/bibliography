@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111185403) do
+ActiveRecord::Schema.define(version: 20150112185335) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -173,6 +173,19 @@ ActiveRecord::Schema.define(version: 20150111185403) do
 
   add_index "royce_role", ["name"], name: "index_royce_role_on_name", using: :btree
 
+  create_table "shelves", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.integer  "privacy",      limit: 4,   default: 0
+    t.boolean  "built_in",     limit: 1,   default: false
+    t.integer  "default_name", limit: 4,   default: 0
+    t.boolean  "active",       limit: 1,   default: true
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "shelves", ["user_id"], name: "index_shelves_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -197,4 +210,5 @@ ActiveRecord::Schema.define(version: 20150111185403) do
   add_foreign_key "contributions", "authors"
   add_foreign_key "contributions", "books"
   add_foreign_key "profiles", "users"
+  add_foreign_key "shelves", "users"
 end

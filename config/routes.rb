@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
       
+  resources :shelves
+
   # resources :profiles, only: [:show, :edit, :update]
 
   # get 'home/index'

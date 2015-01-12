@@ -4,13 +4,6 @@ class ProfilePolicy < ApplicationPolicy
   def update?         ; belongs_to_current_user?                                                        ; end
   def edit?           ; belongs_to_current_user?                                                        ; end
 
-  private
-
-  def belongs_to_current_user?
-    user and (record.user == user)
-  end
-
-
   class Scope < Scope
     def resolve
       scope

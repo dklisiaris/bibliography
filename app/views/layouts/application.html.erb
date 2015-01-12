@@ -65,12 +65,10 @@
 
           
           <!-- BEGIN PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
-          <div id="page-content" class="inner-sidebar-right" style="min-height: 625px;">
+          <div <%= content_for?(:page_content_options) ? yield(:page_content_options) : 'id="page-content"'.html_safe %> >  
             <%= yield :content_header %>
             <%= render 'layouts/messages' %>
-            <%= yield %>
-            
-            
+            <%= yield %>                      
           </div>
           <!-- END PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
           

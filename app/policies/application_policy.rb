@@ -35,5 +35,10 @@ class ApplicationPolicy
   def editor?
     user and (user.editor? or user.admin?)
   end   
+
+  def belongs_to_current_user?
+    user and (record.user == user)
+  end
+
 end
 

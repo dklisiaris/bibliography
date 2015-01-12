@@ -1,0 +1,30 @@
+
+<h1>Listing Shelves</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Privacy</th>
+      <th>Active</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shelves.each do |shelf| %>
+      <tr>
+        <td><%= shelf.screen_name %></td>
+        <td><%= shelf.privacy %></td>
+        <td><%= shelf.active %></td>
+        <td><%= link_to 'Show', shelf %></td>
+        <td><%= link_to 'Edit', edit_shelf_path(shelf) %></td>
+        <td><%= link_to 'Destroy', shelf, method: :delete, data: { confirm: 'Are you sure?' } unless shelf.built_in %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shelf', new_shelf_path %>
