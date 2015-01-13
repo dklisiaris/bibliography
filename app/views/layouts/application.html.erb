@@ -19,7 +19,9 @@
     <meta name="robots" content="noindex, nofollow">
     <%= favicon_link_tag 'favicon.png' %>
 
+    <!-- Apple Touch Icons -->
     <%= favicon_link_tag 'icon57.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '57x57' %>
+    <%= favicon_link_tag 'icon72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
     <%= favicon_link_tag 'icon72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
     <%= favicon_link_tag 'icon76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76' %>
     <%= favicon_link_tag 'icon114.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '114x114' %>
@@ -27,6 +29,12 @@
     <%= favicon_link_tag 'icon144.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
     <%= favicon_link_tag 'icon152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
     <%= favicon_link_tag 'icon180.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180' %>
+
+    <!-- Windows 8 Tile Icons -->
+    <meta name="msapplication-square70x70logo" content="smalltile.png" />
+    <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+    <meta name="msapplication-wide310x150logo" content="widetile.png" />
+    <meta name="msapplication-square310x310logo" content="largetile.png" />    
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 

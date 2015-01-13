@@ -11,6 +11,7 @@ class ShelvesController < ApplicationController
   end
 
   def show
+    @books = @shelf.books.page(params[:page])
     respond_with(@shelf)
   end
 

@@ -15,7 +15,8 @@ end
 
 def top_nav_li(text, path, icon=nil)
   content_tag(:li) do 
-    link_to path do                           
+    options = current_page?(path) ? { class: "active" } : {}
+    link_to path, options do                           
       "<i class='#{icon}'></i><strong>#{text.upcase}</strong>".html_safe
     end     
   end

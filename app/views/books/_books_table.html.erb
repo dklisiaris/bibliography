@@ -1,0 +1,24 @@
+<%= paginate @books %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Subtitle</th>
+      <th>Publisher</th>      
+      <th>Image</th>
+      <th>Isbn</th>
+      <th>Series</th>
+      <th>Price</th>
+      <th>Physical desc.</th>
+      <th>Availability</th>
+      <th>Format</th>
+      <th>Original</th>          
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
+  </tbody>
+</table>

@@ -19,10 +19,7 @@
   <%= @shelf.active %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @shelf.user %>
-</p>
+<%= render 'books/books_table' %>
 
 <%= link_to 'Edit', edit_shelf_path(@shelf) %> |
 <%= link_to 'Back', shelves_path %>

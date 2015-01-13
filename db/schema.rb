@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112185335) do
+ActiveRecord::Schema.define(version: 20150113124906) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "firstname",    limit: 255
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 20150112185335) do
 
   add_index "books_categories", ["book_id"], name: "index_books_categories_on_book_id", using: :btree
   add_index "books_categories", ["category_id"], name: "index_books_categories_on_category_id", using: :btree
+
+  create_table "bookshelves", force: :cascade do |t|
+    t.integer  "book_id",    limit: 4
+    t.integer  "shelf_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "bookshelves", ["book_id"], name: "index_bookshelves_on_book_id", using: :btree
+  add_index "bookshelves", ["shelf_id"], name: "index_bookshelves_on_shelf_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -207,6 +217,8 @@ ActiveRecord::Schema.define(version: 20150112185335) do
   add_foreign_key "awards", "prizes"
   add_foreign_key "books_categories", "books"
   add_foreign_key "books_categories", "categories"
+  add_foreign_key "bookshelves", "books"
+  add_foreign_key "bookshelves", "shelves"
   add_foreign_key "contributions", "authors"
   add_foreign_key "contributions", "books"
   add_foreign_key "profiles", "users"

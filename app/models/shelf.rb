@@ -1,6 +1,9 @@
 class Shelf < ActiveRecord::Base
   belongs_to :user
 
+  has_many :bookshelves
+  has_many :books, through: :bookshelves
+
   enum privacy: %i(Ίδια\ με\ το\ προφίλ Δημόσια Ιδιωτικη)
   enum default_name: ["Η βιβλιοθηκη μου", "Θέλω να διαβάσω", "Αγαπημένα", "Διαβάζω τώρα", "Εχω διαβάσει αλλά δεν έχω", "Για διάβασμα"]
 
