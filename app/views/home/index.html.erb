@@ -2,7 +2,7 @@
 <% content_for :content_header do %>
   <div class="content-header">
     <div class="row">
-      <div class="col-sm-offset-3">
+      <div class="col-sm-offset-3 col-xs-offset-2">
         <div class="header-section">
           <%= render 'home/search_form' %>
         </div>
@@ -21,7 +21,62 @@
 
 <div class="row">
 
-  <div class="col-sm-3">
+  <div class="col-lg-6 col-lg-push-3 col-md-12 col-sm-12 col-xs-12">
+    <div class="widget">  
+      <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
+        <span class="pull-right">(Here are some options to get started)</span>
+        <i class="fa fa-fw fa-home"></i> <strong>Welcome to Bibliography GR</strong>
+      </div>      
+      <div class="widget-content">                
+         <div class="row">
+            <div class="col-md-4">
+              <h4>Add books</h4>
+              <%= link_to "Browse books", "#" %><br>
+              <%= link_to "Add books to your library", "#" %>
+            </div> 
+            <div class="col-md-4">
+              <h4>Spruce up your profile</h4>
+              <%= link_to "Edit your profile", "#" %><br>
+              <%= link_to "Add a member photo", "#" %>              
+            </div> 
+            <div class="col-md-4">
+              <h4>Engage with others</h4>
+              <%= link_to "Read member reviews", "#" %><br>
+              <%= link_to "Invite friends", "#" %>              
+            </div> 
+         </div>
+
+         <div class="push-bit-top">
+            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-facebook"></i> Like</a>
+            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"><i class="fa fa-twitter"></i> Tweet</a>
+         </div>
+      </div>
+   </div>
+  </div>
+
+
+  <div class="col-lg-3 col-lg-pull-6 col-md-6 col-sm-6 col-xs-12">
+
+    <div class="widget">
+      <div class="widget-image widget-image-xs">        
+        <%= image_tag("placeholders/photos/photo18_2x.jpg", alt: "book_background")  %>
+        <div class="widget-image-content">
+          <h2 class="widget-heading text-light"><strong>Most popular</strong></h2>
+          <h3 class="widget-heading text-light-op h4">All time most owned and read.</h3>
+        </div>
+        <i class="fa fa-book"></i>
+      </div>
+       <% @latest_books.each do |book| %>
+        
+          <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
+            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
+            <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
+            <span class="text-muted"><%= book.writers.first.fullname%></span>
+            
+          <% end %> 
+      <% end %>
+    </div>  
+
     <div class="widget">
       <div class="widget-content themed-background-dark-flat text-light-op text-center border-bottom">
         Latest books
@@ -35,11 +90,57 @@
             <span class="text-muted"><%= book.writers.first.fullname%></span>
             
           <% end %> 
- 
       <% end %>
+    </div>  
 
-    </div>   
   </div>
+
+  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">    
+    <div class="widget">
+      <div class="widget-content border-bottom">
+        <span class="pull-right text-muted">(All time)</span>
+        Highest Rated Books
+      </div>      
+      <div class="widget-content widget-content-full">
+         <table class="table table-borderless table-striped table-vcenter">
+            <tbody>
+              <% @latest_books.each do |book| %>                
+                <tr>                                                                       
+                  <td class="text-center" style="width: 80px;">
+                     <%= image_tag(book.image, alt: "book_cover", class: "img-thumbnail")  %>
+                  </td>
+                  <td>                     
+                    <%= link_to book.title, book %><br>
+                    <%= link_to book.writers.first do %>
+                      <span class="text-muted"><small><%= book.writers.first.fullname%></small></span>                     
+                    <% end %> 
+                  </td>
+                  <td class="text-center" style="width: 80px;">
+                     <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Add to collections"><i class="fa fa-plus"></i></a>                     
+                  </td>                  
+                </tr>                
+              <% end %>                  
+            </tbody>
+         </table>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-content border-bottom">
+        <span class="pull-right text-muted">(This month)</span>
+        Trending books
+      </div>
+      <% @latest_books.each do |book| %>
+        
+          <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
+            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
+            <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
+            <span class="text-muted"><%= book.writers.first.fullname%></span>
+            
+          <% end %> 
+      <% end %>
+    </div>
+  </div>    
 
 </div>
 
