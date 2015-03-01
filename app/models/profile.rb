@@ -6,6 +6,8 @@ class Profile < ActiveRecord::Base
   enum language: %i(Ελληνικά English)
   enum email_privacy: %i(Ποτέ Σε\ φίλους\ μόνο Σε\ συνδεδεμένους\ χρήστες Σε\ όλους)
 
+  validates :username, presence: true, uniqueness: true
+
   def gravatar
     if avatar and not avatar.empty?
       avatar
