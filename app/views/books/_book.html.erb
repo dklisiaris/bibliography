@@ -31,12 +31,12 @@
     <%= book.original_title %>
   </td>                      
   <td>
-    <%= link_to 'Show', book %><br>
+    <%= link_to t('show'), book %><br>
     <% if policy(book).update? %>
-    <%= link_to 'Edit', edit_book_path(book) %>
+    <%= link_to t('edit'), edit_book_path(book) %>
     <% end %>
     <% if policy(book).destroy? %>
-    <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to t('destroy'), book, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>   
   </td>
 </tr>

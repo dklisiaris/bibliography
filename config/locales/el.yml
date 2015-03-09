@@ -1,5 +1,56 @@
 el:
-  hello: "Καλησπέρα!"
+  welcome: "Καλώς ήρθατε στο Bibliography GR"
+  home: "ΑΡΧΙΚΗ"
+  collections: "ΣΥΛΛΟΓΕΣ"
+  my_books: "ΤΑ ΒΙΒΛΙΑ ΜΟΥ"
+
+  search: "Αναζήτηση"
+  write_search_terms: "Εισάγετε όρους αναζήτησης..."
+  nothing_found: "Δεν βρέθηκαν αποτελέσματα..."  
+
+  side_menu:
+    discover: "Ανακαλύψτε"
+    categories: "Κατηγορίες"
+    books: "Βιβλία"
+    authors: "Συγγραφείς"
+    publishers: "Εκδότες"
+
+    featured: "Προτεινόμενα"
+    trending: "Δημοφιλή"
+    latest: "Πιο πρόσφατα"
+    awarded: "Βραβευμένα"
+
+    editors_only: "Μόνο για συντάκτες"
+    contributions: "Συνεισφορές"
+    awards: "Βρεβεύσεις"
+    prizes: "Βραβεία"
+
+    admins_only: "Μόνο για διαχειριστές"
+    import: "Εισαγωγή"
+    tasks: "Εργασίες"
+    api: "API"
+
+  show: "Εμφάνιση"
+  edit: "Επεξεργασία"
+  destroy: "Διαγραφή"
+
+  books:
+    index:
+      listing_books: "Λίστα Βιβλίων"
+
+    new_book: "Νέο Βιβλίο"
+
+    title: "Τίτλος"
+    subtitle: "Υπότιτλος"
+    publisher: "Έκδότης"
+    image: "Εικόνα"
+    isbn: "Isbn"
+    series: "Σειρά"
+    price: "Τιμή"
+    physical_desc: "Φυσική περιγραφή"
+    availability: "Διαθεσιμότητα"
+    format: "Φορμά"
+    original: "Πρωτότυπο"  
 
   # Authorization
   pundit:

@@ -17,7 +17,7 @@
 <% @search_results.each do |book| %>
 <%= book.title%><br>
 <% end unless @search_results.nil? %>
-<%= "Nothing was found..." if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
+<%= t("nothing_found") if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
 <div class="row">
 
@@ -25,7 +25,7 @@
     <div class="widget">  
       <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
         <span class="pull-right">(Here are some options to get started)</span>
-        <i class="fa fa-fw fa-home"></i> <strong>Welcome to Bibliography GR</strong>
+        <i class="fa fa-fw fa-home"></i> <strong><%= t('welcome') %></strong>
       </div>      
       <div class="widget-content">                
          <div class="row">

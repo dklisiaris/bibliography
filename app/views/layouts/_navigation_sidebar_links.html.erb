@@ -1,60 +1,39 @@
                 <div class="dark-bg">
-                  <%= side_nav_li("Categories", categories_path, "fa fa-tasks") %>
-                  <%= side_nav_li("Books", books_path, "gi gi-book_open") %>
-                  <%= side_nav_li("Authors", authors_path, "gi gi-old_man") %>
-                  <%= side_nav_li("Publishers", publishers_path, "fa fa-building") %>
+                  <%= side_nav_li(t('side_menu.categories'), categories_path, "fa fa-tasks") %>
+                  <%= side_nav_li(t('side_menu.books'), books_path, "gi gi-book_open") %>
+                  <%= side_nav_li(t('side_menu.authors'), authors_path, "gi gi-old_man") %>
+                  <%= side_nav_li(t('side_menu.publishers'), publishers_path, "fa fa-building") %>
                 </div>
                 <li class="sidebar-separator">
-                  <i><span class="sidebar-nav-mini-hide">Discover</span></i>
+                  <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.discover') %></span></i>
                 </li>
                 <li>
                   <a href="#" class="sidebar-nav-menu">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
                     <i class="fa fa-thumbs-o-up sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide">Featured</span>
+                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.featured') %></span>
                   </a>
                   <ul>
                     <li>
-                      <a href="page_ui_widgets.php">Books</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
                     </li>
                     <li>
-                      <a href="#" class="sidebar-nav-submenu"><i class="fa fa-chevron-left sidebar-nav-indicator"></i>Elements</a>
-                      <ul>
-                        <li>
-                          <a href="page_ui_blocks_grid.php">Blocks &amp; Grid</a>
-                        </li>
-                        <li>
-                          <a href="/authors/new">Typography</a>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#" class="sidebar-nav-submenu"><i class="fa fa-chevron-left sidebar-nav-indicator"></i>Forms</a>
-                      <ul>
-                        <li>
-                          <a href="page_forms_components.php">Components</a>
-                        </li>
-                        <li>
-                          <a href="page_forms_wizard.php">Wizard</a>
-                        </li>
-                        <li>
-                          <a href="page_forms_validation.php">Validation</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
+                    </li>                    
+                  </ul> 
                 </li>
                 <li>
                   <a href="#" class="sidebar-nav-menu">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
                     <i class="fa fa-line-chart sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide">Trending</span>
+                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.trending') %></span>
                   </a>
                   <ul>
                     <li>
-                      <a href="page_ui_widgets.php">Books</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
                     </li>
                     <li>
-                      <a href="page_ui_widgets.php">Authors</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
                     </li>                    
                   </ul>                                      
                 </li> 
@@ -62,14 +41,14 @@
                   <a href="#" class="sidebar-nav-menu">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
                     <i class="fa fa-clock-o sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide">Latest</span>
+                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.latest') %></span>
                   </a>
                   <ul>
                     <li>
-                      <a href="page_ui_widgets.php">Books</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
                     </li>
                     <li>
-                      <a href="page_ui_widgets.php">Authors</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
                     </li>                    
                   </ul>                   
                 </li> 
@@ -77,14 +56,14 @@
                   <a href="#" class="sidebar-nav-menu">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
                     <i class="fa fa-trophy sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide">Awarded</span>
+                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.awarded') %></span>
                   </a>
                   <ul>
                     <li>
-                      <a href="page_ui_widgets.php">Books</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
                     </li>
                     <li>
-                      <a href="page_ui_widgets.php">Authors</a>
+                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
                     </li>                    
                   </ul>                   
                 </li>                                                                 
@@ -94,21 +73,21 @@
 
                   <% if current_user.editor? %>                                      
                     <li class="sidebar-separator">
-                      <i><span class="sidebar-nav-mini-hide">Editors Only</span></i>
+                      <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.editors_only') %></span></i>
                     </li>
 
-                    <%= side_nav_li("Contributions", contributions_path, "fa fa-pencil-square-o") %>
-                    <%= side_nav_li("Awards", awards_path, "fa fa-pencil-square-o") %>
-                    <%= side_nav_li("Prizes", prizes_path, "fa fa-pencil-square-o") %>
+                    <%= side_nav_li(t('side_menu.contributions'), contributions_path, "fa fa-pencil-square-o") %>
+                    <%= side_nav_li(t('side_menu.awards'), awards_path, "fa fa-pencil-square-o") %>
+                    <%= side_nav_li(t('side_menu.prizes'), prizes_path, "fa fa-pencil-square-o") %>
                   <% end %> 
 
                   <% if current_user.editor? %>
                     <li class="sidebar-separator">
-                      <i><span class="sidebar-nav-mini-hide">Admins Only</span></i>
+                      <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.admins_only') %></span></i>
                     </li>
-                    <%= side_nav_li("Import", import_path, "gi gi-file_import") %>
-                    <%= side_nav_li("Tasks", "#", "fa fa-terminal") %>
-                    <%= side_nav_li("API", "#", "fa fa-exchange") %>
+                    <%= side_nav_li(t('side_menu.import'), import_path, "gi gi-file_import") %>
+                    <%= side_nav_li(t('side_menu.tasks'), "#", "fa fa-terminal") %>
+                    <%= side_nav_li(t('side_menu.api'), "#", "fa fa-exchange") %>
                   <% end %> 
 
                 <% end %>

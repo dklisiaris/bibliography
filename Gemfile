@@ -95,3 +95,6 @@ gem 'jquery-turbolinks'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus'
+
+# Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x

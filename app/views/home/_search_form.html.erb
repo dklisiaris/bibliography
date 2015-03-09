@@ -7,12 +7,12 @@
     <% end %>
 
     <span id="remote">      
-      <%= text_field_tag :query, params[:query], class: 'typeahead form-control input-lg', :placeholder => "Write search terms...", autocomplete: "off" %> 
+      <%= text_field_tag :query, params[:query], class: 'typeahead form-control input-lg', :placeholder => t("write_search_terms"), autocomplete: "off" %> 
     </span>     	
 
     <span class="input-group-btn">    	
       <%= button_tag(type: "submit", class: "btn btn-lg btn-effect-ripple btn-primary") do %>
-          <i class="fa fa-search"></i> Search
+          <i class="fa fa-search"></i> <%=t('search')%>
       <% end %>      
     </span>
 

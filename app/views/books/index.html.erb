@@ -1,8 +1,6 @@
 
-<h1>Listing Books</h1>
-
+<h1><%= t('books.index.listing_books') %></h1>
 <%= render 'books/books_table' %>
 
 <br>
-
-<%= link_to 'New Book', new_book_path if policy(Book).new? %>
+<%= link_to t('new_book'), new_book_path if policy(Book).new? %>

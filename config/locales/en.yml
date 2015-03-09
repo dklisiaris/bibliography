@@ -20,7 +20,58 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  welcome: "Welcome to Bibliography GR"
+  home: "Home"
+  collections: "Collections"
+  my_books: "My Books"
+
+  search: "Search"
+  write_search_terms: "Write search terms..."
+  nothing_found: "Nothing was found..."
+
+  side_menu:
+    discover: "Discover"
+    categories: "Categories"
+    books: "Books"
+    authors: "Authors"
+    publishers: "Publishers"
+
+    featured: "Featured"
+    trending: "Trending"
+    latest: "Latest"
+    awarded: "Awarded"
+
+    editors_only: "Editors Only"
+    contributions: "Contributions"
+    awards: "Awards"
+    prizes: "Prizes"
+
+    admins_only: "Admins Only"
+    import: "Import"
+    tasks: "Tasks"
+    api: "API"
+
+  show: "Show"
+  edit: "Edit"
+  destroy: "Destroy"
+
+  books:
+    index:
+      listing_books: "Listing Books"
+
+    new_book: "New Book"
+
+    title: "Title"
+    subtitle: "Subtitle"
+    publisher: "Publisher"
+    image: "Image"
+    isbn: "Isbn"
+    series: "Series"
+    price: "Price"
+    physical_desc: "Physical desc."
+    availability: "Availability"
+    format: "Format"
+    original: "Original"
 
   # Authorization
   pundit:
