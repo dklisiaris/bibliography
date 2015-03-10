@@ -1,0 +1,16 @@
+<div class="tab-pane active" id="file">
+  <div class="block">
+    <div class="block-title">
+      <h2><%= t('import.import_records') %></h2>
+    </div>   
+    <%= form_tag({:action => "import_from_file"},:multipart => true, class: 'form-bordered' )  do %>
+      <div class="form-group">
+        <%= label_tag(:uploaded_file, t('import.import_from_file')) %></br>
+        <%= file_field_tag 'uploaded_file', class: 'form-control' %>
+      </div> 
+      <div class="form-group form-actions">        
+        <%= submit_tag(t('import.import_label'), class: 'btn btn-effect-ripple btn-primary') %>
+      </div>
+    <% end %>
+  </div> 
+</div>

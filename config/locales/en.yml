@@ -25,6 +25,8 @@ en:
   collections: "Collections"
   my_books: "My Books"
 
+  site_settings: "Site Settings"
+
   search: "Search"
   write_search_terms: "Write search terms..."
   nothing_found: "Nothing was found..."
@@ -54,6 +56,7 @@ en:
   show: "Show"
   edit: "Edit"
   destroy: "Destroy"
+  cancel: "Cancel"
 
   books:
     index:
@@ -72,6 +75,19 @@ en:
     availability: "Availability"
     format: "Format"
     original: "Original"
+
+  import:
+    from_file: "From File"
+    from_url: "From URL"
+    from_text: "From Text"    
+    import_data: "Import Data"
+    import_records: "Import Records"
+    import_label: "Import"
+    from_url_hint: "Insert url with data to import"
+    from_text_hint: "Write/Paste data to import"
+    import_from_file: "Import data from file:"
+    import_from_url: "Import data from url:"
+    import_from_text: "Import data from text:"
 
   # Authorization
   pundit:

@@ -1,0 +1,17 @@
+<div class="tab-pane" id="text">
+  <div class="block">
+    <div class="block-title">
+      <h2><%= t('import.import_records') %></h2>
+    </div>
+    <%= form_tag({:action => "import_from_text"}, class: 'form-bordered') do %>
+      <div class="form-group">
+        <%= label_tag(:content, t('import.import_from_text')) %> </br>
+        <%= text_area_tag(:content, nil, placeholder: t('import.from_text_hint'), size: "42x16", class: 'form-control') %>              
+      </div> 
+      <div class="form-group form-actions">
+        <%= submit_tag(t('import.import_label'), class: 'btn btn-effect-ripple btn-primary') %>
+        <%= button_tag(t('cancel'), name: nil, type: 'reset', class: 'btn btn-effect-ripple btn-danger') %>
+      </div>
+    <% end %>
+  </div>
+</div>

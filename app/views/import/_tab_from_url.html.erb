@@ -1,0 +1,17 @@
+<div class="tab-pane" id="url">
+  <div class="block">
+    <div class="block-title">
+      <h2><%= t('import.import_records') %></h2>
+    </div>  
+    <%= form_tag({:action => "import_from_url"}, class: 'form-bordered') do %>
+      <div class="form-group">
+        <%= label_tag(:url, t('import.import_from_url')) %></br>
+        <%= text_field_tag(:url, nil, placeholder: t('import.from_url_hint'), :size => 80, class: 'form-control') %>
+      </div> 
+      <div class="form-group form-actions">              
+        <%= submit_tag(t('import.import_label'), class: 'btn btn-effect-ripple btn-primary') %>
+        <%= button_tag(t('cancel'), name: nil, type: 'reset', class: 'btn btn-effect-ripple btn-danger') %>
+      </div>
+    <% end %>    
+  </div>         
+</div>

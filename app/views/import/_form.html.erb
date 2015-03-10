@@ -2,51 +2,17 @@
   <div class="col-md-12">
 
     <ul id="tabs" class="nav nav-pills" data-tabs="tabs">
-        <li class="active"><a href="#file" data-toggle="tab">From File</a></li>
-        <li><a href="#url" data-toggle="tab">From URL</a></li>
-        <li><a href="#text" data-toggle="tab">From Text</a></li>
+        <li class="active"><a href="#file" data-toggle="tab"><%= t('import.from_file') %></a></li>
+        <li><a href="#url" data-toggle="tab"><%= t('import.from_url') %></a></li>
+        <li><a href="#text" data-toggle="tab"><%= t('import.from_text') %></a></li>
     </ul>
     <br>
     <div id="my-tab-content" class="tab-content">  
-      <div class="tab-pane active" id="file">
-        <%= form_tag({:action => "import_from_file"},:multipart => true, class: 'form-bordered' )  do %>
-          <div class="form-group">
-            <%= label_tag(:uploaded_file, "Import from file:") %></br>
-            <%= file_field_tag 'uploaded_file', class: 'form-control' %>
-          
-            <%= submit_tag("Import", class: 'form-control btn-success') %>
-          </div>
-        <% end %>
-      </div>
+      
+      <%= render 'tab_from_file' %>
+      <%= render 'tab_from_url' %>
+      <%= render 'tab_from_text' %>
 
-      <div class="tab-pane" id="url">
-        <%= form_tag({:action => "import_from_url"}, class: 'form-bordered') do %>
-          <div class="form-group">
-            <%= label_tag(:url, "Import data from url:") %></br>
-            <%= text_field_tag(:url, nil, :size => 80, class: 'form-control') %>
-          
-            <%= submit_tag("Import", class: 'form-control btn-success') %>
-          </div>
-        <% end %>        
-      </div>
-
-      <div class="tab-pane" id="text">
-        <div class="block">
-          <div class="block-title">
-            <h2>Import Records</h2>
-          </div>
-          <%= form_tag({:action => "import_from_text"}, class: 'form-bordered') do %>
-            <div class="form-group">
-              <%= label_tag(:content, "Import from text:") %> </br>
-              <%= text_area_tag(:content, nil, placeholder: "Write/Paste data to import", size: "42x16", class: 'form-control') %>              
-            </div> 
-            <div class="form-group form-actions">
-              <%= submit_tag("Import", class: 'btn btn-effect-ripple btn-primary') %>
-              <%= button_tag("Cancel", name: nil, type: 'reset', class: 'btn btn-effect-ripple btn-danger') %>
-            </div>
-          <% end %>
-        </div>
-      </div>              
     </div>
 
   </div>

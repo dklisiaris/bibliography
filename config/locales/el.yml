@@ -4,6 +4,8 @@ el:
   collections: "ΣΥΛΛΟΓΕΣ"
   my_books: "ΤΑ ΒΙΒΛΙΑ ΜΟΥ"
 
+  site_settings: "Ρυθμίσεις εφαρμογής"
+
   search: "Αναζήτηση"
   write_search_terms: "Εισάγετε όρους αναζήτησης..."
   nothing_found: "Δεν βρέθηκαν αποτελέσματα..."  
@@ -33,6 +35,7 @@ el:
   show: "Εμφάνιση"
   edit: "Επεξεργασία"
   destroy: "Διαγραφή"
+  cancel: "Άκυρο"
 
   books:
     index:
@@ -51,6 +54,20 @@ el:
     availability: "Διαθεσιμότητα"
     format: "Φορμά"
     original: "Πρωτότυπο"  
+
+
+  import:
+    from_file: "Από αρχείο"
+    from_url: "Από URL"
+    from_text: "Από κείμενο"    
+    import_data: "Εισαγωγη δεδομένων"
+    import_records: "Εισαγωγη εγγραφων"
+    import_label: "Εισαγωγή"
+    from_url_hint: "Εισάγετε το url με τα δεδομένα προς εισαγωγή"
+    from_text_hint: "Γράψτε/Επικολλήστε δεδομένα για να εισαχθούν στη βάση"
+    import_from_file: "Εισαγωγή δεδομένων από αρχείο:"
+    import_from_url: "Εισαγωγή δεδομένων από URL:"
+    import_from_text: "Εισαγωγή δεδομένων από κείμενο:"
 
   # Authorization
   pundit:
