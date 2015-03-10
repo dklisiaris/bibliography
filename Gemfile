@@ -43,9 +43,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  gem 'dotenv-rails'
+  gem 'spring'  
 
   gem 'rspec-rails'
   gem 'factory_girl_rails'  
@@ -65,6 +63,12 @@ gem 'autoprefixer-rails'
 group :development do
   gem 'rails_layout'
 end
+
+group :production do
+  gem 'pg'
+end
+
+gem 'dotenv-rails'
 
 # Authentication
 gem 'devise'
@@ -98,3 +102,6 @@ gem 'typhoeus'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+
+# A fast and very simple Ruby web server
+gem 'thin'

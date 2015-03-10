@@ -49,6 +49,10 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: bibliography_production
-  username: bibliography
-  password: <%= ENV['BIBLIOGRAPHY_DATABASE_PASSWORD'] %>
+  username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
+  password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
+  host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
+  port: <%= ENV["PRODUCTION_DATABASE_PORT"] %>
+  socket: 
