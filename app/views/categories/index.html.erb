@@ -1,6 +1,42 @@
+<div class="content-header">
+  <div class="row">
+     <div class="col-sm-6">
+        <div class="header-section">
+          <h1>
+            <%= t('categories.listing') %>
+            <%= link_to new_category_path, 
+              class: "btn btn-effect-ripple btn-xs btn-primary", role: "button", 
+                :data => {"toggle" => "tooltip", "original-title" => t('categories.new')} do %>
+                <i class="fa fa-plus"></i>
+              <% end if policy(Category).new? %>       
+          </h1>
+        </div>
+     </div>
+     <div class="col-sm-6 hidden-xs">
+      <div class="header-section">
+           <ul class="breadcrumb breadcrumb-top">
+              <li><i class="fa fa-home"></i></li>
+              <li><%= t('site_settings') %></li>
+              <li><a href=""><%= t('import.import_label') %></a></li>
+           </ul>
+        </div>
+     </div>
+  </div>
+</div>
 
-<h1>Listing Categories</h1>
+<div class="row">
+   <div class="col-sm-12">
+      <div class="block">
+        <div class="block-title">
+          <h2><%= t('categories.all') %></h2>
+        </div>  
+        <div class="list-group">
+          <%= render @categories %>
+        </div>
+      </div>
 
-<%= render @categories %>
+  </div>
+</div>
 
-<%= link_to 'New Category', new_category_path if policy(Category).new? %>
+
+

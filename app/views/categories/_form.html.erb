@@ -1,4 +1,4 @@
-<%= form_for(@category) do |f| %>
+<%= form_for(@category, class: 'form-bordered') do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -11,26 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label t('name') %><br>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :ddc %><br>
-    <%= f.text_field :ddc %>
+    <%= f.text_field :ddc, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
+    <%= f.text_field :slug, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :biblionet_id %><br>
-    <%= f.number_field :biblionet_id %>
+    <%= f.number_field :biblionet_id, class: 'form-control' %>
   </div>
 
   <%= f.hidden_field :parent_id, value: @category.parent_id %><br>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group form-actions">
+    <%= f.submit t('save'), class: 'btn btn-effect-ripple btn-primary' %>
   </div>
 <% end %>
+
+

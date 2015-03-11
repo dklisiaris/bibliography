@@ -16,9 +16,9 @@
     <% @prizes.each do |prize| %>
       <tr>
         <td><%= prize.name %></td>
-        <td><%= link_to 'Show', prize %></td>        
-        <td><%= link_to 'Edit', edit_prize_path(prize) if policy(prize).update? %></td>                
-        <td><%= link_to 'Destroy', prize, method: :delete, data: { confirm: 'Are you sure?' } if policy(prize).destroy? %></td>        
+        <td><%= link_to t('show'), prize %></td>        
+        <td><%= link_to t('edit'), edit_prize_path(prize) if policy(prize).update? %></td>                
+        <td><%= link_to t('destroy'), prize, method: :delete, data: { confirm: 'Are you sure?' } if policy(prize).destroy? %></td>        
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,9 @@
-<h1>Editing Category</h1>
+<div class="block">
+  <div class="block-title">
+    <h2><%= t('categories.editing') %></h2>
+  </div>
+  <%= render 'form' %>
+</div>  
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @category %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to t('show'), @category %> |
+<%= link_to t('back'), categories_path %>

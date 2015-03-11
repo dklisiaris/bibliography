@@ -23,12 +23,12 @@
         <td><%= author.biography %></td>
         <td><%= author.image %></td>
         <td><%= author.biblionet_id %></td>      
-        <td><%= link_to 'Show', author %></td>
+        <td><%= link_to t('show'), author %></td>
         <% if policy(author).update? %>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
+        <td><%= link_to t('edit'), edit_author_path(author) %></td>
         <% end %>
         <% if policy(author).destroy? %>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('destroy'), author, method: :delete, data: { confirm: t('u_sure') } %></td>
         <% end %>
       </tr>
     <% end %>

@@ -57,6 +57,19 @@ en:
   edit: "Edit"
   destroy: "Destroy"
   cancel: "Cancel"
+  save : "Save"
+  back: "Back"
+  u_sure: "Are you sure?"
+
+  name: "Name"
+
+  categories:
+    label: "Categories"
+    new: "New Category"
+    new_subcategory: "New Subcategory"
+    editing: "Editing Category"
+    listing: "Listing Categories"  
+    all: "All Categories"
 
   books:
     index:

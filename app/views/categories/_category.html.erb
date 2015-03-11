@@ -1,22 +1,11 @@
-
-<div class="col-md-10">
-  <%= link_to "#{category.id}, #{category.name}, Slug: #{category.slug}, DDC: [#{category.ddc}], B_id: #{category.biblionet_id} Parent: [#{category.parent_id}]", category, 
-        class: 'btn btn-default btn-md btn-block', id: "category_#{category.id}"  %>
-</div>
-
-<% if policy(category).update? %>
-  <div class="col-md-1">    
-    <%= link_to edit_category_path(category), class: "btn btn-success btn-block", role:"button" do  %>
-      <span class="glyphicon glyphicon-pencil"></span>
-    <% end %>                
-  </div>
+<%= link_to category, class: "list-group-item", id: "category_#{category.id}" do %>
+  <span class="badge"><%= "[#{category.ddc}]" %></span>
+  <h4 class="list-group-item-heading">
+    <strong>
+      <%= "#{category.name}" %>
+    </strong>   
+  </h4> 
 <% end %>
 
-<% if policy(category).destroy? %>
-  <div class="col-md-1">     
-      <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, 
-      class: "btn btn-danger btn-block", role:"button" do %>
-        <span class="glyphicon glyphicon-trash"></span>
-      <% end %>
-  </div>
-<% end %>
+
+

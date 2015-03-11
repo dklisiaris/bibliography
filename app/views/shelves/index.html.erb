@@ -17,9 +17,9 @@
         <td><%= shelf.screen_name %></td>
         <td><%= shelf.privacy %></td>
         <td><%= shelf.active %></td>
-        <td><%= link_to 'Show', shelf %></td>
-        <td><%= link_to 'Edit', edit_shelf_path(shelf) %></td>
-        <td><%= link_to 'Destroy', shelf, method: :delete, data: { confirm: 'Are you sure?' } unless shelf.built_in %></td>
+        <td><%= link_to t('show'), shelf %></td>
+        <td><%= link_to t('edit'), edit_shelf_path(shelf) %></td>
+        <td><%= link_to t('destroy'), shelf, method: :delete, data: { confirm: 'Are you sure?' } unless shelf.built_in %></td>
       </tr>
     <% end %>
   </tbody>

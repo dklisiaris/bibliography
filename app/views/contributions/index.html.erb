@@ -19,9 +19,9 @@
         <td><%= contribution.job %></td>
         <td><%= contribution.author.fullname %></td>
         <td><%= contribution.book.title %></td>        
-        <td><%= link_to 'Show', contribution %></td>
-        <td><%= link_to 'Edit', edit_contribution_path(contribution) if policy(contribution).update? %></td>
-        <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } if policy(contribution).destroy? %></td>
+        <td><%= link_to t('show'), contribution %></td>
+        <td><%= link_to t('edit'), edit_contribution_path(contribution) if policy(contribution).update? %></td>
+        <td><%= link_to t('destroy'), contribution, method: :delete, data: { confirm: 'Are you sure?' } if policy(contribution).destroy? %></td>
       </tr>
     <% end %>
   </tbody>

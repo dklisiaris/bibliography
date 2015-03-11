@@ -24,7 +24,7 @@ el:
 
     editors_only: "Μόνο για συντάκτες"
     contributions: "Συνεισφορές"
-    awards: "Βρεβεύσεις"
+    awards: "Βραβεύσεις"
     prizes: "Βραβεία"
 
     admins_only: "Μόνο για διαχειριστές"
@@ -36,6 +36,19 @@ el:
   edit: "Επεξεργασία"
   destroy: "Διαγραφή"
   cancel: "Άκυρο"
+  save : "Αποθήκευση"
+  back: "Πίσω"
+  u_sure: "Είστε σίγουροι;"
+
+  name: "Όνομα"
+
+  categories:
+    label: "Κατηγορίες"
+    new: "Νέα Κατηγορία"
+    new_subcategory: "Νέα Υποκατηγορία"
+    editing: "Επεξεργασία Κατηγορίας"
+    listing: "Θεματικές Κατηγορίες"  
+    all: "Ολες οι κατηγοριες"
 
   books:
     index:

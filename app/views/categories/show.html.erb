@@ -1,40 +1,23 @@
-
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
-<p>
-  <strong>Ddc:</strong>
-  <%= @category.ddc %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @category.slug %>
-</p>
-
-<p>
-  <strong>Biblionet:</strong>
-  <%= @category.biblionet_id %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @category.parent_id %>
-</p>
-
 <div class="row">
-  <div class="col-md-10">
-  <%= link_to "..", @category.parent_id.nil? ? categories_path : @category.parent, 
-        class: 'col-md-10 btn btn-default btn-md btn-block', id: "@category_#{@category.id}"  %>  
-  </div>    
-  <%= render @children %>
+   <div class="col-sm-12">
+      <div class="block">
+        <div class="block-title">
+          <h2><%= @category.name %></h2>
+        </div>  
+        <div class="list-group">
+          <%= link_to "..", @category.parent_id.nil? ? categories_path : @category.parent, 
+                class: 'list-group-item', id: "@category_#{@category.id}"  %>            
+          <%= render @children %>
+        </div>
+      </div>
+
+  </div>
 </div>
 
 <% if policy(@category).update? %>
-<%= link_to 'New Subcategory', new_category_path(:parent_id => @category.id) %> |
-<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to t('categories.new_subcategory'), new_category_path(:parent_id => @category.id), class: "label label-primary" %> |
+<%= link_to t('edit'), edit_category_path(@category), class: "label label-success" %> |
 <% end %>
 
-<%= link_to 'Back', categories_path %>
+<%= link_to t('destroy'), @category, class: "label label-danger", method: :delete, data: { confirm: t('u_sure') } if policy(@category).destroy? %>
+<%= link_to t('back'), categories_path, class: "label label-default" %>

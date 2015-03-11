@@ -20,9 +20,9 @@
       <tr>
         <td><%= publisher.name %></td>
         <td><%= publisher.owner %></td>
-        <td><%= link_to 'Show', publisher %></td>        
-        <td><%= link_to 'Edit', edit_publisher_path(publisher) if policy(publisher).update? %></td>
-        <td><%= link_to 'Destroy', publisher, method: :delete, data: { confirm: 'Are you sure?' } if policy(publisher).destroy? %></td>        
+        <td><%= link_to t('show'), publisher %></td>        
+        <td><%= link_to t('edit'), edit_publisher_path(publisher) if policy(publisher).update? %></td>
+        <td><%= link_to t('destroy'), publisher, method: :delete, data: { confirm: 'Are you sure?' } if policy(publisher).destroy? %></td>        
       </tr>
     <% end %>
   </tbody>

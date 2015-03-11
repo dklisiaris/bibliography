@@ -18,8 +18,8 @@
         <td><%= award.year %></td>
         <td><%= award.awardable_id %></td>
         <td><%= award.awardable_type %></td>
-        <td><%= link_to 'Edit', [:edit, @awardable, award]  unless @awardable.nil? or not policy(award).update? %></td>
-        <td><%= link_to 'Destroy', [@awardable, award],
+        <td><%= link_to t('edit'), [:edit, @awardable, award]  unless @awardable.nil? or not policy(award).update? %></td>
+        <td><%= link_to t('destroy'), [@awardable, award],
            method: :delete, data: { confirm: 'Are you sure?' } unless @awardable.nil? or not policy(award).destroy? %></td>
       </tr>
     <% end %>
