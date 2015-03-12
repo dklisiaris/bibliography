@@ -1,3 +1,13 @@
+<% 
+if @category.parent_id.nil? 
+  pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.name => nil}
+else 
+  pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.parent.name => @category.parent, @category.name => nil}
+end 
+%>
+
+<%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: pages) %>
+
 <div class="row">
    <div class="col-sm-12">
       <div class="block">

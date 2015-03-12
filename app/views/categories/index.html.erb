@@ -1,40 +1,22 @@
-<div class="content-header">
-  <div class="row">
-     <div class="col-sm-6">
-        <div class="header-section">
-          <h1>
-            <%= t('categories.listing') %>
-            <%= link_to new_category_path, 
-              class: "btn btn-effect-ripple btn-xs btn-primary", role: "button", 
-                :data => {"toggle" => "tooltip", "original-title" => t('categories.new')} do %>
-                <i class="fa fa-plus"></i>
-              <% end if policy(Category).new? %>       
-          </h1>
-        </div>
-     </div>
-     <div class="col-sm-6 hidden-xs">
-      <div class="header-section">
-           <ul class="breadcrumb breadcrumb-top">
-              <li><i class="fa fa-home"></i></li>
-              <li><%= t('site_settings') %></li>
-              <li><a href=""><%= t('import.import_label') %></a></li>
-           </ul>
-        </div>
-     </div>
-  </div>
-</div>
+<%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
 
 <div class="row">
    <div class="col-sm-12">
       <div class="block">
         <div class="block-title">
+          <div class="block-options pull-right">
+            <%= link_to new_category_path, 
+              class: "btn btn-effect-ripple btn-primary", role: "button", 
+                :data => {"toggle" => "tooltip", "original-title" => t('categories.new')} do %>
+                <i class="fa fa-plus"></i>
+            <% end if policy(Category).new? %>
+          </div>
           <h2><%= t('categories.all') %></h2>
         </div>  
         <div class="list-group">
           <%= render @categories %>
-        </div>
+        </div>              
       </div>
-
   </div>
 </div>
 

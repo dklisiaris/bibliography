@@ -26,6 +26,9 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Cells allow you to encapsulate parts of your page into separate MVC components
+gem 'cells', "~> 4.0.0.beta"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -47,6 +50,8 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'factory_girl_rails'  
+
+  # gem "rspec-cells"
 end
 
 group :test do

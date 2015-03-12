@@ -1,21 +1,9 @@
-
-<div class="content-header">
-  <div class="row">
-     <div class="col-sm-6">
-        <div class="header-section">
-           <h1><%= t('import.import_data') %></h1>
-        </div>
-     </div>
-     <div class="col-sm-6 hidden-xs">
-        <div class="header-section">
-           <ul class="breadcrumb breadcrumb-top">
-              <li><i class="fa fa-home"></i></li>
-              <li><%= t('site_settings') %></li>
-              <li><a href=""><%= t('import.import_label') %></a></li>
-           </ul>
-        </div>
-     </div>
-  </div>
-</div>
+<%= cell(:navigation).call(:content_header, 
+  title: t('import.import_data'),
+  breadcrumbs: {
+    fa('home') => root_url, 
+    t('site_settings') => "#", 
+    t('import.import_label') => nil
+  }) %>
 
 <%= render 'form' %>

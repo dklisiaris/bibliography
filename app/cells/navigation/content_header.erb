@@ -1,0 +1,15 @@
+<div class="content-header">
+  <div class="row">
+     <div class="col-sm-6">
+        <div class="header-section">
+           <h1><%= @title %></h1>
+        </div>
+     </div>
+     <div class="col-sm-6 hidden-xs">
+        <div class="header-section">
+           <%= cell(:navigation).call(:breadcrumb, breadcrumbs: @breadcrumbs) %>
+        </div>
+     </div>
+  </div>
+</div>
+
