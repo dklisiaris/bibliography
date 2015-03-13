@@ -75,7 +75,8 @@ en:
     index:
       listing_books: "Listing Books"
 
-    new_book: "New Book"
+    label: "Books"
+    new: "New Book"
 
     title: "Title"
     subtitle: "Subtitle"

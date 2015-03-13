@@ -1,5 +1,7 @@
-<h1>New Category</h1>
+<% pages = {fa('home') => root_url, t('categories.label') => categories_url, t('categories.new') => nil} %>
+
+<%= cell(:navigation).call(:content_header, title: t('categories.new'), breadcrumbs: pages) %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', categories_path %>
+<%= link_to t('back'), categories_path, class: "label label-default" %>

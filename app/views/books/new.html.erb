@@ -1,6 +1,7 @@
-<h1>New Book</h1>
+<% pages = {fa('home') => root_url, t('books.label') => books_url, t('books.new') => nil} %>
 
-<%= link_to 'Back', books_path %>
+<%= cell(:navigation).call(:content_header, title: t('books.new'), breadcrumbs: pages) %>
 
 <%= render 'form' %>
 
+<%= link_to t('back'), books_path, class: "label label-default" %>

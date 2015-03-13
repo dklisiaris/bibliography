@@ -54,7 +54,8 @@ el:
     index:
       listing_books: "Λίστα Βιβλίων"
 
-    new_book: "Νέο Βιβλίο"
+    label: "Βιβλία"
+    new: "Νέο Βιβλίο"
 
     title: "Τίτλος"
     subtitle: "Υπότιτλος"
