@@ -49,16 +49,33 @@ class NavigationCell < Cell::ViewModel
   # ==== Examples
   #   
   #   cell(:navigation).call(:btn_link_to, name: 'Home', url: root_url, tooltip: 'Go to home')
-  #   cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new'))
-  #   cell(:navigation).call(:btn_link_to, name: fa('comment-o'), url: '/comments/new', tooltip: 'Leave a comment'))
+  #   cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new'), style: 'success')
+  #   cell(:navigation).call(:btn_link_to, name: fa('comment-o'), url: '/comments/new', tooltip: 'Leave a comment', style: 'danger')
   #
   def btn_link_to(opts = {})  
-    @name     = opts[:name]     ||= 'Page Name'
-    @url      = opts[:url]      ||= '#'
-    @tooltip  = opts[:tooltip]  ||= 'Some Info'
-    @style    = opts[:style]    ||= 'primary'        
+    name     = opts[:name]     ||= 'Page Name'
+    url      = opts[:url]      ||= '#'
+    tooltip  = opts[:tooltip]  ||= ''
+    style    = opts[:style]    ||= 'primary'        
     
-    link_to @name, @url, class: "btn btn-effect-ripple btn-#{@style}", role: "button", :data => {"toggle" => "tooltip", "original-title" => @tooltip}
+    link_to name, url, class: "btn btn-effect-ripple btn-#{style}", role: "button", :data => {"toggle" => "tooltip", "original-title" => tooltip}
+  end
+
+  private
+
+  # Limits the max size of a string and adds ellipses in the end.
+  # Used privately to limit the breadcrumbs size
+  #
+  # ==== Attributes
+  #
+  # * +:text+       - The text to be limited.
+  # * +:max_length+ - Maximum permited characters.
+  #  
+  def ellipsize(text, max_length = 30)
+    if text.length > max_length
+      text = text[0..max_length].strip + '...'
+    end
+    text
   end
 
 end

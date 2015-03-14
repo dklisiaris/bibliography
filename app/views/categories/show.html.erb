@@ -12,6 +12,14 @@ end
    <div class="col-sm-12">
       <div class="block">
         <div class="block-title">
+          <div class="block-options pull-right">
+            <% if policy(@category).update? %>
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path(:parent_id => @category.id), tooltip: t('categories.new_subcategory')) %>
+            <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success') %>
+            <% end %>  
+            <%= link_to fa('times'), @category, class: "btn btn-effect-ripple btn-danger", 
+              method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('categories.delete') } if policy(@category).destroy? %>
+          </div>          
           <h2><%= @category.name %></h2>
         </div>  
         <div class="list-group">
@@ -24,10 +32,4 @@ end
   </div>
 </div>
 
-<% if policy(@category).update? %>
-<%= link_to t('categories.new_subcategory'), new_category_path(:parent_id => @category.id), class: "label label-primary" %> |
-<%= link_to t('edit'), edit_category_path(@category), class: "label label-success" %> |
-<% end %>
-
-<%= link_to t('destroy'), @category, class: "label label-danger", method: :delete, data: { confirm: t('u_sure') } if policy(@category).destroy? %>
 <%= link_to t('back'), categories_path, class: "label label-default" %>

@@ -6,6 +6,8 @@ class Author < ActiveRecord::Base
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards  
 
+  enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης)
+
   def fullname
     [firstname, lastname].join(' ')
   end

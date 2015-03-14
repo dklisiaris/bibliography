@@ -1,7 +1,7 @@
 <ul class="breadcrumb breadcrumb-top">
   <% @breadcrumbs.each do |key, value| %>
-    <li><%= link_to key, value %></li>
+    <li><%= link_to ellipsize(key), value %></li>
   <% end unless @breadcrumbs.nil? %>
 
-  <li><%= @current_page %></li>
+  <li><%= ellipsize(@current_page) %></li>
 </ul>

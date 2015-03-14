@@ -10,6 +10,11 @@ class Book < ActiveRecord::Base
             :class_name => "Author", 
             :source => :author
 
+  has_many  :contributors, -> { where.not(contributions: { job: 0 }) },
+            :through => :contributions,
+            :class_name => "Author", 
+            :source => :author            
+
   has_many :bookshelves
   has_many :shelves, through: :bookshelves
 
@@ -31,5 +36,6 @@ class Book < ActiveRecord::Base
       description: description
     }
   end
+
 end
 

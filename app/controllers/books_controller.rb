@@ -10,6 +10,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    # Intantiate a new presenter.
+    @book_presenter = BookPresenter.new(@book, view_context)
     respond_with(@book)
   end
 

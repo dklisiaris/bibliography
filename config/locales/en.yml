@@ -26,6 +26,7 @@ en:
   my_books: "My Books"
 
   site_settings: "Site Settings"
+  add_to_collection: "Add to collection"
 
   search: "Search"
   write_search_terms: "Write search terms..."
@@ -66,10 +67,12 @@ en:
   categories:
     label: "Categories"
     new: "New Category"
+    edit: "Edit Category"
+    delete: "Delete Category"
     new_subcategory: "New Subcategory"
     editing: "Editing Category"
     listing: "Listing Categories"  
-    all: "All Categories"
+    all: "All Categories"    
 
   books:
     index:
