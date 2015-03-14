@@ -37,4 +37,28 @@ class NavigationCell < Cell::ViewModel
     render
   end
 
+  # Produces a link button with tooltip
+  #
+  # ==== Options
+  #
+  # * +:name+     - The name it appears on button. It can be text or font-awesome icon.
+  # * +:url+      - The target url.
+  # * +:tooltip+  - The information that appears on hover as tooltip.
+  # * +:style+    - The bootstrap style of the button i.e. default, primary, etc. (http://getbootstrap.com/css/#buttons).
+  #
+  # ==== Examples
+  #   
+  #   cell(:navigation).call(:btn_link_to, name: 'Home', url: root_url, tooltip: 'Go to home')
+  #   cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new'))
+  #   cell(:navigation).call(:btn_link_to, name: fa('comment-o'), url: '/comments/new', tooltip: 'Leave a comment'))
+  #
+  def btn_link_to(opts = {})  
+    @name     = opts[:name]     ||= 'Page Name'
+    @url      = opts[:url]      ||= '#'
+    @tooltip  = opts[:tooltip]  ||= 'Some Info'
+    @style    = opts[:style]    ||= 'primary'        
+    
+    link_to @name, @url, class: "btn btn-effect-ripple btn-#{@style}", role: "button", :data => {"toggle" => "tooltip", "original-title" => @tooltip}
+  end
+
 end

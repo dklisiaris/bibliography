@@ -7,12 +7,8 @@
    <div class="col-sm-12">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">         
-            <%= link_to new_book_path, 
-              class: "btn btn-effect-ripple btn-primary", role: "button", 
-                :data => {"toggle" => "tooltip", "original-title" => t('books.new')} do %>
-                <i class="fa fa-plus"></i>
-            <% end if policy(Book).new? %>
+          <div class="block-options pull-right">   
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
           </div>
           <h2><%= t('books.label') %><small>&nbsp;(<%= @books.total_count %>)</small></h2>
         </div>  

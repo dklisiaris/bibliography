@@ -5,11 +5,7 @@
       <div class="block">
         <div class="block-title">
           <div class="block-options pull-right">
-            <%= link_to new_category_path, 
-              class: "btn btn-effect-ripple btn-primary", role: "button", 
-                :data => {"toggle" => "tooltip", "original-title" => t('categories.new')} do %>
-                <i class="fa fa-plus"></i>
-            <% end if policy(Category).new? %>
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new')) if policy(Category).new? %>
           </div>
           <h2><%= t('categories.all') %></h2>
         </div>  
