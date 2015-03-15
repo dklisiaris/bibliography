@@ -21,6 +21,7 @@
             <hr>
             
             <h4><%= @book_presenter.writers %></h4> 
+
             <p><%= @book_presenter.contributors %></p>             
 
             <p><%= @book.description %></p> 
@@ -28,28 +29,35 @@
             <table class="table table-striped table-borderless">
               <tbody>
                 <tr>
-                  <td><strong><%= t('books.isbn') %>:</strong></td>
-                  <td><%= @book.isbn %></td>
-                </tr>
-                <tr>
-                  <td><strong><%= t('books.physical_desc')%>:</strong></td>
-                  <td><%= @book.pages %></td>
-                </tr>
-                <tr>
-                  <td><strong><%= t('books.publisher') %>:</strong></td>
-                  <td><%= @book.publisher.name %></td>
-                </tr>
+                  <td><strong><%= t('books.publication') %>:</strong></td>
+                  <td><%= @book_presenter.publication %></td>
+                </tr>  
                 <tr>
                   <td><strong><%= t('books.format') %>:</strong></td>
                   <td><%= @book.format.humanize %></td>
-                </tr>                                                
+                </tr>                                
+                <tr>
+                  <td><strong><%= t('books.original_title')%>:</strong></td>
+                  <td><%= @book.original_title %></td>
+                </tr>
+                <tr>
+                  <td><strong><%= t('books.original_language')%>:</strong></td>
+                  <td><%= @book.original_language %></td>
+                </tr>  
+                <tr>
+                  <td><strong><%= t('books.physical_desc')%>:</strong></td>
+                  <td><%= @book_presenter.physical_description %></td>
+                </tr>     
+                <tr>
+                  <td><strong><%= t('books.genres') %>:</strong></td>
+                  <td><%= @book_presenter.genres %></td>
+                </tr>                                                                                                          
               </tbody>
             </table>
 
             <p>
               <strong>Isbn:</strong>
-              <%= @book.isbn %>
-              <a href="Fas">fadfdgs</a><a href="Fads">-fadfdgs</a>
+              <%= @book.isbn %>              
             </p>
 
             <p>

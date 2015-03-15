@@ -63,14 +63,21 @@ el:
     title: "Τίτλος"
     subtitle: "Υπότιτλος"
     publisher: "Έκδότης"
+    publication: "Έκδοση"
     image: "Εικόνα"
     isbn: "Isbn"
     series: "Σειρά"
     price: "Τιμή"
+    language: "Γλώσσα"
     physical_desc: "Φυσική περιγραφή"
     availability: "Διαθεσιμότητα"
-    format: "Φορμά"
+    format: "Μορφή"
     original: "Πρωτότυπο"  
+    original_title: "Τίτλος Πρωτοτύπου"
+    original_language: "Γλώσσα Πρωτοτύπου"    
+    genres: "Θέματα"
+    pages: "σ."
+    centimeters: "εκ."
 
 
   import:

@@ -41,4 +41,29 @@ class BookPresenter < BasePresenter
     end
   end
 
+  def publication
+    html = []
+    html << book.publication_place                          if book.publication_place.present?
+    html << h.link_to(book.publisher.name, book.publisher)  if book.publisher.present?
+    html << book.publication_year.to_s                      if book.publication_year.present?
+    html.join(', ').html_safe
+  end
+
+  def genres
+    html = []
+    book.categories.each do |category|
+      html << h.link_to(category.name, category)
+    end
+    html.join(h.tag(:br)).html_safe
+  end
+
+  def physical_description
+    html = []
+    html << book.pages.to_s + I18n.t('books.pages')
+    html << book.cover_type.humanize
+    html << book.physical_description + I18n.t('books.centimeters')
+    html.join(', ').html_safe
+
+  end
+
 end
