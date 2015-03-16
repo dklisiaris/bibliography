@@ -63,7 +63,14 @@ class BookPresenter < BasePresenter
     html << book.cover_type.humanize
     html << book.physical_description + I18n.t('books.centimeters')
     html.join(', ').html_safe
-
   end
+
+  def price
+    html = []
+    html << '€ ' + book.price.to_s
+    html << "(#{I18n.t('books.last_updated')}: #{book.price_updated_at.to_s})"
+    html << "[#{book.availability}]"
+    html.join(', ').html_safe
+  end  
 
 end

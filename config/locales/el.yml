@@ -78,6 +78,7 @@ el:
     genres: "Θέματα"
     pages: "σ."
     centimeters: "εκ."
+    last_updated: "Τελ. ενημ"
 
 
   import:

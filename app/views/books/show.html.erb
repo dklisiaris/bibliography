@@ -7,7 +7,10 @@
       <div class="block full">
         <div class="block-title">
           <div class="block-options pull-right">   
-            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: 'add-tο-collection', tooltip: t('add_to_collection')) %>      
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: 'add-tο-collection', tooltip: t('add_to_collection')) %>    
+            <% if policy(@book).update? %>            
+            <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success') %>
+            <% end %>                
           </div>
           <h2><%= @book.title %></h2>
         </div>  
@@ -48,6 +51,10 @@
                   <td><strong><%= t('books.physical_desc')%>:</strong></td>
                   <td><%= @book_presenter.physical_description %></td>
                 </tr>     
+                <tr>
+                  <td><strong><%= t('books.price')%>:</strong></td>
+                  <td><%= @book_presenter.price %></td>
+                </tr> 
                 <tr>
                   <td><strong><%= t('books.genres') %>:</strong></td>
                   <td><%= @book_presenter.genres %></td>
@@ -165,5 +172,4 @@
 
 
 
-<%= link_to 'Edit', edit_book_path(@book) if policy(@book).update? %> <br>
 <%= link_to 'Back', books_path %>

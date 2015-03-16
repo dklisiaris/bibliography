@@ -99,6 +99,7 @@ en:
     genres: "Genres"
     pages: " pages"
     centimeters: "cm"
+    last_updated: "Last Updated at"
 
   import:
     from_file: "From File"
