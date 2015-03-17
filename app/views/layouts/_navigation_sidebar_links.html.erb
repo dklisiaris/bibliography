@@ -36,22 +36,8 @@
                       <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
                     </li>                    
                   </ul>                                      
-                </li> 
-                <li>
-                  <a href="#" class="sidebar-nav-menu">
-                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-                    <i class="fa fa-clock-o sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.latest') %></span>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
-                    </li>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
-                    </li>                    
-                  </ul>                   
-                </li> 
+                </li>                 
+
                 <li>
                   <a href="#" class="sidebar-nav-menu">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
@@ -66,8 +52,9 @@
                       <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
                     </li>                    
                   </ul>                   
-                </li>                                                                 
+                </li>       
 
+                <%= side_nav_li(t('side_menu.latest'), '#', "fa fa-clock-o") %>                                                          
                 
                 <% if user_signed_in? %> 
 

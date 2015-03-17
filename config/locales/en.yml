@@ -80,6 +80,7 @@ en:
 
     label: "Books"
     new: "New Book"
+    edit: "Edit Book"
 
     title: "Title"
     subtitle: "Subtitle"
@@ -100,6 +101,13 @@ en:
     pages: " pages"
     centimeters: "cm"
     last_updated: "Last Updated at"
+    description: "Description"
+    marc_view: "MARC View"
+    isbd_view: "ISBD View"
+    isbn: "ISBN"
+    isbn13: "ISBN-13"
+    ismn: "ISMN"
+    issn: "ISSN"
 
   import:
     from_file: "From File"

@@ -59,6 +59,7 @@ el:
 
     label: "Βιβλία"
     new: "Νέο Βιβλίο"
+    edit: "Επεξεργασία Βιβλίου"
 
     title: "Τίτλος"
     subtitle: "Υπότιτλος"
@@ -79,6 +80,13 @@ el:
     pages: "σ."
     centimeters: "εκ."
     last_updated: "Τελ. ενημ"
+    description: "Περιγραφή"
+    marc_view: "Προβολή MARC"
+    isbd_view: "Προβολή ISBD"
+    isbn: "ISBN"
+    isbn13: "ISBN-13"
+    ismn: "ISMN"
+    issn: "ISSN"    
 
 
   import:

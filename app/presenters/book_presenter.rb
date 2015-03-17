@@ -73,4 +73,11 @@ class BookPresenter < BasePresenter
     html.join(', ').html_safe
   end  
 
+  def tr(key,value)
+    h.content_tag(:tr) do       
+      h.content_tag(:td, h.content_tag(:strong, key)) +
+      h.content_tag(:td, value)  
+    end if value.present?    
+  end
+
 end
