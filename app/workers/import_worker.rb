@@ -2,15 +2,14 @@ class ImportWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(json_content)
-    create_categories_from_json(json_content)   
+  def perform(data_hash)
+    create_categories_from_json(data_hash)   
   end
 
   private
 
-  def create_categories_from_json(json_content)    
-    categories_hash = JSON.parse(json_content)
-
+  def create_categories_from_json(data_hash)        
+    categories_hash = data_hash
     categories_copy = categories_hash.clone    
     
     ActiveRecord::Base.transaction do
@@ -36,8 +35,7 @@ class ImportWorker
       cat.name = value['text']   
       cat.ddc = value['ddc']
       cat.biblionet_id = key
-      puts YAML::dump(cat) if cat.parent_id.nil?
-      
+      # puts YAML::dump(cat) if cat.parent_id.nil?      
       cat.save!
       return cat.id
     end
