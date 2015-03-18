@@ -2,7 +2,7 @@
 <div id="login-container">
   
   <h1 class="h2 text-center push-top-bottom animation-slideDown">
-    <i class="fa fa-book"></i> <strong>Welcome to Bibliography</strong>
+    <i class="fa fa-book"></i> <strong><%= t('welcome') %></strong>
   </h1>
 
   <div class="block animation-fadeInQuickInv">
@@ -10,21 +10,21 @@
       <div class="block-options pull-right">
 
         <% if devise_mapping.recoverable? %>
-          <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: "Forgot your password?"} %>
+          <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: t('forgot_password')} %>
           <%= link_to new_password_path(resource_name), opts do %>                           
             <i class="fa fa-exclamation-circle"></i>
           <% end %>             
         <% end %>
 
         <% if devise_mapping.registerable? %>
-          <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: "Create new account"} %>
+          <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: t('create_account')} %>
           <%= link_to new_registration_path(resource_name), opts do %>                           
             <i class="fa fa-plus"></i>
           <% end %>          
         <% end %>
 
       </div>
-      <h2>Please Login</h2>
+      <h2><%= t('please_login') %></h2>
     </div>
 
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form', class: "form-horizontal"}) do |f| %>
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <%= f.label :password %>
+          <%= f.label t('password') %>
           <%= f.password_field :password, class: 'form-control', placeholder: "Your password..." %>
         </div>
       </div>
@@ -48,12 +48,12 @@
               <%= f.check_box :remember_me %>
               <span></span>              
             </label>  
-            Remember me          
+            <%= t('remember_me') %>          
           </div>
         <% end %>        
         <div class="col-xs-4 text-right">          
           <%= button_tag(type: "submit", class: "btn btn-effect-ripple btn-sm btn-primary") do %>
-              <i class="fa fa-check"></i> Log In
+              <i class="fa fa-check"></i> <%= t('login') %> 
           <% end %>           
         </div>  
       </div>       

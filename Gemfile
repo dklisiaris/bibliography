@@ -73,6 +73,7 @@ group :production do
   gem 'pg'
 end
 
+# Loads environment variables from `.env` file.
 gem 'dotenv-rails'
 
 # Authentication
@@ -110,3 +111,6 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # A fast and very simple Ruby web server
 gem 'thin'
+
+# Simple, efficient background processing for Ruby.
+gem 'sidekiq'

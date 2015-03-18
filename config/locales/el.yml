@@ -7,6 +7,14 @@ el:
   site_settings: "Ρυθμίσεις εφαρμογής"
   add_to_collection: "Προσθήκη σε συλλογή"
 
+  please_login: "Παρακαλούμε συνδεθείτε"
+  login: "Συνδεση"
+  signup: "Εγγραφη"
+  create_account: "Δημιουργία νέου λογαριασμού"
+  forgot_password: "Ξεχάσατε τον κωδικό σας;"
+  password: "Κωδικος"
+  remember_me: "Να με θυμάσαι"  
+
   search: "Αναζήτηση"
   write_search_terms: "Εισάγετε όρους αναζήτησης..."
   nothing_found: "Δεν βρέθηκαν αποτελέσματα..."  
@@ -101,6 +109,7 @@ el:
     import_from_file: "Εισαγωγή δεδομένων από αρχείο:"
     import_from_url: "Εισαγωγή δεδομένων από URL:"
     import_from_text: "Εισαγωγή δεδομένων από κείμενο:"
+    records_importing_in_bg: "Οι εγγραφές αναλύονται και εισάγονται στο σύστημα σε νημα παρασκηνίου."
 
   # Authorization
   pundit:

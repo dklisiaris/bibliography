@@ -27,6 +27,13 @@ en:
 
   site_settings: "Site Settings"
   add_to_collection: "Add to collection"
+  please_login: "Please Login"
+  login: "Log in"
+  signup: "Sign Up"
+  create_account: "Create new account"
+  forgot_password: "Forgot your password?"
+  password: "Password"
+  remember_me: "Remember me"
 
   search: "Search"
   write_search_terms: "Write search terms..."
@@ -121,6 +128,7 @@ en:
     import_from_file: "Import data from file:"
     import_from_url: "Import data from url:"
     import_from_text: "Import data from text:"
+    records_importing_in_bg: "Records are analysed and being imported in background thread."
 
   # Authorization
   pundit:

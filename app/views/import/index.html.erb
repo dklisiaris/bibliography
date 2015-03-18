@@ -1,9 +1,5 @@
-<%= cell(:navigation).call(:content_header, 
-  title: t('import.import_data'),
-  breadcrumbs: {
-    fa('home') => root_url, 
-    t('site_settings') => "#", 
-    t('import.import_label') => nil
-  }) %>
+<% pages = {fa('home') => root_url, t('site_settings') => "#", t('import.import_label') => nil} %>
+
+<%= cell(:navigation).call(:content_header, title: t('import.import_data'), breadcrumbs: pages) %>
 
 <%= render 'form' %>
