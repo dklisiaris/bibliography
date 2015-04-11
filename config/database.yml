@@ -1,3 +1,19 @@
+# PostgreSQL.  Versions 9.1+ are recommended.
+#
+# Install the PostgreSQL driver
+#   gem install pg
+#
+# Ensure the PostgreSQL gem is defined in your Gemfile
+#   gem 'pg'
+#
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 25
+  host: localhost
+  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
+
 # MySQL.  Versions 5.0+ are recommended.
 #
 # Install the MYSQL driver
@@ -9,13 +25,13 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 #
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  pool: 25
-  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
-  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
-  socket: /var/run/mysqld/mysqld.sock
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: 25
+#   username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+#   password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
+#   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -48,8 +64,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  adapter: postgresql
+  <<: *default  
   database: bibliography_production
   username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
   password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
