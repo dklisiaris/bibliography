@@ -63,8 +63,8 @@
                 </ul>
               </li>
               <% else %>            
-                <%= top_nav_li(t('login'), new_user_session_path) %>                 
-                <%= top_nav_li(t('signup'), new_user_registration_path) %> 
+                <%= top_nav_li(UnicodeUtils.upcase(t('login')), new_user_session_path) %>                 
+                <%= top_nav_li(UnicodeUtils.upcase(t('signup')), new_user_registration_path) %> 
               <% end %>              
             </ul>
           </header>

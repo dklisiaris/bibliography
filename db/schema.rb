@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113124906) do
+ActiveRecord::Schema.define(version: 20150412142244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150113124906) do
   create_table "authors", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
-    t.string   "lifetime"
+    t.string   "extra_info"
     t.text     "biography"
     t.string   "image"
     t.datetime "created_at",   null: false
@@ -166,8 +166,9 @@ ActiveRecord::Schema.define(version: 20150113124906) do
   create_table "publishers", force: :cascade do |t|
     t.string   "name"
     t.string   "owner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "biblionet_id"
   end
 
   create_table "royce_connector", force: :cascade do |t|

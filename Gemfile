@@ -114,3 +114,6 @@ gem 'thin', '~> 1.6'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 3.3'
+
+# Unicode algorithms for case conversion, normalization, text segmentation and more
+gem 'unicode_utils', '>= 1.4'

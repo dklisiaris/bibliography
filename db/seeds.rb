@@ -1,4 +1,4 @@
-require 'faker'
+# require 'faker'
 
 # admin_user = User.create(:email => 'admin@bibliography.gr', :password => '12345678', :password_confirmation => '12345678') 
 # admin_user.editor!
@@ -51,7 +51,8 @@ require 'faker'
 #     subtitle: Faker::Lorem.sentence,
 #     description: Faker::Lorem.paragraph,
 #     isbn: Faker::Code.isbn,
-#     image: Faker::Avatar.image,
+#     image: Faker::Avatar.image)
+# end
 
 # Book.all.each do |book|
 #   rand(1..5).times do

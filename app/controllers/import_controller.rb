@@ -34,7 +34,7 @@ class ImportController < ApplicationController
     content_hash = JSON.parse(file_content)
     ImportWorker.perform_async(content_hash)
 
-    flash.now[:notice] = t('records_importing_in_bg')
+    flash.now[:notice] = t('import.records_importing_in_bg')
     render :index
   end
 
@@ -45,7 +45,7 @@ class ImportController < ApplicationController
     content_hash = JSON.parse(file_content)
     ImportWorker.perform_async(content_hash)
 
-    flash.now[:notice] = t('records_importing_in_bg')
+    flash.now[:notice] = t('import.records_importing_in_bg')
     render :index
   end  
 
