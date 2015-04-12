@@ -117,3 +117,6 @@ gem 'sidekiq', '~> 3.3'
 
 # Unicode algorithms for case conversion, normalization, text segmentation and more
 gem 'unicode_utils', '>= 1.4'
+
+# Complete geocoding solution for Ruby
+gem 'geocoder', '~> 1.2'

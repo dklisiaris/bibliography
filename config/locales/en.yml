@@ -81,6 +81,15 @@ en:
     listing: "Listing Categories"  
     all: "All Categories"    
 
+  authors:
+    label: "Authors"
+    new: "New Author"
+    edit: "Edit Author"
+    delete: "Delete Author"
+    editing: "Editing Author"
+    listing: "Listing Authors"  
+    all: "All Authors"
+
   books:
     index:
       listing_books: "Listing Books"

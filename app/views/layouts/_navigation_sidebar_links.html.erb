@@ -68,7 +68,7 @@
                     <%= side_nav_li(t('side_menu.prizes'), prizes_path, "fa fa-pencil-square-o") %>
                   <% end %> 
 
-                  <% if current_user.editor? %>
+                  <% if current_user.admin? %>
                     <li class="sidebar-separator">
                       <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.admins_only') %></span></i>
                     </li>

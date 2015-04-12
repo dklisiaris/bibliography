@@ -21,13 +21,13 @@
   <td>          
     Pages:
     <%= book.pages %><br>
-    <%= book.cover_type.humanize %><br>
+    <%= book.cover_type.humanize if book.cover_type %><br>
     <%= book.physical_description %>
   </td>
-  <td><%= book.availability.humanize %></td>
-  <td><%= book.format.humanize %></td>
+  <td><%= book.availability.humanize if book.availability %></td>
+  <td><%= book.format.humanize if book.format %></td>
   <td>
-    <%= book.original_language.humanize %><br>
+    <%= book.original_language.humanize if book.original_language %><br>
     <%= book.original_title %>
   </td>                      
   <td>

@@ -30,7 +30,7 @@ class BookPresenter < BasePresenter
 
       html = ""
       contributors_hash.each do |job, contributors|
-        html << job + ': '
+        html << UnicodeUtils.titlecase(job) + ': '
         html << contributors.map do |contributor|
           h.link_to(contributor.fullname, contributor)
         end.join(', ')
@@ -59,9 +59,9 @@ class BookPresenter < BasePresenter
 
   def physical_description
     html = []
-    html << book.pages.to_s + I18n.t('books.pages')
-    html << book.cover_type.humanize
-    html << book.physical_description + I18n.t('books.centimeters')
+    html << book.pages.to_s + I18n.t('books.pages') if book.pages
+    html << book.cover_type.humanize if book.cover_type
+    html << book.physical_description + I18n.t('books.centimeters') if book.physical_description
     html.join(', ').html_safe
   end
 

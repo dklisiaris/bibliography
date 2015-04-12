@@ -25,7 +25,7 @@
             
             <h4><%= @book_presenter.writers %></h4> 
 
-            <p><%= @book.description %></p> 
+            <p><%= @book.description.html_safe %></p> 
 
             <p><%= @book_presenter.contributors %></p>             
             
@@ -33,7 +33,7 @@
               <tbody>
                 <%= @book_presenter.tr(t('books.publication'), @book_presenter.publication) %>
 
-                <%= @book_presenter.tr(t('books.format'), @book.format.humanize) %>                
+                <%= @book_presenter.tr(t('books.format'), @book.format.humanize) if @book.format %>                
 
                 <%= @book_presenter.tr(t('books.original_title'), @book.original_title) %>
 

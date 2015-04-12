@@ -1,13 +1,12 @@
 
 <%= paginate @authors %>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered table-vcenter dataTable no-footer">
   <thead>
     <tr>
       <th>Firstname</th>
       <th>Lastname</th>
-      <th>Lifetime</th>
-      <th>Biography</th>
+      <th>Extra_info</th>      
       <th>Image</th>
       <th>Biblionet_id</th>
       <th colspan="3"></th>
@@ -19,17 +18,14 @@
       <tr>
         <td><%= author.firstname %></td>
         <td><%= author.lastname %></td>
-        <td><%= author.lifetime %></td>
-        <td><%= author.biography %></td>
-        <td><%= author.image %></td>
+        <td><%= author.extra_info %></td>        
+        <td><%= image_tag author.image, size: "80x116", alt: "Author Image" if author.image %></td>
         <td><%= author.biblionet_id %></td>      
-        <td><%= link_to t('show'), author %></td>
-        <% if policy(author).update? %>
-        <td><%= link_to t('edit'), edit_author_path(author) %></td>
-        <% end %>
-        <% if policy(author).destroy? %>
-        <td><%= link_to t('destroy'), author, method: :delete, data: { confirm: t('u_sure') } %></td>
-        <% end %>
+        <td><%= link_to t('show'), author %></td>        
+        <td><%= link_to t('edit'), edit_author_path(author) if policy(author).update? %></td>
+        <td>
+          <%= link_to t('destroy'), author, method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
+        </td>        
       </tr>
     <% end %>
   </tbody>
