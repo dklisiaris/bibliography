@@ -2,6 +2,12 @@
 
 [![Dependency Status](https://gemnasium.com/dklisiaris/bibliography.svg)](https://gemnasium.com/dklisiaris/bibliography)
 
+---------------------------------------------------------------------------------------------------
+
+  NOTICE: This project is __under development__ and not funtional yet.
+  
+---------------------------------------------------------------------------------------------------
+
 ## Description
 Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services. 
 On top of that, libraries or individual users can create collections of their books and users can see where they can loan the book they want.
