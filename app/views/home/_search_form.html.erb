@@ -1,5 +1,5 @@
 <%= form_tag({controller: 'home', action: 'index'}, method: 'get') do %>
-  <div class="col-sm-8 col-xs-10 input-group">
+  <div class="col-xs-10 col-sm-8 col-xl-7 input-group">
   	<% if params[:query].present? %>
     <span class="input-group-btn">
     	<%= link_to "clear", {controller: 'home', action: 'index'}, class: "btn btn-default" %>
