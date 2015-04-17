@@ -12,22 +12,25 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
-  config.action_mailer.perform_deliveries = true # Set it to false to disable the email in dev mode
-  config.action_mailer.raise_delivery_errors = true
-
+  
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
+  # change to true to allow email to be sent during development
+  config.action_mailer.perform_deliveries = true
 
-  ActionMailer::Base.smtp_settings = {
-                      :address        => "smtp.gmail.com",
-                      :enable_starttls_auto => true,
-                      :port           => 587,
-                      :authentication => :plain,
-                      :user_name      => ENV["GMAIL_MAIL"],
-                      :password       => ENV["GMAIL_PASSWORD"]
-  }  
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+
+  config.action_mailer.smtp_settings = {
+    :domain => "bibliography.gr",
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587,
+    :user_name => ENV["MANDRILL_USERNAME"],
+    :password  => ENV["MANDRILL_API_KEY"]
+  }   
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

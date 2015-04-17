@@ -119,6 +119,9 @@ el:
     import_from_url: "Εισαγωγή δεδομένων από URL:"
     import_from_text: "Εισαγωγή δεδομένων από κείμενο:"
     records_importing_in_bg: "Οι εγγραφές αναλύονται και εισάγονται στο σύστημα σε νημα παρασκηνίου."
+    danger_zone: "Επικίνδυνη Ζώνη"
+    import_from_storage: "Εισαγωγή από τοπικό χώρο αποθήκευσης"
+    storage_import_description: "Προσοχή! Όλα τα αρχεία json μέσα στον κατάλογο tmp/storage θα εισαχθούν."
 
   # Authorization
   pundit:

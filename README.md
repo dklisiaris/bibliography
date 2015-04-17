@@ -86,5 +86,5 @@ rails s
 
 Start sidekiq from the root directory of your Rails app
 ```
-bundle exec sidekiq
+bundle exec sidekiq -C config/sidekiq.yml
 ```

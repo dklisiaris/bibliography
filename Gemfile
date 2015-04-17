@@ -79,6 +79,9 @@ gem 'dotenv-rails', '~> 2.0'
 # Authentication
 gem 'devise', '~> 3.4'
 
+# Async devise mails
+gem "devise-async", '>= 0.9'
+
 # User roles
 gem 'royce', '~> 1.0'
 

@@ -1,0 +1,17 @@
+# Sample configuration file for Sidekiq.
+# Options here can still be overridden by cmd line args.
+#   sidekiq -C config.yml
+# 
+# We define 2 queues, a top_priority queue which will it is checked 5 times
+# the normal_priority queue will be checked only one time.
+# This will cause the top_priority items to be processed first in average 
+# even though they can be added afterwards (of normal jobs) to the queue
+---
+:verbose: false
+:pidfile: tmp/pids/sidekiq.pid
+:concurrency:  25
+:queues:
+  - [mailer, 5]
+  - [network_ops, 3]
+  - [maintenance, 2]
+  - default

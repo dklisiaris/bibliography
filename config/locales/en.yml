@@ -138,6 +138,9 @@ en:
     import_from_url: "Import data from url:"
     import_from_text: "Import data from text:"
     records_importing_in_bg: "Records are analysed and being imported in background thread."
+    danger_zone: "Danger Zone"
+    import_from_storage: "Import from storage"
+    storage_import_description: "Be careful! All json files inside tmp/storage will be imported."
 
   # Authorization
   pundit:

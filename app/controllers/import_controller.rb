@@ -16,13 +16,14 @@ class ImportController < ApplicationController
     else
       # logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
       flash[:notice] = "Bad file_data: #{file_data.class.name}: #{file_data.inspect}" 
+      redirect_to import_path
     end  
 
     content_hash = JSON.parse(file_content)
     ImportWorker.perform_async(content_hash)
     
-    flash.now[:notice] = t('import.records_importing_in_bg')
-    render :index                 
+    flash[:notice] = t('import.records_importing_in_bg')
+    redirect_to import_path                
   end
 
   def import_from_url   
@@ -34,8 +35,8 @@ class ImportController < ApplicationController
     content_hash = JSON.parse(file_content)
     ImportWorker.perform_async(content_hash)
 
-    flash.now[:notice] = t('import.records_importing_in_bg')
-    render :index
+    flash[:notice] = t('import.records_importing_in_bg')
+    redirect_to import_path
   end
 
   def import_from_text
@@ -45,8 +46,17 @@ class ImportController < ApplicationController
     content_hash = JSON.parse(file_content)
     ImportWorker.perform_async(content_hash)
 
-    flash.now[:notice] = t('import.records_importing_in_bg')
-    render :index
+    flash[:notice] = t('import.records_importing_in_bg')
+    redirect_to import_path
   end  
+
+  def import_from_storage
+    authorize :import, :import_stuff?
+
+    StorageImportWorker.perform_async
+
+    flash[:notice] = t('import.records_importing_in_bg')
+    redirect_to import_path
+  end
 
 end

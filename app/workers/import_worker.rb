@@ -1,6 +1,6 @@
 class ImportWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options queue: :maintenance, retry: false
 
   def perform(data_hash)   
     @data_hash = data_hash 
@@ -17,7 +17,7 @@ class ImportWorker
       author_record = Author.create(
         firstname:    author['firstname'], 
         lastname:     author['lastname'],
-        extra_info:   author['lifetime'],
+        extra_info:   author['extra_info'],
         image:        author['image'],
         biography:    author['bio'],
         biblionet_id: author['b_id']

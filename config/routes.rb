@@ -37,13 +37,16 @@ Rails.application.routes.draw do
   # get '/:permalink',      to: 'users#show', as: 'custom_user'
   # get 'profile/:id', to: 'profiles#show'
   
-  
-  # get 'import/index'
-  get 'import', to: 'import#index'
+  ##
+  # Import Controller Routes
+  #
+  get 'import', to: 'import#index', as: :import
   # post 'import', to: 'import#upload'
   post 'import/url', to: 'import#import_from_url'
   post 'import/text', to: 'import#import_from_text'
   post 'import/file', to: 'import#import_from_file'
+
+  get "import/storage", to: 'import#import_from_storage', as: :storage_import
 
   resources :categories
 
