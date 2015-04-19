@@ -58,6 +58,7 @@ en:
 
     admins_only: "Admins Only"
     import: "Import"
+    monitoring: "Monitoring"
     tasks: "Tasks"
     api: "API"
 
@@ -124,6 +125,7 @@ en:
     isbn13: "ISBN-13"
     ismn: "ISMN"
     issn: "ISSN"
+    collective_work: "Collective work"
 
   import:
     from_file: "From File"

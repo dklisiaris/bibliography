@@ -69,9 +69,9 @@
        <% @latest_books.each do |book| %>
         
           <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
+            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present?  %>
             <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.writers.first.fullname%></span>
+            <span class="text-muted"><%= book.main_author %></span>
             
           <% end %> 
       <% end %>
@@ -85,9 +85,9 @@
       <% @latest_books.each do |book| %>
         
           <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
+            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present?  %>
             <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.writers.first.fullname%></span>
+            <span class="text-muted"><%= book.main_author %></span>
             
           <% end %> 
       <% end %>
@@ -107,12 +107,12 @@
               <% @latest_books.each do |book| %>                
                 <tr>                                                                       
                   <td class="text-center" style="width: 80px;">
-                     <%= image_tag(book.image, alt: "book_cover", class: "img-thumbnail")  %>
+                     <%= image_tag(book.image, alt: "book_cover", class: "img-thumbnail") if book.image.present? %>
                   </td>
                   <td>                     
                     <%= link_to book.title, book %><br>
                     <%= link_to book.writers.first do %>
-                      <span class="text-muted"><small><%= book.writers.first.fullname%></small></span>                     
+                      <span class="text-muted"><small><%= book.main_author %></small></span>                     
                     <% end %> 
                   </td>
                   <td class="text-center" style="width: 80px;">
@@ -133,9 +133,9 @@
       <% @latest_books.each do |book| %>
         
           <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left")  %>
+            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present? %>
             <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.writers.first.fullname%></span>
+            <span class="text-muted"><%= book.main_author %></span>
             
           <% end %> 
       <% end %>

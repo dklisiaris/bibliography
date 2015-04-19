@@ -4,16 +4,21 @@ class ImportWorker
 
   def perform(data_hash)   
     @data_hash = data_hash 
-    import_authors    if @data_hash.keys.include? 'author'
-    import_publishers if @data_hash.keys.include? 'publisher'
-    import_books      if @data_hash.keys.include? 'book'
-    # create_categories_from_json(@data_hash)   
+    import_all  
   end
 
   private
 
-  def import_authors
-    @data_hash['author'].each do |author|
+  def import_all(data_hash = @data_hash)
+    import_authors    if data_hash.keys.include? 'author'
+    import_publishers if data_hash.keys.include? 'publisher'
+    import_books      if data_hash.keys.include? 'book'
+    import_categories if data_hash.keys.include? 'category'
+    # create_categories_from_json(data_hash)  
+  end
+
+  def import_authors(data_hash = @data_hash)
+    data_hash['author'].each do |author|
       author_record = Author.create(
         firstname:    author['firstname'], 
         lastname:     author['lastname'],
@@ -33,8 +38,8 @@ class ImportWorker
     end
   end    
 
-  def import_publishers
-    @data_hash['publisher'].each do |publisher|
+  def import_publishers(data_hash = @data_hash)
+    data_hash['publisher'].each do |publisher|
       publisher_record = Publisher.create(
         name:         publisher['name'], 
         owner:        publisher['owner'],
@@ -57,8 +62,36 @@ class ImportWorker
     end
   end  
 
-  def import_books
-    @data_hash['book'].each do |book|      
+  def import_categories(data_hash = @data_hash)
+    data_hash['category'].each do |category_tree|
+      category_tree.each do |b_id, category|
+        unless Category.exists?(name: category['name'], ddc: category['ddc']) or (b_id == "current")
+          parent_id = category['parent'].nil? ? nil : Category.where(biblionet_id: category['parent']).first.id.to_i
+
+          category_record = Category.create(
+            name:         category['name'], 
+            ddc:          category['ddc'],
+            parent_id:    parent_id,
+            biblionet_id: b_id
+          )
+        end
+      end
+    end    
+  end
+
+  def import_books(data_hash = @data_hash)
+    data_hash['book'].each do |book|    
+      publisher_biblionet_id = book['publisher']['b_id']      
+
+      if Publisher.exists?(biblionet_id: publisher_biblionet_id)
+        publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
+      else
+        import_publishers_from_bookshark(publisher_biblionet_id)
+        publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
+      end   
+
+      publisher_id = publisher_record.id   
+
       book_record = Book.create(
         title:                book['title'], 
         subtitle:             book['subtitle'],        
@@ -82,7 +115,7 @@ class ImportWorker
         format:               book['format'],
         original_language:    book['original_language'],
         original_title:       book['original_title'],
-        publisher_id:         (Publisher.find_by(biblionet_id: book['publisher']['b_id'])).id,
+        publisher_id:         publisher_id,
         extra:                book['extra'],
 
         description:          book['description'],
@@ -97,15 +130,26 @@ class ImportWorker
       end
 
       if book['category'].present?
-        book['category'].each do |category| 
-          book_record.categories << Category.find_by(biblionet_id: category['b_id'])
+        book['category'].each do |category|
+          if Category.exists?(biblionet_id: category['b_id'])
+            category_record = Category.find_by(biblionet_id: category['b_id'])
+          else
+            import_categories_from_bookshark(category['b_id'])
+            category_record = Category.find_by(biblionet_id: category['b_id'])
+          end           
+          
+          book_record.categories << category_record
         end
       end
 
       if book['author'].present?
         book['author'].each do |author|
-          author_record = Author.find_by(biblionet_id: author['b_id'])
-          book_record.contributions.create(job: 0, author: author_record)           
+          if author['b_id']
+            author_record = Author.find_by(biblionet_id: author['b_id'])
+            book_record.contributions.create(job: 0, author: author_record)    
+          else
+            book_record.update(collective_work: true) if author == "Συλλογικό έργο"  
+          end                 
         end
       end
 
@@ -122,6 +166,15 @@ class ImportWorker
     end    
   end  
 
+  def import_publishers_from_bookshark(id)
+    response = Bookshark::Extractor.new(format: 'json').publisher(id: id.to_i)
+    import_publishers JSON.parse(response)
+  end
+
+  def import_categories_from_bookshark(id)
+    response = Bookshark::Extractor.new(format: 'json').category(id: id.to_i)
+    import_categories JSON.parse(response)
+  end  
 
   # Obsolete methods in our new API
   # def create_categories_from_json(data_hash)        

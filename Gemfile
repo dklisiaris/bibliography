@@ -123,3 +123,9 @@ gem 'unicode_utils', '>= 1.4'
 
 # Complete geocoding solution for Ruby
 gem 'geocoder', '~> 1.2'
+
+# Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
+gem 'sinatra', :require => nil
+
+# Book metadata extraction library
+gem 'bookshark', "~> 1.0.0.beta"

@@ -25,7 +25,7 @@
             
             <h4><%= @book_presenter.writers %></h4> 
 
-            <p><%= @book.description.html_safe %></p> 
+            <p><%= @book.description.html_safe if @book.description.present? %></p> 
 
             <p><%= @book_presenter.contributors %></p>             
             

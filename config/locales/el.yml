@@ -38,6 +38,7 @@ el:
 
     admins_only: "Μόνο για διαχειριστές"
     import: "Εισαγωγή"
+    monitoring: "Monitoring"
     tasks: "Εργασίες"
     api: "API"
 
@@ -103,7 +104,8 @@ el:
     isbn: "ISBN"
     isbn13: "ISBN-13"
     ismn: "ISMN"
-    issn: "ISSN"    
+    issn: "ISSN" 
+    collective_work: "Συλλογικό έργο"   
 
 
   import:

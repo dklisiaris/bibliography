@@ -51,6 +51,11 @@ Rails.application.routes.draw do
   resources :categories
 
   devise_for :users
+
+  authenticate :user, lambda { |u| u.admin? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
   
 
   # The priority is based upon order of creation: first created -> highest priority.

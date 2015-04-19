@@ -9,7 +9,8 @@ class Author < ActiveRecord::Base
   enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης)
 
   def fullname
-    [firstname, lastname].join(' ')
+    return [firstname, lastname].join(' ') if firstname.present?
+    return lastname
   end
   
 end

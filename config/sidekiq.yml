@@ -9,7 +9,9 @@
 ---
 :verbose: false
 :pidfile: tmp/pids/sidekiq.pid
-:concurrency:  25
+# :logfile: log/sidekiq.log
+:concurrency: 10
+:timeout: 1500
 :queues:
   - [mailer, 5]
   - [network_ops, 3]

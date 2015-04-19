@@ -3,6 +3,7 @@ class Category < ActiveRecord::Base
   acts_as_tree order: "ddc"
 
   has_and_belongs_to_many :books
+  before_destroy { books.clear }
 
   validates :name, presence: true, :uniqueness => { scope: :ddc, message: 'This category already exists'}
   validates :ddc, presence: true    
