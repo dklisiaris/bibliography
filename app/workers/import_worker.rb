@@ -50,7 +50,7 @@ class ImportWorker
         publisher_record.places.create(
           name:      (publisher['name'] + ' - ' + role).to_s,
           role:       role,
-          address:    place['address'].join(', '),
+          address:   (place['address'].kind_of?(Array) ? place['address'].join(', ') : place['address'] unless place['address'].nil?),
           telephone: (place['telephone'].kind_of?(Array) ? place['telephone'].join(', ') : place['telephone']),
           fax:        place['fax'],
           email:      place['email'],

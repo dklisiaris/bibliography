@@ -9,7 +9,7 @@
 ---
 :verbose: false
 :pidfile: tmp/pids/sidekiq.pid
-# :logfile: log/sidekiq.log
+:logfile: log/sidekiq.log
 :concurrency: 10
 :timeout: 1500
 :queues:

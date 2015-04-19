@@ -5,6 +5,7 @@ class Book < ActiveRecord::Base
   has_many :contributions
   has_many :authors, through: :contributions
   belongs_to :publisher
+  has_many :awards, as: :awardable
 
   has_many  :writers, -> { where contributions: { job: 0 } },
             :through => :contributions,
