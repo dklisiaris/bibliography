@@ -80,90 +80,92 @@ class ImportWorker
   end
 
   def import_books(data_hash = @data_hash)
-    data_hash['book'].each do |book|    
-      publisher_biblionet_id = book['publisher']['b_id']      
+    data_hash['book'].each do |book|
+      unless Book.exists?(biblionet_id: book['b_id'])
+        publisher_biblionet_id = book['publisher']['b_id']      
 
-      if Publisher.exists?(biblionet_id: publisher_biblionet_id)
-        publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
-      else
-        import_publishers_from_bookshark(publisher_biblionet_id)
-        publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
-      end   
+        if Publisher.exists?(biblionet_id: publisher_biblionet_id)
+          publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
+        else
+          import_publishers_from_bookshark(publisher_biblionet_id) if book['publisher']['b_id'].present? 
+          publisher_record = Publisher.find_by(biblionet_id: publisher_biblionet_id)
+        end   
 
-      publisher_id = publisher_record.id   
+        publisher_id = publisher_record.id if publisher_record.present?    
 
-      book_record = Book.create(
-        title:                book['title'], 
-        subtitle:             book['subtitle'],        
-        image:                book['image'],
+        book_record = Book.create(
+          title:                book['title'], 
+          subtitle:             book['subtitle'],        
+          image:                book['image'],
 
-        isbn:                 book['isbn'],
-        isbn13:               book['isbn_13'],
-        ismn:                 book['ismn'],
-        issn:                 book['issn'],
-        series:               book['series'],
+          isbn:                 book['isbn'],
+          isbn13:               book['isbn_13'],
+          ismn:                 book['ismn'],
+          issn:                 book['issn'],
+          series:               book['series'],
 
-        pages:                book['pages'],
-        publication_year:     book['publication_year'],
-        publication_place:    book['publication_place'],
-        price:                book['price'],
-        price_updated_at:     book['price_updated_at'],
+          pages:                book['pages'],
+          publication_year:     book['publication_year'],
+          publication_place:    book['publication_place'],
+          price:                book['price'],
+          price_updated_at:     book['price_updated_at'],
 
-        physical_description: book['physical_description'],
-        cover_type:           book['cover_type'],
-        availability:         book['availability'],
-        format:               book['format'],
-        original_language:    book['original_language'],
-        original_title:       book['original_title'],
-        publisher_id:         publisher_id,
-        extra:                book['extra'],
+          physical_description: book['physical_description'],
+          cover_type:           book['cover_type'],
+          availability:        (book['status'].present? ? Book.availabilities[book['status']] : nil),
+          format:               book['format'],
+          original_language:    book['original_language'],
+          original_title:       book['original_title'],
+          publisher_id:         publisher_id,
+          extra:                book['extra'],
 
-        description:          book['description'],
-        biblionet_id:         book['b_id']
-      )
+          description:          book['description'],
+          biblionet_id:         book['b_id']
+        )
 
-      if book['award'].present?
-        book['award'].each do |award| 
-          prize_record = Prize.find_or_create_by(name: award['name'])    
-          book_record.awards.create(prize: prize_record, year: award['year'])              
-        end
-      end
-
-      if book['category'].present?
-        book['category'].each do |category|
-          if Category.exists?(biblionet_id: category['b_id'])
-            category_record = Category.find_by(biblionet_id: category['b_id'])
-          else
-            import_categories_from_bookshark(category['b_id'])
-            category_record = Category.find_by(biblionet_id: category['b_id'])
-          end           
-          
-          book_record.categories << category_record
-        end
-      end
-
-      if book['author'].present?
-        book['author'].each do |author|
-          if author['b_id']
-            author_record = Author.find_by(biblionet_id: author['b_id'])
-            book_record.contributions.create(job: 0, author: author_record)    
-          else
-            book_record.update(collective_work: true) if author == "Συλλογικό έργο"  
-          end                 
-        end
-      end
-
-      if book['contributors'].present?
-        book['contributors'].each do |job, contributors|
-          job_index = Contribution.jobs[job]
-          contributors.each do |contributor|
-            author_record = Author.find_by(biblionet_id: contributor['b_id'])
-            book_record.contributions.create(job: job_index, author: author_record) 
+        if book['award'].present?
+          book['award'].each do |award| 
+            prize_record = Prize.find_or_create_by(name: award['name'])    
+            book_record.awards.create(prize: prize_record, year: award['year'])              
           end
         end
-      end      
 
-    end    
+        if book['category'].present?
+          book['category'].each do |category|
+            if Category.exists?(biblionet_id: category['b_id'])
+              category_record = Category.find_by(biblionet_id: category['b_id'])
+            else
+              import_categories_from_bookshark(category['b_id'])
+              category_record = Category.find_by(biblionet_id: category['b_id'])
+            end           
+            
+            book_record.categories << category_record
+          end
+        end
+
+        if book['author'].present?
+          book['author'].each do |author|
+            if author['b_id']
+              author_record = Author.find_by(biblionet_id: author['b_id'])
+              book_record.contributions.create(job: 0, author: author_record)    
+            else
+              book_record.update(collective_work: true) if author == "Συλλογικό έργο"  
+            end                 
+          end
+        end
+
+        if book['contributors'].present?
+          book['contributors'].each do |job, contributors|
+            job_index = Contribution.jobs[job]
+            contributors.each do |contributor|
+              author_record = Author.find_by(biblionet_id: contributor['b_id'])
+              book_record.contributions.create(job: job_index, author: author_record) 
+            end
+          end
+        end
+
+      end
+    end
   end  
 
   def import_publishers_from_bookshark(id)

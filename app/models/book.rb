@@ -29,6 +29,7 @@ class Book < ActiveRecord::Base
     categories.clear
     contributions.clear
     bookshelves.clear
+    awards.clear
   end
 
   def main_author
@@ -40,7 +41,6 @@ class Book < ActiveRecord::Base
   end
 
 
-
   searchkick batch_size: 50, 
   callbacks: :async, 
   text_middle: ['title', 'description'],
@@ -48,10 +48,20 @@ class Book < ActiveRecord::Base
   autocomplete: ['title']
 
   def search_data
-    {
-      title: title,
-      description: description
-    }
+  {
+    title: title,
+    description: short_description
+  }
+  end
+
+  def short_description
+    if description.present? and description.length<=10000
+      description
+    elsif description.present? and description.length>10000
+      description[0...10000]
+    else
+      nil
+    end
   end
 
 end
