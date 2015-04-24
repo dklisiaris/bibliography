@@ -86,7 +86,7 @@ gem "devise-async", '>= 0.9'
 gem 'royce', '~> 1.0'
 
 # Authorization
-gem "pundit", '~> 0.3'
+gem "pundit", '~> 1.0'
 
 # For models with tree parent-child associations
 gem 'acts_as_tree', '~> 2.1'

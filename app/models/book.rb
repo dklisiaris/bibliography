@@ -43,14 +43,15 @@ class Book < ActiveRecord::Base
 
   searchkick batch_size: 50, 
   callbacks: :async, 
-  text_middle: ['title', 'description'],
+  # text_middle: ['title', 'description'],
+  text_middle: ['title'],  
   # word_start: ['title', 'description'],
   autocomplete: ['title']
 
   def search_data
   {
     title: title,
-    description: short_description
+    # description: short_description
   }
   end
 
