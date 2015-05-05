@@ -112,7 +112,7 @@ class ImportWorker
 
           physical_description: book['physical_description'],
           cover_type:           book['cover_type'],
-          availability:        (book['status'].present? ? Book.availabilities[book['status']] : nil),
+          availability:        (book['availability'].present? ? Book.availabilities[book['availability']] : nil),
           format:               book['format'],
           original_language:    book['original_language'],
           original_title:       book['original_title'],

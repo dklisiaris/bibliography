@@ -128,4 +128,4 @@ gem 'geocoder', '~> 1.2'
 gem 'sinatra', :require => nil
 
 # Book metadata extraction library
-gem 'bookshark', "~> 1.0.0.beta"
+gem 'bookshark', "~> 1.0.0.pre"
