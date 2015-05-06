@@ -105,7 +105,8 @@ el:
     isbn13: "ISBN-13"
     ismn: "ISMN"
     issn: "ISSN" 
-    collective_work: "Συλλογικό έργο"   
+    collective_work: "Συλλογικό έργο"
+    n_version: "η έκδοση"   
 
 
   import:

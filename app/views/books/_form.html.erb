@@ -44,17 +44,21 @@
     <%= f.text_field :issn, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
-    <%= f.label :series %><br>
-    <%= f.text_field :series, class: 'form-control' %>
+    <%= f.label :series_name %><br>
+    <%= f.text_field :series_name, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
-    <%= f.label :pages %><br>
-    <%= f.number_field :pages, class: 'form-control' %>
-  </div>
+    <%= f.label :series_volume %><br>
+    <%= f.text_field :series_volume, class: 'form-control' %>
+  </div>  
   <div class="col-xs-6 form-group">
     <%= f.label :publication_year %><br>
     <%= f.number_field :publication_year, class: 'form-control' %>
   </div>
+  <div class="col-xs-6 form-group">
+    <%= f.label :publication_version %><br>
+    <%= f.number_field :publication_version, class: 'form-control' %>
+  </div>  
   <div class="col-xs-6 form-group">
     <%= f.label :publication_place %><br>
     <%= f.text_field :publication_place, class: 'form-control' %>
@@ -68,8 +72,12 @@
     <%= f.date_select :price_updated_at, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
-    <%= f.label :physical_description %><br>
-    <%= f.text_field :physical_description, class: 'form-control' %>
+    <%= f.label :pages %><br>
+    <%= f.number_field :pages, class: 'form-control' %>
+  </div>  
+  <div class="col-xs-6 form-group">
+    <%= f.label :size %><br>
+    <%= f.text_field :size, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :cover_type %><br>

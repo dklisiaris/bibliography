@@ -43,9 +43,10 @@ class BookPresenter < BasePresenter
 
   def publication
     html = []
-    html << book.publication_place                          if book.publication_place.present?
-    html << h.link_to(book.publisher.name, book.publisher)  if book.publisher.present?
-    html << book.publication_year.to_s                      if book.publication_year.present?
+    html << book.publication_place                                    if book.publication_place.present?
+    html << h.link_to(book.publisher.name, book.publisher)            if book.publisher.present?
+    html << book.publication_version.to_s + I18n.t('books.n_version') if book.publication_version.present?
+    html << book.publication_year.to_s                                if book.publication_year.present?
     html.join(', ').html_safe
   end
 
@@ -61,7 +62,7 @@ class BookPresenter < BasePresenter
     html = []
     html << book.pages.to_s + I18n.t('books.pages') if book.pages
     html << book.cover_type.humanize if book.cover_type
-    html << book.physical_description + I18n.t('books.centimeters') if book.physical_description
+    html << book.size + I18n.t('books.centimeters') if book.size
     html.join(', ').html_safe
   end
 

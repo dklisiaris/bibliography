@@ -52,7 +52,7 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :subtitle, :description, :image, :isbn, :isbn13, :ismn, :issn, :series, :pages, :publication_year, :publication_place, :price, :price_updated_at, :physical_description, :cover_type, :availability, :format, :original_language, :original_title, :publisher_id, :extra, :biblionet_id)
+      params.require(:book).permit(:title, :subtitle, :description, :image, :isbn, :isbn13, :ismn, :issn, :series_name, :series_volume, :pages, :size, :cover_type, :publication_year, :publication_version, :publication_place, :price, :price_updated_at, :availability, :format, :original_language, :original_title, :publisher_id, :extra, :biblionet_id)
     end
 
     def set_enums

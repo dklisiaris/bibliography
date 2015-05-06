@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419134946) do
+ActiveRecord::Schema.define(version: 20150506191847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,24 +48,26 @@ ActiveRecord::Schema.define(version: 20150419134946) do
     t.string   "isbn13"
     t.string   "ismn"
     t.string   "issn"
-    t.string   "series"
+    t.string   "series_name"
     t.integer  "pages"
     t.integer  "publication_year"
     t.string   "publication_place"
-    t.decimal  "price",                precision: 6, scale: 2
+    t.decimal  "price",               precision: 6, scale: 2
     t.date     "price_updated_at"
-    t.string   "physical_description"
-    t.integer  "cover_type",                                   default: 0
-    t.integer  "availability",                                 default: 0
-    t.integer  "format",                                       default: 0
+    t.string   "size"
+    t.integer  "cover_type",                                  default: 0
+    t.integer  "availability",                                default: 0
+    t.integer  "format",                                      default: 0
     t.integer  "original_language"
     t.string   "original_title"
     t.integer  "publisher_id"
     t.string   "extra"
     t.integer  "biblionet_id"
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
-    t.boolean  "collective_work",                              default: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.boolean  "collective_work",                             default: false
+    t.integer  "series_volume"
+    t.integer  "publication_version"
   end
 
   add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree

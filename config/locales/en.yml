@@ -126,6 +126,7 @@ en:
     ismn: "ISMN"
     issn: "ISSN"
     collective_work: "Collective work"
+    n_version: "th revision"
 
   import:
     from_file: "From File"

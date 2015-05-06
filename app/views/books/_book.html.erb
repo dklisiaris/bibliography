@@ -4,6 +4,7 @@
   <td>
     <%= book.publisher.name unless book.publisher.nil? %><br>
     <%= book.publication_place %><br>
+    <%= book.publication_version %><br>
     <%= book.publication_year %>
   </td>        
   <td><%= image_tag(book.image, height: '64', width: '64') %></td>
@@ -13,7 +14,10 @@
     <%= book.ismn %><br>
     <%= book.issn %>
   </td>
-  <td><%= book.series %></td>        
+  <td>
+    <%= book.series_name %><br>
+    <%= book.series_volume %>
+  </td>        
   <td>
     <%= book.price %><br>
     <%= book.price_updated_at %>
@@ -22,7 +26,7 @@
     Pages:
     <%= book.pages %><br>
     <%= book.cover_type.humanize if book.cover_type %><br>
-    <%= book.physical_description %>
+    <%= book.size %>
   </td>
   <td><%= book.availability.humanize if book.availability %></td>
   <td><%= book.format.humanize if book.format %></td>
