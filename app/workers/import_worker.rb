@@ -145,10 +145,15 @@ class ImportWorker
           end
         end
 
-        if book['author'].present?
-          book['author'].each do |author|
-            if author['b_id']
-              author_record = Author.find_by(biblionet_id: author['b_id'])
+        if book['author'].present?          
+          book['author'].each do |author|            
+            if author['b_id']              
+              if Author.exists?(biblionet_id: author['b_id'])                
+                author_record = Author.find_by(biblionet_id: author['b_id'])   
+              else                
+                import_authors_from_bookshark(author['b_id'])
+                author_record = Author.find_by(biblionet_id: author['b_id'])
+              end
               book_record.contributions.create(job: 0, author: author_record)    
             else
               book_record.update(collective_work: true) if author == "Συλλογικό έργο"  
@@ -160,7 +165,12 @@ class ImportWorker
           book['contributors'].each do |job, contributors|
             job_index = Contribution.jobs[job]
             contributors.each do |contributor|
-              author_record = Author.find_by(biblionet_id: contributor['b_id'])
+              if Author.exists?(biblionet_id: contributor['b_id'])
+                author_record = Author.find_by(biblionet_id: contributor['b_id'])   
+              else  
+                import_authors_from_bookshark(contributor['b_id'])
+                author_record = Author.find_by(biblionet_id: contributor['b_id'])
+              end                            
               book_record.contributions.create(job: job_index, author: author_record) 
             end
           end
@@ -169,6 +179,11 @@ class ImportWorker
       end
     end
   end  
+
+  def import_authors_from_bookshark(id)
+    response = Bookshark::Extractor.new(format: 'json').author(id: id.to_i)
+    import_authors JSON.parse(response)
+  end
 
   def import_publishers_from_bookshark(id)
     response = Bookshark::Extractor.new(format: 'json').publisher(id: id.to_i)
