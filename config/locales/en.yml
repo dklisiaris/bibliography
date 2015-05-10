@@ -21,9 +21,22 @@
 
 en:
   welcome: "Welcome to Bibliography GR"
+  some_options: "Here are some options to get started"
+  add_books: "Add Books"
+  browse_books: "Browse books"
+  add_books_to_library: "Add books to your library"
+  spruce_up_profile: "Spruce up your profile"
+  edit_profile: "Edit your profile"
+  add_member_photo: "Add a member photo"
+  engage: "Engage with others"
+  read_reviews: "Read member reviews"
+  invite_friends: "Invite friends"
+
   home: "Home"
   collections: "Collections"
   my_books: "My Books"
+  my_collections: "My Collections"
+  recently_added: "Recently Added"
 
   site_settings: "Site Settings"
   add_to_collection: "Add to collection"

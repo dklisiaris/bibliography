@@ -1,0 +1,21 @@
+<div class="widget">  
+  <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
+    <i class="fa fa-fw fa-th-large"></i> <strong><%= t('my_collections') %></strong>
+  </div>      
+  <div class="widget-content">
+    <div class="row">
+      <% @shelves.each do |shelf| %>
+        <div class="col-xs-6 col-sm-4">
+          <div class="row">
+            <div class="col-xs-10">
+              <%= link_to shelf.screen_name, shelf %>  
+            </div> 
+            <div class="col-xs-2">
+              <span class="pull-right"><%= shelf.books.count %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>       
+    </div>
+  </div>
+</div>

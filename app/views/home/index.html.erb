@@ -22,36 +22,10 @@
 <div class="row">
 
   <div class="col-lg-8 col-xl-6 col-xl-push-3">
-    <div class="widget">  
-      <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
-        <span class="pull-right">(Here are some options to get started)</span>
-        <i class="fa fa-fw fa-home"></i> <strong><%= t('welcome') %></strong>
-      </div>      
-      <div class="widget-content">                
-         <div class="row">
-            <div class="col-xs-6 col-sm-4">
-              <h4>Add books</h4>
-              <%= link_to "Browse books", "#" %><br>
-              <%= link_to "Add books to your library", "#" %>
-            </div> 
-            <div class="col-xs-6 col-sm-4">
-              <h4>Spruce up your profile</h4>
-              <%= link_to "Edit your profile", "#" %><br>
-              <%= link_to "Add a member photo", "#" %>              
-            </div> 
-            <div class="col-xs-6 col-sm-4">
-              <h4>Engage with others</h4>
-              <%= link_to "Read member reviews", "#" %><br>
-              <%= link_to "Invite friends", "#" %>              
-            </div> 
-         </div>
-
-         <div class="push-bit-top">
-            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-facebook"></i> Like</a>
-            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"><i class="fa fa-twitter"></i> Tweet</a>
-         </div>
-      </div>
-   </div>
+    <%= render 'home/widgets/welcome' %>
+    <%= render 'home/widgets/my_books' %>
+    <%= render 'home/widgets/my_collections' if user_signed_in? %>
+    <%= render 'home/widgets/recently_added' %>   
   </div>
 
 
@@ -140,7 +114,7 @@
           <% end %> 
       <% end %>
     </div>
-  </div>    
+  </div>  
 
 </div>
 

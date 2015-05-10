@@ -1,12 +1,24 @@
 el:
   welcome: "Καλώς ήρθατε στο Bibliography GR"
+  some_options: "Μερικές επιλογές για να ξεκινήσετε"
+  add_books: "Προσθήκη Βιβλίων"
+  browse_books: "Περιήγηση στα βιβλία"
+  add_books_to_library: "Προσθήκη στη βιβλιοθήκη"
+  spruce_up_profile: "Βελτίωση προφίλ"
+  edit_profile: "Επεξεργασία προφιλ"
+  add_member_photo: "Προσθέστε φωτογραφία"
+  engage: "Συνδεθείτε με άλλους"
+  read_reviews: "Διαβάστε κριτικές μελών"
+  invite_friends: "Προσκαλέστε φίλους"
+
   home: "ΑΡΧΙΚΗ"
   collections: "ΣΥΛΛΟΓΕΣ"
-  my_books: "ΤΑ ΒΙΒΛΙΑ ΜΟΥ"
+  my_books: "ΤΑ ΒΙΒΛΙΑ ΜΟΥ"  
+  my_collections: "Οι συλλογές μου"
+  recently_added: "Προστέθηκαν πρόσφατα"
 
   site_settings: "Ρυθμίσεις εφαρμογής"
   add_to_collection: "Προσθήκη σε συλλογή"
-
   please_login: "Παρακαλούμε συνδεθείτε"
   login: "Συνδεση"
   signup: "Εγγραφη"

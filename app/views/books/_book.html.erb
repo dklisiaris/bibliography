@@ -1,5 +1,5 @@
 <tr>
-  <td><%= book.title %></td>
+  <td><%= link_to book.title, book %></td>
   <td><%= book.subtitle %></td>
   <td>
     <%= book.publisher.name unless book.publisher.nil? %><br>
