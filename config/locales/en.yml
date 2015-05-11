@@ -47,6 +47,15 @@ en:
   forgot_password: "Forgot your password?"
   password: "Password"
   remember_me: "Remember me"
+  register: "Register"
+  create_account: "Create Account"
+  password_confirmation: "Password confirmation" 
+  enter_email: "Enter your email"
+  enter_password: "Enter your password"
+  confirm_password: "Confirm your password"
+  terms: "Terms"
+  agree_to_terms: "Agree to terms"
+  back_to_login: "Back to login"
 
   search: "Search"
   write_search_terms: "Write search terms..."
@@ -164,7 +173,6 @@ en:
     all_collections: "All Collections"
     add_to_collections: "Add to collections"
     edit_collections: "Edit collections"
-
 
   # Authorization
   pundit:

@@ -50,15 +50,19 @@
                       <span class="text-muted"><small><%= book.main_author %></small></span>                     
                     <% end %> 
                   </td>
-                  <td class="text-center" style="width: 80px;">
+                  <td class="text-center" style="width: 80px;">                    
                     <% if user_signed_in? and current_user.added_book?(book) %>
-                      <%= link_to '#', 'data-toggle' => "tooltip", "data-placement" => "left", title: t('shelves.edit_collections'), class: "btn btn-effect-ripple btn-xs btn-success" do %>                    
-                        <i class="fa fa-check"></i>
-                      <% end %>                     
-                    <% else %>     
-                      <%= link_to '#', 'data-toggle' => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections'), class: "btn btn-effect-ripple btn-xs btn-primary" do %>                    
-                        <i class="fa fa-plus"></i>
-                      <% end %>                                   
+                      <%= link_to '#collections-modal', "data-toggle" => "modal", class: "btn btn-effect-ripple btn-xs btn-success" do %> 
+                        <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.edit_collections')) do %>     
+                          <i class="fa fa-check"></i>
+                        <% end %>   
+                      <% end %>                   
+                    <% else %>                       
+                      <%= link_to '#collections-modal', "data-toggle" => "modal", class: "btn btn-effect-ripple btn-xs btn-primary" do %>
+                        <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections')) do %>                  
+                          <i class="fa fa-plus"></i>
+                        <% end %>
+                      <% end %>                                     
                     <% end %>
                   </td>                  
                 </tr>                
@@ -125,5 +129,36 @@
     </div>
   </div>  
 
+</div>
+
+<div id="collections-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">
+          <strong><%= t('shelves.edit_collections') %></strong>
+        </h3>
+      </div>
+      <div class="modal-body" style="overflow-y: scroll; height:300px;">
+        
+        <p>TODO: Show collections and checkboxes for each collection.</p>
+        <div class="row">
+          <% @shelves.each do |shelf| %>          
+            <div class="col-xs-6">
+              <label class="csscheckbox csscheckbox-primary">
+                <input id=<%= "collection-#{shelf.id}" %> type="checkbox"><span></span>
+              </label>  
+              <%= shelf.screen_name %>  
+            </div>           
+          <% end %>        
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <button type="button" class="btn btn-effect-ripple btn-sm btn-primary" data-dismiss="modal"><%= t('save') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
