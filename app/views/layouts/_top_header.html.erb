@@ -7,9 +7,9 @@
                 <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
                 </a>
               </li>
-              <%= top_nav_li(t('home'), root_path) %> 
-              <%= top_nav_li(t('collections'), shelves_path) %> 
-              <%= top_nav_li(t('my_books'), '#') %> 
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('home'))), root_path) %> 
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), shelves_path) %> 
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), '#') %> 
 
             </ul>
             <ul class="nav navbar-nav-custom pull-right">

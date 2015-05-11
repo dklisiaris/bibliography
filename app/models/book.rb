@@ -65,5 +65,15 @@ class Book < ActiveRecord::Base
     end
   end
 
+  
+  # Returns book cover url if there is one or the default not image.
+  def cover
+    if image.present?
+      image
+    else
+      "https://bookopolis.com/img/no_book_cover.jpg"
+    end
+  end
+
 end
 

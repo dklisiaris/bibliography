@@ -42,4 +42,8 @@ module ApplicationHelper
     content_tag(:i, nil, { class: "fa fa-#{icon}" })
   end
 
+  def detone(text)
+    text.tr('άέήίόύώ','αεηιουω')
+  end
+
 end

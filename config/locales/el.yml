@@ -11,9 +11,9 @@ el:
   read_reviews: "Διαβάστε κριτικές μελών"
   invite_friends: "Προσκαλέστε φίλους"
 
-  home: "ΑΡΧΙΚΗ"
-  collections: "ΣΥΛΛΟΓΕΣ"
-  my_books: "ΤΑ ΒΙΒΛΙΑ ΜΟΥ"  
+  home: "Αρχική"
+  collections: "Συλλογές"
+  my_books: "Τα βιβλία μου"
   my_collections: "Οι συλλογές μου"
   recently_added: "Προστέθηκαν πρόσφατα"
 
@@ -137,6 +137,9 @@ el:
     danger_zone: "Επικίνδυνη Ζώνη"
     import_from_storage: "Εισαγωγή από τοπικό χώρο αποθήκευσης"
     storage_import_description: "Προσοχή! Όλα τα αρχεία json μέσα στον κατάλογο tmp/storage θα εισαχθούν."
+
+  shelves:
+    all_collections: "Όλες οι συλλογές"
 
   # Authorization
   pundit:

@@ -158,6 +158,10 @@ en:
     import_from_storage: "Import from storage"
     storage_import_description: "Be careful! All json files inside tmp/storage will be imported."
 
+  shelves:
+    all_collections: "All Collections"
+
+
   # Authorization
   pundit:
     default: 'You cannot perform this action.'

@@ -1,24 +1,21 @@
 <div class="widget">  
-  <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
+  <div class="widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom">
     <i class="fa fa-fw fa-book"></i> <strong><%= t('my_books') %></strong>
   </div>      
   <div class="widget-content">                
      <div class="row">
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('add_books') %></h4>
-          <%= link_to t('browse_books'), "#" %><br>
-          <%= link_to t('add_books_to_library'), "#" %>
-        </div> 
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('spruce_up_profile') %></h4>
-          <%= link_to t('edit_profile'), "#" %><br>
-          <%= link_to t('add_member_photo'), "#" %>              
-        </div> 
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('engage') %></h4>
-          <%= link_to t('read_reviews'), "#" %><br>
-          <%= link_to t('invite_friends'), "#" %>              
-        </div> 
+        <% @shelves.each do |shelf| %>
+          <div class="col-xs-6 col-sm-4">
+            <div class="row">
+              <div class="col-xs-10">
+                <%= link_to shelf.screen_name, shelf %>  
+              </div> 
+              <div class="col-xs-2">
+                <span class="pull-right"><%= shelf.books.count %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>  
      </div>
 
      <div class="push-bit-top">

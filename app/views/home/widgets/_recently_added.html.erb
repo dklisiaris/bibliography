@@ -1,29 +1,16 @@
 <div class="widget">  
-  <div class="widget-content themed-background-dark-flat text-light-op border-bottom">
+  <div class="widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom">
     <i class="fa fa-fw fa-clock-o"></i> <strong><%= t('recently_added') %></strong>
   </div>      
   <div class="widget-content">                
      <div class="row">
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('add_books') %></h4>
-          <%= link_to t('browse_books'), "#" %><br>
-          <%= link_to t('add_books_to_library'), "#" %>
-        </div> 
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('spruce_up_profile') %></h4>
-          <%= link_to t('edit_profile'), "#" %><br>
-          <%= link_to t('add_memeber_photo'), "#" %>              
-        </div> 
-        <div class="col-xs-6 col-sm-4">
-          <h4><%= t('engage') %></h4>
-          <%= link_to t('read_reviews'), "#" %><br>
-          <%= link_to t('invite_friends'), "#" %>              
-        </div> 
-     </div>
-
-     <div class="push-bit-top">
-        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-facebook"></i> Like</a>
-        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"><i class="fa fa-twitter"></i> Tweet</a>
+        <% @recently_added.each do |book| %>
+          <div class="col-xs-auto col-xs-3 col-sm-auto col-sm-2">
+            <div class="image-container">
+            <%= link_to image_tag(book.image, alt: "book_cover", class: "img-thumbnail center-block", 'data-toggle' => "tooltip", "data-placement" => "top", title: book.title), book %>     
+            </div>       
+          </div>          
+        <% end %>         
      </div>
   </div>
 </div>

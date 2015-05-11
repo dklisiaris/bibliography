@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   has_one :profile, :dependent => :destroy
   has_many :shelves, :dependent => :destroy
+  has_many :bookshelves, through: :shelves
+  has_many :books, through: :shelves
 
   # after_create :assign_default_role
   def screen_name

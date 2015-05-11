@@ -12,12 +12,12 @@
             <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success') %>
             <% end %>                
           </div>
-          <h2><%= @book.title %></h2>
+          <h2><%= detone(@book.title) %></h2>
         </div>  
 
         <div class="row">
           <div class="col-sm-2">            
-            <%= image_tag(@book.image, alt: "book_cover", class: "img-thumbnail")  %>            
+            <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>            
           </div>  
           <div class="col-sm-10">
             <h2><%= @book.title %><br><small><%= @book.subtitle %></small></h2>
@@ -31,17 +31,17 @@
             
             <table class="table table-striped table-bordered">
               <tbody>
-                <%= @book_presenter.tr(t('books.publication'), @book_presenter.publication) %>
+                <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
 
-                <%= @book_presenter.tr(t('books.format'), @book.format.humanize) if @book.format %>                
+                <%= @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format %>                
 
-                <%= @book_presenter.tr(t('books.original_title'), @book.original_title) %>
+                <%= @book_presenter.trow(t('books.original_title'), @book.original_title) %>
 
-                <%= @book_presenter.tr(t('books.original_language'), @book.original_language) %>
+                <%= @book_presenter.trow(t('books.original_language'), @book.original_language) %>
 
-                <%= @book_presenter.tr(t('books.series'), @book.series_name) %>
+                <%= @book_presenter.trow(t('books.series'), @book.series_name) %>
 
-                <%= @book_presenter.tr(t('books.genres'), @book_presenter.genres) %>
+                <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>
               </tbody>
             </table>
 
@@ -57,17 +57,17 @@
                 <div class="tab-pane active" id="block-tabs-desc">
                   <table class="table table-striped">
                     <tbody>                      
-                      <%= @book_presenter.tr(t('books.isbn'), @book.isbn) %>
+                      <%= @book_presenter.trow(t('books.isbn'), @book.isbn) %>
 
-                      <%= @book_presenter.tr(t('books.isbn13'), @book.isbn13) %>
+                      <%= @book_presenter.trow(t('books.isbn13'), @book.isbn13) %>
   
-                      <%= @book_presenter.tr(t('books.ismn'), @book.ismn) %>
+                      <%= @book_presenter.trow(t('books.ismn'), @book.ismn) %>
 
-                      <%= @book_presenter.tr(t('books.issn'), @book.issn) %>  
+                      <%= @book_presenter.trow(t('books.issn'), @book.issn) %>  
 
-                      <%= @book_presenter.tr(t('books.physical_desc'), @book_presenter.physical_description) %> 
+                      <%= @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description) %> 
 
-                      <%= @book_presenter.tr(t('books.price'), @book_presenter.price) %>
+                      <%= @book_presenter.trow(t('books.price'), @book_presenter.price) %>
                     </tbody>
                   </table>
                 </div>
