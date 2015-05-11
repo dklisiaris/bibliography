@@ -52,6 +52,8 @@ en:
   write_search_terms: "Write search terms..."
   nothing_found: "Nothing was found..."
 
+  search_my_books: "Search my books"
+
   side_menu:
     discover: "Discover"
     categories: "Categories"
@@ -160,6 +162,8 @@ en:
 
   shelves:
     all_collections: "All Collections"
+    add_to_collections: "Add to collections"
+    edit_collections: "Edit collections"
 
 
   # Authorization

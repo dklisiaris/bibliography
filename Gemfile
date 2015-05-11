@@ -52,6 +52,9 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.5'  
 
   # gem "rspec-cells"
+
+  # Model and controller UML class diagram generator
+  gem 'railroady'
 end
 
 group :test do

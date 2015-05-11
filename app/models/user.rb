@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :shelves, :dependent => :destroy
   has_many :bookshelves, through: :shelves
   has_many :books, through: :shelves
+  has_many :writers, through: :books
 
   # after_create :assign_default_role
   def screen_name
@@ -19,6 +20,10 @@ class User < ActiveRecord::Base
 
   def avatar
     profile.gravatar
+  end
+
+  def added_book?(book)
+    bookshelves.where(book: book).count > 0
   end
 
   private

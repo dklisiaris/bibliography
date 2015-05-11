@@ -31,6 +31,8 @@ el:
   write_search_terms: "Εισάγετε όρους αναζήτησης..."
   nothing_found: "Δεν βρέθηκαν αποτελέσματα..."  
 
+  search_my_books: "Αναζήτηση στα βιβλία μου"
+
   side_menu:
     discover: "Ανακαλύψτε"
     categories: "Κατηγορίες"
@@ -140,6 +142,8 @@ el:
 
   shelves:
     all_collections: "Όλες οι συλλογές"
+    add_to_collections: "Προσθήκη σε συλλογές"
+    edit_collections: "Επεξεργασία συλλογών"
 
   # Authorization
   pundit:

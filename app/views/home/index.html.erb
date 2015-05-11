@@ -23,9 +23,9 @@
 
   <div class="col-lg-8 col-xl-6 col-xl-push-3">
     <%= render 'home/widgets/welcome' %>
-    <%= render 'home/widgets/my_books' %>
+    <%= render 'home/widgets/my_books' if user_signed_in? %>
     <%= render 'home/widgets/my_collections' if user_signed_in? %>
-    <%= render 'home/widgets/recently_added' %>   
+    <%= render 'home/widgets/recently_added' if user_signed_in? %>   
   </div>
 
 
@@ -36,13 +36,13 @@
         <span class="pull-right text-muted">(All time)</span>
         Highest Rated Books
       </div>      
-      <div class="widget-content widget-content-full">
+      <div class="widget-content widget-content-full">        
          <table class="table table-borderless table-striped table-vcenter">
             <tbody>
               <% @latest_books.each do |book| %>                
                 <tr>                                                                       
                   <td class="text-center" style="width: 80px;">
-                     <%= image_tag(book.cover, alt: "book_cover", class: "img-thumbnail") %>
+                     <%= link_to image_tag(book.cover, alt: "book_cover", class: "img-thumbnail"), book %>
                   </td>
                   <td>                     
                     <%= link_to book.title, book %><br>
@@ -51,7 +51,15 @@
                     <% end %> 
                   </td>
                   <td class="text-center" style="width: 80px;">
-                     <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Add to collections"><i class="fa fa-plus"></i></a>                     
+                    <% if user_signed_in? and current_user.added_book?(book) %>
+                      <%= link_to '#', 'data-toggle' => "tooltip", "data-placement" => "left", title: t('shelves.edit_collections'), class: "btn btn-effect-ripple btn-xs btn-success" do %>                    
+                        <i class="fa fa-check"></i>
+                      <% end %>                     
+                    <% else %>     
+                      <%= link_to '#', 'data-toggle' => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections'), class: "btn btn-effect-ripple btn-xs btn-primary" do %>                    
+                        <i class="fa fa-plus"></i>
+                      <% end %>                                   
+                    <% end %>
                   </td>                  
                 </tr>                
               <% end %>                  
