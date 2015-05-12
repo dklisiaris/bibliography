@@ -58,6 +58,14 @@ class BookPresenter < BasePresenter
     html.join(h.tag(:br)).html_safe
   end
 
+  def collections(shelves)
+    html = []
+    shelves.each do |shelf|
+      html << h.link_to(shelf.screen_name, shelf)
+    end
+    html.join(h.tag(:br)).html_safe
+  end  
+
   def physical_description
     html = []
     html << book.pages.to_s + I18n.t('books.pages') if book.pages

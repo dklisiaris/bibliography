@@ -27,4 +27,21 @@ $(".home").ready ->
     displayKey: "value"
     source: suggestions.ttAdapter()
 
-   
+
+vex.defaultOptions.className = 'vex-theme-plain'
+vex.defaultOptions.showCloseButton = true
+vex.dialog.buttons.YES.text = <%="'#{I18n.t('save')}'"%>
+vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
+
+@manageCollections = (msg) ->
+  vex.dialog.open
+    message: msg    
+    afterOpen: ($vexContent) ->
+      # Fetch json data about this book's collections
+      console.log 'vexOpen'
+    afterClose: ->
+      # Change whatever needs change in current screen
+      console.log 'vexClose'    
+    callback: (value) ->
+      # Save changes
+      console.log if value then 'Successfully destroyed the planet.' else 'Chicken.'

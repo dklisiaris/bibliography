@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     bookshelves.where(book: book).count > 0
   end
 
+  def book_in_which_collections(book)
+    bookshelves.where(book: book).map {|bookshelf| bookshelf.shelf}
+  end
+
   private
 
   def assign_default_role

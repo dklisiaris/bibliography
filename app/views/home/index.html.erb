@@ -19,8 +19,8 @@
 <% end unless @search_results.nil? %>
 <%= t("nothing_found") if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
-<div class="row">
-
+<div class="row">  
+  <%= link_to 'manage', "javascript:manageCollections($('#collections-manager').html())" %>
   <div class="col-lg-8 col-xl-6 col-xl-push-3">
     <%= render 'home/widgets/welcome' %>
     <%= render 'home/widgets/my_books' if user_signed_in? %>
@@ -57,12 +57,18 @@
                           <i class="fa fa-check"></i>
                         <% end %>   
                       <% end %>                   
-                    <% else %>                       
+                    <% elsif user_signed_in? %>                       
                       <%= link_to '#collections-modal', "data-toggle" => "modal", class: "btn btn-effect-ripple btn-xs btn-primary" do %>
                         <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections')) do %>                  
                           <i class="fa fa-plus"></i>
-                        <% end %>
-                      <% end %>                                     
+                        <% end %>                    
+                      <% end %>
+                    <% elsif user_signed_in? %>
+                      <%= link_to new_user_session_path, class: "btn btn-effect-ripple btn-xs btn-primary" do %>
+                        <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections')) do %>                  
+                          <i class="fa fa-plus"></i>
+                        <% end %>                    
+                      <% end %>                    
                     <% end %>
                   </td>                  
                 </tr>                
@@ -131,6 +137,7 @@
 
 </div>
 
+<% if user_signed_in? %>
 <div id="collections-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -150,7 +157,7 @@
               </label>  
               <%= shelf.screen_name %>  
             </div>           
-          <% end %>        
+          <% end if user_signed_in? %>        
         </div>
       </div>
       <div class="modal-footer">
@@ -162,3 +169,6 @@
   </div>
 </div>
 
+<%= render 'home/widgets/collections_manager' %>
+
+<% end %>
