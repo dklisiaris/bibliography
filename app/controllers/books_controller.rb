@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :collections]
   before_action :set_enums, only: [:new, :edit]
+  before_action :set_json_format, only: [:collections, :update_collections]
 
   respond_to :html
 
@@ -46,6 +47,19 @@ class BooksController < ApplicationController
     respond_with(@book)
   end
 
+  # Shows a json respond with user collections this book belongs to  
+  def collections    
+    @shelves = current_user.book_in_which_collections(@book) if user_signed_in?  
+  end
+
+  def update_collections
+    authorize :book, :update_collections?
+    puts params[:to_add]
+    puts params[:to_remove]
+
+    render json: {status: 200, message: 'OK'}
+  end
+
   private
     def set_book          
       @book = Book.find(params[:id])
@@ -61,5 +75,9 @@ class BooksController < ApplicationController
       @availabilities     = Book.availabilities
       @cover_types        = Book.cover_types
       @formats            = Book.formats
+    end
+
+    def set_json_format
+      request.format = :json
     end
 end

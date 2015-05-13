@@ -19,8 +19,7 @@
 <% end unless @search_results.nil? %>
 <%= t("nothing_found") if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
 
-<div class="row">  
-  <%= link_to 'manage', "javascript:manageCollections($('#collections-manager').html())" %>
+<div class="row">
   <div class="col-lg-8 col-xl-6 col-xl-push-3">
     <%= render 'home/widgets/welcome' %>
     <%= render 'home/widgets/my_books' if user_signed_in? %>
@@ -52,13 +51,13 @@
                   </td>
                   <td class="text-center" style="width: 80px;">                    
                     <% if user_signed_in? and current_user.added_book?(book) %>
-                      <%= link_to '#collections-modal', "data-toggle" => "modal", class: "btn btn-effect-ripple btn-xs btn-success" do %> 
+                      <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", class: "btn btn-effect-ripple btn-xs btn-success" do %> 
                         <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.edit_collections')) do %>     
                           <i class="fa fa-check"></i>
                         <% end %>   
                       <% end %>                   
                     <% elsif user_signed_in? %>                       
-                      <%= link_to '#collections-modal', "data-toggle" => "modal", class: "btn btn-effect-ripple btn-xs btn-primary" do %>
+                      <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", class: "btn btn-effect-ripple btn-xs btn-primary" do %>
                         <%= content_tag(:span, "data-toggle" => "tooltip", "data-placement" => "left", title: t('shelves.add_to_collections')) do %>                  
                           <i class="fa fa-plus"></i>
                         <% end %>                    

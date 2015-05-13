@@ -40,5 +40,9 @@ class ApplicationPolicy
     user and (record.user == user)
   end
 
+  def registered?
+    user.present?
+  end
+
 end
 

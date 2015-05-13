@@ -16,7 +16,14 @@ Rails.application.routes.draw do
   end
   resources :awards, only: [:index], :concerns => :paginatable 
 
-  resources :prizes, :books, :contributions, :concerns => :paginatable
+  resources :prizes, :contributions, :concerns => :paginatable
+
+  resources :books, :concerns => :paginatable do
+    member do
+      get 'collections'
+      post 'collections', to: 'books#update_collections'
+    end
+  end
   
   resources :publishers, :concerns => :paginatable do
     resources :places, only: [:create, :edit, :update, :destroy]

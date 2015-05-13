@@ -29,19 +29,39 @@ $(".home").ready ->
 
 
 vex.defaultOptions.className = 'vex-theme-plain'
-vex.defaultOptions.showCloseButton = true
+vex.dialog.defaultOptions.showCloseButton = true;
 vex.dialog.buttons.YES.text = <%="'#{I18n.t('save')}'"%>
 vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
 
-@manageCollections = (msg) ->
+@manageCollections = (content, book_id) ->
+  was_checked = []
   vex.dialog.open
-    message: msg    
+    message: null
+    input: content    
     afterOpen: ($vexContent) ->
       # Fetch json data about this book's collections
       console.log 'vexOpen'
+      $('.vex-dialog-input .collections-checkboxes').hide()
+      $('.vex-dialog-input .fa-spin').show()      
+      $.ajax(url: '/books/'+book_id+'/collections').done (response) ->        
+        $.each response, (index, collection) ->          
+          $('.vex-dialog-input #collection-'+collection.id).prop('checked', true)
+          was_checked.push(collection.id)
+        $('.vex-dialog-input .fa-spin').hide()
+        $('.vex-dialog-input .collections-checkboxes').show()          
     afterClose: ->
       # Change whatever needs change in current screen
       console.log 'vexClose'    
     callback: (value) ->
-      # Save changes
-      console.log if value then 'Successfully destroyed the planet.' else 'Chicken.'
+      # Save changes            
+      is_checked = []
+      $.each value, (key, value) ->
+        is_checked.push(parseInt(key.split("-").slice(-1)[0])) if value == "on"     
+      
+      request_data =
+        to_add: $(is_checked).not(was_checked).get();
+        to_remove: $(was_checked).not(is_checked).get();
+
+      # console.log request_data
+      # $.post('/books/'+book_id+'/collections', request_data)    
+      

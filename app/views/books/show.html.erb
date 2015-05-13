@@ -53,7 +53,7 @@
 
                       <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>
 
-                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@shelves)) %>                                          
+                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@shelves)) if user_signed_in? %>                                          
                       <%= @book_presenter.trow(t('books.isbn'), @book.isbn) %>
 
                       <%= @book_presenter.trow(t('books.isbn13'), @book.isbn13) %>

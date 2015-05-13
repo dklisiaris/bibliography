@@ -138,8 +138,8 @@
 /* line 30, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 23px;
+  right: 14px;
   cursor: pointer;
 }
 /* line 36, ../sass/vex-theme-plain.sass */
@@ -154,13 +154,13 @@
   text-align: center;
   top: 3px;
   right: 3px;
-  color: #bbbbbb;
+  color: rgba(255,255,255,.8);
   background: transparent;
 }
 /* line 50, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-close:hover:before, .vex.vex-theme-plain .vex-close:active:before {
-  color: #777777;
-  background: #e0e0e0;
+  color: #f0f0f0;
+  background: #c43902;
 }
 /* line 56, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-dialog-form .vex-dialog-message {
