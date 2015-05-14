@@ -1,0 +1,27 @@
+<div class=<%= "collections-btn-#{book.id}" %> >                    
+  <% if user_signed_in? and current_user.added_book?(book) %>
+    <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", 
+    "data-toggle" => "tooltip", 
+    "data-placement" => "left", 
+    title: t('shelves.edit_collections'), 
+    class: "btn btn-effect-ripple btn-xs btn-success" do %>      
+      <i class="fa fa-check"></i>  
+  <% end %>                   
+  <% elsif user_signed_in? %>                       
+    <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", 
+    "data-toggle" => "tooltip", 
+    "data-placement" => "left", 
+    title: t('shelves.add_to_collections'), 
+    class: "btn btn-effect-ripple btn-xs btn-primary" do %>                                         
+      <i class="fa fa-plus"></i>                  
+    <% end %>
+  <% elsif user_signed_in? %>
+    <%= link_to new_user_session_path, 
+    "data-toggle" => "tooltip", 
+    "data-placement" => "left", 
+    title: t('shelves.add_to_collections'), 
+    class: "btn btn-effect-ripple btn-xs btn-primary" do %>                                        
+      <i class="fa fa-plus"></i>                   
+    <% end %>                    
+  <% end %>
+</div>

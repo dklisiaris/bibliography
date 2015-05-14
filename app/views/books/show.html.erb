@@ -16,8 +16,13 @@
         </div>  
 
         <div class="row">
-          <div class="col-sm-3">            
-            <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>            
+          <div class="col-sm-3">
+            <div class="row">            
+            <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>
+            </div>
+            <div class="row">
+            <%= render partial: 'books/collections_manager_btn', locals: {book: @book} %>
+            </div>           
           </div>  
           <div class="col-sm-9">
             <h2><%= @book.title %><br><small><%= @book.subtitle %></small></h2>
@@ -53,7 +58,7 @@
 
                       <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>
 
-                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@shelves)) if user_signed_in? %>                                          
+                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@in_shelves)) if user_signed_in? %>                                          
                       <%= @book_presenter.trow(t('books.isbn'), @book.isbn) %>
 
                       <%= @book_presenter.trow(t('books.isbn13'), @book.isbn13) %>
@@ -83,6 +88,6 @@
   </div>
 </div>
 
-
+<%= render 'home/widgets/collections_manager' %>
 
 <%= link_to 'Back', books_path %>

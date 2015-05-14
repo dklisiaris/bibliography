@@ -17,7 +17,8 @@ class BooksController < ApplicationController
   def show
     # Intantiate a new presenter.
     @book_presenter = BookPresenter.new(@book, view_context)
-    @shelves = current_user.book_in_which_collections(@book) if user_signed_in?
+    @shelves = current_user.shelves
+    @in_shelves = current_user.book_in_which_collections(@book) if user_signed_in?
     respond_with(@book)
   end
 
