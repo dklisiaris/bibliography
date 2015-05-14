@@ -62,6 +62,32 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
         to_add: $(is_checked).not(was_checked).get();
         to_remove: $(was_checked).not(is_checked).get();
 
-      # console.log request_data
-      # $.post('/books/'+book_id+'/collections', request_data)    
+      $.ajax({
+        type: "POST",
+        url: '/books/'+book_id+'/collections',
+        data: request_data,
+        success:(data) ->
+          # TODO success notification
+          if is_checked.length > 0
+            # console.log 'in collection'
+            $('.collections-btn-'+book_id+' .btn').removeClass( "btn-primary" )
+              .addClass("btn-success")
+              .attr('title', <%="'#{I18n.t('shelves.edit_collections')}'"%>)
+              .tooltip('fixTitle')
+
+            $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-plus" )
+              .addClass("fa-check")            
+          else
+            $('.collections-btn-'+book_id+' .btn').removeClass( "btn-success" )
+              .addClass("btn-primary")
+              .attr('title', <%="'#{I18n.t('shelves.add_to_collections')}'"%>)
+              .tooltip('fixTitle')
+              
+            $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-check" )
+              .addClass("fa-plus")            
+          return false
+        error:(data) ->
+          # TODO error notification
+          return false
+      })         
       

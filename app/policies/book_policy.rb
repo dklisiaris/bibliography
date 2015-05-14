@@ -6,7 +6,7 @@ class BookPolicy < ApplicationPolicy
   def show?   ; true; end
 
   def collections? ; registered? ; end  
-  def update_collections? ; registered? ; end  
+  def manage_collections? ; registered? ; end  
 
   class Scope < Scope
     def resolve

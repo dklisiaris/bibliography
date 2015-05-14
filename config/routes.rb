@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :books, :concerns => :paginatable do
     member do
       get 'collections'
-      post 'collections', to: 'books#update_collections'
+      post 'collections', to: 'books#manage_collections'
     end
   end
   
