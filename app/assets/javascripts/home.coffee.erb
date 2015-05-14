@@ -40,7 +40,7 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
     input: content    
     afterOpen: ($vexContent) ->
       # Fetch json data about this book's collections
-      console.log 'vexOpen'
+      console.log 'Collection manager opened'
       $('.vex-dialog-input .collections-checkboxes').hide()
       $('.vex-dialog-input .fa-spin').show()      
       $.ajax(url: '/books/'+book_id+'/collections').done (response) ->        
@@ -51,43 +51,44 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
         $('.vex-dialog-input .collections-checkboxes').show()          
     afterClose: ->
       # Change whatever needs change in current screen
-      console.log 'vexClose'    
+      console.log 'Collection manager closed'    
     callback: (value) ->
-      # Save changes            
-      is_checked = []
-      $.each value, (key, value) ->
-        is_checked.push(parseInt(key.split("-").slice(-1)[0])) if value == "on"     
-      
-      request_data =
-        to_add: $(is_checked).not(was_checked).get();
-        to_remove: $(was_checked).not(is_checked).get();
+      if value           
+        is_checked = []
+        $.each value, (key, value) ->
+          is_checked.push(parseInt(key.split("-").slice(-1)[0])) if value == "on"     
+        
+        request_data =
+          to_add: $(is_checked).not(was_checked).get();
+          to_remove: $(was_checked).not(is_checked).get();
 
-      $.ajax({
-        type: "POST",
-        url: '/books/'+book_id+'/collections',
-        data: request_data,
-        success:(data) ->
-          # TODO success notification
-          if is_checked.length > 0
-            # console.log 'in collection'
-            $('.collections-btn-'+book_id+' .btn').removeClass( "btn-primary" )
-              .addClass("btn-success")
-              .attr('title', <%="'#{I18n.t('shelves.edit_collections')}'"%>)
-              .tooltip('fixTitle')
+        $.ajax({
+          type: "POST",
+          url: '/books/'+book_id+'/collections',
+          data: request_data,
+          success:(data) ->
+            # TODO success notification
+            if is_checked.length > 0
+              # console.log 'in collection'
+              $('.collections-btn-'+book_id+' .btn').removeClass( "btn-primary" )
+                .addClass("btn-success")
+                .attr('title', <%="'#{I18n.t('shelves.edit_collections')}'"%>)
+                .tooltip('fixTitle')
 
-            $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-plus" )
-              .addClass("fa-check")            
-          else
-            $('.collections-btn-'+book_id+' .btn').removeClass( "btn-success" )
-              .addClass("btn-primary")
-              .attr('title', <%="'#{I18n.t('shelves.add_to_collections')}'"%>)
-              .tooltip('fixTitle')
-              
-            $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-check" )
-              .addClass("fa-plus")            
-          return false
-        error:(data) ->
-          # TODO error notification
-          return false
-      })         
+              $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-plus" )
+                .addClass("fa-check")            
+            else
+              $('.collections-btn-'+book_id+' .btn').removeClass( "btn-success" )
+                .addClass("btn-primary")
+                .attr('title', <%="'#{I18n.t('shelves.add_to_collections')}'"%>)
+                .tooltip('fixTitle')
+                
+              $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-check" )
+                .addClass("fa-plus")            
+            return false
+          error:(data) ->
+            # TODO error notification
+            return false
+        })
+      else console.log 'Collection manager canceled'         
       

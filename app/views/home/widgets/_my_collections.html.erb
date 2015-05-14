@@ -10,7 +10,7 @@
             <%= t('shelves.all_collections') %>  
           </div> 
           <div class="col-xs-2">
-            <span class="pull-right"><%= current_user.books.count %></span>
+            <span class="pull-right"><%= current_user.books.distinct.count %></span>
           </div>
         </div>
       </div> 

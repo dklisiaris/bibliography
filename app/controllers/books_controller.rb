@@ -59,11 +59,9 @@ class BooksController < ApplicationController
   def manage_collections
     authorize :book, :manage_collections?
 
-    to_add = params[:to_add].map(&:to_i) if params[:to_add].present?
-    Bookshelf.add_book_to_multiple_bookshelves(@book.id, to_add)
-    
-    to_remove = params[:to_remove].map(&:to_i) if params[:to_remove].present?
-    Bookshelf.remove_book_from_multiple_bookshelves(@book.id, to_remove)
+    Bookshelf.add_book_to_multiple_bookshelves(@book.id, params[:to_add], current_user)
+
+    Bookshelf.remove_book_from_multiple_bookshelves(@book.id, params[:to_remove], current_user)
 
     render json: {status: 200, message: 'ok'}
   end
@@ -76,10 +74,6 @@ class BooksController < ApplicationController
 
     def book_params      
       params.require(:book).permit(:title, :subtitle, :description, :image, :isbn, :isbn13, :ismn, :issn, :series_name, :series_volume, :pages, :size, :cover_type, :publication_year, :publication_version, :publication_place, :price, :price_updated_at, :availability, :format, :original_language, :original_title, :publisher_id, :extra, :biblionet_id)
-    end
-
-    def collection_params
-      # params.require(:book).permit(:id, :format, :to_add, :to_remove)
     end
 
     def set_enums
