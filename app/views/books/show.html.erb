@@ -28,11 +28,24 @@
                 <hr>
 
                 <div class="progress progress-mini">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=<%= "#{@likes_count}" %> aria-valuemin="0" aria-valuemax=<%= "#{@likes_count+@dislikes_count}" %> style=<%= (@likes_count+@dislikes_count)>0 ? "width:#{(@likes_count/(@likes_count+@dislikes_count))*100}%" : "width:0%" %>></div>
                 </div>
 
-                <a href="javascript:void(0)" class="btn btn-xs btn-effect-ripple btn-success" style="overflow: hidden; position: relative;"><i class="fa fa-thumbs-up"></i> Recommend</a>
-                <a href="javascript:void(0)" class="btn btn-xs btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-thumbs-down"></i> Hate it</a>
+                <%= link_to "", 
+                "data-toggle" => "tooltip", 
+                "data-placement" => "top", 
+                title: t('books.recommend'), 
+                class: "btn btn-xs btn-effect-ripple #{current_user.likes?(@book) ? 'btn-success' : 'btn-default'}" do %>      
+                  <i class="fa fa-thumbs-up"></i><%= " #{@likes_count}" %>
+                <% end %>
+
+                <%= link_to "", 
+                "data-toggle" => "tooltip", 
+                "data-placement" => "top", 
+                title: t('books.not_recommend'), 
+                class: "btn btn-xs btn-effect-ripple #{current_user.dislikes?(@book) ? 'btn-danger' : 'btn-default'}" do %>      
+                  <i class="fa fa-thumbs-down"></i><%= " #{@dislikes_count}" %>
+                <% end %>                                  
                 <hr>
 
                 <div class="row text-center">

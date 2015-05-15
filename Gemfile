@@ -121,6 +121,9 @@ gem 'thin', '~> 1.6'
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 3.3'
 
+# Additional middleware for sidekiq.
+gem 'sidekiq-middleware', '~> 0.3'
+
 # Unicode algorithms for case conversion, normalization, text segmentation and more
 gem 'unicode_utils', '>= 1.4'
 
@@ -135,3 +138,6 @@ gem 'bookshark', '~> 1.0.0.pre'
 
 # A lightweight plugin that logs impressions per action or manually per model
 gem 'impressionist', '~> 1.5'
+
+# A recommendation engine using Likes and Dislikes
+gem 'recommendable', '~> 2.2'

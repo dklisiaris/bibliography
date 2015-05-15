@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :books, through: :shelves
   has_many :writers, through: :books
 
+  recommends :books, :shelves
+
   # after_create :assign_default_role
   def screen_name
     name = profile.name ||= profile.username ||= email 

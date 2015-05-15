@@ -25,6 +25,10 @@ class BooksController < ApplicationController
     @bookshelves_count = Bookshelf.where(book_id: @book.id).count
     @views_count = @book.impressionist_count
     @viewers_count = @book.impressions_count
+
+    @likes_count = @book.liked_by_count
+    @dislikes_count = @book.disliked_by_count
+
     respond_with(@book)
   end
 

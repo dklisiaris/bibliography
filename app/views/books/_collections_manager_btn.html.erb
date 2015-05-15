@@ -6,7 +6,7 @@
     title: t('shelves.edit_collections'), 
     class: "btn btn-effect-ripple btn-xs btn-success" do %>      
       <i class="fa fa-check"></i><%= " #{t 'books.added'}" if defined? full_size.present? and full_size %> 
-  <% end %>                   
+    <% end %>                   
   <% elsif user_signed_in? %>                       
     <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", 
     "data-toggle" => "tooltip", 
