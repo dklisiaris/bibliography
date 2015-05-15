@@ -18,11 +18,37 @@
         <div class="row">
           <div class="col-sm-3">
             <div class="row">            
-            <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>
-            </div>
-            <div class="row">
-            <%= render partial: 'books/collections_manager_btn', locals: {book: @book} %>
-            </div>           
+              <div class="widget">
+                <div class="widget-content themed-background-muted text-right clearfix">
+                  <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>
+                </div>
+                <div class="widget-content themed-background-muted text-center">
+
+                <%= render partial: 'books/collections_manager_btn', locals: {book: @book, full_size: true} %>
+                <hr>
+
+                <div class="progress progress-mini">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+                </div>
+
+                <a href="javascript:void(0)" class="btn btn-xs btn-effect-ripple btn-success" style="overflow: hidden; position: relative;"><i class="fa fa-thumbs-up"></i> Recommend</a>
+                <a href="javascript:void(0)" class="btn btn-xs btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-thumbs-down"></i> Hate it</a>
+                <hr>
+
+                <div class="row text-center">
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'collections' %></small><br><%= @bookshelves_count %></h4>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'books.views' %></small><br><%= @views_count %></h4>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'books.visitors' %></small><br><%= @viewers_count %></h4>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>                       
           </div>  
           <div class="col-sm-9">
             <h2><%= @book.title %><br><small><%= @book.subtitle %></small></h2>

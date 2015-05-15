@@ -35,6 +35,7 @@ el:
   terms: "Όροι"
   agree_to_terms: "Συμφωνώ με τους όρους"
   back_to_login: "Έχω λογαριασμό"
+  users: "Χρήστες"
 
   search: "Αναζήτηση"
   write_search_terms: "Εισάγετε όρους αναζήτησης..."
@@ -129,7 +130,13 @@ el:
     ismn: "ISMN"
     issn: "ISSN" 
     collective_work: "Συλλογικό έργο"
-    n_version: "η έκδοση"   
+    n_version: "η έκδοση"
+    views: "Εμφανίσεις"
+    visitors: "Επισκέπτες"
+    add: "Προσθήκη"
+    added: "Προστέθηκε"
+    recommend: "Το Προτείνω"    
+    not_recommend: "Δεν Το Προτείνω"        
 
 
   import:

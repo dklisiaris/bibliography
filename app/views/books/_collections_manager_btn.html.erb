@@ -5,7 +5,7 @@
     "data-placement" => "left", 
     title: t('shelves.edit_collections'), 
     class: "btn btn-effect-ripple btn-xs btn-success" do %>      
-      <i class="fa fa-check"></i>  
+      <i class="fa fa-check"></i><%= " #{t 'books.added'}" if defined? full_size.present? and full_size %> 
   <% end %>                   
   <% elsif user_signed_in? %>                       
     <%= link_to "javascript:manageCollections($('#collections-manager').html(),#{book.id})", 
@@ -13,15 +13,15 @@
     "data-placement" => "left", 
     title: t('shelves.add_to_collections'), 
     class: "btn btn-effect-ripple btn-xs btn-primary" do %>                                         
-      <i class="fa fa-plus"></i>                  
+      <i class="fa fa-plus"></i><%= " #{t 'books.add'}" if defined? full_size.present? and full_size %>                  
     <% end %>
-  <% elsif user_signed_in? %>
+  <% else %>
     <%= link_to new_user_session_path, 
     "data-toggle" => "tooltip", 
     "data-placement" => "left", 
     title: t('shelves.add_to_collections'), 
     class: "btn btn-effect-ripple btn-xs btn-primary" do %>                                        
-      <i class="fa fa-plus"></i>                   
+      <i class="fa fa-plus"></i><%= " #{t 'books.add'}" if defined? full_size.present? and full_size %>                   
     <% end %>                    
   <% end %>
 </div>

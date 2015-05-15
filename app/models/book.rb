@@ -32,6 +32,9 @@ class Book < ActiveRecord::Base
     awards.clear
   end
 
+  # Log impressions filtered by ip
+  is_impressionable :counter_cache => true, :unique => true
+  
   def main_author
     if collective_work?
       I18n.t('books.collective_work')

@@ -37,23 +37,34 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
           url: '/books/'+book_id+'/collections',
           data: request_data,
           success:(data) ->
-            # TODO success notification
+            # TODO success notification            
+            collection_btn = $('.collections-btn-'+book_id+' .btn')
+
             if is_checked.length > 0
-              # console.log 'in collection'
-              $('.collections-btn-'+book_id+' .btn').removeClass( "btn-primary" )
+              # console.log 'in collection'              
+              collection_btn.removeClass( "btn-primary" )
                 .addClass("btn-success")
                 .attr('title', <%="'#{I18n.t('shelves.edit_collections')}'"%>)
-                .tooltip('fixTitle')
+                .tooltip('fixTitle')                
 
-              $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-plus" )
-                .addClass("fa-check")            
+              collection_btn.html ->
+                $(this).html()
+                .replace(<%="'#{I18n.t('books.add')}'"%>, <%="'#{I18n.t('books.added')}'"%>)              
+
+              collection_btn.find('i').removeClass( "fa-plus" )
+                .addClass("fa-check")  
+                      
             else
-              $('.collections-btn-'+book_id+' .btn').removeClass( "btn-success" )
+              collection_btn.removeClass( "btn-success" )
                 .addClass("btn-primary")
                 .attr('title', <%="'#{I18n.t('shelves.add_to_collections')}'"%>)
-                .tooltip('fixTitle')
+                .tooltip('fixTitle')                
+
+              collection_btn.html ->
+                $(this).html()
+                .replace(<%="'#{I18n.t('books.added')}'"%>, <%="'#{I18n.t('books.add')}'"%>)
                 
-              $('.collections-btn-'+book_id+' .btn i').removeClass( "fa-check" )
+              collection_btn.find('i').removeClass( "fa-check" )
                 .addClass("fa-plus")            
             return false
           error:(data) ->

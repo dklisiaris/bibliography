@@ -56,6 +56,7 @@ en:
   terms: "Terms"
   agree_to_terms: "Agree to terms"
   back_to_login: "Back to login"
+  users: "Users"
 
   search: "Search"
   write_search_terms: "Write search terms..."
@@ -151,6 +152,12 @@ en:
     issn: "ISSN"
     collective_work: "Collective work"
     n_version: "th revision"
+    views: "Views"
+    visitors: "Visitors"
+    add: "Add Book"
+    added: "Added"
+    recommend: "Recommend"
+    not_recommend: "Not recommend"    
 
   import:
     from_file: "From File"

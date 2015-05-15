@@ -9,6 +9,8 @@ class BooksController < ApplicationController
 
   respond_to :html
 
+  impressionist :actions=>[:show,:index]
+
   def index
     @books = policy_scope(Book).page(params[:page])
     respond_with(@books)
@@ -19,6 +21,10 @@ class BooksController < ApplicationController
     @book_presenter = BookPresenter.new(@book, view_context)
     @shelves = current_user.shelves
     @in_shelves = current_user.book_in_which_collections(@book) if user_signed_in?
+
+    @bookshelves_count = Bookshelf.where(book_id: @book.id).count
+    @views_count = @book.impressionist_count
+    @viewers_count = @book.impressions_count
     respond_with(@book)
   end
 
