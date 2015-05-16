@@ -67,12 +67,14 @@
             <h2><%= @book.title %><br><small><%= @book.subtitle %></small></h2>
             <hr>
             
-            <h4><%= @book_presenter.writers %></h4>              
-
-            <h4><%= @book_presenter.contributors %></h4>            
-            
+            <h4><%= @book_presenter.writers %></h4>
+            <h4><%= @book_presenter.contributors %></h4>                                  
             <hr>
-
+            
+            <article class="description">
+              <%= @book.description.html_safe if @book.description.present? %>
+            </article>
+            <br>
             <div class="block full">
               <div class="block-title">
                 <ul class="nav nav-tabs" data-toggle="tabs">
@@ -119,8 +121,7 @@
                   <%= t('books.isbd_view') %>
                 </div>                
               </div>
-            </div>                        
-            <p><%= @book.description.html_safe if @book.description.present? %></p>
+            </div>                                    
           </div>  
         </div>          
       </div>

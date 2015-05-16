@@ -136,7 +136,9 @@ el:
     add: "Προσθήκη"
     added: "Προστέθηκε"
     recommend: "Το Προτείνω"    
-    not_recommend: "Δεν Το Προτείνω"        
+    not_recommend: "Δεν Το Προτείνω"    
+    read_more: "Διαβάστε περισσότερα"
+    read_less: "Κλείσιμο"        
 
 
   import:

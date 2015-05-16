@@ -18,4 +18,5 @@
 //= require jquery.readyselector
 //= require typeahead.bundle.min
 //= require vex.combined.min
+//= require readmore/readmore.min
 //= require_tree .

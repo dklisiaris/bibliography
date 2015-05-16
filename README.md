@@ -28,6 +28,8 @@ __Software requirements__
 - [Redis 2.6+](http://redis.io/download), on Ubuntu check Digital Ocean's [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
 - [Elasticsearch 1.4.4+](https://www.elastic.co/downloads/elasticsearch)
 - [Ruby 2.0+](http://www.ruby-lang.org/en/downloads/) (we recommend 2.0.0-p353 or higher)
+- [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
+- [bower](https://github.com/bower/bower) (>= 0.10.0) installed with npm
 
 Clone repository 
 ```

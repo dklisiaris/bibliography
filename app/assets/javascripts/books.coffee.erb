@@ -1,0 +1,12 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+$('.books.show').ready ->
+  desc = $('.description')
+  desc.readmore
+    speed: 100
+    collapsedHeight: 80    
+    heightMargin: 16
+    moreLink: <%= "\'<a href=\"#\">"+(I18n.t 'books.read_more')+"</a>\'" %>
+    lessLink: <%= "\'<a href=\"#\">"+(I18n.t 'books.read_less')+"</a>\'" %>

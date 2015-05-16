@@ -59,10 +59,10 @@ class Book < ActiveRecord::Base
   end
 
   def short_description
-    if description.present? and description.length<=10000
+    if description.present? and description.length<=350
       description
-    elsif description.present? and description.length>10000
-      description[0...10000]
+    elsif description.present? and description.length>350
+      description[0...350]+'...'
     else
       nil
     end

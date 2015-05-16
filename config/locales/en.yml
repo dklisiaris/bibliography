@@ -157,7 +157,9 @@ en:
     add: "Add Book"
     added: "Added"
     recommend: "Recommend"
-    not_recommend: "Not recommend"    
+    not_recommend: "Not recommend"
+    read_more: "Read More"
+    read_less: "Close"    
 
   import:
     from_file: "From File"

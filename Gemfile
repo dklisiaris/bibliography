@@ -141,3 +141,6 @@ gem 'impressionist', '~> 1.5'
 
 # A recommendation engine using Likes and Dislikes
 gem 'recommendable', '~> 2.2'
+
+# Bundler-like DSL and rake tasks for Bower on Rails
+gem "bower-rails", "~> 0.9"
