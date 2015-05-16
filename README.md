@@ -37,10 +37,18 @@ git clone https://github.com/dklisiaris/bibliography.git
 ```
 
 Install depedencies
-```
+```ruby
+# Go to the root of the app
 cd bibliography
+
+# Install ruby gems
 bundle install
+
+# Install javascript libraries
+rake bower:install
 ```
+
+
 
 All sensitive information is stored in environment variables. 
 We use dotenv gem to manage these vars.
