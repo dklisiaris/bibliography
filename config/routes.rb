@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     member do
       get 'collections'
       post 'collections', to: 'books#manage_collections'
+      post 'like'
+      post 'dislike'
     end
   end
   

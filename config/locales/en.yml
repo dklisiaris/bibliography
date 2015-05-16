@@ -158,6 +158,7 @@ en:
     added: "Added"
     recommend: "Recommend"
     not_recommend: "Not recommend"
+    remove_recommendation: "Remove Recommendation"
     read_more: "Read More"
     read_less: "Close"    
 

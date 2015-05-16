@@ -1,0 +1,77 @@
+@like = (book_id) ->
+  $.ajax({
+    type: "POST",
+    url: '/books/'+book_id+'/like',    
+    success:(data) ->
+      console.log 'liked'            
+      btn = $('.btn-like')
+      btn.toggleClass("btn-default btn-success")
+      btn.find('span').text(' ' + data.likes)
+
+      tooltip_text = btn.attr('data-original-title')
+      if tooltip_text==<%="'#{I18n.t('books.recommend')}'"%>
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('books.remove_recommendation')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')       
+      else
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('books.recommend')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')        
+      
+      $('.btn-dislike')
+        .removeClass( "btn-danger" )
+        .addClass("btn-default")
+        .attr('data-original-title', <%="'#{I18n.t('books.not_recommend')}'"%>)
+        .find('span')
+        .text(' ' + data.dislikes)
+
+      refreshRecommendationsBar(data.likes, data.dislikes)       
+    error:(data) ->
+      console.log 'Error...'
+      console.log data
+      return false 
+  })
+
+@dislike = (book_id) ->
+  $.ajax({
+    type: "POST",
+    url: '/books/'+book_id+'/dislike',    
+    success:(data) ->
+      console.log 'disliked'
+      btn = $('.btn-dislike')
+      btn.toggleClass("btn-default btn-danger");
+      btn.find('span').text(' ' + data.dislikes)
+      tooltip_text = btn.attr('data-original-title')
+      
+      if tooltip_text==<%="'#{I18n.t('books.not_recommend')}'"%>
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('books.remove_recommendation')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')
+      else        
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('books.not_recommend')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')             
+      
+      $('.btn-like')
+        .removeClass( "btn-success" )
+        .addClass("btn-default")
+        .attr('data-original-title', <%="'#{I18n.t('books.recommend')}'"%>)
+        .find('span')
+        .text(' ' + data.likes)
+
+      refreshRecommendationsBar(data.likes, data.dislikes)
+    error:(data) ->
+      console.log 'Error...'
+      console.log data
+      return false 
+  }) 
+
+refreshRecommendationsBar = (likes, dislikes) ->
+  likesPercent = if (likes+dislikes)>0 then (likes/(likes+dislikes))*100 else 0
+  $('.recommendations-bar').attr('aria-valuenow', likes)    
+    .attr('aria-valuemax', likes+dislikes)
+    .attr('style', 'width:'+likesPercent+'%')

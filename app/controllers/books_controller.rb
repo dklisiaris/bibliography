@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
-  before_action :set_json_format, only: [:collections, :manage_collections]
-  before_action :authenticate_user!, only: [:collections, :manage_collections]
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :collections, :manage_collections]
+  before_action :set_json_format, only: [:collections, :manage_collections, :like, :dislike]
+  before_action :authenticate_user!, only: [:collections, :manage_collections, :like, :dislike]
+  before_action :set_book
+  skip_before_action :set_book, only: [:index, :new, :create]
   before_action :set_enums, only: [:new, :edit]    
   
-  #Disable protection for stateless api json responsed
-  protect_from_forgery with: :exception, except: [:manage_collections]
+  #Disable protection for stateless api json response
+  protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
 
   respond_to :html
 
@@ -76,6 +77,30 @@ class BooksController < ApplicationController
 
     render json: {status: 200, message: 'ok'}
   end
+
+  def like
+    authorize :book, :like?
+
+    if not current_user.likes?(@book)
+      current_user.like(@book) 
+    else
+      current_user.unlike(@book)
+    end
+
+    render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}
+  end
+
+  def dislike
+    authorize :book, :dislike?
+
+    if not current_user.dislikes?(@book)
+      current_user.dislike(@book) 
+    else
+      current_user.undislike(@book)
+    end
+    
+    render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count} 
+  end  
 
   private
     def set_book          

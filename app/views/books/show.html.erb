@@ -28,23 +28,25 @@
                 <hr>
 
                 <div class="progress progress-mini">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=<%= "#{@likes_count}" %> aria-valuemin="0" aria-valuemax=<%= "#{@likes_count+@dislikes_count}" %> style=<%= (@likes_count+@dislikes_count)>0 ? "width:#{(@likes_count/(@likes_count+@dislikes_count))*100}%" : "width:0%" %>></div>
+                  <div class="progress-bar progress-bar-success recommendations-bar" role="progressbar" aria-valuenow=<%= "#{@likes_count}" %> aria-valuemin="0" aria-valuemax=<%= "#{@likes_count+@dislikes_count}" %> style=<%= (@likes_count+@dislikes_count)>0 ? "width:#{(@likes_count/(@likes_count+@dislikes_count))*100}%" : "width:0%" %>></div>
                 </div>
 
-                <%= link_to "", 
+                <%= button_tag :onclick => "javascript:like(#{@book.id})",                  
                 "data-toggle" => "tooltip", 
-                "data-placement" => "top", 
-                title: t('books.recommend'), 
-                class: "btn btn-xs btn-effect-ripple #{current_user.likes?(@book) ? 'btn-success' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-up"></i><%= " #{@likes_count}" %>
+                "data-placement" => "top",
+                type: "button", 
+                title: current_user.likes?(@book) ? t('books.remove_recommendation') : t('books.recommend'), 
+                class: "btn btn-xs btn-like btn-effect-ripple #{current_user.likes?(@book) ? 'btn-success' : 'btn-default'}" do %>      
+                  <i class="fa fa-thumbs-up"></i><span><%= " #{@likes_count}" %></span>
                 <% end %>
 
-                <%= link_to "", 
+                <%= button_tag :onclick => "javascript:dislike(#{@book.id})",
                 "data-toggle" => "tooltip", 
-                "data-placement" => "top", 
-                title: t('books.not_recommend'), 
-                class: "btn btn-xs btn-effect-ripple #{current_user.dislikes?(@book) ? 'btn-danger' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-down"></i><%= " #{@dislikes_count}" %>
+                "data-placement" => "top",
+                type: "button", 
+                title: current_user.dislikes?(@book) ? t('books.remove_recommendation') : t('books.not_recommend'), 
+                class: "btn btn-xs btn-dislike btn-effect-ripple #{current_user.dislikes?(@book) ? 'btn-danger' : 'btn-default'}" do %>      
+                  <i class="fa fa-thumbs-down"></i><span><%= " #{@dislikes_count}" %></span>
                 <% end %>                                  
                 <hr>
 
