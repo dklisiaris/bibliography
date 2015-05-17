@@ -36,8 +36,7 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
           type: "POST",
           url: '/books/'+book_id+'/collections',
           data: request_data,
-          success:(data) ->
-            # TODO success notification            
+          success:(data) ->                        
             collection_btn = $('.collections-btn-'+book_id+' .btn')
 
             if is_checked.length > 0
@@ -65,10 +64,13 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
                 .replace(<%="'#{I18n.t('books.added')}'"%>, <%="'#{I18n.t('books.add')}'"%>)
                 
               collection_btn.find('i').removeClass( "fa-check" )
-                .addClass("fa-plus")            
+                .addClass("fa-plus")
+
+            notify(<%="'#{I18n.t('notifications.changes_saved_successfully')}'"%>,'success')            
             return false
           error:(data) ->
-            # TODO error notification
+            notify(<%="'#{I18n.t('notifications.changes_saved_failed')}'"%>,'error')
             return false
         })
       else console.log 'Collection manager canceled'
+     

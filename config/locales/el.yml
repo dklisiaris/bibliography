@@ -43,6 +43,10 @@ el:
 
   search_my_books: "Αναζήτηση στα βιβλία μου"
 
+  notifications:
+    changes_saved_successfully: "Οι αλλαγές αποθηκεύτηκαν με επιτυχία!"
+    changed_saved_failed: "Συνέβη κάποιο σφάλμα. Οι αλλαγές δεν αποθηκεύτηκαν."
+
   side_menu:
     discover: "Ανακαλύψτε"
     categories: "Κατηγορίες"

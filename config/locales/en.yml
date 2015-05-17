@@ -64,6 +64,10 @@ en:
 
   search_my_books: "Search my books"
 
+  notifications:
+    changes_saved_successfully: "Changes were successfully saved!"
+    changed_saved_failed: "Something went wrong. Changes failed to save"
+
   side_menu:
     discover: "Discover"
     categories: "Categories"
