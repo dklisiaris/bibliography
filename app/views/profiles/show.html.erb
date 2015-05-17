@@ -106,7 +106,7 @@
             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">               
                <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-avatar pull-left")  %>
                <h1><%= @profile.name %> (<%= @profile.username %>)</h1>
-               <h2 class="text-light-op"> Total Books in library: 0</h2>
+               <h2 class="text-light-op"> Total Books in library: <%= @profile.user.books.distinct.count %></h2>
             </div>
             <% if @profile.user != current_user %>
               <div class="col-sm-5 col-md-4 col-lg-3 text-right push-bit-top-bottom">
@@ -135,6 +135,22 @@
 <p>
   <strong>Name:</strong>
   <%= @profile.name %>
+</p>
+
+<%= button_tag :onclick => "javascript:void(0)",
+  type: "button",    
+  class: "btn btn-xs btn-follow btn-effect-ripple #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-primary'}" do %>      
+    <i class="fa fa-user-plus"></i></i><strong><span><%= " #{t 'users.follow'}" %></span></strong>
+  <% end %>
+
+<p>
+  <strong>Follows:</strong>
+  <%= @profile.user.follow_count %>
+</p>
+
+<p>
+  <strong>Followers:</strong>
+  <%= @profile.user.followers_count %>
 </p>
 
 <p>

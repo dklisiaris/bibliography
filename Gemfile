@@ -67,6 +67,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.3'
 gem 'autoprefixer-rails', '~> 5.1'
+gem 'font-awesome-sass', '~> 4.3'
 
 group :development do
   gem 'rails_layout'
@@ -143,4 +144,7 @@ gem 'impressionist', '~> 1.5'
 gem 'recommendable', '~> 2.2'
 
 # Bundler-like DSL and rake tasks for Bower on Rails
-gem "bower-rails", "~> 0.9"
+gem "bower-rails", '~> 0.9'
+
+# A Gem to add Follow functionality for models
+gem "acts_as_follower", '~> 0.2'

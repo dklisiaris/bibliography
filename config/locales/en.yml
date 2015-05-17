@@ -188,6 +188,11 @@ en:
     add_to_collections: "Add to collections"
     edit_collections: "Edit collections"
 
+  users:
+    follow: "Follow"
+    unfollow: "Unfollow"    
+    following: "Following"
+
   # Authorization
   pundit:
     default: 'You cannot perform this action.'

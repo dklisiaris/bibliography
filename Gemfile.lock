@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_follower (0.2.1)
     acts_as_tree (2.1.0)
       activerecord (>= 3.0.0)
     addressable (2.3.8)
@@ -130,6 +131,8 @@ GEM
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.8)
+    font-awesome-sass (4.3.2.1)
+      sass (~> 3.2)
     geocoder (1.2.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -323,6 +326,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_follower (~> 0.2)
   acts_as_tree (~> 2.1)
   autoprefixer-rails (~> 5.1)
   bookshark (~> 1.0.0.pre)
@@ -339,6 +343,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   factory_girl_rails (~> 4.5)
   faker (~> 1.4)
+  font-awesome-sass (~> 4.3)
   geocoder (~> 1.2)
   impressionist (~> 1.5)
   jbuilder (~> 2.2)

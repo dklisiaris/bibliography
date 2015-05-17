@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 
   recommends :books, :shelves
 
+  acts_as_follower
+  acts_as_followable
+
   # after_create :assign_default_role
   def screen_name
     name = profile.name ||= profile.username ||= email 

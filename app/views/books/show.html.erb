@@ -37,7 +37,7 @@
                 type: "button", 
                 title: current_user.likes?(@book) ? t('books.remove_recommendation') : t('books.recommend'), 
                 class: "btn btn-xs btn-like btn-effect-ripple #{current_user.likes?(@book) ? 'btn-success' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-up"></i><span><%= " #{@likes_count}" %></span>
+                  <i class="fa fa-thumbs-up"></i><strong><span><%= " #{@likes_count}" %></span></strong>
                 <% end %>
 
                 <%= button_tag :onclick => "javascript:dislike(#{@book.id})",
@@ -46,7 +46,7 @@
                 type: "button", 
                 title: current_user.dislikes?(@book) ? t('books.remove_recommendation') : t('books.not_recommend'), 
                 class: "btn btn-xs btn-dislike btn-effect-ripple #{current_user.dislikes?(@book) ? 'btn-danger' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-down"></i><span><%= " #{@dislikes_count}" %></span>
+                  <i class="fa fa-thumbs-down"></i><strong><span><%= " #{@dislikes_count}" %></span></strong>
                 <% end %>                                  
                 <hr>
 

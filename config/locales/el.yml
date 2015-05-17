@@ -168,6 +168,11 @@ el:
     add_to_collections: "Προσθήκη σε συλλογές"
     edit_collections: "Επεξεργασία συλλογών"
 
+  users:
+    follow: "Ακολούθησε"
+    unfollow: "Άρση Ακολούθησης"    
+    following: "Ακολουθείς"
+
   # Authorization
   pundit:
     default: 'Δεν μπορείτε να πραγματοποιήσετε αυτην την ενέργεια.'
