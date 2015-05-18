@@ -56,7 +56,7 @@ el:
 
     featured: "Προτεινόμενα"
     trending: "Δημοφιλή"
-    latest: "Πιο πρόσφατα"
+    latest: "Τελευταίες Κυκλοφορίες"
     awarded: "Βραβευμένα"
 
     editors_only: "Μόνο για συντάκτες"
@@ -143,7 +143,11 @@ el:
     not_recommend: "Δεν Το Προτείνω"
     remove_recommendation: "Αφαίρεση Πρότασης"    
     read_more: "Διαβάστε περισσότερα"
-    read_less: "Κλείσιμο"        
+    read_less: "Κλείσιμο"
+    recommended: "Προτεινόμενα"
+    popular: "Δημοφιλή"
+    awarded: "Βραβευμένα"
+    latest: "Τελευταίες Κυκλοφορίες"
 
 
   import:

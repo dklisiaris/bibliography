@@ -27,128 +27,29 @@
     <%= render 'home/widgets/recently_added' if user_signed_in? %>   
   </div>
 
-  <%= link_to @user_to_follow.profile.username, public_profile_path(@user_to_follow.profile.id) %>
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">
 
-    <div class="widget">
-      <div class="widget-content widget-content-mini border-bottom">
-        <span class="pull-right text-muted">(All time)</span>
-        Highest Rated Books
-      </div>      
-      <div class="widget-content widget-content-full">        
-         <table class="table table-borderless table-striped table-vcenter">
-            <tbody>
-              <% @latest_books.each do |book| %>                
-                <tr>                                                                       
-                  <td class="text-center" style="width: 80px;">
-                     <%= link_to image_tag(book.cover, alt: "book_cover", class: "img-thumbnail"), book %>
-                  </td>
-                  <td>                     
-                    <%= link_to book.title, book %><br>
-                    <%= link_to book.writers.first do %>
-                      <span class="text-muted"><small><%= book.main_author %></small></span>                     
-                    <% end %> 
-                  </td>
-                  <td class="text-center" style="width: 80px;">
-                    <%= render partial: 'books/collections_manager_btn', locals: {book: book} %>
-                  </td>                  
-                </tr>                
-              <% end %>                  
-            </tbody>
-         </table>
-      </div>
-    </div>
+    <%= render partial: 'home/widgets/side_books', locals: {
+      title: " #{t('books.recommended')}", icon: "fa-thumbs-o-up", books: @recommended_books} %>
 
-    <div class="widget">
-      <div class="widget-image widget-image-xs">        
-        <%= image_tag("placeholders/photos/photo18_2x.jpg", alt: "book_background")  %>
-        <div class="widget-image-content">
-          <h2 class="widget-heading text-light"><strong>Most popular</strong></h2>
-          <h3 class="widget-heading text-light-op h4">All time most owned and read.</h3>
-        </div>
-        <i class="fa fa-book"></i>
-      </div>
-       <% @latest_books.each do |book| %>
-        
-          <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present?  %>
-            <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.main_author %></span>
-            
-          <% end %> 
-      <% end %>
-    </div>  
+    <%= render partial: 'home/widgets/side_books', locals: {
+      title: " #{t('books.popular')}", icon: "fa-line-chart", books: @popular_books} %>  
       
   </div>
 
   <div class="col-sm-6 col-lg-4 col-lg-offset-8 col-xl-3 col-xl-offset-0">    
 
-    <div class="widget">
-      <div class="widget-content themed-background-dark-flat text-light-op text-center border-bottom">
-        Latest books
-      </div>    
+    <%= render partial: 'home/widgets/side_books', locals: {
+      title: " #{t('books.awarded')}", icon: "fa-trophy", books: @awarded_books} %>
 
-      <% @latest_books.each do |book| %>
-        
-          <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present?  %>
-            <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.main_author %></span>
-            
-          <% end %> 
-      <% end %>
-    </div>    
-
-    <div class="widget">
-      <div class="widget-content border-bottom">
-        <span class="pull-right text-muted">(This month)</span>
-        Trending books
-      </div>
-      <% @latest_books.each do |book| %>
-        
-          <%= link_to book, {class: "widget-content widget-content-mini themed-background-muted border-top text-right clearfix"} do %>                                   
-            <%= image_tag(book.image, alt: "book_cover",size: "90x126", class: "img-thumbnail pull-left") if book.image.present? %>
-            <h2 class="widget-heading h5"><strong><%= book.title%></strong></h2>
-            <span class="text-muted"><%= book.main_author %></span>
-            
-          <% end %> 
-      <% end %>
-    </div>
+    <%= render partial: 'home/widgets/side_books', locals: {
+      title: " #{t('books.latest')}", icon: "fa-clock-o", books: @latest_books} %>
+   
   </div>  
 
 </div>
 
 <% if user_signed_in? %>
-<div id="collections-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title text-center">
-          <strong><%= t('shelves.edit_collections') %></strong>
-        </h3>
-      </div>
-      <div class="modal-body" style="overflow-y: scroll; height:300px;">
-        
-        <p>TODO: Show collections and checkboxes for each collection.</p>
-        <div class="row">
-          <% @shelves.each do |shelf| %>          
-            <div class="col-xs-6">
-              <label class="csscheckbox csscheckbox-primary">
-                <input id=<%= "collection-#{shelf.id}" %> type="checkbox"><span></span>
-              </label>  
-              <%= shelf.screen_name %>  
-            </div>           
-          <% end if user_signed_in? %>        
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="text-center">
-          <button type="button" class="btn btn-effect-ripple btn-sm btn-primary" data-dismiss="modal"><%= t('save') %></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <%= render 'home/widgets/collections_manager' %>
 

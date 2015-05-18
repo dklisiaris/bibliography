@@ -164,7 +164,11 @@ en:
     not_recommend: "Not recommend"
     remove_recommendation: "Remove Recommendation"
     read_more: "Read More"
-    read_less: "Close"    
+    read_less: "Close"
+    recommended: "Recommended"
+    popular: "Popular"
+    awarded: "Awarded"
+    latest: "Latest"    
 
   import:
     from_file: "From File"
