@@ -27,7 +27,7 @@
     <%= render 'home/widgets/recently_added' if user_signed_in? %>   
   </div>
 
-
+  <%= link_to @user_to_follow.profile.username, public_profile_path(@user_to_follow.profile.id) %>
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">
 
     <div class="widget">

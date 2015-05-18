@@ -14,7 +14,7 @@
             </ul>
             <ul class="nav navbar-nav-custom pull-right">
               <% if user_signed_in? %> 
-              <%= top_nav_li(current_user.screen_name, public_profile_path(current_user.profile.id)) %>                           
+              <%= top_nav_li(current_user.screen_name, public_profile_path) %>                           
               <li>
                 <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
                 <i class="gi gi-settings"></i>

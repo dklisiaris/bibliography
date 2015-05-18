@@ -1,0 +1,35 @@
+$(document).ready ->
+  $('.btn-follow').hover (->
+    if $(this).hasClass("btn-success")
+      $(this).removeClass( "btn-success" ).addClass("btn-danger")
+      $(this).find('span').text(<%=" '#{I18n.t('users.unfollow')}'"%>)
+      $(this).find('i').removeClass( "fa-users" ).addClass("fa-user-times")
+    return
+  ), ->
+    if $(this).hasClass("btn-danger")
+      $(this).removeClass( "btn-danger" ).addClass("btn-success")
+      $(this).find('span').text(<%=" '#{I18n.t('users.following')}'"%>)
+      $(this).find('i').removeClass( "fa-user-times" ).addClass("fa-users")
+    return 
+
+@follow = (profile_id) ->
+  $.ajax({
+    type: "POST",
+    url: '/library/'+profile_id+'/follow',    
+    success:(data) ->
+      console.log 'followed'            
+      btn = $('.btn-follow-'+profile_id)
+      if data.followed        
+        btn.removeClass("btn-default btn-danger").addClass("btn-success")
+        btn.find('i').removeClass("fa-user-plus fa-user-times").addClass("fa-users")
+        btn.find('span').text(<%=" '#{I18n.t('users.following')}'"%>)
+      else
+        btn.removeClass("btn-danger btn-success").addClass("btn-default")
+        btn.find('i').removeClass("fa-users fa-user-times").addClass("fa-user-plus")
+        btn.find('span').text(<%=" '#{I18n.t('users.follow')}'"%>)      
+      return false      
+    error:(data) ->
+      console.log 'Error...'
+      console.log data
+      return false 
+  })

@@ -27,7 +27,8 @@
         .find('span')
         .text(' ' + data.dislikes)
 
-      refreshRecommendationsBar(data.likes, data.dislikes)       
+      refreshRecommendationsBar(data.likes, data.dislikes)
+      return false       
     error:(data) ->
       console.log 'Error...'
       console.log data

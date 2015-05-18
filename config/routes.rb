@@ -38,7 +38,8 @@ Rails.application.routes.draw do
   # resource :profile, only: [:update]
   # get "profile/:id", :to => "profiles#show", as: 'user_profile'
   resource :profile, only: [:edit, :update]
-  get "profile/(:id)", :to => "profiles#show", as: 'public_profile'
+  get "library/(:id)", :to => "profiles#show", as: 'public_profile'
+  post "library/(:id)/follow", :to => "profiles#follow"
 
   
   # get "profile/edit", :to => "profile#edit", as: 'edit_profile'

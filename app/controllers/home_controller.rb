@@ -11,7 +11,8 @@ class HomeController < ApplicationController
       .group('bookshelves.book_id')
       .order('max(bookshelves.created_at) desc')
       .limit(12)
-      .map {|bookshelf| bookshelf.book} if user_signed_in?        
+      .map {|bookshelf| bookshelf.book} if user_signed_in?
+    @user_to_follow = User.last        
   end
 
   def autocomplete
