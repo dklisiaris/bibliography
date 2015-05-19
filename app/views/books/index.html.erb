@@ -7,12 +7,21 @@
    <div class="col-sm-12">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">   
+          <div class="block-options pull-right">               
             <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
           </div>
           <h2><%= t('books.label') %><small>&nbsp;(<%= @books.total_count %>)</small></h2>
-        </div>  
-        <%= render 'books/books_table' %>         
+        </div>
+
+        <div class="row"> 
+          <%= render "pagination" %>
+          <hr> 
+          <div class="col-xs-8">    
+            <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
+          </div>
+          <%= render "pagination" %>  
+        </div>
+
       </div>
   </div>
 </div>

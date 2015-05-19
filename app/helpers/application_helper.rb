@@ -46,4 +46,14 @@ module ApplicationHelper
     text.tr('άέήίόύώ','αεηιουω')
   end
 
+  def subtext(text, max_chars)
+    if text.present? and text.length<=max_chars
+      text.html_safe
+    elsif text.present? and text.length>max_chars
+      (text[0...max_chars]+'...').html_safe
+    else
+      nil
+    end
+  end
+
 end

@@ -141,13 +141,16 @@ el:
     added: "Προστέθηκε"
     recommend: "Το Προτείνω"    
     not_recommend: "Δεν Το Προτείνω"
-    remove_recommendation: "Αφαίρεση Πρότασης"    
+    remove_recommendation: "Αφαίρεση Πρότασης"      
     read_more: "Διαβάστε περισσότερα"
     read_less: "Κλείσιμο"
     recommended: "Προτεινόμενα"
+    recommended_x_times: "Προτεινόμενο %{count} φορές"
     popular: "Δημοφιλή"
     awarded: "Βραβευμένα"
     latest: "Τελευταίες Κυκλοφορίες"
+    in_x_collections: "Σε %{count} συλλογές"
+    with_x_views: "%{count} εμφανίσεις"    
 
 
   import:

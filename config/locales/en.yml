@@ -166,9 +166,12 @@ en:
     read_more: "Read More"
     read_less: "Close"
     recommended: "Recommended"
+    recommended_x_times: "Recommended %{count} times"
     popular: "Popular"
     awarded: "Awarded"
-    latest: "Latest"    
+    latest: "Latest" 
+    in_x_collections: "In %{count} Collections"
+    with_x_views: "%{count} views"   
 
   import:
     from_file: "From File"

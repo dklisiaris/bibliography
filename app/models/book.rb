@@ -58,11 +58,11 @@ class Book < ActiveRecord::Base
   }
   end
 
-  def short_description
-    if description.present? and description.length<=350
-      description
-    elsif description.present? and description.length>350
-      description[0...350]+'...'
+  def short_description(max_chars=350)
+    if description.present? and description.length<=max_chars
+      description.html_safe
+    elsif description.present? and description.length>max_chars
+      (description[0...max_chars]+'...').html_safe
     else
       nil
     end

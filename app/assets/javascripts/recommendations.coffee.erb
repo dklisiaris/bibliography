@@ -4,7 +4,7 @@
     url: '/books/'+book_id+'/like',    
     success:(data) ->
       console.log 'liked'            
-      btn = $('.btn-like')
+      btn = $('.btn-like-'+book_id)
       btn.toggleClass("btn-default btn-success")
       btn.find('span').text(' ' + data.likes)
 
@@ -20,7 +20,7 @@
           .tooltip('fixTitle')
           .tooltip('show')        
       
-      $('.btn-dislike')
+      $('.btn-dislike-'+book_id)
         .removeClass( "btn-danger" )
         .addClass("btn-default")
         .attr('data-original-title', <%="'#{I18n.t('books.not_recommend')}'"%>)
@@ -41,7 +41,7 @@
     url: '/books/'+book_id+'/dislike',    
     success:(data) ->
       console.log 'disliked'
-      btn = $('.btn-dislike')
+      btn = $('.btn-dislike-'+book_id)
       btn.toggleClass("btn-default btn-danger");
       btn.find('span').text(' ' + data.dislikes)
       tooltip_text = btn.attr('data-original-title')
@@ -57,14 +57,14 @@
           .tooltip('fixTitle')
           .tooltip('show')             
       
-      $('.btn-like')
+      $('.btn-like-'+book_id)
         .removeClass( "btn-success" )
         .addClass("btn-default")
         .attr('data-original-title', <%="'#{I18n.t('books.recommend')}'"%>)
         .find('span')
         .text(' ' + data.likes)
 
-      refreshRecommendationsBar(data.likes, data.dislikes)
+      refreshRecommendationsBar(data.likes, data.dislikes, book_id)
     error:(data) ->
       console.log 'Error...'
       console.log data
@@ -73,6 +73,6 @@
 
 refreshRecommendationsBar = (likes, dislikes) ->
   likesPercent = if (likes+dislikes)>0 then (likes/(likes+dislikes))*100 else 0
-  $('.recommendations-bar').attr('aria-valuenow', likes)    
+  $('.recommendations-bar-'+book_id).attr('aria-valuenow', likes)    
     .attr('aria-valuemax', likes+dislikes)
     .attr('style', 'width:'+likesPercent+'%')

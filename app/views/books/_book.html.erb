@@ -1,46 +1,23 @@
-<tr>
-  <td><%= link_to book.title, book %></td>
-  <td><%= book.subtitle %></td>
-  <td>
-    <%= book.publisher.name unless book.publisher.nil? %><br>
-    <%= book.publication_place %><br>
-    <%= book.publication_version %><br>
-    <%= book.publication_year %>
-  </td>        
-  <td><%= image_tag(book.image, height: '64', width: '64') %></td>
-  <td>
-    <%= book.isbn %><br>
-    <%= book.isbn13 %><br>
-    <%= book.ismn %><br>
-    <%= book.issn %>
-  </td>
-  <td>
-    <%= book.series_name %><br>
-    <%= book.series_volume %>
-  </td>        
-  <td>
-    <%= book.price %><br>
-    <%= book.price_updated_at %>
-  </td>
-  <td>          
-    Pages:
-    <%= book.pages %><br>
-    <%= book.cover_type.humanize if book.cover_type %><br>
-    <%= book.size %>
-  </td>
-  <td><%= book.availability.humanize if book.availability %></td>
-  <td><%= book.format.humanize if book.format %></td>
-  <td>
-    <%= book.original_language.humanize if book.original_language %><br>
-    <%= book.original_title %>
-  </td>                      
-  <td>
-    <%= link_to t('show'), book %><br>
-    <% if policy(book).update? %>
-    <%= link_to t('edit'), edit_book_path(book) %>
-    <% end %>
-    <% if policy(book).destroy? %>
-    <%= link_to t('destroy'), book, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>   
-  </td>
-</tr>
+<div class="row clearfix">
+  
+  <div class="col-xs-2">
+    <%= image_tag(book.cover, height: '96', width: '96') %>
+  </div>
+  <div class="col-xs-8">
+    <h4><%= link_to book.title, book %></h4>       
+    <span><%= book.writers.first.present? ? link_to(book.main_author, book.writers.first) : book.main_author %></span><br>
+    <span><small class="text-muted"><%= 
+      t('books.recommended_x_times', count: book.liked_by_count) + " - " + 
+      t('books.in_x_collections', count: book.bookshelves.count) + " - " + 
+      t('books.with_x_views', count: book.impressionist_count)
+    %></small></span>
+    <p><small><%= book.short_description(100) %></small></p>
+  </div>
+  <div class="col-xs-2 text-center">
+    <%= render partial: 'books/collections_manager_btn', locals: {book: book, full_size: true} %>
+    <br>
+    <%= render partial: 'books/widgets/recommend_btns', locals: {book: book} %>        
+  </div>
+
+</div>
+<hr>

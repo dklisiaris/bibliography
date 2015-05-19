@@ -26,30 +26,8 @@
 
                 <%= render partial: 'books/collections_manager_btn', locals: {book: @book, full_size: true} %>
                 <hr>
-
-                <div class="progress progress-mini">
-                  <div class="progress-bar progress-bar-success recommendations-bar" role="progressbar" aria-valuenow=<%= "#{@likes_count}" %> aria-valuemin="0" aria-valuemax=<%= "#{@likes_count+@dislikes_count}" %> style=<%= (@likes_count+@dislikes_count)>0 ? "width:#{(@likes_count/(@likes_count+@dislikes_count))*100}%" : "width:0%" %>></div>
-                </div>
-
-                <%= button_tag :onclick => "javascript:like(#{@book.id})",                  
-                "data-toggle" => "tooltip", 
-                "data-placement" => "top",
-                type: "button", 
-                title: current_user.likes?(@book) ? t('books.remove_recommendation') : t('books.recommend'), 
-                class: "btn btn-xs btn-like btn-effect-ripple #{current_user.likes?(@book) ? 'btn-success' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-up"></i><strong><span><%= " #{@likes_count}" %></span></strong>
-                <% end %>
-
-                <%= button_tag :onclick => "javascript:dislike(#{@book.id})",
-                "data-toggle" => "tooltip", 
-                "data-placement" => "top",
-                type: "button", 
-                title: current_user.dislikes?(@book) ? t('books.remove_recommendation') : t('books.not_recommend'), 
-                class: "btn btn-xs btn-dislike btn-effect-ripple #{current_user.dislikes?(@book) ? 'btn-danger' : 'btn-default'}" do %>      
-                  <i class="fa fa-thumbs-down"></i><strong><span><%= " #{@dislikes_count}" %></span></strong>
-                <% end %>                                  
-                <hr>
-
+                <%= render partial: 'books/widgets/recommend_btns', locals: {book: @book, show_progressbar: true} %>
+                <hr>                
                 <div class="row text-center">
                   <div class="col-xs-6">
                     <h4 class="widget-heading"><small><%= t 'collections' %></small><br><%= @bookshelves_count %></h4>
