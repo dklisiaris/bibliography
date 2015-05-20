@@ -6,8 +6,7 @@
    <div class="col-sm-10 col-sm-offset-1">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">   
-            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: 'add-tο-collection', tooltip: t('add_to_collection')) %>    
+          <div class="block-options pull-right">       
             <% if policy(@book).update? %>            
             <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success') %>
             <% end %>                
@@ -24,7 +23,7 @@
                 </div>
                 <div class="widget-content themed-background-muted text-center">
 
-                <%= render partial: 'books/collections_manager_btn', locals: {book: @book, full_size: true} %>
+                <%= render partial: 'books/widgets/collections_manager_btn', locals: {book: @book, full_size: true} %>
                 <hr>
                 <%= render partial: 'books/widgets/recommend_btns', locals: {book: @book, show_progressbar: true} %>
                 <hr>                

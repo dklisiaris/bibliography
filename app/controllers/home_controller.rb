@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       .select("bookshelves.book_id")
       .group('bookshelves.book_id')
       .order('max(bookshelves.created_at) desc')
-      .limit(12)
+      .limit(10)
       .map {|bookshelf| bookshelf.book} if user_signed_in?
 
   end

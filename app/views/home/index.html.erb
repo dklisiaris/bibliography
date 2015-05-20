@@ -24,25 +24,26 @@
     <%= render 'home/widgets/welcome' %>
     <%= render 'home/widgets/my_books' if user_signed_in? %>
     <%= render 'home/widgets/my_collections' if user_signed_in? %>
-    <%= render 'home/widgets/recently_added' if user_signed_in? %>   
+    <%= render partial: 'books/widgets/grid', 
+    locals: {title: " #{t('recently_added')}", icon: "fa-clock-o", books: @recently_added} if user_signed_in? %>   
   </div>
 
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">
 
-    <%= render partial: 'home/widgets/side_books', locals: {
+    <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.recommended')}", icon: "fa-thumbs-o-up", books: @recommended_books} %>
 
-    <%= render partial: 'home/widgets/side_books', locals: {
+    <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.popular')}", icon: "fa-line-chart", books: @popular_books} %>  
       
   </div>
 
   <div class="col-sm-6 col-lg-4 col-lg-offset-8 col-xl-3 col-xl-offset-0">    
 
-    <%= render partial: 'home/widgets/side_books', locals: {
+    <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.awarded')}", icon: "fa-trophy", books: @awarded_books} %>
 
-    <%= render partial: 'home/widgets/side_books', locals: {
+    <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.latest')}", icon: "fa-clock-o", books: @latest_books} %>
    
   </div>  

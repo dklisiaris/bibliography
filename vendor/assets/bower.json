@@ -2,6 +2,7 @@
   "name": "dsl-generated dependencies",
   "dependencies": {
     "readmore": "latest",
-    "noty": "latest"
+    "noty": "latest",
+    "masonry": "latest"
   }
 }

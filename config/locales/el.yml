@@ -192,10 +192,10 @@ el:
   # Pagination
   views:
     pagination:
-      first: "&laquo; Πρώτο"
-      last: "Τελευταίο &raquo;"
-      previous: "&lsaquo; Προηγούμενο"
-      next: "Επόμενο &rsaquo;"
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
       truncate: "&hellip;"
   helpers:
     page_entries_info:
