@@ -7,11 +7,15 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.roots
 
+    # TODO Replace this with favourite or featured categories
+    @books = Book.order(created_at: :desc).where.not(image: '').limit(10)
+
     respond_with(@categories)
   end
 
   def show
     @children = @category.children
+    @books = @category.books.page(params[:page])
 
     respond_with(@category, @children)
   end

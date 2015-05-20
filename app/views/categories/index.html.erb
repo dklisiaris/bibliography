@@ -1,7 +1,12 @@
 <%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
 
 <div class="row">
-   <div class="col-sm-12">
+  <div class="col-sm-8">
+  <%= render partial: 'books/widgets/grid', 
+      locals: {title: " #{t('recently_added')}", icon: "fa-clock-o", books: @books} %>
+  </div>
+
+   <div class="col-sm-4">
       <div class="block">
         <div class="block-title">
           <div class="block-options pull-right">
