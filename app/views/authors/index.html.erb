@@ -3,15 +3,23 @@
 <%= cell(:navigation).call(:content_header, title: t('authors.listing'), breadcrumbs: pages) %>
 
 <div class="row">
-   <div class="col-sm-12">
+   <div class="col-sm-8">
       <div class="block">
         <div class="block-title">
           <div class="block-options pull-right">
             <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_author_path, tooltip: t('authors.new')) if policy(Author).new? %>
           </div>
-          <h2><%= t('authors.all') %></h2>
-        </div>  
-        <%= render 'authors/authors' %>             
+          <h2><%= detone t('authors.all') %></h2>
+        </div>
+        <div class="row"> 
+          <%= render "authors/widgets/pagination" %>
+          <hr> 
+          <div class="col-xs-12">    
+            <%= render :partial => "authors/author", :collection => @authors, :as => :author %>
+          </div>
+          <%= render "authors/widgets/pagination" %>  
+        </div>
+                     
       </div>
   </div>
 </div>

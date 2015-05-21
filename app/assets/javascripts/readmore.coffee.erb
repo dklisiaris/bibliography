@@ -1,0 +1,7 @@
+@readmore = (text_to_hide) ->
+  text_to_hide.readmore
+    speed: 500
+    collapsedHeight: 80    
+    heightMargin: 16
+    moreLink: <%= "\'<a href=\"#\">"+(I18n.t 'read_more')+"</a>\'" %>
+    lessLink: <%= "\'<a href=\"#\">"+(I18n.t 'read_less')+"</a>\'" %>  

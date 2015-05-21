@@ -3,10 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $('.books.show').ready ->
-  desc = $('.description')
-  desc.readmore
-    speed: 500
-    collapsedHeight: 80    
-    heightMargin: 16
-    moreLink: <%= "\'<a href=\"#\">"+(I18n.t 'books.read_more')+"</a>\'" %>
-    lessLink: <%= "\'<a href=\"#\">"+(I18n.t 'books.read_less')+"</a>\'" %>
+  readmore($('.description'))

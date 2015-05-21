@@ -43,6 +43,13 @@ el:
 
   search_my_books: "Αναζήτηση στα βιβλία μου"
 
+  read_more: "Διαβάστε περισσότερα"
+  read_less: "Κλείσιμο"
+
+  stats:
+    views: "Εμφανίσεις"
+    visitors: "Επισκέπτες"
+
   notifications:
     changes_saved_successfully: "Οι αλλαγές αποθηκεύτηκαν με επιτυχία!"
     changed_saved_failed: "Συνέβη κάποιο σφάλμα. Οι αλλαγές δεν αποθηκεύτηκαν."
@@ -98,6 +105,10 @@ el:
     editing: "Επεξεργασία Συγγραφέα"
     listing: "Λίστα Συγγραφέων"  
     all: "Όλοι οι Συγγραφείς"
+    favoured_x_times: "Στα αγαπημένα %{count} φορές"
+    x_books: "%{count} βιβλία"
+    with_x_views: "%{count} εμφανίσεις"
+    favoured: "Αγαπημένα"    
 
   books:
     index:
@@ -135,15 +146,11 @@ el:
     issn: "ISSN" 
     collective_work: "Συλλογικό έργο"
     n_version: "η έκδοση"
-    views: "Εμφανίσεις"
-    visitors: "Επισκέπτες"
     add: "Προσθήκη"
     added: "Προστέθηκε"
     recommend: "Το Προτείνω"    
     not_recommend: "Δεν Το Προτείνω"
     remove_recommendation: "Αφαίρεση Πρότασης"      
-    read_more: "Διαβάστε περισσότερα"
-    read_less: "Κλείσιμο"
     recommended: "Προτεινόμενα"
     recommended_x_times: "Προτεινόμενο %{count} φορές"
     popular: "Δημοφιλή"
@@ -179,6 +186,9 @@ el:
     follow: "Ακολούθησε"
     unfollow: "Άρση Ακολούθησης"    
     following: "Ακολουθείς"
+
+  awards:
+    label: "Βραβεία"
 
   # Authorization
   pundit:

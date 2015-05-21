@@ -1,26 +1,31 @@
-<h1><%= @awardable.fullname %></h1>
+<div class="row clearfix">
+  
+  <div class="col-xs-2">
+    <%= image_tag(author.avatar, height: '96', width: '96') %>
+  </div>
+  <div class="col-xs-10">
+    <div class="row clearfix">
+      <div class="col-xs-9">
+        <h4><%= link_to author.fullname_reversed, author %></h4>       
+        <span><%= author.extra_info %></span>
+        <%= tag(:br) if author.extra_info.present? %>
+        <span><small class="text-muted"><%= 
+          t('authors.x_books', count: author.books.count) + " - " + 
+          t('authors.favoured_x_times', count: author.liked_by_count) + " - " + 
+          t('authors.with_x_views', count: author.impressionist_count)
+        %></small></span>
+      </div>
+      <div class="col-xs-3 text-center">
+        <%= link_to fa('pencil'), edit_author_path(author) if policy(author).update? %>
+        <%= link_to fa('times'), author, method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10">
+        <p><small><%= author.short_biography(100) %></small></p>
+        </div>
+    </div>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @awardable.firstname %>
-</p>
-
-<p>
-  <strong>Lastname:</strong>
-  <%= @awardable.lastname %>
-</p>
-
-<p>
-  <strong>extra_info:</strong>
-  <%= @awardable.extra_info %>
-</p>
-
-<p>
-  <strong>Biography:</strong>
-  <%= @awardable.biography %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @awardable.image %>
-</p>
+  </div>
+</div>
+<hr>

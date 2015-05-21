@@ -64,6 +64,13 @@ en:
 
   search_my_books: "Search my books"
 
+  read_more: "Read More"
+  read_less: "Close"
+
+  stats:
+    views: "Views"
+    visitors: "Visitors"
+
   notifications:
     changes_saved_successfully: "Changes were successfully saved!"
     changed_saved_failed: "Something went wrong. Changes failed to save"
@@ -119,6 +126,10 @@ en:
     editing: "Editing Author"
     listing: "Listing Authors"  
     all: "All Authors"
+    favoured_x_times: "Favoured %{count} times"
+    x_books: "%{count} books"
+    with_x_views: "%{count} views"
+    favoured: "Favoured"
 
   books:
     index:
@@ -156,15 +167,11 @@ en:
     issn: "ISSN"
     collective_work: "Collective work"
     n_version: "th revision"
-    views: "Views"
-    visitors: "Visitors"
     add: "Add Book"
     added: "Added"
     recommend: "Recommend"
     not_recommend: "Not recommend"
     remove_recommendation: "Remove Recommendation"
-    read_more: "Read More"
-    read_less: "Close"
     recommended: "Recommended"
     recommended_x_times: "Recommended %{count} times"
     popular: "Popular"
@@ -199,6 +206,9 @@ en:
     follow: "Follow"
     unfollow: "Unfollow"    
     following: "Following"
+
+  awards:
+    label: "Awards"
 
   # Authorization
   pundit:

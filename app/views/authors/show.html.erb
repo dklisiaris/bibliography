@@ -1,29 +1,68 @@
-<h1><%= @author.fullname %></h1>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @author.firstname %>
-</p>
+<div class="row">
+   <div class="col-sm-10 col-sm-offset-1">
+      <div class="block full">
+        <div class="block-title">
+          <div class="block-options pull-right">       
+            <% if policy(@author).update? %>            
+            <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success') %>
+            <% end %>                
+          </div>
+          <h2><%= detone(@author.fullname) %></h2>
+        </div>  
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @author.lastname %>
-</p>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="row">            
+              <div class="widget">
+                <div class="widget-content themed-background-muted text-right clearfix">
+                  <%= image_tag(@author.avatar, alt: "author_photo", class: "img-thumbnail")  %>
+                </div>
+                <div class="widget-content themed-background-muted text-center">
+               
+                <div class="row text-center">
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'books.label' %></small><br><%= @author.books.count %></h4>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'stats.views' %></small><br><%= @author.impressionist_count %></h4>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="widget-heading"><small><%= t 'authors.favoured' %></small><br><%= @author.liked_by_count %></h4>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>                       
+          </div>  
+          <div class="col-sm-9">
+            <h2><%= @author.fullname %><br><small><%= @author.extra_info %></small></h2>
+            <hr>
+            <article class="description">
+              <%= @author.biography.html_safe if @author.biography.present? %>
+            </article>
+            <% if @author.awards.count > 0 %>
+              <h4 class="sub-header">
+                <%= t('awards.label') %>
+              </h4>
+              <% @author.awards.each do |award|%>
+                <%= link_to award.prize.name, award.prize %>
+                <%= " (#{award.year})" %>
+              <% end %>
+            <% end %>
+            <% if @author.books.count > 0 %>
+              <h4 class="sub-header">
+                <%= t('books.label') %>
+              </h4>
+              <%= render :partial =>  "books/book", :collection => @author.books, :as => :book %>
+            <% end %>
 
-<p>
-  <strong>extra_info:</strong>
-  <%= @author.extra_info %>
-</p>
+          </div>  
+        </div>          
+      </div>
+  </div>
+</div>
 
-<p>
-  <strong>Biography:</strong>
-  <%= @author.biography %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @author.image %>
-</p>
 
 <h3>Awards</h3>
 

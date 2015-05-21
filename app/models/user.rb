@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :books, through: :shelves
   has_many :writers, through: :books
 
-  recommends :books, :shelves
+  recommends :books, :shelves, :authors
 
   acts_as_follower
   acts_as_followable
