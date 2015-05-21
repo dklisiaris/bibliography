@@ -108,7 +108,25 @@ el:
     favoured_x_times: "Στα αγαπημένα %{count} φορές"
     x_books: "%{count} βιβλία"
     with_x_views: "%{count} εμφανίσεις"
-    favoured: "Αγαπημένα"    
+    favoured: "Αγαπημένα"
+
+  publishers:
+    label: "Εκδότες"
+    new: "Νέος Εκδότης"
+    edit: "Επεξεργασία Εκδότη"
+    delete: "Διαγραφή Εκδότη"
+    editing: "Επεξεργασία Εκδότη"
+    listing: "Λίστα Εκδοτών"  
+    all: "Όλοι οι Εκδότες"
+    x_books: "%{count} βιβλία"
+    with_x_views: "%{count} εμφανίσεις"
+
+  places:
+    address: "Διεύθυνση"
+    telephones: "Τηλέφωνα"
+    fax: "Φαξ"
+    email: "Email"
+    website: "Ιστότοπος"
 
   books:
     index:

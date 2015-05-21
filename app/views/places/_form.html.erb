@@ -1,4 +1,4 @@
-<%= form_for [@placeable, @place] do |f| %>
+<%= form_for [@publisher, @place] do |f| %>
   <% if @place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>

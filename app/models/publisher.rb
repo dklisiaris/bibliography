@@ -1,5 +1,9 @@
 class Publisher < ActiveRecord::Base
   has_many :places, as: :placeable
+  has_many :books
+
+  # Log impressions filtered by ip
+  is_impressionable :counter_cache => true, :unique => true
 
   searchkick batch_size: 50, 
   callbacks: :async, 

@@ -4,6 +4,29 @@
 
 <%= render 'publishers/search_form' %>
 
+<div class="row">
+   <div class="col-sm-8">
+      <div class="block full">
+        <div class="block-title">
+          <div class="block-options pull-right">               
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_publisher_path, tooltip: t('publishers.new')) if policy(Publisher).new? %>      
+          </div>
+          <h2><%= detone t('publishers.label') %><small>&nbsp;(<%= @publishers.total_count %>)</small></h2>
+        </div>
+
+        <div class="row"> 
+          <%= render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers} %>
+          <hr> 
+          <div class="col-xs-12">    
+            <%= render :partial =>  "publishers/publisher", :collection => @publishers, :as => :publisher %>
+          </div>
+          <%= render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers} %>
+        </div>
+
+      </div>
+  </div>
+</div>
+
 <%= paginate @publishers %>
 
 <table class="table table-striped">

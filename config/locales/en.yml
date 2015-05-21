@@ -131,6 +131,24 @@ en:
     with_x_views: "%{count} views"
     favoured: "Favoured"
 
+  publishers:
+    label: "Publishers"
+    new: "New Publisher"
+    edit: "Edit Publisher"
+    delete: "Delete Publisher"
+    editing: "Editing Publisher"
+    listing: "Listing Publishers"  
+    all: "All Publishers"
+    x_books: "%{count} books"
+    with_x_views: "%{count} views"    
+
+  places:
+    address: "Address"
+    telephones: "Telephones"
+    fax: "Fax"
+    email: "Email"
+    website: "Website"
+
   books:
     index:
       listing_books: "Listing Books"
