@@ -116,7 +116,8 @@ en:
     new_subcategory: "New Subcategory"
     editing: "Editing Category"
     listing: "Listing Categories"  
-    all: "All Categories"    
+    all: "All Categories"
+    search: "Search Categories"   
 
   authors:
     label: "Authors"
@@ -130,6 +131,7 @@ en:
     x_books: "%{count} books"
     with_x_views: "%{count} views"
     favoured: "Favoured"
+    search: "Search Authors"
 
   publishers:
     label: "Publishers"
@@ -140,7 +142,8 @@ en:
     listing: "Listing Publishers"  
     all: "All Publishers"
     x_books: "%{count} books"
-    with_x_views: "%{count} views"    
+    with_x_views: "%{count} views"
+    search: "Search Publishers"    
 
   places:
     address: "Address"
@@ -196,7 +199,8 @@ en:
     awarded: "Awarded"
     latest: "Latest" 
     in_x_collections: "In %{count} Collections"
-    with_x_views: "%{count} views"   
+    with_x_views: "%{count} views"
+    search: "Search Books"
 
   import:
     from_file: "From File"

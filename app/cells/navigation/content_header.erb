@@ -2,7 +2,8 @@
   <div class="row">
      <div class="col-sm-6">
         <div class="header-section">
-           <h1><%= @title %></h1>
+           <%= content_tag :h1, @title if @title %>
+           <%= @content if @content%>
         </div>
      </div>
      <div class="col-sm-6 hidden-xs">

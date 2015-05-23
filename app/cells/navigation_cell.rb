@@ -12,7 +12,8 @@ class NavigationCell < Cell::ViewModel
   #   cell(:navigation).call(:content_header, title: 'Some title', breadcrumbs: { fa('home') => root_url, t('site_settings') => "#", 'Current Page' => nil })
   #
   def content_header(opts = {})      
-    @title        = opts[:title]  
+    @title        = opts[:title]
+    @content      = opts[:content]  
     @breadcrumbs  = opts[:breadcrumbs]      
     render
   end

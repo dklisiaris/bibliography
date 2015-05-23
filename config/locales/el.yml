@@ -96,6 +96,7 @@ el:
     editing: "Επεξεργασία Κατηγορίας"
     listing: "Θεματικές Κατηγορίες"  
     all: "Ολες οι κατηγοριες"
+    search: "Αναζήτηση στις κατηγορίες"
 
   authors:
     label: "Συγγραφείς"
@@ -109,6 +110,7 @@ el:
     x_books: "%{count} βιβλία"
     with_x_views: "%{count} εμφανίσεις"
     favoured: "Αγαπημένα"
+    search: "Αναζήτηση στους συγγραφείς"
 
   publishers:
     label: "Εκδότες"
@@ -120,6 +122,7 @@ el:
     all: "Όλοι οι Εκδότες"
     x_books: "%{count} βιβλία"
     with_x_views: "%{count} εμφανίσεις"
+    search: "Αναζήτηση στους εκδότες"
 
   places:
     address: "Διεύθυνση"
@@ -175,7 +178,8 @@ el:
     awarded: "Βραβευμένα"
     latest: "Τελευταίες Κυκλοφορίες"
     in_x_collections: "Σε %{count} συλλογές"
-    with_x_views: "%{count} εμφανίσεις"    
+    with_x_views: "%{count} εμφανίσεις"
+    search: "Αναζήτηση στα βιβλία"   
 
 
   import:
