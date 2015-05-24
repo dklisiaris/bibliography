@@ -40,7 +40,7 @@ gem 'cells', "~> 4.0.0.beta"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 4.0'
+  gem 'byebug', '~> 5.0'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
