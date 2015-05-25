@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_json_format, only: [:collections, :manage_collections, :like, :dislike]
   before_action :authenticate_user!, only: [:collections, :manage_collections, :like, :dislike]
   before_action :set_book
-  skip_before_action :set_book, only: [:index, :new, :create]
+  skip_before_action :set_book, only: [:index, :new, :create, :my]
   before_action :set_enums, only: [:new, :edit]    
   
   #Disable protection for stateless api json response
@@ -14,13 +14,15 @@ class BooksController < ApplicationController
 
   def index
     @books = policy_scope(Book).page(params[:page])
+    @shelves = current_user.shelves if user_signed_in?
+
     respond_with(@books)
   end
 
   def show
     # Intantiate a new presenter.
     @book_presenter = BookPresenter.new(@book, view_context)
-    @shelves = current_user.shelves
+    @shelves = current_user.shelves if user_signed_in?
     @in_shelves = current_user.book_in_which_collections(@book) if user_signed_in?
 
     @bookshelves_count = Bookshelf.where(book_id: @book.id).count
@@ -101,6 +103,15 @@ class BooksController < ApplicationController
     
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count} 
   end  
+
+  def my
+    authorize :book, :my?
+
+    @books = current_user.books.page(params[:page])
+    @shelves = current_user.shelves if user_signed_in?
+    
+    respond_with(@books)
+  end
 
   private
     def set_book          

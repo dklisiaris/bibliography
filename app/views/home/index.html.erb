@@ -51,7 +51,5 @@
 </div>
 
 <% if user_signed_in? %>
-
-<%= render 'home/widgets/collections_manager' %>
-
+<%= render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves} %>
 <% end %>

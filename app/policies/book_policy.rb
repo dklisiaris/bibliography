@@ -8,7 +8,8 @@ class BookPolicy < ApplicationPolicy
   def collections?        ; registered? ; end  
   def manage_collections? ; registered? ; end
   def like?               ; registered? ; end
-  def dislike?            ; registered? ; end  
+  def dislike?            ; registered? ; end
+  def my?                 ; registered? ; end
 
   class Scope < Scope
     def resolve

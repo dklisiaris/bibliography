@@ -7,7 +7,7 @@
   <div class="widget-content">
     <i class="fa fa-asterisk fa-2x fa-spin text-primary" style="display:none;"></i>
     <div class="row collections-checkboxes">
-      <% @shelves.each do |shelf| %>          
+      <% shelves.each do |shelf| %>          
         <div class="col-xs-6">
           <label class="csscheckbox csscheckbox-primary">
             <input name=<%= "collection-#{shelf.id}" %> id=<%= "collection-#{shelf.id}" %> type="checkbox"><span></span>
