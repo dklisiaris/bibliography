@@ -130,8 +130,4 @@ class BooksController < ApplicationController
       @formats            = Book.formats
     end
 
-    def set_json_format
-      request.format = :json
-    end
-
 end

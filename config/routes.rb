@@ -61,7 +61,11 @@ Rails.application.routes.draw do
 
   get "import/storage", to: 'import#import_from_storage', as: :storage_import
 
-  resources :categories
+  resources :categories do
+    member do
+      post 'favourite'
+    end
+  end
 
   devise_for :users
 

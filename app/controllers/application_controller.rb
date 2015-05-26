@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
 
   def not_found
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
+
+  def set_json_format
+    request.format = :json
   end  
 
   private

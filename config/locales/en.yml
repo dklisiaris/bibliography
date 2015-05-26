@@ -117,7 +117,9 @@ en:
     editing: "Editing Category"
     listing: "Listing Categories"  
     all: "All Categories"
-    search: "Search Categories"   
+    search: "Search Categories"
+    favoured: "Favoured"
+    add_to_favourites: "Add to favourites"   
 
   authors:
     label: "Authors"

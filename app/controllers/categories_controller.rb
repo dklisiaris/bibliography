@@ -1,6 +1,11 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_json_format, only: [:favourite]
+  before_action :authenticate_user!, only: [:favourite]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :favourite]
   skip_after_action :verify_policy_scoped, only: :index
+
+  #Disable protection for stateless api json response
+  protect_from_forgery with: :exception, except: [:favourite]
 
   respond_to :html
 
@@ -47,6 +52,18 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_with(@category)
+  end
+
+  def favourite
+    authorize :category, :favourite?
+
+    if not current_user.likes?(@category)
+      current_user.like(@category) 
+    else
+      current_user.unlike(@category)
+    end
+
+    render json: {status: 200, message: 'ok', favourite: current_user.likes?(@category)}
   end
 
   private

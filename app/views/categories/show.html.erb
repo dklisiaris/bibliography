@@ -12,6 +12,15 @@ end
   <div class="col-sm-8">
       <div class="block full">
         <div class="block-title">
+        <div class="block-options pull-right">  
+          <% if current_user.likes?(@category) %>
+          <%= button_tag fa('star'), :onclick => "javascript:favourite_category(#{@category.id})", class: "btn btn-effect-ripple btn-success btn-favourite-category-#{@category.id}", 
+            data: { "toggle" => "tooltip", "original-title" => t('categories.favoured') }%>
+          <% else %>
+          <%= button_tag fa('star-o'), :onclick => "javascript:favourite_category(#{@category.id})", class: "btn btn-effect-ripple btn-primary btn-favourite-category-#{@category.id}", 
+            data: { "toggle" => "tooltip", "original-title" => t('categories.add_to_favourites') }%>
+          <% end %>
+        </div>           
           <h2><%= detone @category.name %></h2>
         </div>
 

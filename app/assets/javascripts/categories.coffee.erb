@@ -1,0 +1,38 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+
+@favourite_category = (category_id) ->
+  $.ajax({
+    type: "POST",
+    url: '/categories/'+category_id+'/favourite',    
+    success:(data) ->
+      console.log 'favoured'            
+      btn = $('.btn-favourite-category-'+category_id)
+      btn.toggleClass("btn-primary btn-success")      
+
+      tooltip_text = btn.attr('data-original-title')
+      if data.favourite and tooltip_text==<%="'#{I18n.t('categories.add_to_favourites')}'"%>
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('categories.favoured')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')
+
+        btn.find('i').removeClass( "fa-star-o" )
+          .addClass("fa-star")                 
+      else
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('categories.add_to_favourites')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')
+
+        btn.find('i').removeClass( "fa-star" )
+          .addClass("fa-star-o")                  
+      
+      return false       
+    error:(data) ->
+      console.log 'Error...'
+      console.log data
+      return false 
+  })
