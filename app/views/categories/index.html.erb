@@ -1,10 +1,13 @@
 <%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
 
-<div class="row">
+<div class="row">  
   <div class="col-sm-8">
-  <%= render partial: 'books/widgets/grid', 
-      locals: {title: " #{t('recently_added')}", icon: "fa-clock-o", books: @books} %>
+    <% @featured.each do |category|%>
+      <%= render partial: 'books/widgets/grid', 
+        locals: {title: link_to(category.name, category, class: "text-light-op"), books: category.books.limit(10)} %>
+    <% end %>
   </div>
+  
 
    <div class="col-sm-4">
       <div class="block">

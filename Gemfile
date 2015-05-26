@@ -148,3 +148,9 @@ gem "bower-rails", '~> 0.9'
 
 # A Gem to add Follow functionality for models
 gem "acts_as_follower", '~> 0.2'
+
+# Generate greeklish forms from Greek words
+gem 'greeklish', '~> 0.0.1'
+
+# The Swiss Army bulldozer of slugging and permalink plugins for ActiveRecord
+gem 'friendly_id', '~> 5.1.0'

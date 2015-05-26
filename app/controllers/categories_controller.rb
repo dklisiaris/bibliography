@@ -13,7 +13,11 @@ class CategoriesController < ApplicationController
     @categories = Category.roots
 
     # TODO Replace this with favourite or featured categories
-    @books = Book.order(created_at: :desc).where.not(image: '').limit(10)
+    if user_signed_in?
+      @featured = current_user.liked_categories.limit(10)
+    else
+      @featured = Category.where(featured: true).limit(10)
+    end    
 
     respond_with(@categories)
   end
@@ -73,6 +77,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.require(:category).permit(:name, :ddc, :slug, :biblionet_id, :parent_id)
+      params.require(:category).permit(:name, :ddc, :slug, :biblionet_id, :parent_id, :featured)
     end
 end

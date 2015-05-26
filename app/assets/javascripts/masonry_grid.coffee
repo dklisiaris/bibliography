@@ -1,5 +1,5 @@
 $(document).ready ->
   container = $('.book-container')  
   container.masonry
-    gutter: 15        
+    gutter: 12        
     itemSelector: '.book-cover'

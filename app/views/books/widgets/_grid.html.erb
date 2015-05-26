@@ -1,6 +1,9 @@
 <div class="widget">  
   <div class="widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom">    
-    <i class=<%= "\"fa #{icon}\"".html_safe %>></i><strong><%= title %></strong>
+    <% if defined? icon.present? %>
+    <i class=<%= "\"fa #{icon}\"".html_safe %>></i>
+    <% end %>
+    <strong><%= title %></strong>
   </div>      
   <div class="widget-content">
     <div class="book-container">
