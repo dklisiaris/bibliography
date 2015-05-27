@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def index
-    @books = policy_scope(Book).page(params[:page])
+    @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
     @shelves = current_user.shelves if user_signed_in?
 
     respond_with(@books)

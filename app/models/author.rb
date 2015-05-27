@@ -11,6 +11,9 @@ class Author < ActiveRecord::Base
   # Log impressions filtered by ip
   is_impressionable :counter_cache => true, :unique => true
 
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+
   def fullname
     return [firstname, lastname].join(' ') if firstname.present?
     return lastname
@@ -37,6 +40,24 @@ class Author < ActiveRecord::Base
     else
       "http://ingermanson.com/images/no_profile_image.jpg"
     end        
+  end
+
+  # Try building a slug based on the following fields in
+  # increasing order of specificity.
+  def slug_candidates
+    [
+      :slugged_name,
+      [:slugged_name, :id],
+    ]
+  end  
+
+  def slugged_name
+    converter = Greeklish.converter(max_expansions: 1,generate_greek_variants: false)
+    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(fullname).gsub('ς','σ').gsub(/[,.]/,''))
+    name_to_slug.split(" ").map do |word|
+      converted = converter.convert(word)
+      converted.present? ? converted.last : word
+    end.join('-')
   end  
   
 end

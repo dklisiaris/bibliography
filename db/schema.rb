@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523102340) do
+ActiveRecord::Schema.define(version: 20150527110154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,11 @@ ActiveRecord::Schema.define(version: 20150523102340) do
     t.datetime "updated_at",                    null: false
     t.integer  "biblionet_id"
     t.integer  "impressions_count", default: 0
+    t.string   "slug"
   end
+
+  add_index "authors", ["biblionet_id"], name: "index_authors_on_biblionet_id", unique: true, using: :btree
+  add_index "authors", ["slug"], name: "index_authors_on_slug", unique: true, using: :btree
 
   create_table "awards", force: :cascade do |t|
     t.integer  "prize_id"
@@ -70,12 +74,14 @@ ActiveRecord::Schema.define(version: 20150523102340) do
     t.integer  "series_volume"
     t.integer  "publication_version"
     t.integer  "impressions_count",                           default: 0
+    t.string   "slug"
   end
 
   add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
   add_index "books", ["isbn13"], name: "index_books_on_isbn13", unique: true, using: :btree
   add_index "books", ["ismn"], name: "index_books_on_ismn", unique: true, using: :btree
   add_index "books", ["publisher_id"], name: "index_books_on_publisher_id", using: :btree
+  add_index "books", ["slug"], name: "index_books_on_slug", unique: true, using: :btree
 
   create_table "books_categories", id: false, force: :cascade do |t|
     t.integer "book_id"
@@ -216,7 +222,10 @@ ActiveRecord::Schema.define(version: 20150523102340) do
     t.datetime "updated_at",                    null: false
     t.integer  "biblionet_id"
     t.integer  "impressions_count", default: 0
+    t.string   "slug"
   end
+
+  add_index "publishers", ["slug"], name: "index_publishers_on_slug", unique: true, using: :btree
 
   create_table "royce_connector", force: :cascade do |t|
     t.integer  "roleable_id",   null: false

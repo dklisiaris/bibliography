@@ -43,7 +43,7 @@ module ApplicationHelper
   end
 
   def detone(text)
-    text.tr('άέήίόύώ','αεηιουω')
+    text.tr('άέήίΐόύώ','αεηιιουω')
   end
 
   def subtext(text, max_chars)

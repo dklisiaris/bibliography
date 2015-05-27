@@ -6,7 +6,7 @@ class AuthorsController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def index
-    @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc)
+    @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     respond_with(@authors)
   end
 
