@@ -1,1 +1,0 @@
-!function(t){var i=t.fn.ready;t.fn.ready=function(n){i(void 0===this.context?n:this.selector?t.proxy(function(){t(this.selector,this.context).each(n)},this):t.proxy(function(){t(this).each(n)},this))}}(jQuery);
