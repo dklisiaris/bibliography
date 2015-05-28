@@ -1,30 +1,35 @@
+<div class="block">
+  <div class="block-title">
+    <div class="block-options pull-right">
+      <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))%>
+    </div>    
+    <h2><%= detone t('my_collections') %></h2>
+  </div>
+  <div class="table-responsive">
+    <table id="general-table" class="table table-vcenter table-striped table-hover">
+      <thead>
+        <tr>
+          <th><%= t('name')%></th>
+          <th><%= t('privacy')%></th>
+          <th class="text-center"><%= t('active')%></th>
+          <th class="text-center" colspan="1"><%= fa('flash')%></th>
+        </tr>
+      </thead>
 
-<h1>Listing Shelves</h1>
+      <tbody>
+        <% @shelves.each do |shelf| %>
+          <tr>
+            <td><%= link_to shelf.screen_name, shelf %></td>
+            <td><%= shelf.privacy %></td>
+            <td class="text-center"><%= shelf.active ? fa('check') : fa('times') %></td>          
+            <td class="text-center">
+              <%= link_to fa('cog'), edit_shelf_path(shelf), class: 'btn btn-effect-ripple btn-xs btn-success' %>
+              <%= link_to fa('trash-o'), shelf, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } unless shelf.built_in %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Privacy</th>
-      <th>Active</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shelves.each do |shelf| %>
-      <tr>
-        <td><%= shelf.screen_name %></td>
-        <td><%= shelf.privacy %></td>
-        <td><%= shelf.active %></td>
-        <td><%= link_to t('show'), shelf %></td>
-        <td><%= link_to t('edit'), edit_shelf_path(shelf) %></td>
-        <td><%= link_to t('destroy'), shelf, method: :delete, data: { confirm: 'Are you sure?' } unless shelf.built_in %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Shelf', new_shelf_path %>

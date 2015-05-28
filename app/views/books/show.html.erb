@@ -57,13 +57,13 @@
             <div class="block full">
               <div class="block-title">
                 <ul class="nav nav-tabs" data-toggle="tabs">
-                  <li><a href="#block-tabs-desc"><%= t('books.description') %></a></li>
+                  <li class="active"><a href="#block-tabs-desc"><%= t('books.description') %></a></li>
                   <li><a href="#block-tabs-marc"><%= t('books.marc_view') %></a></li>
-                  <li class="active"><a href="#block-tabs-isbd"><%= t('books.isbd_view') %></a></li>                  
+                  <li><a href="#block-tabs-isbd"><%= t('books.isbd_view') %></a></li>                  
                 </ul>
               </div>
               <div class="tab-content">
-                <div class="tab-pane" id="block-tabs-desc">
+                <div class="tab-pane active" id="block-tabs-desc">
                   <table class="table table-striped">
                     <tbody>
                       <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
@@ -96,7 +96,7 @@
                 <div class="tab-pane" id="block-tabs-marc">
                   <%= t('books.marc_view') %>
                 </div>
-                <div class="tab-pane active" id="block-tabs-isbd">
+                <div class="tab-pane" id="block-tabs-isbd">
                   <table class="table table-striped">
                     <tbody>
                       <%= @book_presenter.trow(t('books.title'), @book_presenter.isbd_title) %>

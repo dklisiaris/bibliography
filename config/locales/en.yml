@@ -108,6 +108,9 @@ en:
   u_sure: "Are you sure?"
 
   name: "Name"
+  privacy: "Privacy"
+  active: "Active"
+  settings: "Settings"
 
   categories:
     label: "Categories"
@@ -229,6 +232,7 @@ en:
     all_collections: "All Collections"
     add_to_collections: "Add to collections"
     edit_collections: "Edit collections"
+    new: "New Collection"
 
   users:
     follow: "Follow"

@@ -1,4 +1,7 @@
 $(document).ready ->
+  window.onload = masonry_init
+
+masonry_init = ->
   container = $('.book-container')  
   container.masonry
     gutter: 12        

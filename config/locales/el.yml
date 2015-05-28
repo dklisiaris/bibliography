@@ -87,6 +87,9 @@ el:
   u_sure: "Είστε σίγουροι;"
 
   name: "Όνομα"
+  privacy: "Ιδιωτικότητα"
+  active: "Ενεργή"
+  settings: "Ρυθμίσεις"  
 
   categories:
     label: "Κατηγορίες"
@@ -209,6 +212,7 @@ el:
     all_collections: "Όλες οι συλλογές"
     add_to_collections: "Προσθήκη σε συλλογές"
     edit_collections: "Επεξεργασία συλλογών"
+    new: "Νέα συλλογή"
 
   users:
     follow: "Ακολούθησε"
