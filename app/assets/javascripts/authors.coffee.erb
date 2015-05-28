@@ -4,3 +4,37 @@
 
 $('.authors.show').ready ->  
   readmore($('.description'))
+
+@favouriteAuthor = (author_id) ->
+  $.ajax({
+    type: "POST",
+    url: '/authors/'+author_id+'/favourite',    
+    success:(data) ->
+      console.log 'favoured'            
+      btn = $('.btn-favourite-author-'+author_id)
+      btn.toggleClass("btn-default btn-success")      
+
+      tooltip_text = btn.attr('data-original-title')
+      if data.favourite and tooltip_text==<%="'#{I18n.t('authors.add_to_favourites')}'"%>
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('authors.favoured')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')
+
+        btn.find('i').removeClass( "fa-star-o" )
+          .addClass("fa-star")                 
+      else
+        btn.tooltip('hide')
+          .attr('data-original-title', <%="'#{I18n.t('authors.add_to_favourites')}'"%>)
+          .tooltip('fixTitle')
+          .tooltip('show')
+
+        btn.find('i').removeClass( "fa-star" )
+          .addClass("fa-star-o")                  
+      
+      return false       
+    error:(data) ->
+      console.log 'Error...'
+      console.log data
+      return false 
+  })

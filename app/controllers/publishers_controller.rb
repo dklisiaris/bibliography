@@ -71,6 +71,6 @@ class PublishersController < ApplicationController
     end
 
     def publisher_params
-      params.require(:publisher).permit(:name, :owner)
+      params.require(:publisher).permit(:name, :owner, :slug)
     end
 end

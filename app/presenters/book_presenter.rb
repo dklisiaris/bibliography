@@ -11,7 +11,7 @@ class BookPresenter < BasePresenter
     return html
   end
 
-  def contributors
+  def contributors(isbd=false)
     contributions = book.contributions.contributors    
     if contributions.present? 
       current_job = ""     
@@ -30,11 +30,19 @@ class BookPresenter < BasePresenter
 
       html = ""
       contributors_hash.each do |job, contributors|
-        html << UnicodeUtils.titlecase(job) + ': '
-        html << contributors.map do |contributor|
-          h.link_to(contributor.fullname, contributor)
-        end.join(', ')
-        html << h.tag(:br)
+        if isbd
+          html << ', ' unless html.empty?
+          html << UnicodeUtils.downcase(job) + ' '
+          html << contributors.map do |contributor|
+            contributor.fullname
+          end.join(" [#{I18n.t('and')}] ")                    
+        else
+          html << UnicodeUtils.titlecase(job) + ': '
+          html << contributors.map do |contributor|
+            h.link_to(contributor.fullname, contributor)
+          end.join(', ')
+          html << h.tag(:br)
+        end
       end
       return html.html_safe
 
@@ -87,6 +95,25 @@ class BookPresenter < BasePresenter
       h.content_tag(:td, h.content_tag(:strong, key)) +
       h.content_tag(:td, value)  
     end if value.present?    
+  end
+
+  def isbd_title
+    writers = book.writers.map(&:fullname).join(" [#{I18n.t('and')}] ")    
+    "#{book.title} / #{writers} ; #{contributors(true)}"
+  end
+
+  def isbd_main_author
+    if book.collective_work?
+      I18n.t('books.collective_work')
+    else
+      h.link_to(book.writers.first.fullname, book.writers.first) if book.writers.first.present? 
+    end
+  end
+
+  def isdb_other_authors
+    book.authors.map do |author|
+      h.link_to author.fullname, author unless author.fullname == book.main_author
+    end.reject(&:blank?).join(', ').html_safe
   end
 
 end

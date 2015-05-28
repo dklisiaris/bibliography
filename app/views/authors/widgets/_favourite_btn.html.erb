@@ -1,0 +1,27 @@
+<% if user_signed_in? and current_user.likes?(author) %>
+<%= button_tag fa('star'), 
+  :onclick => "javascript:favouriteAuthor(#{author.id})", 
+  class: "btn btn-xs btn-effect-ripple btn-success btn-favourite-author-#{author.id}", 
+  data: { 
+    "toggle" => "tooltip", 
+    "original-title" => t('authors.favoured') 
+  }
+%>
+
+<% elsif user_signed_in? %>
+<%= button_tag fa('star-o'), 
+  :onclick => "javascript:favouriteAuthor(#{author.id})", 
+  class: "btn btn-xs btn-effect-ripple btn-default btn-favourite-author-#{author.id}", 
+  data: { 
+    "toggle" => "tooltip", 
+    "original-title" => t('authors.add_to_favourites') 
+  }
+%>
+<% else %>
+<%= link_to fa('star-o'), new_user_session_path, 
+  class: "btn btn-xs btn-effect-ripple btn-default btn-favourite-author-#{author.id}", 
+  data: { 
+    "toggle" => "tooltip", "original-title" => t('authors.add_to_favourites') 
+  }
+%>
+<% end %>

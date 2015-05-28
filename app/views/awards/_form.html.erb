@@ -1,4 +1,4 @@
-<%= form_for [@awardable, @award] do |f| %>
+<%= form_for([@awardable, @award], class: 'form-bordered') do |f| %>
   <% if @award.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@award.errors.count, "error") %> prohibited this award from being saved:</h2>
@@ -11,16 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field col-xs-12 form-group">
+  <div class="col-xs-12 form-group">
     <%= f.label :prize_id %><br>
     <%= f.collection_select :prize_id, Prize.all, :id, :name, {:prompt => '--- Select prize ---'}, class: 'form-control' %>
   </div>
-  <div class="field col-xs-12 form-group">
+  <div class="col-xs-12 form-group">
     <%= f.label :year %><br>
     <%= f.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), class: 'form-control' %>
   </div>
 
-  <div class="actions col-xs-12 form-group">
-    <%= f.submit 'Save', :class => 'form-control btn-success'  %>
+  <div class="col-xs-12 form-group form-actions">
+    <%= f.submit t('save'), class: 'btn btn-effect-ripple btn-primary' %>    
   </div>
 <% end %>

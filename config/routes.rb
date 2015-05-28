@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :authors, :concerns => :paginatable do
     resources :awards, only: [:create, :edit, :update, :destroy]
+    member do
+      post 'favourite'
+    end    
   end
   resources :awards, only: [:index], :concerns => :paginatable 
 

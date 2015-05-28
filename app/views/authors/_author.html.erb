@@ -12,12 +12,19 @@
         <span><small class="text-muted"><%= 
           t('authors.x_books', count: author.books.count) + " - " + 
           t('authors.favoured_x_times', count: author.liked_by_count) + " - " + 
-          t('authors.with_x_views', count: author.impressionist_count)
+          t('authors.with_x_views', count: author.impressionist_count)          
         %></small></span>
       </div>
       <div class="col-xs-3 text-center">
-        <%= link_to fa('pencil'), edit_author_path(author) if policy(author).update? %>
-        <%= link_to fa('times'), author, method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
+        <%= render partial: 'authors/widgets/favourite_btn', locals: {author: author}  %>
+        <%= link_to fa('pencil'), edit_author_path(author), class: 'btn btn-effect-ripple btn-xs btn-success' if policy(author).update? %>
+        <%= link_to fa('times'), author, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
+        <% if policy(author).update? %>
+          <%= tag(:br) %>
+          <small class="text-muted">
+            <%= "ID: #{author.id}"%>
+          </small>
+        <% end %>
       </div>
     </div>
     <div class="row">

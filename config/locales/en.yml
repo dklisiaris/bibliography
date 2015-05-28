@@ -31,6 +31,7 @@ en:
   engage: "Engage with others"
   read_reviews: "Read member reviews"
   invite_friends: "Invite friends"
+  and: "and"
 
   home: "Home"
   collections: "Collections"
@@ -131,9 +132,12 @@ en:
     all: "All Authors"
     favoured_x_times: "Favoured %{count} times"
     x_books: "%{count} books"
-    with_x_views: "%{count} views"
-    favoured: "Favoured"
+    with_x_views: "%{count} views"    
     search: "Search Authors"
+    favoured: "Favoured"
+    add_to_favourites: "Add to favourites"
+    main: "Main Author"
+    other: "Other Authors"
 
   publishers:
     label: "Publishers"
@@ -233,6 +237,7 @@ en:
 
   awards:
     label: "Awards"
+    new: "New Award"
 
   # Authorization
   pundit:

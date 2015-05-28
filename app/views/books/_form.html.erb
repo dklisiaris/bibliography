@@ -21,7 +21,7 @@
   </div>
   <div class="col-xs-12 form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description, class: 'form-control' %>
+    <%= f.text_area :description, :rows => "10", class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :image %><br>
@@ -108,6 +108,10 @@
     <%= f.label :extra %><br>
     <%= f.text_field :extra, class: 'form-control' %>
   </div>
+  <div class="col-xs-6 form-group">
+    <%= f.label :slug %><br>
+    <%= f.text_field :slug, class: 'form-control' %>
+  </div>  
   <div class="col-xs-6 form-group">
     <%= f.label :biblionet_id %><br>
     <%= f.number_field :biblionet_id, class: 'form-control' %>

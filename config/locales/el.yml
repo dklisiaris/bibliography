@@ -10,6 +10,7 @@ el:
   engage: "Συνδεθείτε με άλλους"
   read_reviews: "Διαβάστε κριτικές μελών"
   invite_friends: "Προσκαλέστε φίλους"
+  and: "και"
 
   home: "Αρχική"
   collections: "Συλλογές"
@@ -110,9 +111,12 @@ el:
     all: "Όλοι οι Συγγραφείς"
     favoured_x_times: "Στα αγαπημένα %{count} φορές"
     x_books: "%{count} βιβλία"
-    with_x_views: "%{count} εμφανίσεις"
-    favoured: "Αγαπημένα"
+    with_x_views: "%{count} εμφανίσεις"    
     search: "Αναζήτηση στους συγγραφείς"
+    favoured: "Αγαπημένος Συγγραφέας"
+    add_to_favourites: "Προσθήκη στους αγαπημένους"
+    main: "Κύριος Συγγραφέας"
+    other: "Άλλοι Συγγραφείς"
 
   publishers:
     label: "Εκδότες"
@@ -213,6 +217,7 @@ el:
 
   awards:
     label: "Βραβεία"
+    new: "Νέο Βραβείο"
 
   # Authorization
   pundit:

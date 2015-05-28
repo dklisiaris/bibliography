@@ -1,5 +1,10 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :set_json_format, only: [:favourite]
+  before_action :authenticate_user!, only: [:favourite]  
+  before_action :set_author, only: [:show, :edit, :update, :destroy, :favourite]
+
+  #Disable protection for stateless api json response
+  protect_from_forgery with: :exception, except: [:favourite]
 
   respond_to :html
 
@@ -47,6 +52,18 @@ class AuthorsController < ApplicationController
 
     respond_with(@author)
   end
+
+  def favourite
+    authorize :author, :favourite?
+
+    if not current_user.likes?(@author)
+      current_user.like(@author) 
+    else
+      current_user.unlike(@author)
+    end
+
+    render json: {status: 200, message: 'ok', favourite: current_user.likes?(@author)}
+  end  
 
   private
     def set_author

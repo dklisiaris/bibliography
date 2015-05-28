@@ -1,6 +1,9 @@
-<h1>Editing Author</h1>
-
-<%= render 'form' %>
+<div class="block">
+  <div class="block-title">
+    <h2><%= detone t('authors.editing') %></h2>
+  </div>
+  <%= render 'form' %>
+</div>
 
 <%= link_to 'Show', @author %> |
 <%= link_to 'Back', authors_path %>
