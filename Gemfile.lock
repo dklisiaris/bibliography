@@ -41,7 +41,7 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.3.8)
     arel (6.0.0)
-    autoprefixer-rails (5.1.11)
+    autoprefixer-rails (5.2.0)
       execjs
       json
     bcrypt (3.1.10)
@@ -109,12 +109,12 @@ GEM
     dotenv (2.0.1)
     dotenv-rails (2.0.1)
       dotenv (= 2.0.1)
-    elasticsearch (1.0.9)
-      elasticsearch-api (= 1.0.9)
-      elasticsearch-transport (= 1.0.9)
-    elasticsearch-api (1.0.9)
+    elasticsearch (1.0.11)
+      elasticsearch-api (= 1.0.11)
+      elasticsearch-transport (= 1.0.11)
+    elasticsearch-api (1.0.11)
       multi_json
-    elasticsearch-transport (1.0.9)
+    elasticsearch-transport (1.0.11)
       faraday
       multi_json
     erubis (2.7.0)
@@ -172,7 +172,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.6.1)
+    minitest (5.7.0)
     modernizr-rails (2.7.1)
     multi_json (1.11.0)
     multipart-post (2.0.0)
@@ -182,7 +182,7 @@ GEM
       nokogiri
     orm_adapter (0.5.0)
     pg (0.18.2)
-    pundit (1.0.0)
+    pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.1)
     rack-protection (1.5.3)
@@ -227,7 +227,7 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    representable (2.2.1)
+    representable (2.2.2)
       multi_json
       nokogiri
       uber (~> 0.0.7)
