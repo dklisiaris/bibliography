@@ -1,3 +1,7 @@
+$(document).ready(function () {
+  App.init();  
+});
+
 var App = function() {
   var e, a, i, s, t, l, o, r, n, d = function() {
       e = $("#page-container"), i = $("header"), a = $("#page-content"), s = $("#sidebar"), t = $("#sidebar-brand"), l = $("#sidebar-extra-info"), r = $("#sidebar-scroll"), o = $("#sidebar-alt"), n = $("#sidebar-scroll-alt"), m(), p("init"), c(), (i.hasClass("navbar-fixed-top") || i.hasClass("navbar-fixed-bottom")) && $(window).on("scroll", function() {
@@ -212,6 +216,3 @@ var App = function() {
     }
   }
 }();
-$(function() {
-  App.init()
-});

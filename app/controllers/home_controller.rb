@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     
     @popular_books = Book.order(impressions_count: :desc).limit(6)
     @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(6)
-    @recommended_books = Book.top(6)    
+    @recommended_books = Book.top(count: 6)    
      
     @awarded_books = Award.where(awardable_type: 'Book')
       .select('awards.awardable_id, awards.awardable_type, sum(awards.id) as awards_count')

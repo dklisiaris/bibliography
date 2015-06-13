@@ -9,7 +9,7 @@
           <%= "#{current_user.books.distinct.count} #{t('books.label')} | #{@shelves.count} #{t('collections')} | #{current_user.writers.distinct.count} #{t('authors.label')}" %>
         </div>
         <div class="col-xs-12">
-          <%= cell(:search).call(:search_form, url: '#', placeholder: t('search_my_books')) %>
+          <%= cell(:search).call(:search_form, url: '#', placeholder: t('search_my_books')) %>         
         </div>             
      </div>
 
