@@ -94,7 +94,15 @@
                   </table>
                 </div>
                 <div class="tab-pane" id="block-tabs-marc">
-                  <%= t('books.marc_view') %>
+                  <table class="table table-striped table-condensed">
+                    <tbody>
+                      <%= @book_presenter.marc_leader %>
+
+                      <%= @book_presenter.marc_control_fields %>
+
+                      <%= @book_presenter.marc_data_fields %>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="tab-pane" id="block-tabs-isbd">
                   <table class="table table-striped">

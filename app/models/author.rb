@@ -59,5 +59,17 @@ class Author < ActiveRecord::Base
       converted.present? ? converted.last : word
     end.join('-')
   end  
+
+  def associated_dates
+    years_re = /\d+-\d*/
+    return extra_info.split(',').select{|part| part =~ years_re}.join.strip if extra_info.present?
+    nil
+  end
+
+  def associated_titles
+    years_re = /\d+-\d*/
+    return extra_info.split(',').reject{|part| part =~ years_re}.join(',').strip if extra_info.present?
+    nil
+  end  
   
 end

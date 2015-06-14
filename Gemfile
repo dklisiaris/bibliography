@@ -154,3 +154,6 @@ gem 'greeklish', '~> 0.0.1'
 
 # The Swiss Army bulldozer of slugging and permalink plugins for ActiveRecord
 gem 'friendly_id', '~> 5.1.0'
+
+# A ruby library for working with Machine Readable Cataloging
+gem 'marc', '~> 1.0.0'

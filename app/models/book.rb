@@ -38,11 +38,14 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]  
   
-  def main_author
+  def main_author(reversed=false)
     if collective_work?
       I18n.t('books.collective_work')
     else
-      writers.first.fullname if writers.first.present? 
+      if writers.first.present?
+        return writers.first.fullname if not reversed
+        return writers.first.fullname_reversed if reversed
+      end
     end
   end
 
@@ -97,7 +100,73 @@ class Book < ActiveRecord::Base
       converted = converter.convert(word)
       converted.present? ? converted.last : word
     end.join('-')
-  end  
+  end
+
+  def to_marc
+    record = MARC::Record.new()
+    record.append(MARC::ControlField.new('001', id))
+    record.append(MARC::ControlField.new('005', updated_at.strftime('%Y%m%d%H%M%S.%L')))
+    record.append(MARC::DataField.new('020', '#',  '#', ['a', isbn.gsub('-','')]))
+    record.append(MARC::DataField.new('020', '#',  '#', ['a', isbn13.gsub('-','')]))
+    record.append(MARC::DataField.new('022', '#',  '#', ['a', issn]))
+
+    if original_language.present?
+      record.append(MARC::DataField.new('041', '1',  '#', ['a', I18n.t('languages.greek')], ['h', original_language]))
+    else
+      record.append(MARC::DataField.new('041', '0',  '#', ['a', I18n.t('languages.greek')]))
+    end
+
+    record.append(MARC::DataField.new('082', '1',  '4', *(categories.map{|c| ['a', c.ddc]}), ['2', '23']))
+
+    record.append(MARC::DataField.new('100', '1',  '#', ['a', main_author(true)], ['c', writers.try(:first).try(:associated_titles)], ['d', writers.try(:first).try(:associated_dates)]))
+    record.append(MARC::DataField.new('245', '1',  '0', ['a', title], ['b', subtitle], ['c', screen_writers]))
+    record.append(MARC::DataField.new('250', '#',  '#', ['a', screen_publication_version]))    
+    record.append(MARC::DataField.new('260', '#',  '#', ['a', publication_place], ['b', publisher.try(:name)], ['c', publication_year.try(:to_s)]))     
+    record.append(MARC::DataField.new('300', '#',  '#', ['a', screen_pages], ['b', screen_cover_type], ['c', screen_size]))
+    
+    record.append(MARC::DataField.new('490', '0',  '#', ['a', series_name], ['v', series_volume]))
+    record.append(MARC::DataField.new('520', '#',  '#', ['a', subtitle]))
+
+    categories.each do |category|
+      record.append(MARC::DataField.new('650', '#',  '1', ['a', category.name]))
+    end
+
+    contributions.each do |contribution|
+      record.append(MARC::DataField.new('700', '1',  '#', ['a', contribution.author.fullname_reversed], ['c', contribution.author.try(:associated_titles)], ['d', contribution.author.try(:associated_dates)], ['e', contribution.job])) unless contribution.author.fullname == main_author
+    end
+    record.append(MARC::DataField.new('765', '1',  '#', ['t', original_title]))
+
+    record.append(MARC::DataField.new('903', '#',  '#', ['a', screen_price]))
+# record.append(MARC::DataField.new('100', '0',  '#', ['a', 'John Doe']))
+# record.append(MARC::DataField.new('700', '#',  '1', ['a', 'Φίλιας'], ['b', 'Βασίλης Ι.'], ['f', '(1927-)'], ['4', '070'], ['9', '31411']))
+# record.append(MARC::DataField.new('700', '#',  '1', ['a', 'Dow'], ['b', 'Dog'], ['f', '(1927-)'], ['4', '070'], ['9', '31411']))
+
+    record
+  end
+
+  def screen_pages
+    pages.to_s + I18n.t('books.pages') if pages
+  end
+
+  def screen_cover_type
+    cover_type.try(:humanize)
+  end
+
+  def screen_size
+    size + I18n.t('books.centimeters') if size
+  end
+
+  def screen_publication_version
+    publication_version.to_s + I18n.t('books.n_version') if publication_version.present?
+  end
+
+  def screen_price
+    '€' + price.to_s if price
+  end
+
+  def screen_writers
+    writers.map(&:fullname).join(" [#{I18n.t('and')}] ")
+  end
 
 end
 

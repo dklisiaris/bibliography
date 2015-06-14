@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
 
   def self.generate_api_key
     loop do
-      token = SecureRandom.base64.tr('0+/=', 'bRat')
+      # token = SecureRandom.base64.tr('0+/=', 'bRat')
+      token = Devise.friendly_token
       break token unless User.exists?(api_key: token)
     end
   end

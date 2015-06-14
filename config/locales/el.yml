@@ -249,3 +249,6 @@ el:
           other: "Εμφανίζονται <b>και τα %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Εμφανίζεται %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> από τα <b>%{total}</b> σύνολο"
+
+  languages:
+    greek: "ελληνικά"

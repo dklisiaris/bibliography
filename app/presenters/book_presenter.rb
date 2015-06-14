@@ -1,6 +1,13 @@
 class BookPresenter < BasePresenter
   presents :book
 
+  attr_reader :marc
+
+  def initialize(object, template)
+    super
+    @marc = book.to_marc
+  end  
+
   def writers
     writers = book.writers        
     if writers.present?    
@@ -98,7 +105,7 @@ class BookPresenter < BasePresenter
   end
 
   def isbd_title
-    writers = book.writers.map(&:fullname).join(" [#{I18n.t('and')}] ")    
+    writers = book.screen_writers    
     "#{book.title} / #{writers} ; #{contributors(true)}"
   end
 
@@ -114,6 +121,42 @@ class BookPresenter < BasePresenter
     book.authors.map do |author|
       h.link_to author.fullname, author unless author.fullname == book.main_author
     end.reject(&:blank?).join(', ').html_safe
+  end
+
+  def marc_leader
+    h.content_tag(:tr) do       
+      h.content_tag(:td, h.content_tag(:strong, 'LEADER')) +
+      h.content_tag(:td, @marc.leader, colspan: "2")  
+    end   
+  end
+
+  def marc_control_fields
+    html = []
+    @marc.each do |control_field|
+      html << h.content_tag(:tr) do       
+        h.content_tag(:td, h.content_tag(:strong, control_field.tag)) +
+        h.content_tag(:td, control_field.value, colspan: "2")
+      end if control_field.is_a?(MARC::ControlField)       
+    end
+    html.join.html_safe
+  end
+
+  def marc_data_fields
+    html = []
+    @marc.each do |data_field|      
+      html << h.content_tag(:tr) do              
+        h.content_tag(:td, h.content_tag(:strong, data_field.tag)) +
+        h.content_tag(:td, data_field.indicator1 + data_field.indicator2) +
+        h.content_tag(:td) do
+          subfields = []
+          data_field.subfields.each do |subfield|
+            subfields << h.content_tag(:strong, '|' + subfield.code) + ' ' + subfield.value if subfield.value.present?
+          end
+          subfields.join(' ').html_safe
+        end 
+      end if data_field.is_a?(MARC::DataField) and data_field.subfields.any?{|s| s.value.present?}
+    end
+    html.join.html_safe
   end
 
 end
