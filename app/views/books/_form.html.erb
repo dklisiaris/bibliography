@@ -91,10 +91,18 @@
     <%= f.label :format %><br>
     <%= f.select :format, options_for_select(@formats.collect { |s| [s[0].humanize, s[0]] }, selected: @book.format), {}, class: 'form-control' %>
   </div>
+
+  <div class="col-xs-6 form-group">
+    <%= f.label :language %><br>
+    <%= f.select :language, 
+        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: Book::LANGUAGES.index(@book.language.to_sym)), {}, class: 'form-control' %>
+  </div>
+  <div>
+
   <div class="col-xs-6 form-group">
     <%= f.label :original_language %><br>
     <%= f.select :original_language, 
-        options_for_select(@original_languages.collect { |s| [s[0].humanize, s[0]] }, selected: @book.original_language), {}, class: 'form-control' %>
+        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: Book::LANGUAGES.index(@book.original_language.to_sym)), {}, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :original_title %><br>
@@ -114,8 +122,9 @@
   </div>  
   <div class="col-xs-6 form-group">
     <%= f.label :biblionet_id %><br>
-    <%= f.number_field :biblionet_id, class: 'form-control' %>
+    <%= f.number_field :biblionet_id, class: 'form-control disabled' %>
   </div>
+  
   <div class="form-group form-actions">
     <%= f.submit t('save'), class: 'btn btn-effect-ripple btn-primary' %>    
   </div>

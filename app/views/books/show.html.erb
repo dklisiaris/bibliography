@@ -69,6 +69,7 @@
                       <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
 
                       <%= @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format %>                
+                      <%= @book_presenter.trow(t('language'), UnicodeUtils.titlecase(@book.language)) if @book.language.present? %>
 
                       <%= @book_presenter.trow(t('books.original_title'), @book.original_title) %>
 
@@ -113,8 +114,7 @@
 
                       <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
 
-                      <%= @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format %>                
-
+                      <%= @book_presenter.trow(t('books.format'), @book.format) if @book.format %>                                      
                       <%= @book_presenter.trow(t('books.original_title'), @book.original_title) %>
 
                       <%= @book_presenter.trow(t('books.original_language'), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present? %>

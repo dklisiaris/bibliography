@@ -89,7 +89,8 @@ el:
   name: "Όνομα"
   privacy: "Ιδιωτικότητα"
   active: "Ενεργή"
-  settings: "Ρυθμίσεις"  
+  settings: "Ρυθμίσεις"
+  language: "Γλώσσα"
 
   categories:
     label: "Κατηγορίες"
