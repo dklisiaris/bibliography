@@ -185,6 +185,10 @@ GEM
       nokogiri
     orm_adapter (0.5.0)
     pg (0.18.2)
+    pg_search (1.0.4)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.1)
@@ -368,6 +372,7 @@ DEPENDENCIES
   marc (~> 1.0.0)
   modernizr-rails (~> 2.7)
   pg (~> 0.18)
+  pg_search (~> 1.0.3)
   pundit (~> 1.0)
   railroady
   rails (~> 4.2)

@@ -11,7 +11,17 @@ class AuthorsController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def index
-    @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
+    if params[:q].present?           
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+
+      @authors = policy_scope(Author)        
+        .search_by_name(keyphrase)
+        .page(params[:page])
+        .order(impressions_count: :desc, image: :asc)
+
+    else
+      @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
+    end    
     respond_with(@authors)
   end
 

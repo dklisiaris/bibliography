@@ -24,7 +24,7 @@ This section's target is to help setup the app and get it running locally.
 
 __Software requirements__
 
-- [Postgres 9.1+](http://www.postgresql.org/download/), on Ubuntu check this quick setup [guide](https://gist.github.com/dklisiaris/3c1cd76c28ab86c8ee9c) 
+- [Postgres 9.1+ with contrib-packages](http://www.postgresql.org/download/), on Ubuntu check this quick setup [guide](https://gist.github.com/dklisiaris/3c1cd76c28ab86c8ee9c)
 - [Redis 2.6+](http://redis.io/download), on Ubuntu check Digital Ocean's [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
 - [Elasticsearch 1.4.4+](https://www.elastic.co/downloads/elasticsearch)
 - [Ruby 2.0+](http://www.ruby-lang.org/en/downloads/) (we recommend 2.0.0-p353 or higher)

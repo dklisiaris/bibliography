@@ -31,7 +31,8 @@ module Bibliography
     config.i18n.default_locale = :el # set default locale to Greek
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true  
+    config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.schema_format = :sql
 
     config.generators do |g|
       g.test_framework :rspec,
@@ -46,7 +47,7 @@ module Bibliography
 
     config.after_initialize do
       I18n.locale = :el
-    end     
-    
+    end
+
   end
 end

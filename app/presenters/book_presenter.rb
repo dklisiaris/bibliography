@@ -79,7 +79,7 @@ class BookPresenter < BasePresenter
       html << h.link_to(shelf.screen_name, shelf)
     end
     html.join(h.tag(:br)).html_safe
-  end  
+  end
 
   def physical_description
     html = []

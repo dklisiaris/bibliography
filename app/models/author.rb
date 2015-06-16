@@ -6,13 +6,30 @@ class Author < ActiveRecord::Base
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards  
 
-  enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης)
+  enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
 
   # Log impressions filtered by ip
   is_impressionable :counter_cache => true, :unique => true
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
+
+  include PgSearch
+  pg_search_scope :search_by_name, 
+    :against => [
+      [:lastname, 'A'],
+      [:firstname, 'B'],
+      [:tsearch_vector, 'C']
+    ], 
+    :using => {
+      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+      :trigram => {:threshold => 0.15}
+    }, 
+    :ignoring => :accents
+
+  multisearchable :against => [:lastname, :firstname, :slug]    
+
+  after_validation :calculate_search_terms, :if => :name_changed? 
 
   def fullname
     return [firstname, lastname].join(' ') if firstname.present?
@@ -23,6 +40,10 @@ class Author < ActiveRecord::Base
     return [lastname, firstname].join(', ') if firstname.present?
     return lastname
   end
+
+  def name_changed?
+    :lastname_changed? || :firstname_changed?
+  end  
 
   def short_biography(max_chars=350)
     if biography.present? and biography.length<=max_chars
@@ -51,14 +72,27 @@ class Author < ActiveRecord::Base
     ]
   end  
 
-  def slugged_name
-    converter = Greeklish.converter(max_expansions: 1,generate_greek_variants: false)
+  def slugged_name(opts={})
+    opts[:max_expansions]  ||= 1
+    opts[:dashes] ||= true
+    join_with = opts[:dashes] ? '-' : ' '
+
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
     name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(fullname).gsub('ς','σ').gsub(/[,.]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
-      converted.present? ? converted.last : word
-    end.join('-')
-  end  
+      converted.present? ? converted : word
+    end.flatten.uniq.join(join_with)
+  end 
+
+  def calculate_search_terms
+    normalized_name = ApplicationController.helpers.detone(UnicodeUtils.downcase(fullname).gsub('ς','σ').gsub(/[,.]/,''))
+    search_terms = slugged_name(max_expansions: 3).split('-')
+    normalized_name.split(' ').each do |word|
+      search_terms << word if Greeklish.converter.identify_greek_word(word)
+    end
+    update_attribute(:tsearch_vector, search_terms.join(' '))    
+  end
 
   def associated_dates
     years_re = /\d+-\d*/

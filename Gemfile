@@ -157,3 +157,6 @@ gem 'friendly_id', '~> 5.1.0'
 
 # A ruby library for working with Machine Readable Cataloging
 gem 'marc', '~> 1.0.0'
+
+# builds ActiveRecord named scopes that take advantage of PostgreSQL's full text search
+gem 'pg_search', '~> 1.0.3'

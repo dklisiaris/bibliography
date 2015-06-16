@@ -56,4 +56,17 @@ module ApplicationHelper
     end
   end
 
+  def latinize(input, opts={})
+    opts[:max_expansions]  ||= 1
+    opts[:dashes] ||= false
+    join_with = opts[:dashes] ? '-' : ' '
+
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
+    name_to_latinize = detone(UnicodeUtils.downcase(input).gsub('ς','σ').gsub(/[,.]/,''))
+    name_to_latinize.split(" ").map do |word|
+      converted = converter.convert(word)
+      converted.present? ? converted : word
+    end.flatten.uniq.join(join_with)
+  end 
+
 end
