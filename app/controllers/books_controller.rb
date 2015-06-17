@@ -13,7 +13,15 @@ class BooksController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def index
-    @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
+    if params[:q].present?           
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+      @books = policy_scope(Book)        
+        .search_by_title(keyphrase)
+        .page(params[:page])
+        .order(impressions_count: :desc, image: :asc)
+    else
+      @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
+    end 
     @shelves = current_user.shelves if user_signed_in?
 
     respond_with(@books)

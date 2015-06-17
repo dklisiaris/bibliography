@@ -39,12 +39,26 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]  
   
+  include PgSearch
+  pg_search_scope :search_by_title, 
+    :against => [
+      [:title, 'A'],
+      [:original_title, 'B'],
+      [:series_name, 'C'],
+      [:tsearch_vector, 'D']
+    ], 
+    :using => {
+      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+      :trigram => {:threshold => 0.15}
+    }, 
+    :ignoring => :accents
+
   def language
-    LANGUAGES[read_attribute(:language).to_i].to_s 
+    LANGUAGES[read_attribute(:language).to_i].to_s if read_attribute(:language)
   end
 
   def original_language
-    LANGUAGES[read_attribute(:original_language).to_i].to_s
+    LANGUAGES[read_attribute(:original_language).to_i].to_s if read_attribute(:original_language)
   end
 
   def main_author(reversed=false)
@@ -102,14 +116,27 @@ class Book < ActiveRecord::Base
     ]
   end  
 
-  def slugged_name
-    converter = Greeklish.converter(max_expansions: 1,generate_greek_variants: false)
-    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(title).gsub('ς','σ').gsub(/[,.]/,''))
+  def slugged_name(opts={})
+    opts[:max_expansions] ||= 1
+    opts[:dashes] = true if opts[:dashes].nil?
+    join_with = opts[:dashes] ? '-' : ' '
+
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
+    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(title).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
-      converted.present? ? converted.last : word
-    end.join('-')
-  end
+      converted.present? ? converted : word
+    end.flatten.uniq.join(join_with)
+  end  
+
+  def calculate_search_terms
+    terms = slugged_name(max_expansions: 3, dashes: false)
+    terms += ' ' + original_title.downcase.gsub(/[,.:'·-]/,'') if original_title.present?
+    terms += ' ' + ApplicationController.helpers.latinize(series_name) if series_name.present?
+    terms += ' ' + isbn.gsub('-','') if isbn.present?
+    terms += ' ' + isbn13.gsub('-','') if isbn13.present?
+    update_attribute(:tsearch_vector, terms)    
+  end  
 
   def to_marc
     record = MARC::Record.new()
@@ -146,9 +173,6 @@ class Book < ActiveRecord::Base
     record.append(MARC::DataField.new('765', '1',  '#', ['t', original_title]))
 
     record.append(MARC::DataField.new('903', '#',  '#', ['a', screen_price]))
-# record.append(MARC::DataField.new('100', '0',  '#', ['a', 'John Doe']))
-# record.append(MARC::DataField.new('700', '#',  '1', ['a', 'Φίλιας'], ['b', 'Βασίλης Ι.'], ['f', '(1927-)'], ['4', '070'], ['9', '31411']))
-# record.append(MARC::DataField.new('700', '#',  '1', ['a', 'Dow'], ['b', 'Dog'], ['f', '(1927-)'], ['4', '070'], ['9', '31411']))
 
     record
   end

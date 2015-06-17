@@ -1,6 +1,8 @@
 <% pages = {fa('home') => root_url, t('authors.label') => nil} %>
 
-<%= cell(:navigation).call(:content_header, content: render('authors/search_form'), breadcrumbs: pages) %>
+<%= cell(:navigation).call(:content_header, 
+  content: render(partial: 'shared/search_form', 
+    locals: {action: authors_path, placeholder: t('authors.search')}), breadcrumbs: pages) %>
 
 <div class="row">
    <div class="col-sm-8">

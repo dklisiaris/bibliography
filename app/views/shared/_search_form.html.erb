@@ -1,14 +1,14 @@
-<%= form_tag(authors_path, method: 'get') do %>
+<%= form_tag(action, method: 'get') do %>
   <div class="input-group">
-  	<% if params[:q].present? %>
+    <% if params[:q].present? %>
     <span class="input-group-btn">
-    	<%= link_to "clear", authors_path, class: "btn btn-default" %>
+      <%= link_to "clear", action, class: "btn btn-default" %>
     </span>  
     <% end %>
 
     <span id="remote">      
-      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => t('authors.search') %> 
-    </span>     	
+      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => placeholder %> 
+    </span>       
 
     <span class="input-group-btn">      
       <%= button_tag(type: "submit", name: nil, class: "btn btn-md btn-effect-ripple btn-primary") do %>

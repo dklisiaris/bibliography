@@ -78,7 +78,7 @@ class Author < ActiveRecord::Base
     join_with = opts[:dashes] ? '-' : ' '
 
     converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
-    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(fullname).gsub('ς','σ').gsub(/[,.]/,''))
+    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(fullname).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
       converted.present? ? converted : word

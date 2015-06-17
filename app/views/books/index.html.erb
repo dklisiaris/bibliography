@@ -1,6 +1,8 @@
 <% pages = {fa('home') => root_url, t('books.label') => nil} %>
 
-<%= cell(:navigation).call(:content_header, title: t('books.index.listing_books'), breadcrumbs: pages) %>
+<%= cell(:navigation).call(:content_header, 
+  content: render(partial: 'shared/search_form', 
+    locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) %>
 
 
 <div class="row">

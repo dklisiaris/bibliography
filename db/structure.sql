@@ -180,7 +180,8 @@ CREATE TABLE books (
     publication_version integer,
     impressions_count integer DEFAULT 0,
     slug character varying,
-    language integer
+    language integer,
+    tsearch_vector tsvector
 );
 
 
@@ -989,6 +990,13 @@ CREATE INDEX authors_tsearch_idx ON authors USING gin (tsearch_vector);
 
 
 --
+-- Name: books_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX books_tsearch_idx ON books USING gin (tsearch_vector);
+
+
+--
 -- Name: controlleraction_ip_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1444,4 +1452,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150616120331');
 INSERT INTO schema_migrations (version) VALUES ('20150616125149');
 
 INSERT INTO schema_migrations (version) VALUES ('20150616134352');
+
+INSERT INTO schema_migrations (version) VALUES ('20150617190157');
 
