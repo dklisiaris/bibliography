@@ -8,7 +8,7 @@ class AuthorsController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:show,:index]
+  impressionist :actions=>[:index]
 
   def index
     if params[:q].present?           
@@ -29,6 +29,7 @@ class AuthorsController < ApplicationController
     @awardable = @author
     @awards = @awardable.awards
     @award = Award.new
+    impressionist(@author)
 
     respond_with(@author)
   end

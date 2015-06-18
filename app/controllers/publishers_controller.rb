@@ -3,7 +3,7 @@ class PublishersController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:show,:index]
+  impressionist :actions=>[:index]
 
   def index
     @publishers = policy_scope(Publisher).page(params[:page])    
@@ -14,6 +14,8 @@ class PublishersController < ApplicationController
     @places = @publisher.places
     @books = @publisher.books.page(params[:page])
     @place = Place.new
+    impressionist(@publisher)
+
     respond_with(@publisher)
   end
 

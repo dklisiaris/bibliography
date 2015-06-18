@@ -10,7 +10,7 @@ class BooksController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:show,:index]
+  impressionist :actions=>[:index]
 
   def index
     if params[:q].present?           
@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
     end 
-    @shelves = current_user.shelves if user_signed_in?
+    @shelves = current_user.shelves if user_signed_in?    
 
     respond_with(@books)
   end
@@ -40,6 +40,7 @@ class BooksController < ApplicationController
     @likes_count = @book.liked_by_count
     @dislikes_count = @book.disliked_by_count
 
+    impressionist(@book)
     respond_with(@book)
   end
 
