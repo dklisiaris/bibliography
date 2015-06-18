@@ -23,7 +23,7 @@ class Category < ActiveRecord::Base
 
   def slugged_name
     converter = Greeklish.converter(max_expansions: 1,generate_greek_variants: false)
-    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(name).gsub('ς','σ').gsub(/[,.]/,''))
+    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(name).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
       converted.present? ? converted.last : word

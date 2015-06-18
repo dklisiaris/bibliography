@@ -160,3 +160,6 @@ gem 'marc', '~> 1.0.0'
 
 # builds ActiveRecord named scopes that take advantage of PostgreSQL's full text search
 gem 'pg_search', '~> 1.0.3'
+
+# Making it easy to serialize models for client-side use
+gem 'active_model_serializers', '~> 0.9'

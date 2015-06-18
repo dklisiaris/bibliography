@@ -1,5 +1,5 @@
+Rails.application.routes.default_url_options[:host] = (Rails.env == 'production') ? 'bibliography.gr' : 'localhost:3000'
 Rails.application.routes.draw do
-      
   resources :shelves
 
   # resources :profiles, only: [:show, :edit, :update]
@@ -77,6 +77,16 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   
+
+  # Restful API routes
+  namespace :api, defaults: {format: 'json'}  do
+    namespace :v1 do
+      resources :books, only: [:show]
+      resources :authors, only: [:show] 
+      resources :publishers, only: [:show]
+      resources :categories, only: [:show]     
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
