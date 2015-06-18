@@ -554,7 +554,8 @@ CREATE TABLE publishers (
     updated_at timestamp without time zone NOT NULL,
     biblionet_id integer,
     impressions_count integer DEFAULT 0,
-    slug character varying
+    slug character varying,
+    tsearch_vector tsvector
 );
 
 
@@ -1277,6 +1278,13 @@ CREATE INDEX poly_session_index ON impressions USING btree (impressionable_type,
 
 
 --
+-- Name: publishers_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX publishers_tsearch_idx ON publishers USING gin (tsearch_vector);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1454,4 +1462,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150616125149');
 INSERT INTO schema_migrations (version) VALUES ('20150616134352');
 
 INSERT INTO schema_migrations (version) VALUES ('20150617190157');
+
+INSERT INTO schema_migrations (version) VALUES ('20150618174541');
 

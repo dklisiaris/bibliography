@@ -6,7 +6,18 @@ class PublishersController < ApplicationController
   impressionist :actions=>[:index]
 
   def index
-    @publishers = policy_scope(Publisher).page(params[:page])    
+    if params[:q].present?           
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+
+      @publishers = policy_scope(Publisher)        
+        .search_by_name(keyphrase)
+        .page(params[:page])
+        .order(impressions_count: :desc)
+
+    else
+      @publishers = policy_scope(Publisher).page(params[:page]).order(impressions_count: :desc)
+    end    
+      
     respond_with(@publishers)
   end
 

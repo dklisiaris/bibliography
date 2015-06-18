@@ -53,6 +53,8 @@ class Book < ActiveRecord::Base
     }, 
     :ignoring => :accents
 
+  after_validation :calculate_search_terms, :if => :recalculate_search_terms?
+
   def language
     LANGUAGES[read_attribute(:language).to_i].to_s if read_attribute(:language)
   end
@@ -137,6 +139,10 @@ class Book < ActiveRecord::Base
     terms += ' ' + isbn13.gsub('-','') if isbn13.present?
     update_attribute(:tsearch_vector, terms)    
   end  
+
+  def recalculate_search_terms?
+    :title_changed? || :original_title_changed? || :series_name_changed? || :isbn_changed? || :isbn13_changed?
+  end
 
   def to_marc
     record = MARC::Record.new()
