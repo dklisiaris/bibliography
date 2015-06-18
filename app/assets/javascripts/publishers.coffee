@@ -5,12 +5,10 @@
 $(".publishers").ready ->
   # Instantiate the Bloodhound suggestion engine
   engine = new Bloodhound(
-    datumTokenizer: (datum) ->
-      Bloodhound.tokenizers.whitespace datum.value
-
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
     queryTokenizer: Bloodhound.tokenizers.whitespace
     sorter: (a, b) ->
-      q = $("input:text[name=query]").val().toLowerCase()
+      q = $("input:text[name=q]").val().toLowerCase()
       index_a = a.value.toLowerCase().indexOf(q)
       index_b = b.value.toLowerCase().indexOf(q)
       if index_a < index_b        
@@ -21,22 +19,28 @@ $(".publishers").ready ->
         0    
     limit: 10
     remote:
-      url: "publishers/search.json?query=%QUERY"
+      url: "/publishers?autocomplete=1&q=%QUERY"
+      wildcard: "%QUERY"
       filter: (suggestions) ->
         
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
-          value: suggestion 
+          name: suggestion['name']
+          url: suggestion['url']
   )
 
   # Initialize the Bloodhound suggestion engine
   engine.initialize()  
 
   # Instantiate the Typeahead UI
-  $("#remote .typeahead").typeahead
+  $("#remote .typeahead").typeahead(
     hint: true
     highlight: true
     minLength: 1
   ,  
-    displayKey: "value"
+    displayKey: "name"
     source: engine.ttAdapter()
+  ).bind 'typeahead:selected', (obj,datum) ->    
+    window.location.href = datum.url.replace("api/v1/", "")
+    return
+

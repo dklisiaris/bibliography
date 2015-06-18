@@ -16,9 +16,13 @@ class PublishersController < ApplicationController
 
     else
       @publishers = policy_scope(Publisher).page(params[:page]).order(impressions_count: :desc)
-    end    
-      
-    respond_with(@publishers)
+    end         
+    
+    if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
+      render json: @publishers, each_serializer: Api::V1::Preview::PublisherSerializer, root: false
+    else
+      respond_with(@publishers)
+    end
   end
 
   def show
@@ -58,17 +62,17 @@ class PublishersController < ApplicationController
 
   def search
     authorize :publisher, :search?
-    if params[:query].present?
+    if params[:q].present?
       respond_to do |format|
 
         format.html do
-          @publishers = Publisher.search(params[:query],fields: [{'name' => :word_start}, 'owner'], page: params[:page], per_page: 25)                
+          @publishers = Publisher.search(params[:q],fields: [{'name' => :word_start}, 'owner'], page: params[:page], per_page: 25)                
           render :index          
         end
 
         format.json do
-          @publishers = Publisher.search(params[:query],fields: [{'name' => :word_start}], limit: 10).map(&:name)
-          render json: @publishers 
+          @publishers = Publisher.search(params[:q],fields: [{'name' => :word_start}], limit: 10).map{|p| {name: p.name}}
+          render json: @publishers, root: false 
         end
 
       end  
