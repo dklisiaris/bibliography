@@ -6,7 +6,8 @@ else
 end 
 %>
 
-<%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: pages) %>
+<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', 
+    locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: pages) %>
 
 <div class="row">
   <div class="col-sm-8">

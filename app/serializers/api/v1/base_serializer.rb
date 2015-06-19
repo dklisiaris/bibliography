@@ -10,4 +10,8 @@ class Api::V1::BaseSerializer < ActiveModel::Serializer
   def url
     url_for([:api,:v1, object])
   end  
+
+  def site_url
+    url_for(object)
+  end
 end

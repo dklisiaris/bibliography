@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.readyselector
-//= require typeahead.bundle.min
+//= require typeahead.js/dist/typeahead.bundle.min
 //= require vex.combined.min
 //= require readmore/readmore.min
 //= require noty/js/noty/packaged/jquery.noty.packaged.min

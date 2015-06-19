@@ -26,7 +26,7 @@ $(".publishers").ready ->
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
           name: suggestion['name']
-          url: suggestion['url']
+          url: suggestion['site_url']
   )
 
   # Initialize the Bloodhound suggestion engine
@@ -41,6 +41,6 @@ $(".publishers").ready ->
     displayKey: "name"
     source: engine.ttAdapter()
   ).bind 'typeahead:selected', (obj,datum) ->    
-    window.location.href = datum.url.replace("api/v1/", "")
+    window.location.href = datum.url
     return
 

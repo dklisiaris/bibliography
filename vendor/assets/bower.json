@@ -3,6 +3,7 @@
   "dependencies": {
     "readmore": "latest",
     "noty": "latest",
-    "masonry": "latest"
+    "masonry": "latest",
+    "typeahead.js": "latest"
   }
 }

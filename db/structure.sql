@@ -260,7 +260,8 @@ CREATE TABLE categories (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     impressions_count integer DEFAULT 0,
-    featured boolean DEFAULT false
+    featured boolean DEFAULT false,
+    tsearch_vector tsvector
 );
 
 
@@ -998,6 +999,13 @@ CREATE INDEX books_tsearch_idx ON books USING gin (tsearch_vector);
 
 
 --
+-- Name: categories_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX categories_tsearch_idx ON categories USING gin (tsearch_vector);
+
+
+--
 -- Name: controlleraction_ip_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1464,4 +1472,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150616134352');
 INSERT INTO schema_migrations (version) VALUES ('20150617190157');
 
 INSERT INTO schema_migrations (version) VALUES ('20150618174541');
+
+INSERT INTO schema_migrations (version) VALUES ('20150619193344');
 

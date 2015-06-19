@@ -24,7 +24,11 @@ class BooksController < ApplicationController
     end 
     @shelves = current_user.shelves if user_signed_in?    
 
-    respond_with(@books)
+    if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
+      render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
+    else
+      respond_with(@books)
+    end    
   end
 
   def show

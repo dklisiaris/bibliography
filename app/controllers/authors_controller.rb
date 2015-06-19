@@ -18,11 +18,15 @@ class AuthorsController < ApplicationController
         .search_by_name(keyphrase)
         .page(params[:page])
         .order(impressions_count: :desc, image: :asc)
-
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
+    end
+
+    if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
+      render json: @authors, each_serializer: Api::V1::Preview::AuthorSerializer, root: false
+    else
+      respond_with(@authors)
     end    
-    respond_with(@authors)
   end
 
   def show

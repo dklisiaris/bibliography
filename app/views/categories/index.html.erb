@@ -1,4 +1,5 @@
-<%= cell(:navigation).call(:content_header, title: t('categories.listing'), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
+<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', 
+    locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
 
 <div class="row">  
   <div class="col-sm-8">

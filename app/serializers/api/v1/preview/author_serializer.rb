@@ -1,5 +1,5 @@
 class Api::V1::Preview::AuthorSerializer < Api::V1::BaseSerializer
-  attributes :id, :firstname, :lastname, :url
+  attributes :id, :firstname, :lastname, :url, :site_url
 
   def attributes
     data = super

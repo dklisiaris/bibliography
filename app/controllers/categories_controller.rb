@@ -13,13 +13,20 @@ class CategoriesController < ApplicationController
     @categories = Category.roots
 
     # TODO Replace this with favourite or featured categories
-    if user_signed_in?
+    if params[:q].present?           
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+      @featured = Category.search_by_name(keyphrase).limit(100)   
+    elsif user_signed_in?
       @featured = current_user.liked_categories.limit(10)
     else
       @featured = Category.where(featured: true).limit(10)
     end    
 
-    respond_with(@categories)
+    if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
+      render json: @featured, each_serializer: Api::V1::Preview::CategorySerializer, root: false
+    else
+      respond_with(@categories)
+    end       
   end
 
   def show
