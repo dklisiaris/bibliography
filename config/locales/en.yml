@@ -49,6 +49,7 @@ en:
   password: "Password"
   remember_me: "Remember me"
   register: "Register"
+  account: "Account"
   create_account: "Create Account"
   password_confirmation: "Password confirmation" 
   enter_email: "Enter your email"
@@ -58,6 +59,8 @@ en:
   agree_to_terms: "Agree to terms"
   back_to_login: "Back to login"
   users: "Users"
+  logout: "Logout"
+  account_settings: "Account settings"
 
   search: "Search"
   write_search_terms: "Write search terms..."

@@ -28,6 +28,7 @@ el:
   password: "Κωδικος"
   remember_me: "Να με θυμάσαι"
   register: "Εγγραφή"
+  account: "Λογαριασμός"
   create_account: "Δημιουργία λογαριασμού"
   password_confirmation: "Επιβεβαίωση Κωδικού" 
   enter_email: "Εισάγετε το email σας"
@@ -37,6 +38,8 @@ el:
   agree_to_terms: "Συμφωνώ με τους όρους"
   back_to_login: "Έχω λογαριασμό"
   users: "Χρήστες"
+  logout: "Αποσύνδεση"
+  account_settings: "Ρυθμίσεις λογαριασμού"
 
   search: "Αναζήτηση"
   write_search_terms: "Εισάγετε όρους αναζήτησης..."

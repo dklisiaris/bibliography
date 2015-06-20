@@ -15,49 +15,26 @@
             <ul class="nav navbar-nav-custom pull-right">
               <% if user_signed_in? %> 
               <%= top_nav_li(current_user.screen_name, public_profile_path) %>                           
-              <li>
-                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');">
-                <i class="gi gi-settings"></i>
-                </a>
-              </li>
               <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                
                 <%= image_tag(current_user.avatar, alt: "avatar")  %>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
-                    <strong>ADMINISTRATOR</strong>
-                  </li>
-                  <li>
-                    <a href="page_app_email.php">
-                    <i class="fa fa-inbox fa-fw pull-right"></i>
-                    Inbox
-                    </a>
+                    <%= content_tag(:strong, subtext(current_user.try(:profile).try(:username).try(:upcase), 16)) %>
                   </li>
 
-                  <%= top_nav_dropdown_li("Edit Profile", edit_profile_path, "fa fa-pencil-square") %> 
+                  <%= top_nav_dropdown_li(UnicodeUtils.titlecase(t('edit_profile')), edit_profile_path, "fa fa-pencil-square") %> 
                   
-                  <li>
-                    <a href="page_app_media.php">
-                    <i class="fa fa-picture-o fa-fw pull-right"></i>
-                    Media Manager
-                    </a>
-                  </li>
                   <li class="divider"></li>
                   <li>                    
                     <%= link_to edit_user_registration_path do %>                    
-                      <i class="gi gi-settings fa-fw pull-right"></i>Account Settings
+                      <i class="gi gi-settings fa-fw pull-right"></i><%= t('account') %>
                     <% end %>                                           
                   </li>
                   <li>
-                    <a href="page_ready_lock_screen.php">
-                    <i class="gi gi-lock fa-fw pull-right"></i>
-                    Lock Account
-                    </a>
-                  </li>
-                  <li>
                     <%= link_to destroy_user_session_path, :method=>'delete' do %>                    
-                      <i class="fa fa-power-off fa-fw pull-right"></i>Log out
+                      <i class="fa fa-power-off fa-fw pull-right"></i><%= t('logout') %>
                     <% end %> 
                   </li>
                 </ul>
