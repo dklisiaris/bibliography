@@ -10,6 +10,8 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+require 'rack/redis_throttle'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -44,6 +46,15 @@ module Bibliography
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end 
+
+    config.middleware.use Rack::RedisThrottle::Daily, max: 100000
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
 
     config.after_initialize do
       I18n.locale = :el

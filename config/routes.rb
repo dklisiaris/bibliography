@@ -81,7 +81,7 @@ Rails.application.routes.draw do
   # Restful API routes
   namespace :api, defaults: {format: 'json'}  do
     namespace :v1 do
-      resources :books, only: [:show]
+      resources :books, only: [:index, :show]
       resources :authors, only: [:show] 
       resources :publishers, only: [:show]
       resources :categories, only: [:show]     

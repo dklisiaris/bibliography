@@ -163,3 +163,12 @@ gem 'pg_search', '~> 1.0.3'
 
 # Making it easy to serialize models for client-side use
 gem 'active_model_serializers', '~> 0.9'
+
+# Simple gem that allows you to run multiple ActiveRecord::Relation using hash
+gem 'active_hash_relation'
+
+# Rack middleware for rate-limiting incoming HTTP requests configured to be used with Redis
+gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
+
+# Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
+gem 'rack-cors', :require => 'rack/cors'
