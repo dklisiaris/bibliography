@@ -98,3 +98,21 @@ Start sidekiq from the root directory of your Rails app
 ```
 bundle exec sidekiq -C config/sidekiq.yml
 ```
+
+## API Docs
+
+The API documentation is a [slate](https://github.com/tripit/slate) app in `doc/api`. 
+
+Do what ever changes you want in api docs and rebuild them by running:
+```ruby
+# Go to the slate folder
+cd doc/api
+
+# Install ruby gems
+bundle install
+
+# Build them
+bundle exec middleman build
+```
+
+The new docs will be available in `public/docs/api` folder.
