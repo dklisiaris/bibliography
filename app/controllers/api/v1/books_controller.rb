@@ -1,5 +1,6 @@
 class Api::V1::BooksController < Api::V1::BaseController
-  
+  before_filter :authenticate_user_from_token!
+
   def index
     books = policy_scope(Book)
     books = paginate(books)

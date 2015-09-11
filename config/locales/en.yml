@@ -49,7 +49,6 @@ en:
   password: "Password"
   remember_me: "Remember me"
   register: "Register"
-  account: "Account"
   create_account: "Create Account"
   password_confirmation: "Password confirmation" 
   enter_email: "Enter your email"
@@ -256,6 +255,18 @@ en:
       create?: 'You cannot create category!'
       show?: 'You cannot see that category!'
       destroy?: 'You cannot delete that category!'
+
+  account:
+    label: 'Account'
+    edit: 'Edit Account'
+    user_edit: 'Edit User'
+    cancel: 'Cancel Account'
+    api_token: 'Api Token'
+    api_key: 'Api Key'
+    personal_info: 'Personal Information'    
+    notifications: 'Notifications'
+    receive_notifications: 'Receive email notifications.'
+    want_notifications: 'I want to receive notifications!'
 
   # Pagination
   views:

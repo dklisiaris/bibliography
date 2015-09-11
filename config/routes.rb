@@ -84,7 +84,8 @@ Rails.application.routes.draw do
       resources :books, only: [:index, :show]
       resources :authors, only: [:show] 
       resources :publishers, only: [:show]
-      resources :categories, only: [:show]     
+      resources :categories, only: [:show]  
+      resources :sessions, only: [:create]   
     end
   end
 

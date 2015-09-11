@@ -27,8 +27,7 @@ el:
   forgot_password: "Ξεχάσατε τον κωδικό σας;"
   password: "Κωδικος"
   remember_me: "Να με θυμάσαι"
-  register: "Εγγραφή"
-  account: "Λογαριασμός"
+  register: "Εγγραφή"  
   create_account: "Δημιουργία λογαριασμού"
   password_confirmation: "Επιβεβαίωση Κωδικού" 
   enter_email: "Εισάγετε το email σας"
@@ -236,6 +235,19 @@ el:
       create?: 'Δεν μπορείτε να δημιουργήσετε κατηγορίες!'
       show?: 'Δεν μπορείτε να δείτε αυτήν την κατηγορία!'
       destroy?: 'Δεν μπορείτε να διαγράψετε αυτήν την κατηγορία!'
+
+  account:
+    label: 'Λογαριασμός'
+    edit: 'Επεξεργασία λογαριασμού'
+    user_edit: 'Επεξεργασία Χρήστη'
+    cancel: 'Διαγραφή Λογαριασμού'
+    api_token: 'Api Token'
+    api_key: 'Api Key'
+    personal_info: 'Προσωπικές Πληροφορίες'
+    notifications: 'Ειδοποιήσεις'
+    receive_notifications: 'Να λαμβάνω ειδοποιήσεις στο email μου.'
+    want_notifications: 'Θέλω να λαμβάνω ειδοποιήσεις!'
+
 
   # Pagination
   views:

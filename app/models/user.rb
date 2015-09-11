@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   royce_roles %w[ registered editor admin ]
-  before_create :assign_api_key
+  before_save :ensure_api_key
+  # before_create :assign_api_key
   after_create :assign_default_role, :assign_profile, :assign_built_in_shelves
 
   # Include default devise modules. Others available are:
@@ -34,6 +35,14 @@ class User < ActiveRecord::Base
 
   def book_in_which_collections(book)
     bookshelves.where(book: book).map {|bookshelf| bookshelf.shelf}
+  end
+
+  
+
+  def ensure_api_key
+    if api_key.blank?
+      self.api_key = self.class.generate_api_key
+    end
   end
 
   def self.generate_api_key

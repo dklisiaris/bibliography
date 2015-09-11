@@ -10,13 +10,8 @@ class Api::V1::BaseController < ApplicationController
   skip_after_action :verify_authorized
   # skip_after_action :verify_policy_scoped
 
-  def destroy_session
-    request.session_options[:skip] = true
-  end
-  
-  def not_found
-    return api_error(status: 404, errors: 'Not found')
-  end  
+  # before_filter :authenticate_user_from_token!
+  # skip_before_filter  :verify_authenticity_token
 
   ##
   # Changes format of a Serializer object to json or pretty json
@@ -47,5 +42,53 @@ class Api::V1::BaseController < ApplicationController
       total_count: object.total_count
     }    
   end
+
+  def authenticate_user_from_token!
+      token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
+      # email = params[:email].presence
+      # user  = email && User.find_by_email(email)
+
+      user_email = options.blank?? nil : options[:email]
+      user = user_email && User.find_by(email: user_email)
+
+      # Notice how we use Devise.secure_compare to compare the token
+      # in the database with the token given in the params, mitigating
+      # timing attacks.
+      if user && Devise.secure_compare(user.api_key, token)
+        sign_in user, store: false
+      else
+        return unauthenticated!
+      end
+    end
+
+    def destroy_session
+      request.session_options[:skip] = true
+    end
+
+    def unauthenticated!
+      response.headers['WWW-Authenticate'] = "Token realm=Application"
+      render json: { error: 'Bad credentials' }, status: 401
+    end
+
+    def unauthorized!
+      render json: { error: 'not authorized' }, status: 403
+    end
+
+    def invalid_resource!(errors = [])
+      api_error(status: 422, errors: errors)
+    end
+
+    def not_found!
+      return api_error(status: 404, errors: 'Not found')
+    end
+
+    def api_error(status: 500, errors: [])
+      unless Rails.env.production?
+        puts errors.full_messages if errors.respond_to? :full_messages
+      end
+      head status: status and return if errors.empty?
+
+      render json: errors.to_json, status: status
+    end    
 
 end

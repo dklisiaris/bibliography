@@ -209,6 +209,7 @@ GEM
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -393,6 +394,7 @@ DEPENDENCIES
   pg (~> 0.18)
   pg_search (~> 1.0.3)
   pundit (~> 1.0)
+  rack-cors
   railroady
   rails (~> 4.2)
   rails-i18n (~> 4.0.0)

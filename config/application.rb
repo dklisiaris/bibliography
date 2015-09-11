@@ -47,6 +47,8 @@ module Bibliography
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end 
 
+    # config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.middleware.use Rack::RedisThrottle::Daily, max: 100000
 
     config.middleware.insert_before 0, "Rack::Cors" do

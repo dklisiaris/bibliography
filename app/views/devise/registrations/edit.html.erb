@@ -1,37 +1,143 @@
-<div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
+<% pages = {fa('home') => root_url, t('account.edit') => nil} %>
+
+<%= cell(:navigation).call(:content_header, title: t('account.label'), breadcrumbs: pages) %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <div class="block">
+      <div class="block-title">
+        <h2>          
+          <%= UnicodeUtils.upcase(detone(t('account.personal_info'))) %>
+        </h2>
+      </div>
+      <div class="block-section">
+        <div class="row">
+          <div class="col-md-2">
+            <%= image_tag(resource.avatar, alt: "avatar")  %>
+          </div>
+          <div class="col-md-10">
+            <h4>
+              <b><%= resource.screen_name %></b>
+              <small><span class="help-block"><%= resource.email %></span></small>
+            </h4>
+            <small>Username: <b><%= resource.profile.username %></b></small>
+          </div>
+        </div>
+      </div>
     </div>
-    <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+
+    <div class="block">
+      <div class="block-title">
+        <h2>
+          <%= UnicodeUtils.upcase(detone(t('account.user_edit'))) %>
+        </h2>
       </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <div class="block-section">
+        <div class="authform">          
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}, class: 'form-bordered') do |f| %>
+            <%= devise_error_messages! %>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+            </div>
+            <fieldset>
+              <span class="help-block">
+                Leave these fields blank if you don't want to change your password.
+              </span>              
+              <div class="form-group">
+                <%= f.label :password %>
+                <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, class: 'form-control' %>
+              </div>
+            </fieldset>
+            <fieldset>              
+              <span class="help-block">
+                You must enter your current password to make changes.
+              </span> 
+              <div class="form-group">
+                <%= f.label :current_password %>
+                <%= f.password_field :current_password, class: 'form-control' %>
+              </div>
+            </fieldset>
+            <%= f.submit 'Update', class: 'btn btn-effect-ripple btn-primary' %>
+          <% end %>
+        </div>
+      </div>      
+    </div>
+
+    <div class="block">
+      <div class="block-title">
+        <h2>
+          <%= UnicodeUtils.upcase(detone(t('account.cancel'))) %>
+        </h2>
       </div>
-    </fieldset>
-    <fieldset>
-      <p>You must enter your current password to make changes.</p>
-      <div class="form-group">
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password, class: 'form-control' %>
+      <div class="block-section">
+        <h4 class="sub-header">
+          Unhappy? We'll be sad to see you go.
+        </h4>
+        <div class="authform">        
+        <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-effect-ripple btn-danger' %>
+        </div>
+      </div>      
+    </div>
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="block">
+      <div class="block-title">
+        <h2>
+          <%= fa('lock') %>
+          <%= UnicodeUtils.upcase(detone(t('account.api_token'))) %>
+        </h2>
       </div>
-    </fieldset>
-    <%= f.submit 'Update', :class => 'button right' %>
-  <% end %>
+      <div class="block-section">
+        <span class="help-block">
+          Use this API Token to access the Bibliography API programmatically:
+        </span> 
+        <pre><%= resource.api_key %></pre>
+        <span class="help-block">
+        Please keep this token secret, and reset the token if compromised.        
+        </span> 
+        <%= button_tag 'Reset Token', class: 'btn btn-effect-ripple btn-danger' %>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">
+        <h2>
+          <%= fa('envelope') %>
+          <%= UnicodeUtils.upcase(detone(t('account.notifications'))) %>
+        </h2>
+      </div>      
+      <div class="block-section">
+        <div class="form-group">          
+          <div class="col-md-2">
+            <label class="csscheckbox csscheckbox-primary">
+              <% if resource.profile.receive_newsletters %>
+                <input type="checkbox" name="receive_notifications" checked>
+              <% else %>
+                <input type="checkbox" name="receive_notifications">
+              <% end %>
+              <span data-toggle="tooltip" title="" data-original-title="I want to receive notifications!"></span>
+            </label>
+          </div> 
+          <label class="col-md-10"><%= t('account.receive_notifications') %></label>
+        </div>
+        <div class="form-group form-actions">
+          <%= button_tag 'Save', class: 'btn btn-effect-ripple btn-primary' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
-<div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
-</div>
+
