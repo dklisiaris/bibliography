@@ -67,11 +67,11 @@ class Api::V1::BaseController < ApplicationController
 
     def unauthenticated!
       response.headers['WWW-Authenticate'] = "Token realm=Application"
-      render json: { error: 'Bad credentials' }, status: 401
+      render json: { error: 'Bad credentials', status: 401 }, status: 401
     end
 
     def unauthorized!
-      render json: { error: 'not authorized' }, status: 403
+      render json: { error: 'not authorized', status: 403 }, status: 403
     end
 
     def invalid_resource!(errors = [])
@@ -89,6 +89,6 @@ class Api::V1::BaseController < ApplicationController
       head status: status and return if errors.empty?
 
       render json: errors.to_json, status: status
-    end    
+    end 
 
 end
