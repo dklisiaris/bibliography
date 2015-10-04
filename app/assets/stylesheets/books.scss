@@ -5,3 +5,18 @@
 .book-container .book-cover {
   margin-bottom: 15px;
 }
+
+.comment-block {
+  display: block;  
+}
+
+.comment-block:hover .comment-action {
+  display: block;
+  cursor: pointer;
+}
+
+.comment-action {
+  display: none;
+  float:right;
+  margin-right: 10px;
+}

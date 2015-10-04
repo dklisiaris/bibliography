@@ -158,7 +158,7 @@
                 <ul class="media-list push comments-list">
                   <% if @comments.count > 0 %>
                     <% @comments.each do |comment|%>
-                      <li class="media">
+                      <li class="media comment-block" id="comment-<%= comment.id %>">
                         <a href="<%= public_profile_path(comment.user.id) %>" class="pull-left">
                         <img src="<%= comment.user.avatar %>" alt="Avatar" width="40" height="40" class="img-circle">
                         </a>
@@ -166,7 +166,15 @@
                           <a href="<%= public_profile_path(comment.user.id) %>">
                             <strong><%= comment.user.screen_name %></strong>
                           </a>
-                          <span class="text-muted"><small><em><%= time_ago_in_words(comment.created_at) %></em></small></span>                        
+                          <span class="text-muted"><small><em><%= time_ago_in_words(comment.created_at) %></em></small></span>
+                          <% if policy(comment).destroy? %>
+                            <span onclick="<%= "deleteComment(#{@book.id}, #{comment.id}, #{current_user.credentials})" %>" class="comment-action delete-comment">
+                              <small><em><%=fa('trash-o')%></em></small></span>
+                          <% end %>
+                          <% if policy(comment).edit? %>
+                            <span class="comment-action edit-comment">
+                              <small><em><%=fa('pencil')%></em></small></span>
+                          <% end %>
                           <p><%= comment.body %></p>
                         </div>
                       </li>                    

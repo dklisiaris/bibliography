@@ -26,9 +26,18 @@ class Api::V1::CommentsController < Api::V1::BaseController
   def create    
     comment = Comment.build_from( @book, current_user.id, create_params[:body] )
     if comment.save!
-      render(json: {:comment => { :body => create_params[:body], :user => { id: current_user.id, name: current_user.screen_name, image: current_user.avatar}, message: 'ok' }})
+      render(json: {:comment => { id: comment.id, :body => create_params[:body], :user => { id: current_user.id, name: current_user.screen_name, image: current_user.avatar}, message: 'ok' }})
     else
       render(json: {:comment => { message: 'fail' }})
+    end
+  end
+
+  def destroy    
+    comment = @book.comment_threads.find(params[:id])
+    if comment.destroy
+      render(json: {message: 'ok'})
+    else
+      render(json: {message: 'fail'})
     end
   end
 

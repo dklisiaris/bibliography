@@ -37,8 +37,6 @@ class User < ActiveRecord::Base
     bookshelves.where(book: book).map {|bookshelf| bookshelf.shelf}
   end
 
-  
-
   def ensure_api_key
     if api_key.blank?
       self.api_key = self.class.generate_api_key
@@ -55,6 +53,10 @@ class User < ActiveRecord::Base
 
   def token
     api_key
+  end
+
+  def credentials
+    return JSON.generate({ email: email, token: api_key })
   end
 
   private

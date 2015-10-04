@@ -1,13 +1,12 @@
 $('.books.show').ready(function() {
-	$('.post-comment').click(function(){
+  $('.post-comment').click(function(){
     var form = $(this).parent();
     var book_id = form.find("input[name='book_id']").val();
     var email = form.find("input[name='email']").val();
     var token = form.find("input[name='token']").val();
-		var comment_area = form.find('.comment-area');
+    var comment_area = form.find('.comment-area');
     var comment = comment_area.val();
-		console.log(comment);		
-		console.log('your comment is:' + token);
+
     comment_area.val('');
 
     $.ajax({
@@ -24,7 +23,7 @@ $('.books.show').ready(function() {
         // $("#results").append("The result =" + StringifyPretty(msg));
         $('.comments-list')
         .prepend('\
-          <li class="media">\
+          <li class="media comment-block" id="comment-'+data.comment.id+'">\
             <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
             <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
             </a>\
@@ -32,13 +31,33 @@ $('.books.show').ready(function() {
               <a href="'+data.comment.user.id+'">\
                 <strong>'+data.comment.user.name+'</strong>\
               </a>\
+              <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
+                <small><em><i class="fa fa-trash-o"></i></em></small></span>\
               <p>'+data.comment.body+'</p>\
             </div>\
           </li>\
-        ')
-        console.log(data);
+        ')        
       }
     });
 
-	});
+  });
+
+  deleteComment = function (book_id, comment_id, credentials){
+    console.log(credentials);
+    $.ajax({
+      type:"DELETE",
+      contentType: "application/json",
+      dataType:"json",
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", 'Token token="'+credentials.token+'", email="'+credentials.email+'"');        
+      },
+      url: "/api/v1/books/" + book_id + "/comments/" + comment_id,
+      
+      success: function(data) {
+        $('#comment-'+ comment_id).remove();
+      }
+    });
+
+  };
+  
 });
