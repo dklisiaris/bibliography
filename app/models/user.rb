@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def token
+    api_key
+  end
+
   private
 
   def assign_api_key    

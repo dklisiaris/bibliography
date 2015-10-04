@@ -5,7 +5,7 @@ class Api::V1::BaseController < ApplicationController
 
   before_action :destroy_session
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found  
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found! 
 
   skip_after_action :verify_authorized
   # skip_after_action :verify_policy_scoped
@@ -78,8 +78,8 @@ class Api::V1::BaseController < ApplicationController
       api_error(status: 422, errors: errors)
     end
 
-    def not_found!
-      return api_error(status: 404, errors: 'Not found')
+    def not_found!      
+      render json: { error: 'Not found', status: 404 }, status: 404
     end
 
     def api_error(status: 500, errors: [])
@@ -88,7 +88,7 @@ class Api::V1::BaseController < ApplicationController
       end
       head status: status and return if errors.empty?
 
-      render json: errors.to_json, status: status
+      render json: jsonapi_format(errors).to_json, status: status
     end 
 
 end

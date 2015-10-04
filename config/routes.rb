@@ -85,6 +85,7 @@ Rails.application.routes.draw do
         collection do
           get 'my'
         end
+        resources :comments, except: [:new, :edit]
       end
       resources :authors, only: [:show] 
       resources :publishers, only: [:show]

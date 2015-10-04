@@ -6,6 +6,8 @@ class Api::V1::BookSerializer < Api::V1::BaseSerializer
   has_one :publisher, serializer: Api::V1::Preview::PublisherSerializer
   has_many :categories, serializer: Api::V1::Preview::CategorySerializer
 
+  has_many :comment_threads, serializer: Api::V1::CommentSerializer
+
   def likes_count
     object.liked_by_count
   end

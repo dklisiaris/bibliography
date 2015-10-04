@@ -102,6 +102,13 @@ en:
     tasks: "Tasks"
     api: "API"
 
+  comments:
+    label: "Comments"
+    or_reviews: "Comments/Reviews"
+    sign_in_to_post: "Sign in to post comments/reviews"
+    write: "Write your comment.."
+    post: "Post"
+
   show: "Show"
   edit: "Edit"
   destroy: "Destroy"

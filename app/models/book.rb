@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+   # a Book may have comments (reviews)
+  acts_as_commentable
   
   has_and_belongs_to_many :categories
 

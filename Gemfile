@@ -40,7 +40,7 @@ gem 'cells', "4.0.0.beta3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 5.0'
+  gem 'byebug', '~> 6.0'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.1'
@@ -66,7 +66,7 @@ group :test do
 end
 
 gem 'bootstrap-sass', '~> 3.3'
-gem 'autoprefixer-rails', '~> 5.1'
+gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.3'
 
 group :development do
@@ -172,3 +172,6 @@ gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
 
 # Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
 gem 'rack-cors', :require => 'rack/cors'
+
+# Allows for threaded comments to be added to multiple and different models. 
+gem 'acts_as_commentable_with_threading'

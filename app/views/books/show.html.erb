@@ -147,7 +147,53 @@
                 <%= link_to award.prize.name, award.prize %>
                 <%= " (#{award.year})" %><br>
               <% end %>
-            <% end %>                                                
+            <% end %> 
+
+            <h4 class="sub-header">
+              <%= t('comments.or_reviews') %>
+            </h4>
+
+            <div class="widget">
+              <div class="widget-content themed-background-muted">
+                <ul class="media-list push comments-list">
+                  <% if @comments.count > 0 %>
+                    <% @comments.each do |comment|%>
+                      <li class="media">
+                        <a href="<%= public_profile_path(comment.user.id) %>" class="pull-left">
+                        <img src="<%= comment.user.avatar %>" alt="Avatar" width="40" height="40" class="img-circle">
+                        </a>
+                        <div class="media-body">
+                          <a href="<%= public_profile_path(comment.user.id) %>">
+                            <strong><%= comment.user.screen_name %></strong>
+                          </a>
+                          <span class="text-muted"><small><em><%= time_ago_in_words(comment.created_at) %></em></small></span>                        
+                          <p><%= comment.body %></p>
+                        </div>
+                      </li>                    
+                    <% end %>
+                  <% end %>
+                  <% if user_signed_in? %>
+                    <li class="media">
+                      <a href="<%= public_profile_path(current_user.id) %>" class="pull-left">                    
+                      <img src="<%= current_user.avatar %>" alt="Avatar" class="img-circle">
+                      </a>
+                      <div class="media-body">
+                        <form class="comment-form" onsubmit="return false;">
+                          <textarea class="comment-area form-control" rows="2" placeholder="<%= t('comments.write') %>"></textarea>
+                          <input type="hidden" name="book_id" value="<%= @book.id %>">
+                          <input type="hidden" name="email" value="<%= current_user.email %>">
+                          <input type="hidden" name="token" value="<%= current_user.token %>">
+                          <button type="submit" class="post-comment btn btn-effect-ripple btn-sm btn-primary"><%= t('comments.post') %></button>
+                        </form>
+                      </div>
+                    </li>
+                  <% else %>
+                    <%= link_to t('comments.sign_in_to_post'), new_user_session_path %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>            
+
           </div>  
         </div>          
       </div>

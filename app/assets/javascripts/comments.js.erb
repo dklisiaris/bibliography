@@ -1,0 +1,44 @@
+$('.books.show').ready(function() {
+	$('.post-comment').click(function(){
+    var form = $(this).parent();
+    var book_id = form.find("input[name='book_id']").val();
+    var email = form.find("input[name='email']").val();
+    var token = form.find("input[name='token']").val();
+		var comment_area = form.find('.comment-area');
+    var comment = comment_area.val();
+		console.log(comment);		
+		console.log('your comment is:' + token);
+    comment_area.val('');
+
+    $.ajax({
+      type:"POST",
+      contentType: "application/json",
+      dataType:"json",
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');        
+      },
+      url: "/api/v1/books/" + book_id + "/comments/",
+      data: JSON.stringify({ "comment": {"body": comment} }),
+      processData: false,
+      success: function(data) {
+        // $("#results").append("The result =" + StringifyPretty(msg));
+        $('.comments-list')
+        .prepend('\
+          <li class="media">\
+            <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
+            <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
+            </a>\
+            <div class="media-body">\
+              <a href="'+data.comment.user.id+'">\
+                <strong>'+data.comment.user.name+'</strong>\
+              </a>\
+              <p>'+data.comment.body+'</p>\
+            </div>\
+          </li>\
+        ')
+        console.log(data);
+      }
+    });
+
+	});
+});
