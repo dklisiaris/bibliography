@@ -13,8 +13,7 @@
 # end
 
 # # Generate 10000 authors
-# 20.times { Author.create(firstnam
-#    Faker::Name.first_name, lastname: Faker::Name.last_name, biography: Faker::Lorem.sentences(3).join ) : }
+# 20.times { Author.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name, biography: Faker::Lorem.sentences(3).join )}
 
 # # Generate 500 prizes
 # 10.times { Prize.create(name: Faker::Lorem.sentence(3)) } 

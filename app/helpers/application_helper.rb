@@ -1,8 +1,9 @@
 module ApplicationHelper
 
-  def side_nav_li(text, path, icon=nil)
+  def side_nav_li(text, path, icon=nil, blank=false)
     content_tag(:li) do   
       options = current_page?(path) ? { class: "active" } : {}
+      options[:target] = '_blank' if blank
       if icon
         link_to path, options do                           
           "<i class='#{icon} sidebar-nav-icon'></i><span class='sidebar-nav-mini-hide'>#{text}</span>".html_safe
@@ -42,10 +43,24 @@ module ApplicationHelper
     content_tag(:i, nil, { class: "fa fa-#{icon}" })
   end
 
+  # Replaces toned greek letters with simple ones
+  # 
   def detone(text)
     text.tr('άέήίΐόύώ','αεηιιουω')
   end
 
+  # Keeps part of a text and ellipsizes it
+  # 
+  # ==== Attributes
+  #
+  # * +text+ - The text to be cutted
+  # * +max_chars+ - The # of characters to keep
+  # 
+  # ==== Examples
+  #   
+  #   subtext ('hello world!', 5)
+  #   => 'hello...'
+  #
   def subtext(text, max_chars)
     if text.present? and text.length<=max_chars
       text.html_safe

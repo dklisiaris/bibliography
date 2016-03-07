@@ -219,6 +219,13 @@ el:
     import_from_storage: "Εισαγωγή από τοπικό χώρο αποθήκευσης"
     storage_import_description: "Προσοχή! Όλα τα αρχεία json μέσα στον κατάλογο tmp/storage θα εισαχθούν."
 
+  tasks:
+    label: "Εργασίες"
+    update: "Ενημέρωση Περιεχομένου"
+    update_description: "Ξεκινάει την αναζήτηση για νέο περιεχόμενο και το αποθηκεύει στη βάση δεδομένων."
+    update_label: "Ενημέρωση"
+    content_updating_in_bg: "Γίνεται αναζήτηση και αποθήκευση νέου περιεχομένου σε νημα παρασκηνίου."
+
   shelves:
     all_collections: "Όλες οι συλλογές"
     add_to_collections: "Προσθήκη σε συλλογές"

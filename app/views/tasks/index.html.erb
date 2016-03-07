@@ -1,0 +1,23 @@
+<% pages = {fa('home') => root_url, t('site_settings') => "#", t('tasks.label') => nil} %>
+
+<%= cell(:navigation).call(:content_header, title: t('tasks.label'), breadcrumbs: pages) %>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="block">
+      <div class="block-title">
+        <h2>
+          <%= UnicodeUtils.upcase(detone(t('tasks.update'))) %>
+        </h2>
+      </div>
+      <div class="block-section">
+        <span class="help-block">
+          <%= t('tasks.update_description') %>
+        </span>
+        <%= link_to(t('tasks.update_label'), tasks_update_path, class: 'btn btn-effect-ripple btn-primary') %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+

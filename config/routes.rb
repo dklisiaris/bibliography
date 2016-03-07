@@ -1,5 +1,6 @@
 Rails.application.routes.default_url_options[:host] = (Rails.env == 'production') ? 'bibliography.gr' : 'localhost:3000'
 Rails.application.routes.draw do
+
   resources :shelves
 
   # resources :profiles, only: [:show, :edit, :update]
@@ -63,6 +64,13 @@ Rails.application.routes.draw do
   post 'import/file', to: 'import#import_from_file'
 
   get "import/storage", to: 'import#import_from_storage', as: :storage_import
+
+  ##
+  # Tasks Controller Routes
+  #
+  get 'tasks', to: 'tasks#index', as: :tasks
+
+  get 'tasks/update', to: 'tasks#update_content'
 
   resources :categories do
     member do

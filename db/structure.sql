@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.0
+-- Dumped by pg_dump version 9.5.0
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -72,7 +76,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: authors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: authors; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE authors (
@@ -111,7 +115,7 @@ ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
 
 
 --
--- Name: awards; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: awards; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE awards (
@@ -145,7 +149,7 @@ ALTER SEQUENCE awards_id_seq OWNED BY awards.id;
 
 
 --
--- Name: books; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: books; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE books (
@@ -186,7 +190,7 @@ CREATE TABLE books (
 
 
 --
--- Name: books_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: books_categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE books_categories (
@@ -215,7 +219,7 @@ ALTER SEQUENCE books_id_seq OWNED BY books.id;
 
 
 --
--- Name: bookshelves; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: bookshelves; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE bookshelves (
@@ -247,7 +251,7 @@ ALTER SEQUENCE bookshelves_id_seq OWNED BY bookshelves.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE categories (
@@ -285,7 +289,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE comments (
@@ -324,7 +328,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: contributions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: contributions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE contributions (
@@ -357,7 +361,7 @@ ALTER SEQUENCE contributions_id_seq OWNED BY contributions.id;
 
 
 --
--- Name: follows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: follows; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE follows (
@@ -392,7 +396,7 @@ ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
 
 
 --
--- Name: impressions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: impressions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE impressions (
@@ -433,7 +437,7 @@ ALTER SEQUENCE impressions_id_seq OWNED BY impressions.id;
 
 
 --
--- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE pg_search_documents (
@@ -466,7 +470,7 @@ ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
 
 
 --
--- Name: places; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: places; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE places (
@@ -507,7 +511,7 @@ ALTER SEQUENCE places_id_seq OWNED BY places.id;
 
 
 --
--- Name: prizes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: prizes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE prizes (
@@ -538,7 +542,7 @@ ALTER SEQUENCE prizes_id_seq OWNED BY prizes.id;
 
 
 --
--- Name: profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: profiles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE profiles (
@@ -583,7 +587,7 @@ ALTER SEQUENCE profiles_id_seq OWNED BY profiles.id;
 
 
 --
--- Name: publishers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: publishers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE publishers (
@@ -619,7 +623,7 @@ ALTER SEQUENCE publishers_id_seq OWNED BY publishers.id;
 
 
 --
--- Name: royce_connector; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: royce_connector; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE royce_connector (
@@ -652,7 +656,7 @@ ALTER SEQUENCE royce_connector_id_seq OWNED BY royce_connector.id;
 
 
 --
--- Name: royce_role; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: royce_role; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE royce_role (
@@ -683,7 +687,7 @@ ALTER SEQUENCE royce_role_id_seq OWNED BY royce_role.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -692,7 +696,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: shelves; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: shelves; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE shelves (
@@ -728,7 +732,7 @@ ALTER SEQUENCE shelves_id_seq OWNED BY shelves.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -895,7 +899,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors
@@ -903,7 +907,7 @@ ALTER TABLE ONLY authors
 
 
 --
--- Name: awards_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: awards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY awards
@@ -911,7 +915,7 @@ ALTER TABLE ONLY awards
 
 
 --
--- Name: books_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books
@@ -919,7 +923,7 @@ ALTER TABLE ONLY books
 
 
 --
--- Name: bookshelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: bookshelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bookshelves
@@ -927,7 +931,7 @@ ALTER TABLE ONLY bookshelves
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -935,7 +939,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -943,7 +947,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: contributions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: contributions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contributions
@@ -951,7 +955,7 @@ ALTER TABLE ONLY contributions
 
 
 --
--- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows
@@ -959,7 +963,7 @@ ALTER TABLE ONLY follows
 
 
 --
--- Name: impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY impressions
@@ -967,7 +971,7 @@ ALTER TABLE ONLY impressions
 
 
 --
--- Name: pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pg_search_documents
@@ -975,7 +979,7 @@ ALTER TABLE ONLY pg_search_documents
 
 
 --
--- Name: places_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: places_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY places
@@ -983,7 +987,7 @@ ALTER TABLE ONLY places
 
 
 --
--- Name: prizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: prizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY prizes
@@ -991,7 +995,7 @@ ALTER TABLE ONLY prizes
 
 
 --
--- Name: profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY profiles
@@ -999,7 +1003,7 @@ ALTER TABLE ONLY profiles
 
 
 --
--- Name: publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY publishers
@@ -1007,7 +1011,7 @@ ALTER TABLE ONLY publishers
 
 
 --
--- Name: royce_connector_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: royce_connector_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_connector
@@ -1015,7 +1019,7 @@ ALTER TABLE ONLY royce_connector
 
 
 --
--- Name: royce_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: royce_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_role
@@ -1023,7 +1027,7 @@ ALTER TABLE ONLY royce_role
 
 
 --
--- Name: shelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: shelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY shelves
@@ -1031,7 +1035,7 @@ ALTER TABLE ONLY shelves
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1039,329 +1043,329 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: authors_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: authors_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX authors_tsearch_idx ON authors USING gin (tsearch_vector);
 
 
 --
--- Name: books_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: books_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX books_tsearch_idx ON books USING gin (tsearch_vector);
 
 
 --
--- Name: categories_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX categories_tsearch_idx ON categories USING gin (tsearch_vector);
 
 
 --
--- Name: controlleraction_ip_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: controlleraction_ip_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX controlleraction_ip_index ON impressions USING btree (controller_name, action_name, ip_address);
 
 
 --
--- Name: controlleraction_request_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: controlleraction_request_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX controlleraction_request_index ON impressions USING btree (controller_name, action_name, request_hash);
 
 
 --
--- Name: controlleraction_session_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: controlleraction_session_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX controlleraction_session_index ON impressions USING btree (controller_name, action_name, session_hash);
 
 
 --
--- Name: fk_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fk_followables; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_type);
 
 
 --
--- Name: fk_follows; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: fk_follows; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
 
 
 --
--- Name: impressionable_type_message_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: impressionable_type_message_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX impressionable_type_message_index ON impressions USING btree (impressionable_type, message, impressionable_id);
 
 
 --
--- Name: index_authors_on_biblionet_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authors_on_biblionet_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_authors_on_biblionet_id ON authors USING btree (biblionet_id);
 
 
 --
--- Name: index_authors_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authors_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_authors_on_slug ON authors USING btree (slug);
 
 
 --
--- Name: index_awards_on_awardable_id_and_awardable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_awards_on_awardable_id_and_awardable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_awards_on_awardable_id_and_awardable_type ON awards USING btree (awardable_id, awardable_type);
 
 
 --
--- Name: index_awards_on_prize_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_awards_on_prize_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_awards_on_prize_id ON awards USING btree (prize_id);
 
 
 --
--- Name: index_books_categories_on_book_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_categories_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_books_categories_on_book_id ON books_categories USING btree (book_id);
 
 
 --
--- Name: index_books_categories_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_categories_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_books_categories_on_category_id ON books_categories USING btree (category_id);
 
 
 --
--- Name: index_books_on_isbn; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_on_isbn; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_books_on_isbn ON books USING btree (isbn);
 
 
 --
--- Name: index_books_on_isbn13; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_on_isbn13; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_books_on_isbn13 ON books USING btree (isbn13);
 
 
 --
--- Name: index_books_on_ismn; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_on_ismn; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_books_on_ismn ON books USING btree (ismn);
 
 
 --
--- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_books_on_publisher_id ON books USING btree (publisher_id);
 
 
 --
--- Name: index_books_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_books_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_books_on_slug ON books USING btree (slug);
 
 
 --
--- Name: index_bookshelves_on_book_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_bookshelves_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_bookshelves_on_book_id ON bookshelves USING btree (book_id);
 
 
 --
--- Name: index_bookshelves_on_book_id_and_shelf_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_bookshelves_on_book_id_and_shelf_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_bookshelves_on_book_id_and_shelf_id ON bookshelves USING btree (book_id, shelf_id);
 
 
 --
--- Name: index_bookshelves_on_shelf_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_bookshelves_on_shelf_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_bookshelves_on_shelf_id ON bookshelves USING btree (shelf_id);
 
 
 --
--- Name: index_categories_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_on_parent_id ON categories USING btree (parent_id);
 
 
 --
--- Name: index_categories_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_categories_on_slug ON categories USING btree (slug);
 
 
 --
--- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments USING btree (commentable_id, commentable_type);
 
 
 --
--- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
--- Name: index_contributions_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_contributions_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_contributions_on_author_id ON contributions USING btree (author_id);
 
 
 --
--- Name: index_contributions_on_book_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_contributions_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_contributions_on_book_id ON contributions USING btree (book_id);
 
 
 --
--- Name: index_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_impressions_on_user_id ON impressions USING btree (user_id);
 
 
 --
--- Name: index_pg_search_documents_on_searchable_type_and_searchable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_pg_search_documents_on_searchable_type_and_searchable_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_pg_search_documents_on_searchable_type_and_searchable_id ON pg_search_documents USING btree (searchable_type, searchable_id);
 
 
 --
--- Name: index_places_on_placeable_id_and_placeable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_places_on_placeable_id_and_placeable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_places_on_placeable_id_and_placeable_type ON places USING btree (placeable_id, placeable_type);
 
 
 --
--- Name: index_prizes_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_prizes_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_prizes_on_name ON prizes USING btree (name);
 
 
 --
--- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_profiles_on_user_id ON profiles USING btree (user_id);
 
 
 --
--- Name: index_profiles_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_profiles_on_username; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_profiles_on_username ON profiles USING btree (username);
 
 
 --
--- Name: index_publishers_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_publishers_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_publishers_on_slug ON publishers USING btree (slug);
 
 
 --
--- Name: index_royce_connector_on_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_royce_connector_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_royce_connector_on_role_id ON royce_connector USING btree (role_id);
 
 
 --
--- Name: index_royce_connector_on_roleable_id_and_roleable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_royce_connector_on_roleable_id_and_roleable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_royce_connector_on_roleable_id_and_roleable_type ON royce_connector USING btree (roleable_id, roleable_type);
 
 
 --
--- Name: index_royce_role_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_royce_role_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_royce_role_on_name ON royce_role USING btree (name);
 
 
 --
--- Name: index_shelves_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_shelves_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_shelves_on_user_id ON shelves USING btree (user_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
--- Name: poly_ip_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: poly_ip_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX poly_ip_index ON impressions USING btree (impressionable_type, impressionable_id, ip_address);
 
 
 --
--- Name: poly_request_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: poly_request_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX poly_request_index ON impressions USING btree (impressionable_type, impressionable_id, request_hash);
 
 
 --
--- Name: poly_session_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: poly_session_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX poly_session_index ON impressions USING btree (impressionable_type, impressionable_id, session_hash);
 
 
 --
--- Name: publishers_tsearch_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: publishers_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX publishers_tsearch_idx ON publishers USING gin (tsearch_vector);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -1451,7 +1455,7 @@ ALTER TABLE ONLY profiles
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20141224113610');
 

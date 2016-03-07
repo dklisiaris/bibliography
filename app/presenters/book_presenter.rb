@@ -91,9 +91,10 @@ class BookPresenter < BasePresenter
 
   def price
     html = []
-    html << '€ ' + book.price.to_s
-    html << "(#{I18n.t('books.last_updated')}: #{book.price_updated_at.to_s})"
-    html << "[#{book.availability}]"
+    if book.price
+      html << '€ ' + book.price.to_s if book.price
+      html << "(#{I18n.t('books.last_updated')}: #{book.price_updated_at.to_s})"
+    end
     html.join(', ').html_safe
   end  
 

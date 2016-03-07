@@ -116,7 +116,7 @@ class ImportWorker
           cover_type:          (book['physical_description']['cover_type'].present? ? Book.cover_types[book['physical_description']['cover_type']] : nil),
           availability:        (book['availability'].present? ? Book.availabilities[book['availability']] : nil),
           format:              (book['format'].present? ? Book.formats[book['format']] : nil),
-          original_language:   (book['original_language'].present? ? Book.original_languages[book['original_language']] : nil),
+          original_language:   (book['original_language'].present? ? Book::LANGUAGES.index(book['original_language']) : nil),
           original_title:       book['original_title'],
           publisher_id:         publisher_id,
           extra:                book['extra'],

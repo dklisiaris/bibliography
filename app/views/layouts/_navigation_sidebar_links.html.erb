@@ -73,8 +73,8 @@
                       <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.admins_only') %></span></i>
                     </li>
                     <%= side_nav_li(t('side_menu.import'), import_path, "gi gi-file_import") %>
-                    <%= side_nav_li(t('side_menu.tasks'), "#", "fa fa-terminal") %>
-                    <%= side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye") %>                    
+                    <%= side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal") %>
+                    <%= side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true) %>                    
                     <%= side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange") %>
                   <% end %> 
 
