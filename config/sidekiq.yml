@@ -7,7 +7,7 @@
 # This will cause the top_priority items to be processed first in average 
 # even though they can be added afterwards (of normal jobs) to the queue
 ---
-:verbose: false
+:verbose: true
 :pidfile: tmp/pids/sidekiq.pid
 :logfile: log/sidekiq.log
 :concurrency: 10

@@ -8,7 +8,7 @@
           <% books.each do |book| %>                
             <tr>                                                                       
               <td class="text-center" style="width: 80px;">
-                 <%= link_to image_tag(book.cover, alt: "book_cover", class: "img-thumbnail"), book %>
+                 <%= link_to image_tag(book.cover, alt: "book_cover", width: "80", class: "img-thumbnail"), book %>
               </td>
               <td>                     
                 <%= link_to book.title, book %><br>

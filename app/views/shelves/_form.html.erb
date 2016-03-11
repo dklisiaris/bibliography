@@ -17,12 +17,14 @@
       </div>
     <% end %>
 
+      <% unless @shelf.built_in? %>
       <div class="form-group">
         <%= f.label :name, class: 'col-md-3 control-label' %>
         <div class="col-md-9">
           <%= f.text_field :name, class: "form-control", placeholder: "Name of collection" %>
         </div>
       </div>
+      <% end %>
 
       <div class="form-group">
         <%= f.label :privacy, class: 'col-md-3 control-label' %>

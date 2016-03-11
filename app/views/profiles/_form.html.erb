@@ -3,7 +3,7 @@
      <h2>Edit Profile</h2>
   </div>
 
-  <%= form_for(@profile, :html => { :role => 'form', class: "form-horizontal form-bordered"}) do |f| %>
+  <%= form_for(@profile, :html => { :role => 'form', :multipart => true, class: "form-horizontal form-bordered"}) do |f| %>
     <% if @profile.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
@@ -31,13 +31,15 @@
     <div class="form-group">
       <%= f.label :avatar, class: 'col-md-3 control-label' %>
       <div class="col-md-6">
-        <%= f.text_field :avatar, class: "form-control", placeholder: "Text" %>
+        <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-thumbnail img-thumbnail-avatar pull-left")  %>
+        <%= f.file_field :avatar, class: "form-control" %>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :cover, class: 'col-md-3 control-label' %>
       <div class="col-md-6">
-        <%= f.text_field :cover, class: "form-control", placeholder: "Text" %>
+        <%= image_tag(@profile.cover_safe, alt: "cover", class: "img-thumbnail pull-left") %>
+        <%= f.file_field :cover, class: "form-control" %>
       </div>
     </div>    
     <div class="form-group">

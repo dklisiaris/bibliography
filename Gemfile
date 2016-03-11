@@ -105,13 +105,13 @@ gem 'json', '~> 1.8'
 gem 'kaminari', '~> 0.16'
 
 # Search engine gem on top of elasticsearch
-gem 'searchkick', '~> 0.8'
+gem 'searchkick', '~> 1.2'
 
 # jQuery plugin for drop-in fix binded events problem caused by Turbolinks
 gem 'jquery-turbolinks', '~> 2.1'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
-gem 'typhoeus', '~> 0.7'
+gem 'typhoeus', '~> 1.0'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x

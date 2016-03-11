@@ -1,8 +1,6 @@
 // import the CSS framework
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 // make all images responsive by default
 img {
@@ -49,3 +47,6 @@ section {
   margin-top: 20px;
   }
 
+.form-control {
+  height: auto 
+}

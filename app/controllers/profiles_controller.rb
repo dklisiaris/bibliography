@@ -44,8 +44,12 @@ class ProfilesController < ApplicationController
     end
 
     def set_current_users_profile
-      @profile = current_user.profile
-      authorize @profile      
+      if current_user
+        @profile = current_user.profile
+        authorize @profile  
+      else
+        redirect_to new_user_session_path    
+      end
     end    
 
     def set_enums
