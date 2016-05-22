@@ -1,4 +1,6 @@
 class Api::V1::BaseSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+  
   def created_at
     object.created_at.in_time_zone.iso8601 if object.created_at
   end

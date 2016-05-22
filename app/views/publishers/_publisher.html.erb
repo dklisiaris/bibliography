@@ -7,7 +7,7 @@
         <span><%= publisher.owner %></span>
         <%= tag(:br) if publisher.owner.present? %>
         <span><small class="text-muted"><%= 
-          t('publishers.x_books', count: publisher.books.count) + " - " +            
+          t('publishers.x_books', count: publisher.books_count) + " - " +            
           t('publishers.with_x_views', count: publisher.impressions_count)
         %></small></span>
       </div>

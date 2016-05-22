@@ -10,7 +10,7 @@
         <span><%= author.extra_info %></span>
         <%= tag(:br) if author.extra_info.present? %>
         <span><small class="text-muted"><%= 
-          t('authors.x_books', count: author.books.count) + " - " + 
+          t('authors.x_books', count: author.contributions_count) + " - " + 
           t('authors.favoured_x_times', count: author.liked_by_count) + " - " + 
           t('authors.with_x_views', count: author.impressionist_count)          
         %></small></span>

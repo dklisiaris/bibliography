@@ -32,13 +32,13 @@
       <div class="form-group">
         <div class="col-xs-12">
           <%= f.label :email %>
-          <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: "Your email..." %>
+          <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: t('enter_email') %>
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
           <%= f.label t('password') %>
-          <%= f.password_field :password, class: 'form-control', placeholder: "Your password..." %>
+          <%= f.password_field :password, class: 'form-control', placeholder: t('enter_password') %>
         </div>
       </div>
       <div class="form-group form-actions">

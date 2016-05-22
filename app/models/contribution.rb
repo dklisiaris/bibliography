@@ -1,6 +1,6 @@
 class Contribution < ActiveRecord::Base
   belongs_to :book
-  belongs_to :author
+  belongs_to :author, :counter_cache => true
 
   enum job: %i(συγγραφή μετάφραση ερμηνεία εικονογράφηση φωτογραφία επιμέλεια συνθέση στιχουργία εισήγηση διασκευή ανθολογία Φορέας Οργανισμός επιμέλεια\ σειράς επιμέλεια\ υποσειράς αφήγηση Ζωγράφος Γλύπτης Καλλιτέχνης κείμενα)
 

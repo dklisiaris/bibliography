@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.0
--- Dumped by pg_dump version 9.5.0
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -91,7 +91,8 @@ CREATE TABLE authors (
     biblionet_id integer,
     impressions_count integer DEFAULT 0,
     slug character varying,
-    tsearch_vector tsvector
+    tsearch_vector tsvector,
+    contributions_count integer DEFAULT 0
 );
 
 
@@ -599,7 +600,8 @@ CREATE TABLE publishers (
     biblionet_id integer,
     impressions_count integer DEFAULT 0,
     slug character varying,
-    tsearch_vector tsvector
+    tsearch_vector tsvector,
+    books_count integer DEFAULT 0
 );
 
 
@@ -1548,4 +1550,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150618174541');
 INSERT INTO schema_migrations (version) VALUES ('20150619193344');
 
 INSERT INTO schema_migrations (version) VALUES ('20151003140444');
+
+INSERT INTO schema_migrations (version) VALUES ('20160521142614');
+
+INSERT INTO schema_migrations (version) VALUES ('20160521200629');
 

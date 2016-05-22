@@ -1,7 +1,7 @@
                 <div class="dark-bg">
                   <%= side_nav_li(t('side_menu.categories'), categories_path, "fa fa-tasks") %>
-                  <%= side_nav_li(t('side_menu.books'), books_path, "gi gi-book_open") %>
-                  <%= side_nav_li(t('side_menu.authors'), authors_path, "gi gi-old_man") %>
+                  <%= side_nav_li(t('side_menu.books'), books_path, "icon-books-stack-of-three") %>
+                  <%= side_nav_li(t('side_menu.authors'), authors_path, "icon-people") %>
                   <%= side_nav_li(t('side_menu.publishers'), publishers_path, "fa fa-building") %>
                 </div>
                 <li class="sidebar-separator">
@@ -72,7 +72,7 @@
                     <li class="sidebar-separator">
                       <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.admins_only') %></span></i>
                     </li>
-                    <%= side_nav_li(t('side_menu.import'), import_path, "gi gi-file_import") %>
+                    <%= side_nav_li(t('side_menu.import'), import_path, "icon-arrow") %>
                     <%= side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal") %>
                     <%= side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true) %>                    
                     <%= side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange") %>

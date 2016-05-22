@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'modernizr-rails', '~> 2.7'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0'
+gem 'jquery-rails', '~> 4.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,10 +40,10 @@ gem 'cells', "4.0.0.beta3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 6.0'
+  gem 'byebug', '~> 8.0'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.1'
+  gem 'web-console', '~> 3.1'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 1.3'  
@@ -73,9 +73,7 @@ group :development do
   gem 'rails_layout'
 end
 
-group :production do
-  gem 'pg', '~> 0.18'
-end
+gem 'pg', '~> 0.18'
 
 # Loads environment variables from `.env` file.
 gem 'dotenv-rails', '~> 2.0'
@@ -117,10 +115,13 @@ gem 'typhoeus', '~> 1.0'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # A fast and very simple Ruby web server
-gem 'thin', '~> 1.6'
+# gem 'thin', '~> 1.6'
+
+# A ruby web server built for concurrency
+gem 'puma', '~> 3.4'
 
 # Simple, efficient background processing for Ruby.
-gem 'sidekiq', '~> 3.3'
+gem 'sidekiq', '< 5'
 
 # Additional middleware for sidekiq.
 gem 'sidekiq-middleware', '~> 0.3'
@@ -175,3 +176,18 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # Allows for threaded comments to be added to multiple and different models. 
 gem 'acts_as_commentable_with_threading'
+
+group :production do
+  # Skylight is a smart profiler for Rails apps
+  gem 'skylight', '~> 0.10.3'
+end
+
+group :development do
+  # Performance management system
+  gem 'newrelic_rpm', '~> 3.15', '>= 3.15.2.317'
+end
+
+group :development do
+  # CLI gem for comfortably working with icon fonts
+  gem 'fontello_rails_converter', '~> 0.4.4'
+end

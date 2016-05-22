@@ -1,12 +1,26 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
-    <h3>Forgot your password?</h3>
-    <p>We'll send password reset instructions.</p>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+<div id="login-container">
+  <div class="block animation-fadeInQuickInv">
+    <div class="block-title">
+      <h2><%= detone t('devise.passwords.forgot') %></h2>
     </div>
-     <%= f.submit 'Reset Password', :class => 'button right' %>
-  <% end %>
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form', class: "form-horizontal"}) do |f| %>
+      <span class="help-block">
+        <%= t('devise.passwords.send_instructions_short') %>
+      </span>
+      <%= devise_error_messages! %>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <%= f.label :email %>
+          <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-8">    
+          <%= button_tag(type: "submit", class: "btn btn-effect-ripple btn-primary") do %>
+             <%= t('devise.passwords.reset') %>
+          <% end %>   
+        </div>
+      </div> 
+    <% end %>
+  </div>
 </div>

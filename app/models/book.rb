@@ -6,7 +6,7 @@ class Book < ActiveRecord::Base
 
   has_many :contributions
   has_many :authors, through: :contributions
-  belongs_to :publisher
+  belongs_to :publisher, :counter_cache => true
   has_many :awards, as: :awardable
 
   has_many  :writers, -> { where contributions: { job: 0 } },
@@ -54,6 +54,14 @@ class Book < ActiveRecord::Base
       :trigram => {:threshold => 0.15}
     }, 
     :ignoring => :accents
+
+  pg_search_scope :search_fast, 
+    :against => [
+      [:tsearch_vector],
+    ],
+    :using => {
+      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+    }
 
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
