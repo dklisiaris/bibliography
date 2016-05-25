@@ -12,7 +12,7 @@
           <div class="block-options pull-right">               
             <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
           </div>
-          <h2><%= detone t('books.label') %><small>&nbsp;(~ <%= @books_est_count %>)</small></h2>
+          <h2><%= detone t('books.label') %></h2>
         </div>
 
         <div class="row"> 
@@ -21,7 +21,7 @@
           <div class="col-xs-12">    
             <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
           </div>
-          <%= render "books/widgets/pagination" %>  
+          <%= render "books/widgets/pagination" %>
         </div>
 
       </div>

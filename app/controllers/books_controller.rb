@@ -17,12 +17,12 @@ class BooksController < ApplicationController
       keyphrase = ApplicationController.helpers.latinize(params[:q])
       @books = policy_scope(Book)        
         .search_fast(keyphrase)
-        .page(params[:page])
         .order(impressions_count: :desc)
+        .limit(50)
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
     end 
-    @books_est_count = 20 * @books.total_pages
+    # @books_est_count = 20 * @books.total_pages
     @shelves = current_user.shelves if user_signed_in?    
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?

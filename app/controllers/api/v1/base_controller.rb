@@ -43,6 +43,10 @@ class Api::V1::BaseController < ApplicationController
     }    
   end
 
+  def custom_pagination?
+    return (params[:limit].present? and params[:offset].present?) ? true : false
+  end
+
   def authenticate_user_from_token!
       token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
       # email = params[:email].presence

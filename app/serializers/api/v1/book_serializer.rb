@@ -27,5 +27,4 @@ class Api::V1::BookSerializer < Api::V1::BaseSerializer
   def viewers_count
     object.impressions_count
   end
-
 end

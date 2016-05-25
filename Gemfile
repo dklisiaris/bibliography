@@ -163,7 +163,7 @@ gem 'marc', '~> 1.0.0'
 gem 'pg_search', '~> 1.0.3'
 
 # Making it easy to serialize models for client-side use
-gem 'active_model_serializers', '~> 0.9'
+gem 'active_model_serializers', '~> 0.9.0'
 
 # Simple gem that allows you to run multiple ActiveRecord::Relation using hash
 gem 'active_hash_relation'
