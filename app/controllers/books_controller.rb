@@ -15,10 +15,14 @@ class BooksController < ApplicationController
   def index
     if params[:q].present?           
       keyphrase = ApplicationController.helpers.latinize(params[:q])
+      # @books = policy_scope(Book)        
+      #   .search_fast(keyphrase)
+      #   .order(impressions_count: :desc)
+      #   .limit(50)
+
       @books = policy_scope(Book)        
-        .search_fast(keyphrase)
-        .order(impressions_count: :desc)
-        .limit(50)
+        .search(keyphrase, order: {_score: :desc}, limit: 50)
+
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
     end 
@@ -131,7 +135,7 @@ class BooksController < ApplicationController
 
   private
     def set_book          
-      @book = Book.find(params[:id])
+      @book = Book.includes(:authors).find(params[:id])
       authorize @book
     end
 

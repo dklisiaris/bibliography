@@ -8,12 +8,13 @@
 </div>
 <% end %> 
 
+<% if current_user %>
 <%= button_tag :onclick => "javascript:like(#{book.id})",                  
 "data-toggle" => "tooltip", 
 "data-placement" => "top",
 type: "button", 
-title: current_user.likes?(book) ? t('books.remove_recommendation') : t('books.recommend'), 
-class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{current_user.likes?(book) ? 'btn-success' : 'btn-default'}" do %>      
+title: (current_user and current_user.likes?(book)) ? t('books.remove_recommendation') : t('books.recommend'), 
+class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(current_user and current_user.likes?(book)) ? 'btn-success' : 'btn-default'}" do %>      
   <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count}" %></span></strong>
 <% end %>
 
@@ -21,7 +22,26 @@ class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{current_user
 "data-toggle" => "tooltip", 
 "data-placement" => "top",
 type: "button", 
-title: current_user.dislikes?(book) ? t('books.remove_recommendation') : t('books.not_recommend'), 
-class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{current_user.dislikes?(book) ? 'btn-danger' : 'btn-default'}" do %>      
+title: (current_user and current_user.dislikes?(book)) ? t('books.remove_recommendation') : t('books.not_recommend'), 
+class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(current_user and current_user.dislikes?(book)) ? 'btn-danger' : 'btn-default'}" do %>      
   <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count}" %></span></strong>
 <% end %> 
+<% else %>
+
+<%= link_to new_user_session_path,
+"data-toggle" => "tooltip", 
+"data-placement" => "top",
+title: t('books.recommend'),
+class: "btn btn-xs btn-like btn-effect-ripple btn-default" do %>
+    <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count}" %></span></strong>
+<% end %>
+
+<%= link_to new_user_session_path,
+"data-toggle" => "tooltip", 
+"data-placement" => "top",
+title: t('books.not_recommend'),
+class: "btn btn-xs btn-dislike btn-effect-ripple btn-default" do %>
+    <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count}" %></span></strong>
+<% end %>
+
+<% end %>

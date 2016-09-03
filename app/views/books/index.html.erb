@@ -16,12 +16,12 @@
         </div>
 
         <div class="row"> 
-          <%= render "books/widgets/pagination" %>
+          <%= render "books/widgets/pagination" if defined? @books.total_pages %>
           <hr> 
           <div class="col-xs-12">    
             <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
           </div>
-          <%= render "books/widgets/pagination" %>
+          <%= render "books/widgets/pagination" if defined? @books.total_pages %>
         </div>
 
       </div>

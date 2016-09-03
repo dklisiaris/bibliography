@@ -62,5 +62,7 @@ module Bibliography
       I18n.locale = :el
     end
 
+    config.to_prepare { Devise::Mailer.layout "mailer" }
+
   end
 end

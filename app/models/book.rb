@@ -65,6 +65,7 @@ class Book < ActiveRecord::Base
 
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
+
   def language
     LANGUAGES[read_attribute(:language).to_i].to_s if read_attribute(:language)
   end
@@ -85,15 +86,16 @@ class Book < ActiveRecord::Base
   end
 
 
-  # searchkick batch_size: 50, 
-  # callbacks: :async, 
+  searchkick batch_size: 50, 
+  callbacks: :async, 
   # # text_middle: ['title', 'description'],
   # text_middle: ['title'],  
-  # # word_start: ['title', 'description'],
+  word_start: ['title', 'tsearch_vector']
   # autocomplete: ['title']
 
   def search_data
   {
+    tsearch_vector: tsearch_vector,
     title: title,
     # description: short_description
   }

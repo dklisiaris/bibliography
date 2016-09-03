@@ -185,6 +185,9 @@ end
 group :development do
   # Performance management system
   gem 'newrelic_rpm', '~> 3.15', '>= 3.15.2.317'
+
+  # Help to kill N+1 queries and unused eager loading.
+  gem 'bullet', '~> 5.3'
 end
 
 group :development do

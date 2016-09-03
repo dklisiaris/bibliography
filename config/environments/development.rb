@@ -25,11 +25,13 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    :domain => "bibliography.gr",
-    :address   => "smtp.mandrillapp.com",
+    :address   => "smtp.sendgrid.net",
     :port      => 587,
-    :user_name => ENV["MANDRILL_USERNAME"],
-    :password  => ENV["MANDRILL_API_KEY"]
+    :authentication => :plain,
+    :enable_starttls_auto => true,
+    :user_name => ENV["SENDGRID_USERNAME"],
+    :password  => ENV["SENDGRID_PASSWORD"],
+    :domain => "bibliography.gr"
   }   
 
   # Print deprecation notices to the Rails logger.
@@ -54,4 +56,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Alert when N+1 queries appear
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+  end
 end

@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   royce_roles %w[ registered editor admin ]
   before_save :ensure_api_key
   # before_create :assign_api_key
-  after_create :assign_default_role, :assign_profile, :assign_built_in_shelves
+  after_create :assign_default_role, :assign_profile, :assign_built_in_shelves, :send_signup_email
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     6.times do |i|
       shelves.create(built_in: true, default_name: i)
     end
+  end
+
+  def send_signup_email
+    AccountNotifier.send_signup_email(self).deliver_later
   end
 
 end
