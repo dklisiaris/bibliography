@@ -31,6 +31,18 @@ class Author < ActiveRecord::Base
 
   after_validation :calculate_search_terms, :if => :name_changed? 
 
+  searchkick batch_size: 100, 
+  callbacks: :async, 
+  word_start: ['lastname', 'tsearch_vector']
+  # autocomplete: ['title']
+
+  def search_data
+  {
+    lastname: lastname,
+    tsearch_vector: tsearch_vector,
+  }
+  end
+
   def fullname
     return [firstname, lastname].join(' ') if firstname.present?
     return lastname

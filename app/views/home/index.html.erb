@@ -11,13 +11,27 @@
   </div>
 <% end %>
 
-
-<%= paginate @search_results unless @search_results.nil? %><br>
-
-<% @search_results.each do |book| %>
-<%= book.title%><br>
-<% end unless @search_results.nil? %>
-<%= t("nothing_found") if not @search_results.nil? and @search_results.empty? and !params[:search].nil? %><br>
+<% unless @search_results.nil? %>
+  <!-- Search Results Block -->
+  <div class="block">
+    <div class="row"> 
+      <div class="col-xs-12">   
+        <% @search_results.each do |result| %>
+          <% if result.class.to_s == "Book" %>
+            <%= render :partial => "books/book", locals: {book: result} %>
+          <% elsif result.class.to_s == "Author" %>
+            <%= render :partial => "authors/author", locals: {author: result} %>
+          <% end %>
+        <% end %>
+        <% if not @search_results.nil? and @search_results.empty? %>
+        <%= t("nothing_found") %>
+        <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- END Search Results Block -->
+<% end %>
 
 <div class="row">
   <div class="col-lg-8 col-xl-6 col-xl-push-3">

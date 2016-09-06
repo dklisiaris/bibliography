@@ -16,15 +16,35 @@
         </div>
 
         <div class="row"> 
-          <%= render "books/widgets/pagination" if defined? @books.total_pages %>
-          <hr> 
-          <div class="col-xs-12">    
+          <div class="col-xs-12">   
+            <%= render "books/widgets/pagination" if defined? @books.total_pages %>
+            <hr> 
+
             <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
+
+            <%= render "books/widgets/pagination" if defined? @books.total_pages %>
           </div>
-          <%= render "books/widgets/pagination" if defined? @books.total_pages %>
         </div>
 
       </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="block full">
+      <div class="block-title">
+        <div class="block-options pull-right">               
+          <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
+        </div>
+        <h2><%= detone t('books.filters.label') %></h2>
+      </div>
+
+      <div class="row"> 
+        <div class="col-xs-12">   
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 

@@ -200,7 +200,9 @@ el:
     latest: "Τελευταίες Κυκλοφορίες"
     in_x_collections: "Σε %{count} συλλογές"
     with_x_views: "%{count} εμφανίσεις"
-    search: "Αναζήτηση στα βιβλία"   
+    search: "Αναζήτηση στα βιβλία"
+    filters:
+      label: "Φίλτρα"
 
 
   import:

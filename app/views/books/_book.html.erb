@@ -17,7 +17,15 @@
       <div class="col-xs-3 text-center">
         <%= render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true} %>
         <br>
-        <%= render partial: 'books/widgets/recommend_btns', locals: {book: book} %>        
+        <%= render partial: 'books/widgets/recommend_btns', locals: {book: book} %>  
+
+        <% if policy(book).update? %>
+          <%= tag(:br) %>
+          <small class="text-muted">
+            <%= "ID: #{book.id}"%>
+          </small>
+        <% end %>   
+
       </div>
     </div>
     <div class="row">

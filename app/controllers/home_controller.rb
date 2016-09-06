@@ -5,6 +5,12 @@ class HomeController < ApplicationController
   def index    
     @search_results = Book.search(params[:query], page: params[:page], per_page: 25, fields: [:title, :description]) if params[:query].present?
     
+    if params[:q].present?           
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+      
+      @search_results = Searchkick.search(keyphrase, index_name: [Book, Author], order: {_score: :desc}, limit: 50)
+    end
+
     @popular_books = Book.order(impressions_count: :desc).limit(6)
     @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(6)
     @recommended_books = Book.top(count: 6)   

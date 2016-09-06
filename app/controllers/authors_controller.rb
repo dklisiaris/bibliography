@@ -14,10 +14,13 @@ class AuthorsController < ApplicationController
     if params[:q].present?           
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
+      # @authors = policy_scope(Author)        
+      #   .search_by_name(keyphrase)
+      #   .page(params[:page])
+      #   .order(impressions_count: :desc, image: :asc)
+
       @authors = policy_scope(Author)        
-        .search_by_name(keyphrase)
-        .page(params[:page])
-        .order(impressions_count: :desc, image: :asc)
+        .search(keyphrase, fields: [:tsearch_vector], match: :word_start, order: {_score: :desc}, limit: 50)
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end

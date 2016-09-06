@@ -222,6 +222,8 @@ en:
     in_x_collections: "In %{count} Collections"
     with_x_views: "%{count} views"
     search: "Search Books"
+    filters:
+      label: "Filters"
 
   import:
     from_file: "From File"

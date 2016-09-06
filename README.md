@@ -72,9 +72,9 @@ export ELASTICSEARCH_URL=http://username:password@host/
 export REDIS_SERVER_URL=redis://redis.example.com:7372/12
 export REDIS_CLIENT_URL=redis://redis.example.com:7372/12
 
-# Mail credentials (we use mandrill for transactional mails)
-export MANDRILL_USERNAME=username
-export MANDRILL_API_KEY=key_provided_by_mandril
+# Mail credentials (we use sendgrid for transactional mails)
+export SENDGRID_USERNAME=username
+export SENDGRID_PASSWORD=key_provided_by_sendgrid
 
 # Devise secret key (Use rake secret to generate it)
 export DEVISE_SECRET_KEY=key_generated_with_rake_secret_command
