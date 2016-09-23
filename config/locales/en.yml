@@ -51,7 +51,7 @@ en:
   remember_me: "Remember me"
   register: "Register"
   create_account: "Create Account"
-  password_confirmation: "Password confirmation" 
+  password_confirmation: "Password confirmation"
   enter_email: "Enter your email"
   enter_password: "Enter your password"
   confirm_password: "Confirm your password"
@@ -131,11 +131,11 @@ en:
     delete: "Delete Category"
     new_subcategory: "New Subcategory"
     editing: "Editing Category"
-    listing: "Listing Categories"  
+    listing: "Listing Categories"
     all: "All Categories"
     search: "Search Categories"
     favoured: "Favoured"
-    add_to_favourites: "Add to favourites"   
+    add_to_favourites: "Add to favourites"
 
   authors:
     label: "Authors"
@@ -143,11 +143,11 @@ en:
     edit: "Edit Author"
     delete: "Delete Author"
     editing: "Editing Author"
-    listing: "Listing Authors"  
+    listing: "Listing Authors"
     all: "All Authors"
     favoured_x_times: "Favoured %{count} times"
     x_books: "%{count} books"
-    with_x_views: "%{count} views"    
+    with_x_views: "%{count} views"
     search: "Search Authors"
     favoured: "Favoured"
     add_to_favourites: "Add to favourites"
@@ -160,11 +160,11 @@ en:
     edit: "Edit Publisher"
     delete: "Delete Publisher"
     editing: "Editing Publisher"
-    listing: "Listing Publishers"  
+    listing: "Listing Publishers"
     all: "All Publishers"
     x_books: "%{count} books"
     with_x_views: "%{count} views"
-    search: "Search Publishers"    
+    search: "Search Publishers"
 
   places:
     address: "Address"
@@ -218,7 +218,7 @@ en:
     recommended_x_times: "Recommended %{count} times"
     popular: "Popular"
     awarded: "Awarded"
-    latest: "Latest" 
+    latest: "Latest"
     in_x_collections: "In %{count} Collections"
     with_x_views: "%{count} views"
     search: "Search Books"
@@ -228,7 +228,7 @@ en:
   import:
     from_file: "From File"
     from_url: "From URL"
-    from_text: "From Text"    
+    from_text: "From Text"
     import_data: "Import Data"
     import_records: "Import Records"
     import_label: "Import"
@@ -257,7 +257,7 @@ en:
 
   users:
     follow: "Follow"
-    unfollow: "Unfollow"    
+    unfollow: "Unfollow"
     following: "Following"
 
   awards:
@@ -280,7 +280,7 @@ en:
     cancel: 'Cancel Account'
     api_token: 'Api Token'
     api_key: 'Api Key'
-    personal_info: 'Personal Information'    
+    personal_info: 'Personal Information'
     notifications: 'Notifications'
     receive_notifications: 'Receive email notifications.'
     want_notifications: 'I want to receive notifications!'

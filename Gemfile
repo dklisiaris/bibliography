@@ -26,6 +26,9 @@ gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# High Performance Haml Implementation
+gem 'hamlit-rails', '~> 0.1.0'
+
 # Cells allow you to encapsulate parts of your page into separate MVC components
 gem 'cells', "4.0.0.beta3"
 
@@ -46,10 +49,18 @@ group :development, :test do
   gem 'web-console', '~> 3.1'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '~> 1.3'  
+  gem 'spring', '~> 1.3'
 
   gem 'rspec-rails', '~> 3.2'
-  gem 'factory_girl_rails', '~> 4.5'  
+  gem 'factory_girl_rails', '~> 4.5'
+
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2'
+
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-rescue'
 
   # gem "rspec-cells"
 
@@ -169,12 +180,12 @@ gem 'active_model_serializers', '~> 0.9.0'
 gem 'active_hash_relation'
 
 # Rack middleware for rate-limiting incoming HTTP requests configured to be used with Redis
-gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
+gem 'redis-throttle', git: 'https://github.com/lelylan/redis-throttle.git'
 
 # Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
 gem 'rack-cors', :require => 'rack/cors'
 
-# Allows for threaded comments to be added to multiple and different models. 
+# Allows for threaded comments to be added to multiple and different models.
 gem 'acts_as_commentable_with_threading'
 
 group :production do
