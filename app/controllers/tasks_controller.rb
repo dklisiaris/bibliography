@@ -7,7 +7,9 @@ class TasksController < ApplicationController
 
   def update_content
     authorize :task, :update_content?
-    ContentUpdateWorker.perform_async
+    limit = params[:limit].to_i
+
+    ContentUpdateWorker.perform_async(limit)
 
     flash[:notice] = t('tasks.content_updating_in_bg')
     redirect_to tasks_path

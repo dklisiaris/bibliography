@@ -248,6 +248,7 @@ en:
     update_description: "Starts a search for new content and stores it in database."
     update_label: "Update"
     content_updating_in_bg: "Searching and storing new content in background thread."
+    max_updates: "Max updates (Leave empty for no limit)"
 
   shelves:
     all_collections: "All Collections"
