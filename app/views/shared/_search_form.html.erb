@@ -3,17 +3,17 @@
     <% if params[:q].present? %>
     <span class="input-group-btn">
       <%= link_to fa('close'), action, class: "btn btn-default" %>
-    </span>  
+    </span>
     <% end %>
 
-    <span id="remote">      
-      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => placeholder %> 
-    </span>       
+    <span id="remote">
+      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => placeholder %>
+    </span>
 
-    <span class="input-group-btn">      
+    <span class="input-group-btn">
       <%= button_tag(type: "submit", name: nil, class: "btn btn-md btn-effect-ripple btn-primary") do %>
           <%= fa('search') %>
-      <% end %>      
+      <% end %>
     </span>
   </div>
 <% end %>

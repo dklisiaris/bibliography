@@ -14,18 +14,18 @@ $('.books.show').ready ->
 #       q = $("input:text[name=q]").val().toLowerCase()
 #       index_a = a.value.toLowerCase().indexOf(q)
 #       index_b = b.value.toLowerCase().indexOf(q)
-#       if index_a < index_b        
+#       if index_a < index_b
 #         -1
 #       else if index_a > index_b
 #         1
 #       else
-#         0    
+#         0
 #     limit: 10
 #     remote:
 #       url: "/books?autocomplete=1&q=%QUERY"
 #       wildcard: "%QUERY"
 #       filter: (suggestions) ->
-        
+
 #         # Map the remote source JSON array to a JavaScript object array
 #         $.map suggestions, (suggestion) ->
 #           title: suggestion['title']
@@ -33,26 +33,26 @@ $('.books.show').ready ->
 #   )
 
 #   # Initialize the Bloodhound suggestion engine
-#   engine.initialize()  
+#   engine.initialize()
 
 #   # Instantiate the Typeahead UI
 #   $("#remote .typeahead").typeahead(
 #     hint: true
 #     highlight: true
 #     minLength: 1
-#   ,  
+#   ,
 #     displayKey: "title"
 #     source: engine.ttAdapter()
-#   ).bind 'typeahead:selected', (obj,datum) ->    
+#   ).bind 'typeahead:selected', (obj,datum) ->
 #     window.location.href = datum.url
 #     return
 
 @like = (book_id) ->
   $.ajax({
     type: "POST",
-    url: '/books/'+book_id+'/like',    
+    url: '/books/'+book_id+'/like',
     success:(data) ->
-      console.log 'liked'            
+      console.log 'liked'
       btn = $('.btn-like-'+book_id)
       btn.toggleClass("btn-default btn-success")
       btn.find('span').text(' ' + data.likes)
@@ -62,13 +62,13 @@ $('.books.show').ready ->
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.remove_recommendation')}'"%>)
           .tooltip('fixTitle')
-          .tooltip('show')       
+          .tooltip('show')
       else
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.recommend')}'"%>)
           .tooltip('fixTitle')
-          .tooltip('show')        
-      
+          .tooltip('show')
+
       $('.btn-dislike-'+book_id)
         .removeClass( "btn-danger" )
         .addClass("btn-default")
@@ -76,36 +76,36 @@ $('.books.show').ready ->
         .find('span')
         .text(' ' + data.dislikes)
 
-      refreshRecommendationsBar(data.likes, data.dislikes)
-      return false       
+      refreshRecommendationsBar(data.likes, data.dislikes, book_id)
+      return false
     error:(data) ->
       console.log 'Error...'
       console.log data
-      return false 
+      return false
   })
 
 @dislike = (book_id) ->
   $.ajax({
     type: "POST",
-    url: '/books/'+book_id+'/dislike',    
+    url: '/books/'+book_id+'/dislike',
     success:(data) ->
       console.log 'disliked'
       btn = $('.btn-dislike-'+book_id)
       btn.toggleClass("btn-default btn-danger");
       btn.find('span').text(' ' + data.dislikes)
       tooltip_text = btn.attr('data-original-title')
-      
+
       if tooltip_text==<%="'#{I18n.t('books.not_recommend')}'"%>
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.remove_recommendation')}'"%>)
           .tooltip('fixTitle')
           .tooltip('show')
-      else        
+      else
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.not_recommend')}'"%>)
           .tooltip('fixTitle')
-          .tooltip('show')             
-      
+          .tooltip('show')
+
       $('.btn-like-'+book_id)
         .removeClass( "btn-success" )
         .addClass("btn-default")
@@ -117,11 +117,11 @@ $('.books.show').ready ->
     error:(data) ->
       console.log 'Error...'
       console.log data
-      return false 
-  }) 
+      return false
+  })
 
-refreshRecommendationsBar = (likes, dislikes) ->
+refreshRecommendationsBar = (likes, dislikes, book_id) ->
   likesPercent = if (likes+dislikes)>0 then (likes/(likes+dislikes))*100 else 0
-  $('.recommendations-bar-'+book_id).attr('aria-valuenow', likes)    
+  $('.recommendations-bar-'+book_id).attr('aria-valuenow', likes)
     .attr('aria-valuemax', likes+dislikes)
     .attr('style', 'width:'+likesPercent+'%')

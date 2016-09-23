@@ -150,13 +150,13 @@ gem 'sinatra', :require => nil
 gem 'bookshark', '~> 1.0.0.pre'
 
 # A lightweight plugin that logs impressions per action or manually per model
-gem 'impressionist', '~> 1.5'
+gem 'impressionist', '= 1.5.1'
 
 # A recommendation engine using Likes and Dislikes
 gem 'recommendable', '~> 2.2'
 
 # Bundler-like DSL and rake tasks for Bower on Rails
-gem "bower-rails", '~> 0.9'
+gem "bower-rails", '~> 0.11'
 
 # A Gem to add Follow functionality for models
 gem "acts_as_follower", '~> 0.2'

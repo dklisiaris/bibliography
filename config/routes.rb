@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     resources :awards, only: [:create, :edit, :update, :destroy]
     member do
       post 'favourite'
-    end    
+    end
   end
-  resources :awards, only: [:index], :concerns => :paginatable 
+  resources :awards, only: [:index], :concerns => :paginatable
 
   resources :prizes, :contributions, :concerns => :paginatable
 
@@ -33,27 +33,27 @@ Rails.application.routes.draw do
       get 'my'
     end
   end
-  
+
   resources :publishers, :concerns => :paginatable do
     resources :places, only: [:create, :edit, :update, :destroy]
     collection do
       get 'search'
     end
-  end 
+  end
 
-  
+
   # resource :profile, only: [:update]
   # get "profile/:id", :to => "profiles#show", as: 'user_profile'
   resource :profile, only: [:edit, :update]
   get "library/(:id)", :to => "profiles#show", as: 'public_profile'
   post "library/(:id)/follow", :to => "profiles#follow"
 
-  
+
   # get "profile/edit", :to => "profile#edit", as: 'edit_profile'
   # patch "profile", :to => "profile#update", as: 'update_profile'
   # get '/:permalink',      to: 'users#show', as: 'custom_user'
   # get 'profile/:id', to: 'profiles#show'
-  
+
   ##
   # Import Controller Routes
   #
@@ -84,7 +84,7 @@ Rails.application.routes.draw do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
   end
-  
+
 
   # Restful API routes
   namespace :api do
@@ -95,9 +95,9 @@ Rails.application.routes.draw do
         end
         resources :comments, except: [:new, :edit]
       end
-      resources :authors, only: [:index, :show] 
+      resources :authors, only: [:index, :show]
       resources :publishers, only: [:show]
-      resources :categories, only: [:show]  
+      resources :categories, only: [:show]
       resources :sessions, only: [:create]
       post 'authenticate', to: 'sessions#create'
     end
