@@ -17,7 +17,7 @@ class NavigationCell < Cell::ViewModel
     @breadcrumbs  = opts[:breadcrumbs]      
     render
   end
-
+  
   # Produces a breadcrumb of site pages/urls 
   #
   # ==== Options

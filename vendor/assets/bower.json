@@ -1,9 +1,9 @@
 {
-  "name": "dsl-generated dependencies",
+  "name": "dsl-generated-dependencies",
   "dependencies": {
-    "readmore": "latest",
+    "readmore": "2.0.5",
     "noty": "latest",
     "masonry": "latest",
-    "typeahead.js": "latest"
+    "typeahead.js": "0.10.5"
   }
 }

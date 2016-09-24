@@ -1,0 +1,5 @@
+%ul.breadcrumb.breadcrumb-top
+  - unless @breadcrumbs.nil?
+    - @breadcrumbs.each do |key, value|
+      %li= link_to ellipsize(key), value
+  %li= ellipsize(@current_page)

@@ -1,0 +1,9 @@
+.content-header
+  .row
+    .col-sm-6
+      .header-section
+        = content_tag :h1, @title if @title
+        = @content if @content
+    .col-sm-6.hidden-xs
+      .header-section
+        = cell(:navigation).call(:breadcrumb, breadcrumbs: @breadcrumbs)

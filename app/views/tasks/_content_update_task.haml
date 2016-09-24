@@ -1,0 +1,14 @@
+.row
+  .col-md-6
+    .block
+      .block-title
+        %h2
+          = UnicodeUtils.upcase(detone(t('tasks.update')))
+      .block-section
+        %span.help-block
+          = t('tasks.update_description')
+        %form{action: tasks_update_path, method: "get"}
+          .form-group
+            = number_field_tag 'limit', nil, min: 25, max: 10000, step: 25, class: "form-control", placeholder: t('tasks.max_updates')
+          .form-group.form-actions
+            = button_tag t('tasks.update_label'), {type: "submit", name: nil, class: "btn btn-effect-ripple btn-primary"}

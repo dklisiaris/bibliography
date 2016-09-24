@@ -11,6 +11,7 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
     afterOpen: ($vexContent) ->
       # Fetch json data about this book's collections
       console.log 'Collection manager opened'
+      console.log content 
       $('.vex-dialog-input .collections-checkboxes').hide()
       $('.vex-dialog-input .fa-spin').show()      
       $.ajax(url: '/books/'+book_id+'/collections').done (response) ->        
@@ -25,12 +26,22 @@ vex.dialog.buttons.NO.text = <%="'#{I18n.t('cancel')}'"%>
     callback: (value) ->
       if value           
         is_checked = []
+        console.log value
         $.each value, (key, value) ->
           is_checked.push(parseInt(key.split("-").slice(-1)[0])) if value == "on"     
         
+        to_add = $.grep is_checked, (el) ->
+          $.inArray(el, was_checked) == -1
+
+        to_remove = $.grep was_checked, (el) ->
+          $.inArray(el, is_checked) == -1
+
         request_data =
-          to_add: $(is_checked).not(was_checked).get();
-          to_remove: $(was_checked).not(is_checked).get();
+          to_add: to_add
+          to_remove: to_remove
+
+        console.log request_data
+        console.log is_checked
 
         $.ajax({
           type: "POST",
