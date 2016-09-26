@@ -1,25 +1,25 @@
 <% pages = {fa('home') => root_url, t('books.label') => books_url, @book.title => nil} %>
 
-<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form',
     locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) %>
 
 <div class="row">
    <div class="col-sm-10 col-sm-offset-1">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">       
-            <% if policy(@book).update? %>            
+          <div class="block-options pull-right">
+            <% if policy(@book).update? %>
             <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success') %>
-            <% end %>                
+            <% end %>
           </div>
           <h2><%= detone(@book.title) %></h2>
-        </div>  
+        </div>
 
         <div class="row">
           <div class="col-sm-3">
-            <div class="row">            
+            <div class="row">
               <div class="widget">
-                <div class="widget-content themed-background-muted text-right clearfix">
+                <div class="widget-content themed-background-muted text-center clearfix">
                   <%= image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")  %>
                 </div>
                 <div class="widget-content themed-background-muted text-center">
@@ -27,7 +27,7 @@
                 <%= render partial: 'books/widgets/collections_manager_btn', locals: {book: @book, full_size: true} %>
                 <hr>
                 <%= render partial: 'books/widgets/recommend_btns', locals: {book: @book, show_progressbar: true} %>
-                <hr>                
+                <hr>
                 <div class="row text-center">
                   <div class="col-xs-6">
                     <h4 class="widget-heading"><small><%= t 'collections' %></small><br><%= @bookshelves_count %></h4>
@@ -41,26 +41,26 @@
                 </div>
                 </div>
               </div>
-            </div>                       
-          </div>  
+            </div>
+          </div>
           <div class="col-sm-9">
             <h2><%= @book.title %><br><small><%= @book.subtitle %></small></h2>
             <hr>
-            
+
             <h4><%= @book_presenter.writers %></h4>
-            <h4><%= @book_presenter.contributors %></h4>                                  
+            <h4><%= @book_presenter.contributors %></h4>
             <hr>
-            
+
             <article class="description">
               <%= @book.description.html_safe if @book.description.present? %>
-            </article>            
+            </article>
             <br>
             <div class="block full">
               <div class="block-title">
                 <ul class="nav nav-tabs" data-toggle="tabs">
                   <li class="active"><a href="#block-tabs-desc"><%= t('books.description') %></a></li>
                   <li><a href="#block-tabs-marc"><%= t('books.marc_view') %></a></li>
-                  <li><a href="#block-tabs-isbd"><%= t('books.isbd_view') %></a></li>                  
+                  <li><a href="#block-tabs-isbd"><%= t('books.isbd_view') %></a></li>
                 </ul>
               </div>
               <div class="tab-content">
@@ -69,7 +69,7 @@
                     <tbody>
                       <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
 
-                      <%= @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format %>                
+                      <%= @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format %>
                       <%= @book_presenter.trow(t('language'), UnicodeUtils.titlecase(@book.language)) if @book.language.present? %>
 
                       <%= @book_presenter.trow(t('books.original_title'), @book.original_title) %>
@@ -77,19 +77,19 @@
                       <%= @book_presenter.trow(t('books.original_language'), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present? %>
 
                       <%= @book_presenter.trow(t('books.series'), [@book.series_name,@book.series_volume].reject(&:blank?).join(' · ')) %>
-                      
+
                       <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>
 
-                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@in_shelves)) if user_signed_in? %>                                          
+                      <%= @book_presenter.trow(t('collections'), @book_presenter.collections(@in_shelves)) if user_signed_in? %>
                       <%= @book_presenter.trow(t('books.isbn'), @book.isbn) %>
 
                       <%= @book_presenter.trow(t('books.isbn13'), @book.isbn13) %>
-  
+
                       <%= @book_presenter.trow(t('books.ismn'), @book.ismn) %>
 
-                      <%= @book_presenter.trow(t('books.issn'), @book.issn) %>  
+                      <%= @book_presenter.trow(t('books.issn'), @book.issn) %>
 
-                      <%= @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description) %> 
+                      <%= @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description) %>
 
                       <%= @book_presenter.trow(t('books.price'), @book_presenter.price) %>
 
@@ -97,7 +97,7 @@
                     </tbody>
                   </table>
                 </div>
-                                
+
                 <div class="tab-pane" id="block-tabs-marc">
                   <table class="table table-striped table-condensed">
                     <tbody>
@@ -118,27 +118,27 @@
 
                       <%= @book_presenter.trow(t('books.publication'), @book_presenter.publication) %>
 
-                      <%= @book_presenter.trow(t('books.format'), @book.format) if @book.format %>                                      
+                      <%= @book_presenter.trow(t('books.format'), @book.format) if @book.format %>
                       <%= @book_presenter.trow(t('books.original_title'), @book.original_title) %>
 
                       <%= @book_presenter.trow(t('books.original_language'), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present? %>
 
                       <%= @book_presenter.trow(t('books.series'), [@book.series_name,@book.series_volume].reject(&:blank?).join(' · ')) %>
 
-                      <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>                                         
+                      <%= @book_presenter.trow(t('books.genres'), @book_presenter.genres) %>
                       <%= @book_presenter.trow(t('books.isbn'), @book.isbn) %>
 
                       <%= @book_presenter.trow(t('books.isbn13'), @book.isbn13) %>
-  
+
                       <%= @book_presenter.trow(t('books.ismn'), @book.ismn) %>
 
-                      <%= @book_presenter.trow(t('books.issn'), @book.issn) %>  
+                      <%= @book_presenter.trow(t('books.issn'), @book.issn) %>
 
-                      <%= @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description) %> 
-                      
+                      <%= @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description) %>
+
                     </tbody>
                   </table>
-                </div>                
+                </div>
               </div>
             </div>
             <% if @book.awards.count > 0 %>
@@ -149,7 +149,7 @@
                 <%= link_to award.prize.name, award.prize %>
                 <%= " (#{award.year})" %><br>
               <% end %>
-            <% end %> 
+            <% end %>
 
             <h4 class="sub-header">
               <%= t('comments.or_reviews') %>
@@ -179,12 +179,12 @@
                           <% end %>
                           <p><%= comment.body %></p>
                         </div>
-                      </li>                    
+                      </li>
                     <% end %>
                   <% end %>
                   <% if user_signed_in? %>
                     <li class="media">
-                      <a href="<%= public_profile_path(current_user.id) %>" class="pull-left">                    
+                      <a href="<%= public_profile_path(current_user.id) %>" class="pull-left">
                       <img src="<%= current_user.avatar %>" alt="Avatar" class="img-circle">
                       </a>
                       <div class="media-body">
@@ -202,10 +202,10 @@
                   <% end %>
                 </ul>
               </div>
-            </div>            
+            </div>
 
-          </div>  
-        </div>          
+          </div>
+        </div>
       </div>
   </div>
 </div>

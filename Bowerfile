@@ -2,7 +2,7 @@
 # Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
 # Install js dependencies: rake bower:install
 
-asset 'readmore', '2.0.5'
+asset 'readmore', '2.2.0'
 asset 'noty'
 asset 'masonry'
-asset 'typeahead.js', '0.10.5'
+asset 'typeahead.js', '0.11.1'
