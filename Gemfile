@@ -188,7 +188,7 @@ gem 'rack-cors', :require => 'rack/cors'
 # Allows for threaded comments to be added to multiple and different models.
 gem 'acts_as_commentable_with_threading'
 
-group :production do
+group :production, :staging do
   # Skylight is a smart profiler for Rails apps
   gem 'skylight', '~> 0.10.3'
 end

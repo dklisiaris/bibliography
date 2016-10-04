@@ -5,11 +5,11 @@
 ---------------------------------------------------------------------------------------------------
 
   NOTICE: This project is __under development__ and not funtional yet.
-  
+
 ---------------------------------------------------------------------------------------------------
 
 ## Description
-Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services. 
+Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services.
 On top of that, libraries or individual users can create collections of their books and users can see where they can loan the book they want.
 Some social features are available too.
 
@@ -31,7 +31,7 @@ __Software requirements__
 - [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
 - [bower](https://github.com/bower/bower) (>= 0.10.0) installed with npm
 
-Clone repository 
+Clone repository
 ```
 git clone https://github.com/dklisiaris/bibliography.git
 ```
@@ -50,7 +50,7 @@ rake bower:install
 
 
 
-All sensitive information is stored in environment variables. 
+All sensitive information is stored in environment variables.
 We use dotenv gem to manage these vars.
 Create a file named `.env` in the root folder and export environment variables as seen below:
 
@@ -64,6 +64,12 @@ export PRODUCTION_DATABASE_USERNAME=db_username
 export PRODUCTION_DATABASE_PASSWORD=db_password
 export PRODUCTION_DATABASE_HOST=db_host
 export PRODUCTION_DATABASE_PORT=db_port
+
+# Database credentials in staging
+export STAGING_DATABASE_USERNAME=db_username
+export STAGING_DATABASE_PASSWORD=db_password
+export STAGING_DATABASE_HOST=db_host
+export STAGING_DATABASE_PORT=db_port
 
 # Elasticsearch host (Usually localhost or some password protected remote url)
 export ELASTICSEARCH_URL=http://username:password@host/
@@ -101,7 +107,7 @@ bundle exec sidekiq -C config/sidekiq.yml
 
 ## API Docs
 
-The API documentation is a [slate](https://github.com/tripit/slate) app in `doc/api`. 
+The API documentation is a [slate](https://github.com/tripit/slate) app in `doc/api`.
 
 Do what ever changes you want in api docs and rebuild them by running:
 ```ruby

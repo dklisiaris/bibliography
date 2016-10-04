@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$('.authors.show').ready ->  
+$('.authors.show').ready ->
   readmore($('.description'))
 
 $(".authors").ready ->
@@ -14,18 +14,18 @@ $(".authors").ready ->
       q = $("input:text[name=q]").val().toLowerCase()
       index_a = a.value.toLowerCase().indexOf(q)
       index_b = b.value.toLowerCase().indexOf(q)
-      if index_a < index_b        
+      if index_a < index_b
         -1
       else if index_a > index_b
         1
       else
-        0    
+        0
     limit: 10
     remote:
       url: "/authors?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
       filter: (suggestions) ->
-        
+
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
           name: [suggestion['lastname'], suggestion['firstname']].join(', ')
@@ -33,28 +33,28 @@ $(".authors").ready ->
   )
 
   # Initialize the Bloodhound suggestion engine
-  engine.initialize()  
+  engine.initialize()
 
   # Instantiate the Typeahead UI
   $("#remote .typeahead").typeahead(
-    hint: true
+    hint: false
     highlight: true
     minLength: 1
-  ,  
+  ,
     displayKey: "name"
     source: engine.ttAdapter()
-  ).bind 'typeahead:selected', (obj,datum) ->    
+  ).bind 'typeahead:selected', (obj,datum) ->
     window.location.href = datum.url
     return
 
 @favouriteAuthor = (author_id) ->
   $.ajax({
     type: "POST",
-    url: '/authors/'+author_id+'/favourite',    
+    url: '/authors/'+author_id+'/favourite',
     success:(data) ->
-      console.log 'favoured'            
+      console.log 'favoured'
       btn = $('.btn-favourite-author-'+author_id)
-      btn.toggleClass("btn-default btn-success")      
+      btn.toggleClass("btn-default btn-success")
 
       tooltip_text = btn.attr('data-original-title')
       if data.favourite and tooltip_text==<%="'#{I18n.t('authors.add_to_favourites')}'"%>
@@ -64,7 +64,7 @@ $(".authors").ready ->
           .tooltip('show')
 
         btn.find('i').removeClass( "fa-star-o" )
-          .addClass("fa-star")                 
+          .addClass("fa-star")
       else
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('authors.add_to_favourites')}'"%>)
@@ -72,11 +72,11 @@ $(".authors").ready ->
           .tooltip('show')
 
         btn.find('i').removeClass( "fa-star" )
-          .addClass("fa-star-o")                  
-      
-      return false       
+          .addClass("fa-star-o")
+
+      return false
     error:(data) ->
       console.log 'Error...'
       console.log data
-      return false 
+      return false
   })

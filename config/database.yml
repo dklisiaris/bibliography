@@ -64,10 +64,18 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default  
+  <<: *default
   database: bibliography_production
   username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
   password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
   host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
   port: <%= ENV["PRODUCTION_DATABASE_PORT"] %>
-  socket: 
+
+production:
+  <<: *default
+  database: bibliography_staging
+  username: <%= ENV["STAGING_DATABASE_USERNAME"] %>
+  password: <%= ENV["STAGING_DATABASE_PASSWORD"] %>
+  host: <%= ENV["STAGING_DATABASE_HOST"] %>
+  port: <%= ENV["STAGING_DATABASE_PORT"] %>
+

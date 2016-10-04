@@ -5,7 +5,7 @@ class Api::V1::BaseController < ApplicationController
 
   before_action :destroy_session
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found! 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found!
 
   skip_after_action :verify_authorized
   # skip_after_action :verify_policy_scoped
@@ -15,12 +15,12 @@ class Api::V1::BaseController < ApplicationController
 
   ##
   # Changes format of a Serializer object to json or pretty json
-  #  
+  #
   # @param serializer The serializer object to change its format
   def apply_format(serializer)
     formatted = serializer.to_json
-    formatted = JSON.pretty_generate(JSON.parse(formatted)) if params[:pretty].try(:to_i) == 1    
-    return formatted    
+    formatted = JSON.pretty_generate(JSON.parse(formatted)) if params[:pretty].try(:to_i) == 1
+    return formatted
   end
 
   def paginate(resource)
@@ -40,7 +40,7 @@ class Api::V1::BaseController < ApplicationController
       prev_page: object.prev_page,
       total_pages: object.total_pages,
       total_count: object.total_count
-    }    
+    }
   end
 
   def custom_pagination?
@@ -82,17 +82,17 @@ class Api::V1::BaseController < ApplicationController
       api_error(status: 422, errors: errors)
     end
 
-    def not_found!      
+    def not_found!
       render json: { error: 'Not found', status: 404 }, status: 404
     end
 
     def api_error(status: 500, errors: [])
-      unless Rails.env.production?
+      unless Rails.env.production? || Rails.env.staging?
         puts errors.full_messages if errors.respond_to? :full_messages
       end
       head status: status and return if errors.empty?
 
       render json: jsonapi_format(errors).to_json, status: status
-    end 
+    end
 
 end
