@@ -14,7 +14,7 @@
             </h4>
             <ul class="nav-users nav-users-online">
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar6.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="label label-success nav-users-indicator">5</span>
                   <span class="nav-users-heading">Olivia Rogers</span>
@@ -22,7 +22,7 @@
                   </a>
                </li>
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar5.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="label label-success nav-users-indicator">3</span>
                   <span class="nav-users-heading">Joe Jones</span>
@@ -30,7 +30,7 @@
                   </a>
                </li>
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar12.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="label label-success nav-users-indicator">2</span>
                   <span class="nav-users-heading">Nancy Cruz</span>
@@ -39,14 +39,14 @@
                </li>
 
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar14.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="nav-users-heading">Ethan Hayes</span>
                   <span class="text-muted">Web Developer</span>
                   </a>
                </li>
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar10.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="nav-users-heading">Julie Bennett</span>
                   <span class="text-muted">Photographer</span>
@@ -61,14 +61,14 @@
             </h4>
             <ul class="nav-users nav-users-away">
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar14.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="nav-users-heading">Harold Green</span>
                   <span class="text-muted">Product Manager</span>
                   </a>
                </li>
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar15.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="nav-users-heading">Alan George</span>
                   <span class="text-muted">Freelancer</span>
@@ -83,7 +83,7 @@
             </h4>
             <ul class="nav-users nav-users-offline">
                <li>
-                  <a href="javascript:void(0)">                  
+                  <a href="javascript:void(0)">
                   <%= image_tag("placeholders/avatars/avatar7.jpg", alt: "avatar", class: "nav-users-avatar")  %>
                   <span class="nav-users-heading">Nathan Moore</span>
                   <span class="text-muted">UX Designer</span>
@@ -103,17 +103,17 @@
    <div class="content-header content-header-media">
       <div class="header-section">
          <div class="row">
-            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">               
+            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
                <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-avatar pull-left")  %>
                <h1><%= @profile.name %> (<%= @profile.username %>)</h1>
                <h2 class="text-light-op"> Total Books in library: <%= @profile.user.books.distinct.count %></h2>
             </div>
             <% if @profile.user != current_user %>
               <div class="col-sm-5 col-md-4 col-lg-3 text-right content-float-hor push-bit-top-bottom">
-                 <div class="row">                  
+                 <div class="row">
                     <div class="col-xs-6 col-sm-12">
                       <%= button_tag :onclick => "javascript:follow(#{@profile.id})",
-                        type: "button",    
+                        type: "button",
                         class: "btn btn-xs btn-follow btn-follow-#{@profile.id} btn-effect-ripple #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}" do %>
                           <% if current_user.following?(@profile.user) %>
                           <i class="fa fa-users"></i>
@@ -122,14 +122,14 @@
                           <i class="fa fa-user-plus"></i>
                           <strong><span><%= " #{t 'users.follow'}" %></span></strong>
                           <% end %>
-                          
+
                       <% end %>
-                    </div>                  
+                    </div>
                  </div>
               </div>
             <% end %>
          </div>
-      </div>      
+      </div>
       <%= image_tag(@profile.cover_safe, alt: "cover")  %>
    </div>
 <% end %>

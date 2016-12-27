@@ -670,9 +670,13 @@ a.sidebar-title:hover {
     position: absolute;
     top: 0;
     left: 0%;
-    width: 2560px;
-    height: 260px;
-    margin-left: 0px
+    margin-left: 0px;
+
+    display: block;
+    max-width:2560px;
+    max-height:260px;
+    width: auto;
+    height: auto;
 }
 .content-header-media small {
     color: #ccc

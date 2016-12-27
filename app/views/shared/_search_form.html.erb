@@ -7,7 +7,7 @@
     <% end %>
 
     <span id="remote">
-      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => placeholder %>
+      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-md', :placeholder => placeholder, autocomplete: "off" %>
     </span>
 
     <span class="input-group-btn">
