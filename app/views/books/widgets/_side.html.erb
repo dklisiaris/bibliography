@@ -1,26 +1,26 @@
 <div class="widget">
-  <div class="widget-content widget-content-mini border-bottom">    
-    <i class=<%= "\"fa #{icon}\"".html_safe %>></i><strong><%= title %></strong>
-  </div>      
-  <div class="widget-content widget-content-full">        
+  <div class="widget-content widget-content-mini border-bottom">
+    <%= fa(icon) %><strong><%= title %></strong>
+  </div>
+  <div class="widget-content widget-content-full">
      <table class="table table-borderless table-striped table-vcenter">
         <tbody>
-          <% books.each do |book| %>                
-            <tr>                                                                       
+          <% books.each do |book| %>
+            <tr>
               <td class="text-center" style="width: 80px;">
                  <%= link_to image_tag(book.cover, alt: "book_cover", width: "80", class: "img-thumbnail"), book %>
               </td>
-              <td>                     
+              <td>
                 <%= link_to book.title, book %><br>
                 <%= link_to book.writers.first do %>
-                  <span class="text-muted"><small><%= book.main_author %></small></span>                     
-                <% end %> 
+                  <span class="text-muted"><small><%= book.main_author %></small></span>
+                <% end %>
               </td>
               <td class="text-center" style="width: 80px;">
                 <%= render partial: 'books/widgets/collections_manager_btn', locals: {book: book} %>
-              </td>                  
-            </tr>                
-          <% end %>                  
+              </td>
+            </tr>
+          <% end %>
         </tbody>
      </table>
   </div>

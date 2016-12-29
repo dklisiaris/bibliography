@@ -41,7 +41,25 @@
         <%= image_tag(@profile.cover_safe, alt: "cover", class: "img-thumbnail pull-left") %>
         <%= f.file_field :cover, class: "form-control" %>
       </div>
-    </div>    
+    </div>
+    <div class="form-group">
+      <%= f.label :website, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :website, class: "form-control", placeholder: "My website" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :goodreads, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :goodreads, class: "form-control", placeholder: "Good Reads profile" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :librarything, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :librarything, class: "form-control", placeholder: "That Library Thing profile" %>
+      </div>
+    </div>
     <div class="form-group">
       <%= f.label :about_me, class: 'col-md-3 control-label' %>
       <div class="col-md-6">
@@ -52,6 +70,30 @@
       <%= f.label :about_library, class: 'col-md-3 control-label' %>
       <div class="col-md-6">
       <%= f.text_area :about_library, class: "form-control", placeholder: "Text", rows: 7 %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :facebook, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :facebook, class: "form-control", placeholder: "Facebook profile" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :twitter, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :twitter, class: "form-control", placeholder: "Twitter profile" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :googleplus, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :googleplus, class: "form-control", placeholder: "Google Plus profile" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :pinterest, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :pinterest, class: "form-control", placeholder: "Pinterest profile" %>
       </div>
     </div>
     <div class="form-group">
@@ -78,7 +120,7 @@
         <%= label_tag(nil, class: 'csscheckbox csscheckbox-primary') do %>
           <%= f.check_box :allow_comments %>
           <span></span>
-        <% end %>      
+        <% end %>
       </div>
     </div>
 
@@ -88,7 +130,7 @@
         <%= label_tag(nil, class: 'csscheckbox csscheckbox-primary') do %>
           <%= f.check_box :allow_friends %>
           <span></span>
-        <% end %>        
+        <% end %>
       </div>
     </div>
 
@@ -101,30 +143,30 @@
 
     <div class="form-group">
       <%= f.label :discoverable_by_email, class: 'col-md-3 control-label' %>
-      <div class="col-md-6">    
+      <div class="col-md-6">
         <%= label_tag(nil, class: 'csscheckbox csscheckbox-primary') do %>
           <%= f.check_box :discoverable_by_email %>
           <span></span>
-        <% end %>           
+        <% end %>
       </div>
     </div>
 
     <div class="form-group">
       <%= f.label :receive_newsletters, class: 'col-md-3 control-label' %>
-      <div class="col-md-6">     
+      <div class="col-md-6">
         <%= label_tag(nil, class: 'csscheckbox csscheckbox-primary') do %>
           <%= f.check_box :receive_newsletters %>
           <span></span>
-        <% end %>                                    
+        <% end %>
       </div>
     </div>
 
      <div class="form-group form-actions">
-        <div class="col-md-9 col-md-offset-3">   
-          <%= button_tag("Save", type: "submit", class: "btn btn-effect-ripple btn-primary") %> 
-          <%= link_to("Back to Profile",public_profile_path(@profile.id), class: "btn btn-effect-ripple btn-danger") %> 
-        </div>   
-      </div> 
+        <div class="col-md-9 col-md-offset-3">
+          <%= button_tag("Save", type: "submit", class: "btn btn-effect-ripple btn-primary") %>
+          <%= link_to("Back to Profile",public_profile_path(@profile.id), class: "btn btn-effect-ripple btn-danger") %>
+        </div>
+      </div>
   <% end %>
 </div>
 

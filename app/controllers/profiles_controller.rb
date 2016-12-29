@@ -10,7 +10,9 @@ class ProfilesController < ApplicationController
 
   respond_to :html
 
-  def show    
+  def show
+    @recommended_books = @profile.user.liked_books.limit(5)
+    @recommended_authors = @profile.user.liked_authors.limit(5)
     respond_with(@profile)
   end
 
@@ -29,7 +31,7 @@ class ProfilesController < ApplicationController
       current_user.follow(@profile.user)
     end
 
-    render json: {status: 200, message: 'ok', 
+    render json: {status: 200, message: 'ok',
       followed: current_user.following?(@profile.user), followers: @profile.user.followers_count}
   end
 
@@ -37,33 +39,37 @@ class ProfilesController < ApplicationController
     def set_public_profile
       if params[:id].present?
         @profile = Profile.find(params[:id])
-        authorize @profile        
-      else 
+        authorize @profile
+      else
         set_current_users_profile
-      end      
+      end
     end
 
     def set_current_users_profile
       if current_user
         @profile = current_user.profile
-        authorize @profile  
+        authorize @profile
       else
-        redirect_to new_user_session_path    
+        redirect_to new_user_session_path
       end
-    end    
+    end
 
     def set_enums
       @account_types   = Profile.account_types
       @privacies       = Profile.privacies
       @languages       = Profile.languages
       @email_privacies = Profile.email_privacies
-    end    
+    end
 
     def profile_params
-      params.require(:profile).permit(:username, :name, :avatar, :cover, :about_me, :about_library, :account_type, :privacy, :language, :allow_comments, :allow_friends, :email_privacy, :discoverable_by_email, :receive_newsletters)
+      params.require(:profile).permit(:username, :name, :avatar, :cover,
+        :website, :about_me, :about_library, :facebook, :twitter, :googleplus,
+        :pinterest, :goodreads, :librarything, :account_type, :privacy, :language,
+        :allow_comments, :allow_friends, :email_privacy, :discoverable_by_email,
+        :receive_newsletters)
     end
 
     def set_json_format
       request.format = :json
-    end    
+    end
 end

@@ -12,6 +12,7 @@ el:
   invite_friends: "Προσκαλέστε φίλους"
   and: "και"
   about: "περίπου"
+  by: "από"
 
   home: "Αρχική"
   collections: "Συλλογές"
@@ -129,9 +130,13 @@ el:
     with_x_views: "%{count} εμφανίσεις"
     search: "Αναζήτηση στους συγγραφείς"
     favoured: "Αγαπημένος Συγγραφέας"
+    favourite: "Αγαπημένοι Συγγραφείς"
     add_to_favourites: "Προσθήκη στους αγαπημένους"
     main: "Κύριος Συγγραφέας"
     other: "Άλλοι Συγγραφείς"
+    pl_followed_by: "Ακολουθούνται από"
+    sg_followed_by: "Ακολουθείται από"
+    author_of: "Συγγραφέας του"
 
   publishers:
     label: "Εκδότες"
@@ -194,6 +199,7 @@ el:
     not_recommend: "Δεν Το Προτείνω"
     remove_recommendation: "Αφαίρεση Πρότασης"
     recommended: "Προτεινόμενα"
+    recommended_by: "Προτεινόμενα από"
     recommended_x_times: "Προτεινόμενο %{count} φορές"
     popular: "Δημοφιλή"
     awarded: "Βραβευμένα"

@@ -42,6 +42,20 @@ COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance betwe
 
 
 --
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -564,7 +578,11 @@ CREATE TABLE profiles (
     receive_newsletters boolean DEFAULT true,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    social hstore,
+    gender integer,
+    city character varying,
+    birthday timestamp without time zone
 );
 
 
@@ -1554,4 +1572,10 @@ INSERT INTO schema_migrations (version) VALUES ('20151003140444');
 INSERT INTO schema_migrations (version) VALUES ('20160521142614');
 
 INSERT INTO schema_migrations (version) VALUES ('20160521200629');
+
+INSERT INTO schema_migrations (version) VALUES ('20161229202559');
+
+INSERT INTO schema_migrations (version) VALUES ('20161229202920');
+
+INSERT INTO schema_migrations (version) VALUES ('20161229221829');
 

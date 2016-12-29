@@ -57,21 +57,58 @@
         </div>
       </div>
       <div class="widget-content border-bottom">
-        <h4>About me</h4>
-        <p><%= @profile.about_me %></p>
-        <h4>About library</h4>
-        <p><%= @profile.about_library %></p>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td style="width: 30%;"><strong>Activity</strong></td>
+              <td>Member since <%= I18n.l(@profile.created_at, format: '%b %Y') %></td>
+            </tr>
+            <% if @profile.about_me.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>About me</strong></td>
+              <td><%= @profile.about_me %></td>
+            </tr>
+            <% end %>
+            <% if @profile.about_library.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>About Library</strong></td>
+              <td><%= @profile.about_library %></td>
+            </tr>
+            <% end %>
+            <% if @profile.website.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>Website</strong></td>
+              <td><%= link_to @profile.website, @profile.website, target: "_blank" %></td>
+            </tr>
+            <% end %>
+            <% if @profile.goodreads.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>Good Reads</strong></td>
+              <td><%= link_to @profile.goodreads, @profile.goodreads, target: "_blank" %></td>
+            </tr>
+            <% end %>
+            <% if @profile.librarything.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>That Library Thing</strong></td>
+              <td><%= link_to @profile.librarything, @profile.librarything, target: "_blank" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
+
+      <% if @profile.social_any? %>
       <div class="widget-content">
         <h4>Social</h4>
         <div class="btn-group">
-          <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook fa-fw"></i></a>
-          <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter fa-fw"></i></a>
-          <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Google Plus"><i class="fa fa-google-plus fa-fw"></i></a>
-          <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest fa-fw"></i></a>
-          <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble fa-fw"></i></a>
+          <%= link_to fa('facebook'), @profile.facebook, target: "_blank", class: "btn btn-default", "data-toggle": "tooltip", title: "Facebook" if @profile.facebook.present? %>
+          <%= link_to fa('twitter'), @profile.twitter, target: "_blank", class: "btn btn-default", "data-toggle": "tooltip", title: "Twitter" if @profile.twitter.present? %>
+          <%= link_to fa('google-plus'), @profile.googleplus, target: "_blank", class: "btn btn-default", "data-toggle": "tooltip", title: "Google Plus" if @profile.googleplus.present? %>
+          <%= link_to fa('pinterest'), @profile.pinterest, target: "_blank", class: "btn btn-default", "data-toggle": "tooltip", title: "Pinterest" if @profile.pinterest.present? %>
         </div>
       </div>
+      <% end %>
+
     </div>
 
     <div class="widget">
@@ -109,84 +146,21 @@
   </div>
 
   <div class="col-lg-5">
+    <%= render partial: 'books/widgets/side',
+      locals: {
+        title: " #{t('books.recommended_by')} #{@profile.username}",
+        icon: "thumbs-o-up",
+        books: @recommended_books
+      } %>
+
+    <%= render partial: 'authors/widgets/side',
+      locals: {
+        title: " #{t('authors.favourite')}",
+        icon: "user-secret",
+        authors: @recommended_authors
+      } %>
+
     <div class="widget">
-     <div class="widget-content widget-content-mini border-bottom">
-       <span class="pull-right text-muted">5 People</span>
-       People you may know
-     </div>
-     <div class="widget-content widget-content-full">
-       <table class="table table-borderless table-striped table-vcenter">
-         <tbody>
-           <tr>
-             <td class="text-center" style="width: 100px;">
-               <%= image_tag("placeholders/avatars/avatar13.jpg", alt: "avatar", class: "img-circle")  %>
-             </td>
-             <td>
-               <a href="javascript:void(0)">Sarah Hart</a><br>
-               <a href="javascript:void(0)" class="text-muted"><small>5 common friends</small></a>
-             </td>
-             <td class="text-center" style="width: 80px;">
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="Friend Request"><i class="fa fa-plus"></i></a>
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" data-toggle="tooltip" title="Follow"><i class="fa fa-share"></i></a>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-center">
-               <%= image_tag("placeholders/avatars/avatar5.jpg", alt: "avatar", class: "img-circle")  %>
-             </td>
-             <td>
-               <a href="javascript:void(0)">Mark Aguilar</a><br>
-               <a href="javascript:void(0)" class="text-muted"><small>2 common friends</small></a>
-             </td>
-             <td class="text-center">
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="Friend Request"><i class="fa fa-plus"></i></a>
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" data-toggle="tooltip" title="Follow"><i class="fa fa-share"></i></a>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-center">
-               <%= image_tag("placeholders/avatars/avatar15.jpg", alt: "avatar", class: "img-circle")  %>
-             </td>
-             <td>
-               <a href="javascript:void(0)">Karen Jackson</a><br>
-               <a href="javascript:void(0)" class="text-muted"><small>3 common friends</small></a>
-             </td>
-             <td class="text-center">
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="Friend Request"><i class="fa fa-plus"></i></a>
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" data-toggle="tooltip" title="Follow"><i class="fa fa-share"></i></a>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-center">
-               <%= image_tag("placeholders/avatars/avatar1.jpg", alt: "avatar", class: "img-circle")  %>
-             </td>
-             <td>
-               <a href="javascript:void(0)">Russell Larson</a><br>
-               <a href="javascript:void(0)" class="text-muted"><small>5 common friends</small></a>
-             </td>
-             <td class="text-center">
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="Friend Request"><i class="fa fa-plus"></i></a>
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" data-toggle="tooltip" title="Follow"><i class="fa fa-share"></i></a>
-             </td>
-           </tr>
-           <tr>
-             <td class="text-center">
-               <%= image_tag("placeholders/avatars/avatar15.jpg", alt: "avatar", class: "img-circle")  %>
-             </td>
-             <td>
-               <a href="javascript:void(0)">Howard Adams</a><br>
-               <a href="javascript:void(0)" class="text-muted"><small>5 common friends</small></a>
-             </td>
-             <td class="text-center">
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" data-toggle="tooltip" title="Friend Request"><i class="fa fa-plus"></i></a>
-               <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" data-toggle="tooltip" title="Follow"><i class="fa fa-share"></i></a>
-             </td>
-           </tr>
-         </tbody>
-       </table>
-     </div>
-   </div>
-   <div class="widget">
      <div class="widget-content widget-content-mini border-bottom">
        <a href="page_ready_pricing_tables.html" class="pull-right text-muted">Pro Plan</a>
        Account Status

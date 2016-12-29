@@ -33,6 +33,7 @@ en:
   invite_friends: "Invite friends"
   and: "and"
   about: "about"
+  by: "by"
 
   home: "Home"
   collections: "Collections"
@@ -150,9 +151,13 @@ en:
     with_x_views: "%{count} views"
     search: "Search Authors"
     favoured: "Favoured"
+    favourite: "Favourite Authors"
     add_to_favourites: "Add to favourites"
     main: "Main Author"
     other: "Other Authors"
+    pl_followed_by: "Followed by"
+    sg_followed_by: "Followed by"
+    author_of: "Author of"
 
   publishers:
     label: "Publishers"
@@ -215,6 +220,7 @@ en:
     not_recommend: "Not recommend"
     remove_recommendation: "Remove Recommendation"
     recommended: "Recommended"
+    recommended_by: "Recommended by"
     recommended_x_times: "Recommended %{count} times"
     popular: "Popular"
     awarded: "Awarded"

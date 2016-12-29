@@ -3,8 +3,8 @@ class BooksController < ApplicationController
   before_action :authenticate_user!, only: [:collections, :manage_collections, :like, :dislike]
   before_action :set_book
   skip_before_action :set_book, only: [:index, :new, :create, :my]
-  before_action :set_enums, only: [:new, :edit]    
-  
+  before_action :set_enums, only: [:new, :edit]
+
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
 
@@ -13,27 +13,27 @@ class BooksController < ApplicationController
   impressionist :actions=>[:index]
 
   def index
-    if params[:q].present?           
+    if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
-      # @books = policy_scope(Book)        
+      # @books = policy_scope(Book)
       #   .search_fast(keyphrase)
       #   .order(impressions_count: :desc)
       #   .limit(50)
 
-      @books = policy_scope(Book)        
+      @books = policy_scope(Book)
         .search(keyphrase, order: {_score: :desc}, limit: 50)
 
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
-    end 
+    end
     # @books_est_count = 20 * @books.total_pages
-    @shelves = current_user.shelves if user_signed_in?    
+    @shelves = current_user.shelves if user_signed_in?
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
       render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
     else
       respond_with(@books)
-    end    
+    end
   end
 
   def show
@@ -62,7 +62,7 @@ class BooksController < ApplicationController
     respond_with(@book)
   end
 
-  def edit    
+  def edit
   end
 
   def create
@@ -73,21 +73,21 @@ class BooksController < ApplicationController
     respond_with(@book)
   end
 
-  def update    
+  def update
     @book.update(book_params)
 
     respond_with(@book)
   end
 
-  def destroy    
+  def destroy
     @book.destroy
 
     respond_with(@book)
   end
 
-  # Shows a json respond with user collections this book belongs to  
-  def collections    
-    @shelves = current_user.book_in_which_collections(@book) if user_signed_in?  
+  # Shows a json respond with user collections this book belongs to
+  def collections
+    @shelves = current_user.book_in_which_collections(@book) if user_signed_in?
   end
 
   def manage_collections
@@ -104,7 +104,7 @@ class BooksController < ApplicationController
     authorize :book, :like?
 
     if not current_user.likes?(@book)
-      current_user.like(@book) 
+      current_user.like(@book)
     else
       current_user.unlike(@book)
     end
@@ -116,30 +116,30 @@ class BooksController < ApplicationController
     authorize :book, :dislike?
 
     if not current_user.dislikes?(@book)
-      current_user.dislike(@book) 
+      current_user.dislike(@book)
     else
       current_user.undislike(@book)
     end
-    
-    render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count} 
-  end  
+
+    render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}
+  end
 
   def my
     authorize :book, :my?
 
     @books = current_user.books.page(params[:page])
     @shelves = current_user.shelves if user_signed_in?
-    
+
     respond_with(@books)
   end
 
   private
-    def set_book          
+    def set_book
       @book = Book.includes(:authors).find(params[:id])
       authorize @book
     end
 
-    def book_params      
+    def book_params
       params.require(:book).permit(:title, :subtitle, :description, :image, :isbn, :isbn13, :ismn, :issn, :series_name, :series_volume, :pages, :size, :cover_type, :publication_year, :publication_version, :publication_place, :price, :price_updated_at, :availability, :format, :language, :original_language, :original_title, :publisher_id, :extra, :biblionet_id, :slug)
     end
 
