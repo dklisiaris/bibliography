@@ -23,7 +23,13 @@ class User < ActiveRecord::Base
 
   # after_create :assign_default_role
   def screen_name
-    name = profile.name ||= profile.username ||= email
+    if profile.name.present?
+      name = profile.name
+    elsif profile.username.present?
+      name = profile.username
+    else
+      name = email
+    end
   end
 
   def avatar

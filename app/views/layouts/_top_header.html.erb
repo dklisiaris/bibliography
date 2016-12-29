@@ -7,16 +7,16 @@
                 <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
                 </a>
               </li>
-              <%= top_nav_li(UnicodeUtils.upcase(detone(t('home'))), root_path) %> 
-              <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), shelves_path) %> 
-              <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), my_books_path) %> 
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('home'))), root_path) %>
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), shelves_path) %>
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), my_books_path) %>
 
             </ul>
             <ul class="nav navbar-nav-custom pull-right">
-              <% if user_signed_in? %> 
-              <%= top_nav_li(current_user.screen_name, public_profile_path) %>                           
+              <% if user_signed_in? %>
+              <%= top_nav_li(current_user.screen_name, public_profile_path) %>
               <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                 <%= image_tag(current_user.avatar, alt: "avatar")  %>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -24,25 +24,25 @@
                     <%= content_tag(:strong, subtext(current_user.try(:profile).try(:username).try(:upcase), 16)) %>
                   </li>
 
-                  <%= top_nav_dropdown_li(UnicodeUtils.titlecase(t('edit_profile')), edit_profile_path, "fa fa-pencil-square") %> 
-                  
+                  <%= top_nav_dropdown_li(UnicodeUtils.titlecase(t('edit_profile')), edit_profile_path, "fa fa-pencil-square") %>
+
                   <li class="divider"></li>
-                  <li>                    
-                    <%= link_to edit_user_registration_path do %>                    
+                  <li>
+                    <%= link_to edit_user_registration_path do %>
                       <i class="fa fa-key fa-fw pull-right"></i><%= t('account.label') %>
-                    <% end %>                                           
+                    <% end %>
                   </li>
                   <li>
-                    <%= link_to destroy_user_session_path, :method=>'delete' do %>                    
+                    <%= link_to destroy_user_session_path, :method=>'delete' do %>
                       <i class="fa fa-power-off fa-fw pull-right"></i><%= t('logout') %>
-                    <% end %> 
+                    <% end %>
                   </li>
                 </ul>
               </li>
-              <% else %>            
-                <%= top_nav_li(UnicodeUtils.upcase(t('login')), new_user_session_path) %>                 
-                <%= top_nav_li(UnicodeUtils.upcase(t('signup')), new_user_registration_path) %> 
-              <% end %>              
+              <% else %>
+                <%= top_nav_li(UnicodeUtils.upcase(t('login')), new_user_session_path) %>
+                <%= top_nav_li(UnicodeUtils.upcase(t('signup')), new_user_registration_path) %>
+              <% end %>
             </ul>
           </header>
           <!-- END HEADER -->
