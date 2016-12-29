@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :bookshelves, through: :shelves
   has_many :books, through: :shelves
   has_many :writers, through: :books
+  has_many :comments
 
   recommends :books, :shelves, :authors, :categories
 
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
 
   # after_create :assign_default_role
   def screen_name
-    name = profile.name ||= profile.username ||= email 
+    name = profile.name ||= profile.username ||= email
   end
 
   def avatar
@@ -61,13 +62,13 @@ class User < ActiveRecord::Base
 
   private
 
-  def assign_api_key    
+  def assign_api_key
     write_attribute(:api_key, self.class.generate_api_key)
   end
 
   def assign_default_role
     add_role :registered
-  end         
+  end
 
   def assign_profile
     create_profile(username: email.gsub(/@.+\z/, id.to_s))

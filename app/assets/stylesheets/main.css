@@ -852,6 +852,11 @@ a.widget:active {
 .widget-image.widget-image-sm {
     height: 270px
 }
+
+.widget-image.widget-image-220 {
+    height: 220px
+}
+
 .widget-image.widget-image-xs {
     height: 175px
 }
@@ -869,9 +874,29 @@ a.widget:active {
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 15px 25px;
-    background: rgba(0, 0, 0, .65)
+    padding: 25px;
+    background: rgba(0, 0, 0, .65);
 }
+
+.widget-image-content .btn-follow {
+    position: absolute !important;
+    top: 20px;
+    right:15px;
+}
+
+.widget-image .cover {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin-left: 0px;
+
+    display: block;
+    max-width:2560px;
+    max-height:220px;
+    width: auto;
+    height: auto;
+}
+
 .widget-content {
     padding: 15px
 }
