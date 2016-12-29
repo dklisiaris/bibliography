@@ -188,6 +188,8 @@ GEM
     hiredis (0.6.1)
     hooks (0.4.1)
       uber (~> 0.0.14)
+    hstore_accessor (1.0.3)
+      activerecord (>= 4.0.0)
     htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -213,6 +215,8 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -444,6 +448,7 @@ DEPENDENCIES
   geocoder (~> 1.2)
   greeklish (~> 0.0.1)
   hamlit-rails (~> 0.1.0)
+  hstore_accessor (~> 1.0, >= 1.0.3)
   impressionist (= 1.5.1)
   jbuilder (~> 2.2)
   jquery-rails (~> 4.1)
@@ -451,6 +456,7 @@ DEPENDENCIES
   json (~> 1.8)
   kaminari (~> 0.16)
   launchy (~> 2.4)
+  letter_opener (~> 1.4, >= 1.4.1)
   marc (~> 1.0.0)
   modernizr-rails (~> 2.7)
   newrelic_rpm (~> 3.15, >= 3.15.2.317)
@@ -487,4 +493,4 @@ DEPENDENCIES
   web-console (~> 3.1)
 
 BUNDLED WITH
-   1.13.1
+   1.13.7

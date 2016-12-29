@@ -199,9 +199,15 @@ group :development do
 
   # Help to kill N+1 queries and unused eager loading.
   gem 'bullet', '~> 5.3'
+
+  # Preview mail in the browser instead of sending.
+  gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 end
 
 group :development do
   # CLI gem for comfortably working with icon fonts
   gem 'fontello_rails_converter', '~> 0.4.4'
 end
+
+# Adds typed hstore backed fields to an ActiveRecord model.
+gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
