@@ -251,6 +251,11 @@ el:
     label: "Βραβεία"
     new: "Νέο Βραβείο"
 
+  gender:
+    male: "Άνδρας"
+    female: "Γυναίκα"
+    other: "Άλλο"
+
   # Authorization
   pundit:
     default: 'Δεν μπορείτε να πραγματοποιήσετε αυτην την ενέργεια.'

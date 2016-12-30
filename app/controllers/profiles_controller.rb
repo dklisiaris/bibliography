@@ -59,6 +59,7 @@ class ProfilesController < ApplicationController
       @privacies       = Profile.privacies
       @languages       = Profile.languages
       @email_privacies = Profile.email_privacies
+      @genders         = Profile.genders
     end
 
     def profile_params
@@ -66,7 +67,7 @@ class ProfilesController < ApplicationController
         :website, :about_me, :about_library, :facebook, :twitter, :googleplus,
         :pinterest, :goodreads, :librarything, :account_type, :privacy, :language,
         :allow_comments, :allow_friends, :email_privacy, :discoverable_by_email,
-        :receive_newsletters)
+        :receive_newsletters, :gender, :city, :birthday)
     end
 
     def set_json_format

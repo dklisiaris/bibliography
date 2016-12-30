@@ -29,6 +29,26 @@
       </div>
     </div>
     <div class="form-group">
+      <%= f.label :gender, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+      <%= f.select :gender, options_for_select(@genders.collect { |s|
+        [Profile.humanize_gender(s[0]), s[0]] }, selected: @profile.gender),
+        {include_blank: true, prompt: 'Select Gender'}, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :city, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.text_field :city, class: "form-control", placeholder: "The city you live in" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :birthday, class: 'col-md-3 control-label' %>
+      <div class="col-md-6">
+        <%= f.date_select :birthday, {include_blank: true, start_year: 1900}, {class: "form-control date-input"} %>
+      </div>
+    </div>
+    <div class="form-group">
       <%= f.label :avatar, class: 'col-md-3 control-label' %>
       <div class="col-md-6">
         <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-thumbnail img-thumbnail-avatar pull-left")  %>

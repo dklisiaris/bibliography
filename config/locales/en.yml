@@ -271,6 +271,11 @@ en:
     label: "Awards"
     new: "New Award"
 
+  gender:
+    male: "Male"
+    female: "Female"
+    other: "Other"
+
   # Authorization
   pundit:
     default: 'You cannot perform this action.'

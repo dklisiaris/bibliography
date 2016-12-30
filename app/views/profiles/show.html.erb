@@ -59,6 +59,12 @@
       <div class="widget-content border-bottom">
         <table class="table table-striped">
           <tbody>
+            <% if @profile.details_any?.present? %>
+            <tr>
+              <td style="width: 30%;"><strong>Details</strong></td>
+              <td><%= @profile.details %></td>
+            </tr>
+            <% end %>
             <tr>
               <td style="width: 30%;"><strong>Activity</strong></td>
               <td>Member since <%= I18n.l(@profile.created_at, format: '%b %Y') %></td>
@@ -108,7 +114,6 @@
         </div>
       </div>
       <% end %>
-
     </div>
 
     <div class="widget">

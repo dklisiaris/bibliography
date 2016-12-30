@@ -4,6 +4,7 @@ class Profile < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   mount_uploader :cover, CoverUploader
 
+  enum gender: %i(male female other)
   enum account_type: %i(Προσωπικός Οργανισμός)
   enum privacy: %i(Δημόσιος Ιδιωτικός)
   enum language: %i(Ελληνικά English)
@@ -36,6 +37,30 @@ class Profile < ActiveRecord::Base
 
   def social_any?
     facebook.present? || twitter.present? || googleplus.present? || pinterest.present?
+  end
+
+  def details_any?
+    gender.present? || city.present? || birthday.present?
+  end
+
+  def screen_gender
+    I18n.t('gender.'+ gender) if gender.present?
+  end
+
+  def details
+    [screen_gender, age, city].reject(&:blank?).join(', ')
+  end
+
+  def age
+    if birthday.present?
+      now = Time.now.utc.to_date
+      now.year - birthday.year - ((now.month > birthday.month ||
+        (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    end
+  end
+
+  def self.humanize_gender(gender_symbol)
+    I18n.t('gender.'+ gender_symbol) if gender_symbol.present?
   end
 
 end
