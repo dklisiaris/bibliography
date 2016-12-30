@@ -1,17 +1,16 @@
-<div class="widget">  
-  <div class="widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom">    
-    <% if defined? icon.present? %>
-    <i class=<%= "\"fa #{icon}\"".html_safe %>></i>
-    <% end %>
-    <strong><%= title %></strong>
-  </div>      
+<% cover_size ||= '114' %>
+
+<div class="widget">
+  <div class="widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom">
+    <%= fa(icon) %><strong><%= title %></strong>
+  </div>
   <div class="widget-content">
     <div class="book-container">
       <% books.each do |book| %>
         <div class="book-cover">
-          <%= link_to image_tag(book.cover, height: '114', width: '114', alt: "book_cover", class: "img-thumbnail center-block", 'data-toggle' => "tooltip", "data-placement" => "top", title: book.title), book %>      
-        </div>          
-      <% end %>     
+          <%= link_to image_tag(book.cover, height: cover_size, width: cover_size, alt: "book_cover", class: "img-thumbnail center-block", "data-toggle" => "tooltip", "data-placement" => "top", title: book.title), book %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

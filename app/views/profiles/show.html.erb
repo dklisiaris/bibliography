@@ -116,6 +116,9 @@
       <% end %>
     </div>
 
+    <%= render partial: 'books/widgets/grid',
+    locals: {title: " #{t('books.favourite')}", icon: "heart-o", cover_size: '72', books: @favourite_books} %>
+
     <div class="widget">
       <div class="widget-content widget-content-mini themed-background-dark text-light-op">
         <span class="pull-right text-muted">just now</span>

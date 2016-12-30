@@ -225,6 +225,7 @@ en:
     popular: "Popular"
     awarded: "Awarded"
     latest: "Latest"
+    favourite: "Favourite Books"
     in_x_collections: "In %{count} Collections"
     with_x_views: "%{count} views"
     search: "Search Books"
@@ -261,6 +262,12 @@ en:
     add_to_collections: "Add to collections"
     edit_collections: "Edit collections"
     new: "New Collection"
+    my_library: "My library"
+    want_to_read: "Want to read"
+    favourites: "Favourites"
+    currently_reading: "Currently reading"
+    read_but_not_own: "Read but dont own"
+    to_read: "To read"
 
   users:
     follow: "Follow"

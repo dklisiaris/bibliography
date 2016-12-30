@@ -39,7 +39,12 @@
     <%= render 'home/widgets/my_books' if user_signed_in? %>
     <%= render 'home/widgets/my_collections' if user_signed_in? %>
     <%= render partial: 'books/widgets/grid',
-    locals: {title: " #{t('recently_added')}", icon: "fa-clock-o", books: @recently_added} if user_signed_in? %>
+      locals: {
+        title: " #{t('recently_added')}",
+        icon: "clock-o",
+        cover_size: '114',
+        books: @recently_added
+      } if user_signed_in? %>
   </div>
 
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">

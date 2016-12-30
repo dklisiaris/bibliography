@@ -204,6 +204,7 @@ el:
     popular: "Δημοφιλή"
     awarded: "Βραβευμένα"
     latest: "Τελευταίες Κυκλοφορίες"
+    favourite: "Αγαπημένα Βιβλία"
     in_x_collections: "Σε %{count} συλλογές"
     with_x_views: "%{count} εμφανίσεις"
     search: "Αναζήτηση στα βιβλία"
@@ -241,6 +242,12 @@ el:
     add_to_collections: "Προσθήκη σε συλλογές"
     edit_collections: "Επεξεργασία συλλογών"
     new: "Νέα συλλογή"
+    my_library: "Η βιβλιοθήκη μου"
+    want_to_read: "Θέλω να διαβάσω"
+    favourites: "Αγαπημένα"
+    currently_reading: "Διαβάζω τώρα"
+    read_but_not_own: "Εχω διαβάσει αλλά δεν έχω"
+    to_read: "Για διάβασμα"
 
   users:
     follow: "Ακολούθησε"

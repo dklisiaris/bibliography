@@ -5,12 +5,12 @@ class Shelf < ActiveRecord::Base
   has_many :books, through: :bookshelves
 
   enum privacy: %i(Ίδια\ με\ το\ προφίλ Δημόσια Ιδιωτικη)
-  enum default_name: ["Η βιβλιοθήκη μου", "Θέλω να διαβάσω", "Αγαπημένα", "Διαβάζω τώρα", "Εχω διαβάσει αλλά δεν έχω", "Για διάβασμα"]
+  enum default_name: %i(my_library want_to_read favourites currently_reading read_but_not_own to_read)
 
   def screen_name
     return name if name.present? and not built_in?
 
-    return default_name.humanize if built_in?
+    return I18n.t('shelves.' + default_name) if built_in?
   end
 
 end
