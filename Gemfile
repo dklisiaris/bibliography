@@ -202,6 +202,9 @@ group :development do
 
   # Preview mail in the browser instead of sending.
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
+
+  # Profiler for your development and production Ruby rack apps.
+  gem 'rack-mini-profiler', '~> 0.10.1'
 end
 
 group :development do
