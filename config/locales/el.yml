@@ -205,6 +205,7 @@ el:
     awarded: "Βραβευμένα"
     latest: "Τελευταίες Κυκλοφορίες"
     favourite: "Αγαπημένα Βιβλία"
+    currently_reading: "Βιβλία που διαβάζει τώρα"
     in_x_collections: "Σε %{count} συλλογές"
     with_x_views: "%{count} εμφανίσεις"
     search: "Αναζήτηση στα βιβλία"

@@ -122,6 +122,10 @@
     <%= render partial: 'shelves/widgets/list',
     locals: {title: " #{t('shelves.collections')}", shelves: @shelves} %>
 
+    <%= render partial: 'books/widgets/grid',
+      locals: {title: " #{t('books.currently_reading')}",
+      icon: "book", cover_size: '72', books: @currently_reading_books} %>
+
     <% @activities.each do |activity| %>
       <%= render partial: 'books/widgets/activity',
         locals: {activity: activity}  if activity.trackable_type == 'Book' %>
