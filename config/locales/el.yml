@@ -198,9 +198,6 @@ el:
     recommend: "Το Προτείνω"
     not_recommend: "Δεν Το Προτείνω"
     remove_recommendation: "Αφαίρεση Πρότασης"
-    recommends: "προτείνει"
-    not_recommends: "δεν προτείνει"
-    recommended_verb: "πρότεινε"
     recommended: "Προτεινόμενα"
     recommended_by: "Προτεινόμενα από"
     recommended_x_times: "Προτεινόμενο %{count} φορές"
@@ -258,6 +255,15 @@ el:
     follow: "Ακολούθησε"
     unfollow: "Άρση Ακολούθησης"
     following: "Ακολουθείς"
+    verbs:
+      recommended: "πρότεινε"
+      not_recommends: "δεν προτείνει"
+      currently_reads: "διαβάζει τώρα"
+      wants_to_read: "θέλει να διαβάσει"
+      has_read: "έχει διαβάσει"
+      owns_in_library: "έχει στη βιβλιοθήκη"
+      will_read: "θα διαβάσει"
+      read_but_not_own: "έχει διαβάσει αλλά δεν έχει"
 
   awards:
     label: "Βραβεία"

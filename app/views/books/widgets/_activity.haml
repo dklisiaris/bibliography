@@ -1,13 +1,9 @@
 .widget
   .widget-content.widget-content-mini.themed-background-dark.text-light-op
     %span.pull-right.text-muted= time_ago_in_words(activity.created_at)
-    - if I18n.locale == :el
-      = (activity.owner.profile.female?) ? 'Η' : 'Ο'
+    = activity_article activity
     = link_to(activity.owner.screen_name, public_profile_path(activity.owner.profile), class: 'text-light')
-    - if activity.key == "book.recommend"
-      = t('books.recommended_verb')
-    - elsif activity.key == "book.not_recommend"
-      = t('books.not_recommends')
+    = activity_verb activity
     = t('books.a_book')
   .widget-content
     = render partial: "books/book", locals: {book: activity.trackable, rule: false}

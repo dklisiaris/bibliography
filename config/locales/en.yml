@@ -219,9 +219,6 @@ en:
     recommend: "Recommend"
     not_recommend: "Not recommend"
     remove_recommendation: "Remove Recommendation"
-    recommends: "recommends"
-    not_recommends: "not recommends"
-    recommended_verb: "recommended"
     recommended: "Recommended"
     recommended_by: "Recommended by"
     recommended_x_times: "Recommended %{count} times"
@@ -278,6 +275,16 @@ en:
     follow: "Follow"
     unfollow: "Unfollow"
     following: "Following"
+    verbs:
+      recommended: "recommended"
+      not_recommends: "not recommends"
+      currently_reads: "currently reads"
+      wants_to_read: "wants to read"
+      has_read: "has read"
+      owns_in_library: "owns in library"
+      will_read: "will read"
+      read_but_not_own: "has read but doesn't own"
+
 
   awards:
     label: "Awards"
