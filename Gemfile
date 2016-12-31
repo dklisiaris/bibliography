@@ -217,3 +217,6 @@ gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
 
 # Easy activity tracking for models
 gem 'public_activity', '~> 1.5'
+
+# Makes rendering and caching a collection of template partials easier and faster
+gem 'multi_fetch_fragments', '~> 0.0.17'

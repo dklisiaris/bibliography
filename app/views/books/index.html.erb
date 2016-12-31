@@ -1,7 +1,7 @@
 <% pages = {fa('home') => root_url, t('books.label') => nil} %>
 
-<%= cell(:navigation).call(:content_header, 
-  content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header,
+  content: render(partial: 'shared/search_form',
     locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) %>
 
 
@@ -9,16 +9,16 @@
    <div class="col-sm-8">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">               
-            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
+          <div class="block-options pull-right">
+            <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>
           </div>
           <h2><%= detone t('books.label') %></h2>
         </div>
 
-        <div class="row"> 
-          <div class="col-xs-12">   
+        <div class="row">
+          <div class="col-xs-12">
             <%= render "books/widgets/pagination" if defined? @books.total_pages %>
-            <hr> 
+            <hr>
 
             <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
 
@@ -32,14 +32,14 @@
   <div class="col-sm-4">
     <div class="block full">
       <div class="block-title">
-        <div class="block-options pull-right">               
-          <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>      
+        <div class="block-options pull-right">
+          <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>
         </div>
         <h2><%= detone t('books.filters.label') %></h2>
       </div>
 
-      <div class="row"> 
-        <div class="col-xs-12">   
+      <div class="row">
+        <div class="col-xs-12">
 
         </div>
       </div>
