@@ -90,6 +90,44 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: activities; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE activities (
+    id integer NOT NULL,
+    trackable_id integer,
+    trackable_type character varying,
+    owner_id integer,
+    owner_type character varying,
+    key character varying,
+    parameters text,
+    recipient_id integer,
+    recipient_type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE activities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+
+
+--
 -- Name: authors; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -796,6 +834,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
 
 
@@ -916,6 +961,14 @@ ALTER TABLE ONLY shelves ALTER COLUMN id SET DEFAULT nextval('shelves_id_seq'::r
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activities
+    ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 
 --
@@ -1123,6 +1176,27 @@ CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
 --
 
 CREATE INDEX impressionable_type_message_index ON impressions USING btree (impressionable_type, message, impressionable_id);
+
+
+--
+-- Name: index_activities_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_owner_id_and_owner_type ON activities USING btree (owner_id, owner_type);
+
+
+--
+-- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities USING btree (recipient_id, recipient_type);
+
+
+--
+-- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
 
 
 --
@@ -1578,4 +1652,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161229202559');
 INSERT INTO schema_migrations (version) VALUES ('20161229202920');
 
 INSERT INTO schema_migrations (version) VALUES ('20161229221829');
+
+INSERT INTO schema_migrations (version) VALUES ('20161230145401');
 

@@ -198,6 +198,9 @@ el:
     recommend: "Το Προτείνω"
     not_recommend: "Δεν Το Προτείνω"
     remove_recommendation: "Αφαίρεση Πρότασης"
+    recommends: "προτείνει"
+    not_recommends: "δεν προτείνει"
+    recommended_verb: "πρότεινε"
     recommended: "Προτεινόμενα"
     recommended_by: "Προτεινόμενα από"
     recommended_x_times: "Προτεινόμενο %{count} φορές"
@@ -208,6 +211,7 @@ el:
     in_x_collections: "Σε %{count} συλλογές"
     with_x_views: "%{count} εμφανίσεις"
     search: "Αναζήτηση στα βιβλία"
+    a_book: "ένα βιβλίο"
     filters:
       label: "Φίλτρα"
 
@@ -248,6 +252,7 @@ el:
     currently_reading: "Διαβάζω τώρα"
     read_but_not_own: "Εχω διαβάσει αλλά δεν έχω"
     to_read: "Για διάβασμα"
+    collections: "Συλλογές"
 
   users:
     follow: "Ακολούθησε"

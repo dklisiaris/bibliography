@@ -211,3 +211,6 @@ end
 
 # Adds typed hstore backed fields to an ActiveRecord model.
 gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
+
+# Easy activity tracking for models
+gem 'public_activity', '~> 1.5'

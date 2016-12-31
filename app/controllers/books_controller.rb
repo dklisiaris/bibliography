@@ -105,8 +105,11 @@ class BooksController < ApplicationController
 
     if not current_user.likes?(@book)
       current_user.like(@book)
+      @book.create_activity :recommend, owner: current_user
     else
       current_user.unlike(@book)
+      activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
+      activity.destroy if activity.present?
     end
 
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}
@@ -117,8 +120,11 @@ class BooksController < ApplicationController
 
     if not current_user.dislikes?(@book)
       current_user.dislike(@book)
+      @book.create_activity :not_recommend, owner: current_user
     else
       current_user.undislike(@book)
+      activity = current_user.activities.find_by(key: "book.not_recommend", trackable: @book)
+      activity.destroy if activity.present?
     end
 
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}

@@ -15,6 +15,8 @@ class ProfilesController < ApplicationController
     @recommended_authors = @profile.user.liked_authors.limit(5)
     @favourite_books = @profile.user.shelves
       .find_by(default_name: Shelf.default_names[:favourites]).books.limit(14)
+    @shelves = @profile.user.shelves
+    @activities = @profile.user.activities.includes(:owner, :trackable)
 
     respond_with(@profile)
   end

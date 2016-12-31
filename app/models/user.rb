@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :books, -> { distinct }, through: :shelves
   has_many :writers, through: :books
   has_many :comments
+  has_many :activities, as: :owner, class_name: 'PublicActivity::Activity', dependent: :destroy
+
 
   recommends :books, :shelves, :authors, :categories
 

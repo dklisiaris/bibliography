@@ -1,7 +1,7 @@
 class Book < ActiveRecord::Base
    # a Book may have comments (reviews)
   acts_as_commentable
-  
+
   has_and_belongs_to_many :categories
 
   has_many :contributions
@@ -11,24 +11,26 @@ class Book < ActiveRecord::Base
 
   has_many  :writers, -> { where contributions: { job: 0 } },
             :through => :contributions,
-            :class_name => "Author", 
+            :class_name => "Author",
             :source => :author
 
   has_many  :contributors, -> { select("authors.*, contributions.job AS job").where.not(contributions: { job: 0 }) },
             :through => :contributions,
-            :class_name => "Author", 
-            :source => :author            
+            :class_name => "Author",
+            :source => :author
 
   has_many :bookshelves
   has_many :shelves, through: :bookshelves
 
+  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
+
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)
   enum format: %i(Βιβλίο CD-ROM CD-Audio Κασέτα Χάρτης Επιτραπέζιο\ παιχνίδι Κασέτα\ VHS Παιχνίδια-Κατασκευές DVD-ROM Video\ DVD Video\ CD e-book Άλλο )
-  
+
   LANGUAGES = %w(αγγλικά αλβανικά αραβικά αρμενικά αρχαία\ ελληνικά αφρικάανς αϊτινά\ κρεολικά βασκικά βιετναμικά βουλγαρικά γίντις γαλλικά γερμανικά γερμανοεβραϊκά γεωργιανά δανέζικα εβραϊκά ελληνικά ελληνικά\ της\ βίβλου ελληνικά\ του\ βυζαντίου εσπεράντο θιβετιανά ιαπωνικά ινδικά ιρλανδικά ισλανδικά ισπανικά ιταλικά καταλανικά κινεζικά κοπτικά κορεατικά κουρδικά κροατικά λατινικά λιθουανικά νορβηγικά ολλανδικά ουγγρικά ουκρανικά περσικά πολωνικά πομακικά πορτογαλικά ρουμανικά ρωσικά σερβικά σερβο-κροατικά σερβοβοσνιακά σλαβομακεδονικά σλοβακικά σλοβενικά σουηδικά τουρκικά τσεχικά φινλανδικά φλαμανδικά)
 
-  before_destroy do 
+  before_destroy do
     categories.clear
     contributions.clear
     bookshelves.clear
@@ -39,23 +41,23 @@ class Book < ActiveRecord::Base
   is_impressionable :counter_cache => true, :unique => true
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: [:slugged, :finders]  
-  
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+
   include PgSearch
-  pg_search_scope :search_by_title, 
+  pg_search_scope :search_by_title,
     :against => [
       [:title, 'A'],
       [:original_title, 'B'],
       [:series_name, 'C'],
       [:tsearch_vector, 'D']
-    ], 
+    ],
     :using => {
       :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
       :trigram => {:threshold => 0.15}
-    }, 
+    },
     :ignoring => :accents
 
-  pg_search_scope :search_fast, 
+  pg_search_scope :search_fast,
     :against => [
       [:tsearch_vector],
     ],
@@ -65,6 +67,7 @@ class Book < ActiveRecord::Base
 
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
+  include PublicActivity::Common
 
   def language
     LANGUAGES[read_attribute(:language).to_i].to_s if read_attribute(:language)
@@ -86,10 +89,10 @@ class Book < ActiveRecord::Base
   end
 
 
-  searchkick batch_size: 50, 
-  callbacks: :async, 
+  searchkick batch_size: 50,
+  callbacks: :async,
   # # text_middle: ['title', 'description'],
-  # text_middle: ['title'],  
+  # text_middle: ['title'],
   word_start: ['title', 'tsearch_vector']
   # autocomplete: ['title']
 
@@ -111,11 +114,11 @@ class Book < ActiveRecord::Base
     end
   end
 
-  
+
   # Returns book cover url if there is one or the default not image.
   def cover
     if image.present?
-      image      
+      image
     else
       "https://bookopolis.com/img/no_book_cover.jpg"
     end
@@ -128,20 +131,20 @@ class Book < ActiveRecord::Base
       :slugged_name,
       [:slugged_name, :id],
     ]
-  end  
+  end
 
   def slugged_name(opts={})
     opts[:max_expansions] ||= 1
     opts[:dashes] = true if opts[:dashes].nil?
     join_with = opts[:dashes] ? '-' : ' '
 
-    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)
     name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(title).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
       converted.present? ? converted : word
     end.flatten.uniq.join(join_with)
-  end  
+  end
 
   def calculate_search_terms
     terms = slugged_name(max_expansions: 3, dashes: false)
@@ -149,8 +152,8 @@ class Book < ActiveRecord::Base
     terms += ' ' + ApplicationController.helpers.latinize(series_name) if series_name.present?
     terms += ' ' + isbn.gsub('-','') if isbn.present?
     terms += ' ' + isbn13.gsub('-','') if isbn13.present?
-    update_attribute(:tsearch_vector, terms)    
-  end  
+    update_attribute(:tsearch_vector, terms)
+  end
 
   def recalculate_search_terms?
     :title_changed? || :original_title_changed? || :series_name_changed? || :isbn_changed? || :isbn13_changed?
@@ -174,10 +177,10 @@ class Book < ActiveRecord::Base
 
     record.append(MARC::DataField.new('100', '1',  '#', ['a', main_author(true)], ['c', writers.try(:first).try(:associated_titles)], ['d', writers.try(:first).try(:associated_dates)]))
     record.append(MARC::DataField.new('245', '1',  '0', ['a', title], ['b', subtitle], ['c', screen_writers]))
-    record.append(MARC::DataField.new('250', '#',  '#', ['a', screen_publication_version]))    
-    record.append(MARC::DataField.new('260', '#',  '#', ['a', publication_place], ['b', publisher.try(:name)], ['c', publication_year.try(:to_s)]))     
+    record.append(MARC::DataField.new('250', '#',  '#', ['a', screen_publication_version]))
+    record.append(MARC::DataField.new('260', '#',  '#', ['a', publication_place], ['b', publisher.try(:name)], ['c', publication_year.try(:to_s)]))
     record.append(MARC::DataField.new('300', '#',  '#', ['a', screen_pages], ['b', screen_cover_type], ['c', screen_size]))
-    
+
     record.append(MARC::DataField.new('490', '0',  '#', ['a', series_name], ['v', series_volume]))
     record.append(MARC::DataField.new('520', '#',  '#', ['a', subtitle]))
 

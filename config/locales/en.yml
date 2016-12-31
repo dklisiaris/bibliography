@@ -219,6 +219,9 @@ en:
     recommend: "Recommend"
     not_recommend: "Not recommend"
     remove_recommendation: "Remove Recommendation"
+    recommends: "recommends"
+    not_recommends: "not recommends"
+    recommended_verb: "recommended"
     recommended: "Recommended"
     recommended_by: "Recommended by"
     recommended_x_times: "Recommended %{count} times"
@@ -229,6 +232,7 @@ en:
     in_x_collections: "In %{count} Collections"
     with_x_views: "%{count} views"
     search: "Search Books"
+    a_book: "a book"
     filters:
       label: "Filters"
 
@@ -268,6 +272,7 @@ en:
     currently_reading: "Currently reading"
     read_but_not_own: "Read but dont own"
     to_read: "To read"
+    collections: "Collections"
 
   users:
     follow: "Follow"

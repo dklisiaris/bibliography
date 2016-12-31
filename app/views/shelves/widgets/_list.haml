@@ -1,0 +1,14 @@
+- icon ||= 'th-large'
+.widget
+  .widget-content.widget-content-mini.themed-background-dark-flat.text-light-op.border-bottom
+    = fa(icon)
+    %strong= title
+  .widget-content
+    .row
+      - shelves.each do |shelf|
+        .col-xs-6.col-sm-4
+          .row
+            .col-xs-10
+              = link_to shelf.screen_name, shelf
+            .col-xs-2
+              %span.pull-right= shelf.books.count
