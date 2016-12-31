@@ -278,12 +278,13 @@ en:
     verbs:
       recommended: "recommended"
       not_recommends: "not recommends"
-      currently_reads: "currently reads"
+      currently_reads: "started reading"
       wants_to_read: "wants to read"
       has_read: "has read"
-      owns_in_library: "owns in library"
+      owns_in_library: "added in library"
       will_read: "will read"
       read_but_not_own: "has read but doesn't own"
+      add_to_favourites: "added in favourites"
 
 
   awards:

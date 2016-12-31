@@ -258,12 +258,13 @@ el:
     verbs:
       recommended: "πρότεινε"
       not_recommends: "δεν προτείνει"
-      currently_reads: "διαβάζει τώρα"
+      currently_reads: "ξεκίνησε να διαβάζει"
       wants_to_read: "θέλει να διαβάσει"
       has_read: "έχει διαβάσει"
-      owns_in_library: "έχει στη βιβλιοθήκη"
+      owns_in_library: "έβαλε στη βιβλιοθήκη του"
       will_read: "θα διαβάσει"
-      read_but_not_own: "έχει διαβάσει αλλά δεν έχει"
+      read_but_not_own: "έχει διαβάσει χωρίς να έχει"
+      add_to_favourites: "πρόσθεσε στα αγαπημένα του"
 
   awards:
     label: "Βραβεία"

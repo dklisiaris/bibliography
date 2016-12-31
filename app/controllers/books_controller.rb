@@ -95,7 +95,17 @@ class BooksController < ApplicationController
 
     Bookshelf.add_book_to_multiple_bookshelves(@book.id, params[:to_add], current_user)
 
+    key = Shelf.find_by(built_in: true, id: params[:to_add]).try(:default_name).try(:to_sym)
+    @book.create_activity key, owner: current_user if key.present?
+
     Bookshelf.remove_book_from_multiple_bookshelves(@book.id, params[:to_remove], current_user)
+
+    shelf_names = current_user.shelves
+      .where(built_in: true, id: params[:to_remove])
+      .map{ |s| ("book." + s.default_name)}
+
+    activities = current_user.activities.where(key: shelf_names, trackable: @book)
+    activities.destroy_all
 
     render json: {status: 200, message: 'ok'}
   end
