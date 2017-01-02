@@ -231,6 +231,8 @@ en:
     with_x_views: "%{count} views"
     search: "Search Books"
     a_book: "a book"
+    book_review: "Book Review"
+    write_review: "Write review and comments about book"
     filters:
       label: "Filters"
 

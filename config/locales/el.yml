@@ -210,6 +210,8 @@ el:
     with_x_views: "%{count} εμφανίσεις"
     search: "Αναζήτηση στα βιβλία"
     a_book: "ένα βιβλίο"
+    book_review: "Κριτική Βιβλίου"
+    write_review: "Γράψτε κριτική και σχόλια για το βιβλίο"
     filters:
       label: "Φίλτρα"
 

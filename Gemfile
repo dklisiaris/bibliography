@@ -220,3 +220,6 @@ gem 'public_activity', '~> 1.5'
 
 # Makes rendering and caching a collection of template partials easier and faster
 gem 'multi_fetch_fragments', '~> 0.0.17'
+
+# A rich text editor for everyday writing
+gem 'trix', '~> 0.9.10'

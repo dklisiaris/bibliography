@@ -1,0 +1,17 @@
+#reviewModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span=fa('times')
+        %h4.modal-title=t('books.book_review')
+      .modal-body
+        .review-btns
+          = render partial: 'books/widgets/recommend_btns', locals: {book: @book}
+        = form_for Comment.new, url: {action: :create} do |f|
+          = f.trix_editor :body, placeholder: t('books.write_review'), rows: 10
+
+      .modal-footer
+        %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
+        %button.post-comment.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "submit"}= t('comments.post')
+

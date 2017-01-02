@@ -7,7 +7,7 @@
 }
 
 .comment-block {
-  display: block;  
+  display: block;
 }
 
 .comment-block:hover .comment-action {
@@ -20,3 +20,13 @@
   float:right;
   margin-right: 10px;
 }
+
+trix-editor {
+  min-height: 286px !important;
+}
+
+.review-btns {
+  padding-bottom: 15px;
+}
+
+

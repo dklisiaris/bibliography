@@ -49,7 +49,7 @@ class BooksController < ApplicationController
     @likes_count = @book.liked_by_count
     @dislikes_count = @book.disliked_by_count
 
-    @comments = @book.comment_threads
+    @comments = @book.comment_threads.includes(:user)
 
     impressionist(@book)
     respond_with(@book)

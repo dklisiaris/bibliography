@@ -195,6 +195,13 @@
                           <input type="hidden" name="token" value="<%= current_user.token %>">
                           <button type="submit" class="post-comment btn btn-effect-ripple btn-sm btn-primary"><%= t('comments.post') %></button>
                         </form>
+
+                        <button type="button" class="btn btn-effect-ripple btn-sm btn-primary"
+                          data-toggle="modal" data-target="#reviewModal">
+                          Review
+                        </button>
+
+                        <%= render 'books/review_modal' %>
                       </div>
                     </li>
                   <% else %>

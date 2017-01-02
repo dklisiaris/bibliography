@@ -21,4 +21,5 @@
 //= require readmore/readmore.min
 //= require noty/js/noty/packaged/jquery.noty.packaged.min
 //= require masonry/dist/masonry.pkgd.min
+//= require trix
 //= require_tree .

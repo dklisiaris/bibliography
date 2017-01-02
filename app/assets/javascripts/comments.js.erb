@@ -14,7 +14,7 @@ $('.books.show').ready(function() {
       contentType: "application/json",
       dataType:"json",
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');        
+        request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
       },
       url: "/api/v1/books/" + book_id + "/comments/",
       data: JSON.stringify({ "comment": {"body": comment} }),
@@ -36,7 +36,7 @@ $('.books.show').ready(function() {
               <p>'+data.comment.body+'</p>\
             </div>\
           </li>\
-        ')        
+        ')
       }
     });
 
@@ -49,15 +49,15 @@ $('.books.show').ready(function() {
       contentType: "application/json",
       dataType:"json",
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token token="'+credentials.token+'", email="'+credentials.email+'"');        
+        request.setRequestHeader("Authorization", 'Token token="'+credentials.token+'", email="'+credentials.email+'"');
       },
       url: "/api/v1/books/" + book_id + "/comments/" + comment_id,
-      
+
       success: function(data) {
         $('#comment-'+ comment_id).remove();
       }
     });
 
   };
-  
+
 });
