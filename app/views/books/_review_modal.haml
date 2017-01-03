@@ -6,12 +6,18 @@
           %span=fa('times')
         %h4.modal-title=t('books.book_review')
       .modal-body
+        %label.text-muted
+          Would you recommend this book?
         .review-btns
           = render partial: 'books/widgets/recommend_btns', locals: {book: @book}
-        = form_for Comment.new, url: {action: :create} do |f|
+        = form_for Comment.new, url: {action: :create}, html: { id: "reviewForm", onsubmit: "return false;"} do |f|
           = f.trix_editor :body, placeholder: t('books.write_review'), rows: 10
+          %input{:name => "book_id", :type => "hidden", :value => "#{@book.id}"}
+          %input{:name => "email", :type => "hidden", :value => "#{current_user.email}"}
+          %input{:name => "token", :type => "hidden", :value => "#{current_user.token}"}
+
 
       .modal-footer
         %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
-        %button.post-comment.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "submit"}= t('comments.post')
+        %button#postReviewBtn.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "submit"}= t('comments.post')
 

@@ -177,7 +177,7 @@
                             <span class="comment-action edit-comment">
                               <small><em><%=fa('pencil')%></em></small></span>
                           <% end %>
-                          <p><%= comment.body %></p>
+                          <p><%= comment.body.html_safe %></p>
                         </div>
                       </li>
                     <% end %>
