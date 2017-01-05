@@ -50,7 +50,7 @@ $('.books.show').ready(function() {
     var comment_area = form.find("input[name='comment[body]']")
     var comment = comment_area.val();
 
-    if(comment){
+    if(comment && comment.length > 0){
       $.ajax({
         type:"POST",
         contentType: "application/json",
