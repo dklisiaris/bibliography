@@ -20,6 +20,11 @@ class ProfilesController < ApplicationController
     @shelves = @profile.user.shelves
     @activities = @profile.user.activities.includes(:owner, :trackable)
 
+    if current_user
+      similarity = Recommendable::Helpers::Calculations.similarity_between(@profile.user.id, current_user.id)
+      @normalized_similarity = ((similarity-(-1))/(1-(-1)) * 100).round(1)
+    end
+
     respond_with(@profile)
   end
 

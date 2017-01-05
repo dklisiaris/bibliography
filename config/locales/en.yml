@@ -278,6 +278,7 @@ en:
     follow: "Follow"
     unfollow: "Unfollow"
     following: "Following"
+    similarity_with: "Your Similarity with"
     verbs:
       recommended: "recommended"
       not_recommends: "not recommends"
@@ -288,7 +289,6 @@ en:
       will_read: "will read"
       read_but_not_own: "has read but doesn't own"
       add_to_favourites: "added in favourites"
-
 
   awards:
     label: "Awards"

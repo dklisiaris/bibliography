@@ -258,6 +258,7 @@ el:
     follow: "Ακολούθησε"
     unfollow: "Άρση Ακολούθησης"
     following: "Ακολουθείς"
+    similarity_with: "Η Ομοιότητά σας με"
     verbs:
       recommended: "πρότεινε"
       not_recommends: "δεν προτείνει"

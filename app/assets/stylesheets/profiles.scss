@@ -2,3 +2,17 @@
   display: inline-block;
   width: auto;
 }
+
+.easyPieChart {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.easyPieChart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
