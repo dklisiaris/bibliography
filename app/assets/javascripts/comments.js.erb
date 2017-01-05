@@ -43,49 +43,49 @@ $('.books.show').ready(function() {
   });
 
   $('#postReviewBtn').click(function(){
-    console.log("review will post btn!");
     var form = $("#reviewForm");
     var book_id = form.find("input[name='book_id']").val();
     var email = form.find("input[name='email']").val();
     var token = form.find("input[name='token']").val();
     var comment_area = form.find("input[name='comment[body]']")
     var comment = comment_area.val();
-    console.log(comment);
 
-    $.ajax({
-      type:"POST",
-      contentType: "application/json",
-      dataType:"json",
-      beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
-      },
-      url: "/api/v1/books/" + book_id + "/comments/",
-      data: JSON.stringify({ "comment": {"body": comment} }),
-      processData: false,
-      success: function(data) {
-        // $("#results").append("The result =" + StringifyPretty(msg));
-        $('#reviewModal').modal('hide');
-        $('.comments-list')
-        .prepend('\
-          <li class="media comment-block" id="comment-'+data.comment.id+'">\
-            <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
-            <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
-            </a>\
-            <div class="media-body">\
-              <a href="'+data.comment.user.id+'">\
-                <strong>'+data.comment.user.name+'</strong>\
+    if(comment){
+      $.ajax({
+        type:"POST",
+        contentType: "application/json",
+        dataType:"json",
+        beforeSend: function (request) {
+          request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
+        },
+        url: "/api/v1/books/" + book_id + "/comments/",
+        data: JSON.stringify({ "comment": {"body": comment} }),
+        processData: false,
+        success: function(data) {
+          // $("#results").append("The result =" + StringifyPretty(msg));
+          $('#reviewModal').modal('hide');
+          $('.comments-list')
+          .prepend('\
+            <li class="media comment-block" id="comment-'+data.comment.id+'">\
+              <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
+              <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
               </a>\
-              <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
-                <small><em><i class="fa fa-trash-o"></i></em></small></span>\
-              <p>'+data.comment.body+'</p>\
-            </div>\
-          </li>\
-        ')
-        var editor = document.querySelector("trix-editor").editor;
-        editor.setSelectedRange([0, comment.length]);
-        editor.deleteInDirection("backward");
-      }
-    });
+              <div class="media-body">\
+                <a href="'+data.comment.user.id+'">\
+                  <strong>'+data.comment.user.name+'</strong>\
+                </a>\
+                <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
+                  <small><em><i class="fa fa-trash-o"></i></em></small></span>\
+                <p>'+data.comment.body+'</p>\
+              </div>\
+            </li>\
+          ')
+          var editor = document.querySelector("trix-editor").editor;
+          editor.setSelectedRange([0, comment.length]);
+          editor.deleteInDirection("backward");
+        }
+      });
+    }
   });
 
   deleteComment = function (book_id, comment_id, credentials){
