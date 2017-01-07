@@ -134,14 +134,18 @@
   </div>
 
   <div class="col-lg-5">
-    <div class="widget">
-      <div class="widget-content widget-content-mini border-bottom">
-        <strong><%= "#{t('users.similarity_with')} #{@profile.username}" %></strong>
-      </div>
-      <div class="widget-content text-center">
-        <div class="pie-chart easyPieChart" data-percent="<%= @normalized_similarity %>" data-line-width="3" data-bar-color="#de4b39" data-track-color="#f9f9f9" style="width: 100px; height: 100px; line-height: 100px;">
-          <span><strong><%= @normalized_similarity %>%</strong></span>
-          <canvas width="100" height="100"></canvas>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="widget">
+          <div class="widget-content widget-content-mini text-center border-bottom">
+            <%= t('users.similarity_with') %><br><strong><%= @profile.username %></strong>
+          </div>
+          <div class="widget-content">
+            <div class="pie-chart easyPieChart" data-percent="<%= @normalized_similarity %>" data-line-width="3" data-bar-color="#de4b39" data-track-color="#f9f9f9">
+              <span><strong><%= @normalized_similarity %>%</strong></span>
+              <canvas width="80" height="80"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
