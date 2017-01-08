@@ -1,0 +1,17 @@
+%ul.media-list.push.comments-list
+  - if comments.present?
+    - comments.each do |comment|
+      = render partial: 'books/widgets/comment', |
+        locals: {                                |
+          comment: comment,                      |
+          book: book,                            |
+          user: user                             |
+        }                                        |
+  - if user_signed_in?
+    = render partial: 'books/widgets/comment_form', |
+      locals: {                                     |
+        book: book,                                 |
+        user: user                                  |
+      }                                             |
+  - else
+    = link_to t('comments.sign_in_to_post'), new_user_session_path
