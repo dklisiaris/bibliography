@@ -71,7 +71,7 @@ production:
   host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
   port: <%= ENV["PRODUCTION_DATABASE_PORT"] %>
 
-production:
+staging:
   <<: *default
   database: bibliography_staging
   username: <%= ENV["STAGING_DATABASE_USERNAME"] %>
