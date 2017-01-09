@@ -1,12 +1,13 @@
 %ul.media-list.push.comments-list
   - if comments.present?
     - comments.each do |comment|
-      = render partial: 'books/widgets/comment', |
-        locals: {                                |
-          comment: comment,                      |
-          book: book,                            |
-          user: user                             |
-        }                                        |
+      = render partial: 'books/widgets/comment',                        |
+        locals: {                                                       |
+          comment: comment,                                             |
+          subcomments: comment.parent_id.nil? ? comment.children : nil, |
+          book: book,                                                   |
+          user: user                                                    |
+        }                                                               |
   - if user_signed_in?
     = render partial: 'books/widgets/comment_form', |
       locals: {                                     |

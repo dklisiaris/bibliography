@@ -18,7 +18,7 @@
     %p= comment.body.html_safe
     = render partial: 'books/widgets/comments_list',  |
       locals: {                                       |
-        comments: comment.children,                   |
+        comments: subcomments,                        |
         book: book,                                   |
         user: user                                    |
       }                                               |
