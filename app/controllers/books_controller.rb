@@ -49,7 +49,7 @@ class BooksController < ApplicationController
     @likes_count = @book.liked_by_count
     @dislikes_count = @book.disliked_by_count
 
-    @comments = @book.root_comments.includes(:children, :user, children: :user)
+    @comments = @book.root_comments.includes(:children, :user, children: {user: :profile})
 
     impressionist(@book)
     respond_with(@book)

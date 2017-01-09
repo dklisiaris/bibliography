@@ -1,6 +1,6 @@
 %li.media.comment-block{:id => "comment-#{comment.id}"}
   %a.pull-left{:href => "#{public_profile_path(comment.user.id)}"}
-    %img.img-circle{:alt => "Avatar", :height => "40", :width => "40", :src => "#{comment.user.avatar}"}/
+    %img.img-circle{:alt => "Avatar", :height => (40/(1+depth)).to_s, :width => (40/(1+depth)).to_s, :src => "#{comment.user.avatar}"}/
   .media-body
     %a{:href => "#{public_profile_path(comment.user.id)}"}
       %strong= comment.user.screen_name
@@ -19,6 +19,8 @@
     = render partial: 'books/widgets/comments_list',  |
       locals: {                                       |
         comments: subcomments,                        |
+        parent_id: comment.parent_id,                 |
         book: book,                                   |
-        user: user                                    |
+        user: user,                                   |
+        depth: depth + 1                              |
       }                                               |

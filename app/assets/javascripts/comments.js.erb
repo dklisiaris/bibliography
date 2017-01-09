@@ -88,6 +88,13 @@ $('.books.show').ready(function() {
     }
   });
 
+  $('.write-comment-btn').click(function(){
+    $('.comment-form').hide();
+    $('.write-comment-btn').show();
+    $(this).prev('.comment-form').show();
+    $(this).hide();
+  });
+
   deleteComment = function (book_id, comment_id, credentials){
     console.log(credentials);
     $.ajax({

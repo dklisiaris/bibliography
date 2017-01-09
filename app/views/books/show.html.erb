@@ -160,8 +160,10 @@
                 <%= render partial: 'books/widgets/comments_list',
                   locals: {
                     comments: @comments,
+                    parent_id: nil,
                     book: @book,
-                    user: current_user
+                    user: current_user,
+                    depth: 0
                   } %>
               </div>
             </div>
