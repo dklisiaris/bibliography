@@ -2,6 +2,7 @@ $('.books.show').ready(function() {
   $('.post-comment').click(function(){
     var form = $(this).parent();
     var book_id = form.find("input[name='book_id']").val();
+    var parent_id = form.find("input[name='parent_id']").val();
     var email = form.find("input[name='email']").val();
     var token = form.find("input[name='token']").val();
     var comment_area = form.find('.comment-area');
@@ -9,37 +10,48 @@ $('.books.show').ready(function() {
 
     comment_area.val('');
 
-    $.ajax({
-      type:"POST",
-      contentType: "application/json",
-      dataType:"json",
-      beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
-      },
-      url: "/api/v1/books/" + book_id + "/comments/",
-      data: JSON.stringify({ "comment": {"body": comment} }),
-      processData: false,
-      success: function(data) {
-        // $("#results").append("The result =" + StringifyPretty(msg));
-        $('.comments-list')
-        .prepend('\
-          <li class="media comment-block" id="comment-'+data.comment.id+'">\
-            <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
-            <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
-            </a>\
-            <div class="media-body">\
-              <a href="'+data.comment.user.id+'">\
-                <strong>'+data.comment.user.name+'</strong>\
-              </a>\
-              <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
-                <small><em><i class="fa fa-trash-o"></i></em></small></span>\
-              <p>'+data.comment.body+'</p>\
-            </div>\
-          </li>\
-        ')
-      }
-    });
+    var btnTextNormal = form.find('button.post-comment').html();
+    var btnTextPressed = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>' + btnTextNormal;
+    form.find('button.post-comment').html(btnTextPressed);
 
+    if(comment && comment.length > 0){
+      $.ajax({
+        type:"POST",
+        contentType: "application/json",
+        dataType:"json",
+        beforeSend: function (request) {
+          request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
+        },
+        url: "/api/v1/books/" + book_id + "/comments/",
+        data: JSON.stringify({
+          "comment": {
+            "body": comment.replace(/\r?\n{2,}/g, '<br/><br/>').replace(/\r?\n/g, '<br/>'),
+            "parent_id": parent_id
+          }
+        }),
+        processData: false,
+        success: function(data) {
+          // $("#results").append("The result =" + StringifyPretty(msg));
+          $('#comment-form-block-' + parent_id)
+          .prepend('\
+            <li class="media comment-block" id="comment-'+data.comment.id+'">\
+              <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
+              <img src="'+data.comment.user.image+'" alt="Avatar" width="32" height="32" class="img-circle">\
+              </a>\
+              <div class="media-body">\
+                <a href="/library/'+data.comment.user.id+'">\
+                  <strong>'+data.comment.user.name+'</strong>\
+                </a>\
+                <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
+                  <small><em><i class="fa fa-trash-o"></i></em></small></span>\
+                <p>'+data.comment.body+'</p>\
+              </div>\
+            </li>\
+          ');
+          form.find('button.post-comment').html(btnTextNormal);
+        }
+      });
+    }
   });
 
   $('#postReviewBtn').click(function(){

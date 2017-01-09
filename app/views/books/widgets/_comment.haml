@@ -1,25 +1,26 @@
 %li.media.comment-block{:id => "comment-#{comment.id}"}
   %a.pull-left{:href => "#{public_profile_path(comment.user.id)}"}
-    %img.img-circle{:alt => "Avatar", :height => (40/(1+depth)).to_s, :width => (40/(1+depth)).to_s, :src => "#{comment.user.avatar}"}/
+    %img.img-circle{:alt => "Avatar", :height => (40/(1+depth*0.25)).to_s, :width => (40/(1+depth*0.25)).to_s, :src => "#{comment.user.avatar}"}/
   .media-body
-    %a{:href => "#{public_profile_path(comment.user.id)}"}
-      %strong= comment.user.screen_name
-    %span.text-muted
-      %small
-        %em= time_ago_in_words(comment.created_at)
-    - if policy(comment).destroy?
-      %span.comment-action.delete-comment{:onclick => "deleteComment(#{book.id}, #{comment.id}, #{user.credentials})"}
+    .comment-content
+      %a{:href => "#{public_profile_path(comment.user.id)}"}
+        %strong= comment.user.screen_name
+      %span.text-muted
         %small
-          %em= fa('trash-o')
-    - if policy(comment).edit?
-      %span.comment-action.edit-comment
-        %small
-          %em= fa('pencil')
-    %p= comment.body.html_safe
+          %em= time_ago_in_words(comment.created_at)
+      - if policy(comment).destroy?
+        %span.comment-action.delete-comment{:onclick => "deleteComment(#{book.id}, #{comment.id}, #{user.credentials})"}
+          %small
+            %em= fa('trash-o')
+      - if policy(comment).edit?
+        %span.comment-action.edit-comment
+          %small
+            %em= fa('pencil')
+      %p= comment.body.html_safe
     = render partial: 'books/widgets/comments_list',  |
       locals: {                                       |
         comments: subcomments,                        |
-        parent_id: comment.parent_id,                 |
+        parent_id: comment.id,                        |
         book: book,                                   |
         user: user,                                   |
         depth: depth + 1                              |

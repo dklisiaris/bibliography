@@ -1,6 +1,6 @@
 %li.media.comment-form-block{:id => "comment-form-block-#{parent_id}"}
   %a.pull-left{:href => "#{public_profile_path(user.id)}"}
-    %img.img-circle{:alt => "Avatar", :height => "30", :width => "30", :src => "#{user.avatar}"}/
+    %img.img-circle{:alt => "Avatar", :height => "32", :width => "32", :src => "#{user.avatar}"}/
   .media-body
     %form.comment-form{:onsubmit => "return false;", :id => "comment-form-#{parent_id}", style: "display:none;"}
       %textarea.comment-area.form-control{:placeholder => "#{t('comments.write')}", :rows => "2"}

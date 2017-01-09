@@ -10,7 +10,7 @@
   display: block;
 }
 
-.comment-block:hover .comment-action {
+.comment-content:hover .comment-action{
   display: block;
   cursor: pointer;
 }
@@ -33,6 +33,10 @@ trix-editor {
   font-size: 26px;
   margin-top: 8px;
   margin-bottom: 12px;
+}
+
+.comment-area {
+  resize: vertical;
 }
 
 

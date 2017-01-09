@@ -1,4 +1,4 @@
-%ul.media-list.push.comments-list
+%ul.media-list.push.comments-list{id: parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list" }
   - if comments.present?
     - comments.each do |comment|
       = render partial: 'books/widgets/comment',                        |

@@ -1,4 +1,4 @@
-class Api::V1::CommentsController < Api::V1::BaseController 
+class Api::V1::CommentsController < Api::V1::BaseController
   before_filter :authenticate_user_from_token!, only: [:create]
   before_action :set_book
 
@@ -8,8 +8,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
     comments = policy_scope(comments)
 
     render(
-      json: comments, 
-      each_serializer: Api::V1::CommentSerializer, 
+      json: comments,
+      each_serializer: Api::V1::CommentSerializer,
       root: 'comments'
     )
   end
@@ -19,20 +19,36 @@ class Api::V1::CommentsController < Api::V1::BaseController
     comment = @book.comment_threads.find(params[:id])
 
     response = apply_format(Api::V1::CommentSerializer.new(comment))
-    
+
     render(json: response)
   end
 
-  def create    
+  def create
     comment = Comment.build_from( @book, current_user.id, create_params[:body] )
     if comment.save!
-      render(json: {:comment => { id: comment.id, :body => create_params[:body], :user => { id: current_user.id, name: current_user.screen_name, image: current_user.avatar}, message: 'ok' }})
+      if(create_params[:parent_id].present?)
+        parent = Comment.find(create_params[:parent_id])
+        comment.move_to_child_of(parent) unless parent.nil?
+      end
+      render(json: {
+        comment: {
+          id: comment.id,
+          body: create_params[:body],
+          parent_id: create_params[:parent_id],
+          user: {
+            id: current_user.id,
+            name: current_user.screen_name,
+            image: current_user.avatar
+          },
+          message: 'ok' }
+        }
+      )
     else
-      render(json: {:comment => { message: 'fail' }})
+      render(json: {comment: { message: 'fail' }})
     end
   end
 
-  def destroy    
+  def destroy
     comment = @book.comment_threads.find(params[:id])
     if comment.destroy
       render(json: {message: 'ok'})
@@ -48,7 +64,7 @@ class Api::V1::CommentsController < Api::V1::BaseController
   end
 
   def create_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :parent_id)
   end
   # def set_award
   #   @award = Award.find(params[:id])
