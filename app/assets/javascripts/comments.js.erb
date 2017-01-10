@@ -76,14 +76,13 @@ $('.books.show').ready(function() {
         success: function(data) {
           // $("#results").append("The result =" + StringifyPretty(msg));
           $('#reviewModal').modal('hide');
-          $('.comments-list')
-          .prepend('\
+          $('\
             <li class="media comment-block" id="comment-'+data.comment.id+'">\
               <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
               <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
               </a>\
               <div class="media-body">\
-                <a href="'+data.comment.user.id+'">\
+                <a href="/library/'+data.comment.user.id+'">\
                   <strong>'+data.comment.user.name+'</strong>\
                 </a>\
                 <span onclick="deleteComment('+book_id+', '+data.comment.id+', {\'email\': \''+email+'\', \'token\': \''+token+'\'})" class="comment-action delete-comment">\
@@ -91,7 +90,7 @@ $('.books.show').ready(function() {
                 <p>'+data.comment.body+'</p>\
               </div>\
             </li>\
-          ')
+          ').insertBefore('#reviewBtn');
           var editor = document.querySelector("trix-editor").editor;
           editor.setSelectedRange([0, comment.length]);
           editor.deleteInDirection("backward");

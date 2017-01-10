@@ -11,10 +11,11 @@
         }                                                               |
 
   - if user_signed_in?
-    - if depth == 0
+    - if depth == 0 && !comments.where(user_id: user.id).exists?
       = button_tag fa('pencil-square-o') + ' ' + t('comments.write_review'),  |
         {                                                               |
           class: "button btn btn-effect-ripple btn-sm btn-primary",     |
+          id: "reviewBtn",                                              |
           "data-target" => "#reviewModal",                              |
           "data-toggle" => "modal",                                     |
           type: "button"                                                |
