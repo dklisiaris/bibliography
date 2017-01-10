@@ -1,4 +1,18 @@
 %ul.media-list.push.comments-list{id: parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list" }
+  - if depth == 0 && !comments.where(user_id: user.id).exists?
+    - if user_signed_in?
+      = button_tag fa('pencil-square-o') + ' ' + t('comments.write_review'),  |
+        {                                                               |
+          class: "button btn btn-effect-ripple btn-sm btn-primary",     |
+          id: "reviewBtn",                                              |
+          "data-target" => "#reviewModal",                              |
+          "data-toggle" => "modal",                                     |
+          type: "button"                                                |
+        }                                                               |
+      = render 'books/review_modal'
+    - else
+      = link_to t('comments.sign_in_to_review'), new_user_session_path
+
   - if comments.present?
     - comments.each do |comment|
       = render partial: 'books/widgets/comment',                        |
@@ -10,26 +24,13 @@
           depth: depth                                                  |
         }                                                               |
 
-  - if user_signed_in?
-    - if depth == 0 && !comments.where(user_id: user.id).exists?
-      = button_tag fa('pencil-square-o') + ' ' + t('comments.write_review'),  |
-        {                                                               |
-          class: "button btn btn-effect-ripple btn-sm btn-primary",     |
-          id: "reviewBtn",                                              |
-          "data-target" => "#reviewModal",                              |
-          "data-toggle" => "modal",                                     |
-          type: "button"                                                |
-        }                                                               |
-      = render 'books/review_modal'
-    - if depth == 1
+  - if depth == 1
+    - if user_signed_in?
       = render partial: 'books/widgets/comment_form', |
         locals: {                                     |
           book: book,                                 |
           user: user,                                 |
           parent_id: parent_id                        |
         }                                             |
-  - else
-    - if depth == 0
-      = link_to t('comments.sign_in_to_review'), new_user_session_path
-    - if depth == 1
+    - else
       = link_to t('comments.sign_in_to_post'), new_user_session_path

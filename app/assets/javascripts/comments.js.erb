@@ -10,11 +10,11 @@ $('.books.show').ready(function() {
 
     comment_area.val('');
 
-    var btnTextNormal = form.find('button.post-comment').html();
-    var btnTextPressed = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>' + btnTextNormal;
-    form.find('button.post-comment').html(btnTextPressed);
-
     if(comment && comment.length > 0){
+      var btnTextNormal = form.find('button.post-comment').html();
+      var btnTextPressed = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>' + btnTextNormal;
+      form.find('button.post-comment').html(btnTextPressed);
+
       $.ajax({
         type:"POST",
         contentType: "application/json",
@@ -63,6 +63,10 @@ $('.books.show').ready(function() {
     var comment = comment_area.val();
 
     if(comment && comment.length > 0){
+      var btnTextNormal = $('#postReviewBtn').html();
+      var btnTextPressed = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>' + btnTextNormal;
+      $('#postReviewBtn').html(btnTextPressed);
+
       $.ajax({
         type:"POST",
         contentType: "application/json",
@@ -90,10 +94,11 @@ $('.books.show').ready(function() {
                 <p>'+data.comment.body+'</p>\
               </div>\
             </li>\
-          ').insertBefore('#reviewBtn');
+          ').insertBefore('#reviews-list li:eq(0)');
           var editor = document.querySelector("trix-editor").editor;
           editor.setSelectedRange([0, comment.length]);
           editor.deleteInDirection("backward");
+          $('#reviewBtn').remove();
         }
       });
     }

@@ -50,6 +50,7 @@ class BooksController < ApplicationController
     @dislikes_count = @book.disliked_by_count
 
     @comments = @book.root_comments.includes(:children, :user, children: {user: :profile})
+      .order(created_at: :desc)
 
     impressionist(@book)
     respond_with(@book)
