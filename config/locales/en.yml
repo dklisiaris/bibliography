@@ -293,6 +293,7 @@ en:
       will_read: "will read"
       read_but_not_own: "has read but doesn't own"
       add_to_favourites: "added in favourites"
+      reviewed: "wrote a review"
 
   awards:
     label: "Awards"

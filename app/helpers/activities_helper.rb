@@ -18,6 +18,8 @@ module ActivitiesHelper
       t('users.verbs.read_but_not_own')
     when "book.to_read"
       t('users.verbs.will_read')
+    when "book.review"
+      t('users.verbs.reviewed')
     end
   end
 

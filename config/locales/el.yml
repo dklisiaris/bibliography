@@ -273,6 +273,7 @@ el:
       will_read: "θα διαβάσει"
       read_but_not_own: "έχει διαβάσει χωρίς να έχει"
       add_to_favourites: "πρόσθεσε στα αγαπημένα του"
+      reviewed: "έγραψε κριτική"
 
   awards:
     label: "Βραβεία"

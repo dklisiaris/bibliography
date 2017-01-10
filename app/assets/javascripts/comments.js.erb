@@ -80,7 +80,7 @@ $('.books.show').ready(function() {
         success: function(data) {
           // $("#results").append("The result =" + StringifyPretty(msg));
           $('#reviewModal').modal('hide');
-          $('\
+          $('#reviews-list').prepend('\
             <li class="media comment-block" id="comment-'+data.comment.id+'">\
               <a href="/library/'+data.comment.user.id+'/" class="pull-left">\
               <img src="'+data.comment.user.image+'" alt="Avatar" width="40" height="40" class="img-circle">\
@@ -94,7 +94,7 @@ $('.books.show').ready(function() {
                 <p>'+data.comment.body+'</p>\
               </div>\
             </li>\
-          ').insertBefore('#reviews-list li:eq(0)');
+          ');
           var editor = document.querySelector("trix-editor").editor;
           editor.setSelectedRange([0, comment.length]);
           editor.deleteInDirection("backward");

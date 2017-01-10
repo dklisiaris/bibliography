@@ -29,6 +29,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
       if(create_params[:parent_id].present?)
         parent = Comment.find(create_params[:parent_id])
         comment.move_to_child_of(parent) unless parent.nil?
+      else
+        @book.create_activity :review, owner: current_user
       end
       render(json: {
         comment: {
@@ -51,6 +53,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
   def destroy
     comment = @book.comment_threads.find(params[:id])
     if comment.destroy
+      activity = current_user.activities.find_by(key: "book.review", trackable: @book)
+      activity.destroy if activity.present?
       render(json: {message: 'ok'})
     else
       render(json: {message: 'fail'})
