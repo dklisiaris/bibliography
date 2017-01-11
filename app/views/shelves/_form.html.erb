@@ -1,6 +1,6 @@
-<div class="block col-md-4">
+<div class="block col-md-6">
   <div class="block-title">
-     <h2>Edit Collection</h2>
+     <h2><%= @shelf.id.present? ? detone(t('shelves.edit')) : detone(t('shelves.new')) %></h2>
   </div>
 
   <%= form_for(@shelf, :html => { :role => 'form', class: "form-horizontal form-bordered"}) do |f| %>
@@ -19,36 +19,37 @@
 
       <% unless @shelf.built_in? %>
       <div class="form-group">
-        <%= f.label :name, class: 'col-md-3 control-label' %>
+        <%= f.label t('shelves.name'), class: 'col-md-3 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :name, class: "form-control", placeholder: "Name of collection" %>
+          <%= f.text_field :name, class: "form-control", placeholder: t('shelves.name_of_shelf') %>
         </div>
       </div>
       <% end %>
 
       <div class="form-group">
-        <%= f.label :privacy, class: 'col-md-3 control-label' %>
+        <%= f.label t('shelves.privacy.label'), class: 'col-md-3 control-label' %>
         <div class="col-md-9">
-        <%= f.select :privacy, options_for_select(@privacies.collect { |s| [s[0].humanize, s[0]] }, selected: @shelf.privacy), {}, class: 'form-control' %>
+        <%= f.select :privacy, options_for_select(@privacies.collect { |s|
+          [Shelf.humanize_privacy(s[0]), s[0]] }, selected: @shelf.privacy), {}, class: 'form-control' %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :active, class: 'col-md-3 control-label' %>
+        <%= f.label t('shelves.active'), class: 'col-md-3 control-label' %>
         <div class="col-md-6">
           <%= label_tag(nil, class: 'csscheckbox csscheckbox-primary') do %>
             <%= f.check_box :active %>
             <span></span>
-          <% end %>        
+          <% end %>
         </div>
       </div>
 
       <div class="form-group form-actions">
-        <div class="col-md-9 col-md-offset-3">   
-          <%= button_tag("Save", type: "submit", class: "btn btn-effect-ripple btn-primary") %> 
-          <%= link_to("Cancel", shelves_path, class: "btn btn-effect-ripple btn-danger") %> 
-        </div>   
-      </div> 
+        <div class="col-md-9 col-md-offset-3">
+          <%= button_tag(t('save'), type: "submit", class: "btn btn-effect-ripple btn-primary") %>
+          <%= link_to(t('cancel'), shelves_path, class: "btn btn-effect-ripple btn-danger") %>
+        </div>
+      </div>
 
   <% end %>
 </div>

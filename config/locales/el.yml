@@ -249,7 +249,8 @@ el:
     all_collections: "Όλες οι συλλογές"
     add_to_collections: "Προσθήκη σε συλλογές"
     edit_collections: "Επεξεργασία συλλογών"
-    new: "Νέα συλλογή"
+    new: "Νέα Συλλογή"
+    edit: "Επεξεργασία Συλλογής"
     my_library: "Η βιβλιοθήκη μου"
     want_to_read: "Θέλω να διαβάσω"
     favourites: "Αγαπημένα"
@@ -257,6 +258,14 @@ el:
     read_but_not_own: "Εχω διαβάσει αλλά δεν έχω"
     to_read: "Για διάβασμα"
     collections: "Συλλογές"
+    active: "Ενεργή"
+    name: "Όνομα"
+    name_of_shelf: "Όνομα της συλλογής"
+    privacy:
+      label: "Ιδιωτικότητα"
+      same_as_profile: "Ίδια με το προφίλ"
+      is_public: "Δημόσια"
+      is_private: "Ιδιωτικη"
 
   users:
     follow: "Ακολούθησε"

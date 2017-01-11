@@ -1,0 +1,18 @@
+- icon ||= 'th-large'
+.block.full
+  .block-title
+    .block-options.pull-right
+      = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
+    %h2
+      = fa(icon)
+      %strong= detone title
+  - shelves.built_in.each do |shelf|
+    = link_to my_books_path(shelf: shelf.id), class: "list-group-item" do
+      %h6.list-group-item-heading
+        = "#{shelf.screen_name} (#{shelf.books.count})"
+  %br
+  - shelves.user_created.each do |shelf|
+    = link_to my_books_path(shelf: shelf.id), class: "list-group-item" do
+      %h6.list-group-item-heading
+        = "#{shelf.screen_name} (#{shelf.books.count})"
+

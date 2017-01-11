@@ -270,6 +270,7 @@ en:
     add_to_collections: "Add to collections"
     edit_collections: "Edit collections"
     new: "New Collection"
+    edit: "Edit Collection"
     my_library: "My library"
     want_to_read: "Want to read"
     favourites: "Favourites"
@@ -277,6 +278,15 @@ en:
     read_but_not_own: "Read but dont own"
     to_read: "To read"
     collections: "Collections"
+    active: "Active"
+    name: "Name"
+    name_of_shelf: "Name of collection"
+    privacy:
+      label: "Privacy"
+      same_as_profile: "Same as profile"
+      is_public: "Public"
+      is_private: "Private"
+
 
   users:
     follow: "Follow"

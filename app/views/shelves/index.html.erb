@@ -2,7 +2,7 @@
   <div class="block-title">
     <div class="block-options pull-right">
       <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))%>
-    </div>    
+    </div>
     <h2><%= detone t('my_collections') %></h2>
   </div>
   <div class="table-responsive">
@@ -20,8 +20,8 @@
         <% @shelves.each do |shelf| %>
           <tr>
             <td><%= link_to shelf.screen_name, shelf %></td>
-            <td><%= shelf.privacy %></td>
-            <td class="text-center"><%= shelf.active ? fa('check') : fa('times') %></td>          
+            <td><%= shelf.screen_privacy %></td>
+            <td class="text-center"><%= shelf.active ? fa('check') : fa('times') %></td>
             <td class="text-center">
               <%= link_to fa('cog'), edit_shelf_path(shelf), class: 'btn btn-effect-ripple btn-xs btn-success' %>
               <%= link_to fa('trash-o'), shelf, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } unless shelf.built_in %>

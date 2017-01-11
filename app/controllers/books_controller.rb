@@ -143,8 +143,16 @@ class BooksController < ApplicationController
 
   def my
     authorize :book, :my?
-
-    @books = current_user.books.page(params[:page])
+    if params[:shelf]
+      @shelf = current_user.shelves.find_by(id: params[:shelf])
+      if @shelf.present?
+        @books = @shelf.books.page(params[:page])
+      else
+        @books = current_user.books.page(params[:page])
+      end
+    else
+      @books = current_user.books.page(params[:page])
+    end
     @shelves = current_user.shelves if user_signed_in?
 
     respond_with(@books)
