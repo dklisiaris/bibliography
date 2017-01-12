@@ -1,0 +1,14 @@
+.block
+  .block-title
+    %h2= detone @shelf.screen_name
+  .row
+    = render "books/widgets/pagination"
+    %hr/
+    .col-xs-12
+      = render :partial =>  "books/book", :collection => @books, :as => :book
+    = render "books/widgets/pagination"
+
+= link_to 'Edit', edit_shelf_path(@shelf)
+|
+= link_to 'Back', shelves_path
+

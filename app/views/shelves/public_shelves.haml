@@ -1,0 +1,33 @@
+- if @shelf.present?
+  - pages = {fa('home') => root_url,                    |
+    @profile.username => public_profile_path(@profile), |
+    t('books.label') => public_shelves_path(@profile),  |
+    @shelf.screen_name => nil                           |
+  }                                                     |
+- else
+  - pages = {fa('home') => root_url,                    |
+    @profile.username => public_profile_path(@profile), |
+    t('books.label') => nil                             |
+  }                                                     |
+
+= cell(:navigation).call(:content_header, title: "#{t('books.label')} #{of_username(@profile)}", breadcrumbs: pages)
+
+.row
+  .col-sm-8
+    .block.full
+      .block-title
+        %h2
+          = @shelf.present? ? detone(@shelf.screen_name) : detone(t('books.all'))
+          %small
+             (#{@books.total_count})
+      .row
+        = render "books/widgets/pagination"
+        %hr/
+        .col-xs-12
+          = render :partial =>  "books/book", :collection => @books, :as => :book
+        = render "books/widgets/pagination"
+  .col-sm-4
+    = render partial: 'shelves/widgets/public_shelves', locals: {title: t('collections'), shelves: @shelves, profile: @profile}
+
+- if user_signed_in?
+  = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}

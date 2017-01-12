@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   get "library/(:id)", :to => "profiles#show", as: 'public_profile'
   post "library/(:id)/follow", :to => "profiles#follow"
 
+  get "library/(:id)/shelves/(:shelf_id)", :to => "shelves#public_shelves", as: 'public_shelf'
+  get "library/(:id)/shelves", :to => "shelves#public_shelves", as: 'public_shelves'
 
   # get "profile/edit", :to => "profile#edit", as: 'edit_profile'
   # patch "profile", :to => "profile#update", as: 'update_profile'

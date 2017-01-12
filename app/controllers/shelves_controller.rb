@@ -10,6 +10,27 @@ class ShelvesController < ApplicationController
     respond_with(@shelves)
   end
 
+  def public_shelves
+    authorize :shelf, :public_shelves?
+
+    @profile = Profile.find(params[:id])
+    @user = @profile.user
+
+    if params[:shelf_id]
+      @shelf = @user.shelves.find_by(id: params[:shelf_id])
+      if @shelf.present?
+        @books = @shelf.books.page(params[:page])
+      else
+        @books = @user.books.page(params[:page])
+      end
+    else
+      @books = @user.books.page(params[:page])
+    end
+    @shelves = @user.shelves
+
+    respond_with(@books)
+  end
+
   def show
     @books = @shelf.books.page(params[:page])
     respond_with(@shelf)
@@ -47,9 +68,9 @@ class ShelvesController < ApplicationController
       authorize @shelf
     end
 
-    def set_enum      
+    def set_enum
       @privacies = Shelf.privacies
-    end     
+    end
 
     def shelf_params
       params.require(:shelf).permit(:name, :privacy, :active)

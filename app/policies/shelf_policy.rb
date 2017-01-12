@@ -8,6 +8,8 @@ class ShelfPolicy < ApplicationPolicy
   def edit?   ; belongs_to_current_user? ; end
   def destroy?; belongs_to_current_user? and not record.built_in ; end
 
+  def public_shelves?; true; end
+
   class Scope < Scope
     def resolve
       scope.where(user_id: user.id)

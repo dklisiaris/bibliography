@@ -20,7 +20,7 @@
           = render :partial =>  "books/book", :collection => @books, :as => :book
         = render "books/widgets/pagination"
   .col-sm-4
-    = render partial: 'books/widgets/my_shelves', locals: {title: t('collections'), shelves: @shelves}
+    = render partial: 'shelves/widgets/my_shelves', locals: {title: t('collections'), shelves: @shelves}
 
 - if user_signed_in?
   = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}

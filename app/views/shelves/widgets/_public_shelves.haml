@@ -1,0 +1,15 @@
+- icon ||= 'th-large'
+.block.full
+  .block-title
+    %h2
+      = fa(icon)
+      %strong= detone title
+  - shelves.built_in.each do |shelf|
+    = link_to public_shelf_path(profile.id, shelf.id), class: "list-group-item" do
+      %h6.list-group-item-heading
+        = "#{shelf.screen_name} (#{shelf.books.count})"
+  %br
+  - shelves.user_created.each do |shelf|
+    = link_to public_shelf_path(profile.id, shelf.id), class: "list-group-item" do
+      %h6.list-group-item-heading
+        = "#{shelf.screen_name} (#{shelf.books.count})"
