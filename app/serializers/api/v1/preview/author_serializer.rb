@@ -3,13 +3,18 @@ class Api::V1::Preview::AuthorSerializer < Api::V1::BaseSerializer
 
   def attributes
     data = super
+    data[:fullname] = fullname
     data[:job] = job unless job.nil?
     data
-  end  
+  end
 
   def job
     return object.job if object.job.present?
     nil
+  end
+
+  def fullname
+    return object.fullname
   end
 
 end

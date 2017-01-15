@@ -14,9 +14,8 @@
 }
 
 .tt-menu {
-  width: 422px;
+  width: 100%;
   margin: 35px 0;
-  padding: 8px 0;
   background-color: #fff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -27,8 +26,7 @@
 
 .tt-suggestion {
   padding: 3px 20px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -51,9 +49,31 @@
   padding: 0 10px;
 }
 
+.tt-book{
+  border-bottom: 1px solid #ddd;
+  height: 64px;
+  padding:5px;
+  overflow: hidden;
+
+  .tt-book-cover{
+    float:left;
+  }
+  .tt-book-details{
+    left:10px;
+  }
+
+  .tt-book-cover, .tt-book-details {
+    position: relative;
+    top: 50%;
+    -webkit-transform: perspective(1px) translateY(-50%);
+    -ms-transform: perspective(1px) translateY(-50%);
+    transform: perspective(1px) translateY(-50%);
+  }
+}
+
 #remote input.loading{
-  background-color: #ffffff;
-  background-image: url("http://loadinggif.com/images/image-selection/3.gif");
+  background-color: #fff;
+  background-image: image-url("spinners/spinner3.gif");
   background-size: 25px 25px;
   background-position:right center;
   background-repeat: no-repeat;
