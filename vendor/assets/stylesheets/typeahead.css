@@ -47,6 +47,17 @@
   margin: 0;
 }
 
+.tt-empty-message {
+  padding: 0 10px;
+}
+
+#remote input.loading{
+  background-color: #ffffff;
+  background-image: url("http://loadinggif.com/images/image-selection/3.gif");
+  background-size: 25px 25px;
+  background-position:right center;
+  background-repeat: no-repeat;
+}
 .input-group span.twitter-typeahead {
   display: block !important;
 }

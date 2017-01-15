@@ -24,11 +24,13 @@ $(".books").ready ->
     remote:
       url: "/books?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
+      rateLimitWait: 1000
       filter: (suggestions) ->
 
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
           title: suggestion['title']
+          image: suggestion['image']
           url: suggestion['site_url']
   )
 
@@ -43,21 +45,27 @@ $(".books").ready ->
   ,
     displayKey: "title"
     limit: 8
-    source: (query, syncResults, asyncResults) ->
-      $.get('/books?autocomplete=1&q=' + query, (data) ->
-        asyncResults(data)
-      )
+    source: engine.ttAdapter()
     templates: {
       empty: [
-        '<div class="empty-message"><p>',
-          'Unable to find any books',
+        '<div class="tt-empty-message"><p>',
+          <%= "'#{I18n.t('nothing_found')}'" %>,
         '</p></div>'
       ].join('\n'),
       suggestion:  (data) ->
-        return '<p><strong>' + data.title + '</strong></p>';
+        return [
+          '<div class="tt-book"><p>',
+            '<strong>' + data.title + '</strong></p>',
+          '</div>'].join('\n')
     }
-  ).bind 'typeahead:selected', (obj,datum) ->
-    window.location.href = datum.site_url
+  ).bind('typeahead:selected', (obj,datum) ->
+    window.location.href = datum.url
+    return
+  ).on('typeahead:asyncrequest', ->
+      $('#remote input').addClass('loading')
+      return
+  ).on 'typeahead:asynccancel typeahead:asyncreceive', ->
+    $('#remote input').removeClass('loading')
     return
 
 @like = (book_id) ->
