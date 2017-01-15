@@ -43,27 +43,42 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
-  include PgSearch
-  pg_search_scope :search_by_title,
-    :against => [
-      [:title, 'A'],
-      [:original_title, 'B'],
-      [:series_name, 'C'],
-      [:tsearch_vector, 'D']
-    ],
-    :using => {
-      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-      :trigram => {:threshold => 0.15}
-    },
-    :ignoring => :accents
+  searchkick batch_size: 50,
+  callbacks: :async,
+  match: :word_start,
+  searchable: [:tsearch_vector],
+  word_start: [:tsearch_vector]
 
-  pg_search_scope :search_fast,
-    :against => [
-      [:tsearch_vector],
-    ],
-    :using => {
-      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-    }
+  def search_data
+  {
+    tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
+    # title: title,
+    # description: short_description
+  }
+  end
+
+
+  # include PgSearch
+  # pg_search_scope :search_by_title,
+  #   :against => [
+  #     [:title, 'A'],
+  #     [:original_title, 'B'],
+  #     [:series_name, 'C'],
+  #     [:tsearch_vector, 'D']
+  #   ],
+  #   :using => {
+  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+  #     :trigram => {:threshold => 0.15}
+  #   },
+  #   :ignoring => :accents
+
+  # pg_search_scope :search_fast,
+  #   :against => [
+  #     [:tsearch_vector],
+  #   ],
+  #   :using => {
+  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+  #   }
 
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
@@ -86,22 +101,6 @@ class Book < ActiveRecord::Base
         return writers.first.fullname_reversed if reversed
       end
     end
-  end
-
-
-  searchkick batch_size: 50,
-  callbacks: :async,
-  # # text_middle: ['title', 'description'],
-  # text_middle: ['title'],
-  word_start: ['title', 'tsearch_vector']
-  # autocomplete: ['title']
-
-  def search_data
-  {
-    tsearch_vector: tsearch_vector,
-    title: title,
-    # description: short_description
-  }
   end
 
   def short_description(max_chars=350)

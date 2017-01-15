@@ -114,7 +114,7 @@ gem 'json', '~> 1.8'
 gem 'kaminari', '~> 0.16'
 
 # Search engine gem on top of elasticsearch
-gem 'searchkick', '~> 1.2'
+gem 'searchkick', '~> 2.0', '>= 2.0.3'
 
 # jQuery plugin for drop-in fix binded events problem caused by Turbolinks
 gem 'jquery-turbolinks', '~> 2.1'

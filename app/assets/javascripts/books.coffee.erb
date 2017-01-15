@@ -42,9 +42,22 @@ $(".books").ready ->
     minLength: 1
   ,
     displayKey: "title"
-    source: engine.ttAdapter()
+    limit: 8
+    source: (query, syncResults, asyncResults) ->
+      $.get('/books?autocomplete=1&q=' + query, (data) ->
+        asyncResults(data)
+      )
+    templates: {
+      empty: [
+        '<div class="empty-message"><p>',
+          'Unable to find any books',
+        '</p></div>'
+      ].join('\n'),
+      suggestion:  (data) ->
+        return '<p><strong>' + data.title + '</strong></p>';
+    }
   ).bind 'typeahead:selected', (obj,datum) ->
-    window.location.href = datum.url
+    window.location.href = datum.site_url
     return
 
 @like = (book_id) ->
