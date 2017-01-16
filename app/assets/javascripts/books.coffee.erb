@@ -24,7 +24,7 @@ $(".books").ready ->
     remote:
       url: "/books?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
-      rateLimitWait: 1000
+      rateLimitWait: 500
       filter: (suggestions) ->
 
         # Map the remote source JSON array to a JavaScript object array

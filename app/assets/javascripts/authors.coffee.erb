@@ -24,6 +24,7 @@ $(".authors").ready ->
     remote:
       url: "/authors?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
+      rateLimitWait: 500
       filter: (suggestions) ->
 
         # Map the remote source JSON array to a JavaScript object array
@@ -38,7 +39,7 @@ $(".authors").ready ->
 
   # Instantiate the Typeahead UI
   $("#remote .typeahead").typeahead(
-    hint: false
+    hint: true
     highlight: true
     minLength: 1
   ,

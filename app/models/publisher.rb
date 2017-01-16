@@ -9,33 +9,32 @@ class Publisher < ActiveRecord::Base
   is_impressionable :counter_cache => true, :unique => true
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: [:slugged, :finders]  
+  friendly_id :slug_candidates, use: [:slugged, :finders]
 
-  # searchkick batch_size: 50,
-  # callbacks: :async, 
-  # word_start: ['name'],
-  # # text_middle: [:owner],
-  # # word_start: [:name, :owner],
-  # autocomplete: ['name']
+  searchkick batch_size: 100,
+  callbacks: :async,
+  match: :word_start,
+  searchable: [:tsearch_vector],
+  word_start: [:tsearch_vector]
+  # autocomplete: ['title']
 
-  # def search_data
-  #   {
-  #     name: name,
-  #     owner: owner
-  #   }
-  # end
+  def search_data
+  {
+    tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
+  }
+  end
 
   include PgSearch
-  pg_search_scope :search_by_name, 
+  pg_search_scope :search_by_name,
     :against => [
       [:name, 'A'],
       [:tsearch_vector, 'B']
-    ], 
+    ],
     :using => {
       :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
       :trigram => {:threshold => 0.15}
-    }, 
-    :ignoring => :accents  
+    },
+    :ignoring => :accents
 
   after_validation :calculate_search_terms, :if => :name_changed?
 
@@ -46,22 +45,22 @@ class Publisher < ActiveRecord::Base
       :slugged_name,
       [:slugged_name, :id],
     ]
-  end  
+  end
 
   def slugged_name(opts={})
     opts[:max_expansions] ||= 1
     opts[:dashes] = true if opts[:dashes].nil?
     join_with = opts[:dashes] ? '-' : ' '
 
-    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)
     name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(name).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_slug.split(" ").map do |word|
       converted = converter.convert(word)
       converted.present? ? converted : word
     end.flatten.uniq.join(join_with)
-  end   
+  end
 
   def calculate_search_terms
-    write_attribute(:tsearch_vector, slugged_name(max_expansions: 3, dashes: false))    
-  end   
+    write_attribute(:tsearch_vector, slugged_name(max_expansions: 3, dashes: false))
+  end
 end

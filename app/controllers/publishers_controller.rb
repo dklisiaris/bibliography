@@ -6,18 +6,21 @@ class PublishersController < ApplicationController
   impressionist :actions=>[:index]
 
   def index
-    if params[:q].present?           
+    if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
-      @publishers = policy_scope(Publisher)        
-        .search_by_name(keyphrase)
-        .page(params[:page])
-        .order(impressions_count: :desc)
+      # @publishers = policy_scope(Publisher)
+      #   .search_by_name(keyphrase)
+      #   .page(params[:page])
+      #   .order(impressions_count: :desc)
+
+      @publishers = policy_scope(Publisher)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: 50)
 
     else
       @publishers = policy_scope(Publisher).page(params[:page]).order(impressions_count: :desc)
-    end         
-    
+    end
+
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
       render json: @publishers, each_serializer: Api::V1::Preview::PublisherSerializer, root: false
     else
@@ -66,20 +69,20 @@ class PublishersController < ApplicationController
       respond_to do |format|
 
         format.html do
-          @publishers = Publisher.search(params[:q],fields: [{'name' => :word_start}, 'owner'], page: params[:page], per_page: 25)                
-          render :index          
+          @publishers = Publisher.search(params[:q],fields: [{'name' => :word_start}, 'owner'], page: params[:page], per_page: 25)
+          render :index
         end
 
         format.json do
           @publishers = Publisher.search(params[:q],fields: [{'name' => :word_start}], limit: 10).map{|p| {name: p.name}}
-          render json: @publishers, root: false 
+          render json: @publishers, root: false
         end
 
-      end  
+      end
     else
       redirect_to(publishers_url)
     end
-  end  
+  end
 
   private
     def set_publisher
