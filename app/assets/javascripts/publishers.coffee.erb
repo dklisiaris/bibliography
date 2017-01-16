@@ -17,7 +17,6 @@ $(".publishers").ready ->
         1
       else
         0
-    limit: 10
     remote:
       url: "/publishers?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
@@ -37,16 +36,16 @@ $(".publishers").ready ->
   $("#remote .typeahead").typeahead(
     hint: true
     highlight: true
-    minLength: 1
-    limit: 8
+    minLength: 2
   ,
     displayKey: "name"
+    limit: Infinity
     source: engine.ttAdapter()
     templates: {
       empty: [
-        '<div class="tt-empty-message"><p>',
+        '<div class="tt-result"><div class="tt-result-details"><span>',
           <%= "'#{I18n.t('nothing_found')}'" %>,
-        '</p></div>'
+        '</span></div></div>'
       ].join('\n'),
       suggestion:  (data) ->
         return ('\

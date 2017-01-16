@@ -11,47 +11,69 @@ $(".categories").ready ->
       q = $("input:text[name=q]").val().toLowerCase()
       index_a = a.value.toLowerCase().indexOf(q)
       index_b = b.value.toLowerCase().indexOf(q)
-      if index_a < index_b        
+      if index_a < index_b
         -1
       else if index_a > index_b
         1
       else
-        0    
+        0
     remote:
       url: "/categories?autocomplete=1&q=%QUERY"
       wildcard: "%QUERY"
+      rateLimitWait: 500
       filter: (suggestions) ->
-        
+
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
           name: suggestion['name']
           url: suggestion['site_url']
-    limit: 10
   )
 
   # Initialize the Bloodhound suggestion engine
-  engine.initialize()  
+  engine.initialize()
 
   # Instantiate the Typeahead UI
   $("#remote .typeahead").typeahead(
     hint: true
     highlight: true
-    minLength: 1
-  ,  
+    minLength: 2
+  ,
     displayKey: "name"
+    limit: Infinity
     source: engine.ttAdapter()
-  ).bind 'typeahead:selected', (obj,datum) ->    
+    templates: {
+      empty: [
+        '<div class="tt-result"><div class="tt-result-details"><span>',
+          <%= "'#{I18n.t('nothing_found')}'" %>,
+        '</span></div></div>'
+      ].join('\n'),
+      suggestion:  (data) ->
+        return ('\
+          <div class="tt-result">\
+            <div class="tt-result-details">\
+              <strong>' + data.name + '</strong><br>\
+            </div>\
+          </div>
+        ')
+    }
+  ).bind('typeahead:selected', (obj,datum) ->
     window.location.href = datum.url
+    return
+  ).on('typeahead:asyncrequest', ->
+      $('#remote input').addClass('loading')
+      return
+  ).on 'typeahead:asynccancel typeahead:asyncreceive', ->
+    $('#remote input').removeClass('loading')
     return
 
 @favouriteCategory = (category_id) ->
   $.ajax({
     type: "POST",
-    url: '/categories/'+category_id+'/favourite',    
+    url: '/categories/'+category_id+'/favourite',
     success:(data) ->
-      console.log 'favoured'            
+      console.log 'favoured'
       btn = $('.btn-favourite-category-'+category_id)
-      btn.toggleClass("btn-primary btn-success")      
+      btn.toggleClass("btn-primary btn-success")
 
       tooltip_text = btn.attr('data-original-title')
       if data.favourite and tooltip_text==<%="'#{I18n.t('categories.add_to_favourites')}'"%>
@@ -61,7 +83,7 @@ $(".categories").ready ->
           .tooltip('show')
 
         btn.find('i').removeClass( "fa-star-o" )
-          .addClass("fa-star")                 
+          .addClass("fa-star")
       else
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('categories.add_to_favourites')}'"%>)
@@ -69,11 +91,11 @@ $(".categories").ready ->
           .tooltip('show')
 
         btn.find('i').removeClass( "fa-star" )
-          .addClass("fa-star-o")                  
-      
-      return false       
+          .addClass("fa-star-o")
+
+      return false
     error:(data) ->
       console.log 'Error...'
       console.log data
-      return false 
+      return false
   })

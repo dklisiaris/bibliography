@@ -16,7 +16,6 @@ class Publisher < ActiveRecord::Base
   match: :word_start,
   searchable: [:tsearch_vector],
   word_start: [:tsearch_vector]
-  # autocomplete: ['title']
 
   def search_data
   {
@@ -24,17 +23,17 @@ class Publisher < ActiveRecord::Base
   }
   end
 
-  include PgSearch
-  pg_search_scope :search_by_name,
-    :against => [
-      [:name, 'A'],
-      [:tsearch_vector, 'B']
-    ],
-    :using => {
-      :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-      :trigram => {:threshold => 0.15}
-    },
-    :ignoring => :accents
+  # include PgSearch
+  # pg_search_scope :search_by_name,
+  #   :against => [
+  #     [:name, 'A'],
+  #     [:tsearch_vector, 'B']
+  #   ],
+  #   :using => {
+  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
+  #     :trigram => {:threshold => 0.15}
+  #   },
+  #   :ignoring => :accents
 
   after_validation :calculate_search_terms, :if => :name_changed?
 

@@ -15,13 +15,14 @@ class BooksController < ApplicationController
   def index
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
       # @books = policy_scope(Book)
       #   .search_fast(keyphrase)
       #   .order(impressions_count: :desc)
       #   .limit(50)
 
       @books = policy_scope(Book)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: 50)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
 
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)

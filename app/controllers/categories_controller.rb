@@ -13,20 +13,24 @@ class CategoriesController < ApplicationController
     @categories = Category.roots
 
     # TODO Replace this with favourite or featured categories
-    if params[:q].present?           
+    if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
-      @featured = Category.search_by_name(keyphrase).limit(100)   
+      # @featured = Category.search_by_name(keyphrase).limit(100)
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
+
+      @featured = Category
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
     elsif user_signed_in?
       @featured = current_user.liked_categories.limit(10)
     else
       @featured = Category.where(featured: true).limit(10)
-    end    
+    end
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
       render json: @featured, each_serializer: Api::V1::Preview::CategorySerializer, root: false
     else
       respond_with(@categories)
-    end       
+    end
   end
 
   def show
@@ -38,9 +42,9 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    authorize @category    
+    authorize @category
     @category.parent_id = params[:parent_id]
-    
+
     respond_with(@category)
   end
 
@@ -69,7 +73,7 @@ class CategoriesController < ApplicationController
     authorize :category, :favourite?
 
     if not current_user.likes?(@category)
-      current_user.like(@category) 
+      current_user.like(@category)
     else
       current_user.unlike(@category)
     end

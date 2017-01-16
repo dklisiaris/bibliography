@@ -13,14 +13,14 @@ class AuthorsController < ApplicationController
   def index
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
-
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
       # @authors = policy_scope(Author)
       #   .search_by_name(keyphrase)
       #   .page(params[:page])
       #   .order(impressions_count: :desc, image: :asc)
 
       @authors = policy_scope(Author)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: 50)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end
