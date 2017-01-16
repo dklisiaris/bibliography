@@ -29,6 +29,7 @@ $(".authors").ready ->
         # Map the remote source JSON array to a JavaScript object array
         $.map suggestions, (suggestion) ->
           name: [suggestion['lastname'], suggestion['firstname']].join(', ')
+          image: suggestion['image']
           url: suggestion['site_url']
   )
 
@@ -42,9 +43,34 @@ $(".authors").ready ->
     minLength: 1
   ,
     displayKey: "name"
+    limit: 8
     source: engine.ttAdapter()
-  ).bind 'typeahead:selected', (obj,datum) ->
+    templates: {
+      empty: [
+        '<div class="tt-empty-message"><p>',
+          <%= "'#{I18n.t('nothing_found')}'" %>,
+        '</p></div>'
+      ].join('\n'),
+      suggestion:  (data) ->
+        return ('\
+          <div class="tt-result">\
+            <div class="tt-result-cover">\
+              <img height="48" width="32" src="' + data.image + '">\
+            </div>\
+            <div class="tt-result-details">\
+              <strong>' + data.name + '</strong><br>\
+            </div>\
+          </div>
+        ')
+    }
+  ).bind('typeahead:selected', (obj,datum) ->
     window.location.href = datum.url
+    return
+  ).on('typeahead:asyncrequest', ->
+      $('#remote input').addClass('loading')
+      return
+  ).on 'typeahead:asynccancel typeahead:asyncreceive', ->
+    $('#remote input').removeClass('loading')
     return
 
 @favouriteAuthor = (author_id) ->

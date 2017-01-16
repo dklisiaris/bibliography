@@ -4,6 +4,7 @@ class Api::V1::Preview::AuthorSerializer < Api::V1::BaseSerializer
   def attributes
     data = super
     data[:fullname] = fullname
+    data[:image] = avatar
     data[:job] = job unless job.nil?
     data
   end
@@ -15,6 +16,10 @@ class Api::V1::Preview::AuthorSerializer < Api::V1::BaseSerializer
 
   def fullname
     return object.fullname
+  end
+
+  def avatar
+    return object.avatar
   end
 
 end

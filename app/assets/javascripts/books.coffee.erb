@@ -55,11 +55,11 @@ $(".books").ready ->
       ].join('\n'),
       suggestion:  (data) ->
         return ('\
-          <div class="tt-book">\
-            <div class="tt-book-cover">\
+          <div class="tt-result">\
+            <div class="tt-result-cover">\
               <img height="48" width="32" src="' + data.image + '">\
             </div>\
-            <div class="tt-book-details">\
+            <div class="tt-result-details">\
               <strong>' + data.title + '</strong><br>\
               <span>' + data.writer + '</span>\
             </div>\

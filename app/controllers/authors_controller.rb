@@ -1,6 +1,6 @@
 class AuthorsController < ApplicationController
   before_action :set_json_format, only: [:favourite]
-  before_action :authenticate_user!, only: [:favourite]  
+  before_action :authenticate_user!, only: [:favourite]
   before_action :set_author, only: [:show, :edit, :update, :destroy, :favourite]
 
   #Disable protection for stateless api json response
@@ -11,16 +11,16 @@ class AuthorsController < ApplicationController
   impressionist :actions=>[:index]
 
   def index
-    if params[:q].present?           
+    if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
-      # @authors = policy_scope(Author)        
+      # @authors = policy_scope(Author)
       #   .search_by_name(keyphrase)
       #   .page(params[:page])
       #   .order(impressions_count: :desc, image: :asc)
 
-      @authors = policy_scope(Author)        
-        .search(keyphrase, fields: [:tsearch_vector], match: :word_start, order: {_score: :desc}, limit: 50)
+      @authors = policy_scope(Author)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: 50)
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end
@@ -29,7 +29,7 @@ class AuthorsController < ApplicationController
       render json: @authors, each_serializer: Api::V1::Preview::AuthorSerializer, root: false
     else
       respond_with(@authors)
-    end    
+    end
   end
 
   def show
@@ -61,7 +61,7 @@ class AuthorsController < ApplicationController
 
   def update
     @author.update(author_params)
-    
+
     respond_with(@author)
   end
 
@@ -75,13 +75,13 @@ class AuthorsController < ApplicationController
     authorize :author, :favourite?
 
     if not current_user.likes?(@author)
-      current_user.like(@author) 
+      current_user.like(@author)
     else
       current_user.unlike(@author)
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@author)}
-  end  
+  end
 
   private
     def set_author

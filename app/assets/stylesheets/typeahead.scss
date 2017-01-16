@@ -49,20 +49,20 @@
   padding: 0 10px;
 }
 
-.tt-book{
+.tt-result{
   border-bottom: 1px solid #ddd;
   height: 64px;
   padding:5px;
   overflow: hidden;
 
-  .tt-book-cover{
+  .tt-result-cover{
     float:left;
   }
-  .tt-book-details{
+  .tt-result-details{
     left:10px;
   }
 
-  .tt-book-cover, .tt-book-details {
+  .tt-result-cover, .tt-result-details {
     position: relative;
     top: 50%;
     -webkit-transform: perspective(1px) translateY(-50%);
