@@ -1,19 +1,19 @@
-<%= form_tag({controller: 'home', action: 'index'}, method: 'get') do %>
+<%= form_tag({controller: 'home', action: 'search'}, method: 'get') do %>
   <div class="col-xs-10 col-sm-8 col-xl-7 input-group">
   	<% if params[:q].present? %>
     <span class="input-group-btn">
     	<%= link_to fa('close'), {controller: 'home', action: 'index'}, class: "btn btn-lg btn-default" %>
-    </span>  
+    </span>
     <% end %>
 
-    <span id="remote">      
-      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-lg', :placeholder => t("write_search_terms") %> 
-    </span>     	
+    <span id="remote">
+      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-lg', :placeholder => t("write_search_terms") %>
+    </span>
 
-    <span class="input-group-btn">    	
+    <span class="input-group-btn">
       <%= button_tag(type: "submit", name: nil, class: "btn btn-lg btn-effect-ripple btn-primary") do %>
           <i class="fa fa-search"></i>
-      <% end %>      
+      <% end %>
     </span>
 
   </div>

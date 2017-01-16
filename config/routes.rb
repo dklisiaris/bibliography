@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # get 'home/index'
   get '/autocomplete', to: 'home#autocomplete'
+  get '/search', to: 'home#search'
 
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''

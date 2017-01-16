@@ -3,27 +3,27 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(".home").ready ->
-  # Instantiate the Bloodhound suggestion engine
-  suggestions = new Bloodhound(
-    datumTokenizer: (datum) ->
-      Bloodhound.tokenizers.whitespace datum.value
+  # # Instantiate the Bloodhound suggestion engine
+  # suggestions = new Bloodhound(
+  #   datumTokenizer: (datum) ->
+  #     Bloodhound.tokenizers.whitespace datum.value
 
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-    limit: 10
-    remote:
-      url: "/autocomplete?query=%QUERY"
-      filter: (suggestions) ->
-        
-        # Map the remote source JSON array to a JavaScript object array
-        $.map suggestions, (suggestion) ->
-          value: suggestion    
-  )
+  #   queryTokenizer: Bloodhound.tokenizers.whitespace
+  #   limit: 10
+  #   remote:
+  #     url: "/autocomplete?query=%QUERY"
+  #     filter: (suggestions) ->
 
-  # Initialize the Bloodhound suggestion engine
-  suggestions.initialize()
+  #       # Map the remote source JSON array to a JavaScript object array
+  #       $.map suggestions, (suggestion) ->
+  #         value: suggestion
+  # )
 
-  # Instantiate the Typeahead UI
-  $("#remote .typeahead").typeahead null,
-    displayKey: "value"
-    source: suggestions.ttAdapter()
-          
+  # # Initialize the Bloodhound suggestion engine
+  # suggestions.initialize()
+
+  # # Instantiate the Typeahead UI
+  # $("#remote .typeahead").typeahead null,
+  #   displayKey: "value"
+  #   source: suggestions.ttAdapter()
+

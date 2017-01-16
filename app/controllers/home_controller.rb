@@ -1,20 +1,12 @@
 class HomeController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :index
-  skip_after_action :verify_authorized,  except: :index 
+  skip_after_action :verify_authorized,  except: :index
 
-  def index    
-    @search_results = Book.search(params[:query], page: params[:page], per_page: 25, fields: [:title, :description]) if params[:query].present?
-    
-    if params[:q].present?           
-      keyphrase = ApplicationController.helpers.latinize(params[:q])
-      
-      @search_results = Searchkick.search(keyphrase, index_name: [Book, Author], order: {_score: :desc}, limit: 50)
-    end
-
+  def index
     @popular_books = Book.order(impressions_count: :desc).limit(6)
     @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(6)
-    @recommended_books = Book.top(count: 6)   
-     
+    @recommended_books = Book.top(count: 6)
+
     @awarded_books = Award.where(awardable_type: 'Book')
       .select('awards.awardable_id, awards.awardable_type, sum(awards.id) as awards_count')
       .group('awards.awardable_id, awards.awardable_type')
@@ -32,9 +24,30 @@ class HomeController < ApplicationController
 
   end
 
+  def search
+    if params[:q].present?
+      keyphrase = ApplicationController.helpers.latinize(params[:q])
+
+      search_options = {
+        body_options: {min_score: 0.1},
+        order: {_score: :desc},
+        limit: 50,
+        execute: false
+      }
+      book_search       = Book.search(keyphrase, search_options)
+      author_search     = Author.search(keyphrase, search_options)
+      publisher_search  = Publisher.search(keyphrase, search_options)
+      category_search   = Category.search(keyphrase, search_options)
+
+      @search_results = Searchkick.multi_search([
+        book_search, author_search, publisher_search, category_search
+      ])
+    end
+  end
+
   def autocomplete
-    autocomplete_results = Book.search(params[:query], autocomplete: true, limit: 10).map(&:title)    
+    autocomplete_results = Book.search(params[:q], autocomplete: true, limit: 10).map(&:title)
     render json: autocomplete_results
-  end  
+  end
 
 end
