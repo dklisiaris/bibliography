@@ -1,14 +1,17 @@
-<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form',
     locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) %>
 
-<div class="row">  
+<div class="row">
   <div class="col-sm-8">
     <% @featured.each do |category|%>
-      <%= render partial: 'books/widgets/grid', 
-        locals: {title: link_to(category.name, category, class: "text-light-op"), books: category.books.limit(10)} %>
+      <%= render partial: 'books/widgets/grid',
+        locals: {
+          title: link_to(category.name, category, class: "text-light-op"),
+          books: category.books.limit(10),
+          icon: 'tag'} %>
     <% end %>
   </div>
-  
+
 
    <div class="col-sm-4">
       <div class="block">
@@ -17,10 +20,10 @@
             <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new')) if policy(Category).new? %>
           </div>
           <h2><%= t('categories.all') %></h2>
-        </div>  
+        </div>
         <div class="list-group">
           <%= render @categories %>
-        </div>              
+        </div>
       </div>
   </div>
 </div>
