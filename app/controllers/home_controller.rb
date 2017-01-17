@@ -42,6 +42,11 @@ class HomeController < ApplicationController
       @search_results = Searchkick.multi_search([
         book_search, author_search, publisher_search, category_search
       ])
+
+      # Hash containing num of hits per search type ie. {"Book"=>2, "Author"=>5}
+      @search_hits = Hash[@search_results.map{|r| [r.klass.to_s, r.response["hits"]["total"]]}]
+    else
+      redirect_to root_path
     end
   end
 

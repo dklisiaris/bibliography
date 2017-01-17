@@ -5,25 +5,47 @@
         .header-section
           = render 'home/search_form'
 
-- unless @search_results.nil?
-  .block
-    .row
-      .col-xs-12
-        - @search_results.each do |result|
-          - if result.klass.to_s == "Book"
-            = render :partial =>  "books/book", :collection => result.results, :as => :book
-          - elsif result.klass.to_s == "Author"
-            = render :partial => "authors/author", :collection => result.results, :as => :author
-          - elsif result.klass.to_s == "Publisher"
-            = render :partial =>  "publishers/publisher", :collection => result.results, :as => :publisher
-          - elsif result.klass.to_s == "Category"
-            - result.results.each do |category|
-              = render partial: 'books/widgets/grid',                            |
-                locals: {                                                        |
-                title: link_to(category.name, category, class: "text-light-op"), |
-                books: category.books.limit(10),                                 |
-                icon: 'tag'}                                                     |
-
-        - if @search_results.all?{|r| r.response["hits"]["total"] == 0}
-          = t("nothing_found")
-          %hr/
+- if @search_results.present? && !@search_hits.all?{|k, v| v == 0}
+  .row
+    .col-sm-12
+      .block
+        .block-title
+          %ul.nav.nav-tabs{"data-toggle" => "tabs"}
+            - active_klass = @search_hits.find{|k, v| v > 0}[0]
+            - if @search_hits["Book"] > 0
+              %li{:class => ("active" if active_klass == "Book")}
+                = link_to("#{t('books.label')} (#{@search_hits["Book"]})", "#search-tab-books")
+            - if @search_hits["Author"] > 0
+              %li{:class => ("active" if active_klass == "Author")}
+                = link_to("#{t('authors.label')} (#{@search_hits["Author"]})", "#search-tab-authors")
+            - if @search_hits["Publisher"] > 0
+              %li{:class => ("active" if active_klass == "Publisher")}
+                = link_to("#{t('publishers.label')} (#{@search_hits["Publisher"]})", "#search-tab-publishers")
+            - if @search_hits["Category"] > 0
+              %li{:class => ("active" if active_klass == "Category")}
+                = link_to("#{t('categories.label')} (#{@search_hits["Category"]})", "#search-tab-categories")
+        .tab-content
+          - @search_results.each do |result|
+            - if result.klass.to_s == "Book" && @search_hits["Book"] > 0
+              #search-tab-books.tab-pane{:class => ("active" if active_klass == "Book")}
+                = render :partial =>  "books/book", :collection => result.results, :as => :book
+            - elsif result.klass.to_s == "Author" && @search_hits["Author"] > 0
+              #search-tab-authors.tab-pane{:class => ("active" if active_klass == "Author")}
+                = render :partial => "authors/author", :collection => result.results, :as => :author
+            - elsif result.klass.to_s == "Publisher" && @search_hits["Publisher"] > 0
+              #search-tab-publishers.tab-pane{:class => ("active" if active_klass == "Publisher")}
+                = render :partial =>  "publishers/publisher", :collection => result.results, :as => :publisher
+            - elsif result.klass.to_s == "Category" && @search_hits["Category"] > 0
+              #search-tab-categories.tab-pane{:class => ("active" if active_klass == "Category")}
+                - result.results.each do |category|
+                  = render partial: 'books/widgets/grid',                            |
+                    locals: {                                                        |
+                    title: link_to(category.name, category, class: "text-light-op"), |
+                    books: category.books.limit(10),                                 |
+                    icon: 'tag'}                                                     |
+- else
+  .row
+    .col-sm-12
+      .block
+        = t("nothing_found")
+        %hr/
