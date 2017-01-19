@@ -223,3 +223,6 @@ gem 'multi_fetch_fragments', '~> 0.0.17'
 
 # A rich text editor for everyday writing
 gem 'trix', '~> 0.9.10'
+
+# The fastest JSON parser and object serializer.
+gem 'oj', '~> 2.18'

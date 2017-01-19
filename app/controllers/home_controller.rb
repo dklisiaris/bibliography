@@ -28,10 +28,11 @@ class HomeController < ApplicationController
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
       search_options = {
         body_options: {min_score: 0.1},
         order: {_score: :desc},
-        limit: 50,
+        limit: limit,
         execute: false
       }
       book_search       = Book.search(keyphrase, search_options)
@@ -45,6 +46,10 @@ class HomeController < ApplicationController
 
       # Hash containing num of hits per search type ie. {"Book"=>2, "Author"=>5}
       @search_hits = Hash[@search_results.map{|r| [r.klass.to_s, r.response["hits"]["total"]]}]
+
+      if params[:autocomplete].try(:to_i) == 1
+        render json: Api::V1::Preview::ResultsSerializer.new(@search_results)
+      end
     else
       redirect_to root_path
     end

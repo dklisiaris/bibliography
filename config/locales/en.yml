@@ -131,6 +131,7 @@ en:
 
   categories:
     label: "Categories"
+    label_singular: "Category"
     new: "New Category"
     edit: "Edit Category"
     delete: "Delete Category"
@@ -144,6 +145,7 @@ en:
 
   authors:
     label: "Authors"
+    label_singular: "Author"
     new: "New Author"
     edit: "Edit Author"
     delete: "Delete Author"
@@ -165,6 +167,7 @@ en:
 
   publishers:
     label: "Publishers"
+    label_singular: "Publisher"
     new: "New Publisher"
     edit: "Edit Publisher"
     delete: "Delete Publisher"

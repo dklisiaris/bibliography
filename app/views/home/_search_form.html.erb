@@ -6,8 +6,8 @@
     </span>
     <% end %>
 
-    <span id="remote">
-      <%= text_field_tag :q, params[:q], class: 'typeahead form-control input-lg', :placeholder => t("write_search_terms") %>
+    <span id="remote" class="multisearch">
+      <%= text_field_tag :q, params[:q], class: 'typeahead multisearch-field form-control input-lg', :placeholder => t("write_search_terms") %>
     </span>
 
     <span class="input-group-btn">

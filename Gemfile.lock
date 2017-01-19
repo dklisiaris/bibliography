@@ -242,6 +242,7 @@ GEM
       pkg-config (~> 1.1.7)
     nokogumbo (1.4.9)
       nokogiri
+    oj (2.18.1)
     orm_adapter (0.5.0)
     pg (0.19.0)
     pg_search (1.0.6)
@@ -471,6 +472,7 @@ DEPENDENCIES
   modernizr-rails (~> 2.7)
   multi_fetch_fragments (~> 0.0.17)
   newrelic_rpm (~> 3.15, >= 3.15.2.317)
+  oj (~> 2.18)
   pg (~> 0.18)
   pg_search (~> 1.0.3)
   pry-byebug
