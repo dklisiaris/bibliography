@@ -2,7 +2,39 @@
 
 <%= cell(:navigation).call(:content_header, title: t('tasks.label'), breadcrumbs: pages) %>
 
+<div class="row">
+  <%= render partial: "resource_counter",
+    locals: {
+      name: t('books.label'),
+      icon: 'book',
+      bg_klass: 'themed-background-social',
+      count: @books_count
+    } %>
+
+  <%= render partial: "resource_counter",
+    locals: {
+      name: t('authors.label'),
+      icon: 'users',
+      bg_klass: 'themed-background-flat',
+      count: @authors_count
+    } %>
+
+  <%= render partial: "resource_counter",
+    locals: {
+      name: t('publishers.label'),
+      icon: 'university',
+      bg_klass: 'themed-background-creme',
+      count: @publishers_count
+    } %>
+
+  <%= render partial: "resource_counter",
+    locals: {
+      name: t('categories.label'),
+      icon: 'tasks',
+      bg_klass: 'themed-background-amethyst',
+      count: @categories_count
+    } %>
+</div>
+
 <%= render partial: "content_update_task", locals: {is_limited: true} %>
-
-
 

@@ -22,8 +22,6 @@ $(".home").ready ->
       wildcard: "%QUERY"
       rateLimitWait: 500
       filter: (suggestions) ->
-        console.log(suggestions)
-        console.log(suggestions.results.books)
         # Map the remote sources JSON arrays to a JavaScript object array
         books = $.map suggestions.results.books, (suggestion) ->
           title: suggestion['title']
@@ -94,27 +92,4 @@ $(".home").ready ->
   ).on 'typeahead:asynccancel typeahead:asyncreceive', ->
     $('#remote input.multisearch-field').removeClass('loading')
     return
-  # # Instantiate the Bloodhound suggestion engine
-  # suggestions = new Bloodhound(
-  #   datumTokenizer: (datum) ->
-  #     Bloodhound.tokenizers.whitespace datum.value
-
-  #   queryTokenizer: Bloodhound.tokenizers.whitespace
-  #   limit: 10
-  #   remote:
-  #     url: "/autocomplete?query=%QUERY"
-  #     filter: (suggestions) ->
-
-  #       # Map the remote source JSON array to a JavaScript object array
-  #       $.map suggestions, (suggestion) ->
-  #         value: suggestion
-  # )
-
-  # # Initialize the Bloodhound suggestion engine
-  # suggestions.initialize()
-
-  # # Instantiate the Typeahead UI
-  # $("#remote .typeahead").typeahead null,
-  #   displayKey: "value"
-  #   source: suggestions.ttAdapter()
 

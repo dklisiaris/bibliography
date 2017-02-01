@@ -3,6 +3,11 @@ class TasksController < ApplicationController
 
   def index
     authorize :task, :index?
+
+    @books_count = Book.all.count
+    @authors_count = Author.all.count
+    @publishers_count = Publisher.all.count
+    @categories_count = Category.all.count
   end
 
   def update_content
