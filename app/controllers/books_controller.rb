@@ -22,7 +22,8 @@ class BooksController < ApplicationController
       #   .limit(50)
 
       @books = policy_scope(Book)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+          page: params[:page], per_page: limit)
 
     else
       @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
@@ -30,7 +31,7 @@ class BooksController < ApplicationController
     # @books_est_count = 20 * @books.total_pages
     @shelves = current_user.shelves if user_signed_in?
 
-    if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
+    if params[:q].present? && (params[:autocomplete].try(:to_i) == 1 || params[:loadmore].try(:to_i) == 1)
       render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
     else
       respond_with(@books)

@@ -20,7 +20,8 @@ class AuthorsController < ApplicationController
       #   .order(impressions_count: :desc, image: :asc)
 
       @authors = policy_scope(Author)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+          page: params[:page], per_page: limit)
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end

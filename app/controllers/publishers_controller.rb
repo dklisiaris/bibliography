@@ -15,8 +15,8 @@ class PublishersController < ApplicationController
       #   .order(impressions_count: :desc)
 
       @publishers = policy_scope(Publisher)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
-
+        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+          page: params[:page], per_page: limit)
     else
       @publishers = policy_scope(Publisher).page(params[:page]).order(impressions_count: :desc)
     end

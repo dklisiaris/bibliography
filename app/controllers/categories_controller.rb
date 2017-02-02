@@ -18,8 +18,8 @@ class CategoriesController < ApplicationController
       # @featured = Category.search_by_name(keyphrase).limit(100)
       limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
 
-      @featured = Category
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc}, limit: limit)
+      @featured = Category.search(keyphrase, body_options: {min_score: 0.1},
+        order: {_score: :desc}, page: params[:page], per_page: limit)
     elsif user_signed_in?
       @featured = current_user.liked_categories.limit(10)
     else
