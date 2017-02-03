@@ -28,24 +28,41 @@ class HomeController < ApplicationController
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
-      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
-      search_options = {
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 5
+      multi_search_options = {
         body_options: {min_score: 0.1},
         order: {_score: :desc},
-        limit: limit,
+        page: 1,
+        per_page: limit,
         execute: false
       }
-      book_search       = Book.search(keyphrase, search_options)
-      author_search     = Author.search(keyphrase, search_options)
-      publisher_search  = Publisher.search(keyphrase, search_options)
-      category_search   = Category.search(keyphrase, search_options)
+      single_search_options = multi_search_options.merge({
+        page: params[:page],
+        execute: true
+      })
 
-      @search_results = Searchkick.multi_search([
-        book_search, author_search, publisher_search, category_search
-      ])
+      case params[:search_only]
+      when 'books'
+        @books = Book.search(keyphrase, single_search_options)
+      when 'authors'
+        @authors = Author.search(keyphrase, single_search_options)
+      when 'publishers'
+        @publishers = Publisher.search(keyphrase, single_search_options)
+      when 'categories'
+        @categories = Category.search(keyphrase, single_search_options)
+      else
+        book_search       = Book.search(keyphrase, multi_search_options)
+        author_search     = Author.search(keyphrase, multi_search_options)
+        publisher_search  = Publisher.search(keyphrase, multi_search_options)
+        category_search   = Category.search(keyphrase, multi_search_options)
 
-      # Hash containing num of hits per search type ie. {"Book"=>2, "Author"=>5}
-      @search_hits = Hash[@search_results.map{|r| [r.klass.to_s, r.response["hits"]["total"]]}]
+        @search_results = Searchkick.multi_search([
+          book_search, author_search, publisher_search, category_search
+        ])
+
+        # Hash containing num of hits per search type ie. {"Book"=>2, "Author"=>5}
+        @search_hits = Hash[@search_results.map{|r| [r.klass.to_s, r.response["hits"]["total"]]}]
+      end
 
       if params[:autocomplete].try(:to_i) == 1
         render json: Api::V1::Preview::ResultsSerializer.new(@search_results)
