@@ -28,7 +28,7 @@ class HomeController < ApplicationController
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
-      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 5
+      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
       multi_search_options = {
         body_options: {min_score: 0.1},
         order: {_score: :desc},

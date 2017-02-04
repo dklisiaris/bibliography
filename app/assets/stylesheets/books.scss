@@ -3,7 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .book-container .book-cover {
-  margin-bottom: 15px;
+  margin: 10px;
+  width: 114px;
+  height: 150px;
+  float: left;
+
+  .img-thumbnail {
+    max-height: 150px;
+  }
 }
 
 .comment-block {

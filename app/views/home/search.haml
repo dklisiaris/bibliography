@@ -30,25 +30,38 @@
               #search-tab-books.tab-pane{:class => ("active" if active_klass == "Book")}
                 = render :partial =>  "books/book", :collection => result.results, :as => :book
                 - if result.results.count < @search_hits["Book"]
-                  #load-more-books-btn-container.row
+                  #load-more-books-btn-container
+                  .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-books= link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 2), remote: true, class: 'btn btn-block btn-primary'
-
-                %hr
+                      #load-more-books= link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                  %hr
             - elsif result.klass.to_s == "Author" && @search_hits["Author"] > 0
               #search-tab-authors.tab-pane{:class => ("active" if active_klass == "Author")}
                 = render :partial => "authors/author", :collection => result.results, :as => :author
+                - if result.results.count < @search_hits["Author"]
+                  #load-more-authors-btn-container
+                  .row
+                    .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+                      #load-more-authors= link_to t('load_more'), search_path(q: params[:q], search_only: 'authors', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                  %hr
             - elsif result.klass.to_s == "Publisher" && @search_hits["Publisher"] > 0
               #search-tab-publishers.tab-pane{:class => ("active" if active_klass == "Publisher")}
                 = render :partial =>  "publishers/publisher", :collection => result.results, :as => :publisher
+                - if result.results.count < @search_hits["Publisher"]
+                  #load-more-publishers-btn-container
+                  .row
+                    .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+                      #load-more-publishers= link_to t('load_more'), search_path(q: params[:q], search_only: 'publishers', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                  %hr
             - elsif result.klass.to_s == "Category" && @search_hits["Category"] > 0
               #search-tab-categories.tab-pane{:class => ("active" if active_klass == "Category")}
-                - result.results.each do |category|
-                  = render partial: 'books/widgets/grid',                            |
-                    locals: {                                                        |
-                    title: link_to(category.name, category, class: "text-light-op"), |
-                    books: category.books.limit(10),                                 |
-                    icon: 'tag'}                                                     |
+                = render :partial =>  "categories/category_with_books", :collection => result.results, :as => :category
+                - if result.results.count < @search_hits["Category"]
+                  #load-more-categories-btn-container
+                  .row
+                    .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+                      #load-more-categories= link_to t('load_more'), search_path(q: params[:q], search_only: 'categories', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                  %hr
 - else
   .row
     .col-sm-12

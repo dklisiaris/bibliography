@@ -1,4 +1,29 @@
-$('#load-more-books-btn-container').prepend("<%= j render :partial => 'books/book', :collection => @books, :as => :book %>");
+if("<%= params['search_only'] %>" === "books"){
+  $('#load-more-books a').button('loading');
+  $('#load-more-books-btn-container').prepend("<%= j render :partial => 'books/book', :collection => @books, :as => :book if @books.present? %>");
 
-$('#load-more-books').html("<%= j link_to_next_page @books, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  %>");
+  $('#load-more-books a').button('reset');
+  $('#load-more-books').html("<%= j link_to_next_page @books, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @books.present? %>");
+}
+else if("<%= params['search_only'] %>" === "authors") {
+  $('#load-more-authors a').button('loading');
+  $('#load-more-authors-btn-container').prepend("<%= j render :partial => 'authors/author', :collection => @authors, :as => :author if @authors.present? %>");
+
+  $('#load-more-authors a').button('reset');
+  $('#load-more-authors').html("<%= j link_to_next_page @authors, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @authors.present? %>");
+}
+else if("<%= params['search_only'] %>" === "publishers") {
+  $('#load-more-publishers a').button('loading');
+  $('#load-more-publishers-btn-container').prepend("<%= j render :partial => 'publishers/publisher', :collection => @publishers, :as => :publisher if @publishers.present? %>");
+
+  $('#load-more-publishers a').button('reset');
+  $('#load-more-publishers').html("<%= j link_to_next_page @publishers, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @publishers.present? %>");
+}
+else if("<%= params['search_only'] %>" === "categories") {
+  $('#load-more-categories a').button('loading');
+  $('#load-more-categories-btn-container').prepend("<%= j render :partial => 'categories/category_with_books', :collection => @categories, :as => :category if @categories.present? %>");
+
+  $('#load-more-categories a').button('reset');
+  $('#load-more-categories').html("<%= j link_to_next_page @categories, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @categories.present? %>");
+}
 
