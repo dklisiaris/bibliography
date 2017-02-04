@@ -1,2 +1,4 @@
 $('#load-more-books-btn-container').prepend("<%= j render :partial => 'books/book', :collection => @books, :as => :book %>");
-$('#load-more-books').html("<%= j link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 3), remote: true, class: 'btn btn-block btn-primary' %>");
+
+$('#load-more-books').html("<%= j link_to_next_page @books, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  %>");
+
