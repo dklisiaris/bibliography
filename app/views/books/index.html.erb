@@ -30,20 +30,19 @@
   </div>
 
   <div class="col-sm-4">
-    <div class="block full">
-      <div class="block-title">
-        <div class="block-options pull-right">
-          <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new? %>
-        </div>
-        <h2><%= detone t('books.filters.label') %></h2>
+    <div class="widget">
+      <div class="widget-content widget-content-mini border-bottom">
+        <strong><%= detone t('books.publication_year') %></strong>
       </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-
-        </div>
+      <div class="widget-content widget-content-full">
+        <ul class="filters">
+          <% @books.aggs["publication_year"]["buckets"].each do |agg| %>
+            <li>
+              <%= link_to(agg["key"], books_path) %><span class="grey"> (<%= agg["doc_count"] %>)</span>
+            </li>
+          <% end %>
+        </ul>
       </div>
-
     </div>
   </div>
 </div>

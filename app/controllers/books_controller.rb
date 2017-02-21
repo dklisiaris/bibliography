@@ -13,25 +13,33 @@ class BooksController < ApplicationController
   impressionist :actions=>[:index]
 
   def index
+    is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
+    aggs = []
+    aggs = [:publication_year] unless is_autocomplete
+    # limit = is_autocomplete ? 8 : 50
+    limit = is_autocomplete ? 8 : 20
+
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
-      limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
+
       # @books = policy_scope(Book)
       #   .search_fast(keyphrase)
       #   .order(impressions_count: :desc)
       #   .limit(50)
+      @books = policy_scope(Book)
+        .search(keyphrase, aggs: aggs, body_options: {min_score: 0.1}, order: {_score: :desc},
+          page: params[:page], per_page: limit)
+    else
+      # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
 
       @books = policy_scope(Book)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+        .search("*", aggs: aggs, order: {_score: :desc},
           page: params[:page], per_page: limit)
-
-    else
-      @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
     end
     # @books_est_count = 20 * @books.total_pages
     @shelves = current_user.shelves if user_signed_in?
 
-    if params[:q].present? && (params[:autocomplete].try(:to_i) == 1 || params[:loadmore].try(:to_i) == 1)
+    if params[:q].present? && (is_autocomplete || params[:loadmore].try(:to_i) == 1)
       render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
     else
       respond_with(@books)

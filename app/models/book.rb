@@ -52,6 +52,7 @@ class Book < ActiveRecord::Base
   def search_data
   {
     tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
+    publication_year: publication_year,
     # title: title,
     # description: short_description
   }

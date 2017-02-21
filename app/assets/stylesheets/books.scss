@@ -46,4 +46,31 @@ trix-editor {
   resize: vertical;
 }
 
+.filters {
+  list-style: none;
+  margin: 0;
+  padding: 5px 15px 10px 15px;
+
+
+  li{
+    padding: 5px 10px;
+  }
+
+  li + li {
+    border-top: 1px solid #eee;
+  }
+
+  li:hover {
+    background-color: rgba(0,0,0,.05);
+  }
+
+  // li:nth-of-type(odd) {
+  //   background-color: rgba(0,0,0,.05);
+  // }
+}
+
+.grey {
+  color: #777;
+}
+
 

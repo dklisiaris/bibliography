@@ -199,6 +199,7 @@ en:
     subtitle: "Subtitle"
     publisher: "Publisher"
     publication: "Publication"
+    publication_year: "Publication Year"
     image: "Image"
     isbn: "Isbn"
     series: "Series"

@@ -178,6 +178,7 @@ el:
     subtitle: "Υπότιτλος"
     publisher: "Έκδότης"
     publication: "Έκδοση"
+    publication_year: "Έτος Έκδοσης"
     image: "Εικόνα"
     isbn: "Isbn"
     series: "Σειρά"
