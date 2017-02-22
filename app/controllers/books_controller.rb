@@ -19,6 +19,10 @@ class BooksController < ApplicationController
     # limit = is_autocomplete ? 8 : 50
     limit = is_autocomplete ? 8 : 20
 
+    @filters = {
+      publication_year: params[:publication_year]
+    }.reject{ |k, v| v.blank? } unless is_autocomplete
+
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
 
@@ -27,13 +31,13 @@ class BooksController < ApplicationController
       #   .order(impressions_count: :desc)
       #   .limit(50)
       @books = policy_scope(Book)
-        .search(keyphrase, aggs: aggs, body_options: {min_score: 0.1}, order: {_score: :desc},
+        .search(keyphrase, where: @filters, aggs: aggs, body_options: {min_score: 0.1}, order: {_score: :desc},
           page: params[:page], per_page: limit)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
 
       @books = policy_scope(Book)
-        .search("*", aggs: aggs, order: {_score: :desc},
+        .search("*", where: @filters, aggs: aggs, order: {_score: :desc},
           page: params[:page], per_page: limit)
     end
     # @books_est_count = 20 * @books.total_pages

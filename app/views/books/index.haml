@@ -1,0 +1,36 @@
+- pages = {fa('home') => root_url, t('books.label') => nil}
+
+= cell(:navigation).call(:content_header,                                            |
+  content: render(partial: 'shared/search_form',                                     |
+  locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
+
+.row
+  .col-sm-8
+    .block.full
+      .block-title
+        .block-options.pull-right
+          = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
+        %h2= detone t('books.label')
+      .row
+        .col-xs-12
+          = render "books/widgets/pagination" if defined? @books.total_pages
+          %hr/
+          = render :partial => "books/book", :collection => @books, :as => :book
+          = render "books/widgets/pagination" if defined? @books.total_pages
+  .col-sm-4
+    - if @books.aggs["publication_year"].present?
+      - if @books.aggs["publication_year"]["buckets"].count > 0
+        %ul.filter-group
+          %h4.filter-title= detone t('books.publication_year')
+          - @books.aggs["publication_year"]["buckets"].each do |agg|
+            = link_to books_path({q: params['q']}.merge(@filters).merge(publication_year: agg["key"])) do
+              %li
+                .radio
+                  %input{:type => "radio", :checked => (agg["key"] == @filters[:publication_year].to_i)}/
+                  %label.radio-label
+                    = agg["key"]
+                    %span.grey
+                       (#{agg["doc_count"]})
+
+- if user_signed_in?
+  = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}
