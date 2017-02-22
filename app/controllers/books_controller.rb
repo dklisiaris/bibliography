@@ -15,12 +15,13 @@ class BooksController < ApplicationController
   def index
     is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
     aggs = []
-    aggs = [:publication_year] unless is_autocomplete
+    aggs = {author: {limit: 10}, publication_year: {limit: 10}} unless is_autocomplete
     # limit = is_autocomplete ? 8 : 50
     limit = is_autocomplete ? 8 : 20
 
     @filters = {
-      publication_year: params[:publication_year]
+      publication_year: params[:publication_year],
+      author: params[:author]
     }.reject{ |k, v| v.blank? } unless is_autocomplete
 
     if params[:q].present?

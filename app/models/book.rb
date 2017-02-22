@@ -53,6 +53,7 @@ class Book < ActiveRecord::Base
   {
     tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
     publication_year: publication_year,
+    author: writers.try(:first).try(:fullname),
     # title: title,
     # description: short_description
   }

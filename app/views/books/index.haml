@@ -18,19 +18,9 @@
           = render :partial => "books/book", :collection => @books, :as => :book
           = render "books/widgets/pagination" if defined? @books.total_pages
   .col-sm-4
-    - if @books.aggs["publication_year"].present?
-      - if @books.aggs["publication_year"]["buckets"].count > 0
-        %ul.filter-group
-          %h4.filter-title= detone t('books.publication_year')
-          - @books.aggs["publication_year"]["buckets"].each do |agg|
-            = link_to books_path({q: params['q']}.merge(@filters).merge(publication_year: agg["key"])) do
-              %li
-                .radio
-                  %input{:type => "radio", :checked => (agg["key"] == @filters[:publication_year].to_i)}/
-                  %label.radio-label
-                    = agg["key"]
-                    %span.grey
-                       (#{agg["doc_count"]})
+    = render partial: 'books/widgets/filter', locals: {title: detone(t('authors.label_singular')), filter_name: "author", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: detone(t('books.publication_year')), filter_name: "publication_year", books: @books}
 
 - if user_signed_in?
   = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}
