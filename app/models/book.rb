@@ -53,7 +53,13 @@ class Book < ActiveRecord::Base
   {
     tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
     publication_year: publication_year,
-    author: writers.try(:first).try(:fullname),
+    author: main_author,
+    publisher: publisher.try(:name),
+    category: categories.try(:first).try(:name),
+    format: format,
+    language: (original_language.present? ? original_language : "ελληνικά"),
+    pages: pages_based_size,
+    has_image: image.present?
     # title: title,
     # description: short_description
   }
@@ -221,6 +227,22 @@ class Book < ActiveRecord::Base
 
   def screen_writers
     writers.map(&:fullname).join(" [#{I18n.t('and')}] ")
+  end
+
+  def pages_based_size
+    if pages.present?
+      if pages < 100
+        "< 100"
+      elsif pages >= 100 && pages < 300
+        "100 - 300"
+      elsif pages >= 300 && pages < 600
+        "300 - 600"
+      elsif pages >= 600 && pages < 1000
+        "600 - 1000"
+      else
+        "> 1000"
+      end
+    end
   end
 
 end

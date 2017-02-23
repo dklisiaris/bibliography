@@ -18,9 +18,19 @@
           = render :partial => "books/book", :collection => @books, :as => :book
           = render "books/widgets/pagination" if defined? @books.total_pages
   .col-sm-4
-    = render partial: 'books/widgets/filter', locals: {title: detone(t('authors.label_singular')), filter_name: "author", books: @books}
+    = render partial: 'books/widgets/filter', locals: {title: t('authors.label_singular'), filter_name: "author", books: @books}
 
-    = render partial: 'books/widgets/filter', locals: {title: detone(t('books.publication_year')), filter_name: "publication_year", books: @books}
+    = render partial: 'books/widgets/filter', locals: {title: t('publishers.label_singular'), filter_name: "publisher", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: t('categories.label_singular'), filter_name: "category", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: t('books.publication_year'), filter_name: "publication_year", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: t('books.format'), filter_name: "format", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: t('books.original_language'), filter_name: "language", books: @books}
+
+    = render partial: 'books/widgets/filter', locals: {title: t('books.pages_label'), filter_name: "pages", books: @books}
 
 - if user_signed_in?
   = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}

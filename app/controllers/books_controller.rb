@@ -15,13 +15,26 @@ class BooksController < ApplicationController
   def index
     is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
     aggs = []
-    aggs = {author: {limit: 10}, publication_year: {limit: 10}} unless is_autocomplete
+    aggs = {
+      author: {limit: 50},
+      publication_year: {limit: 20},
+      publisher: {limit: 30},
+      category: {limit: 30},
+      format: {limit: 10},
+      language: {limit: 10},
+      pages: {limit: 10}
+    } unless is_autocomplete
     # limit = is_autocomplete ? 8 : 50
     limit = is_autocomplete ? 8 : 20
 
     @filters = {
       publication_year: params[:publication_year],
-      author: params[:author]
+      author: params[:author],
+      publisher: params[:publisher],
+      category: params[:category],
+      format: params[:format],
+      language: params[:language],
+      pages: params[:pages]
     }.reject{ |k, v| v.blank? } unless is_autocomplete
 
     if params[:q].present?
@@ -32,13 +45,14 @@ class BooksController < ApplicationController
       #   .order(impressions_count: :desc)
       #   .limit(50)
       @books = policy_scope(Book)
-        .search(keyphrase, where: @filters, aggs: aggs, body_options: {min_score: 0.1}, order: {_score: :desc},
+        .search(keyphrase, where: @filters, aggs: aggs, body_options: {min_score: 0.1},
+          order: {_score: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
 
       @books = policy_scope(Book)
-        .search("*", where: @filters, aggs: aggs, order: {_score: :desc},
+        .search("*", where: @filters, aggs: aggs, order: {_score: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     end
     # @books_est_count = 20 * @books.total_pages

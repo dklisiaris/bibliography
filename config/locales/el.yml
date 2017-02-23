@@ -53,6 +53,9 @@ el:
   read_more: "Διαβάστε περισσότερα"
   read_less: "Κλείσιμο"
 
+  more: "Περισσότερα"
+  less: "Λιγότερα"
+
   stats:
     views: "Εμφανίσεις"
     visitors: "Επισκέπτες"
@@ -192,6 +195,7 @@ el:
     original_language: "Γλώσσα Πρωτοτύπου"
     genres: "Θέματα"
     pages: "σ."
+    pages_label: "Σελίδες"
     centimeters: "εκ."
     last_updated: "Τελ. ενημ"
     description: "Περιγραφή"

@@ -71,7 +71,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bookshark (1.0.0.pre.2)
+    bookshark (1.0.1)
       htmlentities (~> 4.3)
       json (~> 1.8)
       nokogiri (~> 1.6, >= 1.6.6)
@@ -240,7 +240,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    nokogumbo (1.4.9)
+    nokogumbo (1.4.10)
       nokogiri
     oj (2.18.1)
     orm_adapter (0.5.0)
@@ -351,7 +351,7 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     rubyzip (1.2.0)
-    sanitize (4.3.0)
+    sanitize (4.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
       nokogumbo (~> 1.4.1)
@@ -438,7 +438,7 @@ DEPENDENCIES
   autoprefixer-rails (~> 6.0)
   better_errors (~> 2.1, >= 2.1.1)
   binding_of_caller (~> 0.7.2)
-  bookshark (~> 1.0.0.pre)
+  bookshark (~> 1.0)
   bootstrap-sass (~> 3.3)
   bower-rails (~> 0.11)
   bullet (~> 5.3)
@@ -509,4 +509,4 @@ DEPENDENCIES
   web-console (~> 3.1)
 
 BUNDLED WITH
-   1.13.7
+   1.14.3

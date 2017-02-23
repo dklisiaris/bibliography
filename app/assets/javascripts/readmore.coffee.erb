@@ -1,7 +1,15 @@
 @readmore = (text_to_hide) ->
   text_to_hide.readmore
     speed: 500
-    collapsedHeight: 80    
+    collapsedHeight: 80
     heightMargin: 16
     moreLink: <%= "\'<a href=\"#\">"+(I18n.t 'read_more')+"</a>\'" %>
-    lessLink: <%= "\'<a href=\"#\">"+(I18n.t 'read_less')+"</a>\'" %>  
+    lessLink: <%= "\'<a href=\"#\">"+(I18n.t 'read_less')+"</a>\'" %>
+
+@moreFilters = (text_to_hide) ->
+  text_to_hide.readmore
+    speed: 300
+    collapsedHeight: 285
+    heightMargin: 16
+    moreLink: <%= "\'<a style=\"color:#777;font-size:12px\" href=\"#\">"+(I18n.t 'more')+"</a>\'" %>
+    lessLink: <%= "\'<a style=\"color:#777;font-size:12px\" href=\"#\">"+(I18n.t 'less')+"</a>\'" %>

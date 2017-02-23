@@ -5,6 +5,9 @@
 $('.books.show').ready ->
   readmore($('.description'))
 
+$('.books.index').ready ->
+  moreFilters($('.filter-content'))
+
 $(".books").ready ->
   # Instantiate the Bloodhound suggestion engine
   engine = new Bloodhound(
@@ -53,10 +56,11 @@ $(".books").ready ->
         '</span></div></div>'
       ].join('\n'),
       suggestion:  (data) ->
+        image = if data.image then data.image else "https://bookopolis.com/img/no_book_cover.jpg"
         return ('\
           <div class="tt-result">\
             <div class="tt-result-cover">\
-              <img height="48" width="32" src="' + data.image + '">\
+              <img height="48" width="32" src="' + image + '">\
             </div>\
             <div class="tt-result-details">\
               <strong>' + data.title + '</strong><br>\

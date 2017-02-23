@@ -74,6 +74,9 @@ en:
   read_more: "Read More"
   read_less: "Close"
 
+  more: "More"
+  less: "Less"
+
   stats:
     views: "Views"
     visitors: "Visitors"
@@ -213,6 +216,7 @@ en:
     original_language: "Original Language"
     genres: "Genres"
     pages: " pages"
+    pages_label: "Pages"
     centimeters: "cm"
     last_updated: "Last Updated at"
     description: "Description"

@@ -2,12 +2,13 @@
   - if books.aggs[filter_name]["buckets"].count > 0
     %ul.filter-group
       %h4.filter-title= title
-      - books.aggs[filter_name]["buckets"].each do |agg|
-        = link_to books_path({q: params['q']}.merge(@filters).merge(filter_name.to_sym => agg["key"]).reject{|k,v| agg["key"].to_s == @filters[filter_name.to_sym] && k == filter_name.to_sym }) do
-          %li
-            .radio
-              %input{:type => "radio", :checked => (agg["key"].to_s == @filters[filter_name.to_sym])}/
-              %label.radio-label
-                = agg["key"]
-                %span.grey
-                   (#{agg["doc_count"]})
+      .filter-content
+        - books.aggs[filter_name]["buckets"].each do |agg|
+          = link_to books_path({q: params['q']}.merge(@filters).merge(filter_name.to_sym => agg["key"]).reject{|k,v| agg["key"].to_s == @filters[filter_name.to_sym] && k == filter_name.to_sym }) do
+            %li
+              .radio
+                %input{:type => "radio", :checked => (agg["key"].to_s == @filters[filter_name.to_sym])}/
+                %label.radio-label
+                  = agg["key"]
+                  %span.grey
+                     (#{agg["doc_count"]})

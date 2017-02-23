@@ -147,7 +147,7 @@ gem 'geocoder', '~> 1.2'
 gem 'sinatra', :require => nil
 
 # Book metadata extraction library
-gem 'bookshark', '~> 1.0.0.pre'
+gem 'bookshark', '~> 1.0'
 
 # A lightweight plugin that logs impressions per action or manually per model
 gem 'impressionist', '= 1.5.1'
