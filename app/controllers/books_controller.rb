@@ -46,13 +46,13 @@ class BooksController < ApplicationController
       #   .limit(50)
       @books = policy_scope(Book)
         .search(keyphrase, where: @filters, aggs: aggs, body_options: {min_score: 0.1},
-          order: {_score: :desc, has_image: :desc},
+          order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
 
       @books = policy_scope(Book)
-        .search("*", where: @filters, aggs: aggs, order: {_score: :desc, has_image: :desc},
+        .search("*", where: @filters, aggs: aggs, order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     end
     # @books_est_count = 20 * @books.total_pages

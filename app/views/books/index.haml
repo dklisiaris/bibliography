@@ -10,7 +10,9 @@
       .block-title
         .block-options.pull-right
           = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
-        %h2= detone t('books.label')
+        %h2
+          = detone t('books.label')
+          %small= " (#{@books.response["hits"]["total"]})"
       .row
         .col-xs-12
           = render "books/widgets/pagination" if defined? @books.total_pages

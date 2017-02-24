@@ -50,19 +50,25 @@ class Book < ActiveRecord::Base
   word_start: [:tsearch_vector]
 
   def search_data
-  {
-    tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
-    publication_year: publication_year,
-    author: main_author,
-    publisher: publisher.try(:name),
-    category: categories.try(:first).try(:name),
-    format: format,
-    language: (original_language.present? ? original_language : "ελληνικά"),
-    pages: pages_based_size,
-    has_image: image.present?
-    # title: title,
-    # description: short_description
-  }
+    {
+      tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
+      publication_year: publication_year,
+      author: main_author,
+      publisher: publisher.try(:name),
+      category: categories.try(:first).try(:name),
+      format: format,
+      language: (original_language.present? ? original_language : "ελληνικά"),
+      pages: pages_based_size,
+      has_image: image.present?
+      # title: title,
+      # description: short_description
+    }.merge(search_conversions)
+  end
+
+  def search_conversions
+    {
+      views: impressionist_count
+    }
   end
 
 
