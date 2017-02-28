@@ -12,6 +12,8 @@ class Category < ActiveRecord::Base
   validates :ddc, presence: true
   validates_with ParentValidator
 
+  scope :featured, -> { where(featured: true) }
+
   searchkick batch_size: 100,
   callbacks: :async,
   match: :word_start,

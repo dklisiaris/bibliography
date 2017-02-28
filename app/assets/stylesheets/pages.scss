@@ -1,3 +1,17 @@
-// Place all the styles related to the Pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Welcome guide page
+
+.featured-category {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 3px;
+  font-style: bold;
+}
+
+.featured-category:hover, .featured-category.selected  {
+  cursor: pointer;
+  box-shadow: inset 0px 0px 0px 1px #afde5c;
+  -webkit-box-shadow: inset 0px 0px 0px 1px #afde5c;
+  -moz-box-shadow: inset 0px 0px 0px 1px #afde5c;
+  -o-box-shadow: inset 0px 0px 0px 1px #afde5c;
+}
+

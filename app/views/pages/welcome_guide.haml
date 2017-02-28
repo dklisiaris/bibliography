@@ -1,0 +1,44 @@
+/ Progress Bar Wizard Block
+.block
+  / Progress Bars Wizard Title
+  .block-title
+    .block-options.pull-right
+      %a.btn.btn-effect-ripple.btn-default{"data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "Settings"}
+        %i.fa.fa-cog
+    %h2= detone t('welcome')
+  / END Progress Bar Wizard Title
+  / Progress Wizard Content
+  %form#progress-wizard.form-horizontal.form-bordered{:action => "", :method => "post"}
+    .form-group
+      .col-xs-12
+        .progress.progress-mini.remove-margin
+          #progress-bar-wizard.progress-bar.progress-bar-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", :role => "progressbar", :style => "width: 0"}
+    / END Progress Bar
+
+    / First Step
+    #progress-first.step
+      .form-group
+        .col-xs-12
+          %span.help-block= t('choose_categories')
+          %hr
+          .row
+            - @featured_categories.each do |category|
+              %input{:type => "checkbox", :id => "category-#{category.id}", :style => "display: none;"}
+              %label{:for => "category-#{category.id}", :class => "featured-category col-xs-3"}= category.name
+    / END First Step
+    / Second Step
+    #progress-second.step
+
+    / END Second Step
+    / Third Step
+    #progress-third.step
+
+    / END Third Step
+    / Form Buttons
+    .form-group.form-actions
+      .col-md-8.col-md-offset-4
+        %button#back2.btn.btn-effect-ripple.btn-danger{:type => "reset"} Back
+        %button#next2.btn.btn-effect-ripple.btn-primary{:type => "submit"} Next
+    / END Form Buttons
+  / END Progress Bar Wizard Content
+/ END Progress Bar Wizard Block

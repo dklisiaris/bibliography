@@ -77,6 +77,8 @@ en:
   more: "More"
   less: "Less"
 
+  choose_categories: "Choose categories you are interested in."
+
   stats:
     views: "Views"
     visitors: "Visitors"
