@@ -1,6 +1,8 @@
 Rails.application.routes.default_url_options[:host] = (Rails.env == 'production' || Rails.env == 'staging') ? 'bibliography.gr' : 'localhost:3000'
 Rails.application.routes.draw do
 
+  get 'pages/welcome_guide'
+
   resources :shelves
 
   # resources :profiles, only: [:show, :edit, :update]
