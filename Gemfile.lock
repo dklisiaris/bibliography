@@ -71,9 +71,10 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bookshark (1.0.1)
+    bookshark (1.0.4)
       htmlentities (~> 4.3)
       json (~> 1.8)
+      marc (~> 1.0)
       nokogiri (~> 1.6, >= 1.6.6)
       sanitize (~> 4.0)
     bootstrap-sass (3.3.7)
@@ -209,7 +210,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.3)
+    json (1.8.6)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -237,9 +238,8 @@ GEM
     multipart-post (2.0.0)
     netrc (0.11.0)
     newrelic_rpm (3.16.2.321)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     nokogumbo (1.4.10)
       nokogiri
     oj (2.18.1)
@@ -249,7 +249,6 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
-    pkg-config (1.1.7)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -509,4 +508,4 @@ DEPENDENCIES
   web-console (~> 3.1)
 
 BUNDLED WITH
-   1.14.3
+   1.14.5

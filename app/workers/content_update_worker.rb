@@ -7,7 +7,7 @@ class ContentUpdateWorker
     empty_responses = 0
     imported_books_count = 0
 
-    while empty_responses < 10 && imported_books_count <= limit do
+    while empty_responses < 50 && imported_books_count <= limit do
       response = Bookshark::Extractor.new(format: 'json').book(id: target_book_id)
       response_hash = JSON.parse(response)
 
