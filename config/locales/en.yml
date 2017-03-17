@@ -170,6 +170,8 @@ en:
     pl_followed_by: "Followed by"
     sg_followed_by: "Followed by"
     author_of: "Author of"
+    top: "Top"
+    recommended_for_you: "Recommended for you"
 
   publishers:
     label: "Publishers"

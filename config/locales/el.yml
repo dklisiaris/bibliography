@@ -149,6 +149,8 @@ el:
     pl_followed_by: "Ακολουθούνται από"
     sg_followed_by: "Ακολουθείται από"
     author_of: "Συγγραφέας του"
+    top: "Κορυφαίοι"
+    recommended_for_you: "Προτεινόμενοι για εσάς"
 
   publishers:
     label: "Εκδότες"

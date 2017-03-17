@@ -25,6 +25,8 @@ class AuthorsController < ApplicationController
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end
+    @top_authors = Author.top(5)
+    @recommended_authors = current_user.recommended_authors if current_user.present?
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
       render json: @authors, each_serializer: Api::V1::Preview::AuthorSerializer, root: false

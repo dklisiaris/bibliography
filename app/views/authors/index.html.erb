@@ -1,7 +1,7 @@
 <% pages = {fa('home') => root_url, t('authors.label') => nil} %>
 
-<%= cell(:navigation).call(:content_header, 
-  content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header,
+  content: render(partial: 'shared/search_form',
     locals: {action: authors_path, placeholder: t('authors.search')}), breadcrumbs: pages) %>
 
 <div class="row">
@@ -13,16 +13,32 @@
           </div>
           <h2><%= params[:q].present? ? detone(t('search_results')) : detone(t('authors.all')) %></h2>
         </div>
-        <div class="row"> 
+        <div class="row">
           <%= @results %>
           <%= render "authors/widgets/pagination" %>
-          <hr> 
-          <div class="col-xs-12">    
+          <hr>
+          <div class="col-xs-12">
             <%= render :partial => "authors/author", :collection => @authors, :as => :author %>
           </div>
-          <%= render "authors/widgets/pagination" %>  
+          <%= render "authors/widgets/pagination" %>
         </div>
-                     
+
       </div>
+  </div>
+
+  <div class="col-sm-4">
+    <%= render partial: 'authors/widgets/side',
+      locals: {
+        title: " #{t('authors.recommended_for_you')}",
+        icon: "user-secret",
+        authors: @recommended_authors
+      } unless current_user.nil? %>
+
+      <%= render partial: 'authors/widgets/side',
+        locals: {
+          title: " #{t('authors.top')}",
+          icon: "user-secret",
+          authors: @top_authors
+        } %>
   </div>
 </div>
