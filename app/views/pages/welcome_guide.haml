@@ -23,8 +23,9 @@
           %hr
           .row
             - @featured_categories.each do |category|
+              - selected_klass = current_user.likes?(category) ? "selected" : ""
               %input{:type => "checkbox", :id => "category-#{category.id}", :style => "display: none;"}
-              %label{:for => "category-#{category.id}", :class => "featured-category col-xs-3"}= category.name
+              %label{:for => "category-#{category.id}", :onclick => "javascript:favouriteCategory(#{category.id})", :class => "featured-category #{selected_klass} col-xs-3"}= category.name
     / END First Step
     / Second Step
     #progress-second.step
