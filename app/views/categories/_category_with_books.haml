@@ -1,5 +1,5 @@
-= render partial: 'books/widgets/grid',                            |
-  locals: {                                                        |
-  title: link_to(category.name, category, class: "text-light-op"), |
-  books: category.books.limit(10),                                 |
-  icon: 'tag'}                                                     |
+= render partial: 'books/widgets/grid',                                         |
+  locals: {                                                                     |
+  title: link_to(category.name, category, class: "text-light-op"),              |
+  books: category.books.order(impressions_count: :desc, image: :asc).limit(10), |
+  icon: 'tag'}                                                                  |

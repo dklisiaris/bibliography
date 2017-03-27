@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
 
       @featured = Category.search(keyphrase, body_options: {min_score: 0.1},
         order: {_score: :desc}, page: params[:page], per_page: limit)
-    elsif user_signed_in?
+    elsif user_signed_in? && current_user.liked_categories_count > 0
       @featured = current_user.liked_categories.limit(10)
     else
       @featured = Category.where(featured: true).limit(10)
@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
 
   def show
     @children = @category.children
-    @books = @category.books.page(params[:page])
+    @books = @category.books.order(impressions_count: :desc, image: :asc).page(params[:page])
 
     respond_with(@category, @children)
   end
