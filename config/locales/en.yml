@@ -78,6 +78,7 @@ en:
   less: "Less"
 
   choose_categories: "Choose categories you are interested in."
+  no_suggestions_yet: "There are no suggestions yet."
 
   stats:
     views: "Views"
