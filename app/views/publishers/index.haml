@@ -1,0 +1,23 @@
+- pages = {fa('home') => root_url, t('publishers.label') => nil}
+
+= cell(:navigation).call(:content_header,                                                      |
+  content: render(partial: 'shared/search_form',                                               |
+  locals: {action: publishers_path, placeholder: t('publishers.search')}), breadcrumbs: pages) |
+
+.row
+  .col-sm-10.col-sm-offset-1
+    .block.full
+      .block-title
+        .block-options.pull-right
+          = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_publisher_path, tooltip: t('publishers.new')) if policy(Publisher).new?
+        %h2
+          = detone t('publishers.label')
+          %small
+             (#{@publishers.total_count})
+      .row
+        = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}
+        %hr/
+        .col-xs-12
+          = render :partial =>  "publishers/publisher", :collection => @publishers, :as => :publisher
+        = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}
+

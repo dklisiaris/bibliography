@@ -21,10 +21,10 @@
               %span.text-muted
                 %small= "#{author.books.count} #{t('books.label')}"
             %td.text-center{:style => "width: 80px;"}
-              = render partial: 'authors/widgets/favourite_btn', locals: {author: author}
+              = render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.include?(author.id)}
         - if !authors.any?
           %tr
-            %td.text-center{:style => "width: 80px;"}
+            %td.text-center
               %span.text-muted
                 %small= t('no_suggestions_yet')
 

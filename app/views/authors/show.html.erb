@@ -1,47 +1,48 @@
 <% pages = {fa('home') => root_url, t('authors.label') => authors_path, @author.fullname => nil} %>
 
-<%= cell(:navigation).call(:content_header, 
-  content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header,
+  content: render(partial: 'shared/search_form',
     locals: {action: authors_path, placeholder: t('authors.search')}), breadcrumbs: pages) %>
 
 <div class="row">
    <div class="col-sm-10 col-sm-offset-1">
       <div class="block full">
         <div class="block-title">
-          <div class="block-options pull-right">       
-            <% if policy(@author).update? %>            
+          <div class="block-options pull-right">
+            <% if policy(@author).update? %>
             <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success') %>
             <% end %>
-            <%= link_to fa('times'), @author, class: "btn btn-effect-ripple btn-danger", 
-            method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('authors.delete') } if policy(@author).destroy? and @author.books.count==0 %>                            
+            <%= link_to fa('times'), @author, class: "btn btn-effect-ripple btn-danger",
+            method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('authors.delete') } if policy(@author).destroy? and @author.books.count==0 %>
           </div>
           <h2><%= detone(@author.fullname) %></h2>
-        </div>  
+        </div>
 
         <div class="row">
           <div class="col-sm-3">
-            <div class="row">            
+            <div class="row">
               <div class="widget">
-                <div class="widget-content themed-background-muted text-right clearfix">
+                <div class="widget-content themed-background-muted text-center clearfix">
                   <%= image_tag(@author.avatar, alt: "author_photo", class: "img-thumbnail")  %>
                 </div>
                 <div class="widget-content themed-background-muted text-center">
-               
-                <div class="row text-center">
-                  <div class="col-xs-6">
-                    <h4 class="widget-heading"><small><%= t 'books.label' %></small><br><%= @author.books.count %></h4>
+                  <%= render partial: 'authors/widgets/favourite_btn', locals: {author: @author} %>
+                  <hr>
+                  <div class="row text-center">
+                    <div class="col-xs-6">
+                      <h4 class="widget-heading"><small><%= t 'books.label' %></small><br><%= @author.books.count %></h4>
+                    </div>
+                    <div class="col-xs-6">
+                      <h4 class="widget-heading"><small><%= t 'stats.views' %></small><br><%= @author.impressionist_count %></h4>
+                    </div>
+                    <div class="col-xs-6">
+                      <h4 class="widget-heading"><small><%= t 'authors.favoured' %></small><br><%= @author.liked_by_count %></h4>
+                    </div>
                   </div>
-                  <div class="col-xs-6">
-                    <h4 class="widget-heading"><small><%= t 'stats.views' %></small><br><%= @author.impressionist_count %></h4>
-                  </div>
-                  <div class="col-xs-6">
-                    <h4 class="widget-heading"><small><%= t 'authors.favoured' %></small><br><%= @author.liked_by_count %></h4>
-                  </div>
-                </div>
                 </div>
               </div>
-            </div>                       
-          </div>  
+            </div>
+          </div>
           <div class="col-sm-9">
             <h2><%= @author.fullname %><br><small><%= @author.extra_info %></small></h2>
             <hr>
@@ -64,8 +65,8 @@
               <%= render :partial =>  "books/book", :collection => @author.books, :as => :book %>
             <% end %>
 
-          </div>  
-        </div>          
+          </div>
+        </div>
       </div>
   </div>
 </div>
@@ -78,9 +79,9 @@
         <h2><%= detone t('awards.new') %>
       </div>
       <div class="row">
-      <%= render 'awards/form' %>       
+      <%= render 'awards/form' %>
       </div>
     </div>
   </div>
 </div>
-<% end %>        
+<% end %>

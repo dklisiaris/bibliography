@@ -79,6 +79,7 @@ en:
 
   choose_categories: "Choose categories you are interested in."
   no_suggestions_yet: "There are no suggestions yet."
+  no_books_yet: "There are no books yet."
 
   stats:
     views: "Views"

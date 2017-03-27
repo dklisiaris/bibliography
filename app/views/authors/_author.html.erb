@@ -1,22 +1,22 @@
 <div class="row clearfix">
-  
+
   <div class="col-xs-2">
     <%= image_tag(author.avatar, height: '96', width: '96') %>
   </div>
   <div class="col-xs-10">
     <div class="row clearfix">
       <div class="col-xs-9">
-        <h4><%= link_to author.fullname_reversed, author %></h4>       
+        <h4><%= link_to author.fullname_reversed, author %></h4>
         <span><%= author.extra_info %></span>
         <%= tag(:br) if author.extra_info.present? %>
-        <span><small class="text-muted"><%= 
-          t('authors.x_books', count: author.contributions_count) + " - " + 
-          t('authors.favoured_x_times', count: author.liked_by_count) + " - " + 
-          t('authors.with_x_views', count: author.impressionist_count)          
+        <span><small class="text-muted"><%=
+          t('authors.x_books', count: author.contributions_count) + " - " +
+          t('authors.favoured_x_times', count: author.liked_by_count) + " - " +
+          t('authors.with_x_views', count: author.impressionist_count)
         %></small></span>
       </div>
       <div class="col-xs-3 text-center">
-        <%= render partial: 'authors/widgets/favourite_btn', locals: {author: author}  %>
+        <%= render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.include?(author.id) }  %>
         <%= link_to fa('pencil'), edit_author_path(author), class: 'btn btn-effect-ripple btn-xs btn-success' if policy(author).update? %>
         <%= link_to fa('times'), author, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
         <% if policy(author).update? %>
