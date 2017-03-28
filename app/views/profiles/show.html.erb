@@ -166,22 +166,57 @@
       } %>
 
     <div class="widget">
-     <div class="widget-content widget-content-mini border-bottom">
-       <%= t('users.following') %>
-     </div>
-     <div class="widget-content widget-content-full-top-bottom">
-       <!-- Mini Widgets -->
-       <div class="row border-bottom">
-          <% @following_users.each do |u| %>
-           <div class="col-xs-3">
-             <div class="widget-content">
-               <%= image_tag(u.avatar) %>
+      <div class="widget-content widget-content-mini border-bottom">
+       <strong><%= t('users.follows') %></strong>
+      </div>
+      <% if @following_users.any? %>
+        <div class="widget-content widget-content-full-top-bottom">
+          <div class="row">
+            <% @following_users.each do |u| %>
+             <div class="col-xs-3">
+               <div class="widget-content">
+                  <%= link_to image_tag(u.avatar), public_profile_path(u.profile) %>
+               </div>
              </div>
-           </div>
-          <% end %>
-       </div>
-       <!-- END Mini Widgets -->
-     </div>
-   </div>
- </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="widget-content">
+          <div class="text-center">
+            <span class="widget-content text-muted">
+              <small><%= t('users.following_nobody') %></small>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="widget">
+      <div class="widget-content widget-content-mini border-bottom">
+       <strong><%= t('users.are_following') %></strong>
+      </div>
+      <% if @user_followers.any? %>
+        <div class="widget-content widget-content-full-top-bottom">
+          <div class="row">
+            <% @user_followers.each do |u| %>
+             <div class="col-xs-3">
+               <div class="widget-content">
+                 <%= link_to image_tag(u.avatar), public_profile_path(u.profile) %>
+               </div>
+             </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="widget-content">
+          <div class="text-center">
+            <span class="widget-content text-muted">
+              <small><%= t('users.nobody_follows') %></small>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

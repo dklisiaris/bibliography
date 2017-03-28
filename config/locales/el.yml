@@ -285,8 +285,12 @@ el:
 
   users:
     follow: "Ακολούθησε"
+    follows: "Ακολουθεί"
     unfollow: "Άρση Ακολούθησης"
     following: "Ακολουθείς"
+    are_following: "Ακολουθούν"
+    following_nobody: "Δεν ακολουθείται κανένας ακόμα"
+    nobody_follows: "Δεν ακολουθέι κανένας ακόμα"
     similarity_with: "Η Ομοιότητά σας με"
     verbs:
       recommended: "πρότεινε"

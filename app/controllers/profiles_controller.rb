@@ -22,6 +22,7 @@ class ProfilesController < ApplicationController
     @activities = @user.activities.includes(:owner, :trackable)
 
     @following_users = @user.following_users
+    @user_followers = @user.user_followers
 
     if current_user
       similarity = Recommendable::Helpers::Calculations.similarity_between(@user.id, current_user.id)

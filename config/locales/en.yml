@@ -306,8 +306,12 @@ en:
 
   users:
     follow: "Follow"
+    follows: "Follows"
     unfollow: "Unfollow"
     following: "Following"
+    are_following: "Following"
+    following_nobody: "Not following anyone yet"
+    nobody_follows: "No followers yet"
     similarity_with: "Your Similarity with"
     verbs:
       recommended: "recommended"
