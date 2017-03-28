@@ -11,17 +11,20 @@ class ProfilesController < ApplicationController
   respond_to :html
 
   def show
-    @recommended_books = @profile.user.liked_books.limit(5)
-    @recommended_authors = @profile.user.liked_authors.limit(5)
-    @favourite_books = @profile.user.shelves
+    @user = @profile.user
+    @recommended_books = @user.liked_books.limit(5)
+    @recommended_authors = @user.liked_authors.limit(5)
+    @favourite_books = @user.shelves
       .find_by(default_name: Shelf.default_names[:favourites]).books.limit(14)
-    @currently_reading_books = @profile.user.shelves
+    @currently_reading_books = @user.shelves
       .find_by(default_name: Shelf.default_names[:currently_reading]).books.limit(14)
-    @shelves = @profile.user.shelves
-    @activities = @profile.user.activities.includes(:owner, :trackable)
+    @shelves = @user.shelves
+    @activities = @user.activities.includes(:owner, :trackable)
+
+    @following_users = @user.following_users
 
     if current_user
-      similarity = Recommendable::Helpers::Calculations.similarity_between(@profile.user.id, current_user.id)
+      similarity = Recommendable::Helpers::Calculations.similarity_between(@user.id, current_user.id)
       @normalized_similarity = ((similarity-(-1))/(1-(-1)) * 100).round(1)
       @liked_author_ids = current_user.liked_author_ids
     end

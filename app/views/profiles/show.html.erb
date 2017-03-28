@@ -167,62 +167,18 @@
 
     <div class="widget">
      <div class="widget-content widget-content-mini border-bottom">
-       <a href="page_ready_pricing_tables.html" class="pull-right text-muted">Pro Plan</a>
-       Account Status
+       <%= t('users.following') %>
      </div>
      <div class="widget-content widget-content-full-top-bottom">
        <!-- Mini Widgets -->
        <div class="row border-bottom">
-         <div class="col-xs-6 push-inner-top-bottom border-right">
-           <a href="javascript:void(0)" class="widget text-center remove-margin-bottom">
-             <div class="widget-content themed-background text-center">
-               <div class="widget-icon push">
-                 <i class="fa fa-folder text-light-op"></i>
-               </div>
-               <div>
-                 <strong class="text-light">100GB</strong>
-               </div>
+          <% @following_users.each do |u| %>
+           <div class="col-xs-3">
+             <div class="widget-content">
+               <%= image_tag(u.avatar) %>
              </div>
-           </a>
-         </div>
-         <div class="col-xs-6 push-inner-top-bottom">
-           <a href="javascript:void(0)" class="widget text-center remove-margin-bottom">
-             <div class="widget-content themed-background-info text-center">
-               <div class="widget-icon push">
-                 <i class="fa fa-database text-light-op"></i>
-               </div>
-               <div>
-                 <strong class="text-light">3 Databases</strong>
-               </div>
-             </div>
-           </a>
-         </div>
-       </div>
-       <div class="row">
-         <div class="col-xs-6 push-inner-top-bottom border-right">
-           <a href="javascript:void(0)" class="widget text-center remove-margin-bottom">
-             <div class="widget-content themed-background-success text-center">
-               <div class="widget-icon push">
-                 <i class="fa fa-envelope text-light-op"></i>
-               </div>
-               <div>
-                 <strong class="text-light">2 Emails</strong>
-               </div>
-             </div>
-           </a>
-         </div>
-         <div class="col-xs-6 push-inner-top-bottom">
-           <a href="javascript:void(0)" class="widget text-center remove-margin-bottom">
-             <div class="widget-content themed-background-danger text-center">
-               <div class="widget-icon push">
-                 <i class="fa fa-support text-light-op"></i>
-               </div>
-               <div>
-                 <strong class="text-light"><i class="fa fa-check"></i> Support</strong>
-               </div>
-             </div>
-           </a>
-         </div>
+           </div>
+          <% end %>
        </div>
        <!-- END Mini Widgets -->
      </div>
