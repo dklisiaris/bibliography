@@ -175,7 +175,7 @@
             <% @following_users.each do |u| %>
              <div class="col-xs-3">
                <div class="widget-content">
-                  <%= link_to image_tag(u.avatar), public_profile_path(u.profile) %>
+                  <%= link_to image_tag(u.avatar), public_profile_path(u.profile), title: u.screen_name %>
                </div>
              </div>
             <% end %>
@@ -202,7 +202,7 @@
             <% @user_followers.each do |u| %>
              <div class="col-xs-3">
                <div class="widget-content">
-                 <%= link_to image_tag(u.avatar), public_profile_path(u.profile) %>
+                 <%= link_to image_tag(u.avatar), public_profile_path(u.profile), title: u.screen_name %>
                </div>
              </div>
             <% end %>
