@@ -1,37 +1,37 @@
-<% 
-if @category.parent_id.nil? 
+<%
+if @category.parent_id.nil?
   pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.name => nil}
-else 
+else
   pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.parent.name => @category.parent, @category.name => nil}
-end 
+end
 %>
 
-<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', 
+<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form',
     locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: pages) %>
 
 <div class="row">
   <div class="col-sm-8">
       <div class="block full">
         <div class="block-title">
-        <div class="block-options pull-right">  
+        <div class="block-options pull-right">
           <% if current_user.likes?(@category) %>
-          <%= button_tag fa('star'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-success btn-favourite-category-#{@category.id}", 
+          <%= button_tag fa('star'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-success btn-favourite-category-#{@category.id}",
             data: { "toggle" => "tooltip", "original-title" => t('categories.favoured') }%>
           <% else %>
-          <%= button_tag fa('star-o'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-primary btn-favourite-category-#{@category.id}", 
+          <%= button_tag fa('star-o'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-primary btn-favourite-category-#{@category.id}",
             data: { "toggle" => "tooltip", "original-title" => t('categories.add_to_favourites') }%>
           <% end %>
-        </div>           
+        </div>
           <h2><%= detone @category.name %></h2>
         </div>
 
-        <div class="row"> 
+        <div class="row">
           <%= render "books/widgets/pagination" %>
-          <hr> 
-          <div class="col-xs-12">    
+          <hr>
+          <div class="col-xs-12">
             <%= render :partial =>  "books/book", :collection => @books, :as => :book %>
           </div>
-          <%= render "books/widgets/pagination" %>  
+          <%= render "books/widgets/pagination" %>
         </div>
 
       </div>
@@ -44,15 +44,15 @@ end
           <% if policy(@category).update? %>
           <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path(:parent_id => @category.id), tooltip: t('categories.new_subcategory')) %>
           <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success') %>
-          <% end %>  
-          <%= link_to fa('times'), @category, class: "btn btn-effect-ripple btn-danger", 
+          <% end %>
+          <%= link_to fa('times'), @category, class: "btn btn-effect-ripple btn-danger",
             method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('categories.delete') } if policy(@category).destroy? %>
-        </div>          
+        </div>
         <h2><%= detone t('categories.label') %></h2>
-      </div>  
+      </div>
       <div class="list-group">
-        <%= link_to "..", @category.parent_id.nil? ? categories_path : @category.parent, 
-              class: 'list-group-item', id: "@category_#{@category.id}"  %>            
+        <%= link_to fa('arrow-left'), @category.parent_id.nil? ? categories_path : @category.parent,
+              class: 'list-group-item', id: "@category_#{@category.id}"  %>
         <%= render @children %>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-7">
+  <div class="col-lg-8">
     <div class="widget">
       <div class="widget-image widget-image-220">
         <%= image_tag(@profile.cover_safe, alt: "cover", class: "cover")  %>
@@ -117,14 +117,14 @@
     </div>
 
     <%= render partial: 'books/widgets/grid',
-    locals: {title: " #{t('books.favourite')}", icon: "heart-o", cover_size: '72', books: @favourite_books} %>
+    locals: {title: " #{t('books.favourite')}", icon: "heart-o", cover_size: '114', books: @favourite_books} %>
 
     <%= render partial: 'shelves/widgets/list',
     locals: {title: " #{t('shelves.collections')}", shelves: @shelves} %>
 
     <%= render partial: 'books/widgets/grid',
       locals: {title: " #{t('books.currently_reading')}",
-      icon: "book", cover_size: '72', books: @currently_reading_books} %>
+      icon: "book", cover_size: '114', books: @currently_reading_books} %>
 
     <% @activities.each do |activity| %>
       <%= render partial: 'books/widgets/activity',
@@ -133,19 +133,15 @@
 
   </div>
 
-  <div class="col-lg-5">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="widget">
-          <div class="widget-content widget-content-mini text-center border-bottom">
-            <%= t('users.similarity_with') %><br><strong><%= @profile.username %></strong>
-          </div>
-          <div class="widget-content">
-            <div class="pie-chart easyPieChart" data-percent="<%= @normalized_similarity %>" data-line-width="3" data-bar-color="#de4b39" data-track-color="#f9f9f9">
-              <span><strong><%= @normalized_similarity %>%</strong></span>
-              <canvas width="80" height="80"></canvas>
-            </div>
-          </div>
+  <div class="col-lg-4">
+    <div class="widget">
+      <div class="widget-content widget-content-mini text-center border-bottom">
+        <%= t('users.similarity_with') %><br><strong><%= @profile.username %></strong>
+      </div>
+      <div class="widget-content">
+        <div class="pie-chart easyPieChart" data-percent="<%= @normalized_similarity %>" data-line-width="3" data-bar-color="#de4b39" data-track-color="#f9f9f9">
+          <span><strong><%= @normalized_similarity %>%</strong></span>
+          <canvas width="80" height="80"></canvas>
         </div>
       </div>
     </div>

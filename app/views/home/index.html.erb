@@ -23,6 +23,11 @@
         cover_size: '114',
         books: @recently_added
       } if user_signed_in? %>
+
+    <% @activities.each do |activity| %>
+      <%= render partial: 'books/widgets/activity',
+        locals: {activity: activity}  if activity.trackable_type == 'Book' %>
+    <% end %>
   </div>
 
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">

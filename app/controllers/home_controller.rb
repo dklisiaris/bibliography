@@ -22,6 +22,11 @@ class HomeController < ApplicationController
       .limit(10)
       .map {|bookshelf| bookshelf.book} if user_signed_in?
 
+    if user_signed_in?
+      @activities = PublicActivity::Activity
+        .where(owner: current_user.following_users.pluck(:id))
+        .includes({owner: :profile}, :trackable).order(updated_at: :desc)
+    end
   end
 
   def search
