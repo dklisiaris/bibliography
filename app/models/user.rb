@@ -100,7 +100,12 @@ class User < ActiveRecord::Base
   end
 
   def assign_profile
-    create_profile(username: email.gsub(/@.+\z/, id.to_s))
+    username = email.gsub(/@.+\z/, '')
+    loop do
+      break username unless Profile.where(username: username).exists?
+      username = email.gsub(/@.+\z/, rand(100000).to_s)
+    end
+    create_profile(username: username)
   end
 
   # Creates and assigns the six built in shelves to user.
