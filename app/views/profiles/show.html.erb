@@ -134,6 +134,7 @@
   </div>
 
   <div class="col-lg-4">
+    <% unless current_user == @user %>
     <div class="widget">
       <div class="widget-content widget-content-mini text-center border-bottom">
         <%= t('users.similarity_with') %><br><strong><%= @profile.username %></strong>
@@ -145,6 +146,7 @@
         </div>
       </div>
     </div>
+    <% end %>
 
     <%= render partial: 'books/widgets/side',
       locals: {

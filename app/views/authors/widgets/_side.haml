@@ -1,3 +1,5 @@
+- no_authors_msg ||= t('no_authors_yet')
+
 .widget
   .widget-content.widget-content-mini.border-bottom
     = fa(icon)
@@ -26,5 +28,5 @@
           %tr
             %td.text-center
               %span.text-muted
-                %small= t('no_suggestions_yet')
+                %small= no_authors_msg
 

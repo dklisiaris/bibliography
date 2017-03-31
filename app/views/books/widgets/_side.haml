@@ -1,0 +1,26 @@
+- no_books_msg ||= t('no_books_yet')
+
+.widget
+  .widget-content.widget-content-mini.border-bottom
+    = fa(icon)
+    %strong= title
+  .widget-content.widget-content-full
+    %table.table.table-borderless.table-striped.table-vcenter
+      %tbody
+        - books.each do |book|
+          %tr
+            %td.text-center{:style => "width: 80px;"}
+              = link_to image_tag(book.cover, alt: "book_cover", width: "80", class: "img-thumbnail"), book
+            %td
+              = link_to book.title, book
+              %br/
+              = link_to book.writers.first do
+                %span.text-muted
+                  %small= book.main_author
+            %td.text-center{:style => "width: 80px;"}
+              = render partial: 'books/widgets/collections_manager_btn', locals: {book: book}
+        - if !books.any?
+          %tr
+            %td.text-center
+              %span.text-muted
+                %small= no_books_msg
