@@ -27,7 +27,7 @@
     <% @activities.each do |activity| %>
       <%= render partial: 'books/widgets/activity',
         locals: {activity: activity}  if activity.trackable_type == 'Book' %>
-    <% end %>
+    <% end unless @activities.nil? %>
   </div>
 
   <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">
