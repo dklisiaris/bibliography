@@ -48,7 +48,7 @@ section {
 }
 
 .form-control {
-  height: auto 
+  height: auto
 }
 
 .pagination {
@@ -58,4 +58,16 @@ section {
 .pagination>li>a {
   margin-left: 1px !important;
   margin-right: 1px !important;
+}
+
+.btn-fb {
+  background-color: #3b5998 !important;
+  border-color: #8b9dc3;
+  color: #f7f7f7;
+  font-size: 12px;
+
+  &:hover, &:visited{
+    background-color: darken( #3b5998, 10% ) !important;
+    color: #f7f7f7;
+  }
 }

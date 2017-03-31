@@ -95,6 +95,9 @@ gem 'devise', '~> 3.4'
 # Async devise mails
 gem "devise-async", '>= 0.9'
 
+# Facebook OAuth2 Strategy for OmniAuth
+gem 'omniauth-facebook', '~> 4.0'
+
 # User roles
 gem 'royce', '~> 1.0'
 

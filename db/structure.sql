@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
+-- Dumped from database version 9.5.5
+-- Dumped by pg_dump version 9.5.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -807,7 +807,9 @@ CREATE TABLE users (
     last_sign_in_ip character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    api_key character varying
+    api_key character varying,
+    provider character varying,
+    uid character varying
 );
 
 
@@ -1654,4 +1656,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161229202920');
 INSERT INTO schema_migrations (version) VALUES ('20161229221829');
 
 INSERT INTO schema_migrations (version) VALUES ('20161230145401');
+
+INSERT INTO schema_migrations (version) VALUES ('20170331095631');
 

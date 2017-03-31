@@ -7,9 +7,9 @@
     <div class="block-title">
       <div class="block-options pull-right">
         <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: t('back_to_login')} %>
-        <%= link_to new_user_session_path, opts do %>                           
+        <%= link_to new_user_session_path, opts do %>
           <i class="fa fa-user"></i>
-        <% end %>         
+        <% end %>
       </div>
       <h2><%= detone t('register') %></h2>
     </div>
@@ -34,18 +34,26 @@
           <%= f.password_field :password_confirmation, class: 'form-control', placeholder: t('confirm_password') %>
         </div>
       </div>
-      <div class="form-group form-actions">     
-        <div class="col-xs-8">    
+      <div class="form-group form-actions">
+        <div class="col-xs-8">
           <%= button_tag(type: "submit", class: "btn btn-effect-ripple btn-success", id: "submit-btn") do %>
               <i class="fa fa-plus"></i> <%= t('create_account') %>
-          <% end %>   
-        </div>      
-      </div>        
+          <% end %>
+        </div>
+      </div>
     <% end %>
+
+    <hr/>
+
+    <div class="form-group row">
+      <div class="col-md-6">
+        <%= link_to "#{fa('facebook')} Login with Facebook".html_safe, user_omniauth_authorize_path(:facebook), class: 'btn btn-block btn-fb' %>
+      </div>
+    </div>
 
   </div>
   <footer class="text-muted text-center animation-pullUp">
-    <small><span id="year-copy"></span> &copy; <a href="#" target="_blank">Bibliography Foundation</a></small>
+    <small><span id="year-copy"></span> &copy; <%= link_to "Bibliography GR", root_path %></small>
   </footer>
 </div>
 

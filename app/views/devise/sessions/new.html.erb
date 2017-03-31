@@ -1,6 +1,6 @@
 
 <div id="login-container">
-  
+
   <h1 class="h2 text-center push-top-bottom animation-slideDown">
     <i class="fa fa-book"></i> <strong><%= t('welcome') %></strong>
   </h1>
@@ -11,16 +11,16 @@
 
         <% if devise_mapping.recoverable? %>
           <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: t('forgot_password')} %>
-          <%= link_to new_password_path(resource_name), opts do %>                           
+          <%= link_to new_password_path(resource_name), opts do %>
             <i class="fa fa-exclamation-circle"></i>
-          <% end %>             
+          <% end %>
         <% end %>
 
         <% if devise_mapping.registerable? %>
           <% opts = {class: "btn btn-effect-ripple btn-primary", 'data-toggle' => "tooltip", "data-placement" => "left", title: t('create_account')} %>
-          <%= link_to new_registration_path(resource_name), opts do %>                           
+          <%= link_to new_registration_path(resource_name), opts do %>
             <i class="fa fa-plus"></i>
-          <% end %>          
+          <% end %>
         <% end %>
 
       </div>
@@ -43,24 +43,32 @@
       </div>
       <div class="form-group form-actions">
         <% if devise_mapping.rememberable? %>
-          <div class="col-xs-8">            
-            <label class="csscheckbox csscheckbox-primary">                
+          <div class="col-xs-8">
+            <label class="csscheckbox csscheckbox-primary">
               <%= f.check_box :remember_me %>
-              <span></span>              
-            </label>  
-            <%= t('remember_me') %>          
+              <span></span>
+            </label>
+            <%= t('remember_me') %>
           </div>
-        <% end %>        
-        <div class="col-xs-4 text-right">          
+        <% end %>
+        <div class="col-xs-4 text-right">
           <%= button_tag(type: "submit", class: "btn btn-effect-ripple btn-sm btn-primary") do %>
-              <i class="fa fa-check"></i> <%= t('login') %> 
-          <% end %>           
-        </div>  
-      </div>       
-    <% end %>    
+              <i class="fa fa-check"></i> <%= t('login') %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <hr/>
+
+    <div class="form-group row">
+      <div class="col-md-6">
+        <%= link_to "#{fa('facebook')} Login with Facebook".html_safe, user_omniauth_authorize_path(:facebook), class: 'btn btn-block btn-fb' %>
+      </div>
+    </div>
 
   </div>
   <footer class="text-muted text-center animation-pullUp">
-    <small><span id="year-copy"></span> &copy; <a href="#" target="_blank">Bibliography Foundation</a></small>
+    <small><span id="year-copy"></span> &copy; <%= link_to "Bibliography GR", root_path %></small>
   </footer>
 </div>
