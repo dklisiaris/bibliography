@@ -12,7 +12,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-lg-8 col-xl-6 col-xl-push-3">
+  <div class="col-sm-7 col-lg-8">
     <%= render 'home/widgets/welcome' %>
     <%= render 'home/widgets/my_books' if user_signed_in? %>
     <%= render 'home/widgets/my_collections' if user_signed_in? %>
@@ -30,17 +30,13 @@
     <% end unless @activities.nil? %>
   </div>
 
-  <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-pull-6">
+  <div class="col-sm-5 col-lg-4">
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.recommended')}", icon: "thumbs-o-up", books: @recommended_books} %>
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.popular')}", icon: "line-chart", books: @popular_books} %>
-
-  </div>
-
-  <div class="col-sm-6 col-lg-4 col-xl-3 col-xl-offset-0">
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.awarded')}", icon: "trophy", books: @awarded_books} %>
