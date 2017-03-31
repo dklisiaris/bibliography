@@ -44,7 +44,7 @@
                 <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
               <% end %>
             </div>
-            <% if current_user.provider != "facebook"%>
+            <% if current_user.provider != "facebook" && current_user.provider != "google_oauth2" %>
             <fieldset>
               <span class="help-block">
                 Leave these fields blank if you don't want to change your password.

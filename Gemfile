@@ -98,6 +98,10 @@ gem "devise-async", '>= 0.9'
 # Facebook OAuth2 Strategy for OmniAuth
 gem 'omniauth-facebook', '~> 4.0'
 
+# A Google OAuth2 strategy for OmniAuth 1.x
+gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'certified', '~> 1.0'
+
 # User roles
 gem 'royce', '~> 1.0'
 

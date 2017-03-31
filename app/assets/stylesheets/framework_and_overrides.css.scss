@@ -71,3 +71,15 @@ section {
     color: #f7f7f7;
   }
 }
+
+.btn-gl {
+  background-color: #F44336 !important;
+  border-color: lighten( #F44336, 10% );
+  color: #f7f7f7;
+  font-size: 12px;
+
+  &:hover, &:visited{
+    background-color: darken( #F44336, 10% ) !important;
+    color: #f7f7f7;
+  }
+}
