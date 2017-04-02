@@ -41,6 +41,7 @@ class AuthorsController < ApplicationController
     @awardable = @author
     @awards = @awardable.awards
     @award = Award.new
+    @liked = current_user.likes?(@author) if user_signed_in?
     impressionist(@author)
 
     respond_with(@author)

@@ -35,4 +35,4 @@
     = render partial: 'books/widgets/filter', locals: {title: t('books.pages_label'), filter_name: "pages", books: @books}
 
 - if user_signed_in?
-  = render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves}
+  = render 'books/collections_modal'

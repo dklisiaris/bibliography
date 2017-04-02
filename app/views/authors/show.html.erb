@@ -26,7 +26,7 @@
                   <%= image_tag(@author.avatar, alt: "author_photo", class: "img-thumbnail")  %>
                 </div>
                 <div class="widget-content themed-background-muted text-center">
-                  <%= render partial: 'authors/widgets/favourite_btn', locals: {author: @author} %>
+                  <%= render partial: 'authors/widgets/favourite_btn', locals: {author: @author, liked: @liked} %>
                   <hr>
                   <div class="row text-center">
                     <div class="col-xs-6">

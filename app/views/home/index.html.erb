@@ -49,5 +49,5 @@
 </div>
 
 <% if user_signed_in? %>
-<%= render partial: 'books/widgets/collections_manager', locals: {shelves: @shelves} %>
+<%= render 'books/collections_modal' %>
 <% end %>

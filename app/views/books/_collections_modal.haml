@@ -1,0 +1,20 @@
+#collectionsModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span=fa('times')
+        %h4.modal-title=t('shelves.edit_collections')
+      .modal-body
+        %i.fa.fa-asterisk.fa-2x.fa-spin.text-primary{:style => "display:none;"}
+        .row.collections-checkboxes
+          - if user_signed_in?
+            - @shelves.each do |shelf|
+              .col-xs-12.col-sm-6.text-left
+                %label.csscheckbox.csscheckbox-primary
+                  %input{:name => "collection-#{shelf.id}", :id => "collection-#{shelf.id}", :type => "checkbox"}
+                  %span
+                = shelf.screen_name
+      .modal-footer
+        %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
+        %button#saveCollections.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "button"}= t('save')

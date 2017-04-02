@@ -1,0 +1,81 @@
+$(document).ready(function() {
+  $('#collectionsModal').on('show.bs.modal', function(event) {
+    var book_id = $(event.relatedTarget).data("book-id");
+    var was_checked = [];
+    $('#collectionsModal .collections-checkboxes').hide();
+    $('#collectionsModal .fa-spin').show();
+
+    $.ajax({
+      url: '/books/' + book_id + '/collections'
+    }).done(function(response) {
+      $('#collectionsModal input:checkbox').removeAttr('checked');
+      $.each(response, function(index, collection) {
+        // console.log(collection);
+        $('#collectionsModal #collection-' + collection.id).prop('checked', true);
+        return was_checked.push(collection.id);
+      });
+      $('#collectionsModal .fa-spin').hide();
+      $('#collectionsModal .collections-checkboxes').show();
+    });
+
+    $('#saveCollections').unbind().click(function() {
+      var is_checked, request_data, to_add, to_remove;
+      var checkboxInputs = $('#collectionsModal .collections-checkboxes input');
+      if (checkboxInputs) {
+        is_checked = [];
+        $.each(checkboxInputs, function(index, checkboxInput) {
+          if ($(checkboxInput).prop('checked')) {
+            is_checked.push(parseInt($(checkboxInput).attr('id').split("-").slice(-1)[0]));
+          }
+        });
+        to_add = $.grep(is_checked, function(el) {
+          return $.inArray(el, was_checked) === -1;
+        });
+        to_remove = $.grep(was_checked, function(el) {
+          return $.inArray(el, is_checked) === -1;
+        });
+        request_data = {
+          to_add: to_add,
+          to_remove: to_remove
+        };
+        // console.log(request_data);
+        $.ajax({
+          type: "POST",
+          url: '/books/' + book_id + '/collections',
+          data: request_data,
+          success: function(data) {
+            var collection_btn, collection_tooltip;
+            collection_btn = $('.collections-btn-' + book_id + ' .collections-btn');
+            collection_tooltip = $('.collections-btn-' + book_id + ' .tooltip-wrapper');
+            if (is_checked.length > 0) {
+              collection_btn.removeClass("btn-primary").addClass("btn-success");
+              collection_btn.html(function() {
+                return $(this).html().replace('Προσθήκη', 'Προστέθηκε');
+              });
+              collection_btn.find('i').removeClass("fa-plus").addClass("fa-check");
+              collection_tooltip.attr('title', 'Επεξεργασία συλλογών').tooltip('fixTitle');
+            } else {
+              collection_btn.removeClass("btn-success").addClass("btn-primary");
+              collection_btn.html(function() {
+                return $(this).html().replace('Προστέθηκε', 'Προσθήκη');
+              });
+              collection_btn.find('i').removeClass("fa-check").addClass("fa-plus");
+              collection_tooltip.attr('title', 'Προσθήκη σε συλλογές').tooltip('fixTitle');
+            }
+            notify('Οι αλλαγές αποθηκεύτηκαν με επιτυχία!', 'success');
+            $('#collectionsModal').modal('hide');
+            return false;
+          },
+          error: function(data) {
+            notify('ΣΦΑΛΜΑ: Οι αλλαγές δεν αποθηκεύτηκαν...', 'error');
+            $('#collectionsModal').modal('hide');
+            return false;
+          }
+        });
+      } else {
+        $('#collectionsModal').modal('hide');
+        return console.log('Collection manager canceled');
+      }
+    });
+  });
+});

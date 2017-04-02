@@ -1,5 +1,5 @@
 %ul.media-list.push.comments-list{id: parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list" }
-  - if depth == 0 && !comments.where(user_id: user.id).exists?
+  - if depth == 0 && !comments.where(user_id: user.try(:id)).exists?
     - if user_signed_in?
       = button_tag fa('pencil-square-o') + ' ' + t('comments.write_review'),  |
         {                                                               |
