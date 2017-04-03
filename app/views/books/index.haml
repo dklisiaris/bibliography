@@ -15,11 +15,17 @@
           %small= " (#{@books.response["hits"]["total"]})"
       .row
         .col-xs-12
-          = render "books/widgets/pagination" if defined? @books.total_pages
+          .row
+            .col-xs-10
+              = render "books/widgets/pagination" if defined? @books.total_pages
+            .col-xs-2.visible-xs
+              = button_tag "data-toggle" => "collapse", "data-target" => "#filter-sidebar", class: 'btn btn-sm btn-primary pull-right' do
+                %i.fa.fa-sliders
+                %span= " #{t('books.filters.label')}"
           %hr/
           = render :partial => "books/book", :collection => @books, :as => :book
           = render "books/widgets/pagination" if defined? @books.total_pages
-  .col-sm-4
+  .col-sm-4.hidden-xs.sliding-sidebar{id: "filter-sidebar"}
     = render partial: 'books/widgets/filter', locals: {title: t('authors.label_singular'), filter_name: "author", books: @books}
 
     = render partial: 'books/widgets/filter', locals: {title: t('publishers.label_singular'), filter_name: "publisher", books: @books}
