@@ -25,7 +25,7 @@ $(".home").ready ->
         # Map the remote sources JSON arrays to a JavaScript object array
         books = $.map suggestions.results.books, (suggestion) ->
           title: suggestion['title']
-          image: suggestion['image']
+          image: if suggestion['image'] then suggestion['image'] else 'https://bookopolis.com/img/no_book_cover.jpg'
           secondary_title: if suggestion['writers'].length > 0 then suggestion['writers'][0].fullname else ''
           url: suggestion['site_url']
         authors = $.map suggestions.results.authors, (suggestion) ->
@@ -70,7 +70,7 @@ $(".home").ready ->
         if data.image
           coverElement = [
             '<div class="tt-result-cover">',
-              '<img height="48" width="32" src="' + data.image + '">',
+              '<img height="48" width="36" src="' + data.image + '">',
             '</div>'
           ].join('\n')
         return ('\
