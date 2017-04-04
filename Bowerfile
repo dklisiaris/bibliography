@@ -3,5 +3,6 @@
 # Install js dependencies: rake bower:install
 
 asset 'readmore', '2.2.0'
-asset 'noty'
+asset 'noty', '2.4.1'
 asset 'typeahead.js', '0.11.1'
+asset 'dropzone', '4.3.0'

@@ -61,6 +61,9 @@ el:
   no_books_yet: "Δεν υπάρχουν βιβλία ακόμα."
   no_authors_yet: "Δεν υπάρχουν συγγραφείς ακόμα."
 
+  drop_to_upload: "Αφήστε εδώ αρχεία για ανέβασμα"
+  or_click: "ή κάντε κλικ"
+
   stats:
     views: "Εμφανίσεις"
     visitors: "Επισκέπτες"
@@ -293,6 +296,8 @@ el:
     following_nobody: "Δεν ακολουθείται κανένας ακόμα"
     nobody_follows: "Δεν ακολουθέι κανένας ακόμα"
     similarity_with: "Η Ομοιότητά σας με"
+    change_avatar: "Αλλαγή Avatar"
+    change_cover: "Αλλαγή Cover"
     verbs:
       recommended: "πρότεινε"
       not_recommends: "δεν προτείνει"

@@ -82,6 +82,9 @@ en:
   no_books_yet: "There are no books yet."
   no_authors_yet: "There are no authors yet."
 
+  drop_to_upload: "Drop files here to upload"
+  or_click: "or click"
+
   stats:
     views: "Views"
     visitors: "Visitors"
@@ -314,6 +317,8 @@ en:
     following_nobody: "Not following anyone yet"
     nobody_follows: "No followers yet"
     similarity_with: "Your Similarity with"
+    change_avatar: "Change Avatar"
+    change_cover: "Change Cover"
     verbs:
       recommended: "recommended"
       not_recommends: "not recommends"

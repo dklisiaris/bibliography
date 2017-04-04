@@ -16,3 +16,51 @@
   top: 0;
   left: 0;
 }
+
+.dropzone {
+  background: #f4f4f4 !important;
+  border: 5px dashed #888 !important;
+  border-radius: 5px;
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  .note {
+    font-size: 0.8em;
+    font-weight: 200;
+    display: block;
+    margin-top: 1.4rem;
+  }
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+}
+.avatar-wrapper .avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    color: #FFF;
+
+    i {
+      position: relative;
+      top: 30%;
+      font-size: 2.5em;
+    }
+}
+.avatar-wrapper:hover .avatar-overlay {
+    display: block;
+    background: rgba(0, 0, 0, .6);
+    border-radius: 50%;
+}
+
+.widget-image-content .btn-cover {
+    position: absolute !important;
+    bottom: 20px;
+    right: 15px;
+}

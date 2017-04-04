@@ -4,10 +4,17 @@
       <div class="widget-image widget-image-220">
         <%= image_tag(@profile.cover_safe, alt: "cover", class: "cover")  %>
         <div class="widget-image-content text-center">
-          <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-transparent push")  %>
+          <% if @profile.user == current_user %>
+            <div class="avatar-wrapper" data-toggle="modal" data-target="#avatarModal">
+              <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-transparent push") %>
+              <div class="avatar-overlay"><%= fa('cloud-upload') %></div>
+            </div>
+          <% else %>
+            <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-transparent push")  %>
+          <% end %>
           <h3 class="widget-heading text-light"><strong><%= @profile.name %> (<%= @profile.username %>)</strong></h3>
           <h4 class="widget-heading text-light-op"><em> Total Books in library: <%= @profile.user.books.distinct.count %></em></h4>
-          <% if @profile.user != current_user %>
+          <% if user_signed_in? && @profile.user != current_user  %>
             <%= button_tag :onclick => "javascript:follow(#{@profile.id})",
               type: "button",
               class: "btn btn-xs btn-follow btn-follow-#{@profile.id} btn-effect-ripple #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}" do %>
@@ -18,6 +25,11 @@
                 <i class="fa fa-user-plus"></i>
                 <strong><span><%= " #{t 'users.follow'}" %></span></strong>
                 <% end %>
+            <% end %>
+          <% elsif user_signed_in? && @profile.user == current_user %>
+            <%= button_tag type: "button", "data-toggle"=>"modal", "data-target"=>"#coverModal", class: 'btn btn-default btn-xs btn-cover' do %>
+              <%= fa('cloud-upload') %>
+              <strong><span><%= " #{t 'users.change_cover'}" %></span></strong>
             <% end %>
           <% end %>
         </div>
@@ -134,7 +146,7 @@
   </div>
 
   <div class="col-lg-4">
-    <% unless current_user == @user %>
+    <% if user_signed_in? && current_user != @user  %>
     <div class="widget">
       <div class="widget-content widget-content-mini text-center border-bottom">
         <%= t('users.similarity_with') %><br><strong><%= @profile.username %></strong>
@@ -218,3 +230,6 @@
     </div>
   </div>
 </div>
+
+<%= render 'profiles/modals/avatar' %>
+<%= render 'profiles/modals/cover' %>

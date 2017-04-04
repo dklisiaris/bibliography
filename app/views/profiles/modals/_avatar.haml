@@ -1,0 +1,22 @@
+#avatarModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span=fa('times')
+        %h4.modal-title=t('users.change_avatar')
+      .modal-body
+        = form_tag '/', method: :post, class: "dropzone", id: "media-dropzone" do
+          .dz-message{"data-dz-message" => ""}
+            %span= t('drop_to_upload')
+            %br
+            %span.note
+              (#{t('or_click')})
+          .fallback
+            = file_field_tag :avatar, multiple: true
+          %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+
+
+      .modal-footer
+        %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
+        %button#saveAvatarBtn.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "submit"}= t('save')
