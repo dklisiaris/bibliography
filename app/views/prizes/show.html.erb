@@ -10,5 +10,5 @@
 </div>
 
 
-<%= link_to 'Edit', edit_prize_path(@prize) if policy(prize).update? %> <br>
+<%= link_to 'Edit', edit_prize_path(@prize) if policy(@prize).update? %> <br>
 <%= link_to 'Back', prizes_path %>
