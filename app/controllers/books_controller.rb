@@ -50,7 +50,6 @@ class BooksController < ApplicationController
           page: params[:page], per_page: limit)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
-
       @books = policy_scope(Book)
         .search("*", where: @filters, aggs: aggs, order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)

@@ -7,58 +7,14 @@
                 <li class="sidebar-separator">
                   <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.discover') %></span></i>
                 </li>
-                <li>
-                  <a href="#" class="sidebar-nav-menu">
-                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-                    <i class="fa fa-thumbs-o-up sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.featured') %></span>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
-                    </li>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
-                    </li>                    
-                  </ul> 
-                </li>
-                <li>
-                  <a href="#" class="sidebar-nav-menu">
-                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-                    <i class="fa fa-line-chart sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.trending') %></span>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
-                    </li>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
-                    </li>                    
-                  </ul>                                      
-                </li>                 
+                <%= side_nav_li(t('side_menu.featured'), books_path(featured: true), "fa fa-thumbs-o-up") %>
+                <%= side_nav_li(t('side_menu.trending'), books_path(trending: true), "fa fa-line-chart") %>
+                <%= side_nav_li(t('side_menu.awarded'), books_path(awarded: true), "fa fa-trophy") %>
+                <%= side_nav_li(t('side_menu.latest'), books_path(latest: true), "fa fa-clock-o") %>
 
-                <li>
-                  <a href="#" class="sidebar-nav-menu">
-                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-                    <i class="fa fa-trophy sidebar-nav-icon"></i>
-                    <span class="sidebar-nav-mini-hide"><%= t('side_menu.awarded') %></span>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.books') %></a>
-                    </li>
-                    <li>
-                      <a href="page_ui_widgets.php"><%= t('side_menu.authors') %></a>
-                    </li>                    
-                  </ul>                   
-                </li>       
+                <% if user_signed_in? %>
 
-                <%= side_nav_li(t('side_menu.latest'), '#', "fa fa-clock-o") %>                                                          
-                
-                <% if user_signed_in? %> 
-
-                  <% if current_user.editor? %>                                      
+                  <% if current_user.editor? %>
                     <li class="sidebar-separator">
                       <i><span class="sidebar-nav-mini-hide"><%= t('side_menu.editors_only') %></span></i>
                     </li>
@@ -66,7 +22,7 @@
                     <%= side_nav_li(t('side_menu.contributions'), contributions_path, "fa fa-pencil-square-o") %>
                     <%= side_nav_li(t('side_menu.awards'), awards_path, "fa fa-pencil-square-o") %>
                     <%= side_nav_li(t('side_menu.prizes'), prizes_path, "fa fa-pencil-square-o") %>
-                  <% end %> 
+                  <% end %>
 
                   <% if current_user.admin? %>
                     <li class="sidebar-separator">
@@ -74,8 +30,8 @@
                     </li>
                     <%= side_nav_li(t('side_menu.import'), import_path, "icon-arrow") %>
                     <%= side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal") %>
-                    <%= side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true) %>                    
+                    <%= side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true) %>
                     <%= side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange") %>
-                  <% end %> 
+                  <% end %>
 
                 <% end %>

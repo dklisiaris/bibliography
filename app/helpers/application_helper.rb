@@ -1,13 +1,16 @@
 module ApplicationHelper
 
   def side_nav_li(text, path, icon=nil, blank=false)
-    content_tag(:li) do   
-      options = current_page?(path) ? { class: "active" } : {}
+    content_tag(:li) do
+      if path.start_with? '/books'
+      else
+        options = current_page?(path) ? { class: "active" } : {}
+      end
       options[:target] = '_blank' if blank
       if icon
-        link_to path, options do                           
+        link_to path, options do
           "<i class='#{icon} sidebar-nav-icon'></i><span class='sidebar-nav-mini-hide'>#{text}</span>".html_safe
-        end 
+        end
       else
         link_to(text, path, options)
       end
@@ -15,19 +18,19 @@ module ApplicationHelper
   end
 
   def top_nav_li(text, path, icon=nil)
-    content_tag(:li) do 
+    content_tag(:li) do
       options = current_page?(path) ? { class: "active" } : {}
-      link_to path, options do                           
+      link_to path, options do
         "<i class='#{icon}'></i><strong>#{text.upcase}</strong>".html_safe
-      end     
+      end
     end
   end
 
   def top_nav_dropdown_li(text, path, icon=nil)
-    content_tag(:li) do                                      
-      link_to path do  
-        content_tag(:i, nil, { class: "#{icon} fa-fw pull-right" }) + text                             
-      end                                                            
+    content_tag(:li) do
+      link_to path do
+        content_tag(:i, nil, { class: "#{icon} fa-fw pull-right" }) + text
+      end
     end
   end
 
@@ -35,7 +38,7 @@ module ApplicationHelper
   # http://fortawesome.github.io/Font-Awesome/cheatsheet/
   #
   # ==== Examples
-  #   
+  #
   #   fa 'home'
   #   fa('apple')
   #
@@ -44,20 +47,20 @@ module ApplicationHelper
   end
 
   # Replaces toned greek letters with simple ones
-  # 
+  #
   def detone(text)
     text.tr('άέήίΐόύώ','αεηιιουω')
   end
 
   # Keeps part of a text and ellipsizes it
-  # 
+  #
   # ==== Attributes
   #
   # * +text+ - The text to be cutted
   # * +max_chars+ - The # of characters to keep
-  # 
+  #
   # ==== Examples
-  #   
+  #
   #   subtext ('hello world!', 5)
   #   => 'hello...'
   #
@@ -76,12 +79,12 @@ module ApplicationHelper
     opts[:dashes] ||= false
     join_with = opts[:dashes] ? '-' : ' '
 
-    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)     
+    converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)
     name_to_latinize = detone(UnicodeUtils.downcase(input).gsub('ς','σ').gsub(/[,.:'·-]/,''))
     name_to_latinize.split(" ").map do |word|
       converted = converter.convert(word)
       converted.present? ? converted : word
     end.flatten.uniq.join(join_with)
-  end 
+  end
 
 end

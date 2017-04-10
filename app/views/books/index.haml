@@ -17,6 +17,7 @@
         .col-xs-12
           .row
             .col-xs-10
+              -# require 'pry'; binding.pry
               = render "books/widgets/pagination" if defined? @books.total_pages
             .col-xs-2.visible-xs
               = button_tag "data-toggle" => "collapse", "data-target" => "#filter-sidebar", class: 'btn btn-sm btn-primary pull-right' do
