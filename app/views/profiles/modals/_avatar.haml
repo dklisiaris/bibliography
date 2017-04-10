@@ -15,6 +15,7 @@
           .fallback
             = file_field_tag :avatar, multiple: true
           %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+          %input{:name => "upload_type", :type => "hidden", :value => 'avatar'}
 
 
       .modal-footer

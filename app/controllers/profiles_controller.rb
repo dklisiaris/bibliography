@@ -21,8 +21,8 @@ class ProfilesController < ApplicationController
     @shelves = @user.shelves
     @activities = @user.activities.includes(:owner, :trackable)
 
-    @following_users = @user.following_users
-    @user_followers = @user.user_followers
+    @following_users = @user.following_users.includes(:profile)
+    @user_followers = @user.user_followers.includes(:profile)
 
     if current_user
       unless current_user == @user
@@ -39,8 +39,20 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile.update(profile_params)
-    redirect_to public_profile_path(@profile.id)
+    if(params['upload_type'] == 'cover')
+      @profile.update(cover: params['file'])
+    elsif params['upload_type'] == 'avatar'
+      @profile.update(avatar: params['file'])
+    else
+      @profile.update(profile_params)
+    end
+
+    respond_to do |format|
+      format.html do
+        redirect_to public_profile_path(@profile.id)
+      end
+      format.json { render json: @profile.to_json }
+    end
   end
 
   def follow
