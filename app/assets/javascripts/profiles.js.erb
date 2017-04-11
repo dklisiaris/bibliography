@@ -1,0 +1,27 @@
+$('.profiles.show').ready(function() {
+  Dropzone.options.mediaDropzone = {
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    maxFiles: 1,
+    init: function() {
+      this.on("success", function(file, response) {
+        $('#avatarModal').modal('hide');
+        $('#coverModal').modal('hide');
+
+        var $cover = $('.cover').first();
+        if($cover.attr("src") !== response.cover.url){
+          $cover.attr("src", response.cover.url);
+        }
+
+        var $avatar = $('#profileAvatar');
+        if($avatar.attr("src") !== response.avatar.url){
+          $avatar.attr("src", response.avatar.url);
+          $('#topHeaderAvatar').attr("src", response.avatar.url);
+        }
+
+        this.removeFile(file);
+
+      });
+    }
+  };
+});

@@ -17,7 +17,7 @@
               <%= top_nav_li(current_user.screen_name, public_profile_path) %>
               <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                <%= image_tag(current_user.avatar, alt: "avatar")  %>
+                <%= image_tag(current_user.avatar, alt: "avatar", id: 'topHeaderAvatar')  %>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">

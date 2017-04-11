@@ -6,7 +6,7 @@
         <div class="widget-image-content text-center">
           <% if @profile.user == current_user %>
             <div class="avatar-wrapper" data-toggle="modal" data-target="#avatarModal">
-              <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-transparent push") %>
+              <%= image_tag(@profile.gravatar, alt: "avatar", size: "128x128", id: "profileAvatar", class: "img-circle img-thumbnail img-thumbnail-transparent push") %>
               <div class="avatar-overlay"><%= fa('cloud-upload') %></div>
             </div>
           <% else %>
