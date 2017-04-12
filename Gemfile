@@ -25,6 +25,7 @@ gem 'turbolinks', '~> 2.5'
 gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'thor', '0.19.1'
 
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.1.0'
@@ -112,7 +113,8 @@ gem "pundit", '~> 1.0'
 gem 'acts_as_tree', '~> 2.1'
 
 # Uploaders
-gem 'carrierwave', '~> 0.10'
+gem 'carrierwave', '~> 0.11.2'
+gem 'piet-binary', '~> 0.2.0'
 
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
 gem 'mini_magick', '~> 4.5'

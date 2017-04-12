@@ -4,7 +4,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -25,8 +25,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
+  process :resize_to_fill => [128,128]
+
+  include Piet::CarrierWaveExtension
+  process optimize: [{quality: 80, level: 4}]
+
   # def scale(width, height)
   #   # do something
   # end
@@ -57,5 +60,4 @@ class AvatarUploader < CarrierWave::Uploader::Base
     var = :"@#{mounted_as}_secure_token"
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
-
 end
