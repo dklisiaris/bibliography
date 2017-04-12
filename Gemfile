@@ -69,11 +69,11 @@ group :development, :test do
 end
 
 group :test do
-  gem "faker", '~> 1.4'
-  gem "capybara", '~> 2.4'
-  gem "database_cleaner", '~> 1.4'
+  gem 'faker', '~> 1.7'
+  gem 'capybara', '~> 2.13'
+  gem 'database_cleaner', '~> 1.5'
   gem "launchy", '~> 2.4'
-  gem "selenium-webdriver", '>= 2.0'
+  gem 'selenium-webdriver', '~> 3.3'
 end
 
 gem 'bootstrap-sass', '~> 3.3'
@@ -113,6 +113,9 @@ gem 'acts_as_tree', '~> 2.1'
 
 # Uploaders
 gem 'carrierwave', '~> 0.10'
+
+# Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
+gem 'mini_magick', '~> 4.5'
 
 # Json support
 gem 'json', '~> 1.8'
@@ -216,7 +219,7 @@ end
 
 group :development do
   # CLI gem for comfortably working with icon fonts
-  gem 'fontello_rails_converter', '~> 0.4.4'
+  gem 'fontello_rails_converter', '~> 0.4.6'
 end
 
 # Adds typed hstore backed fields to an ActiveRecord model.
