@@ -14,7 +14,7 @@ $('.profiles.show').ready(function() {
         }
 
         var $avatar = $('#profileAvatar');
-        if($avatar.attr("src") !== response.avatar.url){
+        if(response.avatar.url && $avatar.attr("src") !== response.avatar.url){
           $avatar.attr("src", response.avatar.url);
           $('#topHeaderAvatar').attr("src", response.avatar.url);
         }

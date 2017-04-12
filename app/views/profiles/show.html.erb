@@ -12,8 +12,12 @@
           <% else %>
             <%= image_tag(@profile.gravatar, alt: "avatar", class: "img-circle img-thumbnail img-thumbnail-transparent push")  %>
           <% end %>
-          <h3 class="widget-heading text-light"><strong><%= @profile.name %> (<%= @profile.username %>)</strong></h3>
-          <h4 class="widget-heading text-light-op"><em> Total Books in library: <%= @profile.user.books.distinct.count %></em></h4>
+          <h3 class="widget-heading text-light">
+            <strong class="text-dark-bg"><%= @profile.name %> (<%= @profile.username %>)</strong>
+          </h3>
+          <h4 class="widget-heading text-light-op">
+            <em class="text-dark-bg"> Total Books in library: <%= @profile.user.books.distinct.count %></em>
+          </h4>
           <% if user_signed_in? && @profile.user != current_user  %>
             <%= button_tag :onclick => "javascript:follow(#{@profile.id})",
               type: "button",
