@@ -104,6 +104,7 @@ Rails.application.routes.draw do
       resources :authors, only: [:index, :show]
       resources :publishers, only: [:show]
       resources :categories, only: [:show]
+      resources :series, only: [:show]
       resources :sessions, only: [:create]
       post 'authenticate', to: 'sessions#create'
     end

@@ -1,0 +1,68 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+$(".series").ready ->
+  # Instantiate the Bloodhound suggestion engine
+  engine = new Bloodhound(
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+    sorter: (a, b) ->
+      q = $("input:text[name=q]").val().toLowerCase()
+      index_a = a.value.toLowerCase().indexOf(q)
+      index_b = b.value.toLowerCase().indexOf(q)
+      if index_a < index_b
+        -1
+      else if index_a > index_b
+        1
+      else
+        0
+    remote:
+      url: "/series?autocomplete=1&q=%QUERY"
+      wildcard: "%QUERY"
+      rateLimitWait: 500
+      filter: (suggestions) ->
+
+        # Map the remote source JSON array to a JavaScript object array
+        $.map suggestions, (suggestion) ->
+          name: suggestion['name']
+          url: suggestion['site_url']
+  )
+
+  # Initialize the Bloodhound suggestion engine
+  engine.initialize()
+
+  # Instantiate the Typeahead UI
+  $("#remote .typeahead").typeahead(
+    hint: true
+    highlight: true
+    minLength: 1
+  ,
+    displayKey: "name"
+    limit: Infinity
+    source: engine.ttAdapter()
+    templates: {
+      empty: [
+        '<div class="tt-result"><div class="tt-result-details"><span>',
+          <%= "'#{I18n.t('nothing_found')}'" %>,
+        '</span></div></div>'
+      ].join('\n'),
+      suggestion:  (data) ->
+        return ('\
+          <div class="tt-result">\
+            <div class="tt-result-details">\
+              <strong>' + data.name + '</strong><br>\
+            </div>\
+          </div>
+        ')
+    }
+  ).bind('typeahead:selected', (obj,datum) ->
+    window.location.href = datum.url
+    return
+  ).on('typeahead:asyncrequest', ->
+      $('#remote input').addClass('loading')
+      return
+  ).on 'typeahead:asynccancel typeahead:asyncreceive', ->
+    $('#remote input').removeClass('loading')
+    return
+

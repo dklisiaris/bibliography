@@ -15,6 +15,9 @@ class Api::V1::Preview::ResultsSerializer
       elsif result.klass.to_s == "Category"
         @results[:categories] = ActiveModel::ArraySerializer.new(result.results,
           each_serializer: Api::V1::Preview::CategorySerializer)
+      elsif result.klass.to_s == "Series"
+        @results[:series] = ActiveModel::ArraySerializer.new(result.results,
+          each_serializer: Api::V1::Preview::SeriesSerializer)
       end
     end
   end

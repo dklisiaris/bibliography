@@ -37,7 +37,7 @@
                   %hr
             - elsif result.klass.to_s == "Author" && @search_hits["Author"] > 0
               #search-tab-authors.tab-pane{:class => ("active" if active_klass == "Author")}
-                = render :partial => "authors/author", :collection => result.results, :as => :author
+                = render :partial => "authors/author", :collection => result.results, :as => :author, locals: { liked_ids: @liked_author_ids }
                 - if result.results.count < @search_hits["Author"]
                   #load-more-authors-btn-container
                   .row
