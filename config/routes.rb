@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :series, only: [:index], :concerns => :paginatable
 
   # resource :profile, only: [:update]
   # get "profile/:id", :to => "profiles#show", as: 'user_profile'

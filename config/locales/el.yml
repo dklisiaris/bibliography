@@ -239,6 +239,16 @@ el:
     filters:
       label: "Φίλτρα"
 
+  series:
+    label: "Σειρές"
+    label_singular: "Σειρά"
+    new: "Νέα Σειρά"
+    edit: "Επεξεργασία Σειράς"
+    delete: "Διαγραφή Σειράς"
+    editing: "Επεξεργασία Σειράς"
+    listing: "Λίστα Σειρών"
+    all: "Όλες οι σειρές"
+    search: "Αναζήτηση Σειρών"
 
   import:
     from_file: "Από αρχείο"

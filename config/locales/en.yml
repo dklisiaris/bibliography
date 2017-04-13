@@ -260,6 +260,17 @@ en:
     filters:
       label: "Filters"
 
+  series:
+    label: "Series"
+    label_singular: "Series"
+    new: "New Series"
+    edit: "Edit Series"
+    delete: "Delete Series"
+    editing: "Editing Series"
+    listing: "Listing Series"
+    all: "All Series"
+    search: "Search Series"
+
   import:
     from_file: "From File"
     from_url: "From URL"

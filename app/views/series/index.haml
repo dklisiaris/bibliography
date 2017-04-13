@@ -1,0 +1,16 @@
+= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', locals: {action: series_index_path, placeholder: t('series.search')}), breadcrumbs: {fa('home') => root_url, t('series.label') => nil})
+
+.row
+  .col-sm-8
+    .widget
+      .widget-content
+        = paginate @series
+    - @series.each do |series|
+      = render partial: 'books/widgets/grid',                                         |
+        locals: {                                                                     |
+        title: link_to(series.name, books_path(series: series.name), class: "text-light-op"),                          |
+        books: series.books.order(impressions_count: :desc, image: :asc).limit(10), |
+        icon: 'tag'}
+    .widget
+      .widget-content
+        = paginate @series

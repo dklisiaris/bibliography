@@ -33,6 +33,8 @@
 
     = render partial: 'books/widgets/filter', locals: {title: t('categories.label_singular'), filter_name: "category", books: @books}
 
+    = render partial: 'books/widgets/filter', locals: {title: t('series.label_singular'), filter_name: "series", books: @books}
+
     = render partial: 'books/widgets/filter', locals: {title: t('books.publication_year'), filter_name: "publication_year", books: @books}
 
     = render partial: 'books/widgets/filter', locals: {title: t('books.format'), filter_name: "format", books: @books}

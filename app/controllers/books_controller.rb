@@ -20,6 +20,7 @@ class BooksController < ApplicationController
       publication_year: {limit: 20},
       publisher: {limit: 30},
       category: {limit: 30},
+      series: {limit: 50},
       format: {limit: 10},
       language: {limit: 10},
       pages: {limit: 10}
@@ -32,6 +33,7 @@ class BooksController < ApplicationController
       author: params[:author],
       publisher: params[:publisher],
       category: params[:category],
+      series: params[:series],
       format: params[:format],
       language: params[:language],
       pages: params[:pages]

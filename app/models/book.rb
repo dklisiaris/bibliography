@@ -61,6 +61,7 @@ class Book < ActiveRecord::Base
       author: main_author,
       publisher: publisher.try(:name),
       category: categories.try(:first).try(:name),
+      series: series.try(:name),
       format: format,
       language: (original_language.present? ? original_language : "ελληνικά"),
       pages: pages_based_size,
@@ -262,6 +263,21 @@ class Book < ActiveRecord::Base
       write_attribute(:series_id, series_obj.id)
     end
   end
+
+  # def rewrite_series_name
+  #   if (series_name =~ /· \d+ ·/).present?
+  #     write_attribute(:series_name, series_name.gsub(/· \d+ ·/, '-'))
+  #     save!
+  #   end
+  # end
+
+  # def rewrite_series_volume
+  #   if (series_name =~ /· \d+ ·/).present?
+  #     volume = /\d+/.match(series_name)[0].to_i
+  #     write_attribute(:series_volume, volume)
+  #     save!
+  #   end
+  # end
 
 end
 

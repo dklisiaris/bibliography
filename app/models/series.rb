@@ -1,7 +1,7 @@
 class Series < ActiveRecord::Base
   validates :name, presence: true
 
-  has_many :books
+  has_many :books, dependent: :nullify
 
   after_validation :calculate_search_terms, :if => :name_changed?
 

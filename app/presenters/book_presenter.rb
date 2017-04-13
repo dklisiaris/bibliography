@@ -6,34 +6,34 @@ class BookPresenter < BasePresenter
   def initialize(object, template)
     super
     @marc = book.to_marc
-  end  
+  end
 
   def writers
-    writers = book.writers        
-    if writers.present?    
-      html = writers.map do |writer|                  
-        h.link_to(writer.fullname, writer)       
-      end.join(', ').html_safe      
+    writers = book.writers
+    if writers.present?
+      html = writers.map do |writer|
+        h.link_to(writer.fullname, writer)
+      end.join(', ').html_safe
     end
     return html
   end
 
   def contributors(isbd=false)
-    contributions = book.contributions.contributors    
-    if contributions.present? 
-      current_job = ""     
+    contributions = book.contributions.contributors
+    if contributions.present?
+      current_job = ""
       contributors_hash = {}
       contributors_array = []
-           
-      contributions.each do |contribution|  
+
+      contributions.each do |contribution|
         unless current_job == contribution.job
           contributors_array = []
           current_job = contribution.job
         end
         contributors_array << contribution.author
-        contributors_hash[current_job] = contributors_array    
+        contributors_hash[current_job] = contributors_array
         # h.link_to contribution.author.fullname, contribution.author
-      end  
+      end
 
       html = ""
       contributors_hash.each do |job, contributors|
@@ -42,7 +42,7 @@ class BookPresenter < BasePresenter
           html << UnicodeUtils.downcase(job) + ' '
           html << contributors.map do |contributor|
             contributor.fullname
-          end.join(" [#{I18n.t('and')}] ")                    
+          end.join(" [#{I18n.t('and')}] ")
         else
           html << UnicodeUtils.titlecase(job) + ': '
           html << contributors.map do |contributor|
@@ -96,17 +96,24 @@ class BookPresenter < BasePresenter
       html << "(#{I18n.t('books.last_updated')}: #{book.price_updated_at.to_s})"
     end
     html.join(', ').html_safe
-  end  
+  end
 
   def trow(key,value)
-    h.content_tag(:tr) do       
+    h.content_tag(:tr) do
       h.content_tag(:td, h.content_tag(:strong, key)) +
-      h.content_tag(:td, value)  
-    end if value.present?    
+      h.content_tag(:td, value)
+    end if value.present?
+  end
+
+  def series
+    if book.series.present?
+      h.link_to([book.series.name, book.series_volume].reject(&:blank?).join(' - #'), h.books_path(series: book.series.name))
+    end
+
   end
 
   def isbd_title
-    writers = book.screen_writers    
+    writers = book.screen_writers
     "#{book.title} / #{writers} ; #{contributors(true)}"
   end
 
@@ -114,7 +121,7 @@ class BookPresenter < BasePresenter
     if book.collective_work?
       I18n.t('books.collective_work')
     else
-      h.link_to(book.writers.first.fullname, book.writers.first) if book.writers.first.present? 
+      h.link_to(book.writers.first.fullname, book.writers.first) if book.writers.first.present?
     end
   end
 
@@ -125,27 +132,27 @@ class BookPresenter < BasePresenter
   end
 
   def marc_leader
-    h.content_tag(:tr) do       
+    h.content_tag(:tr) do
       h.content_tag(:td, h.content_tag(:strong, 'LEADER')) +
-      h.content_tag(:td, @marc.leader, colspan: "2")  
-    end   
+      h.content_tag(:td, @marc.leader, colspan: "2")
+    end
   end
 
   def marc_control_fields
     html = []
     @marc.each do |control_field|
-      html << h.content_tag(:tr) do       
+      html << h.content_tag(:tr) do
         h.content_tag(:td, h.content_tag(:strong, control_field.tag)) +
         h.content_tag(:td, control_field.value, colspan: "2")
-      end if control_field.is_a?(MARC::ControlField)       
+      end if control_field.is_a?(MARC::ControlField)
     end
     html.join.html_safe
   end
 
   def marc_data_fields
     html = []
-    @marc.each do |data_field|      
-      html << h.content_tag(:tr) do              
+    @marc.each do |data_field|
+      html << h.content_tag(:tr) do
         h.content_tag(:td, h.content_tag(:strong, data_field.tag)) +
         h.content_tag(:td, data_field.indicator1 + data_field.indicator2) +
         h.content_tag(:td) do
@@ -154,7 +161,7 @@ class BookPresenter < BasePresenter
             subfields << h.content_tag(:strong, '|' + subfield.code) + ' ' + subfield.value if subfield.value.present?
           end
           subfields.join(' ').html_safe
-        end 
+        end
       end if data_field.is_a?(MARC::DataField) and data_field.subfields.any?{|s| s.value.present?}
     end
     html.join.html_safe
