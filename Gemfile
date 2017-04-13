@@ -238,3 +238,6 @@ gem 'trix', '~> 0.9.10'
 
 # The fastest JSON parser and object serializer.
 gem 'oj', '~> 2.18'
+
+# Stopwords filter or use some based on Snowball stopwords lists
+gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'

@@ -238,7 +238,8 @@ CREATE TABLE books (
     impressions_count integer DEFAULT 0,
     slug character varying,
     language integer,
-    tsearch_vector tsvector
+    tsearch_vector tsvector,
+    series_id integer
 );
 
 
@@ -754,6 +755,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: series; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE series (
+    id integer NOT NULL,
+    name character varying,
+    books_count integer DEFAULT 0,
+    tsearch_vector tsvector,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE series_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE series_id_seq OWNED BY series.id;
+
+
+--
 -- Name: shelves; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -955,6 +989,13 @@ ALTER TABLE ONLY royce_role ALTER COLUMN id SET DEFAULT nextval('royce_role_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY series ALTER COLUMN id SET DEFAULT nextval('series_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY shelves ALTER COLUMN id SET DEFAULT nextval('shelves_id_seq'::regclass);
 
 
@@ -1099,6 +1140,14 @@ ALTER TABLE ONLY royce_connector
 
 ALTER TABLE ONLY royce_role
     ADD CONSTRAINT royce_role_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY series
+    ADD CONSTRAINT series_pkey PRIMARY KEY (id);
 
 
 --
@@ -1269,6 +1318,13 @@ CREATE UNIQUE INDEX index_books_on_ismn ON books USING btree (ismn);
 --
 
 CREATE INDEX index_books_on_publisher_id ON books USING btree (publisher_id);
+
+
+--
+-- Name: index_books_on_series_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_series_id ON books USING btree (series_id);
 
 
 --
@@ -1468,6 +1524,14 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY books
+    ADD CONSTRAINT fk_rails_1c0d164eeb FOREIGN KEY (series_id) REFERENCES series(id);
+
+
+--
 -- Name: fk_rails_237c584e0e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1658,4 +1722,8 @@ INSERT INTO schema_migrations (version) VALUES ('20161229221829');
 INSERT INTO schema_migrations (version) VALUES ('20161230145401');
 
 INSERT INTO schema_migrations (version) VALUES ('20170331095631');
+
+INSERT INTO schema_migrations (version) VALUES ('20170412202745');
+
+INSERT INTO schema_migrations (version) VALUES ('20170412203337');
 

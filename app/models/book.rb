@@ -23,6 +23,7 @@ class Book < ActiveRecord::Base
   has_many :shelves, through: :bookshelves
 
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
+  belongs_to :series, :counter_cache => true
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)
@@ -38,6 +39,8 @@ class Book < ActiveRecord::Base
     bookshelves.clear
     awards.clear
   end
+
+  before_save :write_series_id
 
   # Log impressions filtered by ip
   is_impressionable :counter_cache => true, :unique => true
@@ -250,6 +253,13 @@ class Book < ActiveRecord::Base
       else
         "> 1000"
       end
+    end
+  end
+
+  def write_series_id
+    if series_name.present?
+      series_obj = Series.find_or_create_by(name: series_name)
+      write_attribute(:series_id, series_obj.id)
     end
   end
 
