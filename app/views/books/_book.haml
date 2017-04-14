@@ -1,0 +1,29 @@
+- rule = true if rule.nil?
+.row.clearfix
+  .col-xs-2
+    = image_tag(book.cover, height: '96', width: '96')
+  .col-xs-10
+    .row.clearfix
+      .col-xs-9
+        %h4= link_to book.title, book
+        %span= book.writers.first.present? ? link_to(book.main_author, book.writers.first) : book.main_author
+        %br/
+        %span
+          %small.text-muted= t('books.recommended_x_times', count: book.liked_by_count) + " - " + |
+              t('books.in_x_collections', count: book.bookshelves.count) + " - " + |
+              t('books.with_x_views', count: book.impressionist_count)             |
+      .col-xs-3.text-center
+        = render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true}
+        %br/
+        = render partial: 'books/widgets/recommend_btns', locals: {book: book}
+        - if policy(book).update?
+          = tag(:br)
+          %small.text-muted
+            = "ID: #{book.id}"
+    .row
+      .col-xs-10
+        %p
+          %small
+            = book.short_description(100)
+= tag(:hr) if rule
+

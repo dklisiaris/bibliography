@@ -124,10 +124,13 @@ class Book < ActiveRecord::Base
   end
 
   def short_description(max_chars=350)
-    if description.present? and description.length<=max_chars
-      description.html_safe
-    elsif description.present? and description.length>max_chars
-      (description[0...max_chars]+'...').html_safe
+    if description.present?
+      no_html_description = ActionView::Base.full_sanitizer.sanitize(description)
+      if no_html_description.length<=max_chars
+        no_html_description
+      elsif no_html_description.length>max_chars
+        (no_html_description[0...max_chars]+'...')
+      end
     else
       nil
     end
