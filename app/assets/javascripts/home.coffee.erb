@@ -40,11 +40,16 @@ $(".home").ready ->
           url: suggestion['site_url']
         categories = $.map suggestions.results.categories, (suggestion) ->
           title: suggestion['name']
-          secondary_title: ''
+          secondary_title: '<%= I18n.t("categories.label_singular")%>'
+          image: ''
+          url: suggestion['site_url']
+        series = $.map suggestions.results.series, (suggestion) ->
+          title: suggestion['name']
+          secondary_title: '<%= I18n.t("series.label_singular")%>'
           image: ''
           url: suggestion['site_url']
 
-        books.concat(authors).concat(publishers).concat(categories)
+        books.concat(authors).concat(publishers).concat(categories).concat(series)
   )
 
   # Initialize the Bloodhound suggestion engine

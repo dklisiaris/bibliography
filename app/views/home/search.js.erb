@@ -26,4 +26,10 @@ else if("<%= params['search_only'] %>" === "categories") {
   $('#load-more-categories a').button('reset');
   $('#load-more-categories').html("<%= j link_to_next_page @categories, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @categories.present? %>");
 }
+else if("<%= params['search_only'] %>" === "series") {
+  $('#load-more-series a').button('loading');
+  $('#load-more-series-btn-container').prepend("<%= j render :partial => 'series/series_with_books', :collection => @series, :as => :series if @series.present? %>");
 
+  $('#load-more-series a').button('reset');
+  $('#load-more-series').html("<%= j link_to_next_page @series, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @series.present? %>");
+}

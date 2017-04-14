@@ -24,6 +24,9 @@
             - if @search_hits["Category"] > 0
               %li{:class => ("active" if active_klass == "Category")}
                 = link_to("#{t('categories.label')} (#{@search_hits["Category"]})", "#search-tab-categories")
+            - if @search_hits["Series"] > 0
+              %li{:class => ("active" if active_klass == "Series")}
+                = link_to("#{t('series.label')} (#{@search_hits["Series"]})", "#search-tab-series")
         .tab-content
           - @search_results.each do |result|
             - if result.klass.to_s == "Book" && @search_hits["Book"] > 0
@@ -61,6 +64,15 @@
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
                       #load-more-categories= link_to t('load_more'), search_path(q: params[:q], search_only: 'categories', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                  %hr
+            - elsif result.klass.to_s == "Series" && @search_hits["Series"] > 0
+              #search-tab-series.tab-pane{:class => ("active" if active_klass == "Series")}
+                = render :partial =>  "series/series_with_books", :collection => result.results, :as => :series
+                - if result.results.count < @search_hits["Series"]
+                  #load-more-series-btn-container
+                  .row
+                    .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+                      #load-more-series= link_to t('load_more'), search_path(q: params[:q], search_only: 'series', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
                   %hr
 - else
   .row
