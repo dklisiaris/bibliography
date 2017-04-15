@@ -62,6 +62,16 @@ var App = function() {
         // Initialize Tooltips
         $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
 
+        // Easy Pie Chart
+        $('.pie-chart').easyPieChart({
+            barColor: $(this).data('bar-color') ? $(this).data('bar-color') : '#777777',
+            trackColor: $(this).data('track-color') ? $(this).data('track-color') : '#eeeeee',
+            lineWidth: $(this).data('line-width') ? $(this).data('line-width') : 3,
+            size: $(this).data('size') ? $(this).data('size') : '80',
+            animate: 800,
+            scaleColor: false
+        });
+
         // Toggles 'open' class on toggle menu
         $('.toggle-menu .submenu').on('click', function(){
            $(this)
