@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-<!--[if IE 9]>         
+<!--[if IE 9]>
 <html class="no-js lt-ie10">
 <![endif]-->
 
-<!--[if gt IE 9]><!--> 
+<!--[if gt IE 9]><!-->
 <html class="no-js">
 <!--<![endif]-->
-  
+
 <html>
   <!-- BEGIN HEAD -->
   <head>
@@ -34,18 +34,18 @@
     <meta name="msapplication-square70x70logo" content="smalltile.png" />
     <meta name="msapplication-square150x150logo" content="mediumtile.png" />
     <meta name="msapplication-wide310x150logo" content="widetile.png" />
-    <meta name="msapplication-square310x310logo" content="largetile.png" />    
+    <meta name="msapplication-square310x310logo" content="largetile.png" />
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 
-    <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true %>   
-    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true %>
+
     <%= csrf_meta_tags %>
   </head>
-  <!-- END HEAD --> 
+  <!-- END HEAD -->
 
   <!-- BEGIN BODY -->
-  <body data-no-turbolink class="<%= controller_name %> <%= action_name %>"> 
+  <body data-no-turbolink class="<%= controller_name %> <%= action_name %>">
 
     <!-- BEGIN PAGE WRAPER FOR LOADING SCREEN -->
     <div id="page-wrapper" class="page-loading">
@@ -58,29 +58,30 @@
         </div>
       </div>
       <!-- END PRELOADER -->
-      
+
       <!-- BEGIN PAGE CONTAINER - THE WHOLE PAGE LIVES HERE -->
-      <div id="page-container" class="header-fixed-top sidebar-visible-lg-full enable-cookies">    
-                
+      <div id="page-container" class="header-fixed-top sidebar-visible-lg-full enable-cookies">
+
         <%= render 'layouts/navigation_sidebar' %>
-        
+
         <!-- BEGIN MAIN CONTAINER - THE MAIN PAGE - INCL TOP HEADER - EXCL SIDE MENUS -->
         <div id="main-container">
-        
+
           <%= render 'layouts/top_header' %>
 
-          
+          <div id="fb-root"></div>
+
           <!-- BEGIN PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
-          <div <%= content_for?(:page_content_options) ? yield(:page_content_options) : 'id="page-content"'.html_safe %> >  
+          <div <%= content_for?(:page_content_options) ? yield(:page_content_options) : 'id="page-content"'.html_safe %> >
             <%= yield :content_header %>
             <%= render 'layouts/messages' %>
-            <%= yield %>                      
+            <%= yield %>
           </div>
           <!-- END PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
-          
+
         </div>
         <!-- END MAIN CONTAINER - THE MAIN PAGE - INCL TOP HEADER - EXCL SIDE MENUS -->
-  
+
       </div>
       <!-- END PAGE CONTAINER -->
     </div>
@@ -90,4 +91,4 @@
 
   </body>
   <!-- END BODY -->
-</html> 
+</html>

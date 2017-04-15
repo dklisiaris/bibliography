@@ -18,7 +18,19 @@ class ProfilesController < ApplicationController
       .find_by(default_name: Shelf.default_names[:favourites]).books.limit(14)
     @currently_reading_books = @user.shelves
       .find_by(default_name: Shelf.default_names[:currently_reading]).books.limit(14)
-    @shelves = @user.shelves
+
+    if @user == current_user
+      @shelves = @user.shelves
+      @show_public_path = false
+    else
+      if @profile.is_public?
+        @shelves = @user.shelves.where(privacy: [Shelf.privacies[:is_public], Shelf.privacies[:same_as_profile]])
+      else
+        @shelves = @user.shelves.is_public
+      end
+      @show_public_path = true
+    end
+
     @activities = @user.activities.includes(:owner, :trackable)
 
     @following_users = @user.following_users.includes(:profile)

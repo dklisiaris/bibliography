@@ -295,7 +295,7 @@ el:
       label: "Ιδιωτικότητα"
       same_as_profile: "Ίδια με το προφίλ"
       is_public: "Δημόσια"
-      is_private: "Ιδιωτικη"
+      is_private: "Ιδιωτική"
 
   users:
     follow: "Ακολούθησε"
@@ -319,6 +319,13 @@ el:
       read_but_not_own: "έχει διαβάσει χωρίς να έχει"
       add_to_favourites: "πρόσθεσε στα αγαπημένα του"
       reviewed: "έγραψε κριτική"
+
+  profile:
+    privacy:
+      label: "Ιδιωτικότητα"
+      is_public: "Δημόσιο"
+      is_private: "Ιδιωτικό"
+    this_is_private: "Ιδιωτικό προφίλ. Μη ορατό σε άλλους."
 
   awards:
     label: "Βραβεία"

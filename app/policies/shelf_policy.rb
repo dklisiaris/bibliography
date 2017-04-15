@@ -8,7 +8,13 @@ class ShelfPolicy < ApplicationPolicy
   def edit?   ; belongs_to_current_user? ; end
   def destroy?; belongs_to_current_user? and not record.built_in ; end
 
-  def public_shelves?; true; end
+  def public_shelves?
+    if record.is_a? Symbol
+      true
+    else
+      (record.is_public? || (record.user.profile.is_public? && record.same_as_profile?))
+    end
+  end
 
   class Scope < Scope
     def resolve

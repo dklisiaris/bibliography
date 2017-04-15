@@ -73,6 +73,14 @@
         </div>
       </div>
       <div class="widget-content border-bottom">
+        <% if @profile.is_private? %>
+        <div class="text-center">
+          <span class="text-muted">
+            <small><%= t('profile.this_is_private') %></small>
+          </span>
+        </div>
+        <% end %>
+        <br>
         <table class="table table-striped">
           <tbody>
             <% if @profile.details_any?.present? %>
@@ -136,7 +144,10 @@
     locals: {title: " #{t('books.favourite')}", icon: "heart-o", cover_size: '114', books: @favourite_books} %>
 
     <%= render partial: 'shelves/widgets/list',
-    locals: {title: " #{t('shelves.collections')}", shelves: @shelves} %>
+      locals: {
+        title: " #{t('shelves.collections')}", shelves: @shelves,
+        show_public_path: @show_public_path, profile_id: @profile.id
+      } %>
 
     <%= render partial: 'books/widgets/grid',
       locals: {title: " #{t('books.currently_reading')}",

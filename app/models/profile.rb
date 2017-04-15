@@ -6,7 +6,7 @@ class Profile < ActiveRecord::Base
 
   enum gender: %i(male female other)
   enum account_type: %i(Προσωπικός Οργανισμός)
-  enum privacy: %i(Δημόσιος Ιδιωτικός)
+  enum privacy: %i(is_public is_private)
   enum language: %i(Ελληνικά English)
   enum email_privacy: %i(Ποτέ Σε\ φίλους\ μόνο Σε\ συνδεδεμένους\ χρήστες Σε\ όλους)
 
@@ -61,6 +61,10 @@ class Profile < ActiveRecord::Base
 
   def self.humanize_gender(gender_symbol)
     I18n.t('gender.'+ gender_symbol) if gender_symbol.present?
+  end
+
+  def self.humanize_privacy(privacy_symbol)
+    I18n.t('profile.privacy.'+ privacy_symbol) if privacy_symbol.present?
   end
 
 end

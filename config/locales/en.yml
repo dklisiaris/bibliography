@@ -342,6 +342,13 @@ en:
       add_to_favourites: "added in favourites"
       reviewed: "wrote a review"
 
+  profile:
+    privacy:
+      label: "Privacy"
+      is_public: "Public"
+      is_private: "Private"
+    this_is_private: "Private Profile. Invisible by others."
+
   awards:
     label: "Awards"
     new: "New Award"

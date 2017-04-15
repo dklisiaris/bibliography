@@ -1,4 +1,6 @@
 - icon ||= 'th-large'
+- show_public_path ||= false
+
 .widget
   .widget-content.widget-content-mini.themed-background-dark-flat.text-light-op.border-bottom
     = fa(icon)
@@ -9,6 +11,9 @@
         .col-xs-6.col-sm-4
           .row
             .col-xs-10
-              = link_to shelf.screen_name, shelf
+              - if show_public_path
+                = link_to shelf.screen_name, public_shelf_path(id: profile_id, shelf_id: shelf.id) if profile_id.present?
+              - else
+                = link_to shelf.screen_name, shelf
             .col-xs-2
               %span.pull-right= shelf.books.count

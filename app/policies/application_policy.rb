@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   # The General Application policy is let editing to editors.
-  
+
   def index?  ; true                                    ; end
   def show?   ; scope.where(:id => record.id).exists?   ; end
   def create? ; editor?                                 ; end
@@ -34,7 +34,7 @@ class ApplicationPolicy
 
   def editor?
     user and (user.editor? or user.admin?)
-  end   
+  end
 
   def belongs_to_current_user?
     user and (record.user == user)

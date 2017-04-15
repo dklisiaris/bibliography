@@ -11,22 +11,27 @@ class ShelvesController < ApplicationController
   end
 
   def public_shelves
-    authorize :shelf, :public_shelves?
-
     @profile = Profile.find(params[:id])
     @user = @profile.user
 
     if params[:shelf_id]
       @shelf = @user.shelves.find_by(id: params[:shelf_id])
+      authorize @shelf
       if @shelf.present?
         @books = @shelf.books.page(params[:page])
       else
         @books = @user.books.page(params[:page])
       end
     else
+      authorize @profile, :show?
       @books = @user.books.page(params[:page])
     end
-    @shelves = @user.shelves
+
+    if @profile.is_public?
+      @shelves = @user.shelves.where(privacy: [Shelf.privacies[:is_public], Shelf.privacies[:same_as_profile]])
+    else
+      @shelves = @user.shelves.is_public
+    end
 
     respond_with(@books)
   end
