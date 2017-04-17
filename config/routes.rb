@@ -103,7 +103,11 @@ Rails.application.routes.draw do
       end
       resources :authors, only: [:index, :show]
       resources :publishers, only: [:show]
-      resources :categories, only: [:show]
+      resources :categories, only: [:index, :show] do
+        collection do
+          get 'liked_with_books'
+        end
+      end
       resources :series, only: [:show]
       resources :sessions, only: [:create]
       post 'authenticate', to: 'sessions#create'

@@ -78,6 +78,7 @@ en:
   less: "Less"
 
   choose_categories: "Choose categories you are interested in."
+  rate_books: "Rate some of the books below, so we can understand your preferences."
   no_suggestions_yet: "There are no suggestions yet."
   no_books_yet: "There are no books yet."
   no_authors_yet: "There are no authors yet."
@@ -133,6 +134,7 @@ en:
   cancel: "Cancel"
   save : "Save"
   back: "Back"
+  next: "Next"
   u_sure: "Are you sure?"
 
   name: "Name"

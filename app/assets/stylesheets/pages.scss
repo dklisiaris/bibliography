@@ -1,10 +1,9 @@
 // Welcome guide page
 
 .featured-category {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
   margin-bottom: 3px;
-  font-style: bold;
+  width: 100%;
 }
 
 .featured-category:hover, .featured-category.selected  {
@@ -13,5 +12,20 @@
   -webkit-box-shadow: inset 0px 0px 0px 1px #afde5c;
   -moz-box-shadow: inset 0px 0px 0px 1px #afde5c;
   -o-box-shadow: inset 0px 0px 0px 1px #afde5c;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.categories-with-books-wrapper{
+   &.loading {
+    height: 100px;
+    background-color: #fff;
+    background-image: image-url("spinners/spinner3.gif");
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
