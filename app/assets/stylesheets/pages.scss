@@ -18,7 +18,21 @@
   border-radius: 3px;
 }
 
-.categories-with-books-wrapper{
+#rateable-books-wrapper{
+  .rateable-book{
+    width: 114px;
+    height: 200px;
+    text-align: center;
+    margin: 0 10px 10px 10px;
+    float: left;
+
+    .book-cover{
+      margin: 0 10px 10px 0;
+    }
+  }
+}
+
+.loading-wrapper{
    &.loading {
     height: 100px;
     background-color: #fff;
@@ -28,4 +42,3 @@
     background-repeat: no-repeat;
   }
 }
-

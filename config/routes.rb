@@ -98,6 +98,7 @@ Rails.application.routes.draw do
       resources :books, only: [:index, :show] do
         collection do
           get 'my'
+          get 'rated_ids'
         end
         resources :comments, except: [:new, :edit]
       end

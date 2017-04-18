@@ -5,12 +5,15 @@
     %h2= detone t('welcome')
   / END Progress Bar Wizard Title
   / Progress Wizard Content
-  %form#progress-wizard.form-horizontal.form-bordered{:action => "", :method => "post"}
+  #progress-wizard.form-horizontal.form-bordered
     .form-group
       .col-xs-12
         .progress.progress-mini.remove-margin
           #progress-bar-wizard.progress-bar.progress-bar-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", :role => "progressbar", :style => "width: 0"}
     / END Progress Bar
+
+    %input{:name => "email", :type => "hidden", :value => "#{current_user.email}"}/
+    %input{:name => "token", :type => "hidden", :value => "#{current_user.token}"}/
 
     / First Step
     #progress-first.step
@@ -25,20 +28,21 @@
                 %input{:type => "checkbox", :id => "category-#{category.id}", :style => "display: none;"}
                 %label{:for => "category-#{category.id}", :onclick => "javascript:favouriteCategory(#{category.id})", :class => "featured-category #{selected_klass}"}= category.name
     / END First Step
+
     / Second Step
     #progress-second.step
       .form-group
         .col-xs-12
           %span.help-block= t('rate_books')
           %hr
-          .categories-with-books-wrapper.loading
-          =# render :partial =>  "categories/category_with_books", :collection => @featured_categories, :as => :category
-
+          #rateable-books-wrapper.loading-wrapper.loading
     / END Second Step
+
     / Third Step
     #progress-third.step
-
+      .loading-wrapper.loading
     / END Third Step
+
     / Form Buttons
     .form-group.form-actions
       .col-md-8

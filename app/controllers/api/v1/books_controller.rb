@@ -1,5 +1,5 @@
 class Api::V1::BooksController < Api::V1::BaseController
-  # before_filter :authenticate_user_from_token!
+  before_filter :authenticate_user_from_token!, only: [:my, :rated_ids]
 
   def index
     books = policy_scope(Book).includes(:writers,:contributors,:publisher,:categories,:comment_threads)
@@ -18,9 +18,9 @@ class Api::V1::BooksController < Api::V1::BaseController
     meta_attrs = meta_attributes(books) unless custom_pagination?
 
     render(
-      json: books, 
-      each_serializer: Api::V1::BookSerializer, 
-      root: 'books', 
+      json: books,
+      each_serializer: Api::V1::BookSerializer,
+      root: 'books',
       meta: meta_attrs
     )
   end
@@ -30,7 +30,7 @@ class Api::V1::BooksController < Api::V1::BaseController
     impressionist(book)
 
     response = apply_format(Api::V1::BookSerializer.new(book))
-    
+
     render(json: response)
   end
 
@@ -40,11 +40,19 @@ class Api::V1::BooksController < Api::V1::BaseController
     books = apply_filters(books, params)
 
     render(
-      json: books, 
-      each_serializer: Api::V1::BookSerializer, 
-      root: 'books', 
+      json: books,
+      each_serializer: Api::V1::BookSerializer,
+      root: 'books',
       meta: meta_attributes(books)
     )
+  end
+
+  def rated_ids
+    book_ids = {
+      liked_book_ids: current_user.liked_book_ids,
+      disliked_book_ids: current_user.disliked_book_ids
+    }
+    render json: book_ids
   end
 
 end

@@ -46,12 +46,92 @@ var FormsWizard = function() {
             .attr('aria-valuenow', '66')
             .removeClass('progress-bar-danger progress-bar-success')
             .addClass('progress-bar-info');
+
+          $('#rateable-books-wrapper').empty();
+          $('#rateable-books-wrapper').addClass('loading');
+
+          var token = '';
+          var email = '';
+
+          var email = $("input[name='email']").val();
+          var token = $("input[name='token']").val();
+
+          $.ajax({
+            url: '/api/v1/books/rated_ids/',
+            beforeSend: function (request) {
+              request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
+            },
+          }).done(function(response){
+            var liked_book_ids = response.liked_book_ids;
+            var disliked_book_ids = response.disliked_book_ids;
+
+            $.ajax({
+              url: '/api/v1/categories/liked_with_books/',
+              beforeSend: function (request) {
+                request.setRequestHeader("Authorization", 'Token token="'+token+'", email="'+email+'"');
+              },
+            }).done(function(response) {
+              $.each(response.categories, function(index, category) {
+                var books_array = [];
+                var books_html;
+                if(category.books.length > 0) {
+                  $.each(category.books, function(index, book) {
+                    var like_btn_klass = ($.inArray(book.id, liked_book_ids) > -1) ? 'btn-success' : 'btn-default';
+                    var dislike_btn_klass = ($.inArray(book.id, disliked_book_ids) > -1) ? 'btn-danger' : 'btn-default';
+
+                    var book_html = "\
+                    <div class='rateable-book'>\
+                    <div class='book-cover'>\
+                    <img height='114' width='114' title='"+ book.title +"' src='"+ book.image +"' alt='book_cover' class='img-thumbnail' data-toggle='tooltip' data-placement='top' />\
+                    </div>\
+                    <button name='button' type='button' onclick='javascript:like("+book.id+")' class='btn btn-sm btn-like btn-like-"+book.id+" btn-effect-ripple "+like_btn_klass+"'>      \
+                      <i class='fa fa-thumbs-up'></i>\
+                    </button>\
+                    <button name='button' type='button' onclick='javascript:dislike("+book.id+")' class='btn btn-sm btn-dislike btn-dislike-"+book.id+" btn-effect-ripple "+dislike_btn_klass+"'>      \
+                      <i class='fa fa-thumbs-down'></i>\
+                    </button>\
+                    </div>\
+                    ";
+                    books_array.push(book_html);
+                  });
+                  books_html = books_array.join("");
+                }
+                else {
+                  books_html = "\
+                  <div class='text-center'>\
+                    <span class='text-muted'>\
+                    <small>Δεν υπάρχουν βιβλία ακόμα.</small>\
+                    </span>\
+                  </div>\
+                  ";
+                }
+
+                $('#rateable-books-wrapper').append("\
+                  <div class='widget'>\
+                    <div class='widget-content widget-content-mini themed-background-dark-flat text-light-op border-bottom'>\
+                      <strong class='text-light-op'>"+ category.name +"</strong>\
+                    </div>\
+                    <div class='widget-content'>\
+                      <div class='row'>\
+                        <div class='book-container'>" + books_html + "</div>\
+                      </div>\
+                    </div>\
+                  </div>\
+                ");
+
+              });
+              $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: '#rateable-books-wrapper', animation: false});
+              $('#rateable-books-wrapper').removeClass('loading');
+            });
+          })
         } else if (data.currentStep === 'progress-third') {
           progressBar
             .css('width', '100%')
             .attr('aria-valuenow', '100')
             .removeClass('progress-bar-danger progress-bar-info')
             .addClass('progress-bar-success');
+          window.location.replace(window.location.origin);
+
         }
       });
     }

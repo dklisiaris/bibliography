@@ -1,4 +1,6 @@
 class Api::V1::CategoriesController < Api::V1::BaseController
+  before_filter :authenticate_user_from_token!, only: [:liked_with_books]
+
   def index
     categories = policy_scope(Category)
     categories = paginate(categories)
@@ -13,7 +15,13 @@ class Api::V1::CategoriesController < Api::V1::BaseController
   end
 
   def liked_with_books
-    categories = policy_scope(Category).featured
+    if user_signed_in? && current_user.liked_categories_count > 1
+      categories = current_user.liked_categories.includes(:books)
+    else
+      categories = Category.featured.includes(:books)
+    end
+
+    categories = policy_scope(categories)
     categories = paginate(categories)
     categories = apply_filters(categories, params)
 
@@ -21,7 +29,7 @@ class Api::V1::CategoriesController < Api::V1::BaseController
       json: categories,
       each_serializer: Api::V1::CategoryWithBooksSerializer,
       root: 'categories',
-      meta: meta_attributes(categories)
+      meta: meta_attributes(categories),
     )
   end
 
