@@ -323,11 +323,21 @@ el:
       reviewed: "έγραψε κριτική"
 
   profile:
+    label: "Προφίλ"
     privacy:
       label: "Ιδιωτικότητα"
       is_public: "Δημόσιο"
       is_private: "Ιδιωτικό"
     this_is_private: "Ιδιωτικό προφίλ. Μη ορατό σε άλλους."
+    edit: "Επεξεργασία προφίλ"
+    username: "Όνομα χρήστη"
+    name: "Όνοματεπώνυμο"
+    gender: "Φύλο"
+    birthday: "Ημ. Γέννησης"
+    city: "Πόλη"
+    website: "Ιστοσελίδα"
+    about_me: "Για εμένα"
+    about_library: "Για την βιβλιοθήκη μου"
 
   awards:
     label: "Βραβεία"

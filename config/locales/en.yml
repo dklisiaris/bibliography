@@ -345,11 +345,21 @@ en:
       reviewed: "wrote a review"
 
   profile:
+    label: "Profile"
     privacy:
       label: "Privacy"
       is_public: "Public"
       is_private: "Private"
     this_is_private: "Private Profile. Invisible by others."
+    edit: "Edit Profile"
+    username: "Username"
+    name: "Name"
+    gender: "Gender"
+    birthday: "Birthday"
+    city: "City"
+    website: "Website"
+    about_me: "About Me"
+    about_library: "About Library"
 
   awards:
     label: "Awards"
