@@ -1,5 +1,5 @@
 class Bookshelf < ActiveRecord::Base
-  belongs_to :book
+  belongs_to :book, :counter_cache => true
   belongs_to :shelf
 
   validates_uniqueness_of :book_id, scope: [:shelf_id]
@@ -17,12 +17,12 @@ class Bookshelf < ActiveRecord::Base
       user_shelves_ids = user.shelves.pluck(:id)
 
       # Make sure shelf ids to be removed belong to current user's shelves
-      bookshelves_to_add = shelf_ids.map do |shelf_id| 
+      bookshelves_to_add = shelf_ids.map do |shelf_id|
         {shelf_id: shelf_id.to_i, book_id: book_id} if user_shelves_ids.include? shelf_id.to_i
       end.compact
 
       self.create bookshelves_to_add
-    end    
+    end
   end
 
   def self.remove_book_from_multiple_bookshelves(book_id, shelf_ids, user)
@@ -36,7 +36,7 @@ class Bookshelf < ActiveRecord::Base
       shelf_ids = shelf_ids.map do |shelf_id|
         shelf_id.to_i if user_shelves_ids.include? shelf_id.to_i
       end.compact
-            
+
       self.where(book_id: book_id, shelf_id: shelf_ids).destroy_all
     end
   end

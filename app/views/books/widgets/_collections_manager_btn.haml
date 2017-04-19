@@ -1,5 +1,5 @@
 %div{:class => "collections-btn-#{book.id}"}
-  - if user_signed_in? and current_user.added_book?(book)
+  - if user_signed_in? and @owned_book_ids.include?(book.id)
     %span{class: "tooltip-wrapper", "data-toggle" => "tooltip", title: t('shelves.edit_collections')}
       = button_tag(type: "button", class: "collections-btn btn btn-effect-ripple btn-xs btn-success", "data-target" => "#collectionsModal", "data-toggle" => "modal", "data-book-id" => "#{book.id}") do
         %i.fa.fa-check

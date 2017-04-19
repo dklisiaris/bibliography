@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy, :favourite]
   skip_after_action :verify_policy_scoped, only: :index
   before_action :set_rated_ids, only: [:show]
+  before_action :set_owned_ids, only: [:show]
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:favourite]
@@ -97,5 +98,9 @@ class CategoriesController < ApplicationController
         @liked_book_ids = current_user.liked_book_ids
         @disliked_book_ids = current_user.disliked_book_ids
       end
+    end
+
+    def set_owned_ids
+      @owned_book_ids = current_user.book_ids if user_signed_in?
     end
 end

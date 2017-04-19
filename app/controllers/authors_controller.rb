@@ -2,6 +2,8 @@ class AuthorsController < ApplicationController
   before_action :set_json_format, only: [:favourite]
   before_action :authenticate_user!, only: [:favourite]
   before_action :set_author, only: [:show, :edit, :update, :destroy, :favourite]
+  before_action :set_rated_ids, only: [:show]
+  before_action :set_owned_ids, only: [:show]
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:favourite]
@@ -91,11 +93,22 @@ class AuthorsController < ApplicationController
 
   private
     def set_author
-      @author = Author.find(params[:id])
+      @author = Author.includes({awards: :prize}).find(params[:id])
       authorize @author
     end
 
     def author_params
       params.require(:author).permit(:firstname, :lastname, :extra_info, :biography, :image, :biblionet_id)
+    end
+
+    def set_rated_ids
+      if user_signed_in?
+        @liked_book_ids = current_user.liked_book_ids
+        @disliked_book_ids = current_user.disliked_book_ids
+      end
+    end
+
+    def set_owned_ids
+      @owned_book_ids = current_user.book_ids if user_signed_in?
     end
 end

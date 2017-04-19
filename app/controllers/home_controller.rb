@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :index
   skip_after_action :verify_authorized,  except: :index
+  before_action :set_owned_ids
 
   def index
     @popular_books = Book.order(impressions_count: :desc).limit(6)
@@ -85,6 +86,11 @@ class HomeController < ApplicationController
   def autocomplete
     autocomplete_results = Book.search(params[:q], autocomplete: true, limit: 10).map(&:title)
     render json: autocomplete_results
+  end
+
+  private
+  def set_owned_ids
+    @owned_book_ids = current_user.book_ids if user_signed_in?
   end
 
 end

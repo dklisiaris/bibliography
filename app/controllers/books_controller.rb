@@ -5,7 +5,9 @@ class BooksController < ApplicationController
   skip_before_action :set_book, only: [:index, :new, :create, :my, :latest, :trending, :awarded, :featured]
   before_action :set_enums, only: [:new, :edit]
   before_action :set_shelves, only: [:index, :show, :my, :latest, :trending, :awarded, :featured]
-  before_action :set_rated_ids
+  before_action :set_rated_ids, except: [:new, :edit, :create, :update, :destroy]
+  before_action :set_owned_ids, except: [:new, :edit, :create, :update, :destroy]
+
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
@@ -238,6 +240,10 @@ class BooksController < ApplicationController
         @liked_book_ids = current_user.liked_book_ids
         @disliked_book_ids = current_user.disliked_book_ids
       end
+    end
+
+    def set_owned_ids
+      @owned_book_ids = current_user.book_ids if user_signed_in?
     end
 
     def book_params

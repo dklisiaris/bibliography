@@ -2,6 +2,7 @@ class ShelvesController < ApplicationController
   before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :set_enum, only: [:new, :edit]
   before_action :set_rated_ids, only: [:show, :public_shelves]
+  before_action :set_owned_ids, only: [:show, :public_shelves]
 
   respond_to :html
 
@@ -87,5 +88,9 @@ class ShelvesController < ApplicationController
         @liked_book_ids = current_user.liked_book_ids
         @disliked_book_ids = current_user.disliked_book_ids
       end
+    end
+
+    def set_owned_ids
+      @owned_book_ids = current_user.book_ids if user_signed_in?
     end
 end

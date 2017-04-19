@@ -9,8 +9,8 @@
         %span= book.writers.first.present? ? link_to(book.main_author, book.writers.first) : book.main_author
         %br/
         %span
-          %small.text-muted= t('books.recommended_x_times', count: book.liked_by_count) + " - " + |
-              t('books.in_x_collections', count: book.bookshelves.count) + " - " + |
+          %small.text-muted= t('books.recommended_x_times', count: book.liked_by_count_cache) + " - " + |
+              t('books.in_x_collections', count: book.bookshelves_count) + " - " + |
               t('books.with_x_views', count: book.impressionist_count)             |
       .col-xs-3.text-center
         = render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true}
