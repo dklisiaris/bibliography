@@ -11,25 +11,25 @@
           - @profile.errors.full_messages.each do |message|
             %li= message
     .form-group
-      = f.label :username, class: 'col-md-3 control-label'
+      = f.label t('profile.username'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :username, class: "form-control", placeholder: "Text"
+        = f.text_field :username, class: "form-control", placeholder: t('profile.placeholder.username')
     .form-group
-      = f.label :name, class: 'col-md-3 control-label'
+      = f.label t('profile.name'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :name, class: "form-control", placeholder: "Text"
+        = f.text_field :name, class: "form-control", placeholder: t('profile.placeholder.name')
     .form-group
-      = f.label :gender, class: 'col-md-3 control-label'
+      = f.label t('profile.gender'), class: 'col-md-3 control-label'
       .col-md-6
         = f.select :gender, options_for_select(@genders.collect { |s|           |
           [Profile.humanize_gender(s[0]), s[0]] }, selected: @profile.gender),  |
-          {include_blank: true, prompt: 'Select Gender'}, class: 'form-control' |
+          {include_blank: true, prompt: t('profile.select_gender')}, class: 'form-control' |
     .form-group
-      = f.label :city, class: 'col-md-3 control-label'
+      = f.label t('profile.city'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :city, class: "form-control", placeholder: "The city you live in"
+        = f.text_field :city, class: "form-control", placeholder: t('profile.placeholder.city')
     .form-group
-      = f.label :birthday, class: 'col-md-3 control-label'
+      = f.label t('profile.birthday'), class: 'col-md-3 control-label'
       .col-md-6
         = f.date_select :birthday, {include_blank: true, start_year: 1900}, {class: "form-control date-input"}
     .form-group
@@ -43,82 +43,82 @@
         = image_tag(@profile.cover_safe, alt: "cover", class: "img-thumbnail pull-left")
         = f.file_field :cover, class: "form-control"
     .form-group
-      = f.label :website, class: 'col-md-3 control-label'
+      = f.label t('profile.website'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :website, class: "form-control", placeholder: "My website"
+        = f.text_field :website, class: "form-control", placeholder: t('profile.placeholder.my_website')
     .form-group
       = f.label :goodreads, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :goodreads, class: "form-control", placeholder: "Good Reads profile"
+        = f.text_field :goodreads, class: "form-control", placeholder: "Good Reads " + t('profile.label')
     .form-group
       = f.label :librarything, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :librarything, class: "form-control", placeholder: "That Library Thing profile"
+        = f.text_field :librarything, class: "form-control", placeholder: "That Library Thing " + t('profile.label')
     .form-group
-      = f.label :about_me, class: 'col-md-3 control-label'
+      = f.label t('profile.about_me'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_area :about_me, class: "form-control", placeholder: "Text", rows: 7
+        = f.text_area :about_me, class: "form-control", placeholder: t('profile.placeholder.about_me'), rows: 7
     .form-group
-      = f.label :about_library, class: 'col-md-3 control-label'
+      = f.label t('profile.about_library'), class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_area :about_library, class: "form-control", placeholder: "Text", rows: 7
+        = f.text_area :about_library, class: "form-control", placeholder: t('profile.placeholder.about_library'), rows: 7
     .form-group
       = f.label :facebook, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :facebook, class: "form-control", placeholder: "Facebook profile"
+        = f.text_field :facebook, class: "form-control", placeholder: "Facebook " + t('profile.label')
     .form-group
       = f.label :twitter, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :twitter, class: "form-control", placeholder: "Twitter profile"
+        = f.text_field :twitter, class: "form-control", placeholder: "Twitter " + t('profile.label')
     .form-group
       = f.label :googleplus, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :googleplus, class: "form-control", placeholder: "Google Plus profile"
+        = f.text_field :googleplus, class: "form-control", placeholder: "Google Plus " + t('profile.label')
     .form-group
       = f.label :pinterest, class: 'col-md-3 control-label'
       .col-md-6
-        = f.text_field :pinterest, class: "form-control", placeholder: "Pinterest profile"
+        = f.text_field :pinterest, class: "form-control", placeholder: "Pinterest " + t('profile.label')
     .form-group
-      = f.label :account_type, class: 'col-md-3 control-label'
+      = f.label t('profile.account_type'), class: 'col-md-3 control-label'
       .col-md-6
         = f.select :account_type, options_for_select(@account_types.collect { |s| [s[0].humanize, s[0]] }, selected: @profile.account_type), {}, class: 'form-control'
     .form-group
-      = f.label :privacy, class: 'col-md-3 control-label'
+      = f.label t('profile.privacy.label'), class: 'col-md-3 control-label'
       .col-md-6
         = f.select :privacy, options_for_select(@privacies.collect { |s| [Profile.humanize_privacy(s[0]), s[0]] }, selected: @profile.privacy), {}, class: 'form-control'
     .form-group
-      = f.label :language, class: 'col-md-3 control-label'
+      = f.label t('profile.language'), class: 'col-md-3 control-label'
       .col-md-6
         = f.select :language, options_for_select(@languages.collect { |s| [(s[0]).humanize, s[0]] }, selected: @profile.language), {}, class: 'form-control'
     .form-group
-      = f.label :allow_comments, class: 'col-md-3 control-label'
+      = f.label t('profile.allow_comments'), class: 'col-md-3 control-label'
       .col-md-6
         = label_tag(nil, class: 'csscheckbox csscheckbox-primary') do
           = f.check_box :allow_comments
           %span
     .form-group
-      = f.label :allow_friends, class: 'col-md-3 control-label'
+      = f.label t('profile.allow_followers'), class: 'col-md-3 control-label'
       .col-md-6
         = label_tag(nil, class: 'csscheckbox csscheckbox-primary') do
           = f.check_box :allow_friends
           %span
     .form-group
-      = f.label :email_privacy, class: 'col-md-3 control-label'
+      = f.label t('profile.email_privacy'), class: 'col-md-3 control-label'
       .col-md-6
         = f.select :email_privacy, options_for_select(@email_privacies.collect { |s| [s[0].humanize, s[0]] }, selected: @profile.email_privacy), {}, class: 'form-control'
     .form-group
-      = f.label :discoverable_by_email, class: 'col-md-3 control-label'
+      = f.label t('profile.discoverable_by_email'), class: 'col-md-3 control-label'
       .col-md-6
         = label_tag(nil, class: 'csscheckbox csscheckbox-primary') do
           = f.check_box :discoverable_by_email
           %span
     .form-group
-      = f.label :receive_newsletters, class: 'col-md-3 control-label'
+      = f.label t('profile.receive_newsletters'), class: 'col-md-3 control-label'
       .col-md-6
         = label_tag(nil, class: 'csscheckbox csscheckbox-primary') do
           = f.check_box :receive_newsletters
           %span
     .form-group.form-actions
       .col-md-9.col-md-offset-3
-        = button_tag("Save", type: "submit", class: "btn btn-effect-ripple btn-primary")
-        = link_to("Back to Profile",public_profile_path(@profile.id), class: "btn btn-effect-ripple btn-danger")
+        = link_to(t('back'), public_profile_path(@profile.id), class: "btn btn-effect-ripple btn-danger")
+        = button_tag(t('save'), type: "submit", class: "btn btn-effect-ripple btn-primary")
