@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :index
   skip_after_action :verify_authorized,  except: :index
   before_action :set_owned_ids
+  before_action :set_rated_ids
 
   def index
     @popular_books = Book.order(impressions_count: :desc).limit(6)
@@ -91,6 +92,13 @@ class HomeController < ApplicationController
   private
   def set_owned_ids
     @owned_book_ids = current_user.book_ids if user_signed_in?
+  end
+
+  def set_rated_ids
+    if user_signed_in?
+      @liked_book_ids = current_user.liked_book_ids
+      @disliked_book_ids = current_user.disliked_book_ids
+    end
   end
 
 end

@@ -117,6 +117,8 @@ class BooksController < ApplicationController
       .order(created_at: :desc)
 
     impressionist(@book)
+    @book.increment!(:views_count)
+
     respond_with(@book)
   end
 
