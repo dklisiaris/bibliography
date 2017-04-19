@@ -11,7 +11,7 @@
         %span
           %small.text-muted= t('books.recommended_x_times', count: book.liked_by_count_cache) + " - " + |
               t('books.in_x_collections', count: book.bookshelves_count) + " - " + |
-              t('books.with_x_views', count: book.impressionist_count)             |
+              t('books.with_x_views', count: book.views_count)             |
       .col-xs-3.text-center
         = render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true}
         %br/

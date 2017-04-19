@@ -242,7 +242,8 @@ CREATE TABLE books (
     series_id integer,
     liked_by_count_cache integer DEFAULT 0,
     disliked_by_count_cache integer DEFAULT 0,
-    bookshelves_count integer DEFAULT 0
+    bookshelves_count integer DEFAULT 0,
+    views_count integer DEFAULT 0
 );
 
 
@@ -1733,4 +1734,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170412203337');
 INSERT INTO schema_migrations (version) VALUES ('20170419124824');
 
 INSERT INTO schema_migrations (version) VALUES ('20170419141515');
+
+INSERT INTO schema_migrations (version) VALUES ('20170419145719');
 
