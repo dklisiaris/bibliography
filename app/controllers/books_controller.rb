@@ -182,11 +182,11 @@ class BooksController < ApplicationController
 
     if not current_user.likes?(@book)
       current_user.like(@book)
-      @book.liked_by_count_cache.increment!
+      @book.increment!(:liked_by_count_cache)
       @book.create_activity :recommend, owner: current_user
     else
       current_user.unlike(@book)
-      @book.liked_by_count_cache.decrement!
+      @book.decrement!(:liked_by_count_cache)
       activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
       activity.destroy if activity.present?
     end
@@ -199,11 +199,11 @@ class BooksController < ApplicationController
 
     if not current_user.dislikes?(@book)
       current_user.dislike(@book)
-      @book.disliked_by_count_cache.increment!
+      @book.increment!(:disliked_by_count_cache)
       @book.create_activity :not_recommend, owner: current_user
     else
       current_user.undislike(@book)
-      @book.disliked_by_count_cache.decrement!
+      @book.decrement!(:disliked_by_count_cache)
       activity = current_user.activities.find_by(key: "book.not_recommend", trackable: @book)
       activity.destroy if activity.present?
     end
