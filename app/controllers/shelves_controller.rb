@@ -1,6 +1,7 @@
 class ShelvesController < ApplicationController
   before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :set_enum, only: [:new, :edit]
+  before_action :set_rated_ids, only: [:show, :public_shelves]
 
   respond_to :html
 
@@ -79,5 +80,12 @@ class ShelvesController < ApplicationController
 
     def shelf_params
       params.require(:shelf).permit(:name, :privacy, :active)
+    end
+
+    def set_rated_ids
+      if user_signed_in?
+        @liked_book_ids = current_user.liked_book_ids
+        @disliked_book_ids = current_user.disliked_book_ids
+      end
     end
 end

@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:favourite]
   before_action :set_category, only: [:show, :edit, :update, :destroy, :favourite]
   skip_after_action :verify_policy_scoped, only: :index
+  before_action :set_rated_ids, only: [:show]
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:favourite]
@@ -89,5 +90,12 @@ class CategoriesController < ApplicationController
 
     def category_params
       params.require(:category).permit(:name, :ddc, :slug, :biblionet_id, :parent_id, :featured)
+    end
+
+    def set_rated_ids
+      if user_signed_in?
+        @liked_book_ids = current_user.liked_book_ids
+        @disliked_book_ids = current_user.disliked_book_ids
+      end
     end
 end

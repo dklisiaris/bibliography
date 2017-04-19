@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   skip_before_action :set_book, only: [:index, :new, :create, :my, :latest, :trending, :awarded, :featured]
   before_action :set_enums, only: [:new, :edit]
   before_action :set_shelves, only: [:index, :show, :my, :latest, :trending, :awarded, :featured]
+  before_action :set_rated_ids
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
@@ -177,9 +178,11 @@ class BooksController < ApplicationController
 
     if not current_user.likes?(@book)
       current_user.like(@book)
+      @book.liked_by_count_cache.increment!
       @book.create_activity :recommend, owner: current_user
     else
       current_user.unlike(@book)
+      @book.liked_by_count_cache.decrement!
       activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
       activity.destroy if activity.present?
     end
@@ -192,9 +195,11 @@ class BooksController < ApplicationController
 
     if not current_user.dislikes?(@book)
       current_user.dislike(@book)
+      @book.disliked_by_count_cache.increment!
       @book.create_activity :not_recommend, owner: current_user
     else
       current_user.undislike(@book)
+      @book.disliked_by_count_cache.decrement!
       activity = current_user.activities.find_by(key: "book.not_recommend", trackable: @book)
       activity.destroy if activity.present?
     end
@@ -226,6 +231,13 @@ class BooksController < ApplicationController
 
     def set_shelves
       @shelves = current_user.shelves if user_signed_in?
+    end
+
+    def set_rated_ids
+      if user_signed_in?
+        @liked_book_ids = current_user.liked_book_ids
+        @disliked_book_ids = current_user.disliked_book_ids
+      end
     end
 
     def book_params

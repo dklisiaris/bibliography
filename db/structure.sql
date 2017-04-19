@@ -239,7 +239,9 @@ CREATE TABLE books (
     slug character varying,
     language integer,
     tsearch_vector tsvector,
-    series_id integer
+    series_id integer,
+    liked_by_count_cache integer DEFAULT 0,
+    disliked_by_count_cache integer DEFAULT 0
 );
 
 
@@ -1726,4 +1728,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170331095631');
 INSERT INTO schema_migrations (version) VALUES ('20170412202745');
 
 INSERT INTO schema_migrations (version) VALUES ('20170412203337');
+
+INSERT INTO schema_migrations (version) VALUES ('20170419124824');
 

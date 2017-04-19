@@ -1,47 +1,47 @@
-<% if defined? show_progressbar.present? and show_progressbar %> 
+<% if defined? show_progressbar.present? and show_progressbar %>
 <div class="progress progress-mini">
-  <div class=<%= "\"progress-bar progress-bar-success recommendations-bar-#{book.id}\"".html_safe %> 
-    role="progressbar" 
-    aria-valuenow=<%= "#{book.liked_by_count}" %> 
-    aria-valuemin="0" aria-valuemax=<%= "#{book.liked_by_count+book.disliked_by_count}" %> 
-    style=<%= (book.liked_by_count+book.disliked_by_count)>0 ? "width:#{(book.liked_by_count/(book.liked_by_count+book.disliked_by_count))*100}%" : "width:0%" %>></div>
+  <div class=<%= "\"progress-bar progress-bar-success recommendations-bar-#{book.id}\"".html_safe %>
+    role="progressbar"
+    aria-valuenow=<%= "#{book.liked_by_count_cache}" %>
+    aria-valuemin="0" aria-valuemax=<%= "#{book.liked_by_count_cache+book.disliked_by_count_cache}" %>
+    style=<%= (book.liked_by_count_cache+book.disliked_by_count_cache)>0 ? "width:#{(book.liked_by_count_cache/(book.liked_by_count_cache+book.disliked_by_count_cache))*100}%" : "width:0%" %>></div>
 </div>
-<% end %> 
+<% end %>
 
-<% if current_user %>
-<%= button_tag :onclick => "javascript:like(#{book.id})",                  
-"data-toggle" => "tooltip", 
+<% if user_signed_in? %>
+<%= button_tag :onclick => "javascript:like(#{book.id})",
+"data-toggle" => "tooltip",
 "data-placement" => "top",
-type: "button", 
-title: (current_user and current_user.likes?(book)) ? t('books.remove_recommendation') : t('books.recommend'), 
-class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(current_user and current_user.likes?(book)) ? 'btn-success' : 'btn-default'}" do %>      
-  <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count}" %></span></strong>
+type: "button",
+title: (@liked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.recommend'),
+class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(@liked_book_ids.include?(book.id)) ? 'btn-success' : 'btn-default'}" do %>
+  <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
 <%= button_tag :onclick => "javascript:dislike(#{book.id})",
-"data-toggle" => "tooltip", 
+"data-toggle" => "tooltip",
 "data-placement" => "top",
-type: "button", 
-title: (current_user and current_user.dislikes?(book)) ? t('books.remove_recommendation') : t('books.not_recommend'), 
-class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(current_user and current_user.dislikes?(book)) ? 'btn-danger' : 'btn-default'}" do %>      
-  <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count}" %></span></strong>
-<% end %> 
+type: "button",
+title: (@disliked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.not_recommend'),
+class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(@disliked_book_ids.include?(book.id)) ? 'btn-danger' : 'btn-default'}" do %>
+  <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
+<% end %>
 <% else %>
 
 <%= link_to new_user_session_path,
-"data-toggle" => "tooltip", 
+"data-toggle" => "tooltip",
 "data-placement" => "top",
 title: t('books.recommend'),
 class: "btn btn-xs btn-like btn-effect-ripple btn-default" do %>
-    <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count}" %></span></strong>
+    <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
 <%= link_to new_user_session_path,
-"data-toggle" => "tooltip", 
+"data-toggle" => "tooltip",
 "data-placement" => "top",
 title: t('books.not_recommend'),
 class: "btn btn-xs btn-dislike btn-effect-ripple btn-default" do %>
-    <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count}" %></span></strong>
+    <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
 <% end %>
 
 <% end %>
