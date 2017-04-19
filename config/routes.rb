@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     end
     collection do
       get 'my'
+      get 'featured'
+      get 'trending'
+      get 'awarded'
+      get 'latest'
     end
   end
 

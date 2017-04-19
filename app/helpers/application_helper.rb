@@ -2,11 +2,7 @@ module ApplicationHelper
 
   def side_nav_li(text, path, icon=nil, blank=false)
     content_tag(:li) do
-      if path.start_with? '/books'
-        options = request.original_fullpath == path ? { class: "active" } : {}
-      else
-        options = current_page?(path) ? { class: "active" } : {}
-      end
+      options = current_page?(path) ? { class: "active" } : {}
       options[:target] = '_blank' if blank
       if icon
         link_to path, options do

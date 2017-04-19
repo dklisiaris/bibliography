@@ -2,8 +2,9 @@ class BooksController < ApplicationController
   before_action :set_json_format, only: [:collections, :manage_collections, :like, :dislike]
   before_action :authenticate_user!, only: [:collections, :manage_collections, :like, :dislike]
   before_action :set_book
-  skip_before_action :set_book, only: [:index, :new, :create, :my]
+  skip_before_action :set_book, only: [:index, :new, :create, :my, :latest, :trending, :awarded, :featured]
   before_action :set_enums, only: [:new, :edit]
+  before_action :set_shelves, only: [:index, :show, :my, :latest, :trending, :awarded, :featured]
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
@@ -57,7 +58,6 @@ class BooksController < ApplicationController
           page: params[:page], per_page: limit)
     end
     # @books_est_count = 20 * @books.total_pages
-    @shelves = current_user.shelves if user_signed_in?
 
     if params[:q].present? && (is_autocomplete || params[:loadmore].try(:to_i) == 1)
       render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
@@ -66,10 +66,41 @@ class BooksController < ApplicationController
     end
   end
 
+  def featured
+    authorize :book, :featured?
+    @books = policy_scope(Book).top(5)
+    respond_with(@books)
+  end
+
+  def trending
+    authorize :book, :trending?
+    # Get The 5 most viewed books this month
+    most_views_book_ids = Impression.where(impressionable_type: "Book")
+      .where("created_at > ?", 1.month.ago)
+      .where.not(impressionable_id: nil)
+      .group(:impressionable_id).order('count_id desc').limit(5).count('id').keys
+
+    @books = policy_scope(Book).where(id: most_views_book_ids)
+    respond_with(@books)
+  end
+
+  def awarded
+    authorize :book, :awarded?
+    most_awarded_book_ids = Award.where(awardable_type: "Book")
+      .group(:awardable_id).order('count_id desc').limit(5).count('id').keys
+    @books = policy_scope(Book).where(id: most_awarded_book_ids)
+    respond_with(@books)
+  end
+
+  def latest
+    authorize :book, :latest?
+    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).order(created_at: :desc).limit(5)
+    respond_with(@books)
+  end
+
   def show
     # Intantiate a new presenter.
     @book_presenter = BookPresenter.new(@book, view_context)
-    @shelves = current_user.shelves if user_signed_in?
     @in_shelves = current_user.book_in_which_collections(@book) if user_signed_in?
 
     @bookshelves_count = Bookshelf.where(book_id: @book.id).count
@@ -183,15 +214,18 @@ class BooksController < ApplicationController
     else
       @books = current_user.books.page(params[:page])
     end
-    @shelves = current_user.shelves if user_signed_in?
 
     respond_with(@books)
   end
 
   private
     def set_book
-      @book = Book.includes(:authors).find(params[:id])
+      @book = Book.includes(:authors, {awards: :prize}).find(params[:id])
       authorize @book
+    end
+
+    def set_shelves
+      @shelves = current_user.shelves if user_signed_in?
     end
 
     def book_params

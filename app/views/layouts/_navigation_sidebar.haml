@@ -1,0 +1,23 @@
+/ BEGIN MAIN LEFT NAVIGATION SIDEBAR
+#sidebar
+  #sidebar-brand.themed-background
+    = link_to root_path, class: "sidebar-title" do
+      %i.fa.fa-book
+      %span.sidebar-nav-mini-hide
+        %strong> Bibliography
+        GR
+  #sidebar-scroll
+    .sidebar-content
+      %ul.sidebar-nav
+        = render "layouts/navigation_sidebar_links"
+  #sidebar-extra-info.sidebar-content.sidebar-nav-mini-hide
+    .text-center
+      %small
+        Crafted with
+        %i.fa.fa-heart.text-danger
+        by
+        %a{:href => "https://github.com/dklisiaris", :target => "_blank"} dklisiaris
+      %br/
+      %small © 20[0-9]{2} Copyleft
+/ END MAIN LEFT NAVIGATION SIDEBAR
+

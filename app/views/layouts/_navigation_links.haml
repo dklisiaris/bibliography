@@ -1,0 +1,24 @@
+%li= link_to 'Categories', categories_path
+%li= link_to 'Books', books_path
+%li= link_to 'Authors', authors_path
+%li= link_to 'Publishers', publishers_path
+- if user_signed_in?
+  - if current_user.editor?
+    = content_tag(:li, link_to('Contributions', contributions_path))
+    = content_tag(:li, link_to('Awards', awards_path))
+    = content_tag(:li, link_to('Prizes', prizes_path))
+  - if current_user.admin?
+    = content_tag(:li, link_to('Import', import_path))
+  %li.dropdown
+    %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
+      %span.glyphicon.glyphicon-user
+      %span.caret
+    %ul.dropdown-menu.dropdown-user
+      %li= link_to 'Profile', '#'
+      %li= link_to 'Account Settings', edit_user_registration_path
+      %li.divider
+      %li= link_to 'Log out', destroy_user_session_path, :method=>'delete'
+    / /.dropdown-user
+- else
+  %li= link_to 'Log in', new_user_session_path
+  %li= link_to 'Sign up', new_user_registration_path
