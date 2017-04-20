@@ -201,6 +201,9 @@ en:
     email: "Email"
     website: "Website"
 
+  prizes:
+    label: "Prizes"
+
   books:
     index:
       listing_books: "Listing Books"

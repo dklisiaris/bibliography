@@ -1,0 +1,7 @@
+.widget
+  .widget-content.widget-content-mini.themed-background-dark.text-light-op
+    %span.pull-right.text-muted= subtitle
+    %strong
+      = title
+  .widget-content
+    = render partial: "books/book", locals: {book: book, rule: false}

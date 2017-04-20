@@ -180,6 +180,9 @@ el:
     email: "Email"
     website: "Ιστότοπος"
 
+  prizes:
+    label: "Βραβεία"
+
   books:
     index:
       listing_books: "Λίστα Βιβλίων"

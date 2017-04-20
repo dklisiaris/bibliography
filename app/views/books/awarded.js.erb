@@ -1,0 +1,5 @@
+$('#load-more-awarded-books a').button('loading');
+$('#load-more-awarded-books-btn-container').prepend("<%= j render :partial => 'books/awarded_book', :collection => @books, :as => :book if @books.present? %>");
+
+$('#load-more-awarded-books a').button('reset');
+$('#load-more-awarded-books').html("<%= j link_to_next_page @books, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @books.present? %>");

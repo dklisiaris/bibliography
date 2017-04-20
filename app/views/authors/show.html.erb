@@ -63,6 +63,8 @@
                 <%= t('books.label') %>
               </h4>
               <%= render :partial =>  "books/book", :collection => @author.books, :as => :book %>
+
+              <%= render 'books/collections_modal' if user_signed_in? %>
             <% end %>
 
           </div>

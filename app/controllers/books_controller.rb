@@ -71,7 +71,7 @@ class BooksController < ApplicationController
 
   def featured
     authorize :book, :featured?
-    @books = policy_scope(Book).top(5)
+    @books = policy_scope(Book).top(25)
     respond_with(@books)
   end
 
@@ -81,7 +81,7 @@ class BooksController < ApplicationController
     most_views_book_ids = Impression.where(impressionable_type: "Book")
       .where("created_at > ?", 1.month.ago)
       .where.not(impressionable_id: nil)
-      .group(:impressionable_id).order('count_id desc').limit(5).count('id').keys
+      .group(:impressionable_id).order('count_id desc').limit(25).count('id').keys
 
     @books = policy_scope(Book).where(id: most_views_book_ids)
     respond_with(@books)
@@ -89,15 +89,22 @@ class BooksController < ApplicationController
 
   def awarded
     authorize :book, :awarded?
-    most_awarded_book_ids = Award.where(awardable_type: "Book")
-      .group(:awardable_id).order('count_id desc').limit(5).count('id').keys
-    @books = policy_scope(Book).where(id: most_awarded_book_ids)
-    respond_with(@books)
+
+    @prizes = Prize.all.order(:name).limit(75)
+
+    if(params[:prize_id].present?)
+      @books = Book.joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
+    else
+      # most_awarded_book_ids = Award.where(awardable_type: "Book").page(params[:page])
+      #   .group(:awardable_id).order('count_id desc').count('id').keys
+      @books = policy_scope(Book).includes(awards: :prize).where.not(awards: { id: nil })
+        .order("awards.year DESC NULLS LAST").page(params[:page])
+    end
   end
 
   def latest
     authorize :book, :latest?
-    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).order(created_at: :desc).limit(5)
+    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).order(created_at: :desc).limit(25)
     respond_with(@books)
   end
 
