@@ -6,7 +6,7 @@
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;" class="content">
   <tr>
     <td align="center" style="padding: 20px 20px 20px 20px; color: #ffffff; font-family: Arial, sans-serif; font-size: 36px; font-weight: bold;">
-      <%= image_tag("https://s3.eu-central-1.amazonaws.com/bibliographygr/icon180.png", width: "80", height: "80", alt: "BibliographyGR Logo", style: "display:block;") %>
+      <%= email_image_tag("icons/icon114.png", width: "80", height: "80", alt: "BibliographyGR Logo", style: "display:block;") %>
         </td>
   </tr>
   <tr>
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td align="center" bgcolor="#ffffff" style="padding: 40px 20px 0 20px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px;">
-      <b><%= t('mailer.thanks_for_signing_up') %>, 
+      <b><%= t('mailer.thanks_for_signing_up') %>,
         <%= @user.screen_name %>!
           </b>
         </td>
@@ -32,7 +32,7 @@
       <table width="128" align="left" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td height="128" style="padding: 0 20px 20px 0;">
-            <img src="https://s3.eu-central-1.amazonaws.com/bibliographygr/icon1.png" alt="Icon #1" width="128" height="128" style="display: block;" />
+            <%= email_image_tag("icons/search.png", width: "128", height: "128", alt: "Search icon", style: "display:block;") %>
           </td>
         </tr>
       </table>
@@ -46,8 +46,8 @@
           <td>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="padding: 0 0 20px 0; color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px;">
-                  Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.
+                <td style="color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px; height:128px; text-align:center; vertical-align:middle">
+                <%= t('mailer.search_stuff') %>
                 </td>
               </tr>
             </table>
@@ -66,7 +66,7 @@
       <table width="128" align="left" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td height="128" style="padding: 0 20px 20px 0;">
-            <img src="https://s3.eu-central-1.amazonaws.com/bibliographygr/icon2.png" alt="Icon #2" width="128" height="128" style="display: block;" />
+          <%= email_image_tag("icons/bookshelf.png", width: "128", height: "128", alt: "Bookshelf icon", style: "display:block;") %>
           </td>
         </tr>
       </table>
@@ -80,8 +80,8 @@
           <td>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="padding: 0 0 20px 0; color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px;">
-                  Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.
+              <td style="color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px; height:128px; text-align:center; vertical-align:middle">
+                  <%= t('mailer.collect_books') %>
                 </td>
               </tr>
             </table>
@@ -100,7 +100,7 @@
       <table width="128" align="left" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td height="128" style="padding: 0 20px 20px 0;">
-            <img src="https://s3.eu-central-1.amazonaws.com/bibliographygr/icon3.png" alt="Icon #3" width="128" height="128" style="display: block;" />
+          <%= email_image_tag("icons/review.png", width: "128", height: "128", alt: "Review icon", style: "display:block;") %>
           </td>
         </tr>
       </table>
@@ -114,8 +114,8 @@
           <td>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="padding: 0 0 20px 0; color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px;">
-                  Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.
+                <td style="color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px; height:128px; text-align:center; vertical-align:middle">
+                  <%= t('mailer.write_reviews') %>
                 </td>
               </tr>
             </table>
@@ -143,7 +143,7 @@
   </tr>
   <tr>
     <td align="center" bgcolor="#e9e9e9" style="padding: 12px 10px 12px 10px; color: #888888; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px;">
-      <b>Hellenic Bibliography Foundation
+      <b>Department of Engineering
       </b> | <%= t('mailer.patras_university') %>
     </td>
   </tr>
@@ -152,8 +152,8 @@
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
           <td align="center" width="100%" style="color: #999999; font-family: Arial, sans-serif; font-size: 12px;">
-            2016 &copy; 
-            <a href="http://bibliography.gr" style="color: #de4b39;">BibliographyGR
+            2016 &copy;
+            <a href="https://bibliography.gr" style="color: #de4b39;">BibliographyGR
             </a>
           </td>
         </tr>
