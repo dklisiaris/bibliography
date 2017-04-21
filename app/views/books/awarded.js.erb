@@ -1,5 +1,15 @@
+<% if @books.present? %>
 $('#load-more-awarded-books a').button('loading');
 $('#load-more-awarded-books-btn-container').prepend("<%= j render :partial => 'books/awarded_book', :collection => @books, :as => :book if @books.present? %>");
 
 $('#load-more-awarded-books a').button('reset');
 $('#load-more-awarded-books').html("<%= j link_to_next_page @books, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @books.present? %>");
+<% end %>
+
+<% if @prizes.present? %>
+$('#load-more-awards-btn a').button('loading');
+$('#load-more-awards-container').append("<%= j render partial: 'prizes/widgets/prize_group_item', :collection => @prizes, :as => :prize if @prizes.present? %>");
+
+$('#load-more-awards-btn a').button('reset');
+$('#load-more-awards-btn').html("<%= j link_to_next_page @prizes, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @prizes.present? %>");
+<% end %>

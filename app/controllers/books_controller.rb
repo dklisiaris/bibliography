@@ -89,16 +89,17 @@ class BooksController < ApplicationController
 
   def awarded
     authorize :book, :awarded?
+    @prizes = Prize.page(params[:page]).per(75).order(:name) unless params[:load_books] == "true"
 
-    @prizes = Prize.all.order(:name).limit(75)
-
-    if(params[:prize_id].present?)
-      @books = Book.joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
-    else
-      # most_awarded_book_ids = Award.where(awardable_type: "Book").page(params[:page])
-      #   .group(:awardable_id).order('count_id desc').count('id').keys
-      @books = policy_scope(Book).includes(awards: :prize).where.not(awards: { id: nil })
-        .order("awards.year DESC NULLS LAST").page(params[:page])
+    if(!(params[:load_awards] == "true"))
+      if(params[:prize_id].present?)
+        @books = Book.joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
+      else
+        # most_awarded_book_ids = Award.where(awardable_type: "Book").page(params[:page])
+        #   .group(:awardable_id).order('count_id desc').count('id').keys
+        @books = policy_scope(Book).includes(awards: :prize).where.not(awards: { id: nil })
+          .order("awards.year DESC NULLS LAST").page(params[:page])
+      end
     end
   end
 

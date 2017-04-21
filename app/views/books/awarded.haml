@@ -11,20 +11,16 @@
       #load-more-awarded-books-btn-container
       .row
         .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-          #load-more-awarded-books= link_to t('load_more'), awarded_books_path(prize_id: params[:prize_id], page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+          #load-more-awarded-books= link_to t('load_more'), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
       %hr
   .col-sm-4
     .block
       .block-title
         %h2= detone t('prizes.label')
-      .group-list
-        - @prizes.each do |prize|
-          = link_to awarded_books_path(prize_id: prize.id), class: "list-group-item" do
-            %h5.list-group-item-heading
-              = prize.name
-        = link_to prizes_path, class: "list-group-item" do
-          %h5.list-group-item-heading
-            = "#{t('more')}..."
+      #load-more-awards-container.group-list
+        = render partial: 'prizes/widgets/prize_group_item', :collection => @prizes, :as => :prize
+      #load-more-awards-btn
+        = link_to t('load_more'), awarded_books_path(load_awards: true, page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
 
 
 - if user_signed_in?
