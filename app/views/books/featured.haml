@@ -6,15 +6,15 @@
 
 .row
   .col-sm-8
-    .block.full
-      .block-title
-        .block-options.pull-right
-          = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
-        %h2
-          = detone t('books.label')
-      .row
-        .col-xs-12
-          = render :partial => "books/book", :collection => @books, :as => :book
+    = render partial: 'books/featured_book', :collection => @books, :as => :book
+  .col-sm-4
+    = render partial: 'authors/widgets/side', |
+    locals: {                                 |
+    title: " #{t('authors.favourite')}",      |
+    icon: "user-secret",                      |
+    authors: @top_authors,                    |
+    liked_ids: @liked_author_ids              |
+    }                                         |
 
 - if user_signed_in?
   = render 'books/collections_modal'
