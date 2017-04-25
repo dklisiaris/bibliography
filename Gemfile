@@ -241,3 +241,6 @@ gem 'oj', '~> 2.18'
 
 # Stopwords filter or use some based on Snowball stopwords lists
 gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'
+
+# Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
+gem 'meta-tags', '~> 2.4'
