@@ -79,13 +79,20 @@ class BooksController < ApplicationController
 
   def trending
     authorize :book, :trending?
-    # Get The 5 most viewed books this month
+    # Get The 25 most viewed books this month
     most_views_book_ids = Impression.where(impressionable_type: "Book")
       .where("created_at > ?", 1.month.ago)
       .where.not(impressionable_id: nil)
       .group(:impressionable_id).order('count_id desc').limit(25).count('id').keys
 
+    most_views_author_ids = Impression.where(impressionable_type: "Author")
+      .where("created_at > ?", 1.month.ago)
+      .where.not(impressionable_id: nil)
+      .group(:impressionable_id).order('count_id desc').limit(5).count('id').keys
+
     @books = policy_scope(Book).where(id: most_views_book_ids)
+    @trending_authors = Author.where(id: most_views_author_ids)
+    @liked_author_ids = current_user.liked_author_ids
     respond_with(@books)
   end
 
