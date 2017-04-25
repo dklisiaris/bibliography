@@ -105,8 +105,12 @@ class BooksController < ApplicationController
 
   def latest
     authorize :book, :latest?
-    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).order(created_at: :desc).limit(25)
-    respond_with(@books)
+    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).page(params[:page]).order(publication_year: :desc, created_at: :desc)
+
+    unless params[:only_books] == "true"
+      @latest_authors = Author.joins(:contributions).where(contributions: {job: 0}).order("contributions.created_at desc").limit(5)
+      @liked_author_ids = current_user.liked_author_ids
+    end
   end
 
   def show

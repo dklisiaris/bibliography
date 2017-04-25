@@ -6,15 +6,21 @@
 
 .row
   .col-sm-8
-    .block.full
-      .block-title
-        .block-options.pull-right
-          = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
-        %h2
-          = detone t('books.label')
+    = render partial: 'books/latest_book', :collection => @books, :as => :book
+    - if @books.next_page
+      #load-more-awarded-books-btn-container
       .row
-        .col-xs-12
-          = render :partial => "books/book", :collection => @books, :as => :book
+        .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
+          #load-more-awarded-books= link_to t('load_more'), latest_books_path(page: 2, only_books: true), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+      %hr
+  .col-sm-4
+    = render partial: 'authors/widgets/side', |
+    locals: {                                 |
+    title: " #{t('recently_added')}",         |
+    icon: "user-secret",                      |
+    authors: @latest_authors,                 |
+    liked_ids: @liked_author_ids              |
+    }                                         |
 
 - if user_signed_in?
   = render 'books/collections_modal'
