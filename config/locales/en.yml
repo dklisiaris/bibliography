@@ -409,6 +409,9 @@ en:
     receive_notifications: 'Receive email notifications.'
     want_notifications: 'I want to receive notifications!'
 
+  metatags:
+    title: "Greek books database, catalogs, recommendations"
+
   # Pagination
   views:
     pagination:

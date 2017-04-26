@@ -387,6 +387,8 @@ el:
     receive_notifications: 'Να λαμβάνω ειδοποιήσεις στο email μου.'
     want_notifications: 'Θέλω να λαμβάνω ειδοποιήσεις!'
 
+  metatags:
+    title: "Κατάλογοι, προτάσεις, κριτικές βιβλίων"
 
   # Pagination
   views:
