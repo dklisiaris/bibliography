@@ -410,7 +410,9 @@ en:
     want_notifications: 'I want to receive notifications!'
 
   metatags:
-    title: "Greek books database, catalogs, recommendations"
+    title: "Discover books, catalog libraries, get recommendations"
+    description: "Bibliography GR is a database of hellenic bibliography. Members catalog and organize their libraries, write reviews, make and receive recommendations."
+    keywords: "books authors series publishers suggestions reviews bibliography recommendations libraries collections catalogs bookshelves discover trending awarded"
 
   # Pagination
   views:

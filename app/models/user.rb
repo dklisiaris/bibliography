@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   end
 
   def book_in_which_collections(book)
-    bookshelves.where(book: book).map {|bookshelf| bookshelf.shelf}
+    bookshelves.where(book: book).includes(:shelf).map {|bookshelf| bookshelf.shelf}
   end
 
   def ensure_api_key

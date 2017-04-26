@@ -56,7 +56,7 @@ $(".books").ready ->
         '</span></div></div>'
       ].join('\n'),
       suggestion:  (data) ->
-        image = if data.image then data.image else "https://bookopolis.com/img/no_book_cover.jpg"
+        image = if data.image then data.image else "/no_cover.jpg"
         return ('\
           <div class="tt-result">\
             <div class="tt-result-cover">\

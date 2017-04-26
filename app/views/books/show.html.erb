@@ -1,8 +1,5 @@
-<%  set_meta_tags title: @book.title,
-  description: @book.short_description,
-  og: { title: @book.title,
-    image: @book.cover,
-    description: @book.description } %>
+<% tags = { title: @book.title, image: @book.cover, description: @book.short_description(185) } %>
+<% set_meta_tags tags.merge({og: tags}).merge(twitter: tags) %>
 
 <% pages = {fa('home') => root_url, t('books.label') => books_url, @book.title => nil} %>
 

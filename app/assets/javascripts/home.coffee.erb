@@ -25,7 +25,7 @@ $(".home").ready ->
         # Map the remote sources JSON arrays to a JavaScript object array
         books = $.map suggestions.results.books, (suggestion) ->
           title: suggestion['title']
-          image: if suggestion['image'] then suggestion['image'] else 'https://bookopolis.com/img/no_book_cover.jpg'
+          image: if suggestion['image'] then suggestion['image'] else '/no_cover.jpg'
           secondary_title: if suggestion['writers'].length > 0 then suggestion['writers'][0].fullname else ''
           url: suggestion['site_url']
         authors = $.map suggestions.results.authors, (suggestion) ->

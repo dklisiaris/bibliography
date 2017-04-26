@@ -142,7 +142,7 @@ class Book < ActiveRecord::Base
     if image.present?
       image
     else
-      "https://bookopolis.com/img/no_book_cover.jpg"
+      "/no_cover.jpg"
     end
   end
 

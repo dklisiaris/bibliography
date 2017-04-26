@@ -27,10 +27,11 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_meta_tags(options={})
-    site_name   = "Bibliography GR - Greek books database, catalogs, recommendations"
-    title       = [controller_name, action_name].join(" ")
-    description = "Bibliography GR is database of hellenic books with social features"
-    image       = options[:image] || "default-image-url"
+    site_name   = "Bibliography GR"
+    title       = I18n.t('metatags.title')
+    description = I18n.t('metatags.description')
+    keywords    = I18n.t('metatags.keywords')
+    image       = options[:image] || "#{request.base_url}/logo.png"
     current_url = request.url
 
     # Let's prepare a nice set of defaults
@@ -39,8 +40,9 @@ class ApplicationController < ActionController::Base
       title:       title,
       image:       image,
       description: description,
-      keywords:    %w[books catalog recommendations reviews],
+      keywords:    keywords.split(" "),
       twitter: {
+        title: title,
         site_name: site_name,
         site: '@bibliographygr',
         card: 'summary',
