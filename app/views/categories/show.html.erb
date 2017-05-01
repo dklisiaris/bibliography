@@ -1,3 +1,6 @@
+<% tags = { title: @category.name } %>
+<% set_meta_tags tags.merge({og: tags}).merge(twitter: tags) %>
+
 <%
 if @category.parent_id.nil?
   pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.name => nil}

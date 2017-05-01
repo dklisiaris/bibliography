@@ -65,6 +65,8 @@ el:
   drop_to_upload: "Αφήστε εδώ αρχεία για ανέβασμα"
   or_click: "ή κάντε κλικ"
 
+  upcoming: "Αναμένεται"
+
   stats:
     views: "Εμφανίσεις"
     visitors: "Επισκέπτες"

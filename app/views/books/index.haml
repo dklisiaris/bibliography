@@ -1,3 +1,6 @@
+- tags = { title: t('books.label') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
 - pages = {fa('home') => root_url, t('books.label') => nil}
 
 = cell(:navigation).call(:content_header,                                            |

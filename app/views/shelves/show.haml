@@ -1,3 +1,6 @@
+- tags = { title: @shelf.screen_name }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
 .block
   .block-title
     %h2= detone @shelf.screen_name

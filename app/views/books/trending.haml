@@ -1,4 +1,7 @@
-- pages = {fa('home') => root_url, t('books.label') => books_path, t('books.latest') => nil}
+- tags = { title: "#{t('side_menu.trending')} #{t('books.label')}" }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- pages = {fa('home') => root_url, t('books.label') => books_path, t('side_menu.trending') => nil}
 
 = cell(:navigation).call(:content_header,                                            |
   content: render(partial: 'shared/search_form',                                     |

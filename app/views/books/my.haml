@@ -1,3 +1,6 @@
+- tags = { title: t('my_books') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
 - if @shelf.present?
   - pages = {fa('home') => root_url, t('my_books') => my_books_path, @shelf.screen_name => nil}
 - else

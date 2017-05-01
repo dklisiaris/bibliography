@@ -86,6 +86,8 @@ en:
   drop_to_upload: "Drop files here to upload"
   or_click: "or click"
 
+  upcoming: "Upcoming"
+
   stats:
     views: "Views"
     visitors: "Visitors"

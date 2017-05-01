@@ -1,3 +1,6 @@
+- tags = { title: t('categories.label') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
 = cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form',                                                        |
   locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: {fa('home') => root_url, t('categories.label') => nil}) |
 
