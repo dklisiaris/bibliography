@@ -23,4 +23,5 @@
 
 # Ignore uploads
 /public/uploads/*
+/public/sitemap*
 .DS_Store

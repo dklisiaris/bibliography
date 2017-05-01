@@ -244,3 +244,6 @@ gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'
 
 # Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
 gem 'meta-tags', '~> 2.4'
+
+# SitemapGenerator is the easiest way to generate Sitemaps in Ruby.
+gem 'sitemap_generator', '~> 5.1'
