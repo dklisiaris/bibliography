@@ -38,6 +38,20 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true %>
 
+    <script type='application/ld+json'>
+    {
+      "@context":"http:\/\/schema.org",
+      "@type":"WebSite",
+      "url":"https:\/\/www.bibliography.gr\/",
+      "name":"Bibliography.gr",
+      "potentialAction":{
+        "@type":"SearchAction",
+        "target":"https:\/\/www.bibliography.gr\/search\/?q={search_term}",
+        "query-input":"required name=search_term"
+      }
+    }
+    </script>
+
     <%= csrf_meta_tags %>
   </head>
   <!-- END HEAD -->
