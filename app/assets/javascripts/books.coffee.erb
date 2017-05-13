@@ -94,12 +94,16 @@ $(".books").ready ->
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.remove_recommendation')}'"%>)
           .tooltip('fixTitle')
-          .tooltip('show')
+        $.each btn, (i, val) ->
+          if $(val).parents('.review-btns').length == 0
+            $(val).tooltip('show')
       else
         btn.tooltip('hide')
           .attr('data-original-title', <%="'#{I18n.t('books.recommend')}'"%>)
           .tooltip('fixTitle')
-          .tooltip('show')
+        $.each btn, (i, val) ->
+          if $(val).parents('.review-btns').length == 0
+            $(val).tooltip('show')
 
       $('.btn-dislike-'+book_id)
         .removeClass( "btn-danger" )
