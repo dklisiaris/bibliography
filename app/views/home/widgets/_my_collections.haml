@@ -1,0 +1,15 @@
+.widget
+  .widget-content.widget-content-mini.border-bottom
+    = fa('th-large')
+    %strong= t('my_collections')
+  .widget-content
+    .row
+      .col-xs-12.col-sm-6
+        = link_to t('shelves.all_collections'), my_books_path
+        %span.grey
+          (#{current_user.books.distinct.count})
+      - @shelves.each do |shelf|
+        .col-xs-12.col-sm-6
+          = link_to shelf.screen_name, shelf
+          %span.grey
+            (#{shelf.books.count})

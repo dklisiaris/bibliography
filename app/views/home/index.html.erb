@@ -12,9 +12,8 @@
 
 <div class="row">
   <div class="col-sm-7 col-lg-8">
-    <%= render 'home/widgets/welcome' %>
-    <%= render 'home/widgets/my_books' if user_signed_in? %>
-    <%= render 'home/widgets/my_collections' if user_signed_in? %>
+    <%= render 'home/widgets/welcome' if user_signed_in? && current_user.newbie? %>
+
     <%= render partial: 'books/widgets/grid',
       locals: {
         title: " #{t('recently_added')}",
@@ -30,6 +29,9 @@
   </div>
 
   <div class="col-sm-5 col-lg-4">
+
+    <%= render 'home/widgets/my_books' if user_signed_in? %>
+    <%= render 'home/widgets/my_collections' if user_signed_in? %>
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.recommended')}", icon: "thumbs-o-up", books: @recommended_books} %>

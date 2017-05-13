@@ -89,6 +89,12 @@ class User < ActiveRecord::Base
     return JSON.generate({ email: email, token: api_key })
   end
 
+  # User is considered a newbie if she registered less than 5 days ago
+  # or has signed in less than 10 times
+  def newbie?
+    ((Time.now - created_at).to_i / 86400) < 5 || sign_in_count < 10
+  end
+
   private
 
   def assign_api_key
