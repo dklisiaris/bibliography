@@ -30,8 +30,8 @@
 
   <div class="col-sm-5 col-lg-4">
 
-    <%= render 'home/widgets/my_books' if user_signed_in? %>
-    <%= render 'home/widgets/my_collections' if user_signed_in? %>
+    <%= render 'home/widgets/my_books' %>
+    <%= render 'home/widgets/my_collections' %>
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('books.recommended')}", icon: "thumbs-o-up", books: @recommended_books} %>

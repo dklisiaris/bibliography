@@ -243,6 +243,7 @@ el:
     a_book: "ένα βιβλίο"
     book_review: "Κριτική Βιβλίου"
     write_review: "Γράψτε κριτική και σχόλια για το βιβλίο"
+    sign_in_to_store_books: "Συνδεθείτε για να αποθηκεύσετε βιβλία"
     filters:
       label: "Φίλτρα"
 
@@ -298,6 +299,7 @@ el:
     active: "Ενεργή"
     name: "Όνομα"
     name_of_shelf: "Όνομα της συλλογής"
+    sign_in_to_create_collections: "Συνδεθείτε για να δημιουργήσετε συλλογές"
     privacy:
       label: "Ιδιωτικότητα"
       same_as_profile: "Ίδια με το προφίλ"

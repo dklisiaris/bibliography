@@ -264,6 +264,7 @@ en:
     a_book: "a book"
     book_review: "Book Review"
     write_review: "Write review and comments about book"
+    sign_in_to_store_books: "Sign in to store books"
     filters:
       label: "Filters"
 
@@ -319,6 +320,7 @@ en:
     active: "Active"
     name: "Name"
     name_of_shelf: "Name of collection"
+    sign_in_to_create_collections: "Sign in to create collections"
     privacy:
       label: "Privacy"
       same_as_profile: "Same as profile"
