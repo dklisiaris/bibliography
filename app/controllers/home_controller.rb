@@ -5,15 +5,15 @@ class HomeController < ApplicationController
   before_action :set_rated_ids
 
   def index
-    @popular_books = Book.order(impressions_count: :desc).limit(6)
-    @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(6)
-    @recommended_books = Book.top(count: 6)
+    @popular_books = Book.order(impressions_count: :desc).limit(5)
+    @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(5)
+    @recommended_books = Book.top(count: 5)
 
     @awarded_books = Award.where(awardable_type: 'Book')
       .select('awards.awardable_id, awards.awardable_type, sum(awards.id) as awards_count')
       .group('awards.awardable_id, awards.awardable_type')
       .order('awards_count desc')
-      .limit(6)
+      .limit(5)
       .map {|award| award.awardable}
 
     @shelves = current_user.shelves if user_signed_in?

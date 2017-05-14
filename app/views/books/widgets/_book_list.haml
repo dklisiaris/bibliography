@@ -1,0 +1,6 @@
+.widget
+  .widget-content.widget-content-mini.themed-background-dark.text-light-op
+    = fa(icon)
+    %strong= title
+  .widget-content
+    = render partial: "books/book", :collection => books, :as => :book, locals: {rule: true}
