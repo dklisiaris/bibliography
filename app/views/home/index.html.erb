@@ -19,7 +19,8 @@
         title: " #{t('books.latest')}",
         icon: "clock-o",
         cover_size: '114',
-        books: @latest_books
+        books: @latest_books,
+        find_more: latest_books_path
       } %>
 
     <%= render partial: 'books/widgets/grid',
@@ -27,7 +28,8 @@
         title: " #{t('books.recommended')}",
         icon: "thumbs-o-up",
         cover_size: '114',
-        books: @recommended_books
+        books: @recommended_books,
+        find_more: featured_books_path
       } %>
 
     <%= render partial: 'books/widgets/grid',
@@ -35,7 +37,8 @@
         title: " #{t('books.popular')}",
         icon: "line-chart",
         cover_size: '114',
-        books: @popular_books
+        books: @popular_books,
+        find_more: trending_books_path
       } %>
 
     <%= render partial: 'books/widgets/grid',
@@ -43,7 +46,9 @@
         title: " #{t('books.awarded')}",
         icon: "trophy",
         cover_size: '114',
-        books: @awarded_books}
+        books: @awarded_books,
+        find_more: awarded_books_path
+      }
       %>
 
     <% @activities.each do |activity| %>
@@ -59,19 +64,6 @@
 
     <%= render partial: 'books/widgets/side', locals: {
       title: " #{t('recently_added')}", icon: "clock-o", books: @recently_added} if user_signed_in? %>
-
-    <%= render partial: 'books/widgets/side', locals: {
-      title: " #{t('books.recommended')}", icon: "thumbs-o-up", books: @recommended_books} %>
-
-    <%= render partial: 'books/widgets/side', locals: {
-      title: " #{t('books.popular')}", icon: "line-chart", books: @popular_books} %>
-
-    <%= render partial: 'books/widgets/side', locals: {
-      title: " #{t('books.awarded')}", icon: "trophy", books: @awarded_books} %>
-
-    <%= render partial: 'books/widgets/side', locals: {
-      title: " #{t('books.latest')}", icon: "clock-o", books: @latest_books} %>
-
   </div>
 
 </div>

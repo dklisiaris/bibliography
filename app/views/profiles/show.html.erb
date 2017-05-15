@@ -246,5 +246,11 @@
   </div>
 </div>
 
-<%= render 'profiles/modals/avatar' %>
-<%= render 'profiles/modals/cover' %>
+<% if user_signed_in? %>
+<%= render 'books/collections_modal' %>
+  <% if @user == current_user %>
+    <%= render 'profiles/modals/avatar' %>
+    <%= render 'profiles/modals/cover' %>
+  <% end %>
+<% end %>
+

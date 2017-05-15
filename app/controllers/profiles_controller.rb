@@ -4,6 +4,8 @@ class ProfilesController < ApplicationController
   before_action :set_current_users_profile, only: [:edit, :update]
   before_action :set_public_profile, only: [:public_profile, :show, :follow]
   before_action :set_enums, only: [:edit]
+  before_action :set_rated_ids, only: [:show]
+  before_action :set_owned_ids, only: [:show]
 
   #Disable protection for stateless api json response
   protect_from_forgery with: :exception, except: [:follow]
@@ -115,5 +117,16 @@ class ProfilesController < ApplicationController
 
     def set_json_format
       request.format = :json
+    end
+
+    def set_rated_ids
+      if user_signed_in?
+        @liked_book_ids = current_user.liked_book_ids
+        @disliked_book_ids = current_user.disliked_book_ids
+      end
+    end
+
+    def set_owned_ids
+      @owned_book_ids = current_user.book_ids if user_signed_in?
     end
 end
