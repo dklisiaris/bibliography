@@ -10,4 +10,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def after_sign_up_path_for(resource)
+    pages_welcome_guide_path
+  end
+
 end
