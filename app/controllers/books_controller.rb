@@ -140,6 +140,8 @@ class BooksController < ApplicationController
     impressionist(@book)
     @book.increment!(:views_count)
 
+    @categories = @book.categories
+
     respond_with(@book)
   end
 

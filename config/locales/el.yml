@@ -236,6 +236,8 @@ el:
     awarded: "Βραβευμένα"
     latest: "Τελευταίες Κυκλοφορίες"
     favourite: "Αγαπημένα Βιβλία"
+    same_category: "Από την ίδια κατηγορία"
+    more_from_x: "Περισσότερα από %{category}"
     currently_reading: "Βιβλία που διαβάζει τώρα"
     in_x_collections: "Σε %{count} συλλογές"
     with_x_views: "%{count} εμφανίσεις"

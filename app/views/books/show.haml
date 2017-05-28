@@ -1,0 +1,135 @@
+- tags = { title: @book.title, image: @book.cover, description: @book.short_description(185) }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+- pages = {fa('home') => root_url, t('books.label') => books_url, @book.title => nil}
+= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', |
+  locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages)     |
+.row
+  .col-sm-10.col-sm-offset-1
+    .block.full
+      .block-title
+        .block-options.pull-right
+          - if policy(@book).update?
+            = cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success')
+        %h2= detone(@book.title)
+      .row
+        .col-sm-3
+          .row
+            .widget
+              .widget-content.themed-background-muted.text-center.clearfix
+                = image_tag(@book.cover, alt: "book_cover", class: "img-thumbnail")
+              .widget-content.themed-background-muted.text-center
+                = render partial: 'books/widgets/collections_manager_btn', locals: {book: @book, full_size: true}
+                %hr/
+                = render partial: 'books/widgets/recommend_btns', locals: {book: @book, show_progressbar: true}
+                %hr/
+                .row.text-center
+                  .col-xs-6
+                    %h4.widget-heading
+                      %small= t 'collections'
+                      %br/
+                      = @bookshelves_count
+                  .col-xs-6
+                    %h4.widget-heading
+                      %small= t 'stats.views'
+                      %br/
+                      = @views_count
+                  .col-xs-6
+                    %h4.widget-heading
+                      %small= t 'stats.visitors'
+                      %br/
+                      = @viewers_count
+        .col-sm-9
+          %h2
+            = @book.title
+            %br/
+            %small= @book.subtitle
+          %hr/
+          %h4= @book_presenter.writers
+          %h4= @book_presenter.contributors
+          %hr/
+          %article.description
+            = @book.description.html_safe if @book.description.present?
+          %br/
+          .block.full
+            .block-title
+              %ul.nav.nav-tabs{"data-toggle" => "tabs"}
+                %li.active
+                  %a{:href => "#block-tabs-desc"}= t('books.description')
+                %li
+                  %a{:href => "#block-tabs-marc"}= t('books.marc_view')
+                %li
+                  %a{:href => "#block-tabs-isbd"}= t('books.isbd_view')
+            .tab-content
+              #block-tabs-desc.tab-pane.active
+                %table.table.table-striped
+                  %tbody
+                    = @book_presenter.trow(t('books.publication'), @book_presenter.publication)
+                    = @book_presenter.trow(t('books.format'), @book.format.humanize) if @book.format
+                    = @book_presenter.trow(t('books.series'), @book_presenter.series)
+                    = @book_presenter.trow(t('language'), UnicodeUtils.titlecase(@book.language)) if @book.language.present?
+                    = @book_presenter.trow(t('books.original_title'), @book.original_title)
+                    = @book_presenter.trow(t('books.original_language'), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present?
+                    = @book_presenter.trow(t('books.genres'), @book_presenter.genres)
+                    = @book_presenter.trow(t('collections'), @book_presenter.collections(@in_shelves)) if user_signed_in?
+                    = @book_presenter.trow(t('books.isbn'), @book.isbn)
+                    = @book_presenter.trow(t('books.isbn13'), @book.isbn13)
+                    = @book_presenter.trow(t('books.ismn'), @book.ismn)
+                    = @book_presenter.trow(t('books.issn'), @book.issn)
+                    = @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description)
+                    = @book_presenter.trow(t('books.price'), @book_presenter.price)
+                    = @book_presenter.trow(t('books.availability'), @book.availability)
+              #block-tabs-marc.tab-pane
+                %table.table.table-striped.table-condensed
+                  %tbody
+                    = @book_presenter.marc_leader
+                    = @book_presenter.marc_control_fields
+                    = @book_presenter.marc_data_fields
+              #block-tabs-isbd.tab-pane
+                %table.table.table-striped
+                  %tbody
+                    = @book_presenter.trow(t('books.title'), @book_presenter.isbd_title)
+                    = @book_presenter.trow(t('authors.main'), @book_presenter.isbd_main_author)
+                    = @book_presenter.trow(t('authors.other'), @book_presenter.isdb_other_authors)
+                    = @book_presenter.trow(t('books.publication'), @book_presenter.publication)
+                    = @book_presenter.trow(t('books.format'), @book.format) if @book.format
+                    = @book_presenter.trow(t('books.original_title'), @book.original_title)
+                    = @book_presenter.trow(t('books.original_language'), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present?
+                    = @book_presenter.trow(t('books.series'), [@book.series_name,@book.series_volume].reject(&:blank?).join(' · '))
+                    = @book_presenter.trow(t('books.genres'), @book_presenter.genres)
+                    = @book_presenter.trow(t('books.isbn'), @book.isbn)
+                    = @book_presenter.trow(t('books.isbn13'), @book.isbn13)
+                    = @book_presenter.trow(t('books.ismn'), @book.ismn)
+                    = @book_presenter.trow(t('books.issn'), @book.issn)
+                    = @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description)
+          - if @book.awards.count > 0
+            %h4.sub-header
+              = t('awards.label')
+            - @book.awards.each do |award|
+              = link_to award.prize.name, award.prize
+              = " (#{award.year})"
+              %br/
+          %h4.sub-header
+            = t('comments.or_reviews')
+          .widget
+            .widget-content.themed-background-muted
+              = render partial: 'books/widgets/comments_list', |
+                locals: {                                      |
+                  comments: @comments,                         |
+                  parent_id: nil,                              |
+                  book: @book,                                 |
+                  user: current_user,                          |
+                  depth: 0                                     |
+                }                                              |
+.row
+  .col-sm-10.col-sm-offset-1
+    - @categories.each do |category|
+      = render partial: 'books/widgets/grid', |
+      locals: { |
+      title: " #{t('books.more_from_x', category: category.name)}", |
+      icon: nil, |
+      cover_size: '114', |
+      books: category.books.where.not(image: nil).order("RANDOM()").limit(12), |
+      find_more: category_path(category) }
+
+- if user_signed_in?
+  = render 'books/collections_modal'

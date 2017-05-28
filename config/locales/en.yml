@@ -257,6 +257,8 @@ en:
     awarded: "Awarded"
     latest: "Latest"
     favourite: "Favourite Books"
+    same_category: "From the same category"
+    more_from_x: "More from %{category}"
     currently_reading: "Books that currently reads"
     in_x_collections: "In %{count} Collections"
     with_x_views: "%{count} views"
