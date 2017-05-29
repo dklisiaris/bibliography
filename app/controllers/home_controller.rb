@@ -21,8 +21,13 @@ class HomeController < ApplicationController
       .select("bookshelves.book_id")
       .group('bookshelves.book_id')
       .order('max(bookshelves.created_at) desc')
-      .limit(10)
+      .limit(6)
       .map {|bookshelf| bookshelf.book} if user_signed_in?
+
+    @recommended_for_you = current_user.recommended_books if user_signed_in?
+    @people_to_follow = current_user.similar_raters.reject do |rater|
+      current_user.following_users.ids.include?(rater.id)
+    end if user_signed_in?
 
     if user_signed_in?
       @activities = PublicActivity::Activity

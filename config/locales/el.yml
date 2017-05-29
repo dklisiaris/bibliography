@@ -20,6 +20,8 @@ el:
   my_books: "Τα βιβλία μου"
   my_collections: "Οι συλλογές μου"
   recently_added: "Προστέθηκαν πρόσφατα"
+  recommended_for_you: "Προτεινόμενα για εσάς"
+  similar_users: "Χρήστες με παρόμοιες προτιμήσεις"
 
   site_settings: "Ρυθμίσεις εφαρμογής"
   add_to_collection: "Προσθήκη σε συλλογή"

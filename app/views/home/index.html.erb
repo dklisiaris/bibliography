@@ -63,9 +63,31 @@
     <%= render 'home/widgets/my_collections' %>
 
     <%= render partial: 'books/widgets/side', locals: {
-      title: " #{t('recently_added')}", icon: "clock-o", books: @recently_added} if user_signed_in? %>
-  </div>
+      title: " #{t('recommended_for_you')}", icon: "thumbs-o-up", books: @recommended_for_you} if user_signed_in? %>
 
+    <%= render partial: 'books/widgets/side', locals: {
+      title: " #{t('recently_added')}", icon: "clock-o", books: @recently_added} if user_signed_in? %>
+
+    <% if @people_to_follow.any? %>
+      <div class="widget">
+        <div class="widget-content widget-content-mini border-bottom">
+         <strong><%= t('similar_users') %></strong>
+        </div>
+        <div class="widget-content widget-content-full-top-bottom">
+          <div class="row">
+            <% @people_to_follow.each do |u| %>
+             <div class="col-xs-3">
+               <div class="widget-content">
+                  <%= link_to image_tag(u.avatar), public_profile_path(u.profile), title: u.screen_name %>
+               </div>
+             </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
 </div>
 
 <% if user_signed_in? %>

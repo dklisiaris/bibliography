@@ -41,6 +41,8 @@ en:
   my_books: "My Books"
   my_collections: "My Collections"
   recently_added: "Recently Added"
+  recommended_for_you: "Recommended for you"
+  similar_users: "Users with similar tastes"
 
   site_settings: "Site Settings"
   add_to_collection: "Add to collection"
