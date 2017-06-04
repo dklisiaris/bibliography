@@ -87,6 +87,16 @@ export DEVISE_SECRET_KEY=key_generated_with_rake_secret_command
 
 # Base secret key (Use rake secret to generate it)
 export SECRET_KEY_BASE=key_generated_with_rake_secret_command
+
+# Keys for omniauth providers
+export FACEBOOK_APP_ID=app_id
+export FACEBOOK_APP_SECRET=app_secret
+export GOOGLE_CLIENT_ID=client_id
+export GOOGLE_CLIENT_SECRET=client_secret
+
+# Keys for performance monitoring tools
+export NEWRELIC_LICENSE_KEY=license_key
+export SKYLIGHT_TOKEN=secret_token
 ```
 
 Create and migrate database
