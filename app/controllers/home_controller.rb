@@ -16,23 +16,25 @@ class HomeController < ApplicationController
       .limit(5)
       .map {|award| award.awardable}
 
-    @shelves = current_user.shelves if user_signed_in?
-    @recently_added = current_user.bookshelves
-      .select("bookshelves.book_id")
-      .group('bookshelves.book_id')
-      .order('max(bookshelves.created_at) desc')
-      .limit(6)
-      .map {|bookshelf| bookshelf.book} if user_signed_in?
-
-    @recommended_for_you = current_user.recommended_books if user_signed_in?
-    @people_to_follow = current_user.similar_raters.reject do |rater|
-      current_user.following_users.ids.include?(rater.id)
-    end if user_signed_in?
-
     if user_signed_in?
+      @shelves = current_user.shelves
+      @recently_added = current_user.bookshelves
+        .select("bookshelves.book_id")
+        .group('bookshelves.book_id')
+        .order('max(bookshelves.created_at) desc')
+        .limit(6)
+        .map {|bookshelf| bookshelf.book}
+
+      @recommended_for_you = current_user.recommended_books
+
+      @people_to_follow = current_user.similar_raters.reject do |rater|
+        current_user.following_users.ids.include?(rater.id)
+      end
+
+
       @activities = PublicActivity::Activity
-        .where(owner: current_user.following_users.pluck(:id))
-        .includes({owner: :profile}, :trackable).order(updated_at: :desc)
+        .where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
+        .includes({owner: :profile}, :trackable).order(updated_at: :desc).page(params[:page]).per(5)
     end
   end
 

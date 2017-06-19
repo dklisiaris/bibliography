@@ -1,0 +1,7 @@
+<% if @activities.present? %>
+$('#load-more-activities-btn a').button('loading');
+$('#activities-container').append("<%= j render partial: 'books/widgets/activity', :collection => @activities, :as => :activity if @activities.present? %>");
+
+$('#load-more-activities-btn a').button('reset');
+$('#load-more-activities-btn').html("<%= j link_to_next_page @activities, t('load_more'), params: params, remote: true, class: 'btn btn-block btn-primary'  if @activities.present? %>");
+<% end %>
