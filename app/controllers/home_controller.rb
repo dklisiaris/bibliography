@@ -34,7 +34,7 @@ class HomeController < ApplicationController
 
       @activities = PublicActivity::Activity
         .where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
-        .includes({owner: :profile}, :trackable).order(updated_at: :desc).page(params[:page]).per(5)
+        .includes({owner: :profile}, :trackable).order(updated_at: :desc).page(params[:page])
     end
   end
 

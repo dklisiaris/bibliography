@@ -202,12 +202,12 @@ gem 'acts_as_commentable_with_threading'
 
 group :production, :staging do
   # Skylight is a smart profiler for Rails apps
-  gem 'skylight', '~> 0.10.3'
+  gem 'skylight', '~> 1.3'
 end
 
 group :development do
   # Performance management system
-  gem 'newrelic_rpm', '~> 3.15', '>= 3.15.2.317'
+  gem 'newrelic_rpm', '~> 4.2'
 
   # Help to kill N+1 queries and unused eager loading.
   gem 'bullet', '~> 5.3'
@@ -247,3 +247,7 @@ gem 'meta-tags', '~> 2.4'
 
 # SitemapGenerator is the easiest way to generate Sitemaps in Ruby.
 gem 'sitemap_generator', '~> 5.1'
+
+# A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
+gem 'redis', '~> 3.3'
+gem 'redis-namespace', '~> 1.5'
