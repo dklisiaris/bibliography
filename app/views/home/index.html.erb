@@ -56,7 +56,7 @@
     </div>
 
     <div id="load-more-activities-btn" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-      <%= link_to t('load_more'), root_path(page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"} if @activities.next_page %>
+      <%= link_to t('load_more'), root_path(page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"} if @activities.try(:next_page) %>
     </div>
   </div>
 
