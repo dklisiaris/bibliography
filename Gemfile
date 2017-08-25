@@ -217,6 +217,23 @@ group :development do
 
   # Profiler for your development and production Ruby rack apps.
   gem 'rack-mini-profiler', '~> 0.10.1'
+
+  # Deployment Automation
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger', '>= 0.1.1'
+
+  # Remove the following if your app does not use Rails
+  gem 'capistrano-rails'
+
+  # Remove the following if your server does not use RVM
+  gem 'capistrano-rvm'
+
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-db-tasks', require: false
+  gem 'capistrano-faster-assets'
+  gem 'capistrano-bower', '~> 1.1'
 end
 
 group :development do
