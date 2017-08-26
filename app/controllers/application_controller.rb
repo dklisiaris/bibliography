@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  http_basic_authenticate_with name: ENV["SERVER_USERNAME"],
-    password: ENV["SERVER_PASSWORD"], if: Proc.new{ Rails.env.production? }
+  # http_basic_authenticate_with name: ENV["SERVER_USERNAME"],
+  #   password: ENV["SERVER_PASSWORD"], if: Proc.new{ Rails.env.production? }
 
   # Verify that controller actions are authorized. Optional, but good.
   after_action :verify_authorized,  except: :index, unless: :devise_controller?
