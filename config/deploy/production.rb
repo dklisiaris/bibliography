@@ -20,8 +20,9 @@
 # role :app, %w{deploy@example.com}, my_property: :my_value
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
-
-
+role :app, [ENV["BIBLIOGRAPHY_CAP_SERVER"]]
+role :web, [ENV["BIBLIOGRAPHY_CAP_SERVER"]]
+role :db,  [ENV["BIBLIOGRAPHY_CAP_SERVER"]]
 
 # Configuration
 # =============
