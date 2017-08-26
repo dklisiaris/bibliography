@@ -11,7 +11,7 @@ Searchkick.timeout = 60
 
 Searchkick.client_options = {
   retry_on_failure: true,
-  hosts: default_host,
+  host: ENV["ELASTICSEARCH_URL"],
   adapter: :typhoeus
 }
 
