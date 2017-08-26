@@ -42,3 +42,17 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :keep_releases, 5
 
 set :rvm_ruby_version, '2.3.3'
+
+namespace :bower do
+  desc 'Install bower'
+  task :install do
+    on roles(:web) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'bower:install CI=true'
+        end
+      end
+    end
+  end
+end
+before 'deploy:compile_assets', 'bower:install'
