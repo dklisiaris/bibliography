@@ -16,7 +16,7 @@
         %></small></span>
       </div>
       <div class="col-xs-3 text-center">
-        <%= render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.include?(author.id) }  %>
+        <%= render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.blank? ? false : liked_ids.include?(author.id) }  %>
         <%= link_to fa('pencil'), edit_author_path(author), class: 'btn btn-effect-ripple btn-xs btn-success' if policy(author).update? %>
         <%= link_to fa('times'), author, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } if policy(author).destroy? %>
         <% if policy(author).update? %>

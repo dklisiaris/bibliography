@@ -73,7 +73,7 @@ class BooksController < ApplicationController
     authorize :book, :featured?
     @books = policy_scope(Book).top(25)
     @top_authors = Author.top(5)
-    @liked_author_ids = current_user.liked_author_ids
+    @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     respond_with(@books)
   end
 
@@ -92,7 +92,7 @@ class BooksController < ApplicationController
 
     @books = policy_scope(Book).where(id: most_views_book_ids)
     @trending_authors = Author.where(id: most_views_author_ids)
-    @liked_author_ids = current_user.liked_author_ids
+    @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     respond_with(@books)
   end
 
@@ -118,7 +118,7 @@ class BooksController < ApplicationController
 
     unless params[:only_books] == "true"
       @latest_authors = Author.joins(:contributions).where(contributions: {job: 0}).order("contributions.created_at desc").limit(5)
-      @liked_author_ids = current_user.liked_author_ids
+      @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     end
   end
 
