@@ -25,7 +25,7 @@ gem 'turbolinks', '~> 2.5'
 gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'thor', '0.19.1'
+gem 'thor', '~> 0.20.0'
 
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.1.0'
@@ -132,7 +132,7 @@ gem 'searchkick', '~> 2.3'
 gem 'jquery-turbolinks', '~> 2.1'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
-gem 'typhoeus', '~> 1.0'
+gem 'typhoeus', '~> 1.3'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
