@@ -17,7 +17,7 @@ end
       <div class="block full">
         <div class="block-title">
         <div class="block-options pull-right">
-          <% if current_user.likes?(@category) %>
+          <% if user_signed_in? && current_user.likes?(@category) %>
           <%= button_tag fa('star'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-success btn-favourite-category-#{@category.id}",
             data: { "toggle" => "tooltip", "original-title" => t('categories.favoured') }%>
           <% else %>
