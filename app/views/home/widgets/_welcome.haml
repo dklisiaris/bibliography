@@ -1,0 +1,30 @@
+.widget
+  .widget-content.widget-content-mini.themed-background-dark-flat.text-light-op.border-bottom
+    %span.pull-right
+      (#{t('some_options')})
+    %i.fa.fa-fw.fa-home
+    %strong= t('welcome')
+  .widget-content
+    .row
+      .col-xs-6.col-sm-4
+        %h4= t('browse')
+        = link_to t('browse_books'), books_path
+        %br/
+        = link_to t('browse_series'), series_index_path
+      .col-xs-6.col-sm-4
+        %h4= t('spruce_up_profile')
+        = link_to t('edit_profile'), edit_profile_path
+        %br/
+        = link_to t('add_member_photo'), public_profile_path
+      .col-xs-6.col-sm-4
+        %h4= t('discover')
+        = link_to "#{t('books.awarded')} #{t('books.label')}", awarded_books_path
+        %br/
+        = link_to "#{t('books.popular')} #{t('books.label')}", trending_books_path
+    -#.push-bit-top
+      %a.btn.btn-effect-ripple.btn-xs.btn-danger{:href => "javascript:void(0)", :style => "overflow: hidden; position: relative;"}
+        %i.fa.fa-facebook
+        Like
+      %a.btn.btn-effect-ripple.btn-xs.btn-primary{:href => "javascript:void(0)", :style => "overflow: hidden; position: relative;"}
+        %i.fa.fa-twitter
+        Tweet
