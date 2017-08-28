@@ -82,10 +82,10 @@
 </div>
 
 <%= link_to 'Edit', edit_publisher_path(@publisher) if policy(@publisher).update? %> <br>
-<%= link_to 'Back', publishers_path %>
+<%#= link_to 'Back', publishers_path %>
 
 
-<%= render 'places/places' %>
+<%#= render 'places/places' %>
 
 
 <%= render 'places/form' if policy(Place).new? %>
