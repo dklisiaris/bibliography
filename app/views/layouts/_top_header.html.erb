@@ -8,8 +8,8 @@
                 </a>
               </li>
               <%= top_nav_li(UnicodeUtils.upcase(detone(t('home'))), root_path) %>
-              <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), user_signed_in? ? shelves_path : new_user_session_path) %>
-              <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), user_signed_in? ? my_books_path : new_user_session_path) %>
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), shelves_path) %>
+              <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), my_books_path) %>
 
             </ul>
             <ul class="nav navbar-nav-custom pull-right">

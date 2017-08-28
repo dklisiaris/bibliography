@@ -67,9 +67,13 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized(exception)
-   policy_name = exception.policy.class.to_s.underscore
+    policy_name = exception.policy.class.to_s.underscore
 
-   flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
-   redirect_to(request.referrer || root_path)
+    if user_signed_in?
+     flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
+     redirect_to(request.referrer || root_path)
+    else
+      redirect_to(new_user_session_path)
+    end
   end
 end
