@@ -74,12 +74,12 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    :address   => "smtp.sendgrid.net",
+    :address   => "in-v3.mailjet.com",
     :port      => 587,
     :authentication => :plain,
     :enable_starttls_auto => true,
-    :user_name => Rails.application.secrets.SENDGRID_USERNAME,
-    :password  => Rails.application.secrets.SENDGRID_PASSWORD,
+    :user_name => Rails.application.secrets.MAILJET_USERNAME,
+    :password  => Rails.application.secrets.MAILJET_PASSWORD,
     :domain => "bibliography.gr"
   }
 
