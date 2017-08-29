@@ -48,7 +48,7 @@
               <% @publisher.places.each do |place|%>
                 <% place_presenter = PlacePresenter.new(place, self) %>
                 <div class="col-xs-12">
-                  <h4 class="sub-header"><%= place.role %></h4>
+                  <h4 class="sub-header"><%= HTMLEntities.new.decode place.role %></h4>
                   <div class="col-xs-3 text-center"><%= place_presenter.address %></div>
                   <div class="col-xs-3 text-center"><%= place_presenter.telephone %></div>
 
