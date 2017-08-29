@@ -78,8 +78,8 @@ Rails.application.configure do
     :port      => 587,
     :authentication => :plain,
     :enable_starttls_auto => true,
-    :user_name => ENV["SENDGRID_USERNAME"],
-    :password  => ENV["SENDGRID_PASSWORD"],
+    :user_name => Rails.application.secrets.SENDGRID_USERNAME,
+    :password  => Rails.application.secrets.SENDGRID_PASSWORD,
     :domain => "bibliography.gr"
   }
 
