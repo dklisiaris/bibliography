@@ -56,3 +56,16 @@ namespace :bower do
   end
 end
 before 'deploy:compile_assets', 'bower:install'
+
+
+namespace :deploy do
+  desc 'Refresh Sitemaps'
+  task :refresh_sitemap do
+    on roles(:web) do
+      within release_path do
+        execute :rake, "sitemap:refresh RAILS_ENV=#{fetch(:rails_env)}"
+      end
+    end
+  end
+end
+after :publishing, 'deploy:refresh_sitemap'

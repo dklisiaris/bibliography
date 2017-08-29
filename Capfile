@@ -36,7 +36,6 @@ require "capistrano/rails/migrations"
 require "capistrano/passenger"
 require 'capistrano/sidekiq'
 require 'capistrano/rails/console'
-require 'capistrano/sitemap_generator'
 # require 'capistrano/bower'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
