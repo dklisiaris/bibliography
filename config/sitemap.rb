@@ -27,12 +27,12 @@ SitemapGenerator::Sitemap.create do
 
   add categories_path
   Category.find_each do |record|
-    add category_path(record.id), lastmod: record.updated_at
+    add category_path(record.slug), lastmod: record.updated_at
   end
 
   add authors_path
   Author.find_each do |record|
-    add author_path(record.id), lastmod: record.updated_at
+    add author_path(record.slug), lastmod: record.updated_at
   end
 
   add books_path
@@ -41,12 +41,12 @@ SitemapGenerator::Sitemap.create do
   add latest_books_path
   add featured_books_path
   Book.find_each do |record|
-    add book_path(record.id), lastmod: record.updated_at
+    add book_path(record.slug), lastmod: record.updated_at
   end
 
   add publishers_path
   Publisher.find_each do |record|
-    add publisher_path(record.id), lastmod: record.updated_at
+    add publisher_path(record.slug), lastmod: record.updated_at
   end
 
   add series_index_path
