@@ -15,7 +15,7 @@ class Api::V1::CategoriesController < Api::V1::BaseController
   end
 
   def liked_with_books
-    if user_signed_in? && current_user.liked_categories_count > 1
+    if user_signed_in? && current_user.liked_categories_count > 0
       categories = current_user.liked_categories.includes(:books)
     else
       categories = Category.featured.includes(:books)
