@@ -1,5 +1,5 @@
 = form_tag({controller: 'home', action: 'search'}, method: 'get') do
-  .col-xs-10.col-sm-8.col-xl-7.input-group
+  .col-xs-12.col-sm-10.col-md-8.col-xl-7.input-group
     - if params[:q].present?
       %span.input-group-btn
         = link_to fa('close'), {controller: 'home', action: 'index'}, class: "btn btn-lg btn-default"

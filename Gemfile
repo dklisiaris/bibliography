@@ -79,7 +79,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.3'
 gem 'autoprefixer-rails', '~> 6.0'
-gem 'font-awesome-sass', '~> 4.3'
+gem 'font-awesome-sass', '~> 4.7'
 
 group :development do
   gem 'rails_layout'

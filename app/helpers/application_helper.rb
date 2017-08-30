@@ -14,9 +14,9 @@ module ApplicationHelper
     end
   end
 
-  def top_nav_li(text, path, icon=nil)
+  def top_nav_li(text, path, icon=nil, klass='')
     content_tag(:li) do
-      options = current_page?(path) ? { class: "active" } : {}
+      options = current_page?(path) ? { class: "active #{klass}" } : { class: klass }
       link_to path, options do
         "<i class='#{icon}'></i><strong>#{text.upcase}</strong>".html_safe
       end
