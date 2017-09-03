@@ -2,11 +2,7 @@
 
 [![Dependency Status](https://gemnasium.com/dklisiaris/bibliography.svg)](https://gemnasium.com/dklisiaris/bibliography)
 
----------------------------------------------------------------------------------------------------
-
-  NOTICE: This project is __under development__ and not funtional yet.
-
----------------------------------------------------------------------------------------------------
+Source code of [BibliographyGR](https://bibliography.gr) Web Application
 
 ## Description
 Bibliography is a catalog for books and authors of Greek national bibliography which provides a public API to 3rd party book services.
