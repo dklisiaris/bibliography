@@ -144,6 +144,7 @@ class Book < ActiveRecord::Base
     if uploaded_cover_url.present?
       uploaded_cover_url
     elsif image.present?
+      BookCoverUploadWorker.perform_async(id)
       image
     else
       "/no_cover.jpg"
