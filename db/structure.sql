@@ -145,7 +145,8 @@ CREATE TABLE authors (
     impressions_count integer DEFAULT 0,
     slug character varying,
     tsearch_vector tsvector,
-    contributions_count integer DEFAULT 0
+    contributions_count integer DEFAULT 0,
+    uploaded_avatar character varying
 );
 
 
@@ -1740,4 +1741,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170419141515');
 INSERT INTO schema_migrations (version) VALUES ('20170419145719');
 
 INSERT INTO schema_migrations (version) VALUES ('20170903183316');
+
+INSERT INTO schema_migrations (version) VALUES ('20170903214213');
 

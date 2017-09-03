@@ -99,7 +99,7 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:firstname, :lastname, :extra_info, :biography, :image, :biblionet_id)
+      params.require(:author).permit(:firstname, :lastname, :extra_info, :biography, :image, :biblionet_id, :remote_uploaded_avatar_url)
     end
 
     def set_rated_ids

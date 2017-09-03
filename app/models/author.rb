@@ -1,6 +1,8 @@
 class Author < ActiveRecord::Base
   validates :lastname, presence: true
 
+  mount_uploader :uploaded_avatar, AuthorAvatarUploader
+
   has_many :contributions
   has_many :books, through: :contributions
   has_many :awards, as: :awardable
@@ -69,10 +71,13 @@ class Author < ActiveRecord::Base
   end
 
   def avatar
-    if image.present?
+    if uploaded_avatar_url.present?
+      uploaded_avatar_url
+    elsif image.present?
+      AuthorAvatarUploadWorker.perform_async(id)
       image
     else
-      "http://ingermanson.com/images/no_profile_image.jpg"
+      "/no_avatar.jpg"
     end
   end
 
