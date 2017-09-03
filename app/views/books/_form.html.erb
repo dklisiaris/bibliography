@@ -1,4 +1,4 @@
-<%= form_for(@book, class: 'form-bordered') do |f| %>
+<%= form_for(@book, html: { multipart: true }, class: 'form-bordered') do |f| %>
   <% if @book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
@@ -22,6 +22,11 @@
   <div class="col-xs-12 form-group">
     <%= f.label :description %><br>
     <%= f.text_area :description, :rows => "10", class: 'form-control' %>
+  </div>
+  <div class="col-xs-6 form-group">
+    <%= image_tag(@book.uploaded_cover_url) %>
+    <%= f.label "Upload new cover" %><br>
+    <%= f.text_field :remote_uploaded_cover_url, class: 'form-control', placeholder: 'Cover Image URL' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :image %><br>
@@ -50,7 +55,7 @@
   <div class="col-xs-6 form-group">
     <%= f.label :series_volume %><br>
     <%= f.text_field :series_volume, class: 'form-control' %>
-  </div>  
+  </div>
   <div class="col-xs-6 form-group">
     <%= f.label :publication_year %><br>
     <%= f.number_field :publication_year, class: 'form-control' %>
@@ -58,7 +63,7 @@
   <div class="col-xs-6 form-group">
     <%= f.label :publication_version %><br>
     <%= f.number_field :publication_version, class: 'form-control' %>
-  </div>  
+  </div>
   <div class="col-xs-6 form-group">
     <%= f.label :publication_place %><br>
     <%= f.text_field :publication_place, class: 'form-control' %>
@@ -74,7 +79,7 @@
   <div class="col-xs-6 form-group">
     <%= f.label :pages %><br>
     <%= f.number_field :pages, class: 'form-control' %>
-  </div>  
+  </div>
   <div class="col-xs-6 form-group">
     <%= f.label :size %><br>
     <%= f.text_field :size, class: 'form-control' %>
@@ -84,7 +89,7 @@
     <%= f.select :cover_type, options_for_select(@cover_types.collect { |s| [s[0].humanize, s[0]] }, selected: @book.cover_type), {}, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
-    <%= f.label :availability %><br>              
+    <%= f.label :availability %><br>
     <%= f.select :availability, options_for_select(@availabilities.collect { |s| [s[0].humanize, s[0]] }, selected: @book.availability), {}, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
@@ -94,15 +99,15 @@
 
   <div class="col-xs-6 form-group">
     <%= f.label :language %><br>
-    <%= f.select :language, 
-        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: Book::LANGUAGES.index(@book.language.to_sym)), {}, class: 'form-control' %>
+    <%= f.select :language,
+        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: @book.language.present? ? Book::LANGUAGES.index(@book.language.to_sym) : nil), {prompt: '-- Select Language --'}, class: 'form-control' %>
   </div>
   <div>
 
   <div class="col-xs-6 form-group">
     <%= f.label :original_language %><br>
-    <%= f.select :original_language, 
-        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: Book::LANGUAGES.index(@book.original_language.to_sym)), {}, class: 'form-control' %>
+    <%= f.select :original_language,
+        options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: @book.original_language.present? ? Book::LANGUAGES.index(@book.original_language.to_sym) : nil), {prompt: '-- Select Original Language --'}, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :original_title %><br>
@@ -119,13 +124,13 @@
   <div class="col-xs-6 form-group">
     <%= f.label :slug %><br>
     <%= f.text_field :slug, class: 'form-control' %>
-  </div>  
+  </div>
   <div class="col-xs-6 form-group">
     <%= f.label :biblionet_id %><br>
     <%= f.number_field :biblionet_id, class: 'form-control disabled' %>
   </div>
-  
+
   <div class="form-group form-actions">
-    <%= f.submit t('save'), class: 'btn btn-effect-ripple btn-primary' %>    
+    <%= f.submit t('save'), class: 'btn btn-effect-ripple btn-primary' %>
   </div>
 <% end %>

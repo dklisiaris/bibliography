@@ -2,6 +2,8 @@ class Book < ActiveRecord::Base
    # a Book may have comments (reviews)
   acts_as_commentable
 
+  mount_uploader :uploaded_cover, UploadedCoverUploader
+
   has_and_belongs_to_many :categories
 
   has_many :contributions
@@ -139,7 +141,9 @@ class Book < ActiveRecord::Base
 
   # Returns book cover url if there is one or the default not image.
   def cover
-    if image.present?
+    if uploaded_cover_url.present?
+      uploaded_cover_url
+    elsif image.present?
       image
     else
       "/no_cover.jpg"
