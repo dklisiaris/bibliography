@@ -71,4 +71,16 @@ class Category < ActiveRecord::Base
     :name_changed? || :ddc_changed?
   end
 
+  def get_popular_books(limit=10)
+    Rails.cache.fetch("#{cache_key}/get_popular_books", expires_in: 7.days) do
+      books.order(impressions_count: :desc, image: :asc).limit(limit)
+    end
+  end
+
+  def get_random_books(limit=12)
+    Rails.cache.fetch("#{cache_key}/get_random_books", expires_in: 2.days) do
+      books.where.not(image: nil).order("RANDOM()").limit(limit)
+    end
+  end
+
 end

@@ -128,7 +128,7 @@
       title: " #{t('books.more_from_x', category: category.name)}", |
       icon: nil, |
       cover_size: '114', |
-      books: category.books.where.not(image: nil).order("RANDOM()").limit(12), |
+      books: category.get_random_books, |
       find_more: category_path(category) }
 
 - if user_signed_in?

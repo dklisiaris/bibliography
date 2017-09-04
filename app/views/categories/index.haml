@@ -10,7 +10,7 @@
       = render partial: 'books/widgets/grid',                                         |
         locals: {                                                                     |
         title: link_to(category.name, category, class: "text-light-op"),              |
-        books: category.books.order(impressions_count: :desc, image: :asc).limit(10), |
+        books: category.get_popular_books,                                            |
         icon: 'tag'}                                                                  |
   .col-sm-4
     .block

@@ -1,0 +1,9 @@
+- cache category do
+  = link_to category, class: "list-group-item", id: "category_#{category.id}" do
+    %span.badge= "[#{category.ddc}]"
+    %h5.list-group-item-heading
+      = "#{category.name}"
+
+
+
+
