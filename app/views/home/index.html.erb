@@ -16,11 +16,11 @@
 
     <%= render partial: 'books/widgets/grid',
       locals: {
-        title: " #{t('books.latest')}",
-        icon: "clock-o",
+        title: " #{t('books.popular')}",
+        icon: "line-chart",
         cover_size: '114',
-        books: @latest_books,
-        find_more: latest_books_path
+        books: @popular_books,
+        find_more: trending_books_path
       } %>
 
     <%= render partial: 'books/widgets/grid',
@@ -34,11 +34,11 @@
 
     <%= render partial: 'books/widgets/grid',
       locals: {
-        title: " #{t('books.popular')}",
-        icon: "line-chart",
+        title: " #{t('books.latest')}",
+        icon: "clock-o",
         cover_size: '114',
-        books: @popular_books,
-        find_more: trending_books_path
+        books: @latest_books,
+        find_more: latest_books_path
       } %>
 
     <%= render partial: 'books/widgets/grid',
