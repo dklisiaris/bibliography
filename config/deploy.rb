@@ -8,7 +8,7 @@ set :repo_url, ENV["BIBLIOGRAPHY_CAP_REPOSITORY"]
 require 'capistrano-db-tasks'
 
 set :disallow_pushing, true
-set :assets_dir, %w(public/system)
+set :assets_dir, %w(public/system public/uploads)
 set :db_local_clean, true
 
 # Default branch is :master
