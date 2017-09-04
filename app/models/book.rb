@@ -272,6 +272,18 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def self.get_popular
+    Rails.cache.fetch("get_popular", expires_in: 2.days) do
+      self.order(impressions_count: :desc).limit(8)
+    end
+  end
+
+  def self.get_latest
+    Rails.cache.fetch("get_latest", expires_in: 2.days) do
+      self.order(created_at: :desc).where.not(image: '').limit(8)
+    end
+  end
+
   # def rewrite_series_name
   #   if (series_name =~ /· \d+ ·/).present?
   #     write_attribute(:series_name, series_name.gsub(/· \d+ ·/, '-'))

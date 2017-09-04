@@ -5,8 +5,8 @@ class HomeController < ApplicationController
   before_action :set_rated_ids
 
   def index
-    @popular_books = Book.order(impressions_count: :desc).limit(8)
-    @latest_books = Book.order(created_at: :desc).where.not(image: '').limit(8)
+    @popular_books = Book.get_popular
+    @latest_books = Book.get_latest
     @recommended_books = Book.top(count: 8)
 
     @awarded_books = Award.where(awardable_type: 'Book')
