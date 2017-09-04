@@ -7,16 +7,18 @@
     = fa(icon)
     %strong= title
   .widget-content
-    .row
-      .book-container
-        - if books.any?
-          - books.each do |book|
-            .book-cover
-              = link_to image_tag(book.cover, height: cover_size, width: cover_size, alt: "book_cover", class: "img-thumbnail", "data-toggle" => "tooltip", "data-placement" => "top", title: book.title), book
-          .col-xs-12
-            .text-right
-              %small= link_to t('more'), find_more unless find_more.nil?
-        - else
-          .text-center
-            %span.text-muted
-              %small= t('no_books_yet')
+    - if books.any?
+      .row
+        .col-xs-12
+          .book-container
+            - books.each do |book|
+              .book-cover
+                = link_to image_tag(book.cover, height: cover_size, width: cover_size, alt: "book_cover", class: "img-thumbnail", "data-toggle" => "tooltip", "data-placement" => "top", title: book.title), book
+      .row
+        .col-xs-12
+          .text-right
+            %small= link_to t('more'), find_more unless find_more.nil?
+    - else
+      .text-center
+        %span.text-muted
+          %small= t('no_books_yet')

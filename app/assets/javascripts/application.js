@@ -22,4 +22,6 @@
 //= require noty/js/noty/packaged/jquery.noty.packaged.min
 //= require trix
 //= require dropzone/dist/min/dropzone.min
+//= require matchheight/dist/jquery.matchHeight-min
+//= require masonry/dist/masonry.pkgd.min
 //= require_tree .

@@ -2,14 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.book-container .book-cover {
-  margin: 10px;
-  width: 114px;
-  height: 150px;
-  float: left;
 
-  .img-thumbnail {
-    max-height: 150px;
+.book-container{
+  margin: 0 auto;
+  .book-cover {
+    margin-bottom: 10px;
+    width: 114px;
+    height: 150px;
+    float: left;
+
+    .img-thumbnail {
+      max-height: 150px;
+    }
   }
 }
 

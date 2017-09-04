@@ -15,7 +15,6 @@ var App = function() {
 
     /* Initialization UI Code */
     var uiInit = function() {
-
         // Set variables - Cache some often used Jquery objects in variables */
         page            = $('#page-container');
         header          = $('header');
@@ -81,21 +80,14 @@ var App = function() {
 
         // Initialize Placeholder (for IE9)
         $('input, textarea').placeholder();
-    };
 
-    /* Page Loading functionality */
-    var pageLoading = function(){
-        var pageWrapper = $('#page-wrapper');
-
-        if (pageWrapper.hasClass('page-loading')) {
-            if (page.hasClass('enable-cookies')) {
-                setTimeout(function(){
-                    pageWrapper.removeClass('page-loading');
-                }, 100);
-            } else {
-                pageWrapper.removeClass('page-loading');
-            }
-        }
+        $('.book-container').masonry({
+          // options
+          itemSelector: '.book-cover',
+          columnWidth: 114,
+          gutter: 16,
+          fitWidth: true
+        });
     };
 
     /* Sidebar Navigation functionality */
@@ -410,7 +402,6 @@ var App = function() {
     return {
         init: function() {
             uiInit(); // Initialize UI
-            pageLoading(); // Initialize Page Loading
         },
         sidebar: function(mode, extra) {
             handleSidebar(mode, extra); // Handle sidebars - access functionality from everywhere
