@@ -284,6 +284,10 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def self.get_awarded
+    self.where(id: Award.most_awarded_book_ids)
+  end
+
   # def rewrite_series_name
   #   if (series_name =~ /· \d+ ·/).present?
   #     write_attribute(:series_name, series_name.gsub(/· \d+ ·/, '-'))

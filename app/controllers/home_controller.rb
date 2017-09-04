@@ -9,12 +9,7 @@ class HomeController < ApplicationController
     @latest_books = Book.get_latest
     @recommended_books = Book.top(count: 8)
 
-    @awarded_books = Award.where(awardable_type: 'Book')
-      .select('awards.awardable_id, awards.awardable_type, sum(awards.id) as awards_count')
-      .group('awards.awardable_id, awards.awardable_type')
-      .order('awards_count desc')
-      .limit(8)
-      .map {|award| award.awardable}
+    @awarded_books = Book.get_awarded
 
     if user_signed_in?
       @shelves = current_user.shelves
