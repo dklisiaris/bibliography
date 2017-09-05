@@ -310,6 +310,9 @@ en:
     update_label: "Update"
     content_updating_in_bg: "Searching and storing new content in background thread."
     max_updates: "Max updates (Leave empty for no limit)"
+    import_book_of_day_candidates: "Import Book-of-the-Day Candidates"
+    book_of_day_description: "Insert book titles below. Each line will be parsed and the best match will become a book of date candidate."
+    insert_book_title_here: "Insert book titles here. (One title per line)"
 
   shelves:
     all_collections: "All Collections"

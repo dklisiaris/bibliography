@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   get 'tasks', to: 'tasks#index', as: :tasks
 
   get 'tasks/update', to: 'tasks#update_content'
+  get 'tasks/import_botd_candidates', to: 'tasks#import_book_of_the_day_candidates'
 
   resources :categories do
     member do

@@ -36,5 +36,11 @@
     } %>
 </div>
 
-<%= render partial: "content_update_task", locals: {is_limited: true} %>
-
+<div class="row">
+  <div class="col-sm-6">
+    <%= render partial: "book_of_month_importer" %>
+  </div>
+  <div class="col-sm-6">
+    <%= render partial: "content_update_task", locals: {is_limited: true} %>
+  </div>
+</div>

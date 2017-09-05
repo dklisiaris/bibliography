@@ -1,0 +1,12 @@
+.block
+  .block-title
+    %h2
+      = UnicodeUtils.upcase(detone(t('tasks.import_book_of_day_candidates')))
+  .block-section
+    %span.help-block
+      = t('tasks.book_of_day_description')
+    %form{action: tasks_import_botd_candidates_path, method: "get"}
+      .form-group
+        = text_area_tag :book_titles, nil, placeholder: t('tasks.insert_book_title_here'), size: "24x10", class: 'form-control'
+      .form-group.form-actions
+        = button_tag t('import.import_label'), {type: "submit", name: nil, class: "btn btn-effect-ripple btn-primary"}

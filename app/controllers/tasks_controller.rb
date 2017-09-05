@@ -19,4 +19,11 @@ class TasksController < ApplicationController
     flash[:notice] = t('tasks.content_updating_in_bg')
     redirect_to tasks_path
   end
+
+  def import_book_of_the_day_candidates
+    authorize :task, :update_content?
+
+    flash[:notice] = t('tasks.content_updating_in_bg')
+    redirect_to tasks_path
+  end
 end
