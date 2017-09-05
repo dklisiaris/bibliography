@@ -65,7 +65,7 @@
               <h4 class="sub-header">
                 <%= t('books.label') %>
               </h4>
-              <%= render :partial =>  "books/book", :collection => @author.books, :as => :book %>
+              <%= render :partial =>  "books/book", :collection => @author.books.order(impressions_count: :desc, id: :desc), :as => :book %>
 
               <%= render 'books/collections_modal' if user_signed_in? %>
             <% end %>
