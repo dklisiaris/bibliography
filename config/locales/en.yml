@@ -38,6 +38,7 @@ en:
   about: "about"
   by: "by"
   load_more: "Load More"
+  book_of_the_day: "Book of the Day"
 
   home: "Home"
   collections: "Collections"
@@ -311,8 +312,8 @@ en:
     content_updating_in_bg: "Searching and storing new content in background thread."
     max_updates: "Max updates (Leave empty for no limit)"
     import_book_of_day_candidates: "Import Book-of-the-Day Candidates"
-    book_of_day_description: "Insert book titles below. Each line will be parsed and the best match will become a book of date candidate."
-    insert_book_title_here: "Insert book titles here. (One title per line)"
+    book_of_day_description: "Insert book titles and authors below. Each line will be parsed and the best match will become a book of date candidate."
+    insert_book_title_here: "Insert book titles in format Title | Author here. (One title per line)"
 
   shelves:
     all_collections: "All Collections"
