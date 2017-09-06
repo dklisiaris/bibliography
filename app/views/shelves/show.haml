@@ -1,17 +1,24 @@
 - tags = { title: @shelf.screen_name }
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 
+- pages = {fa('home') => root_url, t('my_collections') => shelves_path, @shelf.screen_name => nil}
+
+= cell(:navigation).call(:content_header, title: t('my_collections'), breadcrumbs: pages)
+
 .block
   .block-title
+    .block-options.pull-right
+      = cell(:navigation).call(:btn_link_to, name: fa('cog'), url: edit_shelf_path(@shelf), tooltip: t('shelves.edit'))
+      = link_to fa('trash-o'), @shelf, class: 'btn btn-effect-ripple btn-danger', method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('shelves.delete') } unless @shelf.built_in
     %h2= detone @shelf.screen_name
   .row
+    .col-xs-12
+      = link_to new_shelf_path, class: "btn btn-primary btn-sm pull-right" do
+        = fa('plus')
+        = t('shelves.new')
     = render "books/widgets/pagination"
-    %hr/
+    %hr
     .col-xs-12
       = render :partial =>  "books/book", :collection => @books, :as => :book
     = render "books/widgets/pagination"
-
-= link_to 'Edit', edit_shelf_path(@shelf)
-|
-= link_to 'Back', shelves_path
 

@@ -1,0 +1,38 @@
+- tags = { title: t('my_collections') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- pages = {fa('home') => root_url, t('my_collections') => nil}
+
+= cell(:navigation).call(:content_header, title: t('my_collections'), breadcrumbs: pages)
+
+.row
+  .col-xs-12
+    = link_to new_shelf_path, class: "btn btn-primary btn-sm pull-right" do
+      = fa('plus')
+      = t('shelves.new')
+  %hr
+
+= render :partial =>  "shelves/shelf_with_books", :collection => @shelves, :as => :shelf
+
+-#.block
+  .block-title
+    .block-options.pull-right
+      = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
+    %h2= detone t('my_collections')
+  .table-responsive
+    %table#general-table.table.table-vcenter.table-striped.table-hover
+      %thead
+        %tr
+          %th= t('name')
+          %th= t('privacy')
+          %th.text-center= t('active')
+          %th.text-center{:colspan => "1"}= fa('flash')
+      %tbody
+        - @shelves.each do |shelf|
+          %tr
+            %td= link_to shelf.screen_name, shelf
+            %td= shelf.screen_privacy
+            %td.text-center= shelf.active ? fa('check') : fa('times')
+            %td.text-center
+              = link_to fa('cog'), edit_shelf_path(shelf), class: 'btn btn-effect-ripple btn-xs btn-success'
+              = link_to fa('trash-o'), shelf, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: { confirm: t('u_sure') } unless shelf.built_in

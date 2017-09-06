@@ -331,6 +331,7 @@ en:
     name: "Name"
     name_of_shelf: "Name of collection"
     sign_in_to_create_collections: "Sign in to create collections"
+    delete: "Delete Collection"
     privacy:
       label: "Privacy"
       same_as_profile: "Same as profile"

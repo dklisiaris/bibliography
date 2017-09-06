@@ -1,0 +1,32 @@
+.block.col-md-6
+  .block-title
+    %h2= @shelf.id.present? ? detone(t('shelves.edit')) : detone(t('shelves.new'))
+  = form_for(@shelf, :html => { :role => 'form', class: "form-horizontal form-bordered"}) do |f|
+    - if @shelf.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@shelf.errors.count, "error")
+          prohibited this shelf from being saved:
+        %ul
+          - @shelf.errors.full_messages.each do |message|
+            %li= message
+    - unless @shelf.built_in?
+      .form-group
+        = f.label t('shelves.name'), class: 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :name, class: "form-control", placeholder: t('shelves.name_of_shelf')
+    .form-group
+      = f.label t('shelves.privacy.label'), class: 'col-md-3 control-label'
+      .col-md-9
+        = f.select :privacy, options_for_select(@privacies.collect { |s|                               |
+          [Shelf.humanize_privacy(s[0]), s[0]] }, selected: @shelf.privacy), {}, class: 'form-control' |
+    .form-group
+      = f.label t('shelves.active'), class: 'col-md-3 control-label'
+      .col-md-6
+        = label_tag(nil, class: 'csscheckbox csscheckbox-primary') do
+          = f.check_box :active
+          %span
+    .form-group.form-actions
+      .col-md-9.col-md-offset-3
+        = button_tag(t('save'), type: "submit", class: "btn btn-effect-ripple btn-primary")
+        = link_to(t('cancel'), @shelf.new_record? ? shelves_path : shelf_path(@shelf), class: "btn btn-effect-ripple btn-danger")

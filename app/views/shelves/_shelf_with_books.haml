@@ -1,0 +1,5 @@
+= render partial: 'books/widgets/grid',                                         |
+  locals: {                                                                     |
+  title: link_to(shelf.screen_name, shelf, class: "text-light-op"),              |
+  books: shelf.books.order(impressions_count: :desc, image: :asc).limit(10), |
+  icon: 'tag'}

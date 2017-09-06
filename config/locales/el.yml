@@ -310,6 +310,7 @@ el:
     name: "Όνομα"
     name_of_shelf: "Όνομα της συλλογής"
     sign_in_to_create_collections: "Συνδεθείτε για να δημιουργήσετε συλλογές"
+    delete: "Διαγραφή Συλλογής"
     privacy:
       label: "Ιδιωτικότητα"
       same_as_profile: "Ίδια με το προφίλ"
