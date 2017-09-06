@@ -39,12 +39,13 @@ class DailySuggestion < ActiveRecord::Base
   end
 
   def self.get_book_of_the_day
-    get_current_suggestion.book
+    current_suggestion = get_current_suggestion
+    current_suggestion.book unless current_suggestion.nil?
   end
 
   def self.get_book_of_the_day_cached
     Rails.cache.fetch("get_book_of_the_day", expires_in: 1.day) do
-      get_current_suggestion.book
+      get_book_of_the_day
     end
   end
 
