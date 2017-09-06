@@ -26,6 +26,7 @@ class Book < ActiveRecord::Base
 
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
   belongs_to :series, :counter_cache => true
+  has_one :daily_suggestion
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)
