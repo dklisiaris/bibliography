@@ -13,7 +13,7 @@ Devise.setup do |config|
   config.mailer_sender = '"BibliographyGR Accounts" <accounts@bibliography.gr>'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'AuthMailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
