@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
       @show_public_path = true
     end
 
-    @activities = @user.activities.includes(:owner, :trackable)
+    @activities = @user.activities.includes(:owner, :trackable).order(created_at: :desc).page(params[:page])
 
     @following_users = @user.following_users.includes(:profile)
     @user_followers = @user.user_followers.includes(:profile)
