@@ -268,3 +268,6 @@ gem 'sitemap_generator', '~> 5.1'
 # A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
 gem 'redis', '~> 3.3'
 gem 'redis-namespace', '~> 1.5'
+
+# Clean ruby syntax for writing and deploying cron jobs.
+gem 'whenever', '~> 0.9.7'

@@ -3,6 +3,7 @@
 
 set :application, "bibliography"
 set :repo_url, ENV["BIBLIOGRAPHY_CAP_REPOSITORY"]
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Settings for capistrano-db-tasks
 require 'capistrano-db-tasks'
