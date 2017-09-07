@@ -271,6 +271,3 @@ gem 'redis-namespace', '~> 1.5'
 
 # Clean ruby syntax for writing and deploying cron jobs.
 gem 'whenever', '~> 0.9.7'
-
-# Rails based web GUI for managing Whenever Cron jobs
-gem 'whenever-web', '~> 0.0.5'

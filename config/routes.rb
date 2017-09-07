@@ -94,7 +94,6 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
-    mount Whenever::Web, at: '/whenever'
   end
 
   # Restful API routes
