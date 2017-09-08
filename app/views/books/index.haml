@@ -27,7 +27,7 @@
                 %i.fa.fa-sliders
                 %span= " #{t('books.filters.label')}"
           %hr/
-          = render :partial => "books/book", :collection => @books, :as => :book
+          = render :partial => "books/book", :collection => @books, :as => :book, cached: true
           = render "books/widgets/pagination" if defined? @books.total_pages
   .col-sm-4.hidden-xs.sliding-sidebar{id: "filter-sidebar"}
     = render partial: 'books/widgets/filter', locals: {title: t('authors.label_singular'), filter_name: "author", books: @books}

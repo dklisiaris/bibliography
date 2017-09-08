@@ -109,6 +109,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def recommended_authors_cached
+    Rails.cache.fetch("#{cache_key}/recommended_authors", expires_in: 1.day) do
+      recommended_authors
+    end
+  end
+
   private
 
   def assign_api_key

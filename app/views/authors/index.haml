@@ -19,7 +19,7 @@
         = render "authors/widgets/pagination"
         %hr/
         .col-xs-12
-          = render :partial => "authors/author", :collection => @authors, :as => :author, locals: { liked_ids: @liked_author_ids }
+          = render :partial => "authors/author", :collection => @authors, :as => :author, locals: { liked_ids: @liked_author_ids }, cached: true
         = render "authors/widgets/pagination"
   .col-sm-4
     - if current_user.present?
