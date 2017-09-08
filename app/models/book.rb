@@ -280,13 +280,15 @@ class Book < ActiveRecord::Base
   end
 
   def self.get_latest
-    Rails.cache.fetch("get_latest", expires_in: 2.days) do
+    Rails.cache.fetch("get_latest", expires_in: 1.day) do
       self.order(created_at: :desc).where.not(image: '').limit(8)
     end
   end
 
   def self.get_awarded
-    self.where(id: Award.most_awarded_book_ids)
+    Rails.cache.fetch("get_awarded", expires_in: 3.days) do
+      self.where(id: Award.most_awarded_book_ids)
+    end
   end
 
   def self.get_books_per_page

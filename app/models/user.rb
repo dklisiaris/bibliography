@@ -95,6 +95,20 @@ class User < ActiveRecord::Base
     ((Time.now - created_at).to_i / 86400) < 5 || sign_in_count < 10
   end
 
+  def people_to_follow
+    Rails.cache.fetch("#{cache_key}/people_to_follow", expires_in: 1.day) do
+      similar_raters.reject do |rater|
+        following_users.ids.include?(rater.id)
+      end
+    end
+  end
+
+  def recommended_books_cached
+    Rails.cache.fetch("#{cache_key}/recommended_books", expires_in: 1.day) do
+      recommended_books
+    end
+  end
+
   private
 
   def assign_api_key

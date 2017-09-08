@@ -22,12 +22,9 @@ class HomeController < ApplicationController
         .limit(6)
         .map {|bookshelf| bookshelf.book}
 
-      @recommended_for_you = current_user.recommended_books
+      @recommended_for_you = current_user.recommended_books_cached
 
-      @people_to_follow = current_user.similar_raters.reject do |rater|
-        current_user.following_users.ids.include?(rater.id)
-      end
-
+      @people_to_follow = current_user.people_to_follow
 
       @activities = PublicActivity::Activity
         .where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
