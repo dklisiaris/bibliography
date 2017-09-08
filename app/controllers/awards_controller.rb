@@ -5,6 +5,7 @@ class AwardsController < ApplicationController
   respond_to :html
 
   def index
+    authorize :award, :index?
     @awards = policy_scope(Award).page(params[:page])
     respond_with(@awards)
   end
@@ -14,13 +15,13 @@ class AwardsController < ApplicationController
   end
 
 
-  def edit    
+  def edit
   end
 
   def create
     @award = @awardable.awards.new(award_params)
     authorize @award
-    
+
     flash[:notice] = "Award created successfully!" if @award.save
     respond_with(@awardable)
   end
@@ -48,5 +49,5 @@ class AwardsController < ApplicationController
     def load_awardable
       resource, id = request.path.split('/')[1,2]
       @awardable = resource.singularize.classify.constantize.find(id)
-    end    
+    end
 end

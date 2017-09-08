@@ -105,7 +105,7 @@
             %h4.sub-header
               = t('awards.label')
             - @book.awards.each do |award|
-              = link_to award.prize.name, award.prize
+              = link_to(award.prize.name, awarded_books_path(prize_id: award.prize.id))
               = " (#{award.year})"
               %br/
           %h4.sub-header

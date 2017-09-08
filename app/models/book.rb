@@ -291,6 +291,12 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def self.get_random_awarded
+    Rails.cache.fetch("get_random_awarded", expires_in: 1.day) do
+      self.where(id: Award.random_awarded_book_ids)
+    end
+  end
+
   def self.get_books_per_page
 
   end

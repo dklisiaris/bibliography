@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     @latest_books = Book.get_latest
     @recommended_books = Book.top(count: 8)
 
-    @awarded_books = Book.get_awarded
+    @awarded_books = Book.get_random_awarded
 
     @book_of_the_day = DailySuggestion.get_book_of_the_day_cached
 

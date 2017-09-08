@@ -4,6 +4,7 @@ class PrizesController < ApplicationController
   respond_to :html
 
   def index
+    authorize :prize, :index?
     @prizes = policy_scope(Prize).page(params[:page])
 
     respond_with(@prizes)
