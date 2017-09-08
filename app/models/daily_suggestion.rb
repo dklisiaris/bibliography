@@ -5,10 +5,10 @@ class DailySuggestion < ActiveRecord::Base
 
   def self.best_match_by_title_and_author(book_title, author_name)
     # Get author's full name in our DB
-    author_results = Author.search(author_name).results
+    author_results = Author.search(author_name.gsub('. ',' ').gsub('.',' ')).results
     author = author_results.present? ? author_results.first.fullname : author_name
 
-    results = Book.search(book_title, where: {author: author},
+    results = Book.search(book_title.gsub('.',''), where: {author: author},
       order: {_score: :desc, has_image: :desc, publication_year: :desc}).results
 
     return nil if results.count == 0
@@ -21,7 +21,7 @@ class DailySuggestion < ActiveRecord::Base
   end
 
   def self.store_suggestion(book)
-    self.create(book_id: book.id)
+    self.create(book_id: book.id) if book.present?
   end
 
   def self.pick_suggestion

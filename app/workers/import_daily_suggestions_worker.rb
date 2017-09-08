@@ -8,7 +8,10 @@ class ImportDailySuggestionsWorker
       book = DailySuggestion.best_match_by_title_and_author(entry[:title], entry[:author])
       if DailySuggestion.store_suggestion(book)
         puts "Candidate for Book of the Day: #{book.id} - #{book.title}"
+      else
+        puts "FAILED to store: #{entry[:title]} - #{entry[:author]}"
       end
+
     end
   end
 
