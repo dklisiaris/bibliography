@@ -30,7 +30,7 @@ class BooksController < ApplicationController
       pages: {limit: 10}
     } unless is_autocomplete
     # limit = is_autocomplete ? 8 : 50
-    limit = is_autocomplete ? 8 : 20
+    limit = is_autocomplete ? 8 : 15
 
     @filters = {
       publication_year: params[:publication_year],
