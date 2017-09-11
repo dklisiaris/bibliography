@@ -69,4 +69,16 @@ namespace :deploy do
     end
   end
 end
-# after 'deploy:publishing', 'deploy:refresh_sitemap'
+
+namespace :deploy do
+  desc 'Create Sitemaps'
+  task :create_sitemap do
+    on roles(:web) do
+      within release_path do
+        execute :rake, "sitemap:create RAILS_ENV=#{fetch(:rails_env)}"
+      end
+    end
+  end
+end
+
+after 'deploy:publishing', 'deploy:create_sitemap'
