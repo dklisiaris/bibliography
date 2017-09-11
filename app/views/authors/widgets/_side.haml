@@ -16,9 +16,9 @@
               %br/
               %span.text-muted
                 %small= "#{t('authors.author_of')}"
-              = link_to author.books.first do
+              = link_to author.get_first_book do
                 %span
-                  %small= author.books.first.title
+                  %small= author.get_first_book.title
               %br/
               %span.text-muted
                 %small= "#{author.books.count} #{t('books.label')}"

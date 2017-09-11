@@ -16,6 +16,8 @@ class Author < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
+  scope :writers, -> { joins(:contributions).where(contributions:{job: 0}).group("authors.id").order("authors.created_at DESC") }
+  scope :with_biography, -> { where.not(biography: "") }
   # include PgSearch
   # pg_search_scope :search_by_name,
   #   :against => [
@@ -117,6 +119,18 @@ class Author < ActiveRecord::Base
     years_re = /\d+-\d*/
     return extra_info.split(',').reject{|part| part =~ years_re}.join(',').strip if extra_info.present?
     nil
+  end
+
+  def self.get_random_awarded
+    Rails.cache.fetch("get_random_awarded_authors", expires_in: 1.day) do
+      self.where(id: Award.random_awarded_author_ids)
+    end
+  end
+
+  def get_first_book
+    Rails.cache.fetch("#{cache_key}/get_first_book", expires_in: 5.days) do
+      books.first unless books.blank?
+    end
   end
 
 end

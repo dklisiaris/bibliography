@@ -11,6 +11,8 @@ class HomeController < ApplicationController
 
     @awarded_books = Book.get_random_awarded
 
+    @awarded_authors = Author.get_random_awarded
+
     @book_of_the_day = DailySuggestion.get_book_of_the_day_cached
 
     if user_signed_in?
