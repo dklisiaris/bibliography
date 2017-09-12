@@ -32,7 +32,7 @@ class PublishersController < ApplicationController
 
   def show
     @places = @publisher.places
-    @books = @publisher.books.page(params[:page])
+    @books = Book.includes(:main_writer).where(publisher_id: @publisher.id).page(params[:page])
     @place = Place.new
     impressionist(@publisher)
 

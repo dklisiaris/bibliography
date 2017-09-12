@@ -51,13 +51,13 @@ class BooksController < ApplicationController
       #   .order(impressions_count: :desc)
       #   .limit(50)
       @books = policy_scope(Book)
-        .search(keyphrase, where: @filters, aggs: aggs, body_options: {min_score: 0.1},
+        .search(keyphrase, where: @filters, aggs: aggs, includes: [:main_writer], body_options: {min_score: 0.1},
           order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
       @books = policy_scope(Book)
-        .search("*", where: @filters, aggs: aggs, order: {_score: :desc, views: :desc, has_image: :desc},
+        .search("*", where: @filters, aggs: aggs, includes: [:main_writer], order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
     end
     # @books_est_count = 20 * @books.total_pages
@@ -71,8 +71,8 @@ class BooksController < ApplicationController
 
   def featured
     authorize :book, :featured?
-    @books = policy_scope(Book).top(25)
-    @top_authors = Author.top(5)
+    @books = policy_scope(Book).includes(:main_writer).top(25)
+    @top_authors = Author.includes(:masterpiece).top(5)
     @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     respond_with(@books)
   end
@@ -90,8 +90,8 @@ class BooksController < ApplicationController
       .where.not(impressionable_id: nil)
       .group(:impressionable_id).order('count_id desc').limit(5).count('id').keys
 
-    @books = policy_scope(Book).where(id: most_views_book_ids)
-    @trending_authors = Author.where(id: most_views_author_ids)
+    @books = policy_scope(Book).includes(:main_writer).where(id: most_views_book_ids)
+    @trending_authors = Author.includes(:masterpiece).where(id: most_views_author_ids)
     @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     respond_with(@books)
   end
@@ -102,11 +102,11 @@ class BooksController < ApplicationController
 
     if(!(params[:load_awards] == "true"))
       if(params[:prize_id].present?)
-        @books = Book.joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
+        @books = Book.includes(:main_writer).joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
       else
         # most_awarded_book_ids = Award.where(awardable_type: "Book").page(params[:page])
         #   .group(:awardable_id).order('count_id desc').count('id').keys
-        @books = policy_scope(Book).includes(awards: :prize).where.not(awards: { id: nil })
+        @books = policy_scope(Book).includes(:main_writer, awards: :prize).where.not(awards: { id: nil })
           .order("awards.year DESC NULLS LAST").page(params[:page])
       end
     end
@@ -114,10 +114,10 @@ class BooksController < ApplicationController
 
   def latest
     authorize :book, :latest?
-    @books = policy_scope(Book).where("created_at > ?", 1.month.ago).page(params[:page]).order(publication_year: :desc, created_at: :desc)
+    @books = policy_scope(Book).includes(:main_writer).where("created_at > ?", 1.month.ago).page(params[:page]).order(publication_year: :desc, created_at: :desc)
 
     unless params[:only_books] == "true"
-      @latest_authors = Author.joins(:contributions).where(contributions: {job: 0}).order("contributions.created_at desc").limit(5)
+      @latest_authors = Author.includes(:masterpiece).joins(:contributions).where(contributions: {job: 0}).order("contributions.created_at desc").limit(5)
       @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     end
   end
@@ -203,15 +203,17 @@ class BooksController < ApplicationController
   def like
     authorize :book, :like?
 
-    if not current_user.likes?(@book)
-      current_user.like(@book)
-      @book.increment!(:liked_by_count_cache)
-      @book.create_activity :recommend, owner: current_user
+    if !current_user.likes?(@book)
+      if current_user.like(@book)
+        @book.update_column(:liked_by_count_cache, @book.liked_by_count)
+        @book.create_activity :recommend, owner: current_user
+      end
     else
-      current_user.unlike(@book)
-      @book.decrement!(:liked_by_count_cache)
-      activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
-      activity.destroy if activity.present?
+      if current_user.unlike(@book)
+        @book.update_column(:liked_by_count_cache, @book.liked_by_count)
+        activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
+        activity.destroy if activity.present?
+      end
     end
 
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}
@@ -222,11 +224,11 @@ class BooksController < ApplicationController
 
     if not current_user.dislikes?(@book)
       current_user.dislike(@book)
-      @book.increment!(:disliked_by_count_cache)
+      @book.update_column(:disliked_by_count_cache, @book.disliked_by_count)
       @book.create_activity :not_recommend, owner: current_user
     else
       current_user.undislike(@book)
-      @book.decrement!(:disliked_by_count_cache)
+      @book.update_column(:disliked_by_count_cache, @book.disliked_by_count)
       activity = current_user.activities.find_by(key: "book.not_recommend", trackable: @book)
       activity.destroy if activity.present?
     end

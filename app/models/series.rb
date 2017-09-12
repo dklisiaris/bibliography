@@ -34,3 +34,15 @@ class Series < ActiveRecord::Base
     write_attribute(:tsearch_vector, slugged_name(max_expansions: 3, dashes: false))
   end
 end
+
+# == Schema Information
+#
+# Table name: series
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  books_count    :integer          default(0)
+#  tsearch_vector :tsvector
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#

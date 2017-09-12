@@ -21,7 +21,7 @@
                   %small= author.get_first_book.title
               %br/
               %span.text-muted
-                %small= "#{author.books.count} #{t('books.label')}"
+                %small= "#{author.contributions_count} #{t('books.label')}"
             %td.text-center{:style => "width: 80px;"}
               = render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.blank? ? false : liked_ids.include?(author.id)}
         - if !authors.any?

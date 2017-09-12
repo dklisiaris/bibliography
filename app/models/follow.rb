@@ -12,3 +12,22 @@ class Follow < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: follows
+#
+#  id              :integer          not null, primary key
+#  followable_id   :integer          not null
+#  followable_type :string           not null
+#  follower_id     :integer          not null
+#  follower_type   :string           not null
+#  blocked         :boolean          default(FALSE), not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  fk_followables  (followable_id,followable_type)
+#  fk_follows      (follower_id,follower_type)
+#

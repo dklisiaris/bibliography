@@ -14,7 +14,15 @@
             %td
               = link_to book.title, book
               %br/
-              = link_to book.writers.first do
+              - if book.main_writer.present?
+                = link_to book.main_writer do
+                  %span.text-muted
+                    %small= book.main_writer.fullname
+              - elsif book.writers.first.present?
+                = link_to book.writers.first do
+                  %span.text-muted
+                    %small= book.main_author
+              - else
                 %span.text-muted
                   %small= book.main_author
             %td.text-center{:style => "width: 80px;"}

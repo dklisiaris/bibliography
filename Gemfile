@@ -234,11 +234,12 @@ group :development do
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-faster-assets'
   gem 'capistrano-bower', '~> 1.1'
-end
 
-group :development do
   # CLI gem for comfortably working with icon fonts
   gem 'fontello_rails_converter', '~> 0.4.6'
+
+  # Annotate Rails classes with schema and routes info
+  gem 'annotate', '~> 2.7'
 end
 
 # Adds typed hstore backed fields to an ActiveRecord model.

@@ -7,6 +7,7 @@ class Author < ActiveRecord::Base
   has_many :books, through: :contributions
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards
+  belongs_to :masterpiece, class_name: 'Book'
 
   enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
 
@@ -34,6 +35,7 @@ class Author < ActiveRecord::Base
   # multisearchable :against => [:lastname, :firstname, :tsearch_vector]
 
   after_validation :calculate_search_terms, :if => :name_changed?
+  before_save :write_mastepiece_id
 
   searchkick batch_size: 100,
   callbacks: :async,
@@ -123,14 +125,50 @@ class Author < ActiveRecord::Base
 
   def self.get_random_awarded
     Rails.cache.fetch("get_random_awarded_authors", expires_in: 1.day) do
-      self.where(id: Award.random_awarded_author_ids)
+      self.includes(:masterpiece).where(id: Award.random_awarded_author_ids)
     end
   end
 
   def get_first_book
-    Rails.cache.fetch("#{cache_key}/get_first_book", expires_in: 5.days) do
-      books.first unless books.blank?
+    if masterpiece.present?
+      return masterpiece
+    elsif books.present?
+      books.first
+    end
+  end
+
+  def write_mastepiece_id
+    unless books.blank?
+      write_attribute(masterpiece_id: books.first.id)
     end
   end
 
 end
+
+# == Schema Information
+#
+# Table name: authors
+#
+#  id                  :integer          not null, primary key
+#  firstname           :string
+#  lastname            :string
+#  extra_info          :string
+#  biography           :text
+#  image               :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  biblionet_id        :integer
+#  impressions_count   :integer          default(0)
+#  slug                :string
+#  tsearch_vector      :tsvector
+#  contributions_count :integer          default(0)
+#  uploaded_avatar     :string
+#  masterpiece_id      :integer
+#
+# Indexes
+#
+#  authors_tsearch_idx              (tsearch_vector)
+#  index_authors_on_biblionet_id    (biblionet_id) UNIQUE
+#  index_authors_on_masterpiece_id  (masterpiece_id)
+#  index_authors_on_slug            (slug) UNIQUE
+#

@@ -48,3 +48,26 @@ RSpec.describe Category, :type => :model do
   end
 
 end
+
+# == Schema Information
+#
+# Table name: categories
+#
+#  id                :integer          not null, primary key
+#  name              :string
+#  ddc               :string
+#  slug              :string
+#  biblionet_id      :integer
+#  parent_id         :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  impressions_count :integer          default(0)
+#  featured          :boolean          default(FALSE)
+#  tsearch_vector    :tsvector
+#
+# Indexes
+#
+#  categories_tsearch_idx         (tsearch_vector)
+#  index_categories_on_parent_id  (parent_id)
+#  index_categories_on_slug       (slug) UNIQUE
+#

@@ -6,7 +6,12 @@
     .row.clearfix
       .col-xs-9
         %h4= link_to book.title, book
-        %span= book.writers.first.present? ? link_to(book.main_author, book.writers.first) : book.main_author
+        - if book.main_writer.present?
+          %span= link_to(book.main_writer.fullname, book.main_writer)
+        - elsif book.writers.first.present?
+          %span= link_to(book.main_author, book.writers.first)
+        - else
+          %span= book.main_author
         %br/
         %span
           %small.text-muted= t('books.recommended_x_times', count: book.liked_by_count_cache) + " - " + |

@@ -27,7 +27,7 @@ class AuthorsController < ApplicationController
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end
-    @top_authors = Author.top(5)
+    @top_authors = Author.includes(:masterpiece).top(5)
     @recommended_authors = current_user.recommended_authors_cached if current_user.present?
 
     @liked_author_ids = current_user.liked_author_ids if current_user.present?
@@ -47,7 +47,7 @@ class AuthorsController < ApplicationController
     @shelves = current_user.shelves if user_signed_in?
     impressionist(@author)
 
-    @books = @author.books.order(impressions_count: :desc, id: :desc).page(params[:page])
+    @books = @author.books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
 
     respond_with(@author)
   end

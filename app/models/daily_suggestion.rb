@@ -52,3 +52,17 @@ class DailySuggestion < ActiveRecord::Base
 
 
 end
+
+# == Schema Information
+#
+# Table name: daily_suggestions
+#
+#  id              :integer          not null, primary key
+#  book_id         :integer
+#  suggested_at    :datetime
+#  suggested_count :integer          default(0)
+#
+# Indexes
+#
+#  index_daily_suggestions_on_book_id  (book_id) UNIQUE
+#

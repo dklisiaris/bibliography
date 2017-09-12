@@ -145,7 +145,8 @@ CREATE TABLE authors (
     slug character varying,
     tsearch_vector tsvector,
     contributions_count integer DEFAULT 0,
-    uploaded_avatar character varying
+    uploaded_avatar character varying,
+    masterpiece_id integer
 );
 
 
@@ -245,7 +246,8 @@ CREATE TABLE books (
     disliked_by_count_cache integer DEFAULT 0,
     bookshelves_count integer DEFAULT 0,
     views_count integer DEFAULT 0,
-    uploaded_cover character varying
+    uploaded_cover character varying,
+    main_writer_id integer
 );
 
 
@@ -1310,6 +1312,13 @@ CREATE UNIQUE INDEX index_authors_on_biblionet_id ON authors USING btree (biblio
 
 
 --
+-- Name: index_authors_on_masterpiece_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_authors_on_masterpiece_id ON authors USING btree (masterpiece_id);
+
+
+--
 -- Name: index_authors_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1363,6 +1372,13 @@ CREATE UNIQUE INDEX index_books_on_isbn13 ON books USING btree (isbn13);
 --
 
 CREATE UNIQUE INDEX index_books_on_ismn ON books USING btree (ismn);
+
+
+--
+-- Name: index_books_on_main_writer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_main_writer_id ON books USING btree (main_writer_id);
 
 
 --
@@ -1797,4 +1813,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170903183316');
 INSERT INTO schema_migrations (version) VALUES ('20170903214213');
 
 INSERT INTO schema_migrations (version) VALUES ('20170906120011');
+
+INSERT INTO schema_migrations (version) VALUES ('20170912082754');
+
+INSERT INTO schema_migrations (version) VALUES ('20170912092805');
 
