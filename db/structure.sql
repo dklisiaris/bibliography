@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.5
--- Dumped by pg_dump version 9.5.5
+-- Dumped from database version 9.5.8
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -906,154 +907,154 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: activities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: awards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY awards ALTER COLUMN id SET DEFAULT nextval('awards_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: bookshelves id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bookshelves ALTER COLUMN id SET DEFAULT nextval('bookshelves_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: contributions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contributions ALTER COLUMN id SET DEFAULT nextval('contributions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: daily_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY daily_suggestions ALTER COLUMN id SET DEFAULT nextval('daily_suggestions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: follows id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: impressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY impressions ALTER COLUMN id SET DEFAULT nextval('impressions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: pg_search_documents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: places id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY places ALTER COLUMN id SET DEFAULT nextval('places_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: prizes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY prizes ALTER COLUMN id SET DEFAULT nextval('prizes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: profiles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY profiles ALTER COLUMN id SET DEFAULT nextval('profiles_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: publishers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY publishers ALTER COLUMN id SET DEFAULT nextval('publishers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: royce_connector id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_connector ALTER COLUMN id SET DEFAULT nextval('royce_connector_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: royce_role id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_role ALTER COLUMN id SET DEFAULT nextval('royce_role_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: series id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY series ALTER COLUMN id SET DEFAULT nextval('series_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: shelves id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY shelves ALTER COLUMN id SET DEFAULT nextval('shelves_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: activities activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY activities
@@ -1061,7 +1062,7 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors
@@ -1069,7 +1070,7 @@ ALTER TABLE ONLY authors
 
 
 --
--- Name: awards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: awards awards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY awards
@@ -1077,7 +1078,7 @@ ALTER TABLE ONLY awards
 
 
 --
--- Name: books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books
@@ -1085,7 +1086,7 @@ ALTER TABLE ONLY books
 
 
 --
--- Name: bookshelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: bookshelves bookshelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bookshelves
@@ -1093,7 +1094,7 @@ ALTER TABLE ONLY bookshelves
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -1101,7 +1102,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -1109,7 +1110,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: contributions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: contributions contributions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contributions
@@ -1117,7 +1118,7 @@ ALTER TABLE ONLY contributions
 
 
 --
--- Name: daily_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: daily_suggestions daily_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY daily_suggestions
@@ -1125,7 +1126,7 @@ ALTER TABLE ONLY daily_suggestions
 
 
 --
--- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: follows follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows
@@ -1133,7 +1134,7 @@ ALTER TABLE ONLY follows
 
 
 --
--- Name: impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: impressions impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY impressions
@@ -1141,7 +1142,7 @@ ALTER TABLE ONLY impressions
 
 
 --
--- Name: pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pg_search_documents
@@ -1149,7 +1150,7 @@ ALTER TABLE ONLY pg_search_documents
 
 
 --
--- Name: places_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: places places_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY places
@@ -1157,7 +1158,7 @@ ALTER TABLE ONLY places
 
 
 --
--- Name: prizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: prizes prizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY prizes
@@ -1165,7 +1166,7 @@ ALTER TABLE ONLY prizes
 
 
 --
--- Name: profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY profiles
@@ -1173,7 +1174,7 @@ ALTER TABLE ONLY profiles
 
 
 --
--- Name: publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: publishers publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY publishers
@@ -1181,7 +1182,7 @@ ALTER TABLE ONLY publishers
 
 
 --
--- Name: royce_connector_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: royce_connector royce_connector_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_connector
@@ -1189,7 +1190,7 @@ ALTER TABLE ONLY royce_connector
 
 
 --
--- Name: royce_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: royce_role royce_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY royce_role
@@ -1197,7 +1198,7 @@ ALTER TABLE ONLY royce_role
 
 
 --
--- Name: series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: series series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY series
@@ -1205,7 +1206,7 @@ ALTER TABLE ONLY series
 
 
 --
--- Name: shelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: shelves shelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY shelves
@@ -1213,7 +1214,7 @@ ALTER TABLE ONLY shelves
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1599,7 +1600,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: books fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books
@@ -1607,7 +1608,7 @@ ALTER TABLE ONLY books
 
 
 --
--- Name: fk_rails_237c584e0e; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: bookshelves fk_rails_237c584e0e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bookshelves
@@ -1615,7 +1616,7 @@ ALTER TABLE ONLY bookshelves
 
 
 --
--- Name: fk_rails_426cc1dbb3; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: books_categories fk_rails_426cc1dbb3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books_categories
@@ -1623,7 +1624,7 @@ ALTER TABLE ONLY books_categories
 
 
 --
--- Name: fk_rails_4b64804a3a; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: books_categories fk_rails_4b64804a3a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books_categories
@@ -1631,7 +1632,7 @@ ALTER TABLE ONLY books_categories
 
 
 --
--- Name: fk_rails_51d9e3825a; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: awards fk_rails_51d9e3825a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY awards
@@ -1639,7 +1640,7 @@ ALTER TABLE ONLY awards
 
 
 --
--- Name: fk_rails_6b65d5b892; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: shelves fk_rails_6b65d5b892; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY shelves
@@ -1647,7 +1648,7 @@ ALTER TABLE ONLY shelves
 
 
 --
--- Name: fk_rails_9a6539777c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: bookshelves fk_rails_9a6539777c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bookshelves
@@ -1655,7 +1656,7 @@ ALTER TABLE ONLY bookshelves
 
 
 --
--- Name: fk_rails_ab8ec95b90; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: contributions fk_rails_ab8ec95b90; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contributions
@@ -1663,7 +1664,7 @@ ALTER TABLE ONLY contributions
 
 
 --
--- Name: fk_rails_c4e3b9f561; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: contributions fk_rails_c4e3b9f561; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contributions
@@ -1671,7 +1672,7 @@ ALTER TABLE ONLY contributions
 
 
 --
--- Name: fk_rails_d7ae2b039e; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: books fk_rails_d7ae2b039e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books
@@ -1679,7 +1680,7 @@ ALTER TABLE ONLY books
 
 
 --
--- Name: fk_rails_e424190865; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: profiles fk_rails_e424190865; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY profiles

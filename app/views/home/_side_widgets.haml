@@ -1,0 +1,10 @@
+= render partial: 'authors/widgets/side', locals: { title: " #{t('authors.label')}", icon: "user-secret", authors: @awarded_authors, liked_ids: nil } unless user_signed_in?
+
+= render 'home/widgets/my_books'
+= render 'home/widgets/my_collections'
+
+= render partial: 'books/widgets/side', locals: { title: " #{t('recommended_for_you')}", icon: "thumbs-o-up", books: @recommended_for_you} if user_signed_in?
+
+= render partial: 'books/widgets/side', locals: {  title: " #{t('recently_added')}", icon: "clock-o", books: @recently_added} if user_signed_in?
+
+= render 'home/widgets/people_to_follow'
