@@ -1,73 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin-ext,greek-ext);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin-ext,greek-ext);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&subset=greek);
 
-#page-wrapper.page-loading {
-    overflow: hidden
-}
-#page-wrapper.page-loading .preloader {
-    display: block
-}
-#page-wrapper.page-loading #page-container {
-    opacity: 0
-}
-.preloader {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    z-index: 99999
-}
-.preloader .inner {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    margin: 0 0 0 -50px;
-    width: 100px;
-    height: 100px;
-    text-align: center
-}
-.preloader-spinner {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto;
-    background-color: #ccc;
-    -webkit-animation: rotateplane .8s infinite ease-in-out;
-    animation: rotateplane .8s infinite ease-in-out
-}
-@-webkit-keyframes rotateplane {
-    0% {
-        -webkit-transform: perspective(120px)
-    }
-    50% {
-        -webkit-transform: perspective(120px) rotateY(180deg)
-    }
-    100% {
-        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
-    }
-}
-@keyframes rotateplane {
-    0% {
-        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
-    }
-    50% {
-        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
-    }
-    100% {
-        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
-    }
-}
 body {
     font-family: 'Open Sans', sans-serif;
     color: #454e59;
-    background-color: #454e59
+    background-color: #ebf1f2;
 }
 #login-container {
     position: absolute;
@@ -1296,7 +1232,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Roboto', serif;
+    font-family: 'Open Sans', serif;
     font-weight: 300
 }
 .h1 .small,

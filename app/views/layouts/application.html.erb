@@ -34,9 +34,9 @@
     <meta name="msapplication-wide310x150logo" content="icons/widetile.png" />
     <meta name="msapplication-square310x310logo" content="icons/largetile.png" />
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag :modernizr %>
 
     <script type='application/ld+json'>
     {
@@ -59,22 +59,13 @@
   <!-- END HEAD -->
 
   <!-- BEGIN BODY -->
-  <body data-no-turbolink class="<%= controller_name %> <%= action_name %>">
+  <body class="<%= controller_name %> <%= action_name %>">
 
     <!-- BEGIN PAGE WRAPER FOR LOADING SCREEN -->
     <div id="page-wrapper">
 
-      <!-- BEGIN PRELOADER - HERE COMES THE LOADING ICON -->
-      <div class="preloader">
-        <div class="inner">
-          <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
-          <h3 class="text-primary visible-lt-ie10"><strong>Loading..</strong></h3>
-        </div>
-      </div>
-      <!-- END PRELOADER -->
-
       <!-- BEGIN PAGE CONTAINER - THE WHOLE PAGE LIVES HERE -->
-      <div id="page-container" class="header-fixed-top sidebar-visible-lg-full enable-cookies">
+      <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
 
         <%= render 'layouts/navigation_sidebar' %>
 
@@ -100,8 +91,6 @@
       <!-- END PAGE CONTAINER -->
     </div>
     <!-- END PAGE WRAPER FOR LOADING SCREEN -->
-
-    <script>//$(function(){ ReadyDashboard.init(); });</script>
 
   </body>
   <!-- END BODY -->

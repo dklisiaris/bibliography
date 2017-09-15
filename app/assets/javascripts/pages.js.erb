@@ -15,17 +15,7 @@ var FormsWizard = function() {
 
   return {
     init: function() {
-
-      /* Set default wizard options */
-      var wizardOptions = {
-        focusFirstInput: true,
-        disableUIStyles: true,
-        inDuration: 0,
-        outDuration: 0
-      };
-
-      /* Initialize Progress Wizard */
-      $('#progress-wizard').formwizard(wizardOptions);
+      var currentStep = 1;
 
       // Get the progress bar and change its width when a step is shown
       var progressBar = $('#progress-bar-wizard');
@@ -33,14 +23,34 @@ var FormsWizard = function() {
         .css('width', '33%')
         .attr('aria-valuenow', '33');
 
-      $("#progress-wizard").bind('step_shown', function(event, data) {
-        if (data.currentStep === 'progress-first') {
+      $("#progress-second, #progress-third").hide();
+
+      $("#next2").click(function(){
+        if(currentStep < 3){
+          currentStep++;
+          handleStepChange();
+        }
+      });
+
+      $("#back2").click(function(){
+        if(currentStep > 1){
+          currentStep--;
+          handleStepChange();
+        }
+      });
+
+      var handleStepChange = function(){
+        if (currentStep === 1) {
+          $("#progress-second, #progress-third").hide();
+          $("#progress-first").show();
           progressBar
             .css('width', '33%')
             .attr('aria-valuenow', '33')
             .removeClass('progress-bar-info progress-bar-success')
             .addClass('progress-bar-danger');
-        } else if (data.currentStep === 'progress-second') {
+        } else if (currentStep === 2) {
+          $("#progress-first, #progress-third").hide();
+          $("#progress-second").show();
           progressBar
             .css('width', '66%')
             .attr('aria-valuenow', '66')
@@ -122,18 +132,25 @@ var FormsWizard = function() {
               });
               $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: '#rateable-books-wrapper', animation: false});
               $('#rateable-books-wrapper').removeClass('loading');
+              $('.book-container').masonry({
+                itemSelector: '.rateable-book',
+                columnWidth: 44,
+                gutter: 12,
+                fitWidth: true
+              });
             });
           })
-        } else if (data.currentStep === 'progress-third') {
+        } else if (currentStep === 3) {
+          $("#progress-first, #progress-second").hide();
+          $("#progress-third").show();
           progressBar
             .css('width', '100%')
             .attr('aria-valuenow', '100')
             .removeClass('progress-bar-danger progress-bar-info')
             .addClass('progress-bar-success');
           window.location.replace(window.location.origin);
-
         }
-      });
+      }
     }
   };
 }();

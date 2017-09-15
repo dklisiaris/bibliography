@@ -78,9 +78,6 @@ var App = function() {
                .toggleClass('open');
         });
 
-        // Initialize Placeholder (for IE9)
-        $('input, textarea').placeholder();
-
         $('.book-container').masonry({
           // options
           itemSelector: '.book-cover',
@@ -95,7 +92,6 @@ var App = function() {
         // Get all vital links
         var allLinks        = $('.sidebar-nav a', sidebar);
         var menuLinks       = $('.sidebar-nav-menu', sidebar);
-        var submenuLinks    = $('.sidebar-nav-submenu', sidebar);
 
         // Add ripple effect to all navigation links
         allLinks.on('click', function(e){
@@ -147,26 +143,6 @@ var App = function() {
                 }
                 else {
                     $('#sidebar .sidebar-nav-menu.open').removeClass('open');
-                    link.addClass('open');
-                }
-
-                // Resize Page Content
-                setTimeout(resizePageContent, 50);
-            }
-
-            return false;
-        });
-
-        // Submenu Accordion functionality
-        submenuLinks.on('click', function(e){
-            var link = $(this);
-
-            if (link.parent().hasClass('active') !== true) {
-                if (link.hasClass('open')) {
-                    link.removeClass('open');
-                }
-                else {
-                    link.closest('ul').find('.sidebar-nav-submenu.open').removeClass('open');
                     link.addClass('open');
                 }
 

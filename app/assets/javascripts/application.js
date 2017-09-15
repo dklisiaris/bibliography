@@ -11,13 +11,10 @@
 // about supported directives.
 //
 //= require jquery2
-//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.readyselector
 //= require typeahead.js/dist/typeahead.bundle.min
-//= require vex.combined.min
 //= require readmore/readmore.min
 //= require noty/js/noty/packaged/jquery.noty.packaged.min
 //= require trix

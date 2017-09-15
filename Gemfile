@@ -19,8 +19,7 @@ gem 'modernizr-rails', '~> 2.7'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.1'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -81,10 +80,6 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.7'
 
-group :development do
-  gem 'rails_layout'
-end
-
 gem 'pg', '~> 0.18'
 
 # Loads environment variables from `.env` file.
@@ -127,9 +122,6 @@ gem 'kaminari', '~> 1.0'
 
 # Search engine gem on top of elasticsearch
 gem 'searchkick', '~> 2.3'
-
-# jQuery plugin for drop-in fix binded events problem caused by Turbolinks
-gem 'jquery-turbolinks', '~> 2.1'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
@@ -234,9 +226,6 @@ group :development do
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-faster-assets'
   gem 'capistrano-bower', '~> 1.1'
-
-  # CLI gem for comfortably working with icon fonts
-  gem 'fontello_rails_converter', '~> 0.4.6'
 
   # Annotate Rails classes with schema and routes info
   gem 'annotate', '~> 2.7'

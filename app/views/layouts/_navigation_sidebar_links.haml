@@ -1,7 +1,7 @@
 .dark-bg
   = side_nav_li(t('side_menu.categories'), categories_path, "fa fa-sitemap")
-  = side_nav_li(t('side_menu.books'), books_path, "icon-books-stack-of-three")
-  = side_nav_li(t('side_menu.authors'), authors_path, "icon-people")
+  = side_nav_li(t('side_menu.books'), books_path, "fa fa-book")
+  = side_nav_li(t('side_menu.authors'), authors_path, "fa fa-user-secret")
   = side_nav_li(t('side_menu.publishers'), publishers_path, "fa fa-building")
   = side_nav_li(t('series.label'), series_index_path, "fa fa-tasks")
 %li.sidebar-separator
@@ -24,7 +24,7 @@
     %li.sidebar-separator
       %i
         %span.sidebar-nav-mini-hide= t('side_menu.admins_only')
-    = side_nav_li(t('side_menu.import'), import_path, "icon-arrow")
+    = side_nav_li(t('side_menu.import'), import_path, "fa fa-upload")
     = side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal")
     = side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true)
     = side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange")
