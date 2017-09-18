@@ -207,12 +207,14 @@ class BooksController < ApplicationController
       if current_user.like(@book)
         @book.update_column(:liked_by_count_cache, @book.liked_by_count)
         @book.create_activity :recommend, owner: current_user
+        Rating.like(current_user, @book)
       end
     else
       if current_user.unlike(@book)
         @book.update_column(:liked_by_count_cache, @book.liked_by_count)
         activity = current_user.activities.find_by(key: "book.recommend", trackable: @book)
         activity.destroy if activity.present?
+        Rating.unlike(current_user, @book)
       end
     end
 
@@ -226,11 +228,13 @@ class BooksController < ApplicationController
       current_user.dislike(@book)
       @book.update_column(:disliked_by_count_cache, @book.disliked_by_count)
       @book.create_activity :not_recommend, owner: current_user
+      Rating.dislike(current_user, @book)
     else
       current_user.undislike(@book)
       @book.update_column(:disliked_by_count_cache, @book.disliked_by_count)
       activity = current_user.activities.find_by(key: "book.not_recommend", trackable: @book)
       activity.destroy if activity.present?
+      Rating.undislike(current_user, @book)
     end
 
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}

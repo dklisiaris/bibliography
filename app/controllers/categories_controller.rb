@@ -76,8 +76,10 @@ class CategoriesController < ApplicationController
 
     if not current_user.likes?(@category)
       current_user.like(@category)
+      Rating.like(current_user, @category)
     else
       current_user.unlike(@category)
+      Rating.unlike(current_user, @category)
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@category)}

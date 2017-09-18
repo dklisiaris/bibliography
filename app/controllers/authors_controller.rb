@@ -87,8 +87,10 @@ class AuthorsController < ApplicationController
 
     if not current_user.likes?(@author)
       current_user.like(@author)
+      Rating.like(current_user, @author)
     else
       current_user.unlike(@author)
+      Rating.unlike(current_user, @author)
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@author)}

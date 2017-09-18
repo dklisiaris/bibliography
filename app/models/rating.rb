@@ -16,7 +16,7 @@ class Rating < ActiveRecord::Base
   end
 
   def self.unlike(user, rateable)
-    self.where(user_id: user.id, rateable_id: rateable.id, rateable_type: rateable.type, rate: 0).destroy
+    self.where(user_id: user.id, rateable_id: rateable.id, rateable_type: rateable.class.name, rate: 0).each(&:destroy)
   end
 
   def self.dislike(user, rateable)
@@ -24,7 +24,7 @@ class Rating < ActiveRecord::Base
   end
 
   def self.undislike(user, rateable)
-    self.where(user_id: user.id, rateable_id: rateable.id, rateable_type: rateable.type, rate: 1).destroy
+    self.where(user_id: user.id, rateable_id: rateable.id, rateable_type: rateable.class.name, rate: 1).each(&:destroy)
   end
 end
 
