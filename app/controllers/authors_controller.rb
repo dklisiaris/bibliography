@@ -87,10 +87,10 @@ class AuthorsController < ApplicationController
 
     if not current_user.likes?(@author)
       current_user.like(@author)
-      Rating.like(current_user, @author)
+      BackupRatingsWorker.perform_async(current_user.id, @author.id, 'Author', 'like')
     else
       current_user.unlike(@author)
-      Rating.unlike(current_user, @author)
+      BackupRatingsWorker.perform_async(current_user.id, @author.id, 'Author', 'unlike')
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@author)}
