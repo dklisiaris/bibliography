@@ -12,7 +12,11 @@ class Rating < ActiveRecord::Base
   validates :rate, presence: true
 
   def self.like(user, rateable)
-    rateable.ratings.create(user_id: user.id, rate: 0)
+    if !rateable.ratings.exists?(user_id: user.id)
+      rateable.ratings.create(user_id: user.id, rate: 0)
+    else
+      rateable.ratings.find_by(user_id: user.id).update(rate: 0)
+    end
   end
 
   def self.unlike(user, rateable)
@@ -20,7 +24,11 @@ class Rating < ActiveRecord::Base
   end
 
   def self.dislike(user, rateable)
-    rateable.ratings.create(user_id: user.id, rate: 1)
+    if !rateable.ratings.exists?(user_id: user.id)
+      rateable.ratings.create(user_id: user.id, rate: 1)
+    else
+      rateable.ratings.find_by(user_id: user.id).update(rate: 1)
+    end
   end
 
   def self.undislike(user, rateable)
