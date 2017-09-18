@@ -8,6 +8,7 @@ class Author < ActiveRecord::Base
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards
   belongs_to :masterpiece, class_name: 'Book'
+  has_many :ratings, as: :rateable
 
   enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
 

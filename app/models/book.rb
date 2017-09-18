@@ -28,6 +28,7 @@ class Book < ActiveRecord::Base
   belongs_to :series, :counter_cache => true
   has_one :daily_suggestion
   belongs_to :main_writer, class_name: 'Author'
+  has_many :ratings, as: :rateable
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)

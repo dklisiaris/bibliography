@@ -6,6 +6,7 @@ class Category < ActiveRecord::Base
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   has_and_belongs_to_many :books
+  has_many :ratings, as: :rateable
   before_destroy { books.clear }
 
   validates :name, presence: true, :uniqueness => { scope: :ddc, message: 'This category already exists'}

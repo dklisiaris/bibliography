@@ -3,6 +3,7 @@ class Shelf < ActiveRecord::Base
 
   has_many :bookshelves
   has_many :books, through: :bookshelves
+  has_many :ratings, as: :rateable
 
   enum privacy: %i(same_as_profile is_public is_private)
   enum default_name: %i(my_library want_to_read favourites currently_reading read_but_not_own to_read)
