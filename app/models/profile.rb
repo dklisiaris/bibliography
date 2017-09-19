@@ -25,8 +25,9 @@ class Profile < ActiveRecord::Base
     if avatar_url and not avatar_url.nil?
       avatar_url
     else
-      gravatar_id = Digest::MD5::hexdigest(user.email).downcase
-      "https://gravatar.com/avatar/#{gravatar_id}.png"
+      # gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+      # "https://gravatar.com/avatar/#{gravatar_id}.png"
+      "placeholders/no_user_avatar.png"
     end
   end
 
