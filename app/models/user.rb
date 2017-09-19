@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   before_save :ensure_api_key
   # before_create :assign_api_key
   after_create :assign_default_role, :assign_profile, :assign_built_in_shelves, :send_signup_email
+  before_destroy :clear_cache
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -120,6 +121,13 @@ class User < ActiveRecord::Base
     Rails.cache.fetch("#{cache_key}/recommended_authors", expires_in: 1.day) do
       recommended_authors
     end
+  end
+
+  def clear_cache
+    Rails.cache.delete("#{cache_key}/people_to_follow")
+    Rails.cache.delete("#{cache_key}/recommended_books")
+    Rails.cache.delete("#{cache_key}/recommended_authors")
+    return true
   end
 
   private
