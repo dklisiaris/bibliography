@@ -284,13 +284,25 @@ class Book < ActiveRecord::Base
 
   def self.get_popular
     Rails.cache.fetch("get_popular", expires_in: 2.days) do
-      self.order(impressions_count: :desc).limit(8)
+      self.where(id: self.get_popular_ids)
+    end
+  end
+
+  def self.get_popular_ids
+    Rails.cache.fetch("get_popular_ids", expires_in: 2.days) do
+      self.order(impressions_count: :desc).limit(8).ids
     end
   end
 
   def self.get_latest
     Rails.cache.fetch("get_latest", expires_in: 1.day) do
-      self.order(created_at: :desc).where.not(image: '').limit(8)
+      self.where(id: self.get_latest_ids)
+    end
+  end
+
+  def self.get_latest_ids
+    Rails.cache.fetch("get_latest_ids", expires_in: 1.day) do
+      self.order(created_at: :desc).where.not(image: '').limit(8).ids
     end
   end
 

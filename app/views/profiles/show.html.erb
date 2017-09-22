@@ -187,7 +187,8 @@
         title: " #{t('authors.favourite')}",
         icon: "user-secret",
         authors: @recommended_authors,
-        liked_ids: @liked_author_ids
+        liked_ids: @liked_author_ids,
+        cache_key: "side_user_liked_authors_#{@user.id}"
       } %>
 
     <div class="widget">

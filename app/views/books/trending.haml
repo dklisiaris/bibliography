@@ -11,13 +11,14 @@
   .col-sm-8
     = render partial: 'books/featured_book', :collection => @books, :as => :book
   .col-sm-4
-    = render partial: 'authors/widgets/side', |
-    locals: {                                 |
-    title: " #{t('books.popular')} #{t('authors.label')}",      |
-    icon: "user-secret",                      |
-    authors: @trending_authors,                    |
-    liked_ids: @liked_author_ids              |
-    }                                         |
+    = render partial: 'authors/widgets/side',              |
+    locals: {                                              |
+    title: " #{t('books.popular')} #{t('authors.label')}", |
+    icon: "user-secret",                                   |
+    authors: @trending_authors,                            |
+    liked_ids: @liked_author_ids,                          |
+    cache_key: 'side_trending_authors'                     |
+    }                                                      |
 
 - if user_signed_in?
   = render 'books/collections_modal'

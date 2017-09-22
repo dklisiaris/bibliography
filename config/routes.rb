@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin? } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
+    mount RedisBrowser::Web => '/redis'
   end
 
   # Restful API routes

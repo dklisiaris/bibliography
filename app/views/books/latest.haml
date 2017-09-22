@@ -22,7 +22,8 @@
     title: " #{t('recently_added')}",         |
     icon: "user-secret",                      |
     authors: @latest_authors,                 |
-    liked_ids: @liked_author_ids              |
+    liked_ids: @liked_author_ids,             |
+    cache_key: 'side_latest_authors'          |
     }                                         |
 
 - if user_signed_in?
