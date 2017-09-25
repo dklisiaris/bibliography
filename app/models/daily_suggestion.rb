@@ -44,9 +44,20 @@ class DailySuggestion < ActiveRecord::Base
     current_suggestion.book unless current_suggestion.nil?
   end
 
+  def self.get_book_of_the_day_id
+    current_suggestion = get_current_suggestion
+    current_suggestion.book.id unless current_suggestion.nil?
+  end
+
+  def self.get_book_of_the_day_id_cached
+    Rails.cache.fetch("get_book_of_the_day_id", expires_in: 1.day) do
+      get_book_of_the_day_id
+    end
+  end
+
   def self.get_book_of_the_day_cached
     Rails.cache.fetch("get_book_of_the_day", expires_in: 1.day) do
-      get_book_of_the_day
+      Book.find(get_book_of_the_day_id_cached)
     end
   end
 
