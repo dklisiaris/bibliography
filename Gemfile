@@ -264,3 +264,6 @@ gem 'redis-browser', '~> 0.5.1'
 
 # Clean ruby syntax for writing and deploying cron jobs.
 gem 'whenever', '~> 0.9.7'
+
+# Exception and uptime monitoring
+gem 'honeybadger', '~> 3.1'
