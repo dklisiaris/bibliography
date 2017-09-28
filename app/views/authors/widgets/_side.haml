@@ -1,32 +1,34 @@
 - no_authors_msg ||= t('no_authors_yet')
 
-.widget
-  .widget-content.widget-content-mini.border-bottom
-    = fa(icon)
-    %strong= title
-  .widget-content.widget-content-full
-    %table.table.table-borderless.table-striped.table-vcenter
-      %tbody
-        - authors.each do |author|
-          %tr
-            %td.text-center{:style => "width: 80px;"}
-              = link_to image_tag(author.avatar, alt: "author_cover", width: "80", class: "img-thumbnail"), author
-            %td
-              = link_to author.fullname, author
-              %br/
-              %span.text-muted
-                %small= "#{t('authors.author_of')}"
-              = link_to author.get_first_book do
-                %span
-                  %small= author.get_first_book.title
-              %br/
-              %span.text-muted
-                %small= "#{author.contributions_count} #{t('books.label')}"
-            %td.text-center{:style => "width: 80px;"}
-              = render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.blank? ? false : liked_ids.include?(author.id)}
-        - if !authors.any?
-          %tr
-            %td.text-center
-              %span.text-muted
-                %small= no_authors_msg
+- cache([cache_key, authors.map(&:id), authors.map(&:updated_at).max]) do
+  .widget
+    .widget-content.widget-content-mini.border-bottom
+      = fa(icon)
+      %strong= title
+    .widget-content.widget-content-full
+      %table.table.table-borderless.table-striped.table-vcenter
+        %tbody
+          - authors.each do |author|
+            - cache(author) do
+              %tr
+                %td.text-center{:style => "width: 80px;"}
+                  = link_to image_tag(author.avatar, alt: "author_cover", width: "80", class: "img-thumbnail"), author
+                %td
+                  = link_to author.fullname, author
+                  %br/
+                  %span.text-muted
+                    %small= "#{t('authors.author_of')}"
+                  = link_to author.get_first_book do
+                    %span
+                      %small= author.get_first_book.title
+                  %br/
+                  %span.text-muted
+                    %small= "#{author.contributions_count} #{t('books.label')}"
+                -#%td.text-center{:style => "width: 80px;"}
+                  = render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.blank? ? false : liked_ids.include?(author.id)}
+          - if !authors.any?
+            %tr
+              %td.text-center
+                %span.text-muted
+                  %small= no_authors_msg
 

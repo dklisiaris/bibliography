@@ -1,0 +1,2 @@
+---
+api_key: <%= Rails.application.secrets.HONEYBADGER_API_KEY %>

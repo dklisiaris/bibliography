@@ -16,7 +16,8 @@
     title: " #{t('authors.favourite')}",      |
     icon: "user-secret",                      |
     authors: @top_authors,                    |
-    liked_ids: @liked_author_ids              |
+    liked_ids: @liked_author_ids,             |
+    cache_key: 'side_top_authors'             |
     }                                         |
 
 - if user_signed_in?

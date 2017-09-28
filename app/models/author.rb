@@ -140,7 +140,7 @@ class Author < ActiveRecord::Base
 
   def write_mastepiece_id
     unless books.blank?
-      write_attribute(masterpiece_id: books.first.id)
+      write_attribute(:masterpiece_id, books.first.id)
     end
   end
 

@@ -96,6 +96,36 @@ export NEWRELIC_LICENSE_KEY=license_key
 export SKYLIGHT_TOKEN=secret_token
 ```
 
+Omniauth and mail service credentials are loaded from `config/secrets.yml`.
+The `secrets.yml` is not commited to repositiory. Make sure it has been created
+and it looks like this:
+
+```yml
+development:
+  secret_key_base: key_generated_with_rake_secret_command
+
+  FACEBOOK_APP_ID: "facebook_app_id"
+  FACEBOOK_APP_SECRET: "facebook_app_secret"
+  GOOGLE_CLIENT_ID: "google_client_id"
+  GOOGLE_CLIENT_SECRET: "google_client_secret"
+  MAILJET_USERNAME: "mailjet_username"
+  MAILJET_PASSWORD: "mailjet_password"
+
+test:
+  secret_key_base: key_generated_with_rake_secret_command
+
+production:
+  secret_key_base: key_generated_with_rake_secret_command
+
+  FACEBOOK_APP_ID: "facebook_app_id"
+  FACEBOOK_APP_SECRET: "facebook_app_secret"
+  GOOGLE_CLIENT_ID: "google_client_id"
+  GOOGLE_CLIENT_SECRET: "google_client_secret"
+  SKYLIGHT_TOKEN: "skylight_token"
+  MAILJET_USERNAME: "mailjet_username"
+  MAILJET_PASSWORD: "mailjet_username"
+```
+
 Create and migrate database
 ```ruby
 bundle exec rake db:create
