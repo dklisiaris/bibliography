@@ -194,7 +194,7 @@ gem 'acts_as_commentable_with_threading'
 
 group :production, :staging do
   # Skylight is a smart profiler for Rails apps
-  # gem 'skylight', '~> 1.3'
+  gem 'skylight', '~> 1.3'
 end
 
 group :development do
@@ -267,3 +267,6 @@ gem 'whenever', '~> 0.9.7'
 
 # Exception and uptime monitoring
 gem 'honeybadger', '~> 3.1'
+
+# SaaS based Application protection and monitoring platform
+gem 'sqreen', '~> 1.8'
