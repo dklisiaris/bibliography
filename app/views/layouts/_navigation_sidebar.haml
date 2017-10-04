@@ -1,22 +1,24 @@
 / BEGIN MAIN LEFT NAVIGATION SIDEBAR
 #sidebar
-  #sidebar-brand.themed-background
+  #sidebar-brand
     = link_to root_path, class: "sidebar-title" do
-      %i.fa.fa-book
+      %span.sidebar-nav-mini-show
+        = image_tag('icons/apple-touch-icon-57x57', class: 'logo-xs')
       %span.sidebar-nav-mini-hide
-        %strong> Bibliography
-        GR
+        = image_tag('logos/full_logo_6_sm.png', class: 'logo-full')
   #sidebar-scroll
     .sidebar-content
       %ul.sidebar-nav
         = render "layouts/navigation_sidebar_links"
   #sidebar-extra-info.sidebar-content.sidebar-nav-mini-hide
     .text-center
+      = link_to fa('facebook-square'), 'https://www.facebook.com/bibliographygr/', target: '_blank'
+      %br/
       %small
         Crafted with
         %i.fa.fa-heart.text-danger
-        by
-        %a{:href => "https://github.com/dklisiaris", :target => "_blank"} dklisiaris
+        in
+        %a{:href => "https://www.ceid.upatras.gr/", :target => "_blank"} CEID
       %br/
       %small © 20[0-9]{2} Copyleft
 / END MAIN LEFT NAVIGATION SIDEBAR

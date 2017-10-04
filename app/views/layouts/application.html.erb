@@ -15,24 +15,30 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <%= display_meta_tags %>
-    <%= favicon_link_tag 'icons/favicon.png' %>
+    <%= favicon_link_tag 'icons/favicon-16x16.png', type: 'image/png', sizes: '16x16' %>
+    <%= favicon_link_tag 'icons/favicon-32x32.png', type: 'image/png', sizes: '32x32' %>
+    <%= favicon_link_tag 'icons/favicon-96x96.png', type: 'image/png', sizes: '96x96' %>
+    <%= favicon_link_tag 'icons/favicon-128x128.png', type: 'image/png', sizes: '128x128' %>
+    <%= favicon_link_tag 'icons/favicon-196x196.png', type: 'image/png', sizes: '196x196' %>
 
     <!-- Apple Touch Icons -->
-    <%= favicon_link_tag 'icons/icon57.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '57x57' %>
-    <%= favicon_link_tag 'icons/icon72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
-    <%= favicon_link_tag 'icons/icon72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
-    <%= favicon_link_tag 'icons/icon76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76' %>
-    <%= favicon_link_tag 'icons/icon114.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '114x114' %>
-    <%= favicon_link_tag 'icons/icon120.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120' %>
-    <%= favicon_link_tag 'icons/icon144.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
-    <%= favicon_link_tag 'icons/icon152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
-    <%= favicon_link_tag 'icons/icon180.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-57x57.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '57x57' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-72x72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-76x76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-114x114.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '114x114' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-120x120.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-144x144.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-152x152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
+    <%= favicon_link_tag 'icons/apple-touch-icon-180x180.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180' %>
 
     <!-- Windows 8 Tile Icons -->
-    <meta name="msapplication-square70x70logo" content="icons/smalltile.png" />
-    <meta name="msapplication-square150x150logo" content="icons/mediumtile.png" />
-    <meta name="msapplication-wide310x150logo" content="icons/widetile.png" />
-    <meta name="msapplication-square310x310logo" content="icons/largetile.png" />
+    <meta name="application-name" content="BibliographyGR"/>
+    <meta name="msapplication-TileColor" content="#de4b39" />
+    <meta name="msapplication-TileImage" content="icons/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="icons/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="icons/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="icons/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="icons/mstile-310x310.png" />
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>

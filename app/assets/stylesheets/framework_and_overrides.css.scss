@@ -89,3 +89,16 @@ section {
     margin: 0 5px;
   }
 }
+
+#sidebar-brand{
+  background-color: #fff;
+  .sidebar-title{
+    background-color: #fff;
+    .logo-full{
+      padding-top: 5px;
+    }
+    .logo-xs{
+      padding-top: 14px;
+    }
+  }
+}

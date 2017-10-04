@@ -2945,6 +2945,12 @@ p {
     #page-container.sidebar-visible-lg-mini #sidebar .sidebar-nav-mini-hide {
         display: none
     }
+    #page-container.sidebar-visible-lg-full #sidebar .sidebar-nav-mini-show {
+        display: none
+    }
+    #page-container.sidebar-visible-lg-mini #sidebar .sidebar-nav-mini-show {
+        display: block
+    }
     #page-container.sidebar-visible-lg-mini #sidebar .sidebar-nav li {
         position: relative
     }
