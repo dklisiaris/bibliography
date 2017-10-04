@@ -1,0 +1,3 @@
+---
+# The authentication token for the application.
+token: <%= Rails.application.secrets.SQREEN_TOKEN %>
