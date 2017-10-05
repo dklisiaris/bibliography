@@ -102,3 +102,15 @@ section {
     }
   }
 }
+
+.navbar-brand{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  float: none;
+  padding: 5px 0;
+  img{
+    width: 40px;
+    height: 40px;
+  }
+}

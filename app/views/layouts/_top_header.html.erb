@@ -8,13 +8,13 @@
                 </a>
               </li>
               <%= top_nav_li(UnicodeUtils.upcase(detone(t('home'))), root_path, nil, 'hidden-xs') %>
-              <%= top_nav_li('', root_path, 'fa fa-home', 'visible-xs') %>
               <%= top_nav_li(UnicodeUtils.upcase(detone(t('collections'))), shelves_path, nil, 'hidden-xs') %>
-              <%= top_nav_li('', shelves_path, 'fa fa-folder-open', 'visible-xs') %>
               <%= top_nav_li(UnicodeUtils.upcase(detone(t('my_books'))), my_books_path, nil, 'hidden-xs') %>
-              <%= top_nav_li('', my_books_path, 'fa fa-book', 'visible-xs') %>
 
             </ul>
+
+            <%= link_to image_tag('logos/logo120.png'), root_path, class: 'navbar-brand visible-xs' %>
+
             <ul class="nav navbar-nav-custom pull-right">
               <% if user_signed_in? %>
               <%= top_nav_li(current_user.screen_name, public_profile_path, nil, 'hidden-xs') %>
