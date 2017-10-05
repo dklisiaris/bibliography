@@ -1,6 +1,7 @@
-= side_nav_li(t('home'), root_path, "fa fa-home")
-= side_nav_li(t('collections'), shelves_path, "fa fa-folder-open")
-= side_nav_li(t('my_books'), my_books_path, "fa fa-book")
+.visible-xs
+  = side_nav_li(t('home'), root_path, "fa fa-home")
+  = side_nav_li(t('collections'), shelves_path, "fa fa-folder-open")
+  = side_nav_li(t('my_books'), my_books_path, "fa fa-book")
 
 .dark-bg
   = side_nav_li(t('side_menu.categories'), categories_path, "fa fa-sitemap")
