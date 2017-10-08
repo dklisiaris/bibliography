@@ -8,6 +8,9 @@ $('.books.show').ready ->
 $('.books.index').ready ->
   moreFilters($('.filter-content'))
 
+  $('.filters-trigger').click ->
+    $('#filter-sidebar').toggleClass('open')
+
 $(".books").ready ->
   # Instantiate the Bloodhound suggestion engine
   engine = new Bloodhound(
