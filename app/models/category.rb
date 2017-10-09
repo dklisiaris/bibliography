@@ -15,6 +15,9 @@ class Category < ActiveRecord::Base
 
   scope :featured, -> { where(featured: true) }
 
+  # Log impressions filtered by ip
+  is_impressionable :counter_cache => true, :unique => true
+
   searchkick batch_size: 100,
   callbacks: :async,
   match: :word_start,

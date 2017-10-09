@@ -11,6 +11,8 @@ class CategoriesController < ApplicationController
 
   respond_to :html
 
+  impressionist :actions=>[:index]
+
   def index
     @categories = Category.roots
 
@@ -38,6 +40,7 @@ class CategoriesController < ApplicationController
   def show
     @children = @category.children
     @books = @category.books.order(impressions_count: :desc, image: :asc).page(params[:page])
+    impressionist(@category)
 
     respond_with(@category, @children)
   end
