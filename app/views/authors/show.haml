@@ -1,4 +1,4 @@
-- tags = { title: @author.fullname, image: @author.avatar, description: @author.short_biography(140) }
+- tags = { title: @author.fullname, image: image_url(@author.avatar), description: @author.short_biography(140) }
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 - pages = {fa('home') => root_url, t('authors.label') => authors_path, @author.fullname => nil}
 = cell(:navigation).call(:content_header,                                                |

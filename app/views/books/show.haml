@@ -1,4 +1,4 @@
-- tags = { title: @book.title, image: @book.cover, description: @book.short_description(185) }
+- tags = { title: @book.title, image: image_url(@book.cover), description: @book.short_description(185) }
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 - pages = {fa('home') => root_url, t('books.label') => books_url, @book.title => nil}
 = cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', |

@@ -2,6 +2,8 @@
 
 [![Dependency Status](https://gemnasium.com/dklisiaris/bibliography.svg)](https://gemnasium.com/dklisiaris/bibliography)
 
+![Logo](https://i.imgur.com/gyYUq4R.png)
+
 Source code of [BibliographyGR](https://bibliography.gr) Web Application
 
 ## Description
