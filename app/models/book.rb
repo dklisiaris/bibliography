@@ -155,6 +155,21 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def cover_og
+    if uploaded_cover_url.present?
+      og_cover = cover.gsub('.jpg', '_og.jpg')
+      og_cover_path = Rails.public_path.to_s + og_cover
+      if Pathname.new(og_cover_path).exist?
+        og_cover
+      else
+        BookCoverOgGeneratorWorker.perform_async(id)
+        cover
+      end
+    else
+      cover
+    end
+  end
+
   # Try building a slug based on the following fields in
   # increasing order of specificity.
   def slug_candidates
