@@ -11,4 +11,8 @@ every 1.day, at: '06:00 am' do
   runner "ContentUpdateWorker.perform_async(500)"
 end
 
+every 1.day, at: '08:00 pm' do
+  runner "BookOfTheDayPublisherWorker.perform"
+end
+
 # Learn more: http://github.com/javan/whenever
