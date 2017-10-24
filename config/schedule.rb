@@ -12,7 +12,7 @@ every 1.day, at: '06:00 am' do
 end
 
 every 1.day, at: '08:00 pm' do
-  runner "BookOfTheDayPublisherWorker.perform"
+  runner "BookOfTheDayPublisherWorker.perform_async"
 end
 
 # Learn more: http://github.com/javan/whenever
