@@ -18,9 +18,11 @@
               t('books.in_x_collections', count: book.bookshelves_count) + " - " + |
               t('books.with_x_views', count: book.views_count)             |
       .col-xs-3.text-center
-        = render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true}
-        %br/
-        = render partial: 'books/widgets/recommend_btns', locals: {book: book}
+        - if @owned_book_ids.present?
+          = render partial: 'books/widgets/collections_manager_btn', locals: {book: book, full_size: true}
+          %br/
+        - if @liked_book_ids.present? && @disliked_book_ids.present?
+          = render partial: 'books/widgets/recommend_btns', locals: {book: book}
         - if policy(book).update?
           = tag(:br)
           %small.text-muted

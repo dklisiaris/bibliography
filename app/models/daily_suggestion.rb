@@ -32,6 +32,7 @@ class DailySuggestion < ActiveRecord::Base
     suggested = pick_suggestion
     suggested.update(suggested_at: DateTime.now)
     suggested.increment!(:suggested_count)
+    Rails.cache.delete("get_book_of_the_day_id")
     Rails.cache.delete("get_book_of_the_day")
   end
 

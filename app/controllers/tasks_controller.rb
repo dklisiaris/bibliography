@@ -4,10 +4,14 @@ class TasksController < ApplicationController
   def index
     authorize :task, :index?
 
-    @books_count = Book.all.count
-    @authors_count = Author.all.count
+    @books_count      = Book.all.count
+    @authors_count    = Author.all.count
     @publishers_count = Publisher.all.count
     @categories_count = Category.all.count
+
+    daily_suggestion  = DailySuggestion.get_current_suggestion
+    @suggested_at     = daily_suggestion.suggested_at
+    @book_of_the_day  = daily_suggestion.book
   end
 
   def update_content

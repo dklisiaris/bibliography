@@ -39,6 +39,8 @@
 <div class="row">
   <div class="col-sm-6">
     <%= render partial: "book_of_month_importer" %>
+
+    <%= render partial: "books/widgets/book", locals: {subtitle: l(@suggested_at, format: "%a, %d %b %Y"), title: "Book of the Day", book: @book_of_the_day} %>
   </div>
   <div class="col-sm-6">
     <%= render partial: "content_update_task", locals: {is_limited: true} %>
