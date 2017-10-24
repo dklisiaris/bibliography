@@ -126,6 +126,9 @@ gem 'searchkick', '~> 2.3'
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
 
+# A simple HTTP and REST client for Ruby
+gem 'rest-client', '~> 2.0'
+
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
