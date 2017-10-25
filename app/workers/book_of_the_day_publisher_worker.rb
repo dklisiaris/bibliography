@@ -14,7 +14,7 @@ class BookOfTheDayPublisherWorker
     unless book_of_the_day.cover_og == "/no_cover.jpg"
       RestClient::Request.execute(method: :post, url: "https://graph.facebook.com/1964445657164530/feed",
         payload: {
-          message: "Βιβλίο της #{I18n.l(suggested_at, format: "%a, %d %b %Y")}\r\n---\r\n#{book_of_the_day.title}\r\n---\r\n#{book_of_the_day.short_description}",
+          message: "Βιβλίο της #{I18n.l(suggested_at, format: "%A, %d %b %Y")}\r\n---\r\n#{book_of_the_day.title}\r\n---\r\n#{book_of_the_day.short_description}",
           link: "https://bibliography.gr/books/#{book_of_the_day.slug}",
           access_token: Rails.application.secrets.FACEBOOK_ACCESS_TOKEN
         })
