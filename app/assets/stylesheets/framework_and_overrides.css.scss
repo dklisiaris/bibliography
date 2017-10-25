@@ -106,6 +106,10 @@ section {
 #sidebar-extra-info {
   .social-icon{
     font-size: 24px;
+    color: #fff;
+    &:hover{
+      color: #de4b39;
+    }
   }
 }
 
