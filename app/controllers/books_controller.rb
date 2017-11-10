@@ -164,7 +164,11 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book.update(book_params)
+    filtered_params = book_params
+    filtered_params["isbn"]   = nil if filtered_params["isbn"].empty?
+    filtered_params["isbn13"] = nil if filtered_params["isbn13"].empty?
+    filtered_params["ismn"]   = nil if filtered_params["ismn"].empty?
+    @book.update(filtered_params)
 
     respond_with(@book)
   end
