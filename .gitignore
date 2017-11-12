@@ -28,3 +28,6 @@
 
 # Ignore secrets
 /config/secrets.yml
+
+*.key
+*.pem
