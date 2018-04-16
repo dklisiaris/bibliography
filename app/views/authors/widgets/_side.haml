@@ -15,12 +15,13 @@
                   = link_to image_tag(author.avatar, alt: "author_cover", width: "80", class: "img-thumbnail"), author
                 %td
                   = link_to author.fullname, author
-                  %br/
-                  %span.text-muted
-                    %small= "#{t('authors.author_of')}"
-                  = link_to author.get_first_book do
-                    %span
-                      %small= author.get_first_book.try(:title)
+                  - if author.get_first_book.present?
+                    %br/
+                    %span.text-muted
+                      %small= "#{t('authors.author_of')}"
+                    = link_to author.get_first_book do
+                      %span
+                        %small= author.get_first_book.try(:title)
                   %br/
                   %span.text-muted
                     %small= "#{author.contributions_count} #{t('books.label')}"
