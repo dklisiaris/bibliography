@@ -25,8 +25,8 @@ Rails.application.configure do
   config.serve_static_files = true #ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  # config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :scss
+  config.assets.js_compressor = :uglifier
+  config.assets.css_compressor = :scss
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true # Should be false in production, but assets arent loading. Needs further investigation.
