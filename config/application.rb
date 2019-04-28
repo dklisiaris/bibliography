@@ -45,9 +45,11 @@ module Bibliography
         controller_specs: true,
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
-    end 
+    end
 
     # config.action_view.embed_authenticity_token_in_remote_forms = true
+
+    config.middleware.use Rack::Deflater
 
     config.middleware.use Rack::RedisThrottle::Daily, max: 100000
 
