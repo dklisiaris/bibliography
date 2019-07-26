@@ -9,7 +9,8 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 require 'capistrano-db-tasks'
 
 set :disallow_pushing, true
-set :assets_dir, %w(public/system public/uploads)
+set :assets_dir, %w(public/uploads)
+set :local_assets_dir, %w(public/uploads)
 set :db_local_clean, true
 
 # Default branch is :master
@@ -42,7 +43,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rvm_ruby_version, '2.3.3'
+set :rvm_ruby_version, '2.4.4'
 
 namespace :bower do
   desc 'Install bower'
