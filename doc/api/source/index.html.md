@@ -5,13 +5,14 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href='http://localhost:3000'>Bibliography Home</a>
-  - <a href='#'>Get Developer Key</a>
+  - <a href='https://bibliography.gr'>Bibliography Home</a>  
 
 includes:
   - introduction
+  - api_key
+  - books
+  - other_metadata
+  - errors
 
 search: true
 ---
-
-
