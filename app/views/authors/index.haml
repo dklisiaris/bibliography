@@ -13,7 +13,7 @@
       .block-title
         .block-options.pull-right
           = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_author_path, tooltip: t('authors.new')) if policy(Author).new?
-        %h2= params[:q].present? ? detone(t('search_results')) : detone(t('authors.all'))
+        %h1= params[:q].present? ? detone(t('search_results')) : detone(t('authors.all'))
       .row
         = @results
         = render "authors/widgets/pagination"

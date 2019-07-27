@@ -5,6 +5,8 @@
         .header-section
           = render 'home/search_form'
 
+%h1.hidden= "Bibliography GR | #{I18n.t('metatags.title')}"
+
 - if user_signed_in?
   .row
     .col-sm-5.col-sm-push-7.col-lg-4.col-lg-push-8

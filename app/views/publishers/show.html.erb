@@ -18,7 +18,7 @@
             <%= link_to fa('times'), @publisher, class: "btn btn-effect-ripple btn-danger",
             method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('publishers.delete') } if policy(@publisher).destroy? and @publisher.books.count==0 %>
           </div>
-          <h2><%= detone(@publisher.name) %></h2>
+          <h1><%= detone(@publisher.name) %></h1>
         </div>
 
         <div class="row">

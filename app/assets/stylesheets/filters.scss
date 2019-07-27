@@ -70,7 +70,7 @@ $color2: #de4b39;
 
     .sliding-sidebar {
       position: absolute;
-      z-index: 1;
+      z-index: 3;
       top: 115px;
       left: 110%;
       width: 90%;
@@ -87,6 +87,4 @@ $color2: #de4b39;
       }
     }
   }
-
 }
-

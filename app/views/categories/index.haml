@@ -17,7 +17,7 @@
       .block-title
         .block-options.pull-right
           = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path, tooltip: t('categories.new')) if policy(Category).new?
-        %h2= t('categories.all')
+        %h1= t('categories.all')
       .list-group
         - cache(["root_categories", @categories.map(&:id)]) do
           = render @categories

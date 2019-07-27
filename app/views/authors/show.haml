@@ -13,7 +13,7 @@
             = cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success')
           = link_to fa('times'), @author, class: "btn btn-effect-ripple btn-danger",                                                                                               |
             method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('authors.delete') } if policy(@author).destroy? and @author.books.count==0 |
-        %h2= detone(@author.fullname)
+        %h1= detone(@author.fullname)
       .row
         .col-sm-3
           .row
