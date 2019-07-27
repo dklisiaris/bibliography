@@ -8,8 +8,42 @@
         = image_tag('logos/full_logo_6_sm.png', class: 'logo-full')
   #sidebar-scroll
     .sidebar-content
+      %ul.sidebar-nav.visible-xs
+        = side_nav_li(t('home'), root_path, "fa fa-home")
+        = side_nav_li(t('collections'), shelves_path, "fa fa-folder-open")
+        = side_nav_li(t('my_books'), my_books_path, "fa fa-book")
+      %ul.sidebar-nav.dark-bg
+        = side_nav_li(t('side_menu.categories'), categories_path, "fa fa-sitemap")
+        = side_nav_li(t('side_menu.books'), books_path, "fa fa-book")
+        = side_nav_li(t('side_menu.authors'), authors_path, "fa fa-user-secret")
+        = side_nav_li(t('side_menu.publishers'), publishers_path, "fa fa-building")
+        = side_nav_li(t('series.label'), series_index_path, "fa fa-tasks")
       %ul.sidebar-nav
-        = render "layouts/navigation_sidebar_links"
+        %li.sidebar-separator
+          %i
+            %span.sidebar-nav-mini-hide= t('side_menu.discover')
+        = side_nav_li(t('side_menu.featured'), featured_books_path, "fa fa-thumbs-o-up")
+        = side_nav_li(t('side_menu.trending'), trending_books_path, "fa fa-line-chart")
+        = side_nav_li(t('side_menu.awarded'), awarded_books_path, "fa fa-trophy")
+        = side_nav_li(t('side_menu.latest'), latest_books_path, "fa fa-clock-o")
+
+        - if user_signed_in?
+          - if current_user.editor?
+            %li.sidebar-separator
+              %i
+                %span.sidebar-nav-mini-hide= t('side_menu.editors_only')
+            = side_nav_li(t('side_menu.contributions'), contributions_path, "fa fa-pencil-square-o")
+            = side_nav_li(t('side_menu.awards'), awards_path, "fa fa-pencil-square-o")
+            = side_nav_li(t('side_menu.prizes'), prizes_path, "fa fa-pencil-square-o")
+          - if current_user.admin?
+            %li.sidebar-separator
+              %i
+                %span.sidebar-nav-mini-hide= t('side_menu.admins_only')
+            = side_nav_li(t('side_menu.import'), import_path, "fa fa-upload")
+            = side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal")
+            = side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true)
+            = side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange")
+
   #sidebar-extra-info.sidebar-content.sidebar-nav-mini-hide
     .text-center
       = link_to fa('facebook-square'), 'https://www.facebook.com/bibliographygr/', target: '_blank', class: 'social-icon'
