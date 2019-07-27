@@ -76,7 +76,7 @@ group :test do
   gem 'selenium-webdriver', '~> 3.3'
 end
 
-gem 'bootstrap-sass', '~> 3.3'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.7'
 
@@ -86,7 +86,7 @@ gem 'pg', '~> 0.18'
 gem 'dotenv-rails', '~> 2.0'
 
 # Authentication
-gem 'devise', '~> 3.4'
+gem 'devise', '~> 3.5'
 
 # Async devise mails
 gem "devise-async", '>= 0.9'
@@ -112,7 +112,7 @@ gem 'carrierwave', '~> 0.11.2'
 gem 'piet-binary', '~> 0.2.0'
 
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
-gem 'mini_magick', '~> 4.5'
+gem 'mini_magick', '~> 4.9'
 
 # Json support
 gem 'json', '~> 1.8'
