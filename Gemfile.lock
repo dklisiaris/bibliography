@@ -596,7 +596,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5)
   devise (~> 3.5)
-  devise-async (>= 0.9)
+  devise-async (~> 0.10)
   dotenv-rails (~> 2.0)
   factory_girl_rails (~> 4.5)
   faker (~> 1.7)

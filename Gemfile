@@ -89,7 +89,7 @@ gem 'dotenv-rails', '~> 2.0'
 gem 'devise', '~> 3.5'
 
 # Async devise mails
-gem "devise-async", '>= 0.9'
+gem "devise-async", '~> 0.10'
 
 # Facebook OAuth2 Strategy for OmniAuth
 gem 'omniauth-facebook', '~> 4.0'
