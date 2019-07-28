@@ -151,7 +151,7 @@ gem 'unicode_utils', '>= 1.4'
 gem 'geocoder', '~> 1.2'
 
 # Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 
 # Book metadata extraction library
 gem 'bookshark', '~> 1.0'
@@ -190,7 +190,7 @@ gem 'active_hash_relation'
 gem 'redis-throttle', git: 'https://github.com/lelylan/redis-throttle.git'
 
 # Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', '~> 1.0'
 
 # Allows for threaded comments to be added to multiple and different models.
 gem 'acts_as_commentable_with_threading'
