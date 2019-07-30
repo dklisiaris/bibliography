@@ -135,27 +135,26 @@
   = render 'books/collections_modal'
 
 %script{:type => "application/ld+json"}
-  :cdata
-    {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "breadcrumb": "Αρχική > Βιβλία > #{@book.title}",
-    "mainEntity":{
-    "@type": "Book",
-    "author": "#{@book.writers.any? ? 'https://bibliography.gr' + url_for(@book.writers.first) : ''}",
-    "bookFormat": "http://schema.org/Book",
-    "datePublished": "#{@book.publication_year.present? ? @book.publication_year.to_s : ''}",
-    "image": "#{image_url(@book.cover)}",
-    "inLanguage": "#{@book.language.present? ? UnicodeUtils.titlecase(@book.language) : 'Ελληνικά'}",
-    "isbn": "#{@book.isbn}",
-    "name": "#{@book.title}",
-    "numberOfPages": "#{@book.pages.present? ? @book.pages.to_s : ''}",
-    "offers": {
-    "@type": "Offer",
-    "availability": "http://schema.org/InStock",
-    "price": "#{@book.try(:price)}",
-    "priceCurrency": "EUR"
-    },
-    "publisher": "#{@book.try(:publisher).try(:name)}",
-    }
-    }
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "breadcrumb": "Αρχική > Βιβλία > #{@book.title}",
+  "mainEntity":{
+  "@type": "Book",
+  "author": "#{@book.writers.any? ? 'https://bibliography.gr' + url_for(@book.writers.first) : ''}",
+  "bookFormat": "http://schema.org/Book",
+  "datePublished": "#{@book.publication_year.present? ? @book.publication_year.to_s : ''}",
+  "image": "#{image_url(@book.cover)}",
+  "inLanguage": "#{@book.language.present? ? UnicodeUtils.titlecase(@book.language) : 'Ελληνικά'}",
+  "isbn": "#{@book.isbn}",
+  "name": "#{@book.title}",
+  "numberOfPages": "#{@book.pages.present? ? @book.pages.to_s : ''}",
+  "offers": {
+  "@type": "Offer",
+  "availability": "http://schema.org/InStock",
+  "price": "#{@book.try(:price)}",
+  "priceCurrency": "EUR"
+  },
+  "publisher": "#{@book.try(:publisher).try(:name)}"
+  }
+  }
