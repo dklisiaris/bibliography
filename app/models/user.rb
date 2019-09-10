@@ -7,9 +7,12 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :async, :registerable,
+  # devise :database_authenticatable, :async, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable,
+  #        :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   has_one :profile, :dependent => :destroy
   has_many :shelves, :dependent => :destroy
@@ -18,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :writers, through: :books
   has_many :comments
   has_many :activities, as: :owner, class_name: 'PublicActivity::Activity', dependent: :destroy
-  has_many :ratings, :dependent => :destroy
+  has_many :ratings, dependent: :destroy
 
 
   recommends :books, :shelves, :authors, :categories
