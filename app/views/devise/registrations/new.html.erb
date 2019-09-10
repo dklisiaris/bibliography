@@ -47,10 +47,10 @@
 
     <div class="form-group row">
       <div class="col-md-6">
-        <%= link_to "#{fa('facebook')} Login with Facebook".html_safe, user_omniauth_authorize_path(:facebook), class: 'btn btn-block btn-fb' %>
+        <%= link_to "#{fa('facebook')} Login with Facebook".html_safe, user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-fb' %>
       </div>
       <div class="col-md-6">
-        <%= link_to "#{fa('google')} Login with Google".html_safe, user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-block btn-gl' %>
+        <%= link_to "#{fa('google')} Login with Google".html_safe, user_google_oauth2_omniauth_authorize_path, class: 'btn btn-block btn-gl' %>
       </div>
     </div>
 

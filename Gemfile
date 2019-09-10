@@ -86,16 +86,16 @@ gem 'pg', '~> 0.18'
 gem 'dotenv-rails', '~> 2.0'
 
 # Authentication
-gem 'devise', '~> 3.5'
+gem 'devise', '~> 4.7'
 
 # Async devise mails
-gem "devise-async", '~> 0.10'
+# gem 'devise-async', '~> 1.0'
 
 # Facebook OAuth2 Strategy for OmniAuth
-gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-facebook', '~> 5.0'
 
 # A Google OAuth2 strategy for OmniAuth 1.x
-gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'certified', '~> 1.0'
 
 # User roles
