@@ -2,6 +2,7 @@ Rails.application.routes.default_url_options[:host] = (Rails.env == 'production'
 Rails.application.routes.draw do
 
   get 'pages/welcome_guide'
+  get 'pages/privacy-policy'
 
   resources :shelves
 
