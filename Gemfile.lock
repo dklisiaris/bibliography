@@ -346,7 +346,7 @@ GEM
     puma (3.6.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (1.6.11)
+    rack (1.6.12)
     rack-cors (1.0.3)
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
