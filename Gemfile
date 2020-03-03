@@ -136,7 +136,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # gem 'thin', '~> 1.6'
 
 # A ruby web server built for concurrency
-gem 'puma', '~> 3.4'
+gem 'puma', '~> 3.12'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '< 5'
