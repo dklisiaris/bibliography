@@ -148,7 +148,7 @@ gem 'sidekiq-middleware', '~> 0.3'
 gem 'unicode_utils', '>= 1.4'
 
 # Complete geocoding solution for Ruby
-gem 'geocoder', '~> 1.2'
+gem 'geocoder', '~> 1.6'
 
 # Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
 gem 'sinatra', require: nil
