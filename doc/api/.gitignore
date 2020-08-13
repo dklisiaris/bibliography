@@ -1,22 +1,27 @@
-*.gem
-*.rbc
+* .gem
+* .rbc
 .bundle
 .config
 coverage
 InstalledFiles
-lib/bundler/man
+lib / bundler / man
 pkg
 rdoc
-spec/reports
-test/tmp
-test/version_tmp
+spec / reports
+test / tmp
+test / version_tmp
 tmp
-*.DS_STORE
-build/
-.cache
+* .DS_STORE
+build /
+.hidden
+.vagrant
+.sass-cache
 
 # YARD artifacts
 .yardoc
 _yardoc
-doc/
-.idea/
+doc /
+.idea /
+
+# Vagrant artifacts
+ubuntu - * - console.log
