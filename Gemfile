@@ -118,7 +118,7 @@ gem 'mini_magick', '~> 4.9'
 gem 'json', '~> 2.3'
 
 # Pagination
-gem 'kaminari', '~> 1.0'
+gem 'kaminari', '~> 1.2'
 
 # Search engine gem on top of elasticsearch
 gem 'searchkick', '~> 2.3'
@@ -136,7 +136,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # gem 'thin', '~> 1.6'
 
 # A ruby web server built for concurrency
-gem 'puma', '~> 3.4'
+gem 'puma', '~> 4.3'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '< 5'
