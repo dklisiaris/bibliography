@@ -82,6 +82,8 @@ gem 'font-awesome-sass', '~> 4.7'
 
 gem 'pg', '~> 0.18'
 
+gem 'nokogiri', '~> 1.10'
+
 # Loads environment variables from `.env` file.
 gem 'dotenv-rails', '~> 2.0'
 
@@ -272,4 +274,4 @@ gem 'whenever', '~> 0.9.7'
 gem 'honeybadger', '~> 3.1'
 
 # SaaS based Application protection and monitoring platform
-gem 'sqreen', '~> 1.8'
+gem 'sqreen', '~> 1.20'

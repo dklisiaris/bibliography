@@ -43,7 +43,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rvm_ruby_version, '2.4.4'
+set :rvm_ruby_version, '2.6.6'
 
 namespace :bower do
   desc 'Install bower'
