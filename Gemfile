@@ -23,7 +23,7 @@ gem 'jquery-rails', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 0.20.0'
 
 # High Performance Haml Implementation
@@ -108,14 +108,14 @@ gem "pundit", '~> 1.0'
 gem 'acts_as_tree', '~> 2.1'
 
 # Uploaders
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 1.0'
 gem 'piet-binary', '~> 0.2.0'
 
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
 gem 'mini_magick', '~> 4.9'
 
 # Json support
-gem 'json', '~> 1.8'
+gem 'json', '~> 2.3'
 
 # Pagination
 gem 'kaminari', '~> 1.0'
