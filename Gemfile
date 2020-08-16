@@ -118,7 +118,7 @@ gem 'mini_magick', '~> 4.9'
 gem 'json', '~> 2.3'
 
 # Pagination
-gem 'kaminari', '~> 1.0'
+gem 'kaminari', '~> 1.2'
 
 # Search engine gem on top of elasticsearch
 gem 'searchkick', '~> 2.3'
