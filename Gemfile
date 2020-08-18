@@ -274,4 +274,4 @@ gem 'whenever', '~> 0.9.7'
 gem 'honeybadger', '~> 4.7'
 
 # SaaS based Application protection and monitoring platform
-gem 'sqreen', '~> 1.20'
+# gem 'sqreen', '~> 1.20'
