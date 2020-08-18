@@ -271,7 +271,7 @@ gem 'redis-browser', '~> 0.5.1'
 gem 'whenever', '~> 0.9.7'
 
 # Exception and uptime monitoring
-gem 'honeybadger', '~> 3.1'
+gem 'honeybadger', '~> 4.7'
 
 # SaaS based Application protection and monitoring platform
 gem 'sqreen', '~> 1.20'
