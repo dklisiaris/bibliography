@@ -24,9 +24,9 @@ end
 #  price                   :decimal(6, 2)
 #  price_updated_at        :date
 #  size                    :string
-#  cover_type              :integer          default(0)
-#  availability            :integer          default(0)
-#  format                  :integer          default(0)
+#  cover_type              :integer          default("Μαλακό εξώφυλλο")
+#  availability            :integer          default("Κυκλοφορεί")
+#  format                  :integer          default("Βιβλίο")
 #  original_language       :integer
 #  original_title          :string
 #  publisher_id            :integer
@@ -51,7 +51,7 @@ end
 #
 # Indexes
 #
-#  books_tsearch_idx              (tsearch_vector)
+#  books_tsearch_idx              (tsearch_vector) USING gin
 #  index_books_on_isbn            (isbn) UNIQUE
 #  index_books_on_isbn13          (isbn13) UNIQUE
 #  index_books_on_ismn            (ismn) UNIQUE

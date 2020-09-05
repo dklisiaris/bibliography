@@ -11,6 +11,11 @@
 /log/*
 !/log/.keep
 /tmp
+/tmp/*
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
 
 # Ignore environment variable files.
 .env

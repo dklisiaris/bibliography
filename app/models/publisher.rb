@@ -23,22 +23,9 @@ class Publisher < ActiveRecord::Base
   }
   end
 
-  # include PgSearch
-  # pg_search_scope :search_by_name,
-  #   :against => [
-  #     [:name, 'A'],
-  #     [:tsearch_vector, 'B']
-  #   ],
-  #   :using => {
-  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-  #     :trigram => {:threshold => 0.15}
-  #   },
-  #   :ignoring => :accents
-
   after_validation :calculate_search_terms, :if => :name_changed?
 
-  # Try building a slug based on the following fields in
-  # increasing order of specificity.
+  # Try building a slug based on the following fields in increasing order of specificity.
   def slug_candidates
     [
       :slugged_name,
@@ -82,5 +69,5 @@ end
 # Indexes
 #
 #  index_publishers_on_slug  (slug) UNIQUE
-#  publishers_tsearch_idx    (tsearch_vector)
+#  publishers_tsearch_idx    (tsearch_vector) USING gin
 #

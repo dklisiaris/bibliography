@@ -1,10 +1,10 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :shelf do
-    name "MyString"
-privacy 1
-built_in false
-active false
-user nil
+    name { "MyString" }
+    privacy { 1 }
+    built_in { false }
+    active { false }
+    user { nil }
   end
 
 end
@@ -15,9 +15,9 @@ end
 #
 #  id           :integer          not null, primary key
 #  name         :string
-#  privacy      :integer          default(0)
+#  privacy      :integer          default("same_as_profile")
 #  built_in     :boolean          default(FALSE)
-#  default_name :integer          default(0)
+#  default_name :integer          default("my_library")
 #  active       :boolean          default(TRUE)
 #  user_id      :integer
 #  created_at   :datetime         not null

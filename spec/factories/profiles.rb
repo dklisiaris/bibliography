@@ -1,18 +1,18 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :profile do
-    username "MyString"
-name "MyString"
-avatar "MyString"
-about_me "MyText"
-about_library "MyText"
-account_type 1
-privacy 1
-language 1
-allow_comments false
-allow_friends false
-email_privacy 1
-discoverable_by_email false
-receive_newsletters false
+    username { "MyString" }
+    name { "MyString" }
+    avatar { "MyString" }
+    about_me { "MyText" }
+    about_library { "MyText" }
+    account_type { 1 }
+    privacy { 1 }
+    language { 1 }
+    allow_comments { false }
+    allow_friends { false }
+    email_privacy { 1 }
+    discoverable_by_email { false }
+    receive_newsletters { false }
 user nil
   end
 
@@ -29,12 +29,12 @@ end
 #  cover                 :string
 #  about_me              :text
 #  about_library         :text
-#  account_type          :integer          default(0)
-#  privacy               :integer          default(0)
-#  language              :integer          default(0)
+#  account_type          :integer          default("Προσωπικός")
+#  privacy               :integer          default("is_public")
+#  language              :integer          default("Ελληνικά")
 #  allow_comments        :boolean          default(TRUE)
 #  allow_friends         :boolean          default(TRUE)
-#  email_privacy         :integer          default(0)
+#  email_privacy         :integer          default("Ποτέ")
 #  discoverable_by_email :boolean          default(TRUE)
 #  receive_newsletters   :boolean          default(TRUE)
 #  user_id               :integer

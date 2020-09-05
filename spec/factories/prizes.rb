@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :prize do
-    name "MyString"
+    name { "MyString" }
   end
 
 end

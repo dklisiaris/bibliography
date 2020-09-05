@@ -36,6 +36,7 @@ require 'capistrano/faster_assets'
 require "capistrano/rails/migrations"
 require "capistrano/passenger"
 require 'capistrano/sidekiq'
+install_plugin Capistrano::Sidekiq::Systemd
 require 'capistrano/rails/console'
 # require 'capistrano/bower'
 

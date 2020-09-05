@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -9,8 +9,6 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
-
-require 'rack/redis_throttle'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -44,14 +42,12 @@ module Bibliography
         routing_specs: false,
         controller_specs: true,
         request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
     # config.action_view.embed_authenticity_token_in_remote_forms = true
 
     config.middleware.use Rack::Deflater
-
-    config.middleware.use Rack::RedisThrottle::Daily, max: 100000
 
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do

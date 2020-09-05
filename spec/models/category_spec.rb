@@ -67,7 +67,7 @@ end
 #
 # Indexes
 #
-#  categories_tsearch_idx         (tsearch_vector)
+#  categories_tsearch_idx         (tsearch_vector) USING gin
 #  index_categories_on_parent_id  (parent_id)
 #  index_categories_on_slug       (slug) UNIQUE
 #

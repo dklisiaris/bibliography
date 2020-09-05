@@ -15,12 +15,12 @@ end
 #  cover                 :string
 #  about_me              :text
 #  about_library         :text
-#  account_type          :integer          default(0)
-#  privacy               :integer          default(0)
-#  language              :integer          default(0)
+#  account_type          :integer          default("Προσωπικός")
+#  privacy               :integer          default("is_public")
+#  language              :integer          default("Ελληνικά")
 #  allow_comments        :boolean          default(TRUE)
 #  allow_friends         :boolean          default(TRUE)
-#  email_privacy         :integer          default(0)
+#  email_privacy         :integer          default("Ποτέ")
 #  discoverable_by_email :boolean          default(TRUE)
 #  receive_newsletters   :boolean          default(TRUE)
 #  user_id               :integer

@@ -1,28 +1,28 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :book do
-    title "MyString"
-subtitle "MyString"
-description "MyText"
-image "MyString"
-isbn "MyString"
-isbn13 "MyString"
-ismn "MyString"
-issn "MyString"
-series "MyString"
-pages 1
-publication_year 1
-publication_place "MyString"
-price "9.99"
-price_updated_at "2014-12-31"
-physical_description "MyString"
-cover_type 1
-availability 1
-format 1
-original_language 1
-original_title "MyString"
-publisher nil
-extra "MyString"
-biblionet_id 1
+    title { "MyString" }
+    subtitle { "MyString" }
+    description { "MyText" }
+    image { "MyString" }
+    isbn { "MyString" }
+    isbn13 { "MyString" }
+    ismn { "MyString" }
+    issn { "MyString" }
+    series { "MyString" }
+    pages { 1 }
+    publication_year { 1 }
+    publication_place { "MyString" }
+    price { "9.99" }
+    price_updated_at { "2014-12-31" }
+    physical_description { "MyString" }
+    cover_type { 1 }
+    availability { 1 }
+    format { 1 }
+    original_language { 1 }
+    original_title { "MyString" }
+    publisher { nil }
+    extra { "MyString" }
+    biblionet_id { 1 }
   end
 
 end
@@ -47,9 +47,9 @@ end
 #  price                   :decimal(6, 2)
 #  price_updated_at        :date
 #  size                    :string
-#  cover_type              :integer          default(0)
-#  availability            :integer          default(0)
-#  format                  :integer          default(0)
+#  cover_type              :integer          default("Μαλακό εξώφυλλο")
+#  availability            :integer          default("Κυκλοφορεί")
+#  format                  :integer          default("Βιβλίο")
 #  original_language       :integer
 #  original_title          :string
 #  publisher_id            :integer
@@ -74,7 +74,7 @@ end
 #
 # Indexes
 #
-#  books_tsearch_idx              (tsearch_vector)
+#  books_tsearch_idx              (tsearch_vector) USING gin
 #  index_books_on_isbn            (isbn) UNIQUE
 #  index_books_on_isbn13          (isbn13) UNIQUE
 #  index_books_on_ismn            (ismn) UNIQUE

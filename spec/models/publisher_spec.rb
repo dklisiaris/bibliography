@@ -22,5 +22,5 @@ end
 # Indexes
 #
 #  index_publishers_on_slug  (slug) UNIQUE
-#  publishers_tsearch_idx    (tsearch_vector)
+#  publishers_tsearch_idx    (tsearch_vector) USING gin
 #
