@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :publisher do
-    name "MyString"
-owner "MyString"
+    name { "MyString" }
+    owner { "MyString" }
   end
 
 end
@@ -24,5 +24,5 @@ end
 # Indexes
 #
 #  index_publishers_on_slug  (slug) UNIQUE
-#  publishers_tsearch_idx    (tsearch_vector)
+#  publishers_tsearch_idx    (tsearch_vector) USING gin
 #

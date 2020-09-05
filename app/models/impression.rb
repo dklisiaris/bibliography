@@ -21,6 +21,7 @@ end
 #  referrer            :text
 #  created_at          :datetime
 #  updated_at          :datetime
+#  params              :text
 #
 # Indexes
 #
@@ -30,6 +31,7 @@ end
 #  impressionable_type_message_index  (impressionable_type,message,impressionable_id)
 #  index_impressions_on_user_id       (user_id)
 #  poly_ip_index                      (impressionable_type,impressionable_id,ip_address)
+#  poly_params_request_index          (impressionable_type,impressionable_id,params)
 #  poly_request_index                 (impressionable_type,impressionable_id,request_hash)
 #  poly_session_index                 (impressionable_type,impressionable_id,session_hash)
 #

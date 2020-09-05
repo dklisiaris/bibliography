@@ -30,23 +30,9 @@ class Category < ActiveRecord::Base
   }
   end
 
-  # include PgSearch
-  # pg_search_scope :search_by_name,
-  #   :against => [
-  #     [:name, 'A'],
-  #     [:ddc, 'B'],
-  #     [:tsearch_vector, 'C']
-  #   ],
-  #   :using => {
-  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-  #     :trigram => {:threshold => 0.15}
-  #   },
-  #   :ignoring => :accents
-
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
-  # Try building a slug based on the following fields in
-  # increasing order of specificity.
+  # Try building a slug based on the following fields in increasing order of specificity.
   def slug_candidates
     [
       :slugged_name,
@@ -119,7 +105,7 @@ end
 #
 # Indexes
 #
-#  categories_tsearch_idx         (tsearch_vector)
+#  categories_tsearch_idx         (tsearch_vector) USING gin
 #  index_categories_on_parent_id  (parent_id)
 #  index_categories_on_slug       (slug) UNIQUE
 #

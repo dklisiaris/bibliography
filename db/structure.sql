@@ -2,15 +2,17 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.8
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 10.8
+-- Dumped by pg_dump version 10.8
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -84,8 +86,6 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -94,7 +94,7 @@ SET default_with_oids = false;
 -- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE activities (
+CREATE TABLE public.activities (
     id integer NOT NULL,
     trackable_id integer,
     trackable_type character varying,
@@ -113,7 +113,7 @@ CREATE TABLE activities (
 -- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE activities_id_seq
+CREATE SEQUENCE public.activities_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -125,14 +125,26 @@ CREATE SEQUENCE activities_id_seq
 -- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+ALTER SEQUENCE public.activities_id_seq OWNED BY public.activities.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 
 --
 -- Name: authors; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE authors (
+CREATE TABLE public.authors (
     id integer NOT NULL,
     firstname character varying,
     lastname character varying,
@@ -155,7 +167,7 @@ CREATE TABLE authors (
 -- Name: authors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE authors_id_seq
+CREATE SEQUENCE public.authors_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -167,14 +179,14 @@ CREATE SEQUENCE authors_id_seq
 -- Name: authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
+ALTER SEQUENCE public.authors_id_seq OWNED BY public.authors.id;
 
 
 --
 -- Name: awards; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE awards (
+CREATE TABLE public.awards (
     id integer NOT NULL,
     prize_id integer,
     year integer,
@@ -189,7 +201,7 @@ CREATE TABLE awards (
 -- Name: awards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE awards_id_seq
+CREATE SEQUENCE public.awards_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -201,14 +213,14 @@ CREATE SEQUENCE awards_id_seq
 -- Name: awards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE awards_id_seq OWNED BY awards.id;
+ALTER SEQUENCE public.awards_id_seq OWNED BY public.awards.id;
 
 
 --
 -- Name: books; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE books (
+CREATE TABLE public.books (
     id integer NOT NULL,
     title character varying,
     subtitle character varying,
@@ -256,7 +268,7 @@ CREATE TABLE books (
 -- Name: books_categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE books_categories (
+CREATE TABLE public.books_categories (
     book_id integer,
     category_id integer
 );
@@ -266,7 +278,7 @@ CREATE TABLE books_categories (
 -- Name: books_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE books_id_seq
+CREATE SEQUENCE public.books_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -278,14 +290,14 @@ CREATE SEQUENCE books_id_seq
 -- Name: books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE books_id_seq OWNED BY books.id;
+ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
 
 
 --
 -- Name: bookshelves; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE bookshelves (
+CREATE TABLE public.bookshelves (
     id integer NOT NULL,
     book_id integer,
     shelf_id integer,
@@ -298,7 +310,7 @@ CREATE TABLE bookshelves (
 -- Name: bookshelves_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE bookshelves_id_seq
+CREATE SEQUENCE public.bookshelves_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -310,14 +322,14 @@ CREATE SEQUENCE bookshelves_id_seq
 -- Name: bookshelves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE bookshelves_id_seq OWNED BY bookshelves.id;
+ALTER SEQUENCE public.bookshelves_id_seq OWNED BY public.bookshelves.id;
 
 
 --
 -- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE categories (
+CREATE TABLE public.categories (
     id integer NOT NULL,
     name character varying,
     ddc character varying,
@@ -336,7 +348,7 @@ CREATE TABLE categories (
 -- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE categories_id_seq
+CREATE SEQUENCE public.categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -348,14 +360,14 @@ CREATE SEQUENCE categories_id_seq
 -- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE comments (
+CREATE TABLE public.comments (
     id integer NOT NULL,
     commentable_id integer,
     commentable_type character varying,
@@ -375,7 +387,7 @@ CREATE TABLE comments (
 -- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE comments_id_seq
+CREATE SEQUENCE public.comments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -387,14 +399,14 @@ CREATE SEQUENCE comments_id_seq
 -- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 
 
 --
 -- Name: contributions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE contributions (
+CREATE TABLE public.contributions (
     id integer NOT NULL,
     job integer,
     book_id integer,
@@ -408,7 +420,7 @@ CREATE TABLE contributions (
 -- Name: contributions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE contributions_id_seq
+CREATE SEQUENCE public.contributions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -420,14 +432,14 @@ CREATE SEQUENCE contributions_id_seq
 -- Name: contributions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE contributions_id_seq OWNED BY contributions.id;
+ALTER SEQUENCE public.contributions_id_seq OWNED BY public.contributions.id;
 
 
 --
 -- Name: daily_suggestions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE daily_suggestions (
+CREATE TABLE public.daily_suggestions (
     id integer NOT NULL,
     book_id integer,
     suggested_at timestamp without time zone,
@@ -439,7 +451,7 @@ CREATE TABLE daily_suggestions (
 -- Name: daily_suggestions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE daily_suggestions_id_seq
+CREATE SEQUENCE public.daily_suggestions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -451,14 +463,14 @@ CREATE SEQUENCE daily_suggestions_id_seq
 -- Name: daily_suggestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE daily_suggestions_id_seq OWNED BY daily_suggestions.id;
+ALTER SEQUENCE public.daily_suggestions_id_seq OWNED BY public.daily_suggestions.id;
 
 
 --
 -- Name: follows; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE follows (
+CREATE TABLE public.follows (
     id integer NOT NULL,
     followable_id integer NOT NULL,
     followable_type character varying NOT NULL,
@@ -474,7 +486,7 @@ CREATE TABLE follows (
 -- Name: follows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE follows_id_seq
+CREATE SEQUENCE public.follows_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -486,14 +498,14 @@ CREATE SEQUENCE follows_id_seq
 -- Name: follows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
+ALTER SEQUENCE public.follows_id_seq OWNED BY public.follows.id;
 
 
 --
 -- Name: impressions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE impressions (
+CREATE TABLE public.impressions (
     id integer NOT NULL,
     impressionable_type character varying,
     impressionable_id integer,
@@ -507,7 +519,8 @@ CREATE TABLE impressions (
     message text,
     referrer text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    params text
 );
 
 
@@ -515,7 +528,7 @@ CREATE TABLE impressions (
 -- Name: impressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE impressions_id_seq
+CREATE SEQUENCE public.impressions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -527,14 +540,14 @@ CREATE SEQUENCE impressions_id_seq
 -- Name: impressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE impressions_id_seq OWNED BY impressions.id;
+ALTER SEQUENCE public.impressions_id_seq OWNED BY public.impressions.id;
 
 
 --
 -- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE pg_search_documents (
+CREATE TABLE public.pg_search_documents (
     id integer NOT NULL,
     content text,
     searchable_id integer,
@@ -548,7 +561,7 @@ CREATE TABLE pg_search_documents (
 -- Name: pg_search_documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE pg_search_documents_id_seq
+CREATE SEQUENCE public.pg_search_documents_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -560,14 +573,14 @@ CREATE SEQUENCE pg_search_documents_id_seq
 -- Name: pg_search_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
+ALTER SEQUENCE public.pg_search_documents_id_seq OWNED BY public.pg_search_documents.id;
 
 
 --
 -- Name: places; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE places (
+CREATE TABLE public.places (
     id integer NOT NULL,
     name character varying,
     role character varying,
@@ -589,7 +602,7 @@ CREATE TABLE places (
 -- Name: places_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE places_id_seq
+CREATE SEQUENCE public.places_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -601,14 +614,14 @@ CREATE SEQUENCE places_id_seq
 -- Name: places_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE places_id_seq OWNED BY places.id;
+ALTER SEQUENCE public.places_id_seq OWNED BY public.places.id;
 
 
 --
 -- Name: prizes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE prizes (
+CREATE TABLE public.prizes (
     id integer NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
@@ -620,7 +633,7 @@ CREATE TABLE prizes (
 -- Name: prizes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE prizes_id_seq
+CREATE SEQUENCE public.prizes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -632,14 +645,14 @@ CREATE SEQUENCE prizes_id_seq
 -- Name: prizes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE prizes_id_seq OWNED BY prizes.id;
+ALTER SEQUENCE public.prizes_id_seq OWNED BY public.prizes.id;
 
 
 --
 -- Name: profiles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE profiles (
+CREATE TABLE public.profiles (
     id integer NOT NULL,
     username character varying,
     name character varying,
@@ -658,7 +671,7 @@ CREATE TABLE profiles (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    social hstore,
+    social public.hstore,
     gender integer,
     city character varying,
     birthday timestamp without time zone
@@ -669,7 +682,7 @@ CREATE TABLE profiles (
 -- Name: profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE profiles_id_seq
+CREATE SEQUENCE public.profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -681,14 +694,14 @@ CREATE SEQUENCE profiles_id_seq
 -- Name: profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE profiles_id_seq OWNED BY profiles.id;
+ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
 
 
 --
 -- Name: publishers; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE publishers (
+CREATE TABLE public.publishers (
     id integer NOT NULL,
     name character varying,
     owner character varying,
@@ -706,7 +719,7 @@ CREATE TABLE publishers (
 -- Name: publishers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE publishers_id_seq
+CREATE SEQUENCE public.publishers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -718,14 +731,14 @@ CREATE SEQUENCE publishers_id_seq
 -- Name: publishers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE publishers_id_seq OWNED BY publishers.id;
+ALTER SEQUENCE public.publishers_id_seq OWNED BY public.publishers.id;
 
 
 --
 -- Name: ratings; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE ratings (
+CREATE TABLE public.ratings (
     id integer NOT NULL,
     user_id integer NOT NULL,
     rateable_id integer NOT NULL,
@@ -739,7 +752,7 @@ CREATE TABLE ratings (
 -- Name: ratings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ratings_id_seq
+CREATE SEQUENCE public.ratings_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -751,14 +764,14 @@ CREATE SEQUENCE ratings_id_seq
 -- Name: ratings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE ratings_id_seq OWNED BY ratings.id;
+ALTER SEQUENCE public.ratings_id_seq OWNED BY public.ratings.id;
 
 
 --
 -- Name: royce_connector; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE royce_connector (
+CREATE TABLE public.royce_connector (
     id integer NOT NULL,
     roleable_id integer NOT NULL,
     roleable_type character varying NOT NULL,
@@ -772,7 +785,7 @@ CREATE TABLE royce_connector (
 -- Name: royce_connector_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE royce_connector_id_seq
+CREATE SEQUENCE public.royce_connector_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -784,14 +797,14 @@ CREATE SEQUENCE royce_connector_id_seq
 -- Name: royce_connector_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE royce_connector_id_seq OWNED BY royce_connector.id;
+ALTER SEQUENCE public.royce_connector_id_seq OWNED BY public.royce_connector.id;
 
 
 --
 -- Name: royce_role; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE royce_role (
+CREATE TABLE public.royce_role (
     id integer NOT NULL,
     name character varying NOT NULL,
     created_at timestamp without time zone,
@@ -803,7 +816,7 @@ CREATE TABLE royce_role (
 -- Name: royce_role_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE royce_role_id_seq
+CREATE SEQUENCE public.royce_role_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -815,14 +828,14 @@ CREATE SEQUENCE royce_role_id_seq
 -- Name: royce_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE royce_role_id_seq OWNED BY royce_role.id;
+ALTER SEQUENCE public.royce_role_id_seq OWNED BY public.royce_role.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
@@ -831,7 +844,7 @@ CREATE TABLE schema_migrations (
 -- Name: series; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE series (
+CREATE TABLE public.series (
     id integer NOT NULL,
     name character varying,
     books_count integer DEFAULT 0,
@@ -845,7 +858,7 @@ CREATE TABLE series (
 -- Name: series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE series_id_seq
+CREATE SEQUENCE public.series_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -857,14 +870,14 @@ CREATE SEQUENCE series_id_seq
 -- Name: series_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE series_id_seq OWNED BY series.id;
+ALTER SEQUENCE public.series_id_seq OWNED BY public.series.id;
 
 
 --
 -- Name: shelves; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE shelves (
+CREATE TABLE public.shelves (
     id integer NOT NULL,
     name character varying,
     privacy integer DEFAULT 0,
@@ -881,7 +894,7 @@ CREATE TABLE shelves (
 -- Name: shelves_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE shelves_id_seq
+CREATE SEQUENCE public.shelves_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -893,14 +906,14 @@ CREATE SEQUENCE shelves_id_seq
 -- Name: shelves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE shelves_id_seq OWNED BY shelves.id;
+ALTER SEQUENCE public.shelves_id_seq OWNED BY public.shelves.id;
 
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE users (
+CREATE TABLE public.users (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
@@ -924,7 +937,7 @@ CREATE TABLE users (
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE users_id_seq
+CREATE SEQUENCE public.users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -936,176 +949,184 @@ CREATE SEQUENCE users_id_seq
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
 -- Name: activities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
+ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.activities_id_seq'::regclass);
 
 
 --
 -- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
+ALTER TABLE ONLY public.authors ALTER COLUMN id SET DEFAULT nextval('public.authors_id_seq'::regclass);
 
 
 --
 -- Name: awards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY awards ALTER COLUMN id SET DEFAULT nextval('awards_id_seq'::regclass);
+ALTER TABLE ONLY public.awards ALTER COLUMN id SET DEFAULT nextval('public.awards_id_seq'::regclass);
 
 
 --
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regclass);
+ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
 
 
 --
 -- Name: bookshelves id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bookshelves ALTER COLUMN id SET DEFAULT nextval('bookshelves_id_seq'::regclass);
+ALTER TABLE ONLY public.bookshelves ALTER COLUMN id SET DEFAULT nextval('public.bookshelves_id_seq'::regclass);
 
 
 --
 -- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
 
 
 --
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
 
 
 --
 -- Name: contributions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contributions ALTER COLUMN id SET DEFAULT nextval('contributions_id_seq'::regclass);
+ALTER TABLE ONLY public.contributions ALTER COLUMN id SET DEFAULT nextval('public.contributions_id_seq'::regclass);
 
 
 --
 -- Name: daily_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY daily_suggestions ALTER COLUMN id SET DEFAULT nextval('daily_suggestions_id_seq'::regclass);
+ALTER TABLE ONLY public.daily_suggestions ALTER COLUMN id SET DEFAULT nextval('public.daily_suggestions_id_seq'::regclass);
 
 
 --
 -- Name: follows id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
+ALTER TABLE ONLY public.follows ALTER COLUMN id SET DEFAULT nextval('public.follows_id_seq'::regclass);
 
 
 --
 -- Name: impressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY impressions ALTER COLUMN id SET DEFAULT nextval('impressions_id_seq'::regclass);
+ALTER TABLE ONLY public.impressions ALTER COLUMN id SET DEFAULT nextval('public.impressions_id_seq'::regclass);
 
 
 --
 -- Name: pg_search_documents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
+ALTER TABLE ONLY public.pg_search_documents ALTER COLUMN id SET DEFAULT nextval('public.pg_search_documents_id_seq'::regclass);
 
 
 --
 -- Name: places id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY places ALTER COLUMN id SET DEFAULT nextval('places_id_seq'::regclass);
+ALTER TABLE ONLY public.places ALTER COLUMN id SET DEFAULT nextval('public.places_id_seq'::regclass);
 
 
 --
 -- Name: prizes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY prizes ALTER COLUMN id SET DEFAULT nextval('prizes_id_seq'::regclass);
+ALTER TABLE ONLY public.prizes ALTER COLUMN id SET DEFAULT nextval('public.prizes_id_seq'::regclass);
 
 
 --
 -- Name: profiles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY profiles ALTER COLUMN id SET DEFAULT nextval('profiles_id_seq'::regclass);
+ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.profiles_id_seq'::regclass);
 
 
 --
 -- Name: publishers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY publishers ALTER COLUMN id SET DEFAULT nextval('publishers_id_seq'::regclass);
+ALTER TABLE ONLY public.publishers ALTER COLUMN id SET DEFAULT nextval('public.publishers_id_seq'::regclass);
 
 
 --
 -- Name: ratings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ratings ALTER COLUMN id SET DEFAULT nextval('ratings_id_seq'::regclass);
+ALTER TABLE ONLY public.ratings ALTER COLUMN id SET DEFAULT nextval('public.ratings_id_seq'::regclass);
 
 
 --
 -- Name: royce_connector id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY royce_connector ALTER COLUMN id SET DEFAULT nextval('royce_connector_id_seq'::regclass);
+ALTER TABLE ONLY public.royce_connector ALTER COLUMN id SET DEFAULT nextval('public.royce_connector_id_seq'::regclass);
 
 
 --
 -- Name: royce_role id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY royce_role ALTER COLUMN id SET DEFAULT nextval('royce_role_id_seq'::regclass);
+ALTER TABLE ONLY public.royce_role ALTER COLUMN id SET DEFAULT nextval('public.royce_role_id_seq'::regclass);
 
 
 --
 -- Name: series id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY series ALTER COLUMN id SET DEFAULT nextval('series_id_seq'::regclass);
+ALTER TABLE ONLY public.series ALTER COLUMN id SET DEFAULT nextval('public.series_id_seq'::regclass);
 
 
 --
 -- Name: shelves id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY shelves ALTER COLUMN id SET DEFAULT nextval('shelves_id_seq'::regclass);
+ALTER TABLE ONLY public.shelves ALTER COLUMN id SET DEFAULT nextval('public.shelves_id_seq'::regclass);
 
 
 --
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
 -- Name: activities activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY activities
+ALTER TABLE ONLY public.activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
 -- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY authors
+ALTER TABLE ONLY public.authors
     ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
 
 
@@ -1113,7 +1134,7 @@ ALTER TABLE ONLY authors
 -- Name: awards awards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY awards
+ALTER TABLE ONLY public.awards
     ADD CONSTRAINT awards_pkey PRIMARY KEY (id);
 
 
@@ -1121,7 +1142,7 @@ ALTER TABLE ONLY awards
 -- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books
+ALTER TABLE ONLY public.books
     ADD CONSTRAINT books_pkey PRIMARY KEY (id);
 
 
@@ -1129,7 +1150,7 @@ ALTER TABLE ONLY books
 -- Name: bookshelves bookshelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bookshelves
+ALTER TABLE ONLY public.bookshelves
     ADD CONSTRAINT bookshelves_pkey PRIMARY KEY (id);
 
 
@@ -1137,7 +1158,7 @@ ALTER TABLE ONLY bookshelves
 -- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY categories
+ALTER TABLE ONLY public.categories
     ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
 
 
@@ -1145,7 +1166,7 @@ ALTER TABLE ONLY categories
 -- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY comments
+ALTER TABLE ONLY public.comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
@@ -1153,7 +1174,7 @@ ALTER TABLE ONLY comments
 -- Name: contributions contributions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contributions
+ALTER TABLE ONLY public.contributions
     ADD CONSTRAINT contributions_pkey PRIMARY KEY (id);
 
 
@@ -1161,7 +1182,7 @@ ALTER TABLE ONLY contributions
 -- Name: daily_suggestions daily_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY daily_suggestions
+ALTER TABLE ONLY public.daily_suggestions
     ADD CONSTRAINT daily_suggestions_pkey PRIMARY KEY (id);
 
 
@@ -1169,7 +1190,7 @@ ALTER TABLE ONLY daily_suggestions
 -- Name: follows follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY follows
+ALTER TABLE ONLY public.follows
     ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
 
 
@@ -1177,7 +1198,7 @@ ALTER TABLE ONLY follows
 -- Name: impressions impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY impressions
+ALTER TABLE ONLY public.impressions
     ADD CONSTRAINT impressions_pkey PRIMARY KEY (id);
 
 
@@ -1185,7 +1206,7 @@ ALTER TABLE ONLY impressions
 -- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY pg_search_documents
+ALTER TABLE ONLY public.pg_search_documents
     ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
 
 
@@ -1193,7 +1214,7 @@ ALTER TABLE ONLY pg_search_documents
 -- Name: places places_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY places
+ALTER TABLE ONLY public.places
     ADD CONSTRAINT places_pkey PRIMARY KEY (id);
 
 
@@ -1201,7 +1222,7 @@ ALTER TABLE ONLY places
 -- Name: prizes prizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY prizes
+ALTER TABLE ONLY public.prizes
     ADD CONSTRAINT prizes_pkey PRIMARY KEY (id);
 
 
@@ -1209,7 +1230,7 @@ ALTER TABLE ONLY prizes
 -- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY profiles
+ALTER TABLE ONLY public.profiles
     ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
 
 
@@ -1217,7 +1238,7 @@ ALTER TABLE ONLY profiles
 -- Name: publishers publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY publishers
+ALTER TABLE ONLY public.publishers
     ADD CONSTRAINT publishers_pkey PRIMARY KEY (id);
 
 
@@ -1225,7 +1246,7 @@ ALTER TABLE ONLY publishers
 -- Name: ratings ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ratings
+ALTER TABLE ONLY public.ratings
     ADD CONSTRAINT ratings_pkey PRIMARY KEY (id);
 
 
@@ -1233,7 +1254,7 @@ ALTER TABLE ONLY ratings
 -- Name: royce_connector royce_connector_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY royce_connector
+ALTER TABLE ONLY public.royce_connector
     ADD CONSTRAINT royce_connector_pkey PRIMARY KEY (id);
 
 
@@ -1241,7 +1262,7 @@ ALTER TABLE ONLY royce_connector
 -- Name: royce_role royce_role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY royce_role
+ALTER TABLE ONLY public.royce_role
     ADD CONSTRAINT royce_role_pkey PRIMARY KEY (id);
 
 
@@ -1249,7 +1270,7 @@ ALTER TABLE ONLY royce_role
 -- Name: series series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY series
+ALTER TABLE ONLY public.series
     ADD CONSTRAINT series_pkey PRIMARY KEY (id);
 
 
@@ -1257,7 +1278,7 @@ ALTER TABLE ONLY series
 -- Name: shelves shelves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY shelves
+ALTER TABLE ONLY public.shelves
     ADD CONSTRAINT shelves_pkey PRIMARY KEY (id);
 
 
@@ -1265,7 +1286,7 @@ ALTER TABLE ONLY shelves
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -1273,480 +1294,487 @@ ALTER TABLE ONLY users
 -- Name: authors_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX authors_tsearch_idx ON authors USING gin (tsearch_vector);
+CREATE INDEX authors_tsearch_idx ON public.authors USING gin (tsearch_vector);
 
 
 --
 -- Name: books_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX books_tsearch_idx ON books USING gin (tsearch_vector);
+CREATE INDEX books_tsearch_idx ON public.books USING gin (tsearch_vector);
 
 
 --
 -- Name: categories_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX categories_tsearch_idx ON categories USING gin (tsearch_vector);
+CREATE INDEX categories_tsearch_idx ON public.categories USING gin (tsearch_vector);
 
 
 --
 -- Name: controlleraction_ip_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX controlleraction_ip_index ON impressions USING btree (controller_name, action_name, ip_address);
+CREATE INDEX controlleraction_ip_index ON public.impressions USING btree (controller_name, action_name, ip_address);
 
 
 --
 -- Name: controlleraction_request_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX controlleraction_request_index ON impressions USING btree (controller_name, action_name, request_hash);
+CREATE INDEX controlleraction_request_index ON public.impressions USING btree (controller_name, action_name, request_hash);
 
 
 --
 -- Name: controlleraction_session_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX controlleraction_session_index ON impressions USING btree (controller_name, action_name, session_hash);
+CREATE INDEX controlleraction_session_index ON public.impressions USING btree (controller_name, action_name, session_hash);
 
 
 --
 -- Name: fk_followables; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_type);
+CREATE INDEX fk_followables ON public.follows USING btree (followable_id, followable_type);
 
 
 --
 -- Name: fk_follows; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
+CREATE INDEX fk_follows ON public.follows USING btree (follower_id, follower_type);
 
 
 --
 -- Name: fk_rateables; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX fk_rateables ON ratings USING btree (rateable_id, rateable_type);
+CREATE INDEX fk_rateables ON public.ratings USING btree (rateable_id, rateable_type);
 
 
 --
 -- Name: impressionable_type_message_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX impressionable_type_message_index ON impressions USING btree (impressionable_type, message, impressionable_id);
+CREATE INDEX impressionable_type_message_index ON public.impressions USING btree (impressionable_type, message, impressionable_id);
 
 
 --
 -- Name: index_activities_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_owner_id_and_owner_type ON activities USING btree (owner_id, owner_type);
+CREATE INDEX index_activities_on_owner_id_and_owner_type ON public.activities USING btree (owner_id, owner_type);
 
 
 --
 -- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities USING btree (recipient_id, recipient_type);
+CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON public.activities USING btree (recipient_id, recipient_type);
 
 
 --
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
+CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON public.activities USING btree (trackable_id, trackable_type);
 
 
 --
 -- Name: index_authors_on_biblionet_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_authors_on_biblionet_id ON authors USING btree (biblionet_id);
+CREATE UNIQUE INDEX index_authors_on_biblionet_id ON public.authors USING btree (biblionet_id);
 
 
 --
 -- Name: index_authors_on_masterpiece_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_authors_on_masterpiece_id ON authors USING btree (masterpiece_id);
+CREATE INDEX index_authors_on_masterpiece_id ON public.authors USING btree (masterpiece_id);
 
 
 --
 -- Name: index_authors_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_authors_on_slug ON authors USING btree (slug);
+CREATE UNIQUE INDEX index_authors_on_slug ON public.authors USING btree (slug);
 
 
 --
 -- Name: index_awards_on_awardable_id_and_awardable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_awards_on_awardable_id_and_awardable_type ON awards USING btree (awardable_id, awardable_type);
+CREATE INDEX index_awards_on_awardable_id_and_awardable_type ON public.awards USING btree (awardable_id, awardable_type);
 
 
 --
 -- Name: index_awards_on_prize_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_awards_on_prize_id ON awards USING btree (prize_id);
+CREATE INDEX index_awards_on_prize_id ON public.awards USING btree (prize_id);
 
 
 --
 -- Name: index_books_categories_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_categories_on_book_id ON books_categories USING btree (book_id);
+CREATE INDEX index_books_categories_on_book_id ON public.books_categories USING btree (book_id);
 
 
 --
 -- Name: index_books_categories_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_categories_on_category_id ON books_categories USING btree (category_id);
+CREATE INDEX index_books_categories_on_category_id ON public.books_categories USING btree (category_id);
 
 
 --
 -- Name: index_books_on_isbn; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_books_on_isbn ON books USING btree (isbn);
+CREATE UNIQUE INDEX index_books_on_isbn ON public.books USING btree (isbn);
 
 
 --
 -- Name: index_books_on_isbn13; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_books_on_isbn13 ON books USING btree (isbn13);
+CREATE UNIQUE INDEX index_books_on_isbn13 ON public.books USING btree (isbn13);
 
 
 --
 -- Name: index_books_on_ismn; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_books_on_ismn ON books USING btree (ismn);
+CREATE UNIQUE INDEX index_books_on_ismn ON public.books USING btree (ismn);
 
 
 --
 -- Name: index_books_on_main_writer_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_on_main_writer_id ON books USING btree (main_writer_id);
+CREATE INDEX index_books_on_main_writer_id ON public.books USING btree (main_writer_id);
 
 
 --
 -- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_on_publisher_id ON books USING btree (publisher_id);
+CREATE INDEX index_books_on_publisher_id ON public.books USING btree (publisher_id);
 
 
 --
 -- Name: index_books_on_series_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_on_series_id ON books USING btree (series_id);
+CREATE INDEX index_books_on_series_id ON public.books USING btree (series_id);
 
 
 --
 -- Name: index_books_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_books_on_slug ON books USING btree (slug);
+CREATE UNIQUE INDEX index_books_on_slug ON public.books USING btree (slug);
 
 
 --
 -- Name: index_bookshelves_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_bookshelves_on_book_id ON bookshelves USING btree (book_id);
+CREATE INDEX index_bookshelves_on_book_id ON public.bookshelves USING btree (book_id);
 
 
 --
 -- Name: index_bookshelves_on_book_id_and_shelf_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_bookshelves_on_book_id_and_shelf_id ON bookshelves USING btree (book_id, shelf_id);
+CREATE UNIQUE INDEX index_bookshelves_on_book_id_and_shelf_id ON public.bookshelves USING btree (book_id, shelf_id);
 
 
 --
 -- Name: index_bookshelves_on_shelf_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_bookshelves_on_shelf_id ON bookshelves USING btree (shelf_id);
+CREATE INDEX index_bookshelves_on_shelf_id ON public.bookshelves USING btree (shelf_id);
 
 
 --
 -- Name: index_categories_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_categories_on_parent_id ON categories USING btree (parent_id);
+CREATE INDEX index_categories_on_parent_id ON public.categories USING btree (parent_id);
 
 
 --
 -- Name: index_categories_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_categories_on_slug ON categories USING btree (slug);
+CREATE UNIQUE INDEX index_categories_on_slug ON public.categories USING btree (slug);
 
 
 --
 -- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments USING btree (commentable_id, commentable_type);
+CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON public.comments USING btree (commentable_id, commentable_type);
 
 
 --
 -- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
+CREATE INDEX index_comments_on_user_id ON public.comments USING btree (user_id);
 
 
 --
 -- Name: index_contributions_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_contributions_on_author_id ON contributions USING btree (author_id);
+CREATE INDEX index_contributions_on_author_id ON public.contributions USING btree (author_id);
 
 
 --
 -- Name: index_contributions_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_contributions_on_book_id ON contributions USING btree (book_id);
+CREATE INDEX index_contributions_on_book_id ON public.contributions USING btree (book_id);
 
 
 --
 -- Name: index_daily_suggestions_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_daily_suggestions_on_book_id ON daily_suggestions USING btree (book_id);
+CREATE UNIQUE INDEX index_daily_suggestions_on_book_id ON public.daily_suggestions USING btree (book_id);
 
 
 --
 -- Name: index_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_impressions_on_user_id ON impressions USING btree (user_id);
+CREATE INDEX index_impressions_on_user_id ON public.impressions USING btree (user_id);
 
 
 --
 -- Name: index_pg_search_documents_on_searchable_type_and_searchable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_pg_search_documents_on_searchable_type_and_searchable_id ON pg_search_documents USING btree (searchable_type, searchable_id);
+CREATE INDEX index_pg_search_documents_on_searchable_type_and_searchable_id ON public.pg_search_documents USING btree (searchable_type, searchable_id);
 
 
 --
 -- Name: index_places_on_placeable_id_and_placeable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_places_on_placeable_id_and_placeable_type ON places USING btree (placeable_id, placeable_type);
+CREATE INDEX index_places_on_placeable_id_and_placeable_type ON public.places USING btree (placeable_id, placeable_type);
 
 
 --
 -- Name: index_prizes_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_prizes_on_name ON prizes USING btree (name);
+CREATE UNIQUE INDEX index_prizes_on_name ON public.prizes USING btree (name);
 
 
 --
 -- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_profiles_on_user_id ON profiles USING btree (user_id);
+CREATE INDEX index_profiles_on_user_id ON public.profiles USING btree (user_id);
 
 
 --
 -- Name: index_profiles_on_username; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_profiles_on_username ON profiles USING btree (username);
+CREATE UNIQUE INDEX index_profiles_on_username ON public.profiles USING btree (username);
 
 
 --
 -- Name: index_publishers_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_publishers_on_slug ON publishers USING btree (slug);
+CREATE UNIQUE INDEX index_publishers_on_slug ON public.publishers USING btree (slug);
 
 
 --
 -- Name: index_ratings_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_ratings_on_user_id ON ratings USING btree (user_id);
+CREATE INDEX index_ratings_on_user_id ON public.ratings USING btree (user_id);
 
 
 --
 -- Name: index_royce_connector_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_royce_connector_on_role_id ON royce_connector USING btree (role_id);
+CREATE INDEX index_royce_connector_on_role_id ON public.royce_connector USING btree (role_id);
 
 
 --
 -- Name: index_royce_connector_on_roleable_id_and_roleable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_royce_connector_on_roleable_id_and_roleable_type ON royce_connector USING btree (roleable_id, roleable_type);
+CREATE INDEX index_royce_connector_on_roleable_id_and_roleable_type ON public.royce_connector USING btree (roleable_id, roleable_type);
 
 
 --
 -- Name: index_royce_role_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_royce_role_on_name ON royce_role USING btree (name);
+CREATE INDEX index_royce_role_on_name ON public.royce_role USING btree (name);
 
 
 --
 -- Name: index_shelves_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_shelves_on_user_id ON shelves USING btree (user_id);
+CREATE INDEX index_shelves_on_user_id ON public.shelves USING btree (user_id);
 
 
 --
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
 
 
 --
 -- Name: poly_ip_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX poly_ip_index ON impressions USING btree (impressionable_type, impressionable_id, ip_address);
+CREATE INDEX poly_ip_index ON public.impressions USING btree (impressionable_type, impressionable_id, ip_address);
+
+
+--
+-- Name: poly_params_request_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX poly_params_request_index ON public.impressions USING btree (impressionable_type, impressionable_id, params);
 
 
 --
 -- Name: poly_request_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX poly_request_index ON impressions USING btree (impressionable_type, impressionable_id, request_hash);
+CREATE INDEX poly_request_index ON public.impressions USING btree (impressionable_type, impressionable_id, request_hash);
 
 
 --
 -- Name: poly_session_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX poly_session_index ON impressions USING btree (impressionable_type, impressionable_id, session_hash);
+CREATE INDEX poly_session_index ON public.impressions USING btree (impressionable_type, impressionable_id, session_hash);
 
 
 --
 -- Name: publishers_tsearch_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX publishers_tsearch_idx ON publishers USING gin (tsearch_vector);
+CREATE INDEX publishers_tsearch_idx ON public.publishers USING gin (tsearch_vector);
 
 
 --
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
 -- Name: books fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books
-    ADD CONSTRAINT fk_rails_1c0d164eeb FOREIGN KEY (series_id) REFERENCES series(id);
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_1c0d164eeb FOREIGN KEY (series_id) REFERENCES public.series(id);
 
 
 --
 -- Name: bookshelves fk_rails_237c584e0e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bookshelves
-    ADD CONSTRAINT fk_rails_237c584e0e FOREIGN KEY (shelf_id) REFERENCES shelves(id);
+ALTER TABLE ONLY public.bookshelves
+    ADD CONSTRAINT fk_rails_237c584e0e FOREIGN KEY (shelf_id) REFERENCES public.shelves(id);
 
 
 --
 -- Name: books_categories fk_rails_426cc1dbb3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books_categories
-    ADD CONSTRAINT fk_rails_426cc1dbb3 FOREIGN KEY (category_id) REFERENCES categories(id);
+ALTER TABLE ONLY public.books_categories
+    ADD CONSTRAINT fk_rails_426cc1dbb3 FOREIGN KEY (category_id) REFERENCES public.categories(id);
 
 
 --
 -- Name: books_categories fk_rails_4b64804a3a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books_categories
-    ADD CONSTRAINT fk_rails_4b64804a3a FOREIGN KEY (book_id) REFERENCES books(id);
+ALTER TABLE ONLY public.books_categories
+    ADD CONSTRAINT fk_rails_4b64804a3a FOREIGN KEY (book_id) REFERENCES public.books(id);
 
 
 --
 -- Name: awards fk_rails_51d9e3825a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY awards
-    ADD CONSTRAINT fk_rails_51d9e3825a FOREIGN KEY (prize_id) REFERENCES prizes(id);
+ALTER TABLE ONLY public.awards
+    ADD CONSTRAINT fk_rails_51d9e3825a FOREIGN KEY (prize_id) REFERENCES public.prizes(id);
 
 
 --
 -- Name: shelves fk_rails_6b65d5b892; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY shelves
-    ADD CONSTRAINT fk_rails_6b65d5b892 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE ONLY public.shelves
+    ADD CONSTRAINT fk_rails_6b65d5b892 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
 -- Name: bookshelves fk_rails_9a6539777c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bookshelves
-    ADD CONSTRAINT fk_rails_9a6539777c FOREIGN KEY (book_id) REFERENCES books(id);
+ALTER TABLE ONLY public.bookshelves
+    ADD CONSTRAINT fk_rails_9a6539777c FOREIGN KEY (book_id) REFERENCES public.books(id);
 
 
 --
 -- Name: contributions fk_rails_ab8ec95b90; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contributions
-    ADD CONSTRAINT fk_rails_ab8ec95b90 FOREIGN KEY (book_id) REFERENCES books(id);
+ALTER TABLE ONLY public.contributions
+    ADD CONSTRAINT fk_rails_ab8ec95b90 FOREIGN KEY (book_id) REFERENCES public.books(id);
 
 
 --
 -- Name: contributions fk_rails_c4e3b9f561; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contributions
-    ADD CONSTRAINT fk_rails_c4e3b9f561 FOREIGN KEY (author_id) REFERENCES authors(id);
+ALTER TABLE ONLY public.contributions
+    ADD CONSTRAINT fk_rails_c4e3b9f561 FOREIGN KEY (author_id) REFERENCES public.authors(id);
 
 
 --
 -- Name: books fk_rails_d7ae2b039e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY books
-    ADD CONSTRAINT fk_rails_d7ae2b039e FOREIGN KEY (publisher_id) REFERENCES publishers(id);
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_d7ae2b039e FOREIGN KEY (publisher_id) REFERENCES public.publishers(id);
 
 
 --
 -- Name: profiles fk_rails_e424190865; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY profiles
-    ADD CONSTRAINT fk_rails_e424190865 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT fk_rails_e424190865 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -1755,131 +1783,71 @@ ALTER TABLE ONLY profiles
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20141224113610');
+INSERT INTO "schema_migrations" (version) VALUES
+('20141224113610'),
+('20141224164302'),
+('20141224215914'),
+('20141227180024'),
+('20141228192751'),
+('20141228221925'),
+('20141228234255'),
+('20141230215655'),
+('20141230230720'),
+('20141231014554'),
+('20141231122037'),
+('20141231145234'),
+('20141231181733'),
+('20141231214257'),
+('20150101180825'),
+('20150102131342'),
+('20150111185403'),
+('20150112185335'),
+('20150113124906'),
+('20150412132653'),
+('20150412142244'),
+('20150419134946'),
+('20150506191222'),
+('20150506191354'),
+('20150506191553'),
+('20150506191847'),
+('20150513220715'),
+('20150515100817'),
+('20150515120907'),
+('20150515122457'),
+('20150517205441'),
+('20150521121122'),
+('20150521131600'),
+('20150523102340'),
+('20150527100323'),
+('20150527100411'),
+('20150527100420'),
+('20150527110154'),
+('20150615182412'),
+('20150616120331'),
+('20150616125149'),
+('20150616134352'),
+('20150617190157'),
+('20150618174541'),
+('20150619193344'),
+('20151003140444'),
+('20160521142614'),
+('20160521200629'),
+('20161229202559'),
+('20161229202920'),
+('20161229221829'),
+('20161230145401'),
+('20170331095631'),
+('20170412202745'),
+('20170412203337'),
+('20170419124824'),
+('20170419141515'),
+('20170419145719'),
+('20170903183316'),
+('20170903214213'),
+('20170906120011'),
+('20170912082754'),
+('20170912092805'),
+('20170918120936'),
+('20200905162806');
 
-INSERT INTO schema_migrations (version) VALUES ('20141224164302');
-
-INSERT INTO schema_migrations (version) VALUES ('20141224215914');
-
-INSERT INTO schema_migrations (version) VALUES ('20141227180024');
-
-INSERT INTO schema_migrations (version) VALUES ('20141228192751');
-
-INSERT INTO schema_migrations (version) VALUES ('20141228221925');
-
-INSERT INTO schema_migrations (version) VALUES ('20141228234255');
-
-INSERT INTO schema_migrations (version) VALUES ('20141230215655');
-
-INSERT INTO schema_migrations (version) VALUES ('20141230230720');
-
-INSERT INTO schema_migrations (version) VALUES ('20141231014554');
-
-INSERT INTO schema_migrations (version) VALUES ('20141231122037');
-
-INSERT INTO schema_migrations (version) VALUES ('20141231145234');
-
-INSERT INTO schema_migrations (version) VALUES ('20141231181733');
-
-INSERT INTO schema_migrations (version) VALUES ('20141231214257');
-
-INSERT INTO schema_migrations (version) VALUES ('20150101180825');
-
-INSERT INTO schema_migrations (version) VALUES ('20150102131342');
-
-INSERT INTO schema_migrations (version) VALUES ('20150111185403');
-
-INSERT INTO schema_migrations (version) VALUES ('20150112185335');
-
-INSERT INTO schema_migrations (version) VALUES ('20150113124906');
-
-INSERT INTO schema_migrations (version) VALUES ('20150412132653');
-
-INSERT INTO schema_migrations (version) VALUES ('20150412142244');
-
-INSERT INTO schema_migrations (version) VALUES ('20150419134946');
-
-INSERT INTO schema_migrations (version) VALUES ('20150506191222');
-
-INSERT INTO schema_migrations (version) VALUES ('20150506191354');
-
-INSERT INTO schema_migrations (version) VALUES ('20150506191553');
-
-INSERT INTO schema_migrations (version) VALUES ('20150506191847');
-
-INSERT INTO schema_migrations (version) VALUES ('20150513220715');
-
-INSERT INTO schema_migrations (version) VALUES ('20150515100817');
-
-INSERT INTO schema_migrations (version) VALUES ('20150515120907');
-
-INSERT INTO schema_migrations (version) VALUES ('20150515122457');
-
-INSERT INTO schema_migrations (version) VALUES ('20150517205441');
-
-INSERT INTO schema_migrations (version) VALUES ('20150521121122');
-
-INSERT INTO schema_migrations (version) VALUES ('20150521131600');
-
-INSERT INTO schema_migrations (version) VALUES ('20150523102340');
-
-INSERT INTO schema_migrations (version) VALUES ('20150527100323');
-
-INSERT INTO schema_migrations (version) VALUES ('20150527100411');
-
-INSERT INTO schema_migrations (version) VALUES ('20150527100420');
-
-INSERT INTO schema_migrations (version) VALUES ('20150527110154');
-
-INSERT INTO schema_migrations (version) VALUES ('20150615182412');
-
-INSERT INTO schema_migrations (version) VALUES ('20150616120331');
-
-INSERT INTO schema_migrations (version) VALUES ('20150616125149');
-
-INSERT INTO schema_migrations (version) VALUES ('20150616134352');
-
-INSERT INTO schema_migrations (version) VALUES ('20150617190157');
-
-INSERT INTO schema_migrations (version) VALUES ('20150618174541');
-
-INSERT INTO schema_migrations (version) VALUES ('20150619193344');
-
-INSERT INTO schema_migrations (version) VALUES ('20151003140444');
-
-INSERT INTO schema_migrations (version) VALUES ('20160521142614');
-
-INSERT INTO schema_migrations (version) VALUES ('20160521200629');
-
-INSERT INTO schema_migrations (version) VALUES ('20161229202559');
-
-INSERT INTO schema_migrations (version) VALUES ('20161229202920');
-
-INSERT INTO schema_migrations (version) VALUES ('20161229221829');
-
-INSERT INTO schema_migrations (version) VALUES ('20161230145401');
-
-INSERT INTO schema_migrations (version) VALUES ('20170331095631');
-
-INSERT INTO schema_migrations (version) VALUES ('20170412202745');
-
-INSERT INTO schema_migrations (version) VALUES ('20170412203337');
-
-INSERT INTO schema_migrations (version) VALUES ('20170419124824');
-
-INSERT INTO schema_migrations (version) VALUES ('20170419141515');
-
-INSERT INTO schema_migrations (version) VALUES ('20170419145719');
-
-INSERT INTO schema_migrations (version) VALUES ('20170903183316');
-
-INSERT INTO schema_migrations (version) VALUES ('20170903214213');
-
-INSERT INTO schema_migrations (version) VALUES ('20170906120011');
-
-INSERT INTO schema_migrations (version) VALUES ('20170912082754');
-
-INSERT INTO schema_migrations (version) VALUES ('20170912092805');
-
-INSERT INTO schema_migrations (version) VALUES ('20170918120936');
 

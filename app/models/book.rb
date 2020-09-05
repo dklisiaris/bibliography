@@ -83,29 +83,6 @@ class Book < ActiveRecord::Base
     }
   end
 
-
-  # include PgSearch
-  # pg_search_scope :search_by_title,
-  #   :against => [
-  #     [:title, 'A'],
-  #     [:original_title, 'B'],
-  #     [:series_name, 'C'],
-  #     [:tsearch_vector, 'D']
-  #   ],
-  #   :using => {
-  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-  #     :trigram => {:threshold => 0.15}
-  #   },
-  #   :ignoring => :accents
-
-  # pg_search_scope :search_fast,
-  #   :against => [
-  #     [:tsearch_vector],
-  #   ],
-  #   :using => {
-  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-  #   }
-
   after_validation :calculate_search_terms, :if => :recalculate_search_terms?
 
   include PublicActivity::Common
@@ -376,9 +353,9 @@ end
 #  price                   :decimal(6, 2)
 #  price_updated_at        :date
 #  size                    :string
-#  cover_type              :integer          default(0)
-#  availability            :integer          default(0)
-#  format                  :integer          default(0)
+#  cover_type              :integer          default("Μαλακό εξώφυλλο")
+#  availability            :integer          default("Κυκλοφορεί")
+#  format                  :integer          default("Βιβλίο")
 #  original_language       :integer
 #  original_title          :string
 #  publisher_id            :integer
@@ -403,7 +380,7 @@ end
 #
 # Indexes
 #
-#  books_tsearch_idx              (tsearch_vector)
+#  books_tsearch_idx              (tsearch_vector) USING gin
 #  index_books_on_isbn            (isbn) UNIQUE
 #  index_books_on_isbn13          (isbn13) UNIQUE
 #  index_books_on_ismn            (ismn) UNIQUE

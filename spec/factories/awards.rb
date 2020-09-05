@@ -1,11 +1,10 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :award do
-    prize nil
-year 1
-awardable_id 1
-awardable_type "MyString"
+    prize { nil }
+    year { 1 }
+    awardable_id { 1 }
+    awardable_type { 'MyString' }
   end
-
 end
 
 # == Schema Information

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :author do
     firstname {Faker::Name.first_name}
     lastname {Faker::Name.last_name}
@@ -10,7 +10,7 @@ FactoryGirl.define do
     factory :invalid_author do
       firstname nil
       lastname nil
-    end    
+    end
   end
 
 end
@@ -37,7 +37,7 @@ end
 #
 # Indexes
 #
-#  authors_tsearch_idx              (tsearch_vector)
+#  authors_tsearch_idx              (tsearch_vector) USING gin
 #  index_authors_on_biblionet_id    (biblionet_id) UNIQUE
 #  index_authors_on_masterpiece_id  (masterpiece_id)
 #  index_authors_on_slug            (slug) UNIQUE

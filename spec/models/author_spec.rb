@@ -35,7 +35,7 @@ end
 #
 # Indexes
 #
-#  authors_tsearch_idx              (tsearch_vector)
+#  authors_tsearch_idx              (tsearch_vector) USING gin
 #  index_authors_on_biblionet_id    (biblionet_id) UNIQUE
 #  index_authors_on_masterpiece_id  (masterpiece_id)
 #  index_authors_on_slug            (slug) UNIQUE

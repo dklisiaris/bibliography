@@ -20,20 +20,6 @@ class Author < ActiveRecord::Base
 
   scope :writers, -> { joins(:contributions).where(contributions:{job: 0}).group("authors.id").order("authors.created_at DESC") }
   scope :with_biography, -> { where.not(biography: "") }
-  # include PgSearch
-  # pg_search_scope :search_by_name,
-  #   :against => [
-  #     [:lastname, 'A'],
-  #     [:firstname, 'B'],
-  #     [:tsearch_vector, 'C']
-  #   ],
-  #   :using => {
-  #     :tsearch => {:prefix => true, :tsvector_column => :tsearch_vector},
-  #     :trigram => {:threshold => 0.15}
-  #   },
-  #   :ignoring => :accents
-
-  # multisearchable :against => [:lastname, :firstname, :tsearch_vector]
 
   after_validation :calculate_search_terms, :if => :name_changed?
   before_save :write_mastepiece_id
@@ -86,8 +72,7 @@ class Author < ActiveRecord::Base
     end
   end
 
-  # Try building a slug based on the following fields in
-  # increasing order of specificity.
+  # Try building a slug based on the following fields in increasing order of specificity.
   def slug_candidates
     [
       :slugged_name,
@@ -168,7 +153,7 @@ end
 #
 # Indexes
 #
-#  authors_tsearch_idx              (tsearch_vector)
+#  authors_tsearch_idx              (tsearch_vector) USING gin
 #  index_authors_on_biblionet_id    (biblionet_id) UNIQUE
 #  index_authors_on_masterpiece_id  (masterpiece_id)
 #  index_authors_on_slug            (slug) UNIQUE
