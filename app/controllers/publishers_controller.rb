@@ -34,6 +34,7 @@ class PublishersController < ApplicationController
     @places = @publisher.places
     @books = Book.includes(:main_writer).where(publisher_id: @publisher.id).page(params[:page])
     @place = Place.new
+    # byebug
     impressionist(@publisher)
 
     respond_with(@publisher)

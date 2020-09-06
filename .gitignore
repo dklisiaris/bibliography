@@ -17,6 +17,17 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+/node_modules
+/yarn-error.log
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
 # Ignore environment variable files.
 .env
 

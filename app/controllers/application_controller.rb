@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   # Verify that controller actions are authorized. Optional, but good.
   after_action :verify_authorized,  except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
-  before_action :prepare_meta_tags, if: "request.get?"
+  before_action :prepare_meta_tags, if: -> { request.get? }
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # rescue_from ActiveRecord::RecordNotFound, with: :not_found

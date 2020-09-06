@@ -1,5 +1,5 @@
 class Api::V1::CategoriesController < Api::V1::BaseController
-  before_filter :authenticate_user_from_token!, only: [:liked_with_books]
+  before_action :authenticate_user_from_token!, only: [:liked_with_books]
 
   def index
     categories = policy_scope(Category)

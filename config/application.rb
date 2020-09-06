@@ -16,6 +16,9 @@ Bundler.require(*Rails.groups)
 
 module Bibliography
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.2
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,7 +34,6 @@ module Bibliography
     config.i18n.default_locale = :el # set default locale to Greek
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
     config.active_record.schema_format = :sql
 
     config.generators do |g|
@@ -49,7 +51,7 @@ module Bibliography
 
     config.middleware.use Rack::Deflater
 
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options, :head]

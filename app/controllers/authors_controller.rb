@@ -16,10 +16,6 @@ class AuthorsController < ApplicationController
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
       limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
-      # @authors = policy_scope(Author)
-      #   .search_by_name(keyphrase)
-      #   .page(params[:page])
-      #   .order(impressions_count: :desc, image: :asc)
 
       @authors = policy_scope(Author)
         .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
@@ -41,13 +37,16 @@ class AuthorsController < ApplicationController
 
   def show
     @awardable = @author
-    @awards = @awardable.awards
     @award = Award.new
+
+    @awards = @author.awards
     @liked = current_user.likes?(@author) if user_signed_in?
     @shelves = current_user.shelves if user_signed_in?
     impressionist(@author)
 
-    @books = @author.books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
+    # @books = @author.books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
+    @writings = @author.writings.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
+    @contributed_books = @author.contributed_books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
 
     respond_with(@author)
   end

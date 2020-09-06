@@ -5,6 +5,8 @@ class Author < ActiveRecord::Base
 
   has_many :contributions
   has_many :books, through: :contributions
+  has_many :writings, -> { where(contributions: { job: 0 }) }, :through => :contributions, source: 'book'
+  has_many :contributed_books, -> { where.not(contributions: { job: 0 }) }, :through => :contributions, source: 'book'
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards
   belongs_to :masterpiece, class_name: 'Book'
