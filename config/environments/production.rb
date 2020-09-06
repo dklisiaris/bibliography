@@ -29,7 +29,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :scss
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false # Should be false in production, but assets arent loading. Needs further investigation.
+  config.assets.compile = true # Should be false in production, but assets arent loading. Needs further investigation.
   # config.assets.precompile =  ['*.js', '^[^_]*.css', '*.css.erb']
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
