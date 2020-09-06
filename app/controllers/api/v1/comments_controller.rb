@@ -1,5 +1,5 @@
 class Api::V1::CommentsController < Api::V1::BaseController
-  before_filter :authenticate_user_from_token!, only: [:create]
+  before_action :authenticate_user_from_token!, only: [:create]
   before_action :set_book
 
   def index

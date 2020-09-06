@@ -1,5 +1,5 @@
 class Api::V1::BooksController < Api::V1::BaseController
-  before_filter :authenticate_user_from_token!, only: [:my, :rated_ids]
+  before_action :authenticate_user_from_token!, only: [:my, :rated_ids]
 
   def index
     books = policy_scope(Book).includes(:writers,:contributors,:publisher,:categories,:comment_threads)

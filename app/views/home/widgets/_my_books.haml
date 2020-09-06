@@ -6,7 +6,7 @@
     .row
       - if user_signed_in?
         .col-xs-12
-          = "#{current_user.books.distinct.count} #{t('books.label')} | #{@shelves.count} #{t('collections')} | #{current_user.writers.distinct.count} #{t('authors.label')}"
+          = "#{current_user.books.distinct.count} #{t('books.label')} | #{@shelves.count} #{t('collections')} | #{current_user.writer_ids.uniq.count} #{t('authors.label')}"
         .col-xs-12
           = cell(:search).call(:search_form, url: '#', placeholder: t('search_my_books'))
       - else

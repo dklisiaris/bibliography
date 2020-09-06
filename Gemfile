@@ -1,13 +1,11 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+ruby '2.6.6'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
@@ -18,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# gem 'mini_racer', platforms: :ruby
 
 # modernizr.js lib
 gem 'modernizr-rails', '~> 2.7'
@@ -46,9 +45,12 @@ gem 'cells', "4.0.0.beta3"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails', '~> 4.0'
   gem 'factory_bot_rails', '~> 5.2'
@@ -69,7 +71,7 @@ end
 
 group :test do
   gem 'faker', '~> 1.7'
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 2.15'
   gem 'database_cleaner', '~> 1.5'
   gem "launchy", '~> 2.4'
   gem 'selenium-webdriver', '~> 3.3'
@@ -230,7 +232,7 @@ group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.3'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '>= 3.0.5', '< 3.2'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -244,7 +246,7 @@ gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
 gem 'public_activity', '~> 1.5'
 
 # Makes rendering and caching a collection of template partials easier and faster
-gem 'multi_fetch_fragments', '~> 0.0.17'
+# gem 'multi_fetch_fragments', '~> 0.0.17'
 
 # A rich text editor for everyday writing
 gem 'trix', '~> 0.9.10'
