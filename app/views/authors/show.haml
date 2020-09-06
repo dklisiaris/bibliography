@@ -47,21 +47,34 @@
           %hr/
           %article.description
             = @author.biography.html_safe if @author.biography.present?
-          - if @author.awards.count > 0
+          - if @awards.count > 0
             %h4.sub-header
               = t('awards.label')
-            - @author.awards.each do |award|
+            - @awards.each do |award|
               = link_to award.prize.name, award.prize
               = " (#{award.year})"
               %br/
-          - if @author.books.count > 0
+          - if @writings.present?
             %h4.sub-header
-              = t('books.label')
-            = render partial: "shared/pagination", locals: {paginatable: @books}
-            %hr/
-            = render :partial =>  "books/book", :collection => @books, :as => :book
-            = render partial: "shared/pagination", locals: {paginatable: @books}
-            = render 'books/collections_modal' if user_signed_in?
+              = "#{t('books.label')} - Συγγραφή - (#{@author.writings.count})"
+            = render partial: "shared/pagination", locals: {paginatable: @writings}
+            - if @writings.total_pages > 1
+              %hr/
+            = render :partial =>  "books/book", :collection => @writings, :as => :book
+            = render partial: "shared/pagination", locals: {paginatable: @writings}
+            - if @writings.total_pages > 1 && @contributed_books.present?
+              %hr/
+
+          - if @contributed_books.present?
+            %h4.sub-header
+              = "#{t('books.label')} - Συμμετοχή - (#{@author.contributed_books.count})"
+            = render partial: "shared/pagination", locals: {paginatable: @contributed_books}
+            - if @contributed_books.total_pages > 1
+              %hr/
+            = render :partial =>  "books/book", :collection => @contributed_books, :as => :book
+            = render partial: "shared/pagination", locals: {paginatable: @contributed_books}
+
+          = render 'books/collections_modal' if user_signed_in? && (@writings.present? || @contributed_books.present?)
 - if policy(Award).new?
   .row
     .col-sm-10.col-sm-offset-1
