@@ -25,9 +25,9 @@ class Book < ActiveRecord::Base
   has_many :shelves, through: :bookshelves
 
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
-  belongs_to :series, :counter_cache => true
+  belongs_to :series, :counter_cache => true, optional: true
   has_one :daily_suggestion
-  belongs_to :main_writer, class_name: 'Author'
+  belongs_to :main_writer, class_name: 'Author', optional: true
   has_many :ratings, as: :rateable
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
