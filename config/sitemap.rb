@@ -17,6 +17,8 @@ SitemapGenerator::Sitemap.create do
   add awarded_books_path
   add latest_books_path
   add featured_books_path
+  add pages_about_path
+  add pages_privacy_policy_path
   Book.find_each do |record|
     add book_path(record.slug), lastmod: record.updated_at
   end
