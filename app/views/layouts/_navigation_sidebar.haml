@@ -26,6 +26,12 @@
         = side_nav_li(t('side_menu.trending'), trending_books_path, "fa fa-line-chart")
         = side_nav_li(t('side_menu.awarded'), awarded_books_path, "fa fa-trophy")
         = side_nav_li(t('side_menu.latest'), latest_books_path, "fa fa-clock-o")
+      %ul.sidebar-nav
+        %li.sidebar-separator
+          %i
+            %span.sidebar-nav-mini-hide= t('side_menu.pages')
+        = side_nav_li(t('side_menu.about'), pages_about_path, "fa fa-file-text-o")
+        = side_nav_li(t('side_menu.privacy'), pages_privacy_policy_path, "fa fa-file-text-o")
 
         - if user_signed_in?
           - if current_user.editor?

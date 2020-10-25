@@ -94,6 +94,7 @@ en:
 
   upcoming: "Upcoming"
   privacy_policy: Privacy policy
+  about_us: About us
 
   stats:
     views: "Views"
@@ -125,6 +126,10 @@ en:
     monitoring: "Monitoring"
     tasks: "Tasks"
     api: "API"
+
+    pages: Pages
+    about: About
+    privacy: Privacy Policy
 
   comments:
     label: "Comments"

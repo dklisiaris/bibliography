@@ -73,6 +73,7 @@ el:
 
   upcoming: "Αναμένεται"
   privacy_policy: Πολιτική Απορρήτου
+  about_us: Σχετικά με εμάς
 
   stats:
     views: "Εμφανίσεις"
@@ -104,6 +105,10 @@ el:
     monitoring: "Monitoring"
     tasks: "Εργασίες"
     api: "API"
+
+    pages: Σελίδες
+    about: Σχετικά
+    privacy: Πολιτική Απορρήτου
 
   comments:
     label: "Σχόλια"

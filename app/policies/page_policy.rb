@@ -9,6 +9,10 @@ class PagePolicy < Struct.new(:user, :page) # :nodoc:
     true
   end
 
+  def about?
+    true
+  end
+
   private
 
   def registered?

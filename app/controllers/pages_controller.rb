@@ -10,4 +10,8 @@ class PagesController < ApplicationController # :nodoc:
   def privacy_policy
     authorize :page, :privacy_policy?
   end
+
+  def about
+    authorize :page, :about?
+  end
 end
