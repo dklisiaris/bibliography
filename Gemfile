@@ -261,7 +261,7 @@ gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'
 gem 'meta-tags', '~> 2.4'
 
 # SitemapGenerator is the easiest way to generate Sitemaps in Ruby.
-gem 'sitemap_generator', '~> 5.1'
+gem 'sitemap_generator', '~> 6.1'
 
 # A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
 gem 'redis', '~> 4.2'
