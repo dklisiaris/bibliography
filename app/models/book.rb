@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-   # a Book may have comments (reviews)
+  # a Book may have comments (reviews)
   acts_as_commentable
 
   mount_uploader :uploaded_cover, UploadedCoverUploader
@@ -29,6 +29,7 @@ class Book < ActiveRecord::Base
   has_one :daily_suggestion
   belongs_to :main_writer, class_name: 'Author', optional: true
   has_many :ratings, as: :rateable
+  belongs_to :genre, optional: true
 
   enum availability: %i(Κυκλοφορεί Υπό\ Έκδοση Εξαντλημένο Κυκλοφορεί\ -\ Εκκρεμής\ εγγραφή Έχει\ αποσυρθεί\ από\ την\ κυκλοφορία)
   enum cover_type: %i(Μαλακό\ εξώφυλλο Σκληρό\ εξώφυλλο Spiral)
@@ -55,10 +56,10 @@ class Book < ActiveRecord::Base
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   searchkick batch_size: 50,
-  callbacks: :async,
-  match: :word_start,
-  searchable: [:tsearch_vector],
-  word_start: [:tsearch_vector]
+             callbacks: :async,
+             match: :word_start,
+             searchable: [:tsearch_vector],
+             word_start: [:tsearch_vector]
 
   def search_data
     {
@@ -377,10 +378,15 @@ end
 #  views_count             :integer          default(0)
 #  uploaded_cover          :string
 #  main_writer_id          :integer
+#  first_publish_date      :date
+#  current_publish_date    :date
+#  future_publish_date     :date
+#  genre_id                :bigint(8)
 #
 # Indexes
 #
 #  books_tsearch_idx              (tsearch_vector) USING gin
+#  index_books_on_genre_id        (genre_id)
 #  index_books_on_isbn            (isbn) UNIQUE
 #  index_books_on_isbn13          (isbn13) UNIQUE
 #  index_books_on_ismn            (ismn) UNIQUE
@@ -391,6 +397,7 @@ end
 #
 # Foreign Keys
 #
+#  fk_rails_...  (genre_id => genres.id)
 #  fk_rails_...  (publisher_id => publishers.id)
 #  fk_rails_...  (series_id => series.id)
 #

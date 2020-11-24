@@ -278,3 +278,9 @@ gem 'honeybadger', '~> 4.7'
 
 # SaaS based Application protection and monitoring platform
 # gem 'sqreen', '~> 1.20'
+
+# Interactor provides a common interface for performing complex user interactions.
+gem "interactor", "~> 3.0"
+
+# RuboCop is a Ruby code style checking and code formatting tool.
+gem 'rubocop', '~> 1.3', require: false

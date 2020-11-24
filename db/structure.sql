@@ -1,10 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 10.8
--- Dumped by pg_dump version 10.8
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -159,7 +152,10 @@ CREATE TABLE public.authors (
     tsearch_vector tsvector,
     contributions_count integer DEFAULT 0,
     uploaded_avatar character varying,
-    masterpiece_id integer
+    masterpiece_id integer,
+    middle_name character varying,
+    born_year integer,
+    death_year integer
 );
 
 
@@ -260,7 +256,11 @@ CREATE TABLE public.books (
     bookshelves_count integer DEFAULT 0,
     views_count integer DEFAULT 0,
     uploaded_cover character varying,
-    main_writer_id integer
+    main_writer_id integer,
+    first_publish_date date,
+    current_publish_date date,
+    future_publish_date date,
+    genre_id bigint
 );
 
 
@@ -502,6 +502,38 @@ ALTER SEQUENCE public.follows_id_seq OWNED BY public.follows.id;
 
 
 --
+-- Name: genres; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.genres (
+    id bigint NOT NULL,
+    name character varying,
+    biblionet_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.genres_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.genres_id_seq OWNED BY public.genres.id;
+
+
+--
 -- Name: impressions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -711,7 +743,12 @@ CREATE TABLE public.publishers (
     impressions_count integer DEFAULT 0,
     slug character varying,
     tsearch_vector tsvector,
-    books_count integer DEFAULT 0
+    books_count integer DEFAULT 0,
+    alternative_name character varying,
+    address character varying,
+    telephone character varying,
+    email character varying,
+    website character varying
 );
 
 
@@ -1023,6 +1060,13 @@ ALTER TABLE ONLY public.follows ALTER COLUMN id SET DEFAULT nextval('public.foll
 
 
 --
+-- Name: genres id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.genres ALTER COLUMN id SET DEFAULT nextval('public.genres_id_seq'::regclass);
+
+
+--
 -- Name: impressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1192,6 +1236,14 @@ ALTER TABLE ONLY public.daily_suggestions
 
 ALTER TABLE ONLY public.follows
     ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (id);
 
 
 --
@@ -1431,6 +1483,13 @@ CREATE INDEX index_books_categories_on_category_id ON public.books_categories US
 
 
 --
+-- Name: index_books_on_genre_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_genre_id ON public.books USING btree (genre_id);
+
+
+--
 -- Name: index_books_on_isbn; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1547,6 +1606,13 @@ CREATE INDEX index_contributions_on_book_id ON public.contributions USING btree 
 --
 
 CREATE UNIQUE INDEX index_daily_suggestions_on_book_id ON public.daily_suggestions USING btree (book_id);
+
+
+--
+-- Name: index_genres_on_biblionet_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_genres_on_biblionet_id ON public.genres USING btree (biblionet_id);
 
 
 --
@@ -1738,6 +1804,14 @@ ALTER TABLE ONLY public.shelves
 
 
 --
+-- Name: books fk_rails_776de3933f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_776de3933f FOREIGN KEY (genre_id) REFERENCES public.genres(id);
+
+
+--
 -- Name: bookshelves fk_rails_9a6539777c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1848,6 +1922,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170912082754'),
 ('20170912092805'),
 ('20170918120936'),
-('20200905162806');
+('20200905162806'),
+('20201122154811'),
+('20201122155416'),
+('20201122183706'),
+('20201122215656'),
+('20201123071807');
 
 

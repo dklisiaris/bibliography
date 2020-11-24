@@ -19,10 +19,10 @@ class Category < ActiveRecord::Base
   is_impressionable :counter_cache => true, :unique => true
 
   searchkick batch_size: 100,
-  callbacks: :async,
-  match: :word_start,
-  searchable: [:tsearch_vector],
-  word_start: [:tsearch_vector]
+             callbacks: :async,
+             match: :word_start,
+             searchable: [:tsearch_vector],
+             word_start: [:tsearch_vector]
 
   def search_data
   {

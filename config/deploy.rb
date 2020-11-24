@@ -82,4 +82,4 @@ namespace :deploy do
   end
 end
 
-after 'deploy:publishing', 'deploy:refresh_sitemap'
+# after 'deploy:publishing', 'deploy:refresh_sitemap'

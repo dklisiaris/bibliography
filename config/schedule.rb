@@ -4,11 +4,11 @@
 # http://en.wikipedia.org/wiki/Cron
 
 every 1.day, at: '01:00 am' do
-  runner "DailySuggestion.set_book_of_the_day"
+  runner 'DailySuggestion.set_book_of_the_day'
 end
 
 every 1.day, at: '06:00 am' do
-  runner "ContentUpdateWorker.perform_async(500)"
+  runner 'DailyFetchBooksJob.perform_later(500)'
 end
 
 # every 1.day, at: '08:00 pm' do

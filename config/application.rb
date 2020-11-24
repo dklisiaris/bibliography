@@ -33,6 +33,8 @@ module Bibliography
     config.time_zone = 'Athens' # set default time zone to "Athens" (UTC +2)
     config.i18n.default_locale = :el # set default locale to Greek
 
+    config.active_job.queue_adapter = :sidekiq
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.schema_format = :sql
 

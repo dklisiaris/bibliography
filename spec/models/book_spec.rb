@@ -48,10 +48,15 @@ end
 #  views_count             :integer          default(0)
 #  uploaded_cover          :string
 #  main_writer_id          :integer
+#  first_publish_date      :date
+#  current_publish_date    :date
+#  future_publish_date     :date
+#  genre_id                :bigint(8)
 #
 # Indexes
 #
 #  books_tsearch_idx              (tsearch_vector) USING gin
+#  index_books_on_genre_id        (genre_id)
 #  index_books_on_isbn            (isbn) UNIQUE
 #  index_books_on_isbn13          (isbn13) UNIQUE
 #  index_books_on_ismn            (ismn) UNIQUE
@@ -62,6 +67,7 @@ end
 #
 # Foreign Keys
 #
+#  fk_rails_...  (genre_id => genres.id)
 #  fk_rails_...  (publisher_id => publishers.id)
 #  fk_rails_...  (series_id => series.id)
 #

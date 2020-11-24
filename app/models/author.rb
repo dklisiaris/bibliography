@@ -9,7 +9,7 @@ class Author < ActiveRecord::Base
   has_many :contributed_books, -> { where.not(contributions: { job: 0 }) }, :through => :contributions, source: 'book'
   has_many :awards, as: :awardable
   has_many :prizes, through: :awards
-  belongs_to :masterpiece, class_name: 'Book'
+  belongs_to :masterpiece, class_name: 'Book', optional: true
   has_many :ratings, as: :rateable
 
   enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
@@ -27,11 +27,11 @@ class Author < ActiveRecord::Base
   before_save :write_mastepiece_id
 
   searchkick batch_size: 100,
-  callbacks: :async,
-  match: :word_start,
-  searchable: [:tsearch_vector],
-  word_start: [:tsearch_vector]
-  # autocomplete: ['title']
+             callbacks: :async,
+             match: :word_start,
+             searchable: [:tsearch_vector],
+             word_start: [:tsearch_vector]
+             # autocomplete: ['title']
 
   def search_data
   {
@@ -152,6 +152,9 @@ end
 #  contributions_count :integer          default(0)
 #  uploaded_avatar     :string
 #  masterpiece_id      :integer
+#  middle_name         :string
+#  born_year           :integer
+#  death_year          :integer
 #
 # Indexes
 #

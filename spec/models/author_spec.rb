@@ -32,6 +32,9 @@ end
 #  contributions_count :integer          default(0)
 #  uploaded_avatar     :string
 #  masterpiece_id      :integer
+#  middle_name         :string
+#  born_year           :integer
+#  death_year          :integer
 #
 # Indexes
 #

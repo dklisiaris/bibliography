@@ -12,10 +12,10 @@ class Publisher < ActiveRecord::Base
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   searchkick batch_size: 100,
-  callbacks: :async,
-  match: :word_start,
-  searchable: [:tsearch_vector],
-  word_start: [:tsearch_vector]
+             callbacks: :async,
+             match: :word_start,
+             searchable: [:tsearch_vector],
+             word_start: [:tsearch_vector]
 
   def search_data
   {
@@ -65,6 +65,11 @@ end
 #  slug              :string
 #  tsearch_vector    :tsvector
 #  books_count       :integer          default(0)
+#  alternative_name  :string
+#  address           :string
+#  telephone         :string
+#  email             :string
+#  website           :string
 #
 # Indexes
 #

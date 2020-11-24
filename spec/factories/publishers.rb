@@ -20,6 +20,11 @@ end
 #  slug              :string
 #  tsearch_vector    :tsvector
 #  books_count       :integer          default(0)
+#  alternative_name  :string
+#  address           :string
+#  telephone         :string
+#  email             :string
+#  website           :string
 #
 # Indexes
 #
