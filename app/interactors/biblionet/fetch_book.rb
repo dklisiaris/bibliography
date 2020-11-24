@@ -10,9 +10,9 @@ module Biblionet
 
       book_hash = request_get_title
       context.fail!(error: 'Book does not exist') if book_hash.is_a?(String)
-      context.fail!(error: 'Book does not have title') if book_hash['Title'].blank?
 
       book_hash = book_hash&.flatten&.first
+      context.fail!(error: 'Book does not have title') if book_hash['Title'].blank?
 
       b_publisher_id = book_hash['PublisherID']
 
