@@ -10,6 +10,7 @@ module Biblionet
 
       book_hash = request_get_title
       context.fail!(error: 'Book does not exist') if book_hash.is_a?(String)
+      context.fail!(error: 'Book does not have title') if book_hash['Title'].blank?
 
       book_hash = book_hash&.flatten&.first
 
@@ -81,9 +82,9 @@ module Biblionet
         publication_year: publication_year,
         publication_version: book_hash['EditionNo'],
         publication_place: book_hash['Place'],
-        first_publish_date: book_hash['FuturePublishDate'],
-        current_publish_date: book_hash['CurrentPublishDate'],
-        future_publish_date: book_hash['FuturePublishDate'],
+        first_publish_date: book_hash['FuturePublishDate'].presence,
+        current_publish_date: book_hash['CurrentPublishDate'].presence,
+        future_publish_date: book_hash['FuturePublishDate'].presence,
         price: book_hash['Price'],
         price_updated_at: book_hash['LastUpdate'],
         size: book_hash['Dimensions'],
