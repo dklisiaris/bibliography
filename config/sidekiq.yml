@@ -17,6 +17,9 @@
   - [searchkick, 8]
   - [bibliography_production_searchkick, 8]
   - [mailer, 5]
+  - [bibliography_production_mailers, 5]
+  - [recommendable, 5]
   - [network_ops, 3]
   - [maintenance, 2]
+  - [bibliography_production_maintenance, 2]
   - default
