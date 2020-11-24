@@ -52,6 +52,7 @@ module Biblionet
       categories = Category.where(biblionet_id: subject_ids)
       new_book.categories = categories
 
+      new_book.contributions.each(&:destroy) if new_book.contributions.any?
       contributor_hashes.each do |h|
         author_id = Author.find_by(biblionet_id: h['ContributorID']).id
         new_book.contributions.build(job: Author.jobs[h['ContributorType']], author_id: author_id)
@@ -64,11 +65,14 @@ module Biblionet
     def init_book(book_hash, publisher_id, genre_id)
       image = "https://biblionet.gr#{book_hash['CoverImage']}"
       publication_year = Date.parse(book_hash['CurrentPublishDate']).year if book_hash['CurrentPublishDate'].present?
-      ::Book.new(
+      isbn = book_hash['ISBN'].presence
+
+      book = Book.find_or_initialize_by(isbn: isbn)
+      book.attributes = {
         title: book_hash['Title'],
         subtitle: book_hash['Subtitle'],
         image: image,
-        isbn: book_hash['ISBN'].presence,
+        isbn: isbn,
         isbn13: book_hash['ISBN_2'].presence,
         issn: book_hash['ISBN_3'].presence,
         ismn: book_hash['ISMN'].presence,
@@ -93,7 +97,8 @@ module Biblionet
         genre_id: genre_id,
         description: book_hash['Summary'],
         biblionet_id: book_hash['TitlesID']
-      )
+      }
+      book
     end
 
     def create_publisher(company_id)
