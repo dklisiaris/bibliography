@@ -17,6 +17,7 @@ module Biblionet
 
         if service.failure?
           empty_responses += 1
+          puts service.error
         else
           empty_responses = 0
         end

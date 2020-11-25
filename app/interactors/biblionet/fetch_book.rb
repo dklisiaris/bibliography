@@ -9,10 +9,10 @@ module Biblionet
       @biblionet_book_id = context.biblionet_book_id
 
       book_hash = request_get_title
-      context.fail!(error: 'Book does not exist') if book_hash.is_a?(String)
+      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not exist") if book_hash.is_a?(String)
 
       book_hash = book_hash&.flatten&.first
-      context.fail!(error: 'Book does not have title') if book_hash['Title'].blank?
+      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have title") if book_hash['Title'].blank?
 
       b_publisher_id = book_hash['PublisherID']
 
@@ -55,7 +55,9 @@ module Biblionet
 
       new_book.contributions.each(&:destroy) if new_book.contributions.any?
       contributor_hashes.each do |h|
-        author_id = Author.find_by(biblionet_id: h['ContributorID']).id
+        author_id = Author.find_by(biblionet_id: h['ContributorID'])&.id
+        context.fail!(error: "BID: #{@biblionet_book_id} - Author could not be created") if author_id.blank?
+
         new_book.contributions.build(job: Author.jobs[h['ContributorType']], author_id: author_id)
       end
       new_book.save!
