@@ -68,6 +68,9 @@ module Biblionet
       new_book.collective_work = true if new_book.contributions.none?
 
       new_book.save!
+    rescue StandardError
+      redis = Redis.new(url: ENV['REDIS_SERVER_URL'])
+      redis.sadd('failed_biblionet_ids', @biblionet_book_id)
     end
 
     private

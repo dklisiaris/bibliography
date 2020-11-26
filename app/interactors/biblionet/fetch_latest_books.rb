@@ -6,24 +6,12 @@ module Biblionet
     include Interactor
 
     def call
-      @last_biblionet_id = latest_biblionet_id + 1
+      @start_id = latest_biblionet_id + 1
       @limit = context.limit || 0
+      @end_id = @start_id + @limit
 
-      empty_responses = 0
-      imported_books_count = 0
-
-      while empty_responses < 50 && imported_books_count <= @limit
-        service = Biblionet::FetchBook.call(biblionet_book_id: @last_biblionet_id)
-
-        if service.failure?
-          empty_responses += 1
-          puts service.error
-        else
-          empty_responses = 0
-        end
-
-        @last_biblionet_id += 1
-        imported_books_count += 1 if @limit != 0
+      (@start_id..@end_id).to_a.each do |b_id|
+        FetchBookJob.perform_later(b_id)
       end
     end
 
