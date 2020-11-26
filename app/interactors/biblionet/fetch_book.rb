@@ -13,6 +13,7 @@ module Biblionet
 
       book_hash = book_hash&.flatten&.first
       context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have title") if book_hash['Title'].blank?
+      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have isbn") if book_hash['ISBN'].blank?
 
       b_publisher_id = book_hash['PublisherID']
 
