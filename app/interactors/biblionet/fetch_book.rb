@@ -18,7 +18,7 @@ module Biblionet
       b_publisher_id = book_hash['PublisherID']
 
       contributor_hashes = request_get_contributors.flatten
-      contributor_ids = contributor_hashes.map { |s| s['ContributorID'] }
+      contributor_ids = contributor_hashes.map { |s| s['ContributorID'] }.compact
       contributor_ids.each do |id|
         next if Author.where(biblionet_id: id).exists?
 
@@ -56,11 +56,15 @@ module Biblionet
 
       new_book.contributions.each(&:destroy) if new_book.contributions.any?
       contributor_hashes.each do |h|
+        next if h['ContributorID'].blank?
+
         author_id = Author.find_by(biblionet_id: h['ContributorID'])&.id
         context.fail!(error: "BID: #{@biblionet_book_id} - Author could not be created") if author_id.blank?
 
         new_book.contributions.build(job: Author.jobs[h['ContributorType']], author_id: author_id)
       end
+      new_book.collective_work = true if new_book.contributions.none?
+
       new_book.save!
     end
 
