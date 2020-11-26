@@ -15,7 +15,7 @@ module Biblionet
       context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have title") if book_hash['Title'].blank?
       context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have isbn") if book_hash['ISBN'].blank?
 
-      b_publisher_id = book_hash['PublisherID']
+      b_publisher_id = book_hash['PublisherID'].presence
 
       contributor_hashes = request_get_contributors.flatten
       contributor_ids = contributor_hashes.map { |s| s['ContributorID'] }.compact
@@ -26,7 +26,7 @@ module Biblionet
       end
 
       company_hashes = request_get_companies.flatten
-      company_ids = company_hashes.map { |s| s['CompanyID'] }
+      company_ids = company_hashes.map { |s| s['CompanyID'] }.compact
       company_ids.each do |id|
         next if Publisher.where(biblionet_id: id).exists?
 
@@ -48,7 +48,9 @@ module Biblionet
           Genre.create(name: book_hash['Category'], biblionet_id: book_hash['CategoryID']).id
         end
 
-      publisher_id = Publisher.find_by(biblionet_id: b_publisher_id).id
+      publisher_id = Publisher.find_by(biblionet_id: b_publisher_id)&.id
+      context.fail!(error: "BID: #{@biblionet_book_id} - Book has no publisher") if publisher_id.blank?
+
       new_book = init_book(book_hash, publisher_id, genre_id)
 
       categories = Category.where(biblionet_id: subject_ids)
