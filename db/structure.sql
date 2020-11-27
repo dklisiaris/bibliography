@@ -966,7 +966,8 @@ CREATE TABLE public.users (
     updated_at timestamp without time zone,
     api_key character varying,
     provider character varying,
-    uid character varying
+    uid character varying,
+    role character varying DEFAULT 'registered'::character varying
 );
 
 
@@ -1927,6 +1928,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201122155416'),
 ('20201122183706'),
 ('20201122215656'),
-('20201123071807');
+('20201123071807'),
+('20201127215147');
 
 

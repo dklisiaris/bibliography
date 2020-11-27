@@ -228,7 +228,7 @@ group :development do
   gem 'capistrano-bower', '~> 1.1'
 
   # Annotate Rails classes with schema and routes info
-  gem 'annotate', '~> 2.7'
+  gem 'annotate', '~> 3.0'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.3'

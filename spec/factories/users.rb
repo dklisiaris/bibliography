@@ -25,6 +25,7 @@ end
 #  api_key                :string
 #  provider               :string
 #  uid                    :string
+#  role                   :string           default("registered")
 #
 # Indexes
 #

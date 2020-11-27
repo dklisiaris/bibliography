@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   has_many :activities, as: :owner, class_name: 'PublicActivity::Activity', dependent: :destroy
   has_many :ratings, dependent: :destroy
 
-
   recommends :books, :shelves, :authors, :categories
 
   acts_as_follower
@@ -163,7 +162,6 @@ class User < ActiveRecord::Base
   def send_signup_email
     AccountNotifier.send_signup_email(self).deliver_later
   end
-
 end
 
 # == Schema Information
@@ -186,6 +184,7 @@ end
 #  api_key                :string
 #  provider               :string
 #  uid                    :string
+#  role                   :string           default("registered")
 #
 # Indexes
 #
