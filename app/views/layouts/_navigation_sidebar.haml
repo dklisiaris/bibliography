@@ -34,14 +34,14 @@
         = side_nav_li(t('side_menu.privacy'), pages_privacy_policy_path, "fa fa-file-text-o")
 
         - if user_signed_in?
-          - if current_user.editor?
+          - if current_user.role == 'editor' || current_user.role == 'admin'
             %li.sidebar-separator
               %i
                 %span.sidebar-nav-mini-hide= t('side_menu.editors_only')
             = side_nav_li(t('side_menu.contributions'), contributions_path, "fa fa-pencil-square-o")
             = side_nav_li(t('side_menu.awards'), awards_path, "fa fa-pencil-square-o")
             = side_nav_li(t('side_menu.prizes'), prizes_path, "fa fa-pencil-square-o")
-          - if current_user.admin?
+          - if current_user.role == 'admin'
             %li.sidebar-separator
               %i
                 %span.sidebar-nav-mini-hide= t('side_menu.admins_only')

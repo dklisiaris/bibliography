@@ -3,6 +3,6 @@ class TaskPolicy <  Struct.new(:user, :task)
   def update_content? ; admin?; end
 
   def admin?
-    user and user.admin?
+    user && user.role == 'admin'
   end
 end

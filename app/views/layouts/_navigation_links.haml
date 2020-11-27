@@ -3,11 +3,11 @@
 %li= link_to 'Authors', authors_path
 %li= link_to 'Publishers', publishers_path
 - if user_signed_in?
-  - if current_user.editor?
+  - if current_user.role == 'editor' || current_user.role == 'admin'
     = content_tag(:li, link_to('Contributions', contributions_path))
     = content_tag(:li, link_to('Awards', awards_path))
     = content_tag(:li, link_to('Prizes', prizes_path))
-  - if current_user.admin?
+  - if current_user.role == 'admin'
     = content_tag(:li, link_to('Import', import_path))
   %li.dropdown
     %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}

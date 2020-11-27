@@ -3,6 +3,6 @@ class ImportPolicy <  Struct.new(:user, :import)
   def import_stuff? ; admin?; end
 
   def admin?
-    user and user.admin?
+    user && user.role == 'admin'
   end
 end

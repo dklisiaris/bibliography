@@ -93,7 +93,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'users/registrations' }
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, lambda { |u| u.role == 'admin' } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
     mount RedisBrowser::Web => '/redis'

@@ -33,16 +33,14 @@ class ApplicationPolicy
   protected
 
   def editor?
-    user and (user.editor? or user.admin?)
+    user && (user.role == 'editor' || user.role == 'admin')
   end
 
   def belongs_to_current_user?
-    user and (record.user == user)
+    user && (record.user == user)
   end
 
   def registered?
     user.present?
   end
-
 end
-
