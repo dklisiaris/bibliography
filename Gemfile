@@ -34,7 +34,7 @@ gem 'thor', '~> 0.20.0'
 gem 'hamlit-rails', '~> 0.1.0'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
-gem 'cells', "4.0.0.beta3"
+gem 'cells', '4.0.0.beta3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -105,7 +105,7 @@ gem 'certified', '~> 1.0'
 gem 'royce', '~> 1.0'
 
 # Authorization
-gem "pundit", '~> 1.0'
+gem 'pundit', '~> 1.0'
 
 # For models with tree parent-child associations
 gem 'acts_as_tree', '~> 2.1'
@@ -166,10 +166,10 @@ gem 'impressionist', '~> 1.6.1'
 gem 'recommendable', '~> 2.2'
 
 # Bundler-like DSL and rake tasks for Bower on Rails
-gem "bower-rails", '~> 0.11'
+gem 'bower-rails', '~> 0.11'
 
 # A Gem to add Follow functionality for models
-gem "acts_as_follower", '~> 0.2'
+gem 'acts_as_follower', '~> 0.2'
 
 # Generate greeklish forms from Greek words
 gem 'greeklish', '~> 0.0.1'
@@ -280,7 +280,7 @@ gem 'honeybadger', '~> 4.7'
 # gem 'sqreen', '~> 1.20'
 
 # Interactor provides a common interface for performing complex user interactions.
-gem "interactor", "~> 3.0"
+gem 'interactor', '~> 3.0'
 
 # RuboCop is a Ruby code style checking and code formatting tool.
 gem 'rubocop', '~> 1.3', require: false
