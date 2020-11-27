@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  royce_roles %w[ registered editor admin ]
   before_save :ensure_api_key
   # before_create :assign_api_key
-  after_create :assign_default_role, :assign_profile, :assign_built_in_shelves, :send_signup_email
+  after_create :assign_profile, :assign_built_in_shelves, :send_signup_email
   before_destroy :clear_cache
 
   # Include default devise modules. Others available are:
@@ -14,8 +13,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
-  has_one :profile, :dependent => :destroy
-  has_many :shelves, :dependent => :destroy
+  has_one :profile, dependent: :destroy
+  has_many :shelves, dependent: :destroy
   has_many :bookshelves, through: :shelves
   has_many :books, -> { distinct }, through: :shelves
   has_many :writers, through: :books
@@ -28,10 +27,12 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
+  validates :role, inclusion: { in: %w[registered editor admin] }
+
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       # user.name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,
@@ -41,15 +42,15 @@ class User < ActiveRecord::Base
     profile = user.try(:profile)
     if profile.name.nil? && profile.avatar_url.nil?
       profile.update(name: auth.info.name,
-        remote_avatar_url: auth.info.image.gsub('http://','https://'))
+                     remote_avatar_url: auth.info.image.gsub('http://', 'https://'))
     end
-    return user
+    user
   end
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
@@ -57,11 +58,11 @@ class User < ActiveRecord::Base
   # after_create :assign_default_role
   def screen_name
     if profile.name.present?
-      name = profile.name
+      profile.name
     elsif profile.username.present?
-      name = profile.username
+      profile.username
     else
-      name = email
+      email
     end
   end
 
@@ -70,17 +71,15 @@ class User < ActiveRecord::Base
   end
 
   def added_book?(book)
-    bookshelves.where(book: book).count > 0
+    bookshelves.where(book: book).count.positive?
   end
 
   def book_in_which_collections(book)
-    bookshelves.where(book: book).includes(:shelf).map {|bookshelf| bookshelf.shelf}
+    bookshelves.where(book: book).includes(:shelf).map(&:shelf)
   end
 
   def ensure_api_key
-    if api_key.blank?
-      self.api_key = self.class.generate_api_key
-    end
+    self.api_key = self.class.generate_api_key if api_key.blank?
   end
 
   def self.generate_api_key
@@ -96,13 +95,13 @@ class User < ActiveRecord::Base
   end
 
   def credentials
-    return JSON.generate({ email: email, token: api_key })
+    JSON.generate({ email: email, token: api_key })
   end
 
   # User is considered a newbie if she registered less than 5 days ago
   # or has signed in less than 10 times
   def newbie?
-    ((Time.now - created_at).to_i / 86400) < 5 || sign_in_count < 10
+    ((Time.now - created_at).to_i / 86_400) < 5 || sign_in_count < 10
   end
 
   def people_to_follow
@@ -129,7 +128,7 @@ class User < ActiveRecord::Base
     Rails.cache.delete("#{cache_key}/people_to_follow")
     Rails.cache.delete("#{cache_key}/recommended_books")
     Rails.cache.delete("#{cache_key}/recommended_authors")
-    return true
+    true
   end
 
   private
@@ -138,15 +137,12 @@ class User < ActiveRecord::Base
     write_attribute(:api_key, self.class.generate_api_key)
   end
 
-  def assign_default_role
-    add_role :registered
-  end
-
   def assign_profile
     username = email.gsub(/@.+\z/, '')
     loop do
       break username unless Profile.where(username: username).exists?
-      username = email.gsub(/@.+\z/, rand(100000).to_s)
+
+      username = email.gsub(/@.+\z/, rand(100_000).to_s)
     end
     create_profile(username: username)
   end

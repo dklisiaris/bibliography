@@ -101,9 +101,6 @@ gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'certified', '~> 1.0'
 
-# User roles
-gem 'royce', '~> 1.0'
-
 # Authorization
 gem 'pundit', '~> 1.0'
 
