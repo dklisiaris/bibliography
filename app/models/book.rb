@@ -96,40 +96,32 @@ class Book < ActiveRecord::Base
     LANGUAGES[read_attribute(:original_language).to_i].to_s if read_attribute(:original_language)
   end
 
-  def main_author(reversed=false)
+  def main_author(reversed = false)
     if collective_work?
       I18n.t('books.collective_work')
-    else
-      if writers.first.present?
-        return writers.first.fullname if not reversed
-        return writers.first.fullname_reversed if reversed
-      end
+    elsif writers.first.present?
+      reversed ? writers.first.fullname_reversed : writers.first.fullname
     end
   end
 
-  def short_description(max_chars=350)
-    if description.present?
-      no_html_description = ActionView::Base.full_sanitizer.sanitize(description)
-      if no_html_description.length<=max_chars
-        no_html_description
-      elsif no_html_description.length>max_chars
-        (no_html_description[0...max_chars]+'...')
-      end
-    else
-      nil
+  def short_description(max_chars = 350)
+    return unless description.present?
+
+    no_html_description = ActionView::Base.full_sanitizer.sanitize(description)
+    if no_html_description.length <= max_chars
+      no_html_description
+    elsif no_html_description.length > max_chars
+      "#{no_html_description[0...max_chars]}..."
     end
   end
-
 
   # Returns book cover url if there is one or the default not image.
   def cover
     if uploaded_cover_url.present?
       uploaded_cover_url
-    elsif image.present?
-      BookCoverUploadWorker.perform_async(id)
-      image
     else
-      "/no_cover.jpg"
+      BookCoverUploadWorker.perform_async(id) if image.present?
+      '/no_cover.jpg'
     end
   end
 
@@ -153,18 +145,18 @@ class Book < ActiveRecord::Base
   def slug_candidates
     [
       :slugged_name,
-      [:slugged_name, :id],
+      %i[slugged_name id]
     ]
   end
 
-  def slugged_name(opts={})
+  def slugged_name(opts = {})
     opts[:max_expansions] ||= 1
     opts[:dashes] = true if opts[:dashes].nil?
     join_with = opts[:dashes] ? '-' : ' '
 
     converter = Greeklish.converter(max_expansions: opts[:max_expansions], generate_greek_variants: false)
-    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(title).gsub('ς','σ').gsub(/[,.:'·-]/,''))
-    name_to_slug.split(" ").map do |word|
+    name_to_slug = ApplicationController.helpers.detone(UnicodeUtils.downcase(title).gsub('ς', 'σ').gsub(/[,.:'·-]/, ''))
+    name_to_slug.split(' ').map do |word|
       converted = converter.convert(word)
       converted.present? ? converted : word
     end.flatten.uniq.join(join_with)
@@ -184,7 +176,7 @@ class Book < ActiveRecord::Base
   end
 
   def to_marc
-    record = MARC::Record.new()
+    record = MARC::Record.new
     record.append(MARC::ControlField.new('001', id))
     record.append(MARC::ControlField.new('005', updated_at.strftime('%Y%m%d%H%M%S.%L')))
     record.append(MARC::DataField.new('020', '#',  '#', ['a', isbn.gsub('-','')])) if isbn
@@ -247,32 +239,30 @@ class Book < ActiveRecord::Base
   end
 
   def pages_based_size
-    if pages.present?
-      if pages < 100
-        "< 100"
-      elsif pages >= 100 && pages < 300
-        "100 - 300"
-      elsif pages >= 300 && pages < 600
-        "300 - 600"
-      elsif pages >= 600 && pages < 1000
-        "600 - 1000"
-      else
-        "> 1000"
-      end
+    return unless pages.present?
+
+    if pages < 100
+      '< 100'
+    elsif pages >= 100 && pages < 300
+      '100 - 300'
+    elsif pages >= 300 && pages < 600
+      '300 - 600'
+    elsif pages >= 600 && pages < 1000
+      '600 - 1000'
+    else
+      '> 1000'
     end
   end
 
   def write_series_id
-    if series_name.present?
-      series_obj = Series.find_or_create_by(name: series_name)
-      write_attribute(:series_id, series_obj.id)
-    end
+    return unless series_name.present?
+
+    series_obj = Series.find_or_create_by(name: series_name)
+    write_attribute(:series_id, series_obj.id)
   end
 
   def write_main_writer_id
-    if !collective_work && writers.first.present?
-      write_attribute(:main_writer_id, writers.first.id)
-    end
+    write_attribute(:main_writer_id, writers.first.id) if !collective_work && writers.first.present?
   end
 
   def self.get_popular
@@ -312,9 +302,7 @@ class Book < ActiveRecord::Base
   end
 
   def update_main_writer_id
-    if !collective_work && writers.first.present?
-      update(main_writer_id: writers.first.id)
-    end
+    update(main_writer_id: writers.first.id) if !collective_work && writers.first.present?
   end
 
   # def rewrite_series_name

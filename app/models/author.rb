@@ -34,43 +34,41 @@ class Author < ActiveRecord::Base
              # autocomplete: ['title']
 
   def search_data
-  {
-    tsearch_vector: tsearch_vector.gsub("'", "").split(" "),
-  }
+    {
+      tsearch_vector: tsearch_vector.gsub("'", '').split(' ')
+    }
   end
 
   def fullname
     return [firstname, lastname].join(' ') if firstname.present?
-    return lastname
+
+    lastname
   end
 
   def fullname_reversed
     return [lastname, firstname].join(', ') if firstname.present?
-    return lastname
+
+    lastname
   end
 
   def name_changed?
     :lastname_changed? || :firstname_changed?
   end
 
-  def short_biography(max_chars=350)
-    if biography.present? and biography.length<=max_chars
+  def short_biography(max_chars = 350)
+    if biography.present? && biography.length <= max_chars
       biography.html_safe
-    elsif biography.present? and biography.length>max_chars
-      (biography[0...max_chars]+'...').html_safe
-    else
-      nil
+    elsif biography.present? && biography.length > max_chars
+      "#{biography[0...max_chars]}...".html_safe
     end
   end
 
   def avatar
     if uploaded_avatar_url.present?
       uploaded_avatar_url
-    elsif image.present?
-      AuthorAvatarUploadWorker.perform_async(id)
-      image
     else
-      "/no_avatar.jpg"
+      AuthorAvatarUploadWorker.perform_async(id) if image.present?
+      '/no_avatar.jpg'
     end
   end
 
@@ -78,7 +76,7 @@ class Author < ActiveRecord::Base
   def slug_candidates
     [
       :slugged_name,
-      [:slugged_name, :id],
+      %i[slugged_name id]
     ]
   end
 
@@ -102,12 +100,14 @@ class Author < ActiveRecord::Base
   def associated_dates
     years_re = /\d+-\d*/
     return extra_info.split(',').select{|part| part =~ years_re}.join.strip if extra_info.present?
+
     nil
   end
 
   def associated_titles
     years_re = /\d+-\d*/
     return extra_info.split(',').reject{|part| part =~ years_re}.join(',').strip if extra_info.present?
+
     nil
   end
 
@@ -119,18 +119,15 @@ class Author < ActiveRecord::Base
 
   def get_first_book
     if masterpiece.present?
-      return masterpiece
+      masterpiece
     elsif books.present?
       books.first
     end
   end
 
   def write_mastepiece_id
-    unless books.blank?
-      write_attribute(:masterpiece_id, books.first.id)
-    end
+    write_attribute(:masterpiece_id, books.first.id) unless books.blank?
   end
-
 end
 
 # == Schema Information
