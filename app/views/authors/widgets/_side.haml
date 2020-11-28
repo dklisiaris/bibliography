@@ -2,11 +2,11 @@
 
 - cache([cache_key, authors.map(&:id), authors.map(&:updated_at).max]) do
   .widget
-    .widget-content.widget-content-mini.border-bottom
+    .widget-content.widget-content-mini
       = fa(icon)
       %strong= title
     .widget-content.widget-content-full
-      %table.table.table-borderless.table-striped.table-vcenter
+      %table.table.table-borderless.table-vcenter
         %tbody
           - authors.each do |author|
             - cache(author) do
@@ -15,13 +15,13 @@
                   = link_to image_tag(author.avatar, alt: "author_cover", width: "80", class: "img-thumbnail"), author
                 %td
                   = link_to author.fullname, author
-                  - if author.get_first_book.present?
+                  - if author.masterpiece.present?
                     %br/
                     %span.text-muted
                       %small= "#{t('authors.author_of')}"
-                    = link_to author.get_first_book do
+                    = link_to author.masterpiece do
                       %span
-                        %small= author.get_first_book.try(:title)
+                        %small= author.masterpiece.try(:title)
                   %br/
                   %span.text-muted
                     %small= "#{author.contributions_count} #{t('books.label')}"

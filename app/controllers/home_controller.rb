@@ -28,9 +28,9 @@ class HomeController < ApplicationController
 
       @people_to_follow = current_user.people_to_follow
 
-      @activities = PublicActivity::Activity
-        .where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
-        .includes({owner: :profile}, :trackable).order(updated_at: :desc).page(params[:page]).per(8)
+      @activities =
+        PublicActivity::Activity.where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
+                                .includes({ owner: :profile }, trackable: :main_writer).order(updated_at: :desc).page(params[:page]).per(8)
     end
   end
 

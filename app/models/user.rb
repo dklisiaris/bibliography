@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
 
   def people_to_follow
     Rails.cache.fetch("#{cache_key}/people_to_follow", expires_in: 1.day) do
-      similar_raters.reject do |rater|
+      similar_raters.includes(:profile).reject do |rater|
         following_users.ids.include?(rater.id)
       end
     end
@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
 
   def recommended_books_cached
     Rails.cache.fetch("#{cache_key}/recommended_books", expires_in: 1.day) do
-      recommended_books
+      recommended_books.includes(:main_writer)
     end
   end
 

@@ -9,7 +9,7 @@
     - @featured.each do |category|
       = render partial: 'books/widgets/grid',                                         |
         locals: {                                                                     |
-        title: link_to(category.name, category, class: "text-light-op"),              |
+        title: link_to(category.name, category, class: ""),              |
         books: category.get_popular_books,                                            |
         icon: 'tag'}                                                                  |
   .col-sm-4

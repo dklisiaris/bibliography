@@ -15,7 +15,7 @@
           <h3 class="widget-heading text-light">
             <strong class="text-dark-bg"><%= @profile.name %> (<%= @profile.username %>)</strong>
           </h3>
-          <h4 class="widget-heading text-light-op">
+          <h4 class="widget-heading">
             <em class="text-dark-bg"> Total Books in library: <%= @profile.user.books.distinct.count %></em>
           </h4>
           <% if user_signed_in? && @profile.user != current_user  %>

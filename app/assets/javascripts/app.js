@@ -78,13 +78,18 @@ var App = function() {
                .toggleClass('open');
         });
 
-        $('.book-container').masonry({
-          // options
-          itemSelector: '.book-cover',
-          columnWidth: 114,
-          gutter: 16,
-          fitWidth: true
-        });
+        // $('.book-container').masonry({
+        //   // options
+        //   itemSelector: '.book-cover',
+        //   columnWidth: 114,
+        //   gutter: 16,
+        //   fitWidth: true
+        // });
+
+        var $bookCoverImg = $('.book-box .book-cover img');
+        if ($bookCoverImg){
+            $bookCoverImg.height($bookCoverImg.width() * 1.5);
+        }
     };
 
     /* Sidebar Navigation functionality */
@@ -357,6 +362,11 @@ var App = function() {
             pageContent.css('min-height', sidebarH - headerH);
         } else {
             pageContent.css('min-height', windowH - headerH);
+        }
+
+        var $bookCoverImg = $('.book-box .book-cover img');
+        if ($bookCoverImg){
+            $bookCoverImg.height($bookCoverImg.width() * 1.5);
         }
     };
 

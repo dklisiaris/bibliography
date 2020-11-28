@@ -4,7 +4,7 @@
 
 - cache(["book_grid", books.map(&:id), books.map(&:updated_at).max]) do
   .widget
-    .widget-content.widget-content-mini.themed-background-dark-flat.text-light-op.border-bottom
+    .widget-content.widget-content-mini
       = fa(icon)
       %strong= title
     .widget-content
@@ -12,10 +12,20 @@
         .row
           .col-xs-12
             .book-container
-              - books.each do |book|
+              -# books.each do |book|
                 - cache(book) do
                   .book-cover
                     = link_to image_tag(book.cover, height: cover_size, width: cover_size, alt: "book_cover", class: "img-thumbnail", "data-toggle" => "tooltip", "data-placement" => "top", title: book.title), book
+              .row
+                - books.each do |book|
+                  - cache(book) do
+                    .col-xs-6.col-md-4.col-lg-3
+                      .book-box
+                        = link_to book do
+                          .book-cover
+                            = image_tag(book.cover, alt: "book_cover")
+                          .book-title
+                            = book.title
         .row
           .col-xs-12
             .text-right

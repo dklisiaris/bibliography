@@ -1,1 +1,1 @@
-= render partial: 'books/widgets/book', locals: {book: book, title: link_to(book.awards.first.prize.name, awarded_books_path(prize_id: book.awards.first.prize.id), class: "text-light-op"), subtitle:book.awards.first.year}
+= render partial: 'books/widgets/book', locals: {book: book, title: link_to(book.awards.first.prize.name, awarded_books_path(prize_id: book.awards.first.prize.id), class: ""), subtitle:book.awards.first.year}

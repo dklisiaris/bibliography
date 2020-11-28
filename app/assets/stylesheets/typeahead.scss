@@ -24,6 +24,11 @@
           box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 
+.tt-dataset {
+  height: 50vh;
+  overflow: scroll;
+}
+
 .multisearch {
   .tt-menu {
     margin: 45px 0;

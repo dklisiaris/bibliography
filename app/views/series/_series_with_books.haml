@@ -1,5 +1,5 @@
 = render partial: 'books/widgets/grid',                                                 |
   locals: {                                                                             |
-  title: link_to(series.name, books_path(series: series.name), class: "text-light-op"), |
+  title: link_to(series.name, books_path(series: series.name), class: ""), |
   books: series.books.order(impressions_count: :desc, image: :asc).limit(10),           |
   icon: 'tag'}

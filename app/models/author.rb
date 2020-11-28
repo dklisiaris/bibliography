@@ -112,16 +112,8 @@ class Author < ActiveRecord::Base
   end
 
   def self.get_random_awarded
-    Rails.cache.fetch("get_random_awarded_authors", expires_in: 1.day) do
-      self.includes(:masterpiece).where(id: Award.random_awarded_author_ids)
-    end
-  end
-
-  def get_first_book
-    if masterpiece.present?
-      masterpiece
-    elsif books.present?
-      books.first
+    Rails.cache.fetch('get_random_awarded_authors', expires_in: 1.day) do
+      includes(:masterpiece).where(id: Award.random_awarded_author_ids).where.not(masterpiece_id: nil)
     end
   end
 

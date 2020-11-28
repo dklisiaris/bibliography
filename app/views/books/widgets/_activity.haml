@@ -1,8 +1,8 @@
 .widget
-  .widget-content.widget-content-mini.themed-background-dark.text-light-op
+  .widget-content.widget-content-mini
     %span.pull-right.text-muted= time_ago_in_words(activity.created_at)
     = activity_article activity
-    = link_to(activity.owner.screen_name, public_profile_path(activity.owner.profile), class: 'text-light')
+    %b= link_to(activity.owner.screen_name, public_profile_path(activity.owner.profile), class: '')
     = activity_verb activity
   .widget-content
     = render partial: "books/book", locals: {book: activity.trackable, rule: false}
