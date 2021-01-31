@@ -1,10 +1,12 @@
 class ProfilePolicy < ApplicationPolicy
-  
-  def show?   ; belongs_to_current_user? or public? ; end  
+
+  def show?   ; belongs_to_current_user? or public? ; end
   def update? ; belongs_to_current_user?            ; end
   def edit?   ; belongs_to_current_user?            ; end
-  def follow? ; registered? and public?             ; end
 
+  def follow?
+    registered? && public?
+  end
 
   class Scope < Scope
     def resolve
@@ -15,7 +17,6 @@ class ProfilePolicy < ApplicationPolicy
   protected
 
   def public?
-    record[:privacy] == 0 and not record.username.nil?
+    record[:privacy] == 'is_public' && record.username.present?
   end
-
 end
