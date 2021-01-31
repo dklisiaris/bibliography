@@ -37,7 +37,7 @@ class ApplicationPolicy
   end
 
   def belongs_to_current_user?
-    user && (record.user == user)
+    user && (record.user == user) || record.user.profile.privacy == 'is_public'
   end
 
   def registered?
