@@ -1,6 +1,7 @@
 - cover_size   ||= '114'
 - icon         ||= 'book'
 - find_more ||= nil
+- lg_6_cols ||= false
 
 - cache(["book_grid", books.map(&:id), books.map(&:updated_at).max]) do
   .widget
@@ -19,7 +20,7 @@
               .row
                 - books.each do |book|
                   - cache(book) do
-                    .col-xs-6.col-md-4.col-lg-3
+                    .col-xs-6.col-md-4{ class: (lg_6_cols == true) ? 'col-lg-2' : 'col-lg-3' }
                       .book-box
                         = link_to book do
                           .book-cover

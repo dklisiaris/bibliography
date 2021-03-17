@@ -2,4 +2,4 @@
   locals: {                                                                     |
   title: link_to(shelf.screen_name, shelf, class: ""),              |
   books: shelf.books.order(impressions_count: :desc, image: :asc).limit(10), |
-  icon: 'tag'}
+  icon: 'tag', lg_6_cols: true}
