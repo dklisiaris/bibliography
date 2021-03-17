@@ -66,7 +66,7 @@ group :development, :test do
   # gem "rspec-cells"
 
   # Model and controller UML class diagram generator
-  gem 'railroady'
+  gem 'railroady', '~> 1.5'
 end
 
 group :test do
