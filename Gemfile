@@ -121,7 +121,7 @@ gem 'json', '~> 2.3'
 gem 'kaminari', '~> 1.2'
 
 # Search engine gem on top of elasticsearch
-gem 'searchkick', '~> 3.1'
+gem 'searchkick', '~> 4.5'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
