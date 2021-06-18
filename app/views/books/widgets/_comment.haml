@@ -1,9 +1,9 @@
 %li.media.comment-block{:id => "comment-#{comment.id}"}
-  %a.pull-left{:href => "#{public_profile_path(comment.user.id)}"}
-    %img.img-circle{:alt => "Avatar", :height => (40/(1+depth*0.25)).to_s, :width => (40/(1+depth*0.25)).to_s, :src => "#{comment.user.avatar}"}/
+  %a.pull-left{:href => "#{public_profile_path(comment.user.profile.id)}"}
+    = image_tag(comment.user.avatar, alt: "Avatar", height: (40/(1+depth*0.25)).to_s, width: (40/(1+depth*0.25)).to_s, class: "img-circle")
   .media-body
     .comment-content
-      %a{:href => "#{public_profile_path(comment.user.id)}"}
+      %a{:href => "#{public_profile_path(comment.user.profile.id)}"}
         %strong= comment.user.screen_name
       %span.text-muted
         %small
