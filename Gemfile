@@ -55,7 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'factory_bot_rails', '~> 5.2'
 
-  gem 'better_errors', '~> 2.7'
+  gem 'better_errors', '~> 2.8'
   gem 'binding_of_caller', '~> 0.8'
 
   gem 'pry-byebug'
