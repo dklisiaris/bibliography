@@ -14,4 +14,8 @@ class PagesController < ApplicationController # :nodoc:
   def about
     authorize :page, :about?
   end
+
+  def contact
+    authorize :page, :contact?
+  end
 end

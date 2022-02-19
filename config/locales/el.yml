@@ -18,6 +18,7 @@ el:
   by: "από"
   load_more: "Φόρτωση Περισσότερων"
   book_of_the_day: "Βιβλίο της μέρας"
+  contact_us: "Επικοινωνήστε μαζί μας"
 
   home: "Αρχική"
   collections: "Συλλογές"
@@ -109,6 +110,7 @@ el:
     pages: Σελίδες
     about: Σχετικά
     privacy: Πολιτική Απορρήτου
+    contact: Επικοινωνία
 
   comments:
     label: "Σχόλια"

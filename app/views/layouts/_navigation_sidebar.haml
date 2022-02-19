@@ -32,6 +32,7 @@
             %span.sidebar-nav-mini-hide= t('side_menu.pages')
         = side_nav_li(t('side_menu.about'), pages_about_path, "fa fa-file-text-o")
         = side_nav_li(t('side_menu.privacy'), pages_privacy_policy_path, "fa fa-file-text-o")
+        = side_nav_li(t('side_menu.contact'), pages_contact_path, "fa fa-file-text-o")
 
         - if user_signed_in?
           - if current_user.role == 'editor' || current_user.role == 'admin'

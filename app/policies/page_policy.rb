@@ -13,6 +13,10 @@ class PagePolicy < Struct.new(:user, :page) # :nodoc:
     true
   end
 
+  def contact?
+    true
+  end
+
   private
 
   def registered?

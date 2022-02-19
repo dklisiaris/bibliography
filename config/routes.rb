@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'pages/welcome_guide'
   get 'pages/privacy-policy'
   get 'pages/about'
+  get 'pages/contact'
 
   resources :shelves
 

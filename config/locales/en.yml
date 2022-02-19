@@ -39,6 +39,7 @@ en:
   by: "by"
   load_more: "Load More"
   book_of_the_day: "Book of the Day"
+  contact_us: "Contact us"
 
   home: "Home"
   collections: "Collections"
@@ -130,6 +131,7 @@ en:
     pages: Pages
     about: About
     privacy: Privacy Policy
+    contact: Contact
 
   comments:
     label: "Comments"
