@@ -83,7 +83,7 @@ gem 'font-awesome-sass', '~> 4.7'
 
 gem 'pg', '~> 0.18'
 
-gem 'nokogiri', '~> 1.10'
+gem 'nokogiri', '~> 1.13'
 
 # Loads environment variables from `.env` file.
 gem 'dotenv-rails', '~> 2.0'
