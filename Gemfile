@@ -139,7 +139,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'puma', '~> 4.3'
 
 # Simple, efficient background processing for Ruby.
-gem 'sidekiq', '< 6'
+gem 'sidekiq', '< 7'
 
 # Additional middleware for sidekiq.
 gem 'sidekiq-middleware', '~> 0.3'
