@@ -108,7 +108,7 @@ gem 'pundit', '~> 1.0'
 gem 'acts_as_tree', '~> 2.1'
 
 # Uploaders
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 2.2'
 gem 'piet-binary', '~> 0.2.0'
 
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
