@@ -74,7 +74,14 @@ class HomeController < ApplicationController
         ])
 
         # Hash containing num of hits per search type ie. {"Book"=>2, "Author"=>5}
-        @search_hits = Hash[@search_results.map{|r| [r.klass.to_s, r.response["hits"]["total"]]}]
+        # NOTE: With Elasticsearch 7+/Searchkick 4+, hits["total"] is a Hash:
+        #   { "value" => 123, "relation" => "eq" }
+        # Normalize it to an Integer so the views can do numeric comparisons.
+        @search_hits = @search_results.each_with_object({}) do |result, hash|
+          total = result.response["hits"]["total"]
+          total = total["value"] if total.is_a?(Hash)
+          hash[result.klass.to_s] = total.to_i
+        end
 
         @liked_author_ids = current_user.liked_author_ids if current_user.present?
       end
