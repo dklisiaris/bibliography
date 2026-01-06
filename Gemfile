@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-ruby '2.6.6'
+ruby '2.7.7'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
+gem 'rails', '~> 5.2', '>= 5.2.8.1'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
@@ -46,7 +46,7 @@ gem 'cells', '4.0.0.beta3'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '~> 1.5', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -81,9 +81,9 @@ gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.7'
 
-gem 'pg', '~> 0.18'
+gem 'pg', '0.18.4'
 
-gem 'nokogiri', '~> 1.10'
+gem 'nokogiri', '~> 1.11'
 
 # Loads environment variables from `.env` file.
 gem 'dotenv-rails', '~> 2.0'
@@ -125,6 +125,8 @@ gem 'searchkick', '~> 4.5'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
+# FFI gem needs to be updated for Ruby 2.7.7 compatibility
+gem 'ffi', '~> 1.15.0'
 
 # A simple HTTP and REST client for Ruby
 gem 'rest-client', '~> 2.0'
@@ -154,7 +156,7 @@ gem 'geocoder', '~> 1.2'
 gem 'sinatra', require: nil
 
 # Book metadata extraction library
-gem 'bookshark', '~> 1.0'
+# gem 'bookshark', '~> 1.0'
 
 # A lightweight plugin that logs impressions per action or manually per model
 gem 'impressionist', '~> 1.6.1'
@@ -249,7 +251,7 @@ gem 'public_activity', '~> 1.5'
 gem 'trix-rails', '~> 2.2', require: 'trix'
 
 # The fastest JSON parser and object serializer.
-gem 'oj', '~> 2.18'
+gem 'oj', '~> 3.1'
 
 # Stopwords filter or use some based on Snowball stopwords lists
 gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'

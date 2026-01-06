@@ -11,7 +11,20 @@ require 'capistrano-db-tasks'
 set :disallow_pushing, true
 set :assets_dir, %w(public/uploads)
 set :local_assets_dir, %w(public/uploads)
-set :db_local_clean, true
+set :db_local_clean, false
+
+set :ssh_options, {
+  forward_agent: true,
+  auth_methods: %w[publickey],
+  keys: %w[~/.ssh/id_rsa],
+  encryption: %w[
+    chacha20-poly1305@openssh.com
+    aes256-ctr aes192-ctr aes128-ctr
+    aes256-gcm@openssh.com aes128-gcm@openssh.com
+  ],
+  kex: %w[diffie-hellman-group14-sha256 ecdh-sha2-nistp256],
+  hmac: %w[hmac-sha2-256 hmac-sha2-512]
+}
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -43,7 +56,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rvm_ruby_version, '2.6.6'
+set :rvm_ruby_version, '2.7.7'
 
 namespace :bower do
   desc 'Install bower'
