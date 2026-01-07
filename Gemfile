@@ -27,8 +27,8 @@ gem 'jquery-rails', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 2.6', group: :doc
-gem 'thor', '~> 1.5'
+# gem 'sdoc', '~> 1.1', group: :doc
+gem 'thor', '~> 0.20.0'
 
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.1.0'
@@ -138,7 +138,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # gem 'thin', '~> 1.6'
 
 # A ruby web server built for concurrency
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 4.3'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 6.0'
@@ -156,7 +156,7 @@ gem 'htmlentities'
 gem 'geocoder', '~> 1.2'
 
 # Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
-gem 'sinatra', '~> 3.2', require: nil
+gem 'sinatra', require: nil
 
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'
@@ -285,4 +285,4 @@ gem 'honeybadger', '~> 4.7'
 gem 'interactor', '~> 3.0'
 
 # RuboCop is a Ruby code style checking and code formatting tool.
-gem 'rubocop', '~> 1.8', require: false
+gem 'rubocop', '~> 1.3', require: false
