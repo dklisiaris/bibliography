@@ -4,7 +4,7 @@ class UploadedCoverUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -38,9 +38,25 @@ class UploadedCoverUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
+
+  # Validate that downloaded files are actually images before storing
+  before :store, :validate_image!
+
+  private
+
+  def validate_image!(new_file)
+    return unless new_file.present? && new_file.path.present?
+    
+    # Use MiniMagick to validate the file is actually an image
+    image = MiniMagick::Image.open(new_file.path)
+    image.valid? # This will raise MiniMagick::Invalid if not a valid image
+  rescue MiniMagick::Invalid => e
+    Rails.logger.error "UploadedCoverUploader: Invalid image file #{new_file.path}: #{e.message}"
+    raise CarrierWave::IntegrityError, "File is not a valid image: #{e.message}"
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
