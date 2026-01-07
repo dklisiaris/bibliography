@@ -16,7 +16,12 @@ Rails.application.configure do
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
-    config.cache_store = :redis_store, { namespace: 'bibliography:cache', url: ENV["REDIS_SERVER_URL"] }, { expires_in: 2.days }
+    # Updated for redis 5.x compatibility - expires_in is now in the options hash
+    config.cache_store = :redis_cache_store, {
+      namespace: 'bibliography:cache',
+      url: ENV["REDIS_SERVER_URL"],
+      expires_in: 2.days
+    }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
