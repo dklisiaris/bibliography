@@ -1,4 +1,4 @@
-class AddTsearchVectorToCategories < ActiveRecord::Migration
+class AddTsearchVectorToCategories < ActiveRecord::Migration[5.2]
   def self.up
     add_column :categories, :tsearch_vector, :tsvector
     execute "CREATE INDEX categories_tsearch_idx

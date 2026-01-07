@@ -1,6 +1,12 @@
+\restrict qNUAsJhO2j1o46YpQN9N1i8HdfXx3XDZURzgLDxwM1S2srgBlLihH0ev9LmED37
+
+-- Dumped from database version 18.1 (Postgres.app)
+-- Dumped by pg_dump version 18.1 (Postgres.app)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -8,20 +14,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 --
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
@@ -81,24 +73,24 @@ COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.activities (
-    id integer NOT NULL,
-    trackable_id integer,
+    id bigint NOT NULL,
     trackable_type character varying,
-    owner_id integer,
+    trackable_id bigint,
     owner_type character varying,
+    owner_id bigint,
     key character varying,
     parameters text,
-    recipient_id integer,
     recipient_type character varying,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    recipient_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -138,7 +130,7 @@ CREATE TABLE public.ar_internal_metadata (
 --
 
 CREATE TABLE public.authors (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     firstname character varying,
     lastname character varying,
     extra_info character varying,
@@ -183,11 +175,11 @@ ALTER SEQUENCE public.authors_id_seq OWNED BY public.authors.id;
 --
 
 CREATE TABLE public.awards (
-    id integer NOT NULL,
-    prize_id integer,
+    id bigint NOT NULL,
+    prize_id bigint,
     year integer,
-    awardable_id integer,
     awardable_type character varying,
+    awardable_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -217,7 +209,7 @@ ALTER SEQUENCE public.awards_id_seq OWNED BY public.awards.id;
 --
 
 CREATE TABLE public.books (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     title character varying,
     subtitle character varying,
     description text,
@@ -238,7 +230,7 @@ CREATE TABLE public.books (
     format integer DEFAULT 0,
     original_language integer,
     original_title character varying,
-    publisher_id integer,
+    publisher_id bigint,
     extra character varying,
     biblionet_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -250,7 +242,7 @@ CREATE TABLE public.books (
     slug character varying,
     language integer,
     tsearch_vector tsvector,
-    series_id integer,
+    series_id bigint,
     liked_by_count_cache integer DEFAULT 0,
     disliked_by_count_cache integer DEFAULT 0,
     bookshelves_count integer DEFAULT 0,
@@ -269,8 +261,8 @@ CREATE TABLE public.books (
 --
 
 CREATE TABLE public.books_categories (
-    book_id integer,
-    category_id integer
+    book_id bigint,
+    category_id bigint
 );
 
 
@@ -298,9 +290,9 @@ ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
 --
 
 CREATE TABLE public.bookshelves (
-    id integer NOT NULL,
-    book_id integer,
-    shelf_id integer,
+    id bigint NOT NULL,
+    book_id bigint,
+    shelf_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -330,7 +322,7 @@ ALTER SEQUENCE public.bookshelves_id_seq OWNED BY public.bookshelves.id;
 --
 
 CREATE TABLE public.categories (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     ddc character varying,
     slug character varying,
@@ -368,7 +360,7 @@ ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 --
 
 CREATE TABLE public.comments (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     commentable_id integer,
     commentable_type character varying,
     title character varying,
@@ -378,8 +370,8 @@ CREATE TABLE public.comments (
     parent_id integer,
     lft integer,
     rgt integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -407,10 +399,10 @@ ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 --
 
 CREATE TABLE public.contributions (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     job integer,
-    book_id integer,
-    author_id integer,
+    book_id bigint,
+    author_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -440,7 +432,7 @@ ALTER SEQUENCE public.contributions_id_seq OWNED BY public.contributions.id;
 --
 
 CREATE TABLE public.daily_suggestions (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     book_id integer,
     suggested_at timestamp without time zone,
     suggested_count integer DEFAULT 0
@@ -471,14 +463,14 @@ ALTER SEQUENCE public.daily_suggestions_id_seq OWNED BY public.daily_suggestions
 --
 
 CREATE TABLE public.follows (
-    id integer NOT NULL,
-    followable_id integer NOT NULL,
+    id bigint NOT NULL,
     followable_type character varying NOT NULL,
-    follower_id integer NOT NULL,
+    followable_id bigint NOT NULL,
     follower_type character varying NOT NULL,
+    follower_id bigint NOT NULL,
     blocked boolean DEFAULT false NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -538,7 +530,7 @@ ALTER SEQUENCE public.genres_id_seq OWNED BY public.genres.id;
 --
 
 CREATE TABLE public.impressions (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     impressionable_type character varying,
     impressionable_id integer,
     user_id integer,
@@ -550,8 +542,8 @@ CREATE TABLE public.impressions (
     session_hash character varying,
     message text,
     referrer text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     params text
 );
 
@@ -580,10 +572,10 @@ ALTER SEQUENCE public.impressions_id_seq OWNED BY public.impressions.id;
 --
 
 CREATE TABLE public.pg_search_documents (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     content text,
-    searchable_id integer,
     searchable_type character varying,
+    searchable_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -613,7 +605,7 @@ ALTER SEQUENCE public.pg_search_documents_id_seq OWNED BY public.pg_search_docum
 --
 
 CREATE TABLE public.places (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     role character varying,
     address character varying,
@@ -623,8 +615,8 @@ CREATE TABLE public.places (
     website character varying,
     latitude numeric(10,6),
     longitude numeric(10,6),
-    placeable_id integer,
     placeable_type character varying,
+    placeable_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -654,7 +646,7 @@ ALTER SEQUENCE public.places_id_seq OWNED BY public.places.id;
 --
 
 CREATE TABLE public.prizes (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -685,7 +677,7 @@ ALTER SEQUENCE public.prizes_id_seq OWNED BY public.prizes.id;
 --
 
 CREATE TABLE public.profiles (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     username character varying,
     name character varying,
     avatar character varying,
@@ -700,7 +692,7 @@ CREATE TABLE public.profiles (
     email_privacy integer DEFAULT 0,
     discoverable_by_email boolean DEFAULT true,
     receive_newsletters boolean DEFAULT true,
-    user_id integer,
+    user_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     social public.hstore,
@@ -734,7 +726,7 @@ ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
 --
 
 CREATE TABLE public.publishers (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     owner character varying,
     created_at timestamp without time zone NOT NULL,
@@ -776,10 +768,10 @@ ALTER SEQUENCE public.publishers_id_seq OWNED BY public.publishers.id;
 --
 
 CREATE TABLE public.ratings (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     user_id integer NOT NULL,
-    rateable_id integer NOT NULL,
     rateable_type character varying NOT NULL,
+    rateable_id bigint NOT NULL,
     rate integer NOT NULL,
     bookmark boolean DEFAULT false
 );
@@ -809,12 +801,12 @@ ALTER SEQUENCE public.ratings_id_seq OWNED BY public.ratings.id;
 --
 
 CREATE TABLE public.royce_connector (
-    id integer NOT NULL,
-    roleable_id integer NOT NULL,
+    id bigint NOT NULL,
     roleable_type character varying NOT NULL,
-    role_id integer NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    roleable_id bigint NOT NULL,
+    role_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -842,10 +834,10 @@ ALTER SEQUENCE public.royce_connector_id_seq OWNED BY public.royce_connector.id;
 --
 
 CREATE TABLE public.royce_role (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -882,7 +874,7 @@ CREATE TABLE public.schema_migrations (
 --
 
 CREATE TABLE public.series (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     books_count integer DEFAULT 0,
     tsearch_vector tsvector,
@@ -915,13 +907,13 @@ ALTER SEQUENCE public.series_id_seq OWNED BY public.series.id;
 --
 
 CREATE TABLE public.shelves (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name character varying,
     privacy integer DEFAULT 0,
     built_in boolean DEFAULT false,
     default_name integer DEFAULT 0,
     active boolean DEFAULT true,
-    user_id integer,
+    user_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -951,7 +943,7 @@ ALTER SEQUENCE public.shelves_id_seq OWNED BY public.shelves.id;
 --
 
 CREATE TABLE public.users (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
@@ -962,8 +954,8 @@ CREATE TABLE public.users (
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying,
     last_sign_in_ip character varying,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     api_key character varying,
     provider character varying,
     uid character varying,
@@ -1320,6 +1312,14 @@ ALTER TABLE ONLY public.royce_role
 
 
 --
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
 -- Name: series series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1421,6 +1421,13 @@ CREATE INDEX index_activities_on_owner_id_and_owner_type ON public.activities US
 
 
 --
+-- Name: index_activities_on_owner_type_and_owner_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_owner_type_and_owner_id ON public.activities USING btree (owner_type, owner_id);
+
+
+--
 -- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1428,10 +1435,24 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON public.activ
 
 
 --
+-- Name: index_activities_on_recipient_type_and_recipient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_recipient_type_and_recipient_id ON public.activities USING btree (recipient_type, recipient_id);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON public.activities USING btree (trackable_id, trackable_type);
+
+
+--
+-- Name: index_activities_on_trackable_type_and_trackable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_trackable_type_and_trackable_id ON public.activities USING btree (trackable_type, trackable_id);
 
 
 --
@@ -1460,6 +1481,13 @@ CREATE UNIQUE INDEX index_authors_on_slug ON public.authors USING btree (slug);
 --
 
 CREATE INDEX index_awards_on_awardable_id_and_awardable_type ON public.awards USING btree (awardable_id, awardable_type);
+
+
+--
+-- Name: index_awards_on_awardable_type_and_awardable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_awards_on_awardable_type_and_awardable_id ON public.awards USING btree (awardable_type, awardable_id);
 
 
 --
@@ -1610,6 +1638,20 @@ CREATE UNIQUE INDEX index_daily_suggestions_on_book_id ON public.daily_suggestio
 
 
 --
+-- Name: index_follows_on_followable_type_and_followable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_follows_on_followable_type_and_followable_id ON public.follows USING btree (followable_type, followable_id);
+
+
+--
+-- Name: index_follows_on_follower_type_and_follower_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_follows_on_follower_type_and_follower_id ON public.follows USING btree (follower_type, follower_id);
+
+
+--
 -- Name: index_genres_on_biblionet_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1635,6 +1677,13 @@ CREATE INDEX index_pg_search_documents_on_searchable_type_and_searchable_id ON p
 --
 
 CREATE INDEX index_places_on_placeable_id_and_placeable_type ON public.places USING btree (placeable_id, placeable_type);
+
+
+--
+-- Name: index_places_on_placeable_type_and_placeable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_places_on_placeable_type_and_placeable_id ON public.places USING btree (placeable_type, placeable_id);
 
 
 --
@@ -1666,6 +1715,13 @@ CREATE UNIQUE INDEX index_publishers_on_slug ON public.publishers USING btree (s
 
 
 --
+-- Name: index_ratings_on_rateable_type_and_rateable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ratings_on_rateable_type_and_rateable_id ON public.ratings USING btree (rateable_type, rateable_id);
+
+
+--
 -- Name: index_ratings_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1684,6 +1740,13 @@ CREATE INDEX index_royce_connector_on_role_id ON public.royce_connector USING bt
 --
 
 CREATE INDEX index_royce_connector_on_roleable_id_and_roleable_type ON public.royce_connector USING btree (roleable_id, roleable_type);
+
+
+--
+-- Name: index_royce_connector_on_roleable_type_and_roleable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_royce_connector_on_roleable_type_and_roleable_id ON public.royce_connector USING btree (roleable_type, roleable_id);
 
 
 --
@@ -1747,13 +1810,6 @@ CREATE INDEX poly_session_index ON public.impressions USING btree (impressionabl
 --
 
 CREATE INDEX publishers_tsearch_idx ON public.publishers USING gin (tsearch_vector);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
@@ -1855,6 +1911,8 @@ ALTER TABLE ONLY public.profiles
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict qNUAsJhO2j1o46YpQN9N1i8HdfXx3XDZURzgLDxwM1S2srgBlLihH0ev9LmED37
 
 SET search_path TO "$user", public;
 

@@ -1,4 +1,4 @@
-class AddContributionsCountToAuthors < ActiveRecord::Migration
+class AddContributionsCountToAuthors < ActiveRecord::Migration[5.2]
   def change
     add_column :authors, :contributions_count, :integer, :default => 0
 

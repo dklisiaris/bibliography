@@ -1,4 +1,4 @@
-class CreateContributions < ActiveRecord::Migration
+class CreateContributions < ActiveRecord::Migration[5.2]
   def change
     create_table :contributions do |t|
       t.integer :job

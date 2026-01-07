@@ -1,4 +1,4 @@
-class CreateRoyce < ActiveRecord::Migration
+class CreateRoyce < ActiveRecord::Migration[5.2]
 
   def change
 
@@ -9,7 +9,7 @@ class CreateRoyce < ActiveRecord::Migration
     end
 
     add_index :royce_connector, [:roleable_id, :roleable_type]
-    add_index :royce_connector, :role_id
+    # add_index :royce_connector, :role_id
 
     create_table :royce_role do |t|
       t.string :name, null: false

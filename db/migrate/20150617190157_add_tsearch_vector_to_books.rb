@@ -1,4 +1,4 @@
-class AddTsearchVectorToBooks < ActiveRecord::Migration
+class AddTsearchVectorToBooks < ActiveRecord::Migration[5.2]
   def self.up
     add_column :books, :tsearch_vector, :tsvector
     execute "CREATE INDEX books_tsearch_idx

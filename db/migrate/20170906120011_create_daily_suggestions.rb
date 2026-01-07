@@ -1,4 +1,4 @@
-class CreateDailySuggestions < ActiveRecord::Migration
+class CreateDailySuggestions < ActiveRecord::Migration[5.2]
   def change
     create_table :daily_suggestions do |t|
       t.integer :book_id

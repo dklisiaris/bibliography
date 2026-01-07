@@ -1,4 +1,4 @@
-class AddTsearchVectorToPublishers < ActiveRecord::Migration
+class AddTsearchVectorToPublishers < ActiveRecord::Migration[5.2]
   def self.up
     add_column :publishers, :tsearch_vector, :tsvector
     execute "CREATE INDEX publishers_tsearch_idx

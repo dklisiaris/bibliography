@@ -1,4 +1,4 @@
-class AddSearchVectorsToAuthors < ActiveRecord::Migration
+class AddSearchVectorsToAuthors < ActiveRecord::Migration[5.2]
   def self.up
     add_column :authors, :tsearch_vector, :tsvector
     execute "CREATE INDEX authors_tsearch_idx

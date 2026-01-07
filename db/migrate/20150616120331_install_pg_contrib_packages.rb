@@ -1,4 +1,4 @@
-class InstallPgContribPackages < ActiveRecord::Migration
+class InstallPgContribPackages < ActiveRecord::Migration[5.2]
   def up
     execute "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
     execute "CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;"

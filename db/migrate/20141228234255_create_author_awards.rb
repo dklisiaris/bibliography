@@ -1,4 +1,4 @@
-class CreateAuthorAwards < ActiveRecord::Migration
+class CreateAuthorAwards < ActiveRecord::Migration[5.2]
   def change
     create_table :author_awards do |t|
       t.references :author, index: true
