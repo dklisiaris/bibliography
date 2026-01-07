@@ -8,8 +8,6 @@
 # even though they can be added afterwards (of normal jobs) to the queue
 ---
 :verbose: true
-:pidfile: tmp/pids/sidekiq.pid
-:logfile: log/sidekiq.log
 :concurrency: 10
 :timeout: 30000
 :queues:

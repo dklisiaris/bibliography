@@ -58,6 +58,12 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :rvm_ruby_version, '2.7.7'
 
+# Capistrano-sidekiq 3.0.0 configuration for Sidekiq 6+
+# Sidekiq 6 removed daemonization, so capistrano-sidekiq handles it differently
+# These settings ensure compatibility
+set :sidekiq_default_hooks, true
+set :sidekiq_roles, :app
+
 namespace :bower do
   desc 'Install bower'
   task :install do

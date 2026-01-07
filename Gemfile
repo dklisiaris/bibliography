@@ -141,7 +141,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'puma', '~> 4.3'
 
 # Simple, efficient background processing for Ruby.
-gem 'sidekiq', '~> 5.2', '< 6'
+gem 'sidekiq', '~> 6.0'
 
 # Additional middleware for sidekiq.
 gem 'sidekiq-middleware', '~> 0.3'
@@ -266,8 +266,8 @@ gem 'meta-tags', '~> 2.4'
 gem 'sitemap_generator', '~> 6.1'
 
 # A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
-gem 'redis', '~> 4.2'
-gem 'redis-namespace', '~> 1.8'
+gem 'redis', '~> 5.0'
+gem 'redis-namespace', '~> 1.11'
 gem 'redis-rails', '~> 5.0'
 # Web-based Redis browser
 gem 'redis-browser', '~> 0.5.1'
