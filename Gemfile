@@ -149,6 +149,9 @@ gem 'sidekiq-middleware', '~> 0.3'
 # Unicode algorithms for case conversion, normalization, text segmentation and more
 gem 'unicode_utils', '>= 1.4'
 
+# HTML entity encoding/decoding
+gem 'htmlentities'
+
 # Complete geocoding solution for Ruby
 gem 'geocoder', '~> 1.2'
 
@@ -159,7 +162,7 @@ gem 'sinatra', require: nil
 # gem 'bookshark', '~> 1.0'
 
 # A lightweight plugin that logs impressions per action or manually per model
-gem 'impressionist', '~> 1.6.1'
+gem 'impressionist', '~> 1.6'
 
 # A recommendation engine using Likes and Dislikes
 gem 'recommendable', '~> 2.2'

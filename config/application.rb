@@ -38,6 +38,8 @@ module Bibliography
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.schema_format = :sql
 
+    config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
