@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.7'
 
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Bundle edge Rails rinstead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
@@ -30,8 +30,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
 
-# High Performance Haml Implementation
-gem 'hamlit-rails', '~> 0.1.0'
+# High Performance Haml Implementation (Rails 6.1 compatible)
+gem 'hamlit-rails', '~> 0.2.3'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
 gem 'cells', '4.0.0.beta3'
@@ -126,6 +126,8 @@ gem 'searchkick', '~> 4.5'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
+# Faraday 2.x is incompatible with typhoeus adapter; pin Faraday to 1.x
+gem 'faraday', '~> 1.10'
 # FFI gem needs to be updated for Ruby 2.7.7 compatibility
 gem 'ffi', '~> 1.15.0'
 
