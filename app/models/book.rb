@@ -50,7 +50,7 @@ class Book < ActiveRecord::Base
   before_save :write_main_writer_id
 
   # Log impressions filtered by ip
-  is_impressionable :counter_cache => true, :unique => true
+  # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
@@ -80,7 +80,7 @@ class Book < ActiveRecord::Base
 
   def search_conversions
     {
-      views: impressionist_count
+      views: views_count || 0
     }
   end
 

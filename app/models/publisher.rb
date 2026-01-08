@@ -6,7 +6,7 @@ class Publisher < ActiveRecord::Base
   has_many :books
 
   # Log impressions filtered by ip
-  is_impressionable :counter_cache => true, :unique => true
+  # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]

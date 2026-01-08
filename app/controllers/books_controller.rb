@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:index]
+  # impressionist :actions=>[:index] # Disabled - gem causing errors
 
   def index
     is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
@@ -133,7 +133,7 @@ class BooksController < ApplicationController
     @in_shelves = current_user.book_in_which_collections(@book) if user_signed_in?
 
     @bookshelves_count = Bookshelf.where(book_id: @book.id).count
-    @views_count = @book.impressionist_count
+    @views_count = @book.views_count || 0
     @viewers_count = @book.impressions_count
 
     @likes_count = @book.liked_by_count
@@ -142,7 +142,7 @@ class BooksController < ApplicationController
     @comments = @book.root_comments.includes(:children, :user, children: {user: :profile})
       .order(created_at: :desc)
 
-    impressionist(@book)
+    # impressionist(@book) # Disabled - gem causing errors
     @book.increment!(:views_count)
 
     @categories = @book.categories

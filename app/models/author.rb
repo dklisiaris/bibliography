@@ -15,7 +15,7 @@ class Author < ActiveRecord::Base
   enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
 
   # Log impressions filtered by ip
-  is_impressionable :counter_cache => true, :unique => true
+  # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]

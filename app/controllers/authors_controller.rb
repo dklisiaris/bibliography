@@ -10,7 +10,7 @@ class AuthorsController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:index]
+  # impressionist :actions=>[:index] # Disabled - gem causing errors
 
   def index
     if params[:q].present?
@@ -42,7 +42,7 @@ class AuthorsController < ApplicationController
     @awards = @author.awards
     @liked = current_user.likes?(@author) if user_signed_in?
     @shelves = current_user.shelves if user_signed_in?
-    impressionist(@author)
+    # impressionist(@author) # Disabled - gem causing errors
 
     # @books = @author.books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
     @writings = @author.writings.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])

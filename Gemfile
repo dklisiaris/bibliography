@@ -167,7 +167,7 @@ gem 'sinatra', require: nil
 # gem 'bookshark', '~> 1.0'
 
 # A lightweight plugin that logs impressions per action or manually per model
-gem 'impressionist', '~> 2.0'
+# gem 'impressionist', '~> 2.0'
 
 # A recommendation engine using Likes and Dislikes
 gem 'recommendable', '~> 2.2'

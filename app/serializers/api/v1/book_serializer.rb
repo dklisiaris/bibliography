@@ -21,7 +21,7 @@ class Api::V1::BookSerializer < Api::V1::BaseSerializer
   end
 
   def views_count
-    object.impressionist_count
+    object.views_count || 0
   end
 
   def viewers_count

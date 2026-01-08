@@ -16,7 +16,7 @@ class Category < ActiveRecord::Base
   scope :featured, -> { where(featured: true) }
 
   # Log impressions filtered by ip
-  is_impressionable :counter_cache => true, :unique => true
+  # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors
 
   searchkick batch_size: 100,
              callbacks: :async,

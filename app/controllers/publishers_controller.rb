@@ -5,7 +5,7 @@ class PublishersController < ApplicationController
 
   respond_to :html
 
-  impressionist :actions=>[:index]
+  # impressionist :actions=>[:index] # Disabled - gem causing errors
 
   def index
     if params[:q].present?
@@ -35,7 +35,7 @@ class PublishersController < ApplicationController
     @books = Book.includes(:main_writer).where(publisher_id: @publisher.id).page(params[:page])
     @place = Place.new
     # byebug
-    impressionist(@publisher)
+    # impressionist(@publisher) # Disabled - gem causing errors
 
     respond_with(@publisher)
   end
