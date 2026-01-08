@@ -274,7 +274,7 @@ gem 'sitemap_generator', '~> 6.1'
 # A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
 gem 'redis', '~> 5.0'
 gem 'redis-namespace', '~> 1.11'
-gem 'redis-rails', '~> 5.0'
+# gem 'redis-rails', '~> 5.0'
 # Web-based Redis browser
 gem 'redis-browser', '~> 0.5.1'
 
