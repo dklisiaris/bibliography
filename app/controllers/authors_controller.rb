@@ -24,7 +24,7 @@ class AuthorsController < ApplicationController
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end
     @top_authors = Author.includes(:masterpiece).top(5)
-    @recommended_authors = current_user.recommended_authors_cached if current_user.present?
+    # @recommended_authors = current_user.recommended_authors_cached if current_user.present?
 
     @liked_author_ids = current_user.liked_author_ids if current_user.present?
 
