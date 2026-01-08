@@ -1,5 +1,7 @@
 class Api::V1::CommentSerializer < Api::V1::BaseSerializer
-  attributes :id, :title, :body, :subject, :user_id, :user_screen_name, :user_avatar, :parent_id, :lft, :rgt
+  # Removed :lft and :rgt as we're no longer using nested set (acts_as_nested_set)
+  # Using simple parent_id-based threading instead
+  attributes :id, :title, :body, :subject, :user_id, :user_screen_name, :user_avatar, :parent_id
 
   # belongs_to :commentable_id
 

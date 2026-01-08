@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
-  acts_as_nested_set :scope => [:commentable_id, :commentable_type]
-
+  # Replaced acts_as_nested_set with simple parent/children relationships
+  # This is compatible with Rails 6.0+
+  
   validates :body, :presence => true
   validates :user, :presence => true
   # NOTE: install the acts_as_votable plugin if you
@@ -12,6 +13,13 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
+  # Parent-child relationships for threaded comments
+  belongs_to :parent, class_name: 'Comment', optional: true
+  has_many :children, class_name: 'Comment', foreign_key: 'parent_id', dependent: :destroy
+
+  # Scope to get root comments (no parent)
+  scope :roots, -> { where(parent_id: nil) }
+
   # Helper class method that allows you to build a comment
   # by passing a commentable object, a user_id, and comment text
   # example in readme
@@ -22,9 +30,37 @@ class Comment < ActiveRecord::Base
       :user_id     => user_id
   end
 
-  #helper method to check if a comment has children
+  # Helper method to check if a comment has children
   def has_children?
-    self.children.any?
+    children.exists?
+  end
+
+  # Check if this is a root comment (no parent)
+  def root?
+    parent_id.nil?
+  end
+
+  # Move this comment to be a child of the given parent comment
+  # Replaces move_to_child_of from acts_as_nested_set
+  def move_to_child_of(parent_comment)
+    update(parent_id: parent_comment.id)
+  end
+
+  # Get the depth of this comment in the thread (0 for root)
+  def depth
+    return 0 if root?
+    parent.depth + 1
+  end
+
+  # Get all ancestors (parent, grandparent, etc.)
+  def ancestors
+    return [] if root?
+    [parent] + parent.ancestors
+  end
+
+  # Get all descendants (children, grandchildren, etc.)
+  def descendants
+    children + children.flat_map(&:descendants)
   end
 
   # Helper class method to lookup all comments assigned
