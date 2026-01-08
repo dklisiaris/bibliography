@@ -253,7 +253,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    impressionist (1.6.1)
+    impressionist (2.0.0)
       nokogiri (~> 1)
     interactor (3.2.0)
       ostruct
@@ -703,7 +703,7 @@ DEPENDENCIES
   honeybadger (~> 4.7)
   hstore_accessor (~> 1.0, >= 1.0.3)
   htmlentities
-  impressionist (~> 1.6)
+  impressionist (~> 2.0)
   interactor (~> 3.0)
   jbuilder (~> 2.5)
   jquery-rails (~> 4.1)
