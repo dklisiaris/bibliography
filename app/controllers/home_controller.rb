@@ -24,7 +24,7 @@ class HomeController < ApplicationController
         .limit(6)
         .map {|bookshelf| bookshelf.book}
 
-      @recommended_for_you = current_user.recommended_books_cached
+      # @recommended_for_you = current_user.recommended_books_cached
 
       @people_to_follow = current_user.people_to_follow
 

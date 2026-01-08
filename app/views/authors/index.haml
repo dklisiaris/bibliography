@@ -23,7 +23,7 @@
         = render "authors/widgets/pagination"
   .col-sm-4
     - if current_user.present?
-      = render partial: 'authors/widgets/side', locals: { title: " #{t('authors.recommended_for_you')}", icon: "user-secret", authors: @recommended_authors, liked_ids: @liked_author_ids, cache_key: 'side_recommended_authors' }
+      -# = render partial: 'authors/widgets/side', locals: { title: " #{t('authors.recommended_for_you')}", icon: "user-secret", authors: @recommended_authors, liked_ids: @liked_author_ids, cache_key: 'side_recommended_authors' }
     = render partial: 'authors/widgets/side', |
       locals: {                               |
         title: " #{t('authors.top')}",        |
