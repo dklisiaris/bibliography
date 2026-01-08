@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-ruby '2.7.7'
+ruby '3.1.7'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2', '>= 5.2.8.1'
+gem 'rails', '~> 6.0'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
@@ -28,7 +28,7 @@ gem 'jquery-rails', '~> 4.1'
 gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 1.1', group: :doc
-gem 'thor', '~> 0.20.0'
+gem 'thor', '~> 1.5'
 
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.1.0'
@@ -46,22 +46,23 @@ gem 'cells', '4.0.0.beta3'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.5', require: false
+gem 'bootsnap', '~> 1.20', require: false
+gem 'rexml', '~> 3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', '~> 12.0', platforms: [:mri, :windows]
 
   gem 'rspec-rails', '~> 4.0'
   gem 'factory_bot_rails', '~> 5.2'
 
   gem 'better_errors', '~> 2.7'
-  gem 'binding_of_caller', '~> 0.8'
+  gem 'binding_of_caller', '~> 1.0'
 
-  gem 'pry-byebug'
-  gem 'pry-rails'
-  gem 'pry-stack_explorer'
-  gem 'pry-rescue'
+  # gem 'pry-byebug', '~> 3.11'
+  # gem 'pry-rails', '~> 0.3'
+  # gem 'pry-stack_explorer', '~> 0.6'
+  # gem 'pry-rescue', '~> 1.6'
 
   # gem "rspec-cells"
 
@@ -81,9 +82,9 @@ gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.7'
 
-gem 'pg', '0.18.4'
+gem 'pg', '~> 1.5'
 
-gem 'nokogiri', '~> 1.11'
+gem 'nokogiri', '~> 1.18'
 
 # Loads environment variables from `.env` file.
 gem 'dotenv-rails', '~> 2.0'
@@ -132,7 +133,7 @@ gem 'ffi', '~> 1.15.0'
 gem 'rest-client', '~> 2.0'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
-gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+gem 'rails-i18n', '~> 6.0.0'
 
 # A fast and very simple Ruby web server
 # gem 'thin', '~> 1.6'
@@ -191,26 +192,27 @@ gem 'active_hash_relation'
 # Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
 gem 'rack-cors', '~> 1.0'
 
-# Allows for threaded comments to be added to multiple and different models.
-gem 'acts_as_commentable_with_threading'
+# Threaded comments are now implemented using a custom Commentable concern
+# See app/models/concerns/commentable.rb and app/models/comment.rb
+# gem 'acts_as_commentable_with_threading' # REMOVED - replaced with custom implementation
 
-group :production, :staging do
-  # Skylight is a smart profiler for Rails apps
-  gem 'skylight', '~> 1.3'
-end
+# group :production, :staging do
+#   # Skylight is a smart profiler for Rails apps
+#   gem 'skylight', '~> 1.3'
+# end
 
 group :development do
-  # Performance management system
-  gem 'newrelic_rpm', '~> 4.2'
+  # # Performance management system
+  # gem 'newrelic_rpm', '~> 4.2'
 
   # Help to kill N+1 queries and unused eager loading.
-  gem 'bullet', '~> 5.3'
+  gem 'bullet', '~> 8.1'
 
   # Preview mail in the browser instead of sending.
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 
   # Profiler for your development and production Ruby rack apps.
-  gem 'rack-mini-profiler', '~> 0.10.1'
+  gem 'rack-mini-profiler', '~> 4.0'
 
   # Deployment Automation
   gem 'capistrano'
@@ -237,8 +239,8 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '~> 4.4'
+  gem 'spring-watcher-listen', '~> 2.1'
 end
 
 # Adds typed hstore backed fields to an ActiveRecord model.

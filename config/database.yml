@@ -6,13 +6,13 @@
 # Ensure the PostgreSQL gem is defined in your Gemfile
 #   gem 'pg'
 #
-default: &default
-  adapter: postgresql
-  encoding: utf8
-  pool: 100
-  host: localhost
-  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
-  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
+# default: &default
+#   adapter: postgresql
+#   encoding: utf8
+#   pool: 100
+#   host: localhost
+#   username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+#   password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
 
 # MySQL.  Versions 5.0+ are recommended.
 #
@@ -34,14 +34,24 @@ default: &default
 #   socket: /var/run/mysqld/mysqld.sock
 
 development:
-  <<: *default
+  adapter: postgresql
+  encoding: utf8
+  pool: 100
+  host: localhost
+  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
   database: bibliography_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: utf8
+  pool: 100
+  host: localhost
+  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
   database: bibliography_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -63,19 +73,23 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: bibliography_production
-  username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
-  password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
-  host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
-  port: <%= ENV["PRODUCTION_DATABASE_PORT"] %>
+# production:
+#   adapter: postgresql
+#   encoding: utf8
+#   pool: 100
+#   database: bibliography_production
+#   username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
+#   password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
+#   host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
+#   port: <%= ENV["PRODUCTION_DATABASE_PORT"] %>
 
-staging:
-  <<: *default
-  database: bibliography_staging
-  username: <%= ENV["STAGING_DATABASE_USERNAME"] %>
-  password: <%= ENV["STAGING_DATABASE_PASSWORD"] %>
-  host: <%= ENV["STAGING_DATABASE_HOST"] %>
-  port: <%= ENV["STAGING_DATABASE_PORT"] %>
+# staging:
+#   adapter: postgresql
+#   encoding: utf8
+#   pool: 100
+#   database: bibliography_staging
+#   username: <%= ENV["STAGING_DATABASE_USERNAME"] %>
+#   password: <%= ENV["STAGING_DATABASE_PASSWORD"] %>
+#   host: <%= ENV["STAGING_DATABASE_HOST"] %>
+#   port: <%= ENV["STAGING_DATABASE_PORT"] %>
 
