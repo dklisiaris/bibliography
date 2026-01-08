@@ -65,7 +65,12 @@ class BooksController < ApplicationController
     if params[:q].present? && (is_autocomplete || params[:loadmore].try(:to_i) == 1)
       render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
     else
-      respond_with(@books)
+      # Handle unknown formats gracefully
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @books }
+        format.any { render :index }  # Fallback for unknown formats
+      end
     end
   end
 
