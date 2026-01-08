@@ -25,7 +25,7 @@ gem 'modernizr-rails', '~> 2.7'
 gem 'jquery-rails', '~> 4.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.7'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
@@ -46,7 +46,7 @@ gem 'cells', '4.0.0.beta3'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.20', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml', '~> 3.4'
 
 gem "base64", "0.1.1"
@@ -59,7 +59,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.2'
 
   gem 'better_errors', '~> 2.7'
-  gem 'binding_of_caller', '~> 1.0'
+  # gem 'binding_of_caller', '~> 1.0'
 
   # gem 'pry-byebug', '~> 3.11'
   # gem 'pry-rails', '~> 0.3'
@@ -131,7 +131,7 @@ gem 'typhoeus', '~> 1.3'
 # Faraday 2.x is incompatible with typhoeus adapter; pin Faraday to 1.x
 gem 'faraday', '~> 1.10'
 # FFI gem needs to be updated for Ruby 2.7.7 compatibility
-gem 'ffi', '~> 1.15.0'
+# gem 'ffi', '~> 1.15.0'
 
 # A simple HTTP and REST client for Ruby
 gem 'rest-client', '~> 2.0'
@@ -143,7 +143,7 @@ gem 'rails-i18n', '~> 6.0.0'
 # gem 'thin', '~> 1.6'
 
 # A ruby web server built for concurrency
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.0'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 6.0'
@@ -238,13 +238,12 @@ group :development do
   # Annotate Rails classes with schema and routes info
   gem 'annotate', '~> 3.0'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.3'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 4.1.0'
+  gem 'listen', '~> 3.3'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '~> 4.4'
-  gem 'spring-watcher-listen', '~> 2.1'
+  gem 'spring', '4.2.1'
 end
 
 # Adds typed hstore backed fields to an ActiveRecord model.
