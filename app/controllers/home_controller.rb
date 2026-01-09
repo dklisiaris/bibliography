@@ -53,21 +53,21 @@ class HomeController < ApplicationController
 
       case params[:search_only]
       when 'books'
-        @books = Book.search(keyphrase, single_search_options)
+        @books = Book.search(keyphrase, **single_search_options)
       when 'authors'
-        @authors = Author.search(keyphrase, single_search_options)
+        @authors = Author.search(keyphrase, **single_search_options)
       when 'publishers'
-        @publishers = Publisher.search(keyphrase, single_search_options)
+        @publishers = Publisher.search(keyphrase, **single_search_options)
       when 'categories'
-        @categories = Category.search(keyphrase, single_search_options)
+        @categories = Category.search(keyphrase, **single_search_options)
       when 'series'
-        @series = Series.search(keyphrase, single_search_options)
+        @series = Series.search(keyphrase, **single_search_options)
       else
-        book_search       = Book.search(keyphrase, multi_search_options)
-        author_search     = Author.search(keyphrase, multi_search_options)
-        publisher_search  = Publisher.search(keyphrase, multi_search_options)
-        category_search   = Category.search(keyphrase, multi_search_options)
-        series_search     = Series.search(keyphrase, multi_search_options)
+        book_search       = Book.search(keyphrase, **multi_search_options)
+        author_search     = Author.search(keyphrase, **multi_search_options)
+        publisher_search  = Publisher.search(keyphrase, **multi_search_options)
+        category_search   = Category.search(keyphrase, **multi_search_options)
+        series_search     = Series.search(keyphrase, **multi_search_options)
 
         @search_results = Searchkick.multi_search([
           book_search, author_search, publisher_search, category_search, series_search
