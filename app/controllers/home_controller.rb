@@ -26,7 +26,7 @@ class HomeController < ApplicationController
 
       # @recommended_for_you = current_user.recommended_books_cached
 
-      @people_to_follow = current_user.people_to_follow
+      # @people_to_follow = current_user.people_to_follow
 
       @activities =
         PublicActivity::Activity.where(owner: current_user.following_users.pluck(:id), trackable_type: 'Book')
