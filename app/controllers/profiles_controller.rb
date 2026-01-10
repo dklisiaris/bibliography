@@ -40,8 +40,9 @@ class ProfilesController < ApplicationController
 
     if current_user
       unless current_user == @user
-        similarity = Recommendable::Helpers::Calculations.similarity_between(@user.id, current_user.id)
-        @normalized_similarity = ((similarity-(-1))/(1-(-1)) * 100).round(1)
+        # similarity = Recommendable::Helpers::Calculations.similarity_between(@user.id, current_user.id)
+        # @normalized_similarity = ((similarity-(-1))/(1-(-1)) * 100).round(1)
+        @normalized_similarity = 0
       end
       @liked_author_ids = current_user.liked_author_ids
     end
