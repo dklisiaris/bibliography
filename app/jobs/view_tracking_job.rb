@@ -3,10 +3,10 @@
 class ViewTrackingJob < ApplicationJob
   queue_as :default
 
-  # # Don't retry - if it fails, it's not critical
-  # discard_on StandardError do |job, error|
-  #   Rails.logger.error "ViewTrackingJob failed: #{error.message}\n#{error.backtrace.first(5).join("\n")}"
-  # end
+  # Don't retry
+  discard_on StandardError do |job, error|
+    Rails.logger.error "ViewTrackingJob failed: #{error.message}\n#{error.backtrace.first(5).join("\n")}"
+  end
 
   def perform(impressionable_type:, impressionable_id:, user_id: nil, ip_address: nil, 
               session_hash: nil, request_hash: nil, controller_name: nil, action_name: nil, 

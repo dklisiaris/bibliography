@@ -1,8 +1,6 @@
 class SeriesController < ApplicationController
   respond_to :html
 
-  # impressionist :actions=>[:index]
-
   def index
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])

@@ -11,8 +11,6 @@ class CategoriesController < ApplicationController
 
   respond_to :html
 
-  # impressionist :actions=>[:index] # Disabled - gem causing errors
-
   def index
     @categories = Category.roots
 
@@ -40,7 +38,7 @@ class CategoriesController < ApplicationController
   def show
     @children = @category.children
     @books = @category.books.order(impressions_count: :desc, image: :asc).page(params[:page])
-    # impressionist(@category) # Disabled - gem causing errors
+
     ViewTracker.track(@category, request: request, user: current_user)
 
     respond_with(@category, @children)

@@ -16,7 +16,7 @@ class ViewTracker
     @resource = resource
     @request = request
     @user = user
-    @options = { async: false, force: false }.merge(options)
+    @options = { async: true, force: false }.merge(options)
   end
 
   def track

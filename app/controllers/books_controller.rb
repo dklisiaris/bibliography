@@ -14,8 +14,6 @@ class BooksController < ApplicationController
 
   respond_to :html
 
-  # impressionist :actions=>[:index] # Disabled - gem causing errors
-
   def index
     is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
     aggs = []
@@ -107,7 +105,7 @@ class BooksController < ApplicationController
     @books = policy_scope(Book).includes(:main_writer).where(id: most_views_book_ids)
     @trending_authors = Author.includes(:masterpiece).where(id: most_views_author_ids)
     @liked_author_ids = current_user.liked_author_ids if user_signed_in?
-    
+
     respond_with(@books)
   end
 
@@ -152,7 +150,6 @@ class BooksController < ApplicationController
     @comments = @book.root_comments.includes(:children, :user, children: {user: :profile})
       .order(created_at: :desc)
 
-    # # impressionist(@book) # Disabled - gem causing errors
     # @book.increment!(:views_count)
     ViewTracker.track(@book, request: request, user: current_user)
 

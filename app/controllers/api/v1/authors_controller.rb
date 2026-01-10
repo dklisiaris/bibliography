@@ -14,7 +14,6 @@ class Api::V1::AuthorsController < Api::V1::BaseController
 
   def show
     author = Author.find(params[:id])
-    # impressionist(author) # Disabled - gem causing errors
 
     response = apply_format(Api::V1::AuthorSerializer.new(author))
     
