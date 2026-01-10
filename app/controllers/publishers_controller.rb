@@ -36,6 +36,7 @@ class PublishersController < ApplicationController
     @place = Place.new
     # byebug
     # impressionist(@publisher) # Disabled - gem causing errors
+    ViewTracker.track(@publisher, request: request, user: current_user)
 
     respond_with(@publisher)
   end

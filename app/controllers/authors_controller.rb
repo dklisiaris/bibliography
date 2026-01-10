@@ -43,6 +43,7 @@ class AuthorsController < ApplicationController
     @liked = current_user.likes?(@author) if user_signed_in?
     @shelves = current_user.shelves if user_signed_in?
     # impressionist(@author) # Disabled - gem causing errors
+    ViewTracker.track(@author, request: request, user: current_user)
 
     # @books = @author.books.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
     @writings = @author.writings.includes(:main_writer).order(impressions_count: :desc, id: :desc).page(params[:page])
