@@ -1,4 +1,4 @@
-\restrict qNUAsJhO2j1o46YpQN9N1i8HdfXx3XDZURzgLDxwM1S2srgBlLihH0ev9LmED37
+\restrict CjJisLSEyixOeP86WlKIJBUSkSt7HDY7NOWdu7q9bRZlrL2lLLroeWf0xsIWMPP
 
 -- Dumped from database version 18.1 (Postgres.app)
 -- Dumped by pg_dump version 18.1 (Postgres.app)
@@ -120,8 +120,8 @@ ALTER SEQUENCE public.activities_id_seq OWNED BY public.activities.id;
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -222,7 +222,8 @@ CREATE TABLE public.books (
     pages integer,
     publication_year integer,
     publication_place character varying,
-    price numeric(6,2),
+    price numeric,
+    "{:precision=>6, :scale=>2}" numeric,
     price_updated_at date,
     size character varying,
     cover_type integer DEFAULT 0,
@@ -1912,7 +1913,7 @@ ALTER TABLE ONLY public.profiles
 -- PostgreSQL database dump complete
 --
 
-\unrestrict qNUAsJhO2j1o46YpQN9N1i8HdfXx3XDZURzgLDxwM1S2srgBlLihH0ev9LmED37
+\unrestrict CjJisLSEyixOeP86WlKIJBUSkSt7HDY7NOWdu7q9bRZlrL2lLLroeWf0xsIWMPP
 
 SET search_path TO "$user", public;
 
