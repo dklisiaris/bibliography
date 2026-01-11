@@ -1,4 +1,6 @@
 class Shelf < ActiveRecord::Base
+  include Recommendable
+  
   belongs_to :user
 
   has_many :bookshelves

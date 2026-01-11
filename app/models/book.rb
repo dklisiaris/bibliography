@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
   # a Book may have comments (reviews)
   include Commentable
+  include Recommendable
 
   mount_uploader :uploaded_cover, UploadedCoverUploader
 

@@ -1,9 +1,12 @@
 class Publisher < ActiveRecord::Base
+  include Recommendable
+  
   validates :biblionet_id, uniqueness: true
   validates :name, presence: true
 
   has_many :places, as: :placeable
   has_many :books
+  has_many :ratings, as: :rateable
 
   has_many :impressions, as: :impressionable, dependent: :destroy
 

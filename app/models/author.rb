@@ -1,4 +1,6 @@
 class Author < ActiveRecord::Base
+  include Recommendable
+  
   validates :lastname, presence: true
 
   mount_uploader :uploaded_avatar, AuthorAvatarUploader

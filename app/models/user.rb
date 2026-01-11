@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   has_many :activities, as: :owner, class_name: 'PublicActivity::Activity', dependent: :destroy
   has_many :ratings, dependent: :destroy
 
-  recommends :books, :shelves, :authors, :categories
+  # Recommendations handled by RecommendationService
+  # No need for recommendable gem
 
   acts_as_follower
   acts_as_followable
@@ -104,6 +105,28 @@ class User < ActiveRecord::Base
     ((Time.now - created_at).to_i / 86_400) < 5 || sign_in_count < 10
   end
 
+  # Recommendation methods (replaces recommendable gem)
+  def recommended_books(limit: 10)
+    RecommendationService.recommendations_for(self, resource_type: 'Book', limit: limit)
+  end
+
+  def recommended_authors(limit: 10)
+    RecommendationService.recommendations_for(self, resource_type: 'Author', limit: limit)
+  end
+
+  def recommended_categories(limit: 10)
+    RecommendationService.recommendations_for(self, resource_type: 'Category', limit: limit)
+  end
+
+  def recommended_shelves(limit: 10)
+    RecommendationService.recommendations_for(self, resource_type: 'Shelf', limit: limit)
+  end
+
+  # Similar users (people to follow)
+  def similar_raters(limit: 20)
+    RecommendationService.similar_users(self, limit: limit)
+  end
+
   def people_to_follow
     Rails.cache.fetch("#{cache_key}/people_to_follow", expires_in: 1.day) do
       similar_raters.includes(:profile).reject do |rater|
@@ -122,6 +145,86 @@ class User < ActiveRecord::Base
     Rails.cache.fetch("#{cache_key}/recommended_authors", expires_in: 1.day) do
       recommended_authors
     end
+  end
+
+  # Like/Dislike methods (replaces recommendable gem)
+  def likes?(rateable)
+    ratings.exists?(rateable: rateable, rate: :like)
+  end
+
+  def dislikes?(rateable)
+    ratings.exists?(rateable: rateable, rate: :dislike)
+  end
+
+  def like(rateable)
+    Rating.like(self, rateable)
+  end
+
+  def unlike(rateable)
+    Rating.unlike(self, rateable)
+  end
+
+  def dislike(rateable)
+    Rating.dislike(self, rateable)
+  end
+
+  def undislike(rateable)
+    Rating.undislike(self, rateable)
+  end
+
+  # Get liked/disliked items
+  def liked_books
+    Book.joins("INNER JOIN ratings ON ratings.rateable_id = books.id AND ratings.rateable_type = 'Book'")
+        .where(ratings: { user_id: id, rate: :like })
+  end
+
+  def liked_authors
+    Author.joins("INNER JOIN ratings ON ratings.rateable_id = authors.id AND ratings.rateable_type = 'Author'")
+          .where(ratings: { user_id: id, rate: :like })
+  end
+
+  def liked_categories
+    Category.joins("INNER JOIN ratings ON ratings.rateable_id = categories.id AND ratings.rateable_type = 'Category'")
+            .where(ratings: { user_id: id, rate: :like })
+  end
+
+  def disliked_books
+    Book.joins("INNER JOIN ratings ON ratings.rateable_id = books.id AND ratings.rateable_type = 'Book'")
+        .where(ratings: { user_id: id, rate: :dislike })
+  end
+
+  def disliked_authors
+    Author.joins("INNER JOIN ratings ON ratings.rateable_id = authors.id AND ratings.rateable_type = 'Author'")
+          .where(ratings: { user_id: id, rate: :dislike })
+  end
+
+  # Get IDs of liked/disliked items (for performance)
+  def liked_book_ids
+    ratings.where(rateable_type: 'Book', rate: :like).pluck(:rateable_id)
+  end
+
+  def liked_author_ids
+    ratings.where(rateable_type: 'Author', rate: :like).pluck(:rateable_id)
+  end
+
+  def disliked_book_ids
+    ratings.where(rateable_type: 'Book', rate: :dislike).pluck(:rateable_id)
+  end
+
+  def disliked_author_ids
+    ratings.where(rateable_type: 'Author', rate: :dislike).pluck(:rateable_id)
+  end
+
+  # Total count of likes given by this user
+  # @return [Integer] Total number of likes
+  def likes_count
+    ratings.where(rate: :like).count
+  end
+
+  # Total count of dislikes given by this user
+  # @return [Integer] Total number of dislikes
+  def dislikes_count
+    ratings.where(rate: :dislike).count
   end
 
   def clear_cache

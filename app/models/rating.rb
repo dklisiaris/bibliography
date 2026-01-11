@@ -11,6 +11,11 @@ class Rating < ActiveRecord::Base
   validates :user_id, :uniqueness => { :scope => [:rateable_type, :rateable_id] }
   validates :rate, presence: true
 
+  # Update recommendations when ratings change
+  after_create :update_recommendations
+  after_update :update_recommendations
+  after_destroy :update_recommendations
+
   def self.like(user, rateable)
     if !rateable.ratings.exists?(user_id: user.id)
       rateable.ratings.create(user_id: user.id, rate: 0)
@@ -33,6 +38,14 @@ class Rating < ActiveRecord::Base
 
   def self.undislike(user, rateable)
     self.where(user_id: user.id, rateable_id: rateable.id, rateable_type: rateable.class.name, rate: 1).each(&:destroy)
+  end
+
+  private
+
+  def update_recommendations
+    # Update recommendations for this user when they like/dislike items
+    # Uses existing ratings persistence - no new tables needed
+    RecommendationService.update_for(user)
   end
 end
 
