@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :award do
-    prize { nil }
-    year { 1 }
-    awardable_id { 1 }
-    awardable_type { 'MyString' }
+    association :prize
+    year { 2020 }
+    association :awardable, factory: :book
   end
 end
 

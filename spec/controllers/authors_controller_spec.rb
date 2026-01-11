@@ -31,6 +31,11 @@ RSpec.describe AuthorsController, :type => :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # AuthorsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+  let(:user) { create(:user, :editor) }
+
+  before do
+    sign_in user
+  end
 
   describe "GET index" do
     it "assigns all authors as @authors" do
@@ -50,13 +55,13 @@ RSpec.describe AuthorsController, :type => :controller do
   describe "GET show" do
     it "assigns the requested author as @author" do
       author = create(:author)
-      get :show, id: author
+      get :show, params: { id: author }
       expect(assigns(:author)).to eq author
     end  
 
     it "renders the show template" do
       author = create(:author)
-      get :show, id: author
+      get :show, params: { id: author }
       expect(response).to render_template :show
     end
   end
@@ -77,13 +82,13 @@ RSpec.describe AuthorsController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested author as @author" do
       author = create(:author)
-      get :edit, id: author
+      get :edit, params: { id: author }
       expect(assigns(:author)).to eq(author)
     end
 
     it "renders the edit template" do
       author = create(:author)
-      get :edit, id: author
+      get :edit, params: { id: author }
       expect(response).to render_template :edit
     end    
   end
@@ -92,18 +97,18 @@ RSpec.describe AuthorsController, :type => :controller do
     context "with valid params" do
       it "creates a new Author" do
         expect {
-          post :create, author: valid_attributes
+          post :create, params: { author: valid_attributes }
         }.to change(Author, :count).by(1)
       end
 
       it "assigns a newly created author as @author" do
-        post :create, author: valid_attributes
+        post :create, params: { author: valid_attributes }
         expect(assigns(:author)).to be_a(Author)
         expect(assigns(:author)).to be_persisted
       end
 
       it "redirects to the created author" do
-        post :create, author: valid_attributes
+        post :create, params: { author: valid_attributes }
         expect(response).to redirect_to(Author.last)
       end
     end
@@ -111,18 +116,18 @@ RSpec.describe AuthorsController, :type => :controller do
     context "with invalid params" do
       it "does not save the new author in the database" do
         expect {
-          post :create, author: invalid_attributes
+          post :create, params: { author: invalid_attributes }
         }.not_to change(Author, :count)
       end      
 
       it "assigns a newly created but unsaved author as @author" do
-        post :create, author: invalid_attributes
+        post :create, params: { author: invalid_attributes }
         expect(assigns(:author)).to be_a_new(Author)
         expect(assigns(:author)).not_to be_persisted
       end
 
       it "re-renders the 'new' template" do
-        post :create, author: invalid_attributes
+        post :create, params: { author: invalid_attributes }
         expect(response).to render_template :new
       end
     end
@@ -135,32 +140,32 @@ RSpec.describe AuthorsController, :type => :controller do
 
     context "with valid params" do
       it "locates the requested @author" do
-        patch :update, id: @author, author: valid_attributes
+        patch :update, params: { id: @author, author: valid_attributes }
         expect(assigns(:author)).to eq(@author)
       end
 
       it "updates the requested author" do
-        patch :update, id: @author, author: attributes_for(:author, lastname: "R.R. Martin")
+        patch :update, params: { id: @author, author: attributes_for(:author, lastname: "R.R. Martin") }
         @author.reload
         expect(@author.lastname).to eq("R.R. Martin")
       end
 
 
       it "redirects to the author" do
-        patch :update, id: @author, author: valid_attributes
+        patch :update, params: { id: @author, author: valid_attributes }
         expect(response).to redirect_to(@author)
       end
     end
 
     context "with invalid params" do
       it "does not change the author's attributes" do
-        patch :update, id: @author, author: invalid_attributes
+        patch :update, params: { id: @author, author: invalid_attributes }
         @author.reload
         expect(@author.lastname).to eq("Tolkien")
       end
 
       it "re-renders the 'edit' template" do        
-        patch :update, id: @author, author: invalid_attributes
+        patch :update, params: { id: @author, author: invalid_attributes }
         expect(response).to render_template("edit")
       end
     end
@@ -173,12 +178,12 @@ RSpec.describe AuthorsController, :type => :controller do
 
     it "destroys the requested author" do      
       expect {
-        delete :destroy, id: @author
+        delete :destroy, params: { id: @author }
       }.to change(Author, :count).by(-1)
     end
 
     it "redirects to the authors list" do      
-      delete :destroy, id: @author
+      delete :destroy, params: { id: @author }
       expect(response).to redirect_to(authors_url)
     end
   end

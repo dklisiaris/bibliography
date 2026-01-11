@@ -9,8 +9,7 @@ FactoryBot.define do
     website { "MyString" }
     latitude { 1.5 }
     longitude { 1.5 }
-    placeable_id { 1 }
-    placeable_type { "MyString" }
+    association :placeable, factory: :publisher
   end
 end
 

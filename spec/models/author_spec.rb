@@ -9,7 +9,9 @@ RSpec.describe Author, :type => :model do
   it 'is invalid without lastname' do
     author = build(:author, lastname: nil)
     author.valid?
-    expect(author.errors[:lastname]).to include("can't be blank")
+
+    expect(author.errors[:lastname]).to be_present
+    expect(author.errors[:lastname].first).to match(/κενό|blank/i)
   end  
 end
 

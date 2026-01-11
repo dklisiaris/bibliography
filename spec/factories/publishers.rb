@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :publisher do
-    name { "MyString" }
+    sequence(:name) { |n| "Publisher #{n}" }
     owner { "MyString" }
+    sequence(:biblionet_id) { |n| n }
   end
 
 end
