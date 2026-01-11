@@ -5,8 +5,6 @@ class PublishersController < ApplicationController
 
   respond_to :html
 
-  # impressionist :actions=>[:index] # Disabled - gem causing errors
-
   def index
     if params[:q].present?
       keyphrase = ApplicationController.helpers.latinize(params[:q])
@@ -34,8 +32,8 @@ class PublishersController < ApplicationController
     @places = @publisher.places
     @books = Book.includes(:main_writer).where(publisher_id: @publisher.id).page(params[:page])
     @place = Place.new
-    # byebug
-    # impressionist(@publisher) # Disabled - gem causing errors
+
+    ViewTracker.track(@publisher, request: request, user: current_user)
 
     respond_with(@publisher)
   end

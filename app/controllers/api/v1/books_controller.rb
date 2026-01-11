@@ -27,7 +27,6 @@ class Api::V1::BooksController < Api::V1::BaseController
 
   def show
     book = Book.find(params[:id])
-    # impressionist(book) # Disabled - gem causing errors
 
     response = apply_format(Api::V1::BookSerializer.new(book))
 

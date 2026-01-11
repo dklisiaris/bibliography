@@ -5,6 +5,8 @@ class Publisher < ActiveRecord::Base
   has_many :places, as: :placeable
   has_many :books
 
+  has_many :impressions, as: :impressionable, dependent: :destroy
+
   # Log impressions filtered by ip
   # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors
 

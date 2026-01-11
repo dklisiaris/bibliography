@@ -1,28 +1,28 @@
 FactoryBot.define do
   factory :book do
-    title { "MyString" }
-    subtitle { "MyString" }
-    description { "MyText" }
-    image { "MyString" }
-    isbn { "MyString" }
-    isbn13 { "MyString" }
-    ismn { "MyString" }
-    issn { "MyString" }
-    series { "MyString" }
-    pages { 1 }
-    publication_year { 1 }
-    publication_place { "MyString" }
+    title { "Test Book" }
+    subtitle { "Test Subtitle" }
+    description { "Test description" }
+    image { "test.jpg" }
+    isbn { "1234567890" }
+    isbn13 { "1234567890123" }
+    pages { 100 }
+    publication_year { 2020 }
+    publication_place { "Athens" }
     price { "9.99" }
-    price_updated_at { "2014-12-31" }
-    physical_description { "MyString" }
-    cover_type { 1 }
-    availability { 1 }
-    format { 1 }
-    original_language { 1 }
-    original_title { "MyString" }
-    publisher { nil }
-    extra { "MyString" }
+    price_updated_at { Date.today }
+    size { "20x15" }
+    cover_type { 0 } # Μαλακό εξώφυλλο
+    availability { 0 } # Κυκλοφορεί
+    format { 0 } # Βιβλίο
+    original_language { 0 }
+    original_title { "Original Title" }
+    association :publisher
+    extra { "Extra info" }
     biblionet_id { 1 }
+    # series is optional, so we don't set it by default
+    # series_name is a string field, not an association
+    series_name { nil }
   end
 
 end

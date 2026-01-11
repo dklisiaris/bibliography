@@ -14,8 +14,6 @@ class BooksController < ApplicationController
 
   respond_to :html
 
-  # impressionist :actions=>[:index] # Disabled - gem causing errors
-
   def index
     is_autocomplete = (params[:autocomplete].try(:to_i) == 1)
     aggs = []
@@ -84,20 +82,30 @@ class BooksController < ApplicationController
 
   def trending
     authorize :book, :trending?
-    # Get The 25 most viewed books this month
+
+    # Get The 25 most viewed books this month (using impressions table)
     most_views_book_ids = Impression.where(impressionable_type: "Book")
       .where("created_at > ?", 1.month.ago)
       .where.not(impressionable_id: nil)
-      .group(:impressionable_id).order('count_id desc').limit(25).count('id').keys
+      .group(:impressionable_id)
+      .order('count_id desc')
+      .limit(25)
+      .count('id')
+      .keys
 
     most_views_author_ids = Impression.where(impressionable_type: "Author")
       .where("created_at > ?", 1.month.ago)
       .where.not(impressionable_id: nil)
-      .group(:impressionable_id).order('count_id desc').limit(5).count('id').keys
+      .group(:impressionable_id)
+      .order('count_id desc')
+      .limit(5)
+      .count('id')
+      .keys
 
     @books = policy_scope(Book).includes(:main_writer).where(id: most_views_book_ids)
     @trending_authors = Author.includes(:masterpiece).where(id: most_views_author_ids)
     @liked_author_ids = current_user.liked_author_ids if user_signed_in?
+
     respond_with(@books)
   end
 
@@ -142,8 +150,8 @@ class BooksController < ApplicationController
     @comments = @book.root_comments.includes(:children, :user, children: {user: :profile})
       .order(created_at: :desc)
 
-    # impressionist(@book) # Disabled - gem causing errors
-    @book.increment!(:views_count)
+    # @book.increment!(:views_count)
+    ViewTracker.track(@book, request: request, user: current_user)
 
     @categories = @book.categories
 

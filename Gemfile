@@ -55,9 +55,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 12.0', platforms: [:mri, :windows]
 
-  gem 'rspec-rails', '~> 4.0'
-  gem 'factory_bot_rails', '~> 5.2'
-
   gem 'better_errors', '~> 2.7'
   # gem 'binding_of_caller', '~> 1.0'
 
@@ -73,11 +70,13 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker', '~> 1.7'
-  gem 'capybara', '~> 2.15'
-  gem 'database_cleaner', '~> 1.5'
-  gem "launchy", '~> 2.4'
-  gem 'selenium-webdriver', '~> 3.3'
+  gem 'rspec-rails', '~> 6.0'
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 2.23'
+  gem 'capybara', '~> 3.40'
+  gem 'database_cleaner-active_record', '~> 2.2'
+  gem "launchy", '~> 2.5'
+  gem 'selenium-webdriver', '~> 4.0'
 end
 
 gem 'bootstrap-sass', '~> 3.4'
@@ -165,9 +164,6 @@ gem 'sinatra', require: nil
 
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'
-
-# A lightweight plugin that logs impressions per action or manually per model
-# gem 'impressionist', '~> 2.0'
 
 # A recommendation engine using Likes and Dislikes
 gem 'recommendable', '~> 2.2'

@@ -1,6 +1,33 @@
+# frozen_string_literal: true
+
 class Impression < ActiveRecord::Base
   belongs_to :impressionable, polymorphic: true
+  belongs_to :user, optional: true
 
+  # Scopes for analytics
+  scope :recent, ->(duration = 1.month) { where("created_at > ?", duration.ago) }
+  scope :for_resource, ->(type, id) { where(impressionable_type: type, impressionable_id: id) }
+  scope :by_user, ->(user_id) { where(user_id: user_id) }
+  scope :by_ip, ->(ip) { where(ip_address: ip) }
+
+  # Validations
+  validates :impressionable_type, :impressionable_id, presence: true
+
+  # Class methods for analytics
+  def self.unique_views_for(resource)
+    where(
+      impressionable_type: resource.class.name,
+      impressionable_id: resource.id
+    ).select(:ip_address, :user_id, :session_hash)
+     .distinct
+     .count
+  end
+
+  def self.views_in_period(resource, duration = 1.month)
+    for_resource(resource.class.name, resource.id)
+      .recent(duration)
+      .count
+  end
 end
 
 # == Schema Information
