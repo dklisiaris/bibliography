@@ -4,17 +4,17 @@ FactoryBot.define do
     subtitle { "Test Subtitle" }
     description { "Test description" }
     image { "test.jpg" }
-    isbn { "1234567890" }
-    isbn13 { "1234567890123" }
+    sequence(:isbn) { |n| "123456789#{n}" }
+    sequence(:isbn13) { |n| "123456789012#{n}" }
     pages { 100 }
     publication_year { 2020 }
     publication_place { "Athens" }
     price { "9.99" }
     price_updated_at { Date.today }
     size { "20x15" }
-    cover_type { 0 } # Μαλακό εξώφυλλο
-    availability { 0 } # Κυκλοφορεί
-    format { 0 } # Βιβλίο
+    cover_type { :"Μαλακό εξώφυλλο" } # Μαλακό εξώφυλλο
+    availability { :Κυκλοφορεί } # Κυκλοφορεί
+    format { :Βιβλίο } # Βιβλίο
     original_language { 0 }
     original_title { "Original Title" }
     association :publisher

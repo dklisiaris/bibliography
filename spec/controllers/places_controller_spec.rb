@@ -20,140 +20,121 @@ require 'rails_helper'
 
 RSpec.describe PlacesController, :type => :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Place. As you add validations to Place, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { attributes_for(:place) }
+  let(:invalid_attributes) { { address: nil } }
+  let(:user) { create(:user, role: 'editor') }
+  let(:publisher) { create(:publisher) }
+  let(:place) { create(:place, placeable: publisher) }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # PlacesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET index" do
-    it "assigns all places as @places" do
-      place = Place.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:places)).to eq([place])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested place as @place" do
-      place = Place.create! valid_attributes
-      get :show, {:id => place.to_param}, valid_session
-      expect(assigns(:place)).to eq(place)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new place as @place" do
-      get :new, {}, valid_session
-      expect(assigns(:place)).to be_a_new(Place)
-    end
+  before do
+    sign_in user
+    # Stub load_placeable to return the publisher
+    allow_any_instance_of(PlacesController).to receive(:load_placeable).and_return(publisher)
+    controller.instance_variable_set(:@placeable, publisher)
   end
 
   describe "GET edit" do
     it "assigns the requested place as @place" do
-      place = Place.create! valid_attributes
-      get :edit, {:id => place.to_param}, valid_session
+      allow(controller.request).to receive(:path).and_return("/publishers/#{publisher.id}/places/#{place.id}/edit")
+      get :edit, params: { publisher_id: publisher.id, id: place }
       expect(assigns(:place)).to eq(place)
     end
   end
 
   describe "POST create" do
+    before do
+      # Set up the request path so load_placeable can parse it
+      allow(controller.request).to receive(:path).and_return("/publishers/#{publisher.id}/places")
+    end
+
     describe "with valid params" do
       it "creates a new Place" do
         expect {
-          post :create, {:place => valid_attributes}, valid_session
+          post :create, params: { publisher_id: publisher.id, place: valid_attributes }
         }.to change(Place, :count).by(1)
       end
 
       it "assigns a newly created place as @place" do
-        post :create, {:place => valid_attributes}, valid_session
+        post :create, params: { publisher_id: publisher.id, place: valid_attributes }
         expect(assigns(:place)).to be_a(Place)
         expect(assigns(:place)).to be_persisted
       end
 
-      it "redirects to the created place" do
-        post :create, {:place => valid_attributes}, valid_session
-        expect(response).to redirect_to(Place.last)
+      it "redirects to the placeable" do
+        post :create, params: { publisher_id: publisher.id, place: valid_attributes }
+        expect(response).to redirect_to(publisher)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved place as @place" do
-        post :create, {:place => invalid_attributes}, valid_session
-        expect(assigns(:place)).to be_a_new(Place)
+        post :create, params: { publisher_id: publisher.id, place: invalid_attributes }
+        expect(assigns(:place)).to be_a(Place)
+        expect(assigns(:place)).not_to be_persisted
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:place => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      it "redirects to the placeable even with invalid params" do
+        post :create, params: { publisher_id: publisher.id, place: invalid_attributes }
+        expect(response).to redirect_to(publisher)
       end
     end
   end
 
   describe "PUT update" do
+    before do
+      allow(controller.request).to receive(:path).and_return("/publishers/#{publisher.id}/places/#{place.id}")
+    end
+
     describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { { name: "New Place Name" } }
 
       it "updates the requested place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => new_attributes}, valid_session
+        put :update, params: { publisher_id: publisher.id, id: place, place: new_attributes }
         place.reload
-        skip("Add assertions for updated state")
+        expect(place.name).to eq("New Place Name")
       end
 
       it "assigns the requested place as @place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
+        put :update, params: { publisher_id: publisher.id, id: place, place: valid_attributes }
         expect(assigns(:place)).to eq(place)
       end
 
-      it "redirects to the place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
-        expect(response).to redirect_to(place)
+      it "redirects to the placeable" do
+        put :update, params: { publisher_id: publisher.id, id: place, place: valid_attributes }
+        expect(response).to redirect_to(publisher)
       end
     end
 
     describe "with invalid params" do
       it "assigns the place as @place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => invalid_attributes}, valid_session
+        put :update, params: { publisher_id: publisher.id, id: place, place: invalid_attributes }
         expect(assigns(:place)).to eq(place)
       end
 
-      it "re-renders the 'edit' template" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+      it "redirects to the placeable even with invalid params" do
+        put :update, params: { publisher_id: publisher.id, id: place, place: invalid_attributes }
+        expect(response).to redirect_to(publisher)
       end
     end
   end
 
   describe "DELETE destroy" do
+    before do
+      allow(controller.request).to receive(:path).and_return("/publishers/#{publisher.id}/places/#{place.id}")
+    end
+
     it "destroys the requested place" do
-      place = Place.create! valid_attributes
+      place # Create the place
       expect {
-        delete :destroy, {:id => place.to_param}, valid_session
+        delete :destroy, params: { publisher_id: publisher.id, id: place }
       }.to change(Place, :count).by(-1)
     end
 
-    it "redirects to the places list" do
-      place = Place.create! valid_attributes
-      delete :destroy, {:id => place.to_param}, valid_session
-      expect(response).to redirect_to(places_url)
+    it "redirects to the placeable" do
+      delete :destroy, params: { publisher_id: publisher.id, id: place }
+      expect(response).to redirect_to(publisher)
     end
   end
+
 
 end

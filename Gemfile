@@ -72,11 +72,13 @@ end
 group :test do
   gem 'rspec-rails', '~> 6.0'
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 2.23'
+  gem 'faker', '~> 3.5'
   gem 'capybara', '~> 3.40'
   gem 'database_cleaner-active_record', '~> 2.2'
   gem "launchy", '~> 2.5'
   gem 'selenium-webdriver', '~> 4.0'
+  gem 'rails-controller-testing', '~> 1.0'
+  gem 'simplecov', '~> 0.22', require: false
 end
 
 gem 'bootstrap-sass', '~> 3.4'

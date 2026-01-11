@@ -51,3 +51,7 @@
 
 *.key
 *.pem
+
+# SimpleCov coverage reports
+/coverage/
+/.simplecov

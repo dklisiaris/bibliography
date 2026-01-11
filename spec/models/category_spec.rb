@@ -7,15 +7,21 @@ RSpec.describe Category, :type => :model do
   end
 
   it "is invalid without name" do 
-    category = build(:category, name: nil)
-    category.valid?
-    expect(category.errors[:name]).to include("can't be blank")
+    category = Category.new(ddc: "800")
+    # Test validation without triggering callbacks that require name
+    expect(category).not_to be_valid
+    # App uses Greek locale, error message is in Greek
+    expect(category.errors[:name]).to be_present
+    expect(category.errors[:name].first).to match(/κενό|blank/i)
   end
 
   it "is invalid without ddc" do 
-    category = build(:category, ddc: nil)
-    category.valid?
-    expect(category.errors[:ddc]).to include("can't be blank")
+    category = Category.new(name: "Test Category")
+    # Test validation without triggering callbacks that require ddc
+    expect(category).not_to be_valid
+    # App uses Greek locale, error message is in Greek
+    expect(category.errors[:ddc]).to be_present
+    expect(category.errors[:ddc].first).to match(/κενό|blank/i)
   end
 
   it "has a unique set of name and ddc" do    

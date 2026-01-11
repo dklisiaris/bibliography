@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :shelf do
     name { "MyString" }
-    privacy { 1 }
+    privacy { :same_as_profile }
     built_in { false }
     active { false }
-    user { nil }
+    association :user
   end
 
 end

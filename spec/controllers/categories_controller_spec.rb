@@ -23,18 +23,14 @@ RSpec.describe CategoriesController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Category. As you add validations to Category, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # CategoriesController. Be sure to keep this updated too.
+  let(:valid_attributes) { attributes_for(:category) }
+  let(:invalid_attributes) { attributes_for(:invalid_category) }
   let(:valid_session) { {} }
+  let(:user) { create(:user, :editor) }
+
+  before do
+    sign_in user
+  end
 
   describe "GET index" do
     it "assigns root categories sorted by ddc as @categories" do
@@ -54,7 +50,7 @@ RSpec.describe CategoriesController, :type => :controller do
   describe "GET show" do
     it "assigns the requested category as @category" do
       category = create(:category)
-      get :show, id: category
+      get :show, params: { id: category }
       expect(assigns(:category)).to eq category
     end
 
@@ -63,13 +59,13 @@ RSpec.describe CategoriesController, :type => :controller do
       child1 = create(:category, parent_id: category.id)
       child2 = create(:category, parent_id: category.id)
       
-      get :show, id: category
+      get :show, params: { id: category }
       expect(assigns(:children)).to eq [child1, child2].sort_by!{ |item| item[:ddc] }
     end    
 
     it "renders the show template" do
       category = create(:category)
-      get :show, id: category
+      get :show, params: { id: category }
       expect(response).to render_template :show
     end
   end
@@ -90,13 +86,13 @@ RSpec.describe CategoriesController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested category as @category" do
       category = create(:category)
-      get :edit, id: category
+      get :edit, params: { id: category }
       expect(assigns(:category)).to eq(category)
     end
 
     it "renders the edit template" do
       category = create(:category)
-      get :edit, id: category
+      get :edit, params: { id: category }
       expect(response).to render_template :edit
     end    
   end
@@ -105,18 +101,18 @@ RSpec.describe CategoriesController, :type => :controller do
     context "with valid params" do
       it "creates a new Category" do
         expect {
-          post :create, category: attributes_for(:category)
+          post :create, params: { category: attributes_for(:category) }
         }.to change(Category, :count).by(1)
       end
 
       it "assigns a newly created category as @category" do
-        post :create, category: attributes_for(:category)
+        post :create, params: { category: attributes_for(:category) }
         expect(assigns(:category)).to be_a(Category)
         expect(assigns(:category)).to be_persisted
       end
 
       it "redirects to the created category" do
-        post :create, category: attributes_for(:category)
+        post :create, params: { category: attributes_for(:category) }
         expect(response).to redirect_to(Category.last)
       end
     end
@@ -124,18 +120,18 @@ RSpec.describe CategoriesController, :type => :controller do
     context "with invalid params" do
       it "does not save the new category in the database" do
         expect {
-          post :create, category: attributes_for(:invalid_category)
+          post :create, params: { category: attributes_for(:invalid_category) }
         }.not_to change(Category, :count)
       end      
 
       it "assigns a newly created but unsaved category as @category" do
-        post :create, category: attributes_for(:invalid_category)
+        post :create, params: { category: attributes_for(:invalid_category) }
         expect(assigns(:category)).to be_a_new(Category)
         expect(assigns(:category)).not_to be_persisted
       end
 
       it "re-renders the 'new' template" do
-        post :create, category: attributes_for(:invalid_category)
+        post :create, params: { category: attributes_for(:invalid_category) }
         expect(response).to render_template :new
       end
     end
@@ -148,32 +144,33 @@ RSpec.describe CategoriesController, :type => :controller do
 
     context "with valid params" do
       it "locates the requested @category" do
-        patch :update, id: @category, category: attributes_for(:category)
+        patch :update, params: { id: @category, category: attributes_for(:category) }
         expect(assigns(:category)).to eq(@category)
       end
 
       it "updates the requested category" do
-        patch :update, id: @category, category: attributes_for(:category, name: "History and arts")
+        patch :update, params: { id: @category, category: attributes_for(:category, name: "History and arts") }
         @category.reload
         expect(@category.name).to eq("History and arts")
       end
 
 
       it "redirects to the category" do
-        patch :update, id: @category, category: attributes_for(:category)
+        patch :update, params: { id: @category, category: attributes_for(:category) }
+        @category.reload
         expect(response).to redirect_to(@category)
       end
     end
 
     context "with invalid params" do
       it "does not change the category's attributes" do
-        patch :update, id: @category, category: attributes_for(:invalid_category)
+        patch :update, params: { id: @category, category: attributes_for(:invalid_category) }
         @category.reload
         expect(@category.name).to eq("Applied Sciences")
       end
 
       it "re-renders the 'edit' template" do        
-        patch :update, id: @category, category: attributes_for(:invalid_category)
+        patch :update, params: { id: @category, category: attributes_for(:invalid_category) }
         expect(response).to render_template("edit")
       end
     end
@@ -186,12 +183,12 @@ RSpec.describe CategoriesController, :type => :controller do
 
     it "destroys the requested category" do      
       expect {
-        delete :destroy, id: @category
+        delete :destroy, params: { id: @category }
       }.to change(Category, :count).by(-1)
     end
 
     it "redirects to the categories list" do      
-      delete :destroy, id: @category
+      delete :destroy, params: { id: @category }
       expect(response).to redirect_to(categories_url)
     end
   end

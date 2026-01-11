@@ -43,6 +43,8 @@ class Category < ActiveRecord::Base
   end
 
   def slugged_name(opts={})
+    return '' unless name.present?
+
     opts[:max_expansions] ||= 1
     opts[:dashes] = true if opts[:dashes].nil?
     join_with = opts[:dashes] ? '-' : ' '
@@ -56,6 +58,8 @@ class Category < ActiveRecord::Base
   end
 
   def calculate_search_terms
+    return unless name.present? && ddc.present?
+    
     write_attribute(:tsearch_vector, slugged_name(max_expansions: 3, dashes: false) + ' ' + ddc)
   end
 

@@ -1,0 +1,6 @@
+# This directory will contain shared examples for reusable test patterns
+# Examples:
+# - impressionable.rb (for models with impressions)
+# - commentable.rb (for commentable models)
+# - sluggable.rb (for FriendlyId models)
+

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :prize do
-    name { "MyString" }
+    sequence(:name) { |n| "Prize #{n}" }
   end
 
 end

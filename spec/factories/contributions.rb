@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :contribution do
-    job { 1 }
-    book { nil }
-    author { nil }
+    job { :συγγραφή } # First enum value (index 0)
+    association :book
+    association :author
   end
-
 end
 
 # == Schema Information
