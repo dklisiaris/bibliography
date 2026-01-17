@@ -227,6 +227,12 @@ class User < ActiveRecord::Base
     ratings.where(rate: :dislike).count
   end
 
+  # Count of liked categories for this user
+  # @return [Integer] Number of liked categories
+  def liked_categories_count
+    ratings.where(rateable_type: 'Category', rate: :like).count
+  end
+
   def clear_cache
     Rails.cache.delete("#{cache_key}/people_to_follow")
     Rails.cache.delete("#{cache_key}/recommended_books")
