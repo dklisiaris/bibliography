@@ -11,12 +11,14 @@
 :concurrency: 10
 :timeout: 30000
 :queues:
+  - [bibliography_production_recommendable, 10]
   - [recommendable, 10]
-  - [searchkick, 8]
   - [bibliography_production_searchkick, 8]
-  - [mailer, 5]
+  - [searchkick, 8]
   - [bibliography_production_mailers, 5]
+  - [mailer, 5]
   - [network_ops, 3]
-  - [maintenance, 2]
   - [bibliography_production_maintenance, 2]
-  - default
+  - [maintenance, 2]
+  - [bibliography_production_default, 1]
+  - [default, 1]
