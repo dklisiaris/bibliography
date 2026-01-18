@@ -1,0 +1,66 @@
+- pages = {fa('home') => root_url, 'Admin' => '#', 'Redis Browser' => admin_redis_path, 'Stats' => nil}
+
+= cell(:navigation).call(:content_header, title: 'Redis Statistics', breadcrumbs: pages)
+
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          = fa('bar-chart')
+          Redis Server Information
+      .panel-body
+        .row
+          .col-md-6
+            .panel.panel-info
+              .panel-heading
+                %h4.panel-title Server Info
+              .panel-body
+                %dl.dl-horizontal
+                  %dt Redis Version:
+                  %dd= @info['redis_version']
+                  %dt Uptime (days):
+                  %dd= (@info['uptime_in_seconds'].to_f / 86400).round(2)
+                  %dt Connected Clients:
+                  %dd= @info['connected_clients']
+                  %dt Used Memory:
+                  %dd= number_to_human_size(@info['used_memory'].to_i)
+                  %dt Used Memory Peak:
+                  %dd= number_to_human_size(@info['used_memory_peak'].to_i)
+                  %dt Total Keys:
+                  %dd
+                    %strong= @dbsize
+
+          .col-md-6
+            .panel.panel-success
+              .panel-heading
+                %h4.panel-title Performance
+              .panel-body
+                %dl.dl-horizontal
+                  %dt Commands Processed:
+                  %dd= number_with_delimiter(@info['total_commands_processed'].to_i)
+                  %dt Keyspace Hits:
+                  %dd= number_with_delimiter(@info['keyspace_hits'].to_i)
+                  %dt Keyspace Misses:
+                  %dd= number_with_delimiter(@info['keyspace_misses'].to_i)
+                  %dt Hit Rate:
+                  %dd
+                    - hits = @info['keyspace_hits'].to_i
+                    - misses = @info['keyspace_misses'].to_i
+                    - total = hits + misses
+                    - hit_rate = total > 0 ? (hits.to_f / total * 100).round(2) : 0
+                    %strong= "#{hit_rate}%"
+                  %dt Expired Keys:
+                  %dd= number_with_delimiter(@info['expired_keys'].to_i)
+
+        - if @keyspace.present?
+          .panel.panel-warning
+            .panel-heading
+              %h4.panel-title Keyspace
+            .panel-body
+              %pre= @keyspace.inspect
+
+        .btn-group
+          = link_to admin_redis_path, class: 'btn btn-default' do
+            = fa('arrow-left')
+            Back to Browser
