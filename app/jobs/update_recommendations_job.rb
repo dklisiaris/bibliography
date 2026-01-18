@@ -6,7 +6,7 @@ class UpdateRecommendationsJob < ApplicationJob
   # Retry a few times in case of temporary Redis issues
   retry_on Redis::BaseError, wait: :exponentially_longer, attempts: 3
 
-  def perform(user_id, resource_types: ['Book', 'Author', 'Category', 'Publisher'])
+  def perform(user_id, resource_types: ['Book', 'Author', 'Category', 'Publisher', 'Shelf'])
     user = User.find_by(id: user_id)
     return unless user.present?
 
