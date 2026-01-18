@@ -61,23 +61,8 @@ set :rvm_ruby_version, '3.1.7'
 # Capistrano-sidekiq 3.0.0 configuration for Sidekiq 6+
 # Sidekiq 6 removed daemonization, so capistrano-sidekiq handles it differently
 # These settings ensure compatibility
-# NOTE: We're using systemd to manage Sidekiq, so we disable Capistrano hooks
-# and manually restart via systemctl during deployment
-set :sidekiq_default_hooks, false
+set :sidekiq_default_hooks, true
 set :sidekiq_roles, :app
-
-# Custom task to restart Sidekiq via systemd after deployment
-namespace :sidekiq do
-  desc 'Restart Sidekiq via systemd'
-  task :restart do
-    on roles(:app) do
-      execute :sudo, :systemctl, :restart, 'bibliography-sidekiq'
-    end
-  end
-end
-
-# Hook into deployment to restart Sidekiq after publishing
-after 'deploy:publishing', 'sidekiq:restart'
 
 namespace :bower do
   desc 'Install bower'
