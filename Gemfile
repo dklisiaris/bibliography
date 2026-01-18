@@ -233,6 +233,10 @@ group :development do
   gem 'capistrano-faster-assets'
   gem 'capistrano-bower', '~> 1.1'
 
+  # SSH key support for net-ssh (required for ED25519 keys)
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+
   # Annotate Rails classes with schema and routes info
   gem 'annotate', '~> 3.0'
 
