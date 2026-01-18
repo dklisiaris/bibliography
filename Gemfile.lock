@@ -468,14 +468,6 @@ GEM
       redis (>= 2.2.0)
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-browser (0.5.1)
-      coffee-script
-      multi_json
-      redis
-      sass
-      sinatra
-      sinatra-contrib
-      slim
     redis-client (0.26.3)
       connection_pool
     redis-namespace (1.11.0)
@@ -567,17 +559,8 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.2.0)
       tilt (~> 2.0)
-    sinatra-contrib (3.2.0)
-      multi_json (>= 0.0.2)
-      mustermann (~> 3.0)
-      rack-protection (= 3.2.0)
-      sinatra (= 3.2.0)
-      tilt (~> 2.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
-    slim (5.2.1)
-      temple (~> 0.10.0)
-      tilt (>= 2.1.0)
     snaky_hash (2.0.3)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
@@ -722,7 +705,6 @@ DEPENDENCIES
   rails-i18n (~> 6.0.0)
   recommendable (~> 2.2)
   redis (~> 5.0)
-  redis-browser (~> 0.5.1)
   redis-namespace (~> 1.11)
   rest-client (~> 2.0)
   rexml (~> 3.4)

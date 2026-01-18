@@ -273,7 +273,7 @@ gem 'redis', '~> 5.0'
 gem 'redis-namespace', '~> 1.11'
 # gem 'redis-rails', '~> 5.0'
 # Web-based Redis browser
-gem 'redis-browser', '~> 0.5.1'
+# gem 'redis-browser', '~> 0.5.1'
 
 # Clean ruby syntax for writing and deploying cron jobs.
 gem 'whenever', '~> 0.9.7'

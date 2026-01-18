@@ -97,7 +97,12 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.role == 'admin' } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
-    mount RedisBrowser::Web => '/redis'
+    
+    # Custom Redis browser (replaces redis-browser gem)
+    get 'redis', to: 'admin/redis#index', as: :admin_redis
+    get 'redis/stats', to: 'admin/redis#stats', as: :admin_redis_stats
+    get 'redis/:id', to: 'admin/redis#show', as: :admin_redis_key
+    delete 'redis/:id', to: 'admin/redis#destroy', as: :admin_redis_delete
   end
 
   # Restful API routes

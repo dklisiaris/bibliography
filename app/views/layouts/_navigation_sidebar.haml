@@ -48,7 +48,8 @@
                 %span.sidebar-nav-mini-hide= t('side_menu.admins_only')
             = side_nav_li(t('side_menu.import'), import_path, "fa fa-upload")
             = side_nav_li(t('side_menu.tasks'), tasks_path, "fa fa-terminal")
-            = side_nav_li(t('side_menu.monitoring'), sidekiq_web_path, "fa fa-bullseye", true)
+            = side_nav_li('Sidekiq', sidekiq_web_path, "fa fa-bullseye", true)
+            = side_nav_li('Redis', admin_redis_path, "fa fa-database")
             = side_nav_li(t('side_menu.api'), "/docs/api#introduction", "fa fa-exchange")
 
   #sidebar-extra-info.sidebar-content.sidebar-nav-mini-hide
