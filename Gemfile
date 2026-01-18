@@ -233,6 +233,10 @@ group :development do
   gem 'capistrano-faster-assets'
   gem 'capistrano-bower', '~> 1.1'
 
+  # SSH key support for net-ssh (required for ED25519 keys)
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+
   # Annotate Rails classes with schema and routes info
   gem 'annotate', '~> 3.0'
 
@@ -273,7 +277,7 @@ gem 'redis', '~> 5.0'
 gem 'redis-namespace', '~> 1.11'
 # gem 'redis-rails', '~> 5.0'
 # Web-based Redis browser
-gem 'redis-browser', '~> 0.5.1'
+# gem 'redis-browser', '~> 0.5.1'
 
 # Clean ruby syntax for writing and deploying cron jobs.
 gem 'whenever', '~> 0.9.7'

@@ -1,0 +1,71 @@
+- pages = {fa('home') => root_url, 'Admin' => '#', 'Redis Browser' => nil}
+
+= cell(:navigation).call(:content_header, title: 'Redis Browser', breadcrumbs: pages)
+
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          = fa('database')
+          Redis Keys
+          %span.pull-right
+            = link_to admin_redis_stats_path, class: 'btn btn-sm btn-info' do
+              = fa('bar-chart')
+              Stats
+      .panel-body
+        = form_tag admin_redis_path, method: :get, class: 'form-inline', style: 'margin-bottom: 20px;' do
+          .form-group
+            %label{for: 'namespace'} Namespace:
+            = text_field_tag :namespace, @namespace, class: 'form-control', placeholder: 'e.g. bibliography', style: 'width: 200px;'
+          .form-group
+            %label{for: 'pattern'} Pattern:
+            = text_field_tag :pattern, @pattern, class: 'form-control', placeholder: '*', style: 'width: 200px;'
+          = submit_tag 'Search', class: 'btn btn-primary'
+          = link_to 'Clear', admin_redis_path, class: 'btn btn-default'
+
+        .alert.alert-info
+          %strong Total keys found:
+          = @total_keys
+          - if @total_keys > @per_page
+            %span.pull-right
+              Showing #{(@page - 1) * @per_page + 1} - #{[@page * @per_page, @total_keys].min} of #{@total_keys}
+
+        - if @keys_info.any?
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th Key
+                %th Type
+                %th Size/Count
+                %th TTL
+                %th Actions
+            %tbody
+              - @keys_info.each do |key_info|
+                %tr
+                  %td
+                    %code= key_info[:key]
+                  %td
+                    %span.label{class: "label-#{type_label_class(key_info[:type])}"}
+                      = key_info[:type].upcase
+                  %td= key_info[:size]
+                  %td
+                    - if key_info[:ttl].is_a?(Integer)
+                      = distance_of_time_in_words(Time.now, Time.now + key_info[:ttl])
+                    - else
+                      %span.text-muted= key_info[:ttl]
+                  %td
+                    = link_to admin_redis_key_path(key_info[:key]), class: 'btn btn-xs btn-primary' do
+                      = fa('eye')
+                      View
+                    = link_to admin_redis_delete_path(key_info[:key]), method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: "Are you sure you want to delete '#{key_info[:key]}'?" } do
+                      = fa('trash')
+                      Delete
+
+          - if @total_keys > @per_page
+            .text-center
+              = paginate_keys(@page, @total_keys, @per_page)
+        - else
+          .alert.alert-warning
+            No keys found matching pattern:
+            %code= @namespace.present? ? "#{@namespace}:#{@pattern}" : @pattern
