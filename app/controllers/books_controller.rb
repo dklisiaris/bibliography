@@ -74,8 +74,8 @@ class BooksController < ApplicationController
 
   def featured
     authorize :book, :featured?
-    @books = policy_scope(Book).includes(:main_writer).top(25)
-    @top_authors = Author.includes(:masterpiece).top(5)
+    @books = policy_scope(Book).includes(:main_writer).top(count: 25)
+    @top_authors = Author.includes(:masterpiece).top(count: 5)
     @liked_author_ids = current_user.liked_author_ids if user_signed_in?
     respond_with(@books)
   end

@@ -167,8 +167,8 @@ gem 'sinatra', require: nil
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'
 
-# A recommendation engine using Likes and Dislikes
-gem 'recommendable', '~> 2.2'
+# # A recommendation engine using Likes and Dislikes
+# gem 'recommendable', '~> 2.2'
 
 # Bundler-like DSL and rake tasks for Bower on Rails
 gem 'bower-rails', '~> 0.11'

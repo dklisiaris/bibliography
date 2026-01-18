@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  include Recommendable
+  
   extend ActsAsTree::TreeWalker
   acts_as_tree order: "ddc"
 
