@@ -13,8 +13,9 @@ class RecommendationService
   # Find similar users for a user
   # @param user [User] The user to find similar users for
   # @param limit [Integer] Number of similar users to return
-  def self.similar_users(user, limit: 20)
-    new(user, nil, limit).similar_users
+  # @param resource_type [String] Resource type to use for similarity calculation
+  def self.similar_users(user, limit: 20, resource_type: 'Book')
+    new(user, resource_type, limit, false).similar_users
   end
 
   # Update recommendations for a user (called after like/dislike)
@@ -98,7 +99,8 @@ class RecommendationService
 
   def calculate_and_store_similar_users
     # Find similar users (calculated from ratings table)
-    similar_users = RecommendationService::NeighborFinder.find(@user, limit: @limit)
+    # Use the resource_type from the instance (defaults to 'Book' for similar_users)
+    similar_users = RecommendationService::NeighborFinder.find(@user, limit: @limit, resource_type: @resource_type)
 
     # Store in Redis (fast access) - Phase 1: Redis-only
     RecommendationService::RedisStore.store_similar_users(@user, similar_users)

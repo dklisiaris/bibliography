@@ -42,29 +42,45 @@ class RecommendationService::NeighborFinder
   private
 
   def calculate_similarities
-    # Get all users who have rated items of this type
+    # Try to get cached similarities first
+    # Get users who have rated items of this type, with at least 5 ratings
     users_with_ratings = User.joins(:ratings)
       .where(ratings: { rateable_type: @resource_type })
       .where.not(id: @user.id)
-      .distinct
+      .group('users.id')
+      .having('COUNT(ratings.id) > ?', 5) # Only users with sufficient ratings
+      .limit(1000) # Limit to prevent excessive calculation
       .pluck(:id)
-
-    # Calculate similarity with each user
+  
     similarities = {}
     users_with_ratings.each do |other_user_id|
-      other_user = User.find_by(id: other_user_id)
-      next unless other_user
-
-      similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(
+      # Try cached similarity first
+      cached = RecommendationService::RedisStore.get_similarity(
         @user,
-        other_user,
-        resource_type: @resource_type
+        User.find(other_user_id),
+        @resource_type
       )
-
-      # Only store if similarity > 0
-      similarities[other_user_id] = similarity if similarity > 0
+      
+      if cached
+        similarities[other_user_id] = cached
+      else
+        # Calculate and cache
+        other_user = User.find_by(id: other_user_id)
+        next unless other_user
+        
+        similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(
+          @user, other_user, resource_type: @resource_type
+        )
+        
+        if similarity > 0
+          RecommendationService::RedisStore.store_similarity(
+            @user, other_user, @resource_type, similarity
+          )
+          similarities[other_user_id] = similarity
+        end
+      end
     end
-
+    
     similarities
   end
 end

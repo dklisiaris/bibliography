@@ -100,7 +100,7 @@ class RecommendationService::RedisStore
   private
 
   def self.redis
-    @redis ||= Redis.new(url: ENV["REDIS_SERVER_URL"])
+    @redis ||= Redis.new(url: ENV["REDIS_SERVER_URL"] || ENV["REDIS_CLIENT_URL"] || 'redis://127.0.0.1:6379/0')
   end
 
   def self.recommendations_key(user, resource_type)

@@ -155,7 +155,8 @@ namespace :recommendations do
 
     puts "Clearing all recommendations from Redis..."
     pattern = "recommendations:*"
-    redis = Redis.new(url: ENV["REDIS_SERVER_URL"])
+    redis_url = ENV["REDIS_SERVER_URL"] || ENV["REDIS_CLIENT_URL"] || 'redis://127.0.0.1:6379/0'
+    redis = Redis.new(url: redis_url)
     keys = redis.keys(pattern)
     
     if keys.empty?

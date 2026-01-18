@@ -39,11 +39,14 @@ class ProfilesController < ApplicationController
     @user_followers = @user.user_followers.includes(:profile)
 
     if current_user
-      unless current_user == @user
-        # similarity = Recommendable::Helpers::Calculations.similarity_between(@user.id, current_user.id)
-        # @normalized_similarity = ((similarity-(-1))/(1-(-1)) * 100).round(1)
-        @normalized_similarity = 0
+      if current_user != @user
+        similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(
+          @user, current_user, resource_type: 'Book'
+        )
+        # Normalize from [-1, 1] to [0, 100]
+        @normalized_similarity = ((similarity - (-1)) / (1 - (-1)) * 100).round(1)
       end
+
       @liked_author_ids = current_user.liked_author_ids
     end
 
