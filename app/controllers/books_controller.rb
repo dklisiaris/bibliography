@@ -48,15 +48,19 @@ class BooksController < ApplicationController
       #   .search_fast(keyphrase)
       #   .order(impressions_count: :desc)
       #   .limit(50)
-      @books = policy_scope(Book)
-        .search(keyphrase, where: @filters, aggs: aggs, includes: [:main_writer], body_options: {min_score: 0.1},
+      # Searchkick search must be called on model class, not relation
+      @books = Book.search(keyphrase, where: @filters, aggs: aggs, includes: [:main_writer], body_options: {min_score: 0.1},
           order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
+      # Call policy_scope for Pundit verification (even though it doesn't filter in this case)
+      policy_scope(Book)
     else
       # @books = policy_scope(Book).page(params[:page]).order(impressions_count: :desc)
-      @books = policy_scope(Book)
-        .search("*", where: @filters, aggs: aggs, includes: [:main_writer], order: {_score: :desc, views: :desc, has_image: :desc},
+      # Searchkick search must be called on model class, not relation
+      @books = Book.search("*", where: @filters, aggs: aggs, includes: [:main_writer], order: {_score: :desc, views: :desc, has_image: :desc},
           page: params[:page], per_page: limit)
+      # Call policy_scope for Pundit verification (even though it doesn't filter in this case)
+      policy_scope(Book)
     end
     # @books_est_count = 20 * @books.total_pages
 

@@ -15,9 +15,11 @@ class AuthorsController < ApplicationController
       keyphrase = ApplicationController.helpers.latinize(params[:q])
       limit = params[:autocomplete].try(:to_i) == 1 ? 8 : 50
 
-      @authors = policy_scope(Author)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+      # Searchkick search must be called on model class, not relation
+      @authors = Author.search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
           page: params[:page], per_page: limit)
+      # Call policy_scope for Pundit verification (even though it doesn't filter in this case)
+      policy_scope(Author)
     else
       @authors = policy_scope(Author).page(params[:page]).order(impressions_count: :desc, image: :asc)
     end

@@ -14,9 +14,11 @@ class PublishersController < ApplicationController
       #   .page(params[:page])
       #   .order(impressions_count: :desc)
 
-      @publishers = policy_scope(Publisher)
-        .search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
+      # Searchkick search must be called on model class, not relation
+      @publishers = Publisher.search(keyphrase, body_options: {min_score: 0.1}, order: {_score: :desc},
           page: params[:page], per_page: limit)
+      # Call policy_scope for Pundit verification (even though it doesn't filter in this case)
+      policy_scope(Publisher)
     else
       @publishers = policy_scope(Publisher).page(params[:page]).order(impressions_count: :desc)
     end
