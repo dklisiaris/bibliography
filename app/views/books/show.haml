@@ -76,8 +76,6 @@
                     = @book_presenter.trow(t('books.ismn'), @book.ismn)
                     = @book_presenter.trow(t('books.issn'), @book.issn)
                     = @book_presenter.trow(t('books.physical_desc'), @book_presenter.physical_description)
-                    = @book_presenter.trow(t('books.price'), @book_presenter.price)
-                    = @book_presenter.trow(t('books.availability'), @book.availability)
                     - if policy(@book).update?
                       = @book_presenter.trow('ID', @book.id)
                       = @book_presenter.trow('Biblionet ID', @book.biblionet_id)
@@ -138,27 +136,5 @@
 - if user_signed_in?
   = render 'books/collections_modal'
 
-%script{:type => "application/ld+json"}
-  {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "breadcrumb": "Αρχική > Βιβλία > #{@book.title}",
-  "mainEntity":{
-  "@type": "Book",
-  "author": "#{@book.writers.any? ? 'https://bibliography.gr' + url_for(@book.writers.first) : ''}",
-  "bookFormat": "http://schema.org/Book",
-  "datePublished": "#{@book.publication_year.present? ? @book.publication_year.to_s : ''}",
-  "image": "#{image_url(@book.cover)}",
-  "inLanguage": "#{@book.language.present? ? UnicodeUtils.titlecase(@book.language) : 'Ελληνικά'}",
-  "isbn": "#{@book.isbn}",
-  "name": "#{@book.title}",
-  "numberOfPages": "#{@book.pages.present? ? @book.pages.to_s : ''}",
-  "offers": {
-  "@type": "Offer",
-  "availability": "http://schema.org/InStock",
-  "price": "#{@book.try(:price)}",
-  "priceCurrency": "EUR"
-  },
-  "publisher": "#{@book.try(:publisher).try(:name)}"
-  }
-  }
+%script{type: 'application/ld+json'}
+  = @book_presenter.structured_data.to_json.html_safe

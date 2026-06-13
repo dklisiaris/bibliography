@@ -302,13 +302,12 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title, :subtitle, :description, :image,
         :isbn, :isbn13, :ismn, :issn, :series_name, :series_volume, :pages,
         :size, :cover_type, :publication_year, :publication_version,
-        :publication_place, :price, :price_updated_at, :availability, :format,
+        :publication_place, :format,
         :language, :original_language, :original_title, :publisher_id, :extra,
         :biblionet_id, :slug, :remote_uploaded_cover_url)
     end
 
     def set_enums
-      @availabilities     = Book.availabilities
       @cover_types        = Book.cover_types
       @formats            = Book.formats
     end
