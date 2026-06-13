@@ -69,14 +69,6 @@
     <%= f.text_field :publication_place, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
-    <%= f.label :price %><br>
-    <%= f.text_field :price, class: 'form-control' %>
-  </div>
-  <div class="col-xs-6 form-group">
-    <%= f.label :price_updated_at %><br>
-    <%= f.date_select :price_updated_at, class: 'form-control' %>
-  </div>
-  <div class="col-xs-6 form-group">
     <%= f.label :pages %><br>
     <%= f.number_field :pages, class: 'form-control' %>
   </div>
@@ -87,10 +79,6 @@
   <div class="col-xs-6 form-group">
     <%= f.label :cover_type %><br>
     <%= f.select :cover_type, options_for_select(@cover_types.collect { |s| [s[0].humanize, s[0]] }, selected: @book.cover_type), {}, class: 'form-control' %>
-  </div>
-  <div class="col-xs-6 form-group">
-    <%= f.label :availability %><br>
-    <%= f.select :availability, options_for_select(@availabilities.collect { |s| [s[0].humanize, s[0]] }, selected: @book.availability), {}, class: 'form-control' %>
   </div>
   <div class="col-xs-6 form-group">
     <%= f.label :format %><br>

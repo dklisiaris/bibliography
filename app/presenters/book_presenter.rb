@@ -89,13 +89,42 @@ class BookPresenter < BasePresenter
     html.join(', ').html_safe
   end
 
-  def price
-    html = []
-    if book.price
-      html << '€ ' + book.price.to_s if book.price
-      html << "(#{I18n.t('books.last_updated')}: #{book.price_updated_at.to_s})"
+  def structured_data
+    main_entity = {
+      '@type' => 'Book',
+      'name' => book.title,
+      'url' => h.book_url(book),
+      'bookFormat' => 'https://schema.org/Book'
+    }
+
+    main_entity['isbn'] = book.isbn if book.isbn.present?
+    main_entity['image'] = h.image_url(book.cover)
+    main_entity['inLanguage'] = book.language.present? ? UnicodeUtils.titlecase(book.language) : 'Ελληνικά'
+    main_entity['datePublished'] = book.publication_year.to_s if book.publication_year.present?
+    main_entity['numberOfPages'] = book.pages if book.pages.present?
+    main_entity['description'] = book.short_description(300) if book.description.present?
+    main_entity['alternateName'] = book.subtitle if book.subtitle.present?
+
+    authors = book.writers.map do |writer|
+      { '@type' => 'Person', 'name' => writer.fullname, 'url' => h.url_for(writer) }
     end
-    html.join(', ').html_safe
+    main_entity['author'] = authors if authors.any?
+
+    if book.publisher.present?
+      main_entity['publisher'] = { '@type' => 'Organization', 'name' => book.publisher.name }
+    end
+
+    rating = structured_data_community_rating
+    main_entity['aggregateRating'] = rating if rating
+
+    {
+      '@context' => 'https://schema.org',
+      '@type' => 'WebPage',
+      'url' => h.book_url(book),
+      'name' => book.title,
+      'breadcrumb' => "#{I18n.t('home')} > #{I18n.t('books.label')} > #{book.title}",
+      'mainEntity' => main_entity
+    }
   end
 
   def trow(key,value)
@@ -165,6 +194,23 @@ class BookPresenter < BasePresenter
       end if data_field.is_a?(MARC::DataField) and data_field.subfields.any?{|s| s.value.present?}
     end
     html.join.html_safe
+  end
+
+  private
+
+  def structured_data_community_rating
+    likes = book.liked_by_count_cache.to_i
+    dislikes = book.disliked_by_count_cache.to_i
+    total = likes + dislikes
+    return if total.zero?
+
+    {
+      '@type' => 'AggregateRating',
+      'ratingValue' => ((likes.to_f / total) * 5).round(1),
+      'ratingCount' => total,
+      'bestRating' => 5,
+      'worstRating' => 1
+    }
   end
 
 end
