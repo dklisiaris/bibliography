@@ -61,6 +61,9 @@ set :rvm_ruby_version, '3.1.7'
 # Capistrano-sidekiq 3.0.0 configuration for Sidekiq 7+
 set :sidekiq_default_hooks, true
 set :sidekiq_roles, :app
+# Match /etc/systemd/system/bibliography-sidekiq.service (not the gem default bibliography_sidekiq_production)
+set :sidekiq_service_unit_name, 'bibliography-sidekiq'
+set :service_unit_user, :system
 
 namespace :bower do
   desc 'Install bower'
