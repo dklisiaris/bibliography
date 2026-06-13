@@ -9,7 +9,8 @@
 ---
 :verbose: true
 :concurrency: 10
-:timeout: 30000
+# Max job runtime in seconds (Sidekiq also uses this as shutdown wait).
+:timeout: 600
 :queues:
   - [bibliography_production_recommendable, 10]
   - [recommendable, 10]
