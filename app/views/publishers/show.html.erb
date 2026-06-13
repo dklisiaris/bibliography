@@ -44,24 +44,6 @@
             </div>
           </div>
           <div class="col-sm-12">
-             <div class="row">
-              <% @publisher.places.each do |place|%>
-                <% place_presenter = PlacePresenter.new(place, self) %>
-                <div class="col-xs-12">
-                  <h4 class="sub-header"><%= HTMLEntities.new.decode place.role %></h4>
-                  <div class="col-xs-3 text-center"><%= place_presenter.address %></div>
-                  <div class="col-xs-3 text-center"><%= place_presenter.telephone %></div>
-
-                  <div class="col-xs-3 text-center"><%= place_presenter.fax %></div>
-
-                  <div class="col-xs-3 text-center"><%= place_presenter.website %></div>
-
-                  <div class="col-xs-3 text-center"><%= place_presenter.email %></div>
-
-
-                </div>
-              <% end %>
-            </div>
             <% if @books.count > 0 %>
               <h4 class="sub-header">
                 <%= t('books.label') %>
@@ -84,8 +66,3 @@
 <%= link_to 'Edit', edit_publisher_path(@publisher) if policy(@publisher).update? %> <br>
 <%#= link_to 'Back', publishers_path %>
 
-
-<%#= render 'places/places' %>
-
-
-<%= render 'places/form' if policy(Place).new? %>
