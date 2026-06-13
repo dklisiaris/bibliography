@@ -98,6 +98,15 @@ en:
   privacy_policy: Privacy policy
   about_us: About us
 
+  pages:
+    about:
+      headline: "Your Greek library online"
+      intro: "Bibliography.gr is a community of readers and the most complete catalog of Greek bibliographic records — not a bookstore."
+      mission: "Organize your library, discover new titles, follow other readers, and share reviews and recommendations."
+      catalog: "The catalog includes over 240,000 Greek book titles with rich bibliographic data: authors, translators, publishers, series, awards, and more."
+      history: "Bibliography started as a university thesis and has grown into a living catalog maintained by editors and the community."
+      not_a_store: "We don't sell books. We help you find, organize, and discuss them."
+
   stats:
     views: "Views"
     visitors: "Visitors"
@@ -281,7 +290,7 @@ en:
     a_book: "a book"
     book_review: "Book Review"
     write_review: "Write review and comments about book"
-    sign_in_to_store_books: "Sign in to store books"
+    sign_in_to_save_books: "Sign in to save books"
     filters:
       label: "Filters"
 
