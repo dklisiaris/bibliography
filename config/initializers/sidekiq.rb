@@ -1,22 +1,19 @@
+# frozen_string_literal: true
+
 # Sidekiq 7+ no longer supports the redis-namespace option in config.redis.
-# Use a dedicated Redis URL or DB index for isolation if needed.
+# Logger must be set on config inside configure_server (not Sidekiq.logger=).
 Sidekiq.configure_server do |config|
   config.redis = { url: ENV["REDIS_SERVER_URL"] }
+
+  if Rails.env.production? || Rails.env.staging?
+    log_file = Rails.root.join('log', 'sidekiq.log')
+    FileUtils.mkdir_p(File.dirname(log_file))
+    config.logger = Logger.new(log_file)
+  end
+
+  config.logger.level = Logger::WARN
 end
 
 Sidekiq.configure_client do |config|
   config.redis = { url: ENV["REDIS_CLIENT_URL"] }
-end
-
-# Configure logging for Sidekiq 7+
-# Sidekiq 6 logs to STDOUT by default, redirect to log file in production/staging
-if Rails.env.production? || Rails.env.staging?
-  log_file = Rails.root.join('log', 'sidekiq.log')
-  # Ensure log directory exists
-  FileUtils.mkdir_p(File.dirname(log_file))
-  Sidekiq.logger = Logger.new(log_file)
-  Sidekiq.logger.level = Logger::WARN
-else
-  # In development, log to STDOUT (default behavior)
-  Sidekiq.logger.level = Logger::WARN
 end
