@@ -36,23 +36,15 @@ RSpec.describe BooksController, :type => :controller do
   describe "GET index" do
     it "assigns all books as @books" do
       book = create(:book)
-      # The controller uses Searchkick which requires an index
-      # We'll stub the entire search chain to avoid Searchkick errors
-      search_results = double("Searchkick::Results", 
+      search_results = double("Searchkick::Results",
         results: [book],
         total_count: 1,
         total_pages: 1,
         current_page: 1,
         limit_value: 15
       )
-      # Stub policy_scope on controller and stub search on the result
-      # We need to actually call policy_scope so Pundit's verify_policy_scoped callback passes
-      book_relation = Book.all
-      allow(book_relation).to receive(:search).and_return(search_results)
-      # Use and_call_original to actually call policy_scope but stub the search result
-      allow(controller).to receive(:policy_scope).with(Book).and_return(book_relation)
-      # Skip Pundit's verify_policy_scoped callback for this test
-      allow_any_instance_of(BooksController).to receive(:verify_policy_scoped).and_return(true)
+      allow(Book).to receive(:search).and_return(search_results)
+      allow(controller).to receive(:verify_policy_scoped).and_return(true)
       get :index
       expect(assigns(:books)).to be_present
     end

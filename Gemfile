@@ -112,7 +112,7 @@ gem 'pundit', '~> 1.0'
 gem 'acts_as_tree', '~> 2.1'
 
 # Uploaders
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 gem 'piet-binary', '~> 0.2.0'
 
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
@@ -148,7 +148,7 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'puma', '~> 5.0'
 
 # Simple, efficient background processing for Ruby.
-gem 'sidekiq', '~> 6.0'
+gem 'sidekiq', '~> 7.3', '>= 7.1.3'
 
 # Additional middleware for sidekiq.
 gem 'sidekiq-middleware', '~> 0.3'
@@ -163,7 +163,8 @@ gem 'htmlentities'
 gem 'geocoder', '~> 1.2'
 
 # Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
-gem 'sinatra', require: nil
+# Sinatra 4.x requires Rack 3 (Rails 7+). Pin to 3.x on Rails 6.1; upgrade with Rails 7.
+gem 'sinatra', '~> 3.2', require: nil
 
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'
