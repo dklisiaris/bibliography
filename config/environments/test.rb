@@ -5,12 +5,13 @@ Rails.application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = false
+  # While tests run files are not watched, reloading is not necessary.
+  config.enable_reloading = false
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+  config.eager_load = ENV["CI"].present?
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
@@ -21,9 +22,10 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
+  config.cache_store = :null_store
 
-  # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  # Raise exceptions in tests (same as former show_exceptions = false).
+  config.action_dispatch.show_exceptions = :none
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false

@@ -9,8 +9,8 @@ gem 'base64', '0.2.0'
 gem 'rails', '~> 7.1.5'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# Use SCSS for stylesheets (sass-rails 6 → sassc-rails; allows Sprockets 4.2+ / Rack 3)
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -33,6 +33,7 @@ gem 'hamlit-rails', '~> 0.2.3'
 
 # Rails 7 does not include Sprockets by default; keep the asset pipeline for now (Phase 4 migration)
 gem 'sprockets-rails', '~> 3.4'
+gem 'sprockets', '~> 4.2', '>= 4.2.2'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
 
@@ -143,8 +144,8 @@ gem 'rails-i18n', '~> 7.0'
 # A fast and very simple Ruby web server
 # gem 'thin', '~> 1.6'
 
-# A ruby web server built for concurrency
-gem 'puma', '~> 5.0'
+# A ruby web server built for concurrency (dev/test; production uses Passenger)
+gem 'puma', '~> 6.4'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 7.3', '>= 7.1.3'
@@ -161,9 +162,8 @@ gem 'htmlentities'
 # Complete geocoding solution for Ruby
 gem 'geocoder', '~> 1.2'
 
-# Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
-# Sinatra 4.x requires Rack 3 (Rails 7+). Pin to 3.x on Rails 6.1; upgrade with Rails 7.
-gem 'sinatra', '~> 3.2', require: nil
+# Sinatra DSL for Sidekiq Web UI (requires Rack 3 on Rails 7)
+gem 'sinatra', '~> 4.2', require: nil
 
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'

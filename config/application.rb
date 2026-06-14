@@ -17,8 +17,10 @@ Bundler.require(*Rails.groups)
 module Bibliography
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
-    config.autoloader = :zeitwerk
+    config.load_defaults 7.1
+
+    # New cache entry format (Rails 7.1). Clear Redis cache after deploy when this changes.
+    config.active_support.cache_format_version = 7.1
 
     # Rails 7 removed secrets.yml auto-loading; bridge until credentials migration (Phase 3.4).
     config.secret_key_base = config_for(:secrets)[:secret_key_base]
@@ -48,7 +50,13 @@ module Bibliography
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.schema_format = :sql
 
-    config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
+    config.active_record.yaml_column_permitted_classes = [
+      ActiveSupport::HashWithIndifferentAccess,
+      Symbol,
+      Time,
+      Date,
+      ActiveSupport::TimeWithZone
+    ]
 
     config.generators do |g|
       g.test_framework :rspec,
