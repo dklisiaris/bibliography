@@ -5,8 +5,8 @@ ruby '3.3.11'
 
 # Match Ruby 3.3 stdlib default gem on production (Passenger activates it before Bundler)
 gem 'base64', '0.2.0'
-# Bundle edge Rails rinstead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.1.5'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
@@ -28,8 +28,11 @@ gem 'jbuilder', '~> 2.7'
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
 
-# High Performance Haml Implementation (Rails 6.1 compatible)
+# High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.2.3'
+
+# Rails 7 does not include Sprockets by default; keep the asset pipeline for now (Phase 4 migration)
+gem 'sprockets-rails', '~> 3.4'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
 
@@ -135,7 +138,7 @@ gem 'faraday', '~> 1.10', '>= 1.10.5'
 gem 'rest-client', '~> 2.0'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
-gem 'rails-i18n', '~> 6.0.0'
+gem 'rails-i18n', '~> 7.0'
 
 # A fast and very simple Ruby web server
 # gem 'thin', '~> 1.6'
@@ -248,7 +251,7 @@ end
 gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
 
 # Easy activity tracking for models
-gem 'public_activity', '~> 1.5'
+gem 'public_activity', '~> 3.0'
 
 # Makes rendering and caching a collection of template partials easier and faster
 # gem 'multi_fetch_fragments', '~> 0.0.17'

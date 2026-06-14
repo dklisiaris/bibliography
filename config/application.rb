@@ -20,6 +20,15 @@ module Bibliography
     config.load_defaults 6.1
     config.autoloader = :zeitwerk
 
+    # Rails 7 removed secrets.yml auto-loading; bridge until credentials migration (Phase 3.4).
+    config.secret_key_base = config_for(:secrets)[:secret_key_base]
+
+    def secrets
+      @secrets ||= ActiveSupport::OrderedOptions.new.tap do |options|
+        self.class.config_for(:secrets).each { |key, value| options[key] = value }
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
