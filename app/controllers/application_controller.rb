@@ -85,6 +85,7 @@ class ApplicationController < ActionController::Base
       "[CSRF] path=#{request.path} host=#{request.host} ssl=#{request.ssl?} " \
       "legacy_cookies=#{cookie_header.scan(/#{LegacySessionCookies::LEGACY_KEY}=/).size} " \
       "v2_cookies=#{cookie_header.scan(/_bibliography_session_v2=/).size} " \
+      "garbled_cookies=#{cookie_header.scan(/\[\"_bibliography_session/).size} " \
       "session_loaded=#{session.loaded?} session_keys=#{unsigned_keys.presence || 'empty'} " \
       "session_csrf=#{session[:_csrf_token].present?} param_token=#{params[:authenticity_token].present?}"
     )
