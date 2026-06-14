@@ -12,7 +12,11 @@ module Bibliography
 
       def secrets
         @secrets = nil if reload?
-        @secrets ||= build_secrets
+        @secrets ||= build_secrets(Rails.env)
+      end
+
+      def for_environment(env)
+        build_secrets(env.to_s)
       end
 
       private
@@ -23,10 +27,10 @@ module Bibliography
         false
       end
 
-      def build_secrets
+      def build_secrets(env)
         ActiveSupport::OrderedOptions.new.tap do |options|
-          from_credentials = credential_values
-          from_secrets_yml = secrets_yml_values
+          from_credentials = credential_values(env)
+          from_secrets_yml = secrets_yml_values(env)
 
           all_keys(from_credentials, from_secrets_yml).each do |key|
             value = from_credentials[key].presence || from_secrets_yml[key]
@@ -39,8 +43,8 @@ module Bibliography
         hashes.flat_map(&:keys).uniq
       end
 
-      def credential_values
-        tree = credential_tree
+      def credential_values(env)
+        tree = credential_tree(env)
         return {} if tree.blank?
 
         {
@@ -60,26 +64,26 @@ module Bibliography
         {}
       end
 
-      def credential_tree
-        return {} unless credentials_available?
+      def credential_tree(env)
+        return {} unless credentials_available?(env)
 
-        content = encrypted_credentials.read
+        content = encrypted_credentials(env).read
         return {} if content.blank?
 
         YAML.safe_load(content, aliases: true).with_indifferent_access
       end
 
-      def encrypted_credentials
+      def encrypted_credentials(env)
         ActiveSupport::EncryptedConfiguration.new(
-          config_path: encrypted_path,
-          key_path: key_path,
+          config_path: encrypted_path(env),
+          key_path: key_path(env),
           env_key: "RAILS_MASTER_KEY",
           raise_if_missing_key: true
         )
       end
 
-      def secrets_yml_values
-        section = secrets_yml_section
+      def secrets_yml_values(env)
+        section = secrets_yml_section(env)
         return {} if section.blank?
 
         section.symbolize_keys
@@ -87,23 +91,23 @@ module Bibliography
         {}
       end
 
-      def secrets_yml_section
+      def secrets_yml_section(env)
         return {} unless secrets_yml_path.exist?
 
         raw = YAML.safe_load(ERB.new(secrets_yml_path.read).result, aliases: true)
-        raw[Rails.env] || raw[Rails.env.to_s] || {}
+        raw[env] || raw[env.to_s] || {}
       end
 
-      def credentials_available?
-        encrypted_path.exist? && key_path.exist?
+      def credentials_available?(env)
+        encrypted_path(env).exist? && key_path(env).exist?
       end
 
-      def encrypted_path
-        Rails.root.join("config/credentials/#{Rails.env}.yml.enc")
+      def encrypted_path(env)
+        Rails.root.join("config/credentials/#{env}.yml.enc")
       end
 
-      def key_path
-        Rails.root.join("config/credentials/#{Rails.env}.key")
+      def key_path(env)
+        Rails.root.join("config/credentials/#{env}.key")
       end
 
       def secrets_yml_path
