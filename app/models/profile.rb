@@ -4,11 +4,14 @@ class Profile < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   mount_uploader :cover, CoverUploader
 
-  enum gender: %i(male female other)
-  enum account_type: %i(Προσωπικός Οργανισμός)
-  enum privacy: %i(is_public is_private)
-  enum language: %i(Ελληνικά English)
-  enum email_privacy: %i(Ποτέ Σε\ φίλους\ μόνο Σε\ συνδεδεμένους\ χρήστες Σε\ όλους)
+  enum :gender, { male: 0, female: 1, other: 2 }
+  enum :account_type, { "Προσωπικός": 0, "Οργανισμός": 1 }
+  enum :privacy, { is_public: 0, is_private: 1 }
+  enum :language, { "Ελληνικά": 0, English: 1 }
+  enum :email_privacy, {
+    "Ποτέ": 0, "Σε φίλους μόνο": 1,
+    "Σε συνδεδεμένους χρήστες": 2, "Σε όλους": 3
+  }
 
   validates :username, presence: true, uniqueness: true
 

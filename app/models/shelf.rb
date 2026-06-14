@@ -7,8 +7,11 @@ class Shelf < ActiveRecord::Base
   has_many :books, through: :bookshelves
   has_many :ratings, as: :rateable
 
-  enum privacy: %i(same_as_profile is_public is_private)
-  enum default_name: %i(my_library want_to_read favourites currently_reading read_but_not_own to_read)
+  enum :privacy, { same_as_profile: 0, is_public: 1, is_private: 2 }
+  enum :default_name, {
+    my_library: 0, want_to_read: 1, favourites: 2,
+    currently_reading: 3, read_but_not_own: 4, to_read: 5
+  }
 
   scope :built_in, -> { where(built_in: true) }
   scope :user_created, -> { where(built_in: false) }

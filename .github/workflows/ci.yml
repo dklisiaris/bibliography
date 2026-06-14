@@ -40,6 +40,7 @@ jobs:
 
     env:
       RAILS_ENV: test
+      DISABLE_SPRING: 1
       DEVELOPMENT_DATABASE_USERNAME: postgres
       DEVELOPMENT_DATABASE_PASSWORD: postgres
       REDIS_SERVER_URL: redis://127.0.0.1:6379/0

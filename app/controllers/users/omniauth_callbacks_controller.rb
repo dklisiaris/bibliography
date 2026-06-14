@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       # sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-      sign_in(:user, @user)
+      sign_in(@user)
 
       if @user.sign_in_count > 1
         redirect_to root_path, notice: 'Successful login from facebook'
@@ -27,7 +27,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.persisted?
         # flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
         # sign_in_and_redirect @user, :event => :authentication
-        sign_in(:user, @user)
+        sign_in(@user)
 
         if @user.sign_in_count > 1
           redirect_to root_path, notice: 'Successful login from google'

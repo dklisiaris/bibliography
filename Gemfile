@@ -5,12 +5,12 @@ ruby '3.3.11'
 
 # Match Ruby 3.3 stdlib default gem on production (Passenger activates it before Bundler)
 gem 'base64', '0.2.0'
-# Bundle edge Rails rinstead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.1.5'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# Use SCSS for stylesheets (sass-rails 6 → sassc-rails; allows Sprockets 4.2+ / Rack 3)
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -28,8 +28,12 @@ gem 'jbuilder', '~> 2.7'
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
 
-# High Performance Haml Implementation (Rails 6.1 compatible)
+# High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.2.3'
+
+# Rails 7 does not include Sprockets by default; keep the asset pipeline for now (Phase 4 migration)
+gem 'sprockets-rails', '~> 3.4'
+gem 'sprockets', '~> 4.2', '>= 4.2.2'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
 
@@ -89,7 +93,7 @@ gem 'nokogiri', '~> 1.18'
 gem 'dotenv-rails', '~> 2.0'
 
 # Authentication
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 5.0', '>= 5.0.4'
 
 # Async devise mails
 # gem 'devise-async', '~> 1.0'
@@ -135,13 +139,13 @@ gem 'faraday', '~> 1.10', '>= 1.10.5'
 gem 'rest-client', '~> 2.0'
 
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
-gem 'rails-i18n', '~> 6.0.0'
+gem 'rails-i18n', '~> 7.0'
 
 # A fast and very simple Ruby web server
 # gem 'thin', '~> 1.6'
 
-# A ruby web server built for concurrency
-gem 'puma', '~> 5.0'
+# A ruby web server built for concurrency (dev/test; production uses Passenger)
+gem 'puma', '~> 7.2', '>= 7.2.1'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 7.3', '>= 7.1.3'
@@ -158,9 +162,8 @@ gem 'htmlentities'
 # Complete geocoding solution for Ruby
 gem 'geocoder', '~> 1.2'
 
-# Sinatra DSL for quickly creating web applications is used by sidekiq monitoring page
-# Sinatra 4.x requires Rack 3 (Rails 7+). Pin to 3.x on Rails 6.1; upgrade with Rails 7.
-gem 'sinatra', '~> 3.2', require: nil
+# Sinatra DSL for Sidekiq Web UI (requires Rack 3 on Rails 7)
+gem 'sinatra', '~> 4.2', require: nil
 
 # Book metadata extraction library
 # gem 'bookshark', '~> 1.0'
@@ -248,7 +251,7 @@ end
 gem 'hstore_accessor', '~> 1.0', '>= 1.0.3'
 
 # Easy activity tracking for models
-gem 'public_activity', '~> 1.5'
+gem 'public_activity', '~> 3.0'
 
 # Makes rendering and caching a collection of template partials easier and faster
 # gem 'multi_fetch_fragments', '~> 0.0.17'

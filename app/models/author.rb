@@ -15,7 +15,7 @@ class Author < ActiveRecord::Base
   has_many :ratings, as: :rateable
   has_many :impressions, as: :impressionable, dependent: :destroy
 
-  enum job: %i(Συγγραφέας Μεταφραστής Ερμηνευτής Εικονογράφος Φωτογράφος Επιμελητής Συνθέτης Στιχουργός Εισηγητής Διασκευαστής Ανθολόγος Φορέας Οργανισμός Υπεύθυνος\ Σειράς Υπεύθυνος\ Υποσειράς Αφηγητής Ζωγράφος Γλύπτης Καλλιτέχνης Κειμενογράφος)
+  # job role is stored on contributions.job, not authors — see Contribution
 
   # Log impressions filtered by ip
   # is_impressionable :counter_cache => true, :unique => true # Disabled - gem causing errors

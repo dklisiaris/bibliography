@@ -2,7 +2,7 @@ class Rating < ActiveRecord::Base
   belongs_to :user
   belongs_to :rateable, polymorphic: true
 
-  enum rate: %i(like dislike hide)
+  enum :rate, { like: 0, dislike: 1, hide: 2 }
 
   validates :user_id, presence: true
   validates :rateable_id, presence: true
