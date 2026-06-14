@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
 
+  after_action :expire_legacy_session_cookies, if: -> { Rails.env.production? || Rails.env.staging? }
+
+  rescue_from ActionController::InvalidAuthenticityToken, with: :log_csrf_failure
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
@@ -64,6 +67,22 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def expire_legacy_session_cookies
+    LegacySessionCookies.expire!(cookies, host: request.host)
+  end
+
+  def log_csrf_failure(exception)
+    cookie_header = request.headers["Cookie"].to_s
+    Rails.logger.error(
+      "[CSRF] path=#{request.path} host=#{request.host} " \
+      "legacy_cookies=#{cookie_header.scan(/#{LegacySessionCookies::LEGACY_KEY}=/).size} " \
+      "v2_cookies=#{cookie_header.scan(/_bibliography_session_v2=/).size} " \
+      "session_csrf=#{session[:_csrf_token].present?} " \
+      "param_token=#{params[:authenticity_token].present?}"
+    )
+    raise exception
+  end
 
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
