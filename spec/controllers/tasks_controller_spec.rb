@@ -20,12 +20,4 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe "GET #update_content" do
-    it "redirects to tasks path with disabled notice" do
-      get :update_content
-      expect(response).to redirect_to(tasks_path)
-      expect(flash[:alert]).to eq(I18n.t('tasks.content_update_disabled'))
-    end
-  end
-
 end

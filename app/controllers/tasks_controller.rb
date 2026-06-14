@@ -14,14 +14,8 @@ class TasksController < ApplicationController
     @book_of_the_day  = daily_suggestion.book
   end
 
-  def update_content
-    authorize :task, :update_content?
-    flash[:alert] = t('tasks.content_update_disabled')
-    redirect_to tasks_path
-  end
-
   def import_book_of_the_day_candidates
-    authorize :task, :update_content?
+    authorize :task, :index?
 
     ImportDailySuggestionsWorker.perform_async(params[:book_titles])
 

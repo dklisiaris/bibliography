@@ -11,8 +11,4 @@ end
 #   runner 'DailyFetchBooksJob.perform_later(500)'
 # end
 
-# every 1.day, at: '08:00 pm' do
-#   runner "BookOfTheDayPublisherWorker.perform_async"
-# end
-
 # Learn more: http://github.com/javan/whenever
