@@ -14,6 +14,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "../lib/bibliography/secrets"
+
 module Bibliography
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -22,13 +24,11 @@ module Bibliography
     # New cache entry format (Rails 7.1). Clear Redis cache after deploy when this changes.
     config.active_support.cache_format_version = 7.1
 
-    # Rails 7 removed secrets.yml auto-loading; bridge until credentials migration (Phase 3.4).
-    config.secret_key_base = config_for(:secrets)[:secret_key_base]
+    # Credentials first, secrets.yml fallback (Phase 3.4 migration).
+    config.secret_key_base = Bibliography::Secrets.secret_key_base
 
     def secrets
-      @secrets ||= ActiveSupport::OrderedOptions.new.tap do |options|
-        self.class.config_for(:secrets).each { |key, value| options[key] = value }
-      end
+      Bibliography::Secrets.secrets
     end
 
     # Settings in config/environments/* take precedence over those specified here.
