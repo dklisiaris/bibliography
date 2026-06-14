@@ -71,19 +71,13 @@ set :service_unit_user, :system
 namespace :npm do
   desc 'Install JavaScript dependencies from package-lock.json'
   task :install do
-    on roles(:web) do
+    on roles(:web) do |host|
       within release_path do
-        node = fetch(:nvm_node)
-        # Non-login SSH (Capistrano) skips .bashrc — source nvm explicitly.
-        # Legacy ~/.npmrc prefix/globalconfig (from system Node 14) breaks nvm; --delete-prefix clears it per run.
-        install_cmd = [
-          'export NVM_DIR="$HOME/.nvm"',
-          '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"',
-          "nvm use --delete-prefix v#{node} --silent",
-          'unset NPM_CONFIG_PREFIX',
-          'npm ci --omit=dev'
-        ].join(' && ')
-        execute :bash, '-c', install_cmd
+        # Capistrano SSH is non-login — PATH won't include nvm; prepend it explicitly.
+        nvm_bin = "/home/#{host.user}/.nvm/versions/node/v#{fetch(:nvm_node)}/bin"
+        with path: "#{nvm_bin}:$PATH" do
+          execute :npm, 'ci', '--omit=dev'
+        end
       end
     end
   end
