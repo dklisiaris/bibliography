@@ -145,7 +145,7 @@ gem 'rails-i18n', '~> 7.0'
 # gem 'thin', '~> 1.6'
 
 # A ruby web server built for concurrency (dev/test; production uses Passenger)
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 7.2', '>= 7.2.1'
 
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 7.3', '>= 7.1.3'

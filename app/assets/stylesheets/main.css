@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&subset=greek);
-
 body {
     font-family: 'Open Sans', sans-serif;
     color: #1c2b36;
     background-color: #ebf1f2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 #login-container {
     position: absolute;
@@ -1247,7 +1247,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Open Sans', serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300
 }
 .h1 .small,

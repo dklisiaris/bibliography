@@ -29,6 +29,11 @@
     <meta name="msapplication-wide310x150logo" content="icons/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="icons/mstile-310x310.png" />
 
+    <%# Open Sans must load via <link>, not @import inside the Sprockets bundle (mid-file @import is ignored) %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
