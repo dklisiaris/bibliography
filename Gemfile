@@ -93,7 +93,7 @@ gem 'nokogiri', '~> 1.18'
 gem 'dotenv-rails', '~> 2.0'
 
 # Authentication
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 5.0', '>= 5.0.4'
 
 # Async devise mails
 # gem 'devise-async', '~> 1.0'
