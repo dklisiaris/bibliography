@@ -1,6 +1,6 @@
 <% pages = {fa('home') => root_url, t('account.edit') => nil} %>
 
-<%= cell(:navigation).call(:content_header, title: t('account.label'), breadcrumbs: pages) %>
+<%= content_header( title: t('account.label'), breadcrumbs: pages) %>
 
 <div class="row">
 

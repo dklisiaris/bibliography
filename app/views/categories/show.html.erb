@@ -9,7 +9,7 @@ else
 end
 %>
 
-<%= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form',
+<%= content_header( content: render(partial: 'shared/search_form',
     locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: pages) %>
 
 <div class="row">
@@ -45,8 +45,8 @@ end
       <div class="block-title">
         <div class="block-options pull-right">
           <% if policy(@category).update? %>
-          <%= cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_category_path(:parent_id => @category.id), tooltip: t('categories.new_subcategory')) %>
-          <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success') %>
+          <%= nav_btn_link_to( name: fa('plus'), url: new_category_path(:parent_id => @category.id), tooltip: t('categories.new_subcategory')) %>
+          <%= nav_btn_link_to( name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success') %>
           <% end %>
           <%= link_to fa('times'), @category, class: "btn btn-effect-ripple btn-danger",
             method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('categories.delete') } if policy(@category).destroy? %>

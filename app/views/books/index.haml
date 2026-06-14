@@ -3,7 +3,7 @@
 
 - pages = {fa('home') => root_url, t('books.label') => nil}
 
-= cell(:navigation).call(:content_header,                                            |
+= content_header(                                            |
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 
@@ -22,7 +22,7 @@
     .block.full
       .block-title
         .block-options.pull-right
-          = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
+          = nav_btn_link_to( name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
         %h1
           = detone t('books.label')
           %small= " (#{@books.response["hits"]["total"]})"

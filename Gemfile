@@ -31,7 +31,6 @@ gem 'thor', '~> 1.5'
 gem 'hamlit-rails', '~> 0.2.3'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
-gem 'cells', '4.0.0.beta3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -3,7 +3,7 @@
 
 - pages = {fa('home') => root_url, t('my_collections') => nil}
 
-= cell(:navigation).call(:content_header, title: t('my_collections'), breadcrumbs: pages)
+= content_header( title: t('my_collections'), breadcrumbs: pages)
 
 .row
   .col-xs-12
@@ -17,7 +17,7 @@
 -#.block
   .block-title
     .block-options.pull-right
-      = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
+      = nav_btn_link_to( name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
     %h2= detone t('my_collections')
   .table-responsive
     %table#general-table.table.table-vcenter.table-striped.table-hover

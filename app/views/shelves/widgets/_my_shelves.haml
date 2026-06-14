@@ -2,7 +2,7 @@
 .block.full
   .block-title
     .block-options.pull-right
-      = cell(:navigation).call(:btn_link_to, name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
+      = nav_btn_link_to( name: fa('plus'), url: new_shelf_path, tooltip: t('shelves.new'))
     %h2
       = fa(icon)
       %strong= detone title

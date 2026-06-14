@@ -3,7 +3,7 @@
 
 - pages = {fa('home') => root_url, t('books.label') => books_path, t('books.latest') => nil}
 
-= cell(:navigation).call(:content_header,                                            |
+= content_header(                                            |
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 

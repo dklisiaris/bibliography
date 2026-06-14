@@ -1,7 +1,7 @@
 - tags = { title: t('series.label') }
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 
-= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', locals: {action: series_index_path, placeholder: t('series.search')}), breadcrumbs: {fa('home') => root_url, t('series.label') => nil})
+= content_header( content: render(partial: 'shared/search_form', locals: {action: series_index_path, placeholder: t('series.search')}), breadcrumbs: {fa('home') => root_url, t('series.label') => nil})
 
 .row
   .col-sm-8

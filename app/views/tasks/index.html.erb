@@ -1,6 +1,6 @@
 <% pages = {fa('home') => root_url, t('site_settings') => "#", t('tasks.label') => nil} %>
 
-<%= cell(:navigation).call(:content_header, title: t('tasks.label'), breadcrumbs: pages) %>
+<%= content_header( title: t('tasks.label'), breadcrumbs: pages) %>
 
 <div class="row">
   <%= render partial: "resource_counter",
