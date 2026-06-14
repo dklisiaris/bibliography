@@ -729,7 +729,7 @@ DEPENDENCIES
   whenever (~> 0.9.7)
 
 RUBY VERSION
-   ruby 3.1.7p261
+   ruby 3.3.11p205
 
 BUNDLED WITH
    2.6.9
