@@ -71,16 +71,19 @@ set :service_unit_user, :system
 namespace :npm do
   desc 'Install JavaScript dependencies from package-lock.json'
   task :install do
-    on roles(:web) do |host|
+    on roles(:web) do
       within release_path do
-        # Capistrano SSH sessions are non-login shells — /usr/bin/env npm hits system Node 14.
-        # package-lock.json lockfileVersion 3 requires npm 7+ (Node 18 via nvm).
-        nvm_npm = "/home/#{host.user}/.nvm/versions/node/v#{fetch(:nvm_node)}/bin/npm"
-        unless test("[ -x #{nvm_npm} ]")
-          error "npm not found at #{nvm_npm}. On the server run: nvm install #{fetch(:nvm_node)}"
-          exit 1
-        end
-        execute nvm_npm, 'ci', '--omit=dev'
+        node = fetch(:nvm_node)
+        # Non-login SSH (Capistrano) skips .bashrc — source nvm explicitly.
+        # Legacy ~/.npmrc prefix/globalconfig (from system Node 14) breaks nvm; --delete-prefix clears it per run.
+        install_cmd = [
+          'export NVM_DIR="$HOME/.nvm"',
+          '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"',
+          "nvm use --delete-prefix v#{node} --silent",
+          'unset NPM_CONFIG_PREFIX',
+          'npm ci --omit=dev'
+        ].join(' && ')
+        execute :bash, '-c', install_cmd
       end
     end
   end
