@@ -87,6 +87,5 @@ jobs:
 
       - name: Bundle audit
         run: |
-          gem install bundler-audit --no-document
-          bundle audit update
-          bundle audit
+          bundle exec bundle-audit update
+          bundle exec bundle-audit check
