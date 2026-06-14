@@ -54,6 +54,15 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
       - name: Prepare database
         run: bundle exec rails db:prepare
 

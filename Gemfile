@@ -167,8 +167,7 @@ gem 'sinatra', '~> 3.2', require: nil
 # # A recommendation engine using Likes and Dislikes
 # gem 'recommendable', '~> 2.2'
 
-# Bundler-like DSL and rake tasks for Bower on Rails
-gem 'bower-rails', '~> 0.11'
+# Bundler-like DSL and rake tasks for Bower on Rails — removed Phase 1 (npm/yarn)
 
 # A Gem to add Follow functionality for models
 gem 'acts_as_follower', '~> 0.2'
@@ -228,7 +227,6 @@ group :development do
   gem 'capistrano-rails-console'
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-faster-assets'
-  gem 'capistrano-bower', '~> 1.1'
 
   # SSH key support for net-ssh (required for ED25519 keys)
   gem 'ed25519', '>= 1.2', '< 2.0'

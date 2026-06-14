@@ -94,7 +94,6 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    bower-rails (0.12.0)
     builder (3.3.0)
     bullet (8.1.0)
       activesupport (>= 3.0.0)
@@ -105,8 +104,6 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bower (1.1.0)
-      capistrano (~> 3.0)
     capistrano-bundler (2.2.0)
       capistrano (~> 3.1)
     capistrano-db-tasks (0.6)
@@ -649,11 +646,9 @@ DEPENDENCIES
   better_errors (~> 2.7)
   bootsnap (>= 1.4.4)
   bootstrap-sass (~> 3.4)
-  bower-rails (~> 0.11)
   bullet (~> 8.1)
   byebug (~> 12.0)
   capistrano
-  capistrano-bower (~> 1.1)
   capistrano-bundler
   capistrano-db-tasks
   capistrano-faster-assets
