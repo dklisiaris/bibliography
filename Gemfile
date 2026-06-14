@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.3.11'
 
-
+# Match Ruby 3.3 stdlib default gem on production (Passenger activates it before Bundler)
+gem 'base64', '0.2.0'
 # Bundle edge Rails rinstead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use mysql as the database for Active Record
