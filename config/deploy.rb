@@ -56,7 +56,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rvm_ruby_version, '3.1.7'
+set :rvm_ruby_version, '3.3.11'
 
 # Must match .tool-versions and nvm install on the server (package-lock.json is lockfile v3 → npm 7+)
 set :nvm_node, '18.20.0'
