@@ -54,7 +54,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 12.0', platforms: [:mri, :windows]
 
-  gem 'better_errors', '~> 2.7'
   gem 'bundler-audit', '~> 0.9', require: false
   # gem 'binding_of_caller', '~> 1.0'
 
@@ -281,8 +280,11 @@ gem 'redis-namespace', '~> 1.11'
 # Clean ruby syntax for writing and deploying cron jobs.
 gem 'whenever', '~> 0.9.7'
 
-# Exception and uptime monitoring
-gem 'honeybadger', '~> 4.7'
+# Loaded only when ENABLE_BETTER_ERRORS=1 (see config/initializers/production_diagnostics.rb)
+gem 'better_errors', '~> 2.10', require: false
+
+# Exception and uptime monitoring (5.28+ for Rails 7 backtrace context)
+gem 'honeybadger', '~> 5.28'
 
 # SaaS based Application protection and monitoring platform
 # gem 'sqreen', '~> 1.20'

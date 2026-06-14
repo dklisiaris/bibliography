@@ -77,6 +77,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  require "better_errors"
+  config.middleware.insert_after ActionDispatch::DebugExceptions, BetterErrors::Middleware
+
   # Alert when N+1 queries appear
   config.after_initialize do
     Bullet.enable = true

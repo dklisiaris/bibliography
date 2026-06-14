@@ -45,9 +45,12 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :debug
+  # Default :warn keeps logs readable (was :debug — produced multi‑GB logs).
+  # Override temporarily: RAILS_LOG_LEVEL=debug
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "warn").to_sym
+
+  # Always log rescued exceptions (including 500s) at error severity with backtrace.
+  config.action_dispatch.debug_exception_log_level = :error
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]

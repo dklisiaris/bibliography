@@ -267,7 +267,9 @@ GEM
       railties (>= 4.0.1)
     hashie (5.1.0)
       logger
-    honeybadger (4.12.2)
+    honeybadger (5.30.0)
+      logger
+      ostruct
     hstore_accessor (1.1.1)
       activerecord (>= 4.0.0)
     htmlentities (4.4.2)
@@ -530,7 +532,8 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.4.4)
-    rouge (4.7.0)
+    rouge (5.0.0)
+      strscan (~> 3.1)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -639,6 +642,7 @@ GEM
     ssrf_filter (1.5.0)
     stopwords-filter (0.4.1)
     stringio (3.2.0)
+    strscan (3.1.8)
     temple (0.10.4)
     thor (1.5.0)
     tilt (2.7.0)
@@ -697,7 +701,7 @@ DEPENDENCIES
   autoprefixer-rails (~> 6.0)
   base64 (= 0.2.0)
   bcrypt_pbkdf (>= 1.0, < 2.0)
-  better_errors (~> 2.7)
+  better_errors (~> 2.10)
   bootsnap (>= 1.4.4)
   bootstrap-sass (~> 3.4)
   bullet (~> 8.1)
@@ -729,7 +733,7 @@ DEPENDENCIES
   geocoder (~> 1.2)
   greeklish (~> 0.0.1)
   hamlit-rails (~> 0.2.3)
-  honeybadger (~> 4.7)
+  honeybadger (~> 5.28)
   hstore_accessor (~> 1.0, >= 1.0.3)
   htmlentities
   interactor (~> 3.0)
