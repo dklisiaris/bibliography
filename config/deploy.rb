@@ -65,19 +65,17 @@ set :sidekiq_roles, :app
 set :sidekiq_service_unit_name, 'bibliography-sidekiq'
 set :service_unit_user, :system
 
-namespace :bower do
-  desc 'Install bower'
+namespace :npm do
+  desc 'Install JavaScript dependencies from package-lock.json'
   task :install do
     on roles(:web) do
       within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'bower:install CI=true'
-        end
+        execute :npm, 'ci', '--omit=dev'
       end
     end
   end
 end
-before 'deploy:compile_assets', 'bower:install'
+before 'deploy:compile_assets', 'npm:install'
 
 
 namespace :deploy do
