@@ -51,6 +51,7 @@ group :development, :test do
   gem 'byebug', '~> 12.0', platforms: [:mri, :windows]
 
   gem 'better_errors', '~> 2.7'
+  gem 'bundler-audit', '~> 0.9', require: false
   # gem 'binding_of_caller', '~> 1.0'
 
   # gem 'pry-byebug', '~> 3.11'
@@ -114,7 +115,7 @@ gem 'piet-binary', '~> 0.2.0'
 gem 'mini_magick', '~> 4.9'
 
 # Json support
-gem 'json', '~> 2.3'
+gem 'json', '~> 2.19', '>= 2.19.2'
 
 # Pagination
 gem 'kaminari', '~> 1.2'
@@ -126,7 +127,7 @@ gem 'elasticsearch', '~> 7.0'
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
 gem 'typhoeus', '~> 1.3'
 # Faraday 2.x is incompatible with typhoeus adapter; pin Faraday to 1.x
-gem 'faraday', '~> 1.10'
+gem 'faraday', '~> 1.10', '>= 1.10.5'
 # FFI gem needs to be updated for Ruby 2.7.7 compatibility
 # gem 'ffi', '~> 1.15.0'
 
