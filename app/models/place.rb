@@ -7,10 +7,6 @@ class Place < ActiveRecord::Base
   
   after_validation :geocode, :if => :address_changed?
 
-  # def geocode_in_background  
-  #   GeocodeWorker.perform_async(self.id)
-  # end
-
 end
 
 # == Schema Information

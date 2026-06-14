@@ -18,9 +18,6 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 # gem 'mini_racer', platforms: :ruby
 
-# modernizr.js lib
-gem 'modernizr-rails', '~> 2.7'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.1'
 
@@ -48,8 +45,6 @@ gem 'cells', '4.0.0.beta3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml', '~> 3.4'
-
-gem "base64", "0.1.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
