@@ -53,6 +53,11 @@ Rails.application.configure do
   # nginx terminates SSL in front of Passenger; strict Origin matching can reject valid form POSTs.
   config.action_controller.forgery_protection_origin_check = false
 
+  # Rails 7.1 load_defaults enables a new encrypted-cookie metadata format. If session
+  # cookies cannot round-trip (CSRF fails with v2 cookie present but empty session),
+  # keep this false until all clients have fresh cookies.
+  config.active_support.use_message_serializer_for_metadata = false
+
   # Default :warn keeps logs readable (was :debug — produced multi‑GB logs).
   # Override temporarily: RAILS_LOG_LEVEL=debug
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "warn").to_sym

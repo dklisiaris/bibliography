@@ -74,12 +74,19 @@ class ApplicationController < ActionController::Base
 
   def log_csrf_failure(exception)
     cookie_header = request.headers["Cookie"].to_s
+    unsigned = request.env["action_dispatch.request.unsigned_session_cookie"]
+    unsigned_keys =
+      case unsigned
+      when Hash then unsigned.except("session_id").keys.join(",")
+      else unsigned.inspect
+      end
+
     Rails.logger.error(
-      "[CSRF] path=#{request.path} host=#{request.host} " \
+      "[CSRF] path=#{request.path} host=#{request.host} ssl=#{request.ssl?} " \
       "legacy_cookies=#{cookie_header.scan(/#{LegacySessionCookies::LEGACY_KEY}=/).size} " \
       "v2_cookies=#{cookie_header.scan(/_bibliography_session_v2=/).size} " \
-      "session_csrf=#{session[:_csrf_token].present?} " \
-      "param_token=#{params[:authenticity_token].present?}"
+      "session_loaded=#{session.loaded?} session_keys=#{unsigned_keys.presence || 'empty'} " \
+      "session_csrf=#{session[:_csrf_token].present?} param_token=#{params[:authenticity_token].present?}"
     )
     raise exception
   end
