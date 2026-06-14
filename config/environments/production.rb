@@ -45,6 +45,9 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
+  # nginx terminates SSL in front of Passenger; strict Origin matching can reject valid form POSTs.
+  config.action_controller.forgery_protection_origin_check = false
+
   # Default :warn keeps logs readable (was :debug — produced multi‑GB logs).
   # Override temporarily: RAILS_LOG_LEVEL=debug
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "warn").to_sym
