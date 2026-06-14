@@ -1,76 +1,18 @@
 # frozen_string_literal: true
 
 module Biblionet
+  # BiblioNet API is decommissioned — kept as attribute-mapping reference for Phase 10.
+  #
+  # Original orchestration (API calls removed):
+  #   get_title → validate Title/ISBN → get_contributors → get_companies → get_subjects
+  #   → create missing authors/publishers/categories → init_book → assign categories/contributions
+  #
   # :nodoc
   class FetchBook
     include Interactor
 
     def call
-      @biblionet_book_id = context.biblionet_book_id
-
-      book_hash = request_get_title
-      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not exist") if book_hash.is_a?(String)
-
-      book_hash = book_hash&.flatten&.first
-      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have title") if book_hash['Title'].blank?
-      context.fail!(error: "BID: #{@biblionet_book_id} - Book does not have isbn") if book_hash['ISBN'].blank?
-
-      b_publisher_id = book_hash['PublisherID'].presence
-
-      contributor_hashes = request_get_contributors.flatten
-      contributor_ids = contributor_hashes.map { |s| s['ContributorID'] }.compact
-      contributor_ids.each do |id|
-        next if Author.where(biblionet_id: id).exists?
-
-        create_author(id)
-      end
-
-      company_hashes = request_get_companies.flatten
-      company_ids = company_hashes.map { |s| s['CompanyID'] }.compact
-      company_ids.each do |id|
-        next if Publisher.where(biblionet_id: id).exists?
-
-        create_publisher(id)
-      end
-
-      subject_hashes = request_get_subjects.flatten
-      subject_ids = subject_hashes.map { |s| s['SubjectsID'] }
-      subject_ids.each do |id|
-        next if id.nil? || Category.where(biblionet_id: id).exists?
-
-        create_category(id)
-      end
-
-      genre_id =
-        if book_hash['CategoryID'].present? && Genre.where(biblionet_id: book_hash['CategoryID']).exists?
-          Genre.find_by(biblionet_id: book_hash['CategoryID']).id
-        elsif book_hash['CategoryID'].present?
-          Genre.create(name: book_hash['Category'], biblionet_id: book_hash['CategoryID']).id
-        end
-
-      publisher_id = Publisher.find_by(biblionet_id: b_publisher_id)&.id
-      context.fail!(error: "BID: #{@biblionet_book_id} - Book has no publisher") if publisher_id.blank?
-
-      new_book = init_book(book_hash, publisher_id, genre_id)
-
-      categories = Category.where(biblionet_id: subject_ids)
-      new_book.categories = categories
-
-      new_book.contributions.each(&:destroy) if new_book.contributions.any?
-      contributor_hashes.each do |h|
-        next if h['ContributorID'].blank?
-
-        author_id = Author.find_by(biblionet_id: h['ContributorID'])&.id
-        context.fail!(error: "BID: #{@biblionet_book_id} - Author could not be created") if author_id.blank?
-
-        new_book.contributions.build(job: Author.jobs[h['ContributorType']], author_id: author_id)
-      end
-      new_book.collective_work = true if new_book.contributions.none?
-
-      new_book.save!
-    rescue StandardError
-      redis = Redis.new(url: ENV['REDIS_SERVER_URL'])
-      redis.sadd('failed_biblionet_ids', @biblionet_book_id)
+      context.fail!(error: 'Biblionet API disabled until Phase 10 book metadata pipeline')
     end
 
     private
@@ -115,7 +57,9 @@ module Biblionet
     end
 
     def create_publisher(company_id)
-      company_hash = request_get_company(company_id).flatten.first
+      company_hash = nil # BiblioNet get_company response removed
+      return unless company_hash
+
       Publisher.create(
         name: company_hash['Title'],
         alternative_name: company_hash['AlternativeTitle'],
@@ -128,7 +72,9 @@ module Biblionet
     end
 
     def create_category(subject_id)
-      subject_hash = request_get_subject(subject_id).flatten.first
+      subject_hash = nil # BiblioNet get_subject response removed
+      return unless subject_hash
+
       parent_id =
         if subject_hash['SubjectParent'].nil?
           nil
@@ -147,7 +93,9 @@ module Biblionet
     end
 
     def create_author(person_id)
-      contributor_hash = request_get_person(person_id).flatten.first
+      contributor_hash = nil # BiblioNet get_person response removed
+      return unless contributor_hash
+
       extra_info = "#{contributor_hash['BornYear']}-#{contributor_hash['DeathYear']}"
       image = "https://biblionet.gr#{contributor_hash['Photo']}"
       Author.create(
@@ -161,46 +109,6 @@ module Biblionet
         biography: contributor_hash['Biography'],
         biblionet_id: contributor_hash['PersonsID']
       )
-    end
-
-    def request_get_title
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_title')
-    end
-
-    def request_get_contributors
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_contributors')
-    end
-
-    def request_get_companies
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_title_companies')
-    end
-
-    def request_get_subjects
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_title_subject')
-    end
-
-    def request_get_person(person_id)
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_person', person: person_id)
-    end
-
-    def request_get_company(company_id)
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_company', company: company_id)
-    end
-
-    def request_get_subject(subject_id)
-      make_request('https://biblionet.diadrasis.net/wp-json/biblionetwebservice/get_subject', subject: subject_id)
-    end
-
-    def make_request(url, payload = { title: @biblionet_book_id })
-      res = RestClient::Request.execute(
-        method: :post,
-        url: url,
-        payload: {
-          username: 'testuser',
-          password: 'testpsw'
-        }.merge(payload)
-      )
-      JSON.parse(res.body)
     end
   end
 end
