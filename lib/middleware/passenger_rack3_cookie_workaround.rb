@@ -2,7 +2,7 @@
 
 # Rack 3 returns response header values as Arrays (e.g. multiple Set-Cookie lines).
 # Passenger releases before 6.0.19 stringify those arrays incorrectly, producing
-# cookie names like ["_bibliography_session_v2 instead of _bibliography_session_v2.
+# cookie names like ["_bibliography_session instead of _bibliography_session.
 # That breaks session round-trip and causes InvalidAuthenticityToken on login.
 #
 # https://github.com/phusion/passenger/issues/2503
