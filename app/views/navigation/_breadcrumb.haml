@@ -1,0 +1,10 @@
+%ul.breadcrumb.breadcrumb-top
+  - unless breadcrumbs.nil? || breadcrumbs.empty?
+    - current_page = breadcrumbs.keys.last
+    - breadcrumbs.each do |key, value|
+      - next if key == current_page
+      - if value.present?
+        %li= link_to ellipsize(key), value
+      - else
+        %li= ellipsize(key)
+    %li= ellipsize(current_page)

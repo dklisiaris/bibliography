@@ -3,7 +3,7 @@
 
 <% pages = {fa('home') => root_url, t('publishers.label') => publishers_path, @publisher.name => nil} %>
 
-<%= cell(:navigation).call(:content_header,
+<%= content_header(
   content: render(partial: 'shared/search_form',
     locals: {action: publishers_path, placeholder: t('publishers.search')}), breadcrumbs: pages) %>
 
@@ -13,7 +13,7 @@
         <div class="block-title">
           <div class="block-options pull-right">
             <% if policy(@publisher).update? %>
-            <%= cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_publisher_path(@publisher), tooltip: t('publishers.edit'), style: 'success') %>
+            <%= nav_btn_link_to( name: fa('pencil'), url: edit_publisher_path(@publisher), tooltip: t('publishers.edit'), style: 'success') %>
             <% end %>
             <%= link_to fa('times'), @publisher, class: "btn btn-effect-ripple btn-danger",
             method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('publishers.delete') } if policy(@publisher).destroy? and @publisher.books.count==0 %>

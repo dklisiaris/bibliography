@@ -1,7 +1,7 @@
 - tags = { title: @book.title, image: image_url(@book.cover), description: @book.short_description(185) }
 - set_meta_tags tags.merge({og: tags.merge({image:{_: image_url(@book.cover_og), width:'215', height: '320'}, description: @book.short_description(300), type: 'books.book', books: {isbn: @book.isbn}})}).merge(twitter: tags)
 - pages = {fa('home') => root_url, t('books.label') => books_url, @book.title => nil}
-= cell(:navigation).call(:content_header, content: render(partial: 'shared/search_form', |
+= content_header( content: render(partial: 'shared/search_form', |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages)     |
 .row
   .col-sm-10.col-sm-offset-1
@@ -9,7 +9,7 @@
       .block-title
         .block-options.pull-right
           - if policy(@book).update?
-            = cell(:navigation).call(:btn_link_to, name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success')
+            = nav_btn_link_to( name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success')
         %h1= detone(@book.title)
       .row
         .col-sm-3
