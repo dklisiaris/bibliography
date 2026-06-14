@@ -58,6 +58,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :rvm_ruby_version, '3.1.7'
 
+# Must match .tool-versions and nvm install on the server (package-lock.json is lockfile v3 → npm 7+)
+set :nvm_node, '18.20.0'
+
 # Capistrano-sidekiq 3.0.0 configuration for Sidekiq 7+
 set :sidekiq_default_hooks, true
 set :sidekiq_roles, :app
@@ -68,9 +71,16 @@ set :service_unit_user, :system
 namespace :npm do
   desc 'Install JavaScript dependencies from package-lock.json'
   task :install do
-    on roles(:web) do
+    on roles(:web) do |host|
       within release_path do
-        execute :npm, 'ci', '--omit=dev'
+        # Capistrano SSH sessions are non-login shells — /usr/bin/env npm hits system Node 14.
+        # package-lock.json lockfileVersion 3 requires npm 7+ (Node 18 via nvm).
+        nvm_npm = "/home/#{host.user}/.nvm/versions/node/v#{fetch(:nvm_node)}/bin/npm"
+        unless test("[ -x #{nvm_npm} ]")
+          error "npm not found at #{nvm_npm}. On the server run: nvm install #{fetch(:nvm_node)}"
+          exit 1
+        end
+        execute nvm_npm, 'ci', '--omit=dev'
       end
     end
   end

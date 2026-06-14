@@ -1,6 +1,9 @@
 {
   "name": "bibliography",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "dropzone": "4.3.0",
     "masonry-layout": "4.2.2",
