@@ -15,7 +15,6 @@
 //= require bootstrap-sprockets
 //= require jquery.readyselector
 //= require typeahead.js/dist/typeahead.bundle.min
-//= require readmore-js/readmore.min
 //= require trix
 //= require dropzone/dist/min/dropzone.min
 //= require masonry-layout/dist/masonry.pkgd.min

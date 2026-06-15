@@ -1,7 +1,9 @@
 import { application } from "./application"
 import FlashController from "./flash_controller"
+import ReadMoreController from "./read_more_controller"
 
 application.register("flash", FlashController)
+application.register("read-more", ReadMoreController)
 
 import { showToast } from "../toast"
 

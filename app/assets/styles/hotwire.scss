@@ -16,3 +16,17 @@
   margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+.read-more-toggle {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.read-more-toggle--compact {
+  color: #777;
+  font-size: 12px;
+}
+
+.read-more-content + .read-more-toggle {
+  margin-bottom: 12px;
+}

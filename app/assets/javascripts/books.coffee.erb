@@ -2,12 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$('.books.show').ready ->
-  readmore($('.description'))
-
 $('.books.index').ready ->
-  moreFilters($('.filter-content'))
-
   $('.filters-trigger').click ->
     $('#filter-sidebar').toggleClass('open')
 

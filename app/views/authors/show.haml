@@ -45,7 +45,14 @@
             %br/
             %small= @author.extra_info
           %hr/
-          %article.description
+          %article.description{
+            data: {
+              controller: "read-more",
+              read_more_collapsed_height_value: 80,
+              read_more_more_label_value: t("read_more"),
+              read_more_less_label_value: t("read_less")
+            }
+          }
             = @author.biography.html_safe if @author.biography.present?
           - if @awards.count > 0
             %h4.sub-header
