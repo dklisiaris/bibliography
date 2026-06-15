@@ -1,3 +1,18 @@
 // Hotwire stylesheet entry (sass → app/assets/builds/hotwire.css).
 // Source lives outside app/assets/stylesheets to avoid Sprockets name collision.
-// Bootstrap 5 and migrated component styles will land here later.
+
+.flash-toast-container {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 10000;
+  width: 320px;
+  max-width: calc(100vw - 30px);
+  pointer-events: none;
+}
+
+.flash-toast {
+  pointer-events: auto;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
