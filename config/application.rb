@@ -19,9 +19,9 @@ require_relative "../lib/bibliography/secrets"
 module Bibliography
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
-    # New cache entry format (Rails 7.1). Clear Redis cache after deploy when this changes.
+    # Rails 7.1 cache format (unchanged in 7.2). Clear Redis cache after deploy when this changes.
     config.active_support.cache_format_version = 7.1
 
     # Credentials first, secrets.yml fallback (Phase 3.4 migration).
