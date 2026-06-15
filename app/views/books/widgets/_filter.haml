@@ -2,7 +2,16 @@
   - if books.aggs[filter_name]["buckets"].count > 0
     %ul.filter-group
       %h4.filter-title= title
-      .filter-content
+      .filter-content{
+        data: {
+          controller: "read-more",
+          read_more_collapsed_height_value: 285,
+          read_more_speed_value: 300,
+          read_more_more_label_value: t("more"),
+          read_more_less_label_value: t("less"),
+          read_more_compact_value: true
+        }
+      }
         - books.aggs[filter_name]["buckets"].each do |agg|
           = link_to books_path({q: params['q']}.merge(@filters).merge(filter_name.to_sym => agg["key"]).reject{|k,v| agg["key"].to_s == @filters[filter_name.to_sym] && k == filter_name.to_sym }) do
             %li

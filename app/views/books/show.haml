@@ -47,7 +47,14 @@
           %h4= @book_presenter.writers
           %h4= @book_presenter.contributors
           %hr/
-          %article.description
+          %article.description{
+            data: {
+              controller: "read-more",
+              read_more_collapsed_height_value: 80,
+              read_more_more_label_value: t("read_more"),
+              read_more_less_label_value: t("read_less")
+            }
+          }
             = @book.description.html_safe if @book.description.present?
           %br/
           .block.full
