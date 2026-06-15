@@ -10,7 +10,6 @@
     "dropzone": "4.3.0",
     "esbuild": "^0.25.0",
     "masonry-layout": "4.2.2",
-    "noty": "2.4.1",
     "readmore-js": "2.2.1",
     "sass": "1.77.8",
     "typeahead.js": "0.11.1"

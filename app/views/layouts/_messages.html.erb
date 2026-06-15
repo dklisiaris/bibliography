@@ -1,6 +1,10 @@
-<%# Rails flash messages for noty library %>
+<%# Rails flash messages — shown as top-right toasts via Stimulus %>
 <% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
-    <script>notify(<%= "\'#{msg}\'".html_safe %>,<%= name.to_s == 'notice' ? "\'success\'".html_safe : "\'error\'".html_safe %>);</script>  
-  <% end %>
+  <% next unless msg.is_a?(String) %>
+  <%= tag.div hidden: true,
+        data: {
+          controller: "flash",
+          flash_message_value: msg,
+          flash_type_value: (name.to_s == "notice" ? "success" : "error")
+        } %>
 <% end %>
