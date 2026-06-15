@@ -64,6 +64,9 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm ci
 
+      - name: Build Hotwire assets
+        run: npm run build
+
       - name: Prepare database
         run: bundle exec rails db:prepare
 

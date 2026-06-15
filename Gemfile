@@ -31,9 +31,15 @@ gem 'thor', '~> 1.5'
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.2.3'
 
-# Rails 7 does not include Sprockets by default; keep the asset pipeline for now (Phase 4 migration)
+# Rails 7 does not include Sprockets by default; keep the asset pipeline until frontend migration is complete
 gem 'sprockets-rails', '~> 3.4'
 gem 'sprockets', '~> 4.2', '>= 4.2.2'
+
+# Hotwire foundation (coexists with Sprockets legacy assets)
+gem 'turbo-rails', '~> 2.0'
+gem 'stimulus-rails', '~> 1.3'
+gem 'jsbundling-rails', '~> 1.3'
+gem 'cssbundling-rails', '~> 1.4'
 
 # Cells allow you to encapsulate parts of your page into separate MVC components
 
