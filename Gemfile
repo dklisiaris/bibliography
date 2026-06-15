@@ -11,8 +11,8 @@ gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 # gem 'mysql2'
 # Use SCSS for stylesheets (sass-rails 6 → sassc-rails; allows Sprockets 4.2+ / Rack 3)
 gem 'sass-rails', '~> 6.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# Minify Sprockets JS in production (Terser supports modern ES in hotwire.js/Turbo)
+gem 'terser', '~> 1.2'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
