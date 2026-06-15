@@ -80,7 +80,7 @@ namespace :npm do
         # Capistrano SSH is non-login — PATH won't include nvm; prepend it explicitly.
         nvm_bin = "/home/#{host.user}/.nvm/versions/node/v#{fetch(:nvm_node)}/bin"
         with path: "#{nvm_bin}:$PATH" do
-          execute :npm, 'ci', '--omit=dev'
+          execute :npm, 'ci', '--omit=dev' # esbuild/sass are runtime deps for assets:precompile
         end
       end
     end

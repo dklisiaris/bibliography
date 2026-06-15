@@ -5,10 +5,20 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo": "^8.0.12",
     "dropzone": "4.3.0",
+    "esbuild": "^0.25.0",
     "masonry-layout": "4.2.2",
     "noty": "2.4.1",
     "readmore-js": "2.2.1",
+    "sass": "^1.85.0",
     "typeahead.js": "0.11.1"
+  },
+  "scripts": {
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "esbuild app/javascript/hotwire.js --bundle --sourcemap --format=esm --outfile=app/assets/builds/hotwire.js --public-path=/assets",
+    "build:css": "sass ./app/assets/styles/hotwire.scss:./app/assets/builds/hotwire.css --no-source-map --load-path=node_modules",
+    "build:css:watch": "sass ./app/assets/styles/hotwire.scss:./app/assets/builds/hotwire.css --no-source-map --load-path=node_modules --watch"
   }
 }
