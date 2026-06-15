@@ -6,7 +6,7 @@ ruby '3.3.11'
 # Match Ruby 3.3 stdlib default gem on production (Passenger activates it before Bundler)
 gem 'base64', '0.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.5'
+gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets (sass-rails 6 → sassc-rails; allows Sprockets 4.2+ / Rack 3)
