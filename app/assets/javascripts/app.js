@@ -398,5 +398,3 @@ var App = function() {
     };
 }();
 
-/* Initialize App when page loads */
-$(function(){ App.init(); });

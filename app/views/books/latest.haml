@@ -14,7 +14,7 @@
       #load-more-awarded-books-btn-container
       .row
         .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-          #load-more-awarded-books= link_to t('load_more'), latest_books_path(page: 2, only_books: true), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+          #load-more-awarded-books= link_to t('load_more'), latest_books_path(page: 2, only_books: true, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
       %hr
   .col-sm-4
     = render partial: 'authors/widgets/side', |

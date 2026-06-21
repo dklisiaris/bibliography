@@ -1,0 +1,46 @@
+<% case params[:search_only] %>
+<% when "books" %>
+<%= turbo_stream.prepend "load-more-books-btn-container" do %>
+  <%= render partial: "books/book", collection: @books, as: :book %>
+<% end %>
+
+<%= turbo_stream.update "load-more-books" do %>
+  <%= turbo_load_more_link(@books) %>
+<% end %>
+
+<% when "authors" %>
+<%= turbo_stream.prepend "load-more-authors-btn-container" do %>
+  <%= render partial: "authors/author", collection: @authors, as: :author, locals: { liked_ids: @liked_author_ids } %>
+<% end %>
+
+<%= turbo_stream.update "load-more-authors" do %>
+  <%= turbo_load_more_link(@authors) %>
+<% end %>
+
+<% when "publishers" %>
+<%= turbo_stream.prepend "load-more-publishers-btn-container" do %>
+  <%= render partial: "publishers/publisher", collection: @publishers, as: :publisher %>
+<% end %>
+
+<%= turbo_stream.update "load-more-publishers" do %>
+  <%= turbo_load_more_link(@publishers) %>
+<% end %>
+
+<% when "categories" %>
+<%= turbo_stream.prepend "load-more-categories-btn-container" do %>
+  <%= render partial: "categories/category_with_books", collection: @categories, as: :category %>
+<% end %>
+
+<%= turbo_stream.update "load-more-categories" do %>
+  <%= turbo_load_more_link(@categories) %>
+<% end %>
+
+<% when "series" %>
+<%= turbo_stream.prepend "load-more-series-btn-container" do %>
+  <%= render partial: "series/series_with_books", collection: @series, as: :series %>
+<% end %>
+
+<%= turbo_stream.update "load-more-series" do %>
+  <%= turbo_load_more_link(@series) %>
+<% end %>
+<% end %>

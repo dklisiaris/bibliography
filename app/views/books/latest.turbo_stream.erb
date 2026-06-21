@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend "load-more-awarded-books-btn-container" do %>
+  <%= render partial: "books/latest_book", collection: @books, as: :book %>
+<% end %>
+
+<%= turbo_stream.update "load-more-awarded-books" do %>
+  <%= turbo_load_more_link(@books) %>
+<% end %>

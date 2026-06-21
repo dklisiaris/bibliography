@@ -1,0 +1,9 @@
+<% if @activities.present? %>
+<%= turbo_stream.append "activities-container" do %>
+  <%= render partial: "books/widgets/activity", collection: @activities, as: :activity %>
+<% end %>
+
+<%= turbo_stream.update "load-more-activities-btn" do %>
+  <%= turbo_load_more_link(@activities) %>
+<% end %>
+<% end %>
