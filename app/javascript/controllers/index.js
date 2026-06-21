@@ -5,19 +5,19 @@ import ReadMoreController from "./read_more_controller"
 import FollowController from "./follow_controller"
 import RecommendationController from "./recommendation_controller"
 import FavouriteController from "./favourite_controller"
+import CollectionsModalController from "./collections_modal_controller"
 
 application.register("flash", FlashController)
 application.register("read-more", ReadMoreController)
 application.register("follow", FollowController)
 application.register("recommendation", RecommendationController)
 application.register("favourite", FavouriteController)
+application.register("collections-modal", CollectionsModalController)
 
-import { showToast } from "../toast"
 import { submitRecommendation } from "../recommendation"
 import { submitFavourite } from "../favourite"
 
 // Legacy jQuery callers until migrated to Stimulus.
-window.notify = showToast
 window.like = (bookId) =>
   submitRecommendation(bookId, "like", window.recommendationLabels).catch(() => {})
 window.dislike = (bookId) =>

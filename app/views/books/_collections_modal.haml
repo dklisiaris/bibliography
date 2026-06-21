@@ -1,4 +1,13 @@
-#collectionsModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+#collectionsModal.modal.fade{:role => "dialog", :tabindex => "-1",
+  data: {
+    controller: "collections-modal",
+    collections_modal_success_message_value: t('notifications.changes_saved_successfully'),
+    collections_modal_error_message_value: t('notifications.changed_saved_failed'),
+    collections_modal_add_label_value: t('books.add'),
+    collections_modal_added_label_value: t('books.added'),
+    collections_modal_add_tooltip_value: t('shelves.add_to_collections'),
+    collections_modal_edit_tooltip_value: t('shelves.edit_collections')
+  }}
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
@@ -6,8 +15,8 @@
           %span=fa('times')
         %h4.modal-title=t('shelves.edit_collections')
       .modal-body
-        %i.fa.fa-asterisk.fa-2x.fa-spin.text-primary{:style => "display:none;"}
-        .row.collections-checkboxes
+        %i.fa.fa-asterisk.fa-2x.fa-spin.text-primary{style: "display:none;", data: {collections_modal_target: "spinner"}}
+        .row.collections-checkboxes{data: {collections_modal_target: "checkboxes"}}
           - if user_signed_in?
             - @shelves.each do |shelf|
               .col-xs-12.col-sm-6.text-left
@@ -17,4 +26,4 @@
                 = shelf.screen_name
       .modal-footer
         %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
-        %button#saveCollections.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "button"}= t('save')
+        %button#saveCollections.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "button", data: {action: "click->collections-modal#save"}}= t('save')
