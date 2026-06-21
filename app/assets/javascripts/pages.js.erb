@@ -1,6 +1,12 @@
 $('.pages.welcome_guide').ready(function() {
   FormsWizard.init();
 
+  window.recommendationLabels = <%= {
+    recommend: I18n.t("books.recommend"),
+    notRecommend: I18n.t("books.not_recommend"),
+    removeRecommendation: I18n.t("books.remove_recommendation")
+  }.to_json.html_safe %>;
+
   $('.featured-category').click(function(){
     $( this ).toggleClass( "selected" );
   })

@@ -1,3 +1,11 @@
+<% if user_signed_in? %>
+<div data-controller="recommendation"
+     data-recommendation-book-id-value="<%= book.id %>"
+     data-recommendation-recommend-label-value="<%= t('books.recommend') %>"
+     data-recommendation-not-recommend-label-value="<%= t('books.not_recommend') %>"
+     data-recommendation-remove-recommendation-label-value="<%= t('books.remove_recommendation') %>">
+<% end %>
+
 <% if defined? show_progressbar.present? and show_progressbar %>
 <div class="progress progress-mini">
   <div class=<%= "\"progress-bar progress-bar-success recommendations-bar-#{book.id}\"".html_safe %>
@@ -9,23 +17,28 @@
 <% end %>
 
 <% if user_signed_in? %>
-<%= button_tag :onclick => "javascript:like(#{book.id})",
-"data-toggle" => "tooltip",
-"data-placement" => "top",
-type: "button",
-title: (@liked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.recommend'),
-class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(@liked_book_ids.include?(book.id)) ? 'btn-success' : 'btn-default'}" do %>
+<%= button_tag type: "button",
+  data: {
+    toggle: "tooltip",
+    placement: "top",
+    action: "click->recommendation#like"
+  },
+  title: (@liked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.recommend'),
+  class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(@liked_book_ids.include?(book.id)) ? 'btn-success' : 'btn-default'}" do %>
   <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
-<%= button_tag :onclick => "javascript:dislike(#{book.id})",
-"data-toggle" => "tooltip",
-"data-placement" => "top",
-type: "button",
-title: (@disliked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.not_recommend'),
-class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(@disliked_book_ids.include?(book.id)) ? 'btn-danger' : 'btn-default'}" do %>
+<%= button_tag type: "button",
+  data: {
+    toggle: "tooltip",
+    placement: "top",
+    action: "click->recommendation#dislike"
+  },
+  title: (@disliked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.not_recommend'),
+  class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(@disliked_book_ids.include?(book.id)) ? 'btn-danger' : 'btn-default'}" do %>
   <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
 <% end %>
+</div>
 <% else %>
 
 <%= link_to new_user_session_path,
