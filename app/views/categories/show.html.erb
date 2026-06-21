@@ -17,12 +17,29 @@ end
       <div class="block full">
         <div class="block-title">
         <div class="block-options pull-right">
-          <% if user_signed_in? && current_user.likes?(@category) %>
-          <%= button_tag fa('star'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-success btn-favourite-category-#{@category.id}",
-            data: { "toggle" => "tooltip", "original-title" => t('categories.favoured') }%>
+          <% if user_signed_in? %>
+          <% category_favourited = current_user.likes?(@category) %>
+          <%= button_tag fa(category_favourited ? 'star' : 'star-o'),
+            type: "button",
+            class: "btn btn-effect-ripple #{category_favourited ? 'btn-success' : 'btn-primary'} btn-favourite-category-#{@category.id}",
+            data: {
+              controller: "favourite",
+              action: "click->favourite#toggle",
+              toggle: "tooltip",
+              original_title: category_favourited ? t('categories.favoured') : t('categories.add_to_favourites'),
+              favourite_url_value: favourite_category_path(@category),
+              favourite_record_id_value: @category.id,
+              favourite_kind_value: "category",
+              favourite_inactive_class_value: "btn-primary",
+              favourite_add_label_value: t('categories.add_to_favourites'),
+              favourite_favoured_label_value: t('categories.favoured')
+            } %>
           <% else %>
-          <%= button_tag fa('star-o'), :onclick => "javascript:favouriteCategory(#{@category.id})", class: "btn btn-effect-ripple btn-primary btn-favourite-category-#{@category.id}",
-            data: { "toggle" => "tooltip", "original-title" => t('categories.add_to_favourites') }%>
+          <%= button_tag fa('star-o'),
+            type: "button",
+            onclick: "javascript:favouriteCategory(#{@category.id})",
+            class: "btn btn-effect-ripple btn-primary btn-favourite-category-#{@category.id}",
+            data: { "toggle" => "tooltip", "original-title" => t('categories.add_to_favourites') } %>
           <% end %>
         </div>
           <h1><%= detone @category.name %></h1>

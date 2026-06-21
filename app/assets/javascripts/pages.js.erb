@@ -7,6 +7,11 @@ $('.pages.welcome_guide').ready(function() {
     removeRecommendation: I18n.t("books.remove_recommendation")
   }.to_json.html_safe %>;
 
+  window.favouriteCategoryLabels = <%= {
+    addToFavourites: I18n.t("categories.add_to_favourites"),
+    favoured: I18n.t("categories.favoured")
+  }.to_json.html_safe %>;
+
   $('.featured-category').click(function(){
     $( this ).toggleClass( "selected" );
   })

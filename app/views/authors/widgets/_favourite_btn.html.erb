@@ -1,20 +1,18 @@
-<% if user_signed_in? && liked %>
-<%= button_tag fa('star'),
-  :onclick => "javascript:favouriteAuthor(#{author.id})",
-  class: "btn btn-xs btn-effect-ripple btn-success btn-favourite-author-#{author.id}",
+<% if user_signed_in? %>
+<%= button_tag fa(liked ? 'star' : 'star-o'),
+  type: "button",
+  class: "btn btn-xs btn-effect-ripple #{liked ? 'btn-success' : 'btn-default'} btn-favourite-author-#{author.id}",
   data: {
-    "toggle" => "tooltip",
-    "original-title" => t('authors.favoured')
-  }
-%>
-
-<% elsif user_signed_in? %>
-<%= button_tag fa('star-o'),
-  :onclick => "javascript:favouriteAuthor(#{author.id})",
-  class: "btn btn-xs btn-effect-ripple btn-default btn-favourite-author-#{author.id}",
-  data: {
-    "toggle" => "tooltip",
-    "original-title" => t('authors.add_to_favourites')
+    controller: "favourite",
+    action: "click->favourite#toggle",
+    toggle: "tooltip",
+    original_title: liked ? t('authors.favoured') : t('authors.add_to_favourites'),
+    favourite_url_value: favourite_author_path(author),
+    favourite_record_id_value: author.id,
+    favourite_kind_value: "author",
+    favourite_inactive_class_value: "btn-default",
+    favourite_add_label_value: t('authors.add_to_favourites'),
+    favourite_favoured_label_value: t('authors.favoured')
   }
 %>
 <% else %>
