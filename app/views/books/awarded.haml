@@ -14,7 +14,7 @@
       #load-more-awarded-books-btn-container
       .row
         .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-          #load-more-awarded-books= link_to t('load_more'), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+          #load-more-awarded-books= link_to t('load_more'), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
       %hr
   .col-sm-4
     .block
@@ -23,7 +23,7 @@
       #load-more-awards-container.group-list
         = render partial: 'prizes/widgets/prize_group_item', :collection => @prizes, :as => :prize
       #load-more-awards-btn
-        = link_to t('load_more'), awarded_books_path(load_awards: true, page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+        = link_to t('load_more'), awarded_books_path(load_awards: true, page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
 
 
 - if user_signed_in?

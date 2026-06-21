@@ -1,0 +1,19 @@
+<% if @books.present? %>
+<%= turbo_stream.prepend "load-more-awarded-books-btn-container" do %>
+  <%= render partial: "books/awarded_book", collection: @books, as: :book %>
+<% end %>
+
+<%= turbo_stream.update "load-more-awarded-books" do %>
+  <%= turbo_load_more_link(@books) %>
+<% end %>
+<% end %>
+
+<% if @prizes.present? %>
+<%= turbo_stream.append "load-more-awards-container" do %>
+  <%= render partial: "prizes/widgets/prize_group_item", collection: @prizes, as: :prize %>
+<% end %>
+
+<%= turbo_stream.update "load-more-awards-btn" do %>
+  <%= turbo_load_more_link(@prizes) %>
+<% end %>
+<% end %>

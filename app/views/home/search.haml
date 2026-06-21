@@ -36,7 +36,7 @@
                   #load-more-books-btn-container
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-books= link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                      #load-more-books= link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
                   %hr
             - elsif result.klass.to_s == "Author" && @search_hits["Author"] > 0
               #search-tab-authors.tab-pane{:class => ("active" if active_klass == "Author")}
@@ -45,7 +45,7 @@
                   #load-more-authors-btn-container
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-authors= link_to t('load_more'), search_path(q: params[:q], search_only: 'authors', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                      #load-more-authors= link_to t('load_more'), search_path(q: params[:q], search_only: 'authors', page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
                   %hr
             - elsif result.klass.to_s == "Publisher" && @search_hits["Publisher"] > 0
               #search-tab-publishers.tab-pane{:class => ("active" if active_klass == "Publisher")}
@@ -54,7 +54,7 @@
                   #load-more-publishers-btn-container
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-publishers= link_to t('load_more'), search_path(q: params[:q], search_only: 'publishers', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                      #load-more-publishers= link_to t('load_more'), search_path(q: params[:q], search_only: 'publishers', page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
                   %hr
             - elsif result.klass.to_s == "Category" && @search_hits["Category"] > 0
               #search-tab-categories.tab-pane{:class => ("active" if active_klass == "Category")}
@@ -63,7 +63,7 @@
                   #load-more-categories-btn-container
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-categories= link_to t('load_more'), search_path(q: params[:q], search_only: 'categories', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                      #load-more-categories= link_to t('load_more'), search_path(q: params[:q], search_only: 'categories', page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
                   %hr
             - elsif result.klass.to_s == "Series" && @search_hits["Series"] > 0
               #search-tab-series.tab-pane{:class => ("active" if active_klass == "Series")}
@@ -72,7 +72,7 @@
                   #load-more-series-btn-container
                   .row
                     .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-                      #load-more-series= link_to t('load_more'), search_path(q: params[:q], search_only: 'series', page: 2), remote: true, class: 'btn btn-block btn-primary', data: { loading_text: "<i class='fa fa-circle-o-notch fa-spin'></i>"}
+                      #load-more-series= link_to t('load_more'), search_path(q: params[:q], search_only: 'series', page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
                   %hr
 - else
   .row

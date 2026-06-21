@@ -56,6 +56,7 @@ class HomeController < ApplicationController
         @books = Book.search(keyphrase, **single_search_options)
       when 'authors'
         @authors = Author.search(keyphrase, **single_search_options)
+        @liked_author_ids = current_user.liked_author_ids if current_user.present?
       when 'publishers'
         @publishers = Publisher.search(keyphrase, **single_search_options)
       when 'categories'
