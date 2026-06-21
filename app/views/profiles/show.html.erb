@@ -19,16 +19,24 @@
             <em class="text-dark-bg"> Total Books in library: <%= @profile.user.books.distinct.count %></em>
           </h4>
           <% if user_signed_in? && @profile.user != current_user  %>
-            <%= button_tag :onclick => "javascript:follow(#{@profile.id})",
-              type: "button",
-              class: "btn btn-xs btn-follow btn-follow-#{@profile.id} btn-effect-ripple #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}" do %>
-                <% if current_user.following?(@profile.user) %>
-                <i class="fa fa-users"></i>
-                <strong><span><%= " #{t 'users.following'}" %></span></strong>
-                <% else %>
-                <i class="fa fa-user-plus"></i>
-                <strong><span><%= " #{t 'users.follow'}" %></span></strong>
-                <% end %>
+            <%= button_tag type: "button",
+              class: "btn btn-xs btn-follow btn-effect-ripple #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}",
+              data: {
+                controller: "follow",
+                action: "click->follow#toggle mouseenter->follow#previewUnfollow mouseleave->follow#resetPreview",
+                follow_url_value: "/library/#{@profile.id}/follow",
+                follow_following_value: current_user.following?(@profile.user),
+                follow_follow_label_value: t("users.follow"),
+                follow_following_label_value: t("users.following"),
+                follow_unfollow_label_value: t("users.unfollow")
+              } do %>
+              <% if current_user.following?(@profile.user) %>
+                <i class="fa fa-users" data-follow-target="icon"></i>
+                <strong><span data-follow-target="label"><%= " #{t 'users.following'}" %></span></strong>
+              <% else %>
+                <i class="fa fa-user-plus" data-follow-target="icon"></i>
+                <strong><span data-follow-target="label"><%= " #{t 'users.follow'}" %></span></strong>
+              <% end %>
             <% end %>
           <% elsif user_signed_in? && @profile.user == current_user %>
             <%= button_tag type: "button", "data-toggle"=>"modal", "data-target"=>"#coverModal", class: 'btn btn-default btn-xs btn-cover' do %>
