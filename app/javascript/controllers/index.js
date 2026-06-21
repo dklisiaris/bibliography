@@ -6,6 +6,7 @@ import FollowController from "./follow_controller"
 import RecommendationController from "./recommendation_controller"
 import FavouriteController from "./favourite_controller"
 import CollectionsModalController from "./collections_modal_controller"
+import AutocompleteController from "./autocomplete_controller"
 
 application.register("flash", FlashController)
 application.register("read-more", ReadMoreController)
@@ -13,6 +14,7 @@ application.register("follow", FollowController)
 application.register("recommendation", RecommendationController)
 application.register("favourite", FavouriteController)
 application.register("collections-modal", CollectionsModalController)
+application.register("autocomplete", AutocompleteController)
 
 import { submitRecommendation } from "../recommendation"
 import { submitFavourite } from "../favourite"

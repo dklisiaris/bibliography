@@ -4,8 +4,8 @@
       %span.input-group-btn
         = link_to fa('close'), {controller: 'home', action: 'index'}, class: "btn btn-lg btn-default"
 
-    %span#remote.multisearch
-      = text_field_tag :q, params[:q], class: 'typeahead multisearch-field form-control input-lg', :placeholder => t("write_search_terms")
+    %span#remote.multisearch{data: {controller: "autocomplete", autocomplete_url_value: "/search?autocomplete=1&q=%QUERY", autocomplete_variant_value: "multisearch", autocomplete_nothing_found_value: t("nothing_found"), autocomplete_publisher_label_value: t("publishers.label_singular"), autocomplete_category_label_value: t("categories.label_singular"), autocomplete_series_label_value: t("series.label_singular")}}
+      = text_field_tag :q, params[:q], class: 'typeahead multisearch-field form-control input-lg', placeholder: t("write_search_terms"), autocomplete: "off", data: {autocomplete_target: "input"}
 
     %span.input-group-btn
       = button_tag(type: "submit", name: nil, class: "btn btn-lg btn-effect-ripple btn-primary") do
