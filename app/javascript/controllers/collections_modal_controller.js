@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
+import { hideBs3Modal, showBs3Modal } from "../bs3_modal"
 import {
   applyCollectionCheckboxes,
   checkedCollectionIds,
   collectionDiff,
-  hideCollectionsModal,
   loadBookCollections,
   notifyCollectionsError,
   notifyCollectionsSaved,
@@ -26,27 +26,27 @@ export default class extends Controller {
   connect() {
     this.wasChecked = []
     this.bookId = null
-    this.onShow = this.onShow.bind(this)
-
-    if (window.jQuery) {
-      window.jQuery(this.element).on("show.bs.modal", this.onShow)
-    }
+    this.handleDocumentClick = this.handleDocumentClick.bind(this)
+    document.addEventListener("click", this.handleDocumentClick)
   }
 
   disconnect() {
-    if (window.jQuery) {
-      window.jQuery(this.element).off("show.bs.modal", this.onShow)
-    }
+    document.removeEventListener("click", this.handleDocumentClick)
   }
 
-  onShow(event) {
-    const trigger = event.relatedTarget
+  handleDocumentClick(event) {
+    const trigger = event.target.closest(".collections-btn[data-book-id]")
     if (!trigger) return
 
-    const bookId = parseInt(trigger.dataset.bookId, 10)
+    event.preventDefault()
+    this.openForBook(parseInt(trigger.dataset.bookId, 10))
+  }
+
+  openForBook(bookId) {
     if (Number.isNaN(bookId)) return
 
     this.bookId = bookId
+    showBs3Modal(this.element)
     this.showLoading()
 
     loadBookCollections(bookId)
@@ -57,8 +57,13 @@ export default class extends Controller {
       .catch(() => {
         this.showCheckboxes()
         notifyCollectionsError(this.errorMessageValue)
-        hideCollectionsModal(this.element)
+        this.close()
       })
+  }
+
+  close(event) {
+    event?.preventDefault()
+    hideBs3Modal(this.element)
   }
 
   save(event) {
@@ -79,11 +84,11 @@ export default class extends Controller {
       .then(() => {
         updateCollectionsButton(this.bookId, isChecked.length > 0, labels)
         notifyCollectionsSaved(this.successMessageValue)
-        hideCollectionsModal(this.element)
+        this.close()
       })
       .catch(() => {
         notifyCollectionsError(this.errorMessageValue)
-        hideCollectionsModal(this.element)
+        this.close()
       })
   }
 

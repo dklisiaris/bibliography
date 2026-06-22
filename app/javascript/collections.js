@@ -1,3 +1,5 @@
+import { updateTooltip } from "./tooltip"
+import { hideBs3Modal } from "./bs3_modal"
 import { showToast } from "./toast"
 
 function csrfToken() {
@@ -28,11 +30,7 @@ export function updateCollectionsButton(bookId, hasCollections, labels) {
 
   if (tooltipWrapper) {
     const title = hasCollections ? labels.editTooltip : labels.addTooltip
-    tooltipWrapper.setAttribute("title", title)
-
-    if (window.jQuery?.fn?.tooltip) {
-      window.jQuery(tooltipWrapper).tooltip("fixTitle")
-    }
+    updateTooltip(tooltipWrapper, title)
   }
 }
 
@@ -106,9 +104,7 @@ export function collectionDiff(wasChecked, isChecked) {
 }
 
 export function hideCollectionsModal(modalElement) {
-  if (window.jQuery?.fn?.modal) {
-    window.jQuery(modalElement).modal("hide")
-  }
+  hideBs3Modal(modalElement)
 }
 
 export function notifyCollectionsSaved(message) {

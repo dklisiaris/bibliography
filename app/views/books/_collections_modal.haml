@@ -11,7 +11,7 @@
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
-        %button.close{"data-dismiss" => "modal", :type => "button"}
+        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->collections-modal#close"}}
           %span=fa('times')
         %h4.modal-title=t('shelves.edit_collections')
       .modal-body
@@ -25,5 +25,5 @@
                   %span
                 = shelf.screen_name
       .modal-footer
-        %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
+        %button.btn.btn-sm.btn-danger{type: "button", data: {action: "click->collections-modal#close"}}= t('cancel')
         %button#saveCollections.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "button", data: {action: "click->collections-modal#save"}}= t('save')

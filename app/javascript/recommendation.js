@@ -1,3 +1,5 @@
+import { updateTooltip } from "./tooltip"
+
 function csrfToken() {
   return document.querySelector('meta[name="csrf-token"]')?.content
 }
@@ -10,18 +12,6 @@ export function registerRecommendationLabels(bookId, labels) {
 
 function labelsFor(bookId) {
   return labelsByBookId.get(String(bookId))
-}
-
-function updateTooltip(button, title, showTooltip) {
-  button.setAttribute("title", title)
-  button.setAttribute("data-original-title", title)
-
-  if (!showTooltip || button.closest(".review-btns")) return
-
-  if (window.jQuery?.fn?.tooltip) {
-    window.jQuery(button).tooltip("fixTitle")
-    window.jQuery(button).tooltip("show")
-  }
 }
 
 function updateCount(button, count) {
@@ -50,8 +40,7 @@ function applyLikeState(bookId, likes, dislikes, liked) {
     updateCount(button, likes)
     updateTooltip(
       button,
-      liked ? labels.removeRecommendation : labels.recommend,
-      true
+      liked ? labels.removeRecommendation : labels.recommend
     )
   })
 
@@ -59,7 +48,7 @@ function applyLikeState(bookId, likes, dislikes, liked) {
     button.classList.remove("btn-danger")
     button.classList.add("btn-default")
     updateCount(button, dislikes)
-    updateTooltip(button, labels.notRecommend, false)
+    updateTooltip(button, labels.notRecommend)
   })
 
   updateProgressBar(bookId, likes, dislikes)
@@ -75,8 +64,7 @@ function applyDislikeState(bookId, likes, dislikes, disliked) {
     updateCount(button, dislikes)
     updateTooltip(
       button,
-      disliked ? labels.removeRecommendation : labels.notRecommend,
-      true
+      disliked ? labels.removeRecommendation : labels.notRecommend
     )
   })
 
@@ -84,7 +72,7 @@ function applyDislikeState(bookId, likes, dislikes, disliked) {
     button.classList.remove("btn-success")
     button.classList.add("btn-default")
     updateCount(button, likes)
-    updateTooltip(button, labels.recommend, false)
+    updateTooltip(button, labels.recommend)
   })
 
   updateProgressBar(bookId, likes, dislikes)
