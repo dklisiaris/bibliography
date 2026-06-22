@@ -1,3 +1,5 @@
+import { updateTooltip } from "./tooltip"
+
 function csrfToken() {
   return document.querySelector('meta[name="csrf-token"]')?.content
 }
@@ -10,17 +12,6 @@ export function registerFavouriteLabels(kind, recordId, labels) {
 
 function labelsFor(kind, recordId) {
   return labelsByKey.get(`${kind}-${recordId}`)
-}
-
-function updateTooltip(button, title) {
-  button.setAttribute("title", title)
-  button.setAttribute("data-original-title", title)
-
-  if (window.jQuery?.fn?.tooltip) {
-    window.jQuery(button).tooltip("hide")
-    window.jQuery(button).tooltip("fixTitle")
-    window.jQuery(button).tooltip("show")
-  }
 }
 
 function setStarIcon(button, favourited) {

@@ -7,9 +7,9 @@
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 
-.row
+.row{data: {controller: "filter-sidebar"}}
   .col-sm-4.col-sm-push-8.sliding-sidebar-cont
-    .sliding-sidebar{id: "filter-sidebar"}
+    .sliding-sidebar#filter-sidebar{data: {filter_sidebar_target: "panel"}}
       = render partial: 'books/widgets/filter', locals: {title: t('authors.label_singular'), filter_name: "author", books: @books}
       = render partial: 'books/widgets/filter', locals: {title: t('publishers.label_singular'), filter_name: "publisher", books: @books}
       = render partial: 'books/widgets/filter', locals: {title: t('categories.label_singular'), filter_name: "category", books: @books}
@@ -32,7 +32,7 @@
             .col-xs-10
               = render "books/widgets/pagination" if defined? @books.total_pages
             .col-xs-2.visible-xs
-              = button_tag nil, class: 'btn btn-sm btn-primary pull-right filters-trigger' do
+              = button_tag nil, class: 'btn btn-sm btn-primary pull-right filters-trigger', data: {action: "click->filter-sidebar#toggle"} do
                 %i.fa.fa-sliders
                 %span= " #{t('books.filters.label')}"
           %hr/
