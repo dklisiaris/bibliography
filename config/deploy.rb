@@ -85,8 +85,21 @@ namespace :npm do
       end
     end
   end
+
+  desc 'Build Hotwire JS/CSS before Sprockets precompile'
+  task :build do
+    on roles(:web) do |host|
+      within release_path do
+        nvm_bin = "/home/#{host.user}/.nvm/versions/node/v#{fetch(:nvm_node)}/bin"
+        with path: "#{nvm_bin}:$PATH" do
+          execute :npm, 'run', 'build'
+        end
+      end
+    end
+  end
 end
 before 'deploy:compile_assets', 'npm:install'
+before 'deploy:compile_assets', 'npm:build'
 
 
 namespace :deploy do
