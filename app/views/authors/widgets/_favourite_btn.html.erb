@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <%= button_tag fa(liked ? 'star' : 'star-o'),
   type: "button",
-  class: "btn btn-xs btn-effect-ripple #{liked ? 'btn-success' : 'btn-default'} btn-favourite-author-#{author.id}",
+  class: "btn btn-xs #{liked ? 'btn-success' : 'btn-outline-secondary'} btn-favourite-author-#{author.id}",
   data: {
     controller: "favourite",
     action: "click->favourite#toggle",
@@ -10,14 +10,14 @@
     favourite_url_value: favourite_author_path(author),
     favourite_record_id_value: author.id,
     favourite_kind_value: "author",
-    favourite_inactive_class_value: "btn-default",
+    favourite_inactive_class_value: "btn-outline-secondary",
     favourite_add_label_value: t('authors.add_to_favourites'),
     favourite_favoured_label_value: t('authors.favoured')
   }
 %>
 <% else %>
 <%= link_to fa('star-o'), new_user_session_path,
-  class: "btn btn-xs btn-effect-ripple btn-default btn-favourite-author-#{author.id}",
+  class: "btn btn-xs btn-outline-secondary btn-favourite-author-#{author.id}",
   data: {
     "toggle" => "tooltip", "original-title" => t('authors.add_to_favourites')
   }

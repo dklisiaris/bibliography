@@ -1,14 +1,14 @@
 %div{:class => "collections-btn-#{book.id}"}
   - if user_signed_in? and @owned_book_ids.include?(book.id)
     %span{class: "tooltip-wrapper", title: t('shelves.edit_collections')}
-      = button_tag(type: "button", class: "collections-btn btn btn-effect-ripple btn-xs btn-success", "data-book-id" => "#{book.id}") do
+      = button_tag(type: "button", class: "collections-btn btn btn-xs btn-success", "data-book-id" => "#{book.id}") do
         %i.fa.fa-check{aria: {hidden: true}}
         - if defined?(full_size) && full_size
           %span.collections-btn__label.hidden-xs= t("books.added")
 
   - elsif user_signed_in?
     %span{class: "tooltip-wrapper", title: t('shelves.add_to_collections')}
-      = button_tag(type: "button", class: "collections-btn btn btn-effect-ripple btn-xs btn-primary", "data-book-id" => "#{book.id}") do
+      = button_tag(type: "button", class: "collections-btn btn btn-xs btn-primary", "data-book-id" => "#{book.id}") do
         %i.fa.fa-plus{aria: {hidden: true}}
         - if defined?(full_size) && full_size
           %span.collections-btn__label.hidden-xs= t("books.add")
@@ -18,7 +18,7 @@
       "data-toggle" => "tooltip",                          |
       "data-placement" => "left",                          |
       title: t('shelves.add_to_collections'),              |
-      class: "collections-btn btn btn-effect-ripple btn-xs btn-primary" do |
+      class: "collections-btn btn btn-xs btn-primary" do |
       %i.fa.fa-plus{aria: {hidden: true}}
       - if defined?(full_size) && full_size
         %span.collections-btn__label.hidden-xs= t("books.add")

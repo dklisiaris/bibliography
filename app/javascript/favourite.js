@@ -27,7 +27,7 @@ function applyFavouriteState(kind, recordId, favourited, inactiveClass) {
   const selector = `.btn-favourite-${kind}-${recordId}`
 
   document.querySelectorAll(selector).forEach((button) => {
-    button.classList.remove("btn-success", "btn-default", "btn-primary")
+    button.classList.remove("btn-success", "btn-outline-secondary", "btn-primary")
     button.classList.add(favourited ? "btn-success" : inactiveClass)
     setStarIcon(button, favourited)
 

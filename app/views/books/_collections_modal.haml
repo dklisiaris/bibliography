@@ -19,11 +19,10 @@
         .row.collections-checkboxes{data: {collections_modal_target: "checkboxes"}}
           - if user_signed_in?
             - @shelves.each do |shelf|
-              .col-xs-12.col-sm-6.text-left
-                %label.csscheckbox.csscheckbox-primary
-                  %input{:name => "collection-#{shelf.id}", :id => "collection-#{shelf.id}", :type => "checkbox"}
-                  %span
-                = shelf.screen_name
+              .col-12.col-sm-6
+                .form-check.collections-modal__check
+                  %input.form-check-input{type: "checkbox", name: "collection-#{shelf.id}", id: "collection-#{shelf.id}"}
+                  %label.form-check-label{for: "collection-#{shelf.id}"}= shelf.screen_name
       .modal-footer
         %button.btn.btn-sm.btn-danger{type: "button", data: {action: "click->collections-modal#close"}}= t('cancel')
-        %button#saveCollections.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "button", data: {action: "click->collections-modal#save"}}= t('save')
+        %button#saveCollections.btn.btn-sm.btn-primary{type: "button", data: {action: "click->collections-modal#save"}}= t('save')

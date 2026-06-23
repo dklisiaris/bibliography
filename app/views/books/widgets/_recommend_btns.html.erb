@@ -24,7 +24,7 @@
     action: "click->recommendation#like"
   },
   title: (@liked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.recommend'),
-  class: "btn btn-xs btn-like btn-like-#{book.id} btn-effect-ripple #{(@liked_book_ids.include?(book.id)) ? 'btn-success' : 'btn-default'}" do %>
+  class: "btn btn-xs btn-like btn-like-#{book.id} #{(@liked_book_ids.include?(book.id)) ? 'btn-success' : 'btn-outline-secondary'}" do %>
   <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
@@ -35,7 +35,7 @@
     action: "click->recommendation#dislike"
   },
   title: (@disliked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.not_recommend'),
-  class: "btn btn-xs btn-dislike btn-dislike-#{book.id} btn-effect-ripple #{(@disliked_book_ids.include?(book.id)) ? 'btn-danger' : 'btn-default'}" do %>
+  class: "btn btn-xs btn-dislike btn-dislike-#{book.id} #{(@disliked_book_ids.include?(book.id)) ? 'btn-danger' : 'btn-outline-secondary'}" do %>
   <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
 <% end %>
 </div>
@@ -45,7 +45,7 @@
 "data-toggle" => "tooltip",
 "data-placement" => "top",
 title: t('books.recommend'),
-class: "btn btn-xs btn-like btn-effect-ripple btn-default" do %>
+class: "btn btn-xs btn-like btn-outline-secondary" do %>
     <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
@@ -53,7 +53,7 @@ class: "btn btn-xs btn-like btn-effect-ripple btn-default" do %>
 "data-toggle" => "tooltip",
 "data-placement" => "top",
 title: t('books.not_recommend'),
-class: "btn btn-xs btn-dislike btn-effect-ripple btn-default" do %>
+class: "btn btn-xs btn-dislike btn-outline-secondary" do %>
     <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
 <% end %>
 

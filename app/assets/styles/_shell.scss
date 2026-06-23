@@ -1,5 +1,13 @@
 // App shell — BS5 navbar + desktop sidebar + mobile offcanvas (replaces ProUI #page-container layout).
 
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #1c2b36;
+  background-color: #ebf1f2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .app-shell {
   --app-shell-header-height: 50px;
   --app-shell-sidebar-width: 220px;

@@ -15,8 +15,8 @@
 
       .prize-list-item__actions
         - if policy(prize).update?
-          = link_to fa('pencil'), edit_prize_path(prize), class: 'btn btn-effect-ripple btn-xs btn-success', title: t('edit', default: 'Edit')
+          = link_to fa('pencil'), edit_prize_path(prize), class: 'btn btn-xs btn-success', title: t('edit', default: 'Edit')
         - if policy(prize).destroy?
-          = link_to fa('times'), prize, class: 'btn btn-effect-ripple btn-xs btn-danger', method: :delete, data: {confirm: t('u_sure')}
+          = link_to fa('times'), prize, class: 'btn btn-xs btn-danger', method: :delete, data: {confirm: t('u_sure')}
         - if policy(prize).update?
           %span.prize-list-item__admin-id ID: #{prize.id}

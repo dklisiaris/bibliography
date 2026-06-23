@@ -26,7 +26,7 @@
     .profile-show__actions
       - if user_signed_in? && @profile.user != current_user
         - follow_data = {controller: "follow", action: "click->follow#toggle mouseenter->follow#previewUnfollow mouseleave->follow#resetPreview", follow_url_value: "/library/#{@profile.id}/follow", follow_following_value: current_user.following?(@profile.user), follow_follow_label_value: t("users.follow"), follow_following_label_value: t("users.following"), follow_unfollow_label_value: t("users.unfollow")}
-        - follow_class = "btn btn-sm btn-follow #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}"
+        - follow_class = "btn btn-sm btn-follow #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-outline-secondary'}"
         = button_tag type: "button", class: follow_class, data: follow_data do
           - if current_user.following?(@profile.user)
             %i.fa.fa-users{data: {follow_target: "icon"}}

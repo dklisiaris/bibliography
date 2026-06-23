@@ -15,9 +15,9 @@
       .author-list-item__actions
         = render partial: "authors/widgets/favourite_btn", locals: {author: author, liked: liked}
         - if policy(author).update?
-          = link_to fa("pencil"), edit_author_path(author), class: "btn btn-effect-ripple btn-xs btn-success", title: t("edit", default: "Edit")
+          = link_to fa("pencil"), edit_author_path(author), class: "btn btn-xs btn-success", title: t("edit", default: "Edit")
         - if policy(author).destroy?
-          = link_to fa("times"), author, class: "btn btn-effect-ripple btn-xs btn-danger", method: :delete, data: {confirm: t("u_sure")}
+          = link_to fa("times"), author, class: "btn btn-xs btn-danger", method: :delete, data: {confirm: t("u_sure")}
         - if policy(author).update?
           %span.author-list-item__admin-id ID: #{author.id}
 

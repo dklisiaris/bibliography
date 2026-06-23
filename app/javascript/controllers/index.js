@@ -35,7 +35,7 @@ window.favouriteAuthor = (id) =>
     url: `/authors/${id}/favourite`,
     kind: "author",
     recordId: id,
-    inactiveClass: "btn-default",
+    inactiveClass: "btn-outline-secondary",
     labels: window.favouriteAuthorLabels,
   }).catch(() => {})
 window.favouriteCategory = (id) =>

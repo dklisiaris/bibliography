@@ -1,11 +1,11 @@
-// Bootstrap 3 → 5 shims for existing views (remove in Track B.6).
+// Bootstrap 3 → 5 shims for legacy markup still in Sprockets bundle (trim as views migrate).
 
 .img-responsive {
   @extend .img-fluid;
 }
 
 .btn-default {
-  @extend .btn-secondary;
+  @extend .btn-outline-secondary;
 }
 
 .pull-right {
@@ -64,12 +64,6 @@
 // BS3 right-aligned menus (avatar dropdown in header, etc.)
 .dropdown-menu-right {
   @extend .dropdown-menu-end;
-}
-
-.navbar-default {
-  @extend .navbar;
-  @extend .navbar-light;
-  @extend .bg-light;
 }
 
 .label {
@@ -144,10 +138,7 @@
 }
 
 // ProUI sidebar (layout HTML unchanged until B.4)
-.navbar-fixed-top,
-.navbar-fixed-bottom {
-  @extend .fixed-top;
-}
+// navbar-fixed-top removed — app-shell uses sticky navbar
 
 .open > .dropdown-menu {
   display: block;
