@@ -7,6 +7,12 @@ $primary: #de4b39;
 $body-bg: #ebf1f2;
 $body-color: #1c2b36;
 
+// ProUI palette (alerts, progress bars, legacy accents).
+$success: #afde5c;
+$info: #5cafde;
+$warning: #deb25c;
+$danger: #de815c;
+
 // Match bootstrap-sass 3 / ProUI (BS5 defaults are 16px + underlined links).
 $font-size-base: 0.875rem;
 $line-height-base: 1.428571429;

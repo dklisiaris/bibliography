@@ -1,0 +1,7 @@
+.tab-pane.fade.show.active#import-file{role: 'tabpanel'}
+  = form_tag({action: 'import_from_file'}, multipart: true, html: {role: 'form'}) do
+    .mb-3
+      = label_tag :uploaded_file, t('import.import_from_file'), class: 'form-label'
+      = file_field_tag 'uploaded_file', class: 'form-control'
+    .resource-form__actions
+      = submit_tag t('import.import_label'), class: 'btn btn-primary'

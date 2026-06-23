@@ -1,7 +1,7 @@
 = form_tag({controller: "home", action: "search"}, method: "get", class: "search-bar-form") do
   .search-bar.search-bar--lg.multisearch
     .search-bar__container.row
-      .col-xs-12.col-sm-10.col-md-8.col-xl-7
+      .col-12.col-sm-10.col-md-8.col-xl-7
         .input-group.input-group-lg.search-bar__group{data: {controller: "autocomplete", autocomplete_url_value: "/search?autocomplete=1&q=%QUERY", autocomplete_variant_value: "multisearch", autocomplete_nothing_found_value: t("nothing_found"), autocomplete_publisher_label_value: t("publishers.label_singular"), autocomplete_category_label_value: t("categories.label_singular"), autocomplete_series_label_value: t("series.label_singular")}}
           - if params[:q].present?
             = link_to({controller: "home", action: "index"}, class: "btn btn-outline-secondary btn-icon search-bar__clear", title: t("clear", default: "Clear")) do

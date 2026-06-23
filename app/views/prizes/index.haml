@@ -1,0 +1,27 @@
+- tags = { title: t('prizes.label') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- pages = {fa('home') => root_url, t('prizes.label') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-12
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title
+          = detone(t('prizes.label'))
+          - if @prizes.respond_to?(:total_count) && @prizes.total_count.present?
+            %span.index-panel__count= " (#{@prizes.total_count})"
+        - if policy(Prize).new?
+          .index-panel__actions
+            = nav_btn_link_to(name: fa('plus'), url: new_prize_path, tooltip: t('prizes.new', default: 'New prize'))
+
+      .index-panel__toolbar
+        .index-panel__pagination
+          = render partial: 'prizes/widgets/pagination', locals: {paginatable: @prizes}
+
+      .index-panel__content
+        .prize-list
+          = render partial: 'prizes/prize', collection: @prizes, as: :prize
+        = render partial: 'prizes/widgets/pagination', locals: {paginatable: @prizes}

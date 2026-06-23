@@ -1,0 +1,20 @@
+= form_for [@awardable, @award], html: {role: 'form'} do |f|
+  - if @award.errors.any?
+    .alert.alert-danger
+      %h2.h6
+        = pluralize(@award.errors.count, 'error')
+        prohibited this award from being saved:
+      %ul.mb-0
+        - @award.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col-md-6.mb-3
+      = f.label :prize_id, class: 'form-label'
+      = f.collection_select :prize_id, Prize.all, :id, :name, {prompt: '--- Select prize ---'}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :year, class: 'form-label'
+      = f.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), {}, class: 'form-select'
+
+  .resource-form__actions
+    = f.submit t('save'), class: 'btn btn-primary'

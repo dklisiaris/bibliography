@@ -1,0 +1,34 @@
+- awardee = award.awardable
+- icon_class = {'Author' => 'fa-user', 'Book' => 'fa-book'}.fetch(award.awardable_type, 'fa-trophy')
+- awardee_name = {'Author' => awardee&.fullname, 'Book' => awardee&.title}[award.awardable_type]
+
+%article.award-list-item
+  .award-list-item__media
+    - if awardee.present?
+      = link_to awardee, class: 'award-list-item__icon-link' do
+        %span.award-list-item__icon{aria: {hidden: true}}
+          %i.fa{class: icon_class}
+    - else
+      %span.award-list-item__icon{aria: {hidden: true}}
+        %i.fa.fa-trophy
+
+  .award-list-item__content
+    .award-list-item__header
+      .award-list-item__heading
+        %h4.award-list-item__title
+          - if awardee.present? && awardee_name.present?
+            = link_to awardee_name, awardee, class: 'award-list-item__title-link'
+          - else
+            %span.text-muted= t('awards.missing_awardee', default: 'Missing awardee')
+
+        %p.award-list-item__meta
+          - if award.prize.present?
+            = link_to award.prize.name, award.prize, class: 'award-list-item__meta-link'
+          - else
+            %span.text-muted= t('awards.missing_prize', default: 'Missing prize')
+          %span.mx-1 ·
+          %span= award.year
+
+      .award-list-item__actions
+        %span.award-list-item__type= award.awardable_type
+        %span.award-list-item__admin-id ID: #{award.id}

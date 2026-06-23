@@ -1,17 +1,17 @@
 .book-show__details
   %ul.nav.nav-tabs.book-show__tabs{role: "tablist"}
-    %li.nav-item.active{role: "presentation"}
-      %a.nav-link.active{href: "#book-show-desc", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-desc", "aria-selected" => "true"}
+    %li.nav-item{role: "presentation"}
+      %button.nav-link.active{id: "book-show-desc-tab", type: "button", role: "tab", data: {bs_toggle: "tab", bs_target: "#book-show-desc"}, aria: {controls: "book-show-desc", selected: true}}
         = t("books.description")
     %li.nav-item{role: "presentation"}
-      %a.nav-link{href: "#book-show-marc", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-marc", "aria-selected" => "false"}
+      %button.nav-link{id: "book-show-marc-tab", type: "button", role: "tab", data: {bs_toggle: "tab", bs_target: "#book-show-marc"}, aria: {controls: "book-show-marc", selected: false}}
         = t("books.marc_view")
     %li.nav-item{role: "presentation"}
-      %a.nav-link{href: "#book-show-isbd", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-isbd", "aria-selected" => "false"}
+      %button.nav-link{id: "book-show-isbd-tab", type: "button", role: "tab", data: {bs_toggle: "tab", bs_target: "#book-show-isbd"}, aria: {controls: "book-show-isbd", selected: false}}
         = t("books.isbd_view")
 
   .tab-content.book-show__tab-content
-    #book-show-desc.tab-pane.active{role: "tabpanel"}
+    #book-show-desc.tab-pane.fade.show.active{role: "tabpanel", aria: {labelledby: "book-show-desc-tab"}}
       %table.table.table-striped.book-show__table
         %tbody
           = @book_presenter.trow(t("books.publication"), @book_presenter.publication)
@@ -31,14 +31,14 @@
             = @book_presenter.trow("ID", @book.id)
             = @book_presenter.trow("Biblionet ID", @book.biblionet_id)
 
-    #book-show-marc.tab-pane{role: "tabpanel"}
+    #book-show-marc.tab-pane.fade{role: "tabpanel", aria: {labelledby: "book-show-marc-tab"}}
       %table.table.table-striped.table-sm.book-show__table
         %tbody
           = @book_presenter.marc_leader
           = @book_presenter.marc_control_fields
           = @book_presenter.marc_data_fields
 
-    #book-show-isbd.tab-pane{role: "tabpanel"}
+    #book-show-isbd.tab-pane.fade{role: "tabpanel", aria: {labelledby: "book-show-isbd-tab"}}
       %table.table.table-striped.book-show__table
         %tbody
           = @book_presenter.trow(t("books.title"), @book_presenter.isbd_title)

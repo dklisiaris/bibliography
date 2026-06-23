@@ -1,0 +1,14 @@
+// Autocomplete dropdown — vanilla implementation (replaces typeahead.js).
+
+.search-bar__input.loading,
+.search-bar__group input.loading {
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' stroke='%23de4b39' stroke-width='2' opacity='.25'/%3E%3Cpath stroke='%23de4b39' stroke-width='2' stroke-linecap='round' d='M12 3a9 9 0 0 1 9 9'/%3E%3C/svg%3E");
+  background-size: 1.25rem 1.25rem;
+  background-position: right 0.625rem center;
+  background-repeat: no-repeat;
+}
+
+.tt-menu[hidden] {
+  display: none !important;
+}

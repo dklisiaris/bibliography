@@ -1,0 +1,23 @@
+= form_for @contribution, html: {role: 'form'} do |f|
+  - if @contribution.errors.any?
+    .alert.alert-danger
+      %h2.h6
+        = pluralize(@contribution.errors.count, 'error')
+        prohibited this contribution from being saved:
+      %ul.mb-0
+        - @contribution.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col-md-6.mb-3
+      = f.label :job, class: 'form-label'
+      = f.select :job, options_for_select(@jobs.collect { |s| [s[0].humanize, s[0]] }, selected: @contribution.job), {}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :book_id, class: 'form-label'
+      = f.text_field :book_id, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :author_id, class: 'form-label'
+      = f.text_field :author_id, class: 'form-control'
+
+  .resource-form__actions
+    = f.submit t('save'), class: 'btn btn-primary'

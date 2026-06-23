@@ -35,8 +35,8 @@ function applyLikeState(bookId, likes, dislikes, liked) {
   if (!labels) return
 
   document.querySelectorAll(`.btn-like-${bookId}`).forEach((button) => {
-    button.classList.remove("btn-default", "btn-success")
-    button.classList.add(liked ? "btn-success" : "btn-default")
+    button.classList.remove("btn-outline-secondary", "btn-success")
+    button.classList.add(liked ? "btn-success" : "btn-outline-secondary")
     updateCount(button, likes)
     updateTooltip(
       button,
@@ -46,7 +46,7 @@ function applyLikeState(bookId, likes, dislikes, liked) {
 
   document.querySelectorAll(`.btn-dislike-${bookId}`).forEach((button) => {
     button.classList.remove("btn-danger")
-    button.classList.add("btn-default")
+    button.classList.add("btn-outline-secondary")
     updateCount(button, dislikes)
     updateTooltip(button, labels.notRecommend)
   })
@@ -59,8 +59,8 @@ function applyDislikeState(bookId, likes, dislikes, disliked) {
   if (!labels) return
 
   document.querySelectorAll(`.btn-dislike-${bookId}`).forEach((button) => {
-    button.classList.remove("btn-default", "btn-danger")
-    button.classList.add(disliked ? "btn-danger" : "btn-default")
+    button.classList.remove("btn-outline-secondary", "btn-danger")
+    button.classList.add(disliked ? "btn-danger" : "btn-outline-secondary")
     updateCount(button, dislikes)
     updateTooltip(
       button,
@@ -70,7 +70,7 @@ function applyDislikeState(bookId, likes, dislikes, disliked) {
 
   document.querySelectorAll(`.btn-like-${bookId}`).forEach((button) => {
     button.classList.remove("btn-success")
-    button.classList.add("btn-default")
+    button.classList.add("btn-outline-secondary")
     updateCount(button, likes)
     updateTooltip(button, labels.recommend)
   })

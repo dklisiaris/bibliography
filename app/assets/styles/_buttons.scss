@@ -1,4 +1,4 @@
-// Bibliography button system — BS5-native, overrides ProUI main.css.
+// Bibliography button system — BS5-native.
 
 .btn {
   margin: 0;
@@ -29,12 +29,6 @@
   }
 }
 
-// ProUI ripple — keep for JS compatibility, no visual side effects.
-.btn-effect-ripple {
-  position: relative;
-  overflow: hidden;
-}
-
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: #{$primary};
@@ -48,8 +42,7 @@
   --bs-btn-focus-shadow-rgb: #{red($primary)}, #{green($primary)}, #{blue($primary)};
 }
 
-.btn-secondary,
-.btn-default {
+.btn-secondary {
   --bs-btn-color: #{$body-color};
   --bs-btn-bg: #fff;
   --bs-btn-border-color: #dae5e8;
@@ -119,12 +112,6 @@
     margin: 0;
     line-height: 1;
   }
-
-  &__label.hidden-xs {
-    @media (min-width: 576px) {
-      display: inline !important;
-    }
-  }
 }
 
 // Icon-only square buttons (search submit, clear, toolbar).
@@ -142,7 +129,6 @@
 }
 
 .input-group .btn,
-.block-options .btn,
 .modal-content .btn {
   margin-top: 0;
   margin-bottom: 0;

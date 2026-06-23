@@ -1,0 +1,17 @@
+= form_for @prize, html: {role: 'form'} do |f|
+  - if @prize.errors.any?
+    .alert.alert-danger
+      %h2.h6
+        = pluralize(@prize.errors.count, 'error')
+        prohibited this prize from being saved:
+      %ul.mb-0
+        - @prize.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col-md-6.mb-3
+      = f.label :name, t('name'), class: 'form-label'
+      = f.text_field :name, class: 'form-control'
+
+  .resource-form__actions
+    = f.submit t('save'), class: 'btn btn-primary'

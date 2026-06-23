@@ -12,7 +12,7 @@
           - if policy(@publisher).update?
             = nav_btn_link_to(name: fa('pencil'), url: edit_publisher_path(@publisher), tooltip: t('publishers.edit'), style: 'success')
           - if policy(@publisher).destroy? && @publisher.books.count == 0
-            = link_to fa('times'), @publisher, class: "btn btn-effect-ripple btn-danger", method: :delete, data: {confirm: t('u_sure'), toggle: "tooltip", original_title: t('publishers.delete')}
+            = link_to fa('times'), @publisher, class: "btn btn-danger", method: :delete, data: { turbo_confirm: t('u_sure'), bs_toggle: "tooltip"}, title: t('publishers.delete')
 
       .resource-show__layout
         = render partial: "publishers/publisher_show_sidebar"

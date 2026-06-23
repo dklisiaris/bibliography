@@ -77,5 +77,74 @@
       padding-top: 1rem;
       border-top: 1px solid #ebf1f2;
     }
+
+    .static-page__wizard-category {
+      margin-bottom: 1rem;
+      background-color: #fff;
+      border: 1px solid #e8eef0;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(28, 43, 54, 0.05);
+      overflow: hidden;
+    }
+
+    .static-page__wizard-category-header {
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: $body-color;
+      background-color: #f8fafb;
+      border-bottom: 1px solid #ebf1f2;
+    }
+
+    .static-page__wizard-category-body {
+      padding: 1rem;
+    }
+
+    #rateable-books-wrapper {
+      .book-container {
+        margin: 0 auto;
+      }
+
+      .rateable-book {
+        width: 114px;
+        height: 200px;
+        margin: 0 10px 10px;
+        text-align: center;
+        float: left;
+
+        .book-cover {
+          margin: 0 10px 10px 0;
+        }
+      }
+    }
+
+    .loading-wrapper {
+      &.loading {
+        position: relative;
+        min-height: 100px;
+        background-color: #fff;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 1.75rem;
+          height: 1.75rem;
+          margin: -0.875rem 0 0 -0.875rem;
+          border: 2px solid #e8eef0;
+          border-top-color: $primary;
+          border-radius: 50%;
+          animation: static-page-spinner 0.8s linear infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes static-page-spinner {
+  to {
+    transform: rotate(360deg);
   }
 }

@@ -1,0 +1,17 @@
+- pages = {fa('home') => root_url, t('awards.label', default: 'Awards') => awards_path, t('awards.edit', default: 'Edit award') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-10.col-xl-9
+    %section.index-panel.resource-form
+      %header.index-panel__header
+        %h1.index-panel__title= detone(t('awards.edit', default: 'Editing award'))
+
+      .index-panel__content
+        = render 'authors/author'
+
+        = render 'form'
+
+        .resource-form__footer-links
+          = link_to t('back'), @awardable

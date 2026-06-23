@@ -1,0 +1,18 @@
+// Solid alerts — palette from _bootstrap_variables.scss ($danger, $warning, $success, $info).
+
+.alert {
+  border-width: 0;
+
+  .alert-link {
+    color: #000;
+    opacity: 0.4;
+  }
+}
+
+@each $state in (danger, warning, success, info) {
+  .alert-#{$state} {
+    --bs-alert-color: #fff;
+    --bs-alert-bg: var(--bs-#{$state});
+    --bs-alert-border-color: var(--bs-#{$state});
+  }
+}

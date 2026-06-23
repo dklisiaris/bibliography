@@ -1,0 +1,183 @@
+// Awards admin index list rows.
+
+.award-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .award-list-item + .award-list-item {
+    margin-top: 0;
+  }
+}
+
+.award-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #e8eef0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(28, 43, 54, 0.05);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  & + & {
+    margin-top: 0.75rem;
+  }
+
+  &:hover {
+    border-color: rgba($primary, 0.2);
+    box-shadow: 0 4px 14px rgba(28, 43, 54, 0.08);
+  }
+
+  &__media {
+    flex: 0 0 auto;
+  }
+
+  &__icon-link {
+    display: block;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      transform: translateY(-1px);
+
+      .award-list-item__icon {
+        box-shadow: 0 6px 14px rgba(28, 43, 54, 0.14);
+        border-color: rgba($primary, 0.18);
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #f4f7f8;
+    border: 1px solid #e8eef0;
+    box-shadow: 0 2px 8px rgba(28, 43, 54, 0.08);
+    color: rgba($body-color, 0.55);
+    font-size: 1.375rem;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    .award-list-item__icon-link:hover &,
+    .award-list-item__icon-link:focus & {
+      color: $primary;
+      transform: scale(1.03);
+    }
+  }
+
+  &__content {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  &__heading {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0 0 0.25rem;
+    font-family: $headings-font-family;
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.35;
+  }
+
+  &__title-link {
+    color: $primary;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: shade-color($primary, 12%);
+      text-decoration: none;
+    }
+  }
+
+  &__meta {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #6c757d;
+  }
+
+  &__meta-link {
+    color: #6c757d;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    max-width: 8rem;
+  }
+
+  &__type {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #879599;
+  }
+
+  &__admin-id {
+    font-size: 0.6875rem;
+    color: #adb5bd;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .award-list-item {
+    gap: 0.875rem;
+    padding: 0.875rem;
+
+    &__header {
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    &__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    &__admin-id {
+      text-align: left;
+    }
+  }
+}

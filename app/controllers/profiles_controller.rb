@@ -69,7 +69,12 @@ class ProfilesController < ApplicationController
       format.html do
         redirect_to public_profile_path(@profile.id)
       end
-      format.json { render json: @profile.to_json }
+      format.json do
+        render json: {
+          avatar: { url: @profile.gravatar },
+          cover: { url: @profile.cover_safe }
+        }
+      end
     end
   end
 

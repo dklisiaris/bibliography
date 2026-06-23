@@ -13,14 +13,9 @@ gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 gem 'sass-rails', '~> 6.0'
 # Minify Sprockets JS in production (Terser supports modern ES in hotwire.js/Turbo)
 gem 'terser', '~> 1.2'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # gem 'mini_racer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
@@ -87,7 +82,7 @@ group :test do
 end
 
 gem 'autoprefixer-rails', '~> 6.0'
-gem 'font-awesome-sass', '~> 4.7'
+# Icons — Font Awesome 4.7 CSS loaded via npm in hotwire.scss (_vendor.scss).
 
 gem 'pg', '~> 1.5'
 

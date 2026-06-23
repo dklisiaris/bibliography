@@ -1,28 +1,19 @@
-%ul.media-list.push.comments-list{id: parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list" }
-  - if depth == 0 && !comments.where(user_id: user.try(:id)).exists?
-    - if user_signed_in?
-      = button_tag fa("pencil-square-o") + " " + t("comments.write_review"), class: "button btn btn-effect-ripple btn-sm btn-primary", id: "reviewBtn", type: "button"
-    - else
-      = link_to t('comments.sign_in_to_review'), new_user_session_path
+- list_id = parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list"
+%ul.book-comments-list{class: depth.positive? ? "book-comments-list--nested" : nil, id: list_id}
+  - if depth.zero? && !comments.where(user_id: user.try(:id)).exists?
+    %li.book-comments-list__actions
+      - if user_signed_in?
+        = button_tag fa("pencil-square-o") + " " + t("comments.write_review"), class: "btn btn-sm btn-primary", id: "reviewBtn", type: "button"
+      - else
+        = link_to t("comments.sign_in_to_review"), new_user_session_path
 
   - if comments.present?
     - comments.each do |comment|
-      = render partial: 'books/widgets/comment',                        |
-        locals: {                                                       |
-          comment: comment,                                             |
-          subcomments: comment.parent_id.nil? ? comment.children : nil, |
-          book: book,                                                   |
-          user: user,                                                   |
-          depth: depth                                                  |
-        }                                                               |
+      = render partial: "books/widgets/comment", locals: {comment: comment, subcomments: comment.parent_id.nil? ? comment.children : nil, book: book, user: user, depth: depth}
 
   - if depth == 1
     - if user_signed_in?
-      = render partial: 'books/widgets/comment_form', |
-        locals: {                                     |
-          book: book,                                 |
-          user: user,                                 |
-          parent_id: parent_id                        |
-        }                                             |
+      = render partial: "books/widgets/comment_form", locals: {book: book, user: user, parent_id: parent_id}
     - else
-      = link_to t('comments.sign_in_to_post'), new_user_session_path
+      %li.book-comments-list__actions
+        = link_to t("comments.sign_in_to_post"), new_user_session_path

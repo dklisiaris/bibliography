@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang='el'>
-  <!-- BEGIN HEAD -->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
     <%= favicon_link_tag 'icons/favicon-128x128.png', type: 'image/png', sizes: '128x128' %>
     <%= favicon_link_tag 'icons/favicon-196x196.png', type: 'image/png', sizes: '196x196' %>
 
-    <!-- Apple Touch Icons -->
     <%= favicon_link_tag 'icons/apple-touch-icon-57x57.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '57x57' %>
     <%= favicon_link_tag 'icons/apple-touch-icon-72x72.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '72x72' %>
     <%= favicon_link_tag 'icons/apple-touch-icon-76x76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76' %>
@@ -20,7 +18,6 @@
     <%= favicon_link_tag 'icons/apple-touch-icon-144x144.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
     <%= favicon_link_tag 'icons/apple-touch-icon-152x152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
 
-    <!-- Windows 8 Tile Icons -->
     <meta name="application-name" content="BibliographyGR"/>
     <meta name="msapplication-TileColor" content="#de4b39" />
     <meta name="msapplication-TileImage" content="icons/mstile-144x144.png" />
@@ -29,15 +26,10 @@
     <meta name="msapplication-wide310x150logo" content="icons/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="icons/mstile-310x310.png" />
 
-    <%# Open Sans must load via <link>, not @import inside the Sprockets bundle (mid-file @import is ignored) %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <%# Legacy Sprockets bundle (jQuery, rails-ujs, Bootstrap 3, CoffeeScript) %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%# Hotwire bundle (Turbo + Stimulus; coexists with legacy Sprockets assets during migration) %>
     <%= stylesheet_link_tag 'hotwire', media: 'all', data: { turbo_track: 'reload' } %>
 
     <script type='application/ld+json'>
@@ -63,42 +55,34 @@
     <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-61773702-1', 'auto'); ga('send', 'pageview'); </script>
     <%= javascript_include_tag 'hotwire', defer: true, type: 'module', data: { turbo_track: 'reload' } %>
   </head>
-  <!-- END HEAD -->
 
-  <!-- BEGIN BODY -->
   <body class="<%= controller_name %> <%= action_name %>">
+    <div class="app-shell" data-controller="app-shell">
+      <aside id="sidebar" class="app-shell__sidebar d-none d-lg-flex" role="navigation" aria-label="Main navigation">
+        <%= render 'layouts/sidebar_nav' %>
+      </aside>
 
-    <!-- BEGIN PAGE WRAPER FOR LOADING SCREEN -->
-    <div id="page-wrapper">
-
-      <!-- BEGIN PAGE CONTAINER - THE WHOLE PAGE LIVES HERE -->
-      <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
-
-        <%= render 'layouts/navigation_sidebar' %>
-
-        <!-- BEGIN MAIN CONTAINER - THE MAIN PAGE - INCL TOP HEADER - EXCL SIDE MENUS -->
-        <div id="main-container">
-
-          <%= render 'layouts/top_header' %>
-
-          <div id="fb-root"></div>
-
-          <!-- BEGIN PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
-          <div <%= content_for?(:page_content_options) ? yield(:page_content_options) : 'id="page-content"'.html_safe %> >
-            <%= yield :content_header %>
-            <%= render 'layouts/messages' %>
-            <%= yield %>
-          </div>
-          <!-- END PAGE CONTENT - EXCL ALL MENUS AND SIDEBARS -->
-
+      <div class="offcanvas offcanvas-start app-shell__offcanvas d-lg-none" tabindex="-1" id="appSidebarOffcanvas" aria-labelledby="appSidebarOffcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="appSidebarOffcanvasLabel"><%= t('side_menu.navigation', default: 'Navigation') %></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="<%= t('close', default: 'Close') %>"></button>
         </div>
-        <!-- END MAIN CONTAINER - THE MAIN PAGE - INCL TOP HEADER - EXCL SIDE MENUS -->
-
+        <div class="offcanvas-body p-0">
+          <%= render 'layouts/sidebar_nav', mobile: true %>
+        </div>
       </div>
-      <!-- END PAGE CONTAINER -->
-    </div>
-    <!-- END PAGE WRAPER FOR LOADING SCREEN -->
 
+      <div class="app-shell__stage">
+        <%= render 'layouts/navbar' %>
+
+        <div id="fb-root"></div>
+
+        <div id="page-content" class="app-shell__main">
+          <%= yield :content_header %>
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
-  <!-- END BODY -->
 </html>

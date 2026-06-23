@@ -1,0 +1,66 @@
+- mobile = local_assigns[:mobile]
+
+- unless mobile
+  #sidebar-brand.app-sidebar__brand
+    = link_to root_path, class: "sidebar-title app-sidebar__brand-link" do
+      %span.sidebar-nav-mini-show
+        = image_tag("icons/apple-touch-icon-57x57", class: "logo-xs", alt: "")
+      %span.sidebar-nav-mini-hide
+        = image_tag("logos/full_logo_6_sm.png", class: "logo-full", alt: "Bibliography")
+
+.app-sidebar__scroll
+  .sidebar-content.app-sidebar__content
+    %nav.app-sidebar__nav.d-block.d-sm-none{aria: {label: "Quick links"}}
+      %ul.sidebar-nav.app-sidebar__list
+        = side_nav_li(t("home"), root_path, "fa fa-home")
+        = side_nav_li(t("collections"), shelves_path, "fa fa-folder-open")
+        = side_nav_li(t("my_books"), my_books_path, "fa fa-book")
+
+    %nav.app-sidebar__nav.app-sidebar__nav--primary.dark-bg{aria: {label: "Browse"}}
+      %ul.sidebar-nav.app-sidebar__list
+        = side_nav_li(t("side_menu.categories"), categories_path, "fa fa-sitemap")
+        = side_nav_li(t("side_menu.books"), books_path, "fa fa-book")
+        = side_nav_li(t("side_menu.authors"), authors_path, "fa fa-user-secret")
+        = side_nav_li(t("side_menu.publishers"), publishers_path, "fa fa-building")
+        = side_nav_li(t("series.label"), series_index_path, "fa fa-tasks")
+
+    %nav.app-sidebar__nav{aria: {label: t("side_menu.discover")}}
+      %ul.sidebar-nav.app-sidebar__list
+        = sidebar_section(t("side_menu.discover"))
+        = side_nav_li(t("side_menu.featured"), featured_books_path, "fa fa-thumbs-o-up")
+        = side_nav_li(t("side_menu.trending"), trending_books_path, "fa fa-line-chart")
+        = side_nav_li(t("side_menu.awarded"), awarded_books_path, "fa fa-trophy")
+        = side_nav_li(t("side_menu.latest"), latest_books_path, "fa fa-clock-o")
+
+    %nav.app-sidebar__nav{aria: {label: t("side_menu.pages")}}
+      %ul.sidebar-nav.app-sidebar__list
+        = sidebar_section(t("side_menu.pages"))
+        = side_nav_li(t("side_menu.about"), pages_about_path, "fa fa-file-text-o")
+        = side_nav_li(t("side_menu.privacy"), pages_privacy_policy_path, "fa fa-file-text-o")
+        = side_nav_li(t("side_menu.contact"), pages_contact_path, "fa fa-file-text-o")
+
+        - if user_signed_in?
+          - if current_user.role == "editor" || current_user.role == "admin"
+            = sidebar_section(t("side_menu.editors_only"))
+            = side_nav_li(t("side_menu.contributions"), contributions_path, "fa fa-pencil-square-o")
+            = side_nav_li(t("side_menu.awards"), awards_path, "fa fa-pencil-square-o")
+            = side_nav_li(t("side_menu.prizes"), prizes_path, "fa fa-pencil-square-o")
+          - if current_user.role == "admin"
+            = sidebar_section(t("side_menu.admins_only"))
+            = side_nav_li(t("side_menu.import"), import_path, "fa fa-upload")
+            = side_nav_li(t("side_menu.tasks"), tasks_path, "fa fa-terminal")
+            = side_nav_li("Sidekiq", sidekiq_web_path, "fa fa-bullseye", true)
+            = side_nav_li("Redis", admin_redis_path, "fa fa-database")
+            = side_nav_li(t("side_menu.api"), "/docs/api#introduction", "fa fa-exchange")
+
+- unless mobile
+  #sidebar-extra-info.app-sidebar__footer.sidebar-content.sidebar-nav-mini-hide
+    .text-center
+      %small
+        Crafted with
+        %i.fa.fa-heart.text-danger
+        in
+        %a{href: "https://www.ceid.upatras.gr/", target: "_blank", rel: "noopener"} CEID
+      %br/
+      %small
+        © #{Date.current.year} Copyleft

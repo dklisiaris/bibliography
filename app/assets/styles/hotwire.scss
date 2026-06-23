@@ -38,7 +38,10 @@
 @import "bootstrap/scss/helpers";
 @import "bootstrap/scss/utilities/api";
 
-@import "bootstrap_compat";
+@import "dropzone/dist/min/dropzone.min.css";
+
+@import "vendor";
+@import "legacy";
 @import "buttons";
 @import "search_bar";
 @import "search_results";
@@ -51,18 +54,26 @@
 @import "index_panel";
 @import "book_filters";
 @import "book_show";
+@import "book_comments";
+@import "trix_editor";
+@import "review_modal";
+@import "typeahead";
 @import "resource_show";
 @import "profile_show";
 @import "profile_form";
+@import "resource_form";
 @import "auth_form";
 @import "static_page";
 @import "admin_redis";
+@import "admin_tools";
 @import "author_list";
 @import "publisher_list";
+@import "prize_list";
+@import "award_list";
 @import "shelves";
 @import "home_widgets";
 @import "category_nav";
-@import "top_header";
+@import "shell";
 @import "shell_sidebar";
 @import "site_overrides";
 @import "user_menu";
@@ -82,6 +93,35 @@
   pointer-events: auto;
   margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: flash-toast-in 0.45s ease;
+
+  &.flash-toast--dismissing {
+    animation: flash-toast-out 0.45s ease forwards;
+  }
+}
+
+@keyframes flash-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes flash-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
 .read-more-toggle {

@@ -1,0 +1,22 @@
+%article.prize-list-item
+  .prize-list-item__media
+    = link_to prize, class: 'prize-list-item__icon-link' do
+      %span.prize-list-item__icon{aria: {hidden: true}}
+        %i.fa.fa-trophy
+
+  .prize-list-item__content
+    .prize-list-item__header
+      .prize-list-item__heading
+        %h4.prize-list-item__title= link_to prize.name, prize, class: 'prize-list-item__title-link'
+
+        - awards_count = prize.awards.size
+        - if awards_count.positive?
+          %p.prize-list-item__meta= t('prizes.awards_count', count: awards_count)
+
+      .prize-list-item__actions
+        - if policy(prize).update?
+          = link_to fa('pencil'), edit_prize_path(prize), class: 'btn btn-xs btn-success', title: t('edit', default: 'Edit')
+        - if policy(prize).destroy?
+          = link_to fa('times'), prize, class: 'btn btn-xs btn-danger', method: :delete, data: { turbo_confirm: t('u_sure')}
+        - if policy(prize).update?
+          %span.prize-list-item__admin-id ID: #{prize.id}

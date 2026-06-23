@@ -14,9 +14,9 @@
 
       .publisher-list-item__actions
         - if policy(publisher).update?
-          = link_to fa("pencil"), edit_publisher_path(publisher), class: "btn btn-effect-ripple btn-xs btn-success", title: t("edit", default: "Edit")
+          = link_to fa("pencil"), edit_publisher_path(publisher), class: "btn btn-xs btn-success", title: t("edit", default: "Edit")
         - if policy(publisher).destroy?
-          = link_to fa("times"), publisher, class: "btn btn-effect-ripple btn-xs btn-danger", method: :delete, data: {confirm: t("u_sure")}
+          = link_to fa("times"), publisher, class: "btn btn-xs btn-danger", method: :delete, data: { turbo_confirm: t("u_sure")}
         - if policy(publisher).update?
           %span.publisher-list-item__admin-id ID: #{publisher.id}
 

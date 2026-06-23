@@ -1,0 +1,49 @@
+= form_for @author, html: {role: 'form'} do |f|
+  - if @author.errors.any?
+    .alert.alert-danger
+      %h2.h6
+        = pluralize(@author.errors.count, 'error')
+        prohibited this author from being saved:
+      %ul.mb-0
+        - @author.errors.full_messages.each do |message|
+          %li= message
+
+  %h2.resource-form__section Name
+  .row
+    .col-md-6.mb-3
+      = f.label :firstname, class: 'form-label'
+      = f.text_field :firstname, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :lastname, class: 'form-label'
+      = f.text_field :lastname, class: 'form-control'
+    .col-md-12.mb-3
+      = f.label :extra_info, class: 'form-label'
+      = f.text_field :extra_info, class: 'form-control'
+
+  %h2.resource-form__section Biography
+  .mb-3
+    = f.label :biography, class: 'form-label'
+    = f.text_area :biography, rows: 8, class: 'form-control'
+
+  %h2.resource-form__section Photo
+  .resource-form__media
+    = image_tag @author.avatar, class: 'resource-form__preview', alt: @author.fullname.presence || t('authors.label'), style: 'border-radius: 50%;'
+    .resource-form__media-fields
+      .mb-3
+        = f.label :remote_uploaded_avatar_url, 'Upload new avatar (URL)', class: 'form-label'
+        = f.text_field :remote_uploaded_avatar_url, class: 'form-control', placeholder: 'Avatar image URL'
+      .mb-3
+        = f.label :image, class: 'form-label'
+        = f.text_field :image, class: 'form-control'
+
+  %h2.resource-form__section Metadata
+  .row
+    .col-md-6.mb-3
+      = f.label :slug, class: 'form-label'
+      = f.text_field :slug, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :biblionet_id, class: 'form-label'
+      = f.number_field :biblionet_id, class: 'form-control'
+
+  .resource-form__actions
+    = f.submit t('save'), class: 'btn btn-primary'

@@ -6,7 +6,7 @@ class AwardsController < ApplicationController
 
   def index
     authorize :award, :index?
-    @awards = policy_scope(Award).page(params[:page])
+    @awards = policy_scope(Award).includes(:prize, :awardable).order(year: :desc).page(params[:page])
     respond_with(@awards)
   end
 

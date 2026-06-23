@@ -4,8 +4,8 @@ module NavigationHelper
   end
 
   def nav_btn_link_to(name: 'Page Name', url: '#', tooltip: '', style: 'primary')
-    link_to name, url, class: "btn btn-effect-ripple btn-#{style}", role: 'button',
-            data: { toggle: 'tooltip', 'original-title' => tooltip }
+    link_to name, url, class: "btn btn-#{style}", role: 'button',
+            data: { bs_toggle: 'tooltip' }, title: tooltip
   end
 
   def ellipsize(text, max_length = 30)

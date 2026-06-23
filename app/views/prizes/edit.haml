@@ -1,0 +1,17 @@
+- pages = {fa('home') => root_url, t('prizes.label') => prizes_path, @prize.name => @prize, t('prizes.edit', default: 'Edit prize') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-10.col-xl-9
+    %section.index-panel.resource-form
+      %header.index-panel__header
+        %h1.index-panel__title= detone(t('prizes.edit', default: 'Editing prize'))
+
+      .index-panel__content
+        = render 'form'
+
+        .resource-form__footer-links
+          = link_to t('show'), @prize
+          %span.mx-1 |
+          = link_to t('back'), prizes_path

@@ -59,14 +59,14 @@ export default class extends Controller {
   }
 
   render() {
-    this.element.classList.remove("btn-default", "btn-success", "btn-danger")
+    this.element.classList.remove("btn-outline-secondary", "btn-success", "btn-danger")
 
     if (this.followingValue) {
       this.element.classList.add("btn-success")
       this.setIcon("fa-users")
       this.setLabel(this.followingLabelValue)
     } else {
-      this.element.classList.add("btn-default")
+      this.element.classList.add("btn-outline-secondary")
       this.setIcon("fa-user-plus")
       this.setLabel(this.followLabelValue)
     }

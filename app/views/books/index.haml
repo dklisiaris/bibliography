@@ -21,7 +21,7 @@
       .index-panel__toolbar
         .index-panel__pagination
           = render "books/widgets/pagination" if defined? @books.total_pages
-        = button_tag nil, class: "btn btn-sm btn-primary index-panel__toolbar-action index-panel__toolbar-action--mobile-only visible-xs", data: {action: "click->filter-sidebar#toggle"} do
+        = button_tag nil, class: "btn btn-sm btn-primary index-panel__toolbar-action index-panel__toolbar-action--mobile-only", data: {action: "click->filter-sidebar#toggle"} do
           %i.fa.fa-sliders{aria: {hidden: true}}
           %span= t('books.filters.label')
 

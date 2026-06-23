@@ -1,0 +1,245 @@
+// App shell — BS5 navbar + desktop sidebar + mobile offcanvas (replaces ProUI #page-container layout).
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #1c2b36;
+  background-color: #ebf1f2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-shell {
+  --app-shell-header-height: 50px;
+  --app-shell-sidebar-width: 220px;
+  --app-shell-sidebar-width-mini: 52px;
+  min-height: 100vh;
+  background-color: #ebf1f2;
+
+  &__sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1035;
+    flex-direction: column;
+    width: var(--app-shell-sidebar-width);
+    background-color: #1c2b36;
+    transition: width 0.2s ease;
+    overflow: hidden;
+  }
+
+  // Beat legacy main.css #sidebar { left: -220px } (ID specificity).
+  #sidebar.app-shell__sidebar {
+    position: fixed;
+    left: 0;
+    width: var(--app-shell-sidebar-width);
+    transform: none;
+    overflow: hidden;
+  }
+
+  &__stage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    margin-left: var(--app-shell-sidebar-width);
+    transition: margin-left 0.2s ease;
+  }
+
+  &__navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    flex-shrink: 0;
+    height: var(--app-shell-header-height);
+    background: #fff;
+    border-bottom: 1px solid #dae5e8;
+    transition: background 0.2s ease;
+
+    &.navbar-glass {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  &__navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    height: var(--app-shell-header-height);
+    padding: 0 0.25rem;
+  }
+
+  &__navbar-start,
+  &__navbar-end {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  &__navbar-end {
+    margin-left: auto;
+  }
+
+  &__navbar-brand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    line-height: 0;
+
+    img {
+      display: block;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: #1c2b36;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+
+  &__sidebar-toggle-mini {
+    display: none;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+      display: flex;
+      align-items: center;
+      min-height: var(--app-shell-header-height);
+
+      &.d-none.d-sm-flex {
+        display: none !important;
+
+        @media (min-width: 576px) {
+          display: flex !important;
+        }
+      }
+
+      &.d-flex.d-sm-none {
+        display: flex !important;
+
+        @media (min-width: 576px) {
+          display: none !important;
+        }
+      }
+
+      > a {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        height: var(--app-shell-header-height);
+        padding: 0 0.5rem;
+        color: #1c2b36;
+        line-height: 1 !important;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          color: $primary;
+          text-decoration: none;
+        }
+
+        i.fa {
+          margin: 0;
+          line-height: 1;
+        }
+
+        strong {
+          display: block;
+          font-size: 0.75rem;
+          font-weight: 600;
+          line-height: 1;
+        }
+      }
+    }
+  }
+
+  &__main,
+  #page-content.app-shell__main,
+  #page-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 12px 1px !important;
+    padding-top: 10px !important;
+    background-color: #f8f8fb;
+    min-height: calc(100vh - var(--app-shell-header-height));
+    transform: none;
+    margin-left: 0;
+  }
+
+  &__offcanvas {
+    width: min(280px, 88vw);
+    background-color: #1c2b36;
+    color: #fff;
+    border-right: 0;
+
+    .offcanvas-header {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .offcanvas-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+
+  &--sidebar-mini {
+    .app-shell__sidebar,
+    #sidebar.app-shell__sidebar {
+      width: var(--app-shell-sidebar-width-mini);
+    }
+
+    .app-shell__stage {
+      margin-left: var(--app-shell-sidebar-width-mini);
+    }
+
+    .app-shell__sidebar-toggle-full {
+      display: none;
+    }
+
+    .app-shell__sidebar-toggle-mini {
+      display: inline-block;
+    }
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .app-shell {
+    &__stage {
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .app-shell__navbar-brand img {
+    width: 30px;
+    height: 30px;
+  }
+}

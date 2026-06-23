@@ -1,14 +1,15 @@
-// Native title tooltips — no jQuery / Bootstrap JS dependency.
-// After dynamic updates, drop data-toggle="tooltip" so BS3 does not show a stale cached title.
+import { Tooltip } from "bootstrap"
 
+// Update tooltip text after dynamic UI changes (recommendations, favourites, collections).
 export function updateTooltip(element, title) {
   if (!element || title == null) return
 
   element.setAttribute("title", title)
   element.removeAttribute("data-original-title")
+  element.removeAttribute("data-bs-original-title")
 
-  if (element.getAttribute("data-toggle") === "tooltip") {
-    element.removeAttribute("data-toggle")
-    element.removeAttribute("data-placement")
+  const instance = Tooltip.getInstance(element)
+  if (instance) {
+    instance.setContent({ ".tooltip-inner": title })
   }
 }

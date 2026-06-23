@@ -1,6 +1,2 @@
-.widget
-  .widget-content.widget-content-mini
-    %span.pull-right.text-muted= subtitle
-    %strong= title
-  .widget-content
-    = render partial: "books/book_list_item", locals: {book: book}
+- meta_text = [local_assigns[:title], local_assigns[:subtitle]].compact.join(' · ')
+= render partial: "books/book_list_item", locals: {book: book, meta: meta_text.presence}

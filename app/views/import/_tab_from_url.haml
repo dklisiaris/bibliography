@@ -1,0 +1,8 @@
+.tab-pane.fade#import-url{role: 'tabpanel'}
+  = form_tag({action: 'import_from_url'}, html: {role: 'form'}) do
+    .mb-3
+      = label_tag :url, t('import.import_from_url'), class: 'form-label'
+      = text_field_tag :url, nil, placeholder: t('import.from_url_hint'), class: 'form-control'
+    .resource-form__actions
+      = submit_tag t('import.import_label'), class: 'btn btn-primary'
+      = button_tag t('cancel'), name: nil, type: 'reset', class: 'btn btn-outline-secondary'

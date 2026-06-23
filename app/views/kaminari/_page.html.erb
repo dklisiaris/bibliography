@@ -1,9 +1,9 @@
 <% if page.current? %>
   <li class="page-item active" aria-current="page">
-    <%= content_tag :a, page, class: "page-link", remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+    <%= content_tag :a, page, class: "page-link", rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
   </li>
 <% else %>
   <li class="page-item">
-    <%= link_to page, url, class: "page-link", remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+    <%= link_to page, url, class: "page-link", rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
   </li>
 <% end %>

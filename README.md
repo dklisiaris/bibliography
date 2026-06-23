@@ -25,9 +25,8 @@ __Software requirements__
 - [Postgres 9.1+ with contrib-packages](http://www.postgresql.org/download/), on Ubuntu check this quick setup [guide](https://gist.github.com/dklisiaris/3c1cd76c28ab86c8ee9c)
 - [Redis 2.6+](http://redis.io/download), on Ubuntu check Digital Ocean's [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
 - [Elasticsearch 2+](https://www.elastic.co/downloads/elasticsearch) (Optional)
-- [Ruby 2.0+](http://www.ruby-lang.org/en/downloads/) (we recommend 2.0.0-p353 or higher)
-- [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
-- [bower](https://github.com/bower/bower) (>= 0.10.0) installed with npm
+- Ruby 3.3+ (see `.ruby-version` / `Gemfile`)
+- [Node.js 18+](https://nodejs.org) and npm
 - [imagemagick](https://www.imagemagick.org/script/index.php)
 
 Clone repository
@@ -35,7 +34,7 @@ Clone repository
 git clone https://github.com/dklisiaris/bibliography.git
 ```
 
-Install depedencies
+Install dependencies
 ```ruby
 # Go to the root of the app
 cd bibliography
@@ -43,15 +42,26 @@ cd bibliography
 # Install ruby gems
 bundle install
 
-# Install javascript libraries
-rake bower:install
-
-# Hotwire / Bootstrap 5 assets (required — app/assets/builds/ is not committed)
+# Frontend assets (Bootstrap 5, Stimulus, Turbo — required; app/assets/builds/ is not committed)
 npm install
 npm run build
 ```
 
-For local development with auto-rebuild on JS/CSS changes, use `bin/dev` instead of `rails s`.
+### Local development
+
+`bin/dev` starts Rails plus asset watchers (via [foreman](https://github.com/ddollar/foreman) and `Procfile.dev`):
+
+- **web** — `bin/rails server` (port 3000)
+- **js** — esbuild watch → `app/assets/builds/hotwire.js`
+- **css** — Sass watch → `app/assets/builds/hotwire.css`
+
+```bash
+bin/dev
+```
+
+Use `rails s` only if you have already run `npm run build` and do not need live CSS/JS rebuilds.
+
+**Deploy / CI:** always run `npm run build` before asset precompilation (Capistrano runs this via `npm ci` + build).
 
 All sensitive information is stored in environment variables.
 We use dotenv gem to manage these vars.

@@ -1,6 +1,6 @@
-// Modern user avatar menu — BS5-native, scoped away from ProUI dropdown rules.
+// Modern user avatar menu — BS5-native.
 
-.nav.navbar-nav-custom > li.dropdown {
+.app-shell__navbar .dropdown {
   position: relative;
 }
 
@@ -31,7 +31,7 @@
   object-fit: cover;
 }
 
-.nav.navbar-nav-custom > li.dropdown > .user-menu {
+.app-shell__navbar .dropdown > .user-menu {
   position: absolute;
   top: 100%;
   right: 0;

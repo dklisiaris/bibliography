@@ -2,7 +2,7 @@
   .category-nav__header
     %h2.category-nav__title= title
     - if local_assigns[:new_path].present?
-      = link_to new_path, class: "btn btn-sm btn-primary btn-icon category-nav__new", title: local_assigns[:new_tooltip], data: {toggle: "tooltip"} do
+      = link_to new_path, class: "btn btn-sm btn-primary btn-icon category-nav__new", title: local_assigns[:new_tooltip], data: {bs_toggle: "tooltip"} do
         %i.fa.fa-plus
 
   .category-nav__list

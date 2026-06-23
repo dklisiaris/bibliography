@@ -100,6 +100,8 @@ el:
     changed_saved_failed: "Συνέβη κάποιο σφάλμα. Οι αλλαγές δεν αποθηκεύτηκαν."
 
   side_menu:
+    navigation: "Πλοήγηση"
+    toggle_sidebar: "Εναλλαγή πλαϊνής μπάρας"
     discover: "Ανακαλύψτε"
     categories: "Κατηγορίες"
     books: "Βιβλία"
@@ -213,6 +215,13 @@ el:
 
   prizes:
     label: "Βραβεία"
+    new: "Νέο βραβείο"
+    edit: "Επεξεργασία βραβείου"
+    awarded_authors: "Βραβευμένοι συγγραφείς"
+    no_awardees_yet: "Δεν υπάρχουν βραβευμένοι συγγραφείς ακόμα."
+    awards_count:
+      one: "1 βράβευση"
+      other: "%{count} βραβεύσεις"
 
   books:
     index:
@@ -397,6 +406,9 @@ el:
   awards:
     label: "Βραβεία"
     new: "Νέο Βραβείο"
+    edit: "Επεξεργασία βράβευσης"
+    missing_awardee: "Λείπει ο βραβευμένος"
+    missing_prize: "Λείπει το βραβείο"
 
   gender:
     male: "Άνδρας"

@@ -1,0 +1,20 @@
+// Recommendation progress bar sizing (book show sidebar).
+
+.progress {
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+
+  &,
+  .progress-bar {
+    height: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  &.progress-mini,
+  &.progress-mini .progress-bar {
+    height: 0.4375rem;
+    line-height: 0.4375rem;
+  }
+}

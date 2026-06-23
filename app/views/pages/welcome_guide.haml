@@ -1,28 +1,28 @@
 = render layout: "pages/page_shell", locals: {title: detone(t("welcome")), col_class: "col-lg-10"} do
-  .static-page__wizard
+  .static-page__wizard{data: {controller: "welcome-wizard", welcome_wizard_email_value: current_user.email, welcome_wizard_token_value: current_user.token, welcome_wizard_recommendation_labels_value: {recommend: t("books.recommend"), notRecommend: t("books.not_recommend"), removeRecommendation: t("books.remove_recommendation")}.to_json, welcome_wizard_favourite_category_labels_value: {addToFavourites: t("categories.add_to_favourites"), favoured: t("categories.favoured")}.to_json, action: "click->welcome-wizard#rateBook"}}
     #progress-wizard
       .progress.mb-3
-        #progress-bar-wizard.progress-bar.bg-danger{role: "progressbar", style: "width: 0", "aria-valuenow": 0, "aria-valuemin": 0, "aria-valuemax": 100}
+        #progress-bar-wizard.progress-bar.bg-danger{role: "progressbar", style: "width: 0", "aria-valuenow": 0, "aria-valuemin": 0, "aria-valuemax": 100, data: {welcome_wizard_target: "progressBar"}}
 
       %input{name: "email", type: "hidden", value: current_user.email}
       %input{name: "token", type: "hidden", value: current_user.token}
 
-      #progress-first.step
+      #progress-first.step{data: {welcome_wizard_target: "stepFirst"}}
         %p.text-muted.mb-3= t("choose_categories")
         .row.g-2
           - @featured_categories.each do |category|
             - selected_klass = current_user.likes?(category) ? "selected" : ""
             .col-6.col-sm-3
               %input{type: "checkbox", id: "category-#{category.id}", style: "display: none;"}
-              %label.featured-category{class: selected_klass, for: "category-#{category.id}", onclick: "javascript:favouriteCategory(#{category.id})"}= category.name
+              %label.featured-category{class: selected_klass, for: "category-#{category.id}", data: {action: "click->welcome-wizard#toggleCategory"}}= category.name
 
-      #progress-second.step
+      #progress-second.step{hidden: true, data: {welcome_wizard_target: "stepSecond"}}
         %p.text-muted.mb-3= t("rate_books")
-        #rateable-books-wrapper.loading-wrapper.loading
+        #rateable-books-wrapper.loading-wrapper.loading{data: {welcome_wizard_target: "rateableBooks"}}
 
-      #progress-third.step
+      #progress-third.step{hidden: true, data: {welcome_wizard_target: "stepThird"}}
         .loading-wrapper.loading
 
       .static-page__wizard-actions
-        %button#back2.btn.btn-outline-secondary{type: "reset"}= t("back")
-        %button#next2.btn.btn-primary{type: "submit"}= t("next")
+        %button#back2.btn.btn-outline-secondary{type: "reset", data: {welcome_wizard_target: "backBtn", action: "click->welcome-wizard#back"}}= t("back")
+        %button#next2.btn.btn-primary{type: "submit", data: {welcome_wizard_target: "nextBtn", action: "click->welcome-wizard#next"}}= t("next")

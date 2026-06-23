@@ -6,7 +6,7 @@ export default class extends Controller {
     url: String,
     recordId: Number,
     kind: String,
-    inactiveClass: { type: String, default: "btn-default" },
+    inactiveClass: { type: String, default: "btn-outline-secondary" },
     addLabel: String,
     favouredLabel: String,
   }
