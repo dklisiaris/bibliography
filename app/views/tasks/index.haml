@@ -1,0 +1,18 @@
+- pages = {fa('home') => root_url, t('site_settings') => '#', t('tasks.label') => nil}
+
+= content_header(title: t('tasks.label'), breadcrumbs: pages)
+
+.tasks-page
+  .admin-stats
+    = render 'stats_grid'
+
+  = render partial: 'book_of_month_importer'
+
+  - if @book_of_the_day.present?
+    %section.index-panel.tasks-page__section
+      %header.index-panel__header
+        %h1.index-panel__title= t('book_of_the_day')
+        %span.index-panel__count= l(@suggested_at, format: '%a, %d %b %Y')
+      .index-panel__content
+        .book-list
+          = render partial: 'books/book_list_item', locals: {book: @book_of_the_day}

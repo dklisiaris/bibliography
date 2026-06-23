@@ -1,7 +1,0 @@
-<% pages = {fa('home') => root_url, t('categories.label') => categories_url, t('categories.new') => nil} %>
-
-<%= content_header( title: t('categories.new'), breadcrumbs: pages) %>
-
-<%= render 'form' %>
-
-<%= link_to t('back'), categories_path, class: "label label-default" %>

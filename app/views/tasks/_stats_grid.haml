@@ -1,0 +1,5 @@
+.admin-stats__grid
+  = render partial: 'resource_counter', locals: {name: t('books.label'), icon: 'book', variant: 'social', count: @books_count}
+  = render partial: 'resource_counter', locals: {name: t('authors.label'), icon: 'users', variant: 'flat', count: @authors_count}
+  = render partial: 'resource_counter', locals: {name: t('publishers.label'), icon: 'university', variant: 'creme', count: @publishers_count}
+  = render partial: 'resource_counter', locals: {name: t('categories.label'), icon: 'tasks', variant: 'amethyst', count: @categories_count}

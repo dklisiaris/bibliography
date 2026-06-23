@@ -1,0 +1,21 @@
+- pages = {fa('home') => root_url, t('site_settings') => '#', t('import.import_label') => nil}
+
+= content_header(title: t('import.import_data'), breadcrumbs: pages)
+
+.row.index-layout
+  .col-12
+    %section.index-panel.import-page
+      %header.index-panel__header
+        %h1.index-panel__title= t('import.import_records')
+
+      .index-panel__content
+        = render 'form'
+
+    %section.index-panel.import-page__danger
+      %header.index-panel__header
+        %h1.index-panel__title= UnicodeUtils.upcase(detone(t('import.danger_zone')))
+
+      .index-panel__content.import-page__danger-body
+        %h2.h6= t('import.import_from_storage')
+        %p= t('import.storage_import_description')
+        = link_to t('import.import_label'), storage_import_path, class: 'btn btn-danger'

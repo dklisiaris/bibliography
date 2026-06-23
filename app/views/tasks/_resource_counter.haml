@@ -1,8 +1,8 @@
-.col-sm-6.col-lg-3
-  .widget
-    .widget-content.clearfix{class: bg_klass}
-      .widget-icon.pull-right
-        = fa(icon)
-      %h2.widget-heading.h3.text-light
-        %strong= count
-      %span= name
+- variant = local_assigns.fetch(:variant, 'flat')
+
+.admin-stat-card{class: "admin-stat-card--#{variant}"}
+  .admin-stat-card__icon
+    = fa(icon)
+  .admin-stat-card__body
+    %strong.admin-stat-card__count= count
+    %span.admin-stat-card__label= name

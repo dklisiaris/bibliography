@@ -1,0 +1,8 @@
+.tab-pane.fade#import-text{role: 'tabpanel'}
+  = form_tag({action: 'import_from_text'}, html: {role: 'form'}) do
+    .mb-3
+      = label_tag :content, t('import.import_from_text'), class: 'form-label'
+      = text_area_tag :content, nil, placeholder: t('import.from_text_hint'), rows: 16, class: 'form-control'
+    .resource-form__actions
+      = submit_tag t('import.import_label'), class: 'btn btn-primary'
+      = button_tag t('cancel'), name: nil, type: 'reset', class: 'btn btn-outline-secondary'

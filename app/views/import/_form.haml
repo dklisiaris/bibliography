@@ -1,0 +1,15 @@
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li.nav-item{role: 'presentation'}
+    %button.nav-link.active{id: 'import-file-tab', type: 'button', role: 'tab', data: {bs_toggle: 'tab', bs_target: '#import-file'}, aria: {controls: 'import-file', selected: true}}
+      = t('import.from_file')
+  %li.nav-item{role: 'presentation'}
+    %button.nav-link{id: 'import-url-tab', type: 'button', role: 'tab', data: {bs_toggle: 'tab', bs_target: '#import-url'}, aria: {controls: 'import-url', selected: false}}
+      = t('import.from_url')
+  %li.nav-item{role: 'presentation'}
+    %button.nav-link{id: 'import-text-tab', type: 'button', role: 'tab', data: {bs_toggle: 'tab', bs_target: '#import-text'}, aria: {controls: 'import-text', selected: false}}
+      = t('import.from_text')
+
+.tab-content
+  = render 'tab_from_file'
+  = render 'tab_from_url'
+  = render 'tab_from_text'
