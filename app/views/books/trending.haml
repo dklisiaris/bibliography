@@ -7,10 +7,17 @@
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 
-.row
+.row.index-layout
   .col-sm-8
-    = render partial: 'books/featured_book', :collection => @books, :as => :book
-  .col-sm-4
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title= detone("#{t('side_menu.trending')} #{t('books.label')}")
+
+      .index-panel__content
+        .book-list
+          = render partial: 'books/featured_book', collection: @books, as: :book
+
+  .col-sm-4.index-sidebar
     = render partial: 'authors/widgets/side',              |
     locals: {                                              |
     title: " #{t('books.popular')} #{t('authors.label')}", |

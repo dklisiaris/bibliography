@@ -7,16 +7,20 @@
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 
-.row
+.row.index-layout
   .col-sm-8
-    = render partial: 'books/latest_book', :collection => @books, :as => :book
-    - if @books.next_page
-      #load-more-awarded-books-btn-container
-      .row
-        .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-          #load-more-awarded-books= link_to t('load_more'), latest_books_path(page: 2, only_books: true, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
-      %hr
-  .col-sm-4
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title= detone(t('books.latest'))
+
+      .index-panel__content
+        .book-list#load-more-awarded-books-btn-container
+          = render partial: 'books/latest_book', collection: @books, as: :book
+        - if @books.next_page
+          .text-center.mt-3.pt-2
+            #load-more-awarded-books= link_to t('load_more'), latest_books_path(page: 2, only_books: true, format: :turbo_stream), class: 'btn btn-primary', data: {turbo_stream: true}
+
+  .col-sm-4.index-sidebar
     = render partial: 'authors/widgets/side', |
     locals: {                                 |
     title: " #{t('recently_added')}",         |

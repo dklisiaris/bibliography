@@ -92,18 +92,18 @@ var FormsWizard = function() {
                 var books_html;
                 if(category.books.length > 0) {
                   $.each(category.books, function(index, book) {
-                    var like_btn_klass = ($.inArray(book.id, liked_book_ids) > -1) ? 'btn-success' : 'btn-default';
-                    var dislike_btn_klass = ($.inArray(book.id, disliked_book_ids) > -1) ? 'btn-danger' : 'btn-default';
+                    var like_btn_klass = ($.inArray(book.id, liked_book_ids) > -1) ? 'btn-success' : 'btn-outline-secondary';
+                    var dislike_btn_klass = ($.inArray(book.id, disliked_book_ids) > -1) ? 'btn-danger' : 'btn-outline-secondary';
 
                     var book_html = "\
                     <div class='rateable-book'>\
                     <div class='book-cover'>\
                     <img height='114' width='114' title='"+ book.title +"' src='"+ book.cover +"' alt='book_cover' class='img-thumbnail' data-toggle='tooltip' data-placement='top' />\
                     </div>\
-                    <button name='button' type='button' onclick='javascript:like("+book.id+")' class='btn btn-sm btn-like btn-like-"+book.id+" btn-effect-ripple "+like_btn_klass+"'>      \
+                    <button name='button' type='button' onclick='javascript:like("+book.id+")' class='btn btn-sm btn-like btn-like-"+book.id+" "+like_btn_klass+"'>      \
                       <i class='fa fa-thumbs-up'></i>\
                     </button>\
-                    <button name='button' type='button' onclick='javascript:dislike("+book.id+")' class='btn btn-sm btn-dislike btn-dislike-"+book.id+" btn-effect-ripple "+dislike_btn_klass+"'>      \
+                    <button name='button' type='button' onclick='javascript:dislike("+book.id+")' class='btn btn-sm btn-dislike btn-dislike-"+book.id+" "+dislike_btn_klass+"'>      \
                       <i class='fa fa-thumbs-down'></i>\
                     </button>\
                     </div>\
@@ -123,16 +123,12 @@ var FormsWizard = function() {
                 }
 
                 $('#rateable-books-wrapper').append("\
-                  <div class='widget'>\
-                    <div class='widget-content widget-content-mini'>\
-                      <strong class=''>"+ category.name +"</strong>\
+                  <section class='static-page__wizard-category'>\
+                    <header class='static-page__wizard-category-header'>"+ category.name +"</header>\
+                    <div class='static-page__wizard-category-body'>\
+                      <div class='book-container'>" + books_html + "</div>\
                     </div>\
-                    <div class='widget-content'>\
-                      <div class='row'>\
-                        <div class='book-container'>" + books_html + "</div>\
-                      </div>\
-                    </div>\
-                  </div>\
+                  </section>\
                 ");
 
               });

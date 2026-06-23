@@ -1,0 +1,16 @@
+- pages = {fa('home') => root_url, t('contributions.label', default: 'Contributions') => contributions_path, t('contributions.edit', default: 'Edit contribution') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-10.col-xl-9
+    %section.index-panel.resource-form
+      %header.index-panel__header
+        %h1.index-panel__title= detone(t('contributions.edit', default: 'Editing contribution'))
+
+      .index-panel__content
+        = render 'form'
+
+        .resource-form__footer-links
+          = link_to t('show'), @contribution
+          = link_to t('back'), contributions_path

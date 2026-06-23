@@ -142,6 +142,15 @@
     max-width: 11rem;
   }
 
+  &__meta {
+    flex: 0 0 100%;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #879599;
+    text-align: right;
+    white-space: nowrap;
+  }
+
   &__admin-id {
     flex: 0 0 100%;
     font-size: 0.6875rem;
@@ -188,6 +197,10 @@
     }
 
     &__admin-id {
+      text-align: left;
+    }
+
+    &__meta {
       text-align: left;
     }
   }

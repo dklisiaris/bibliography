@@ -16,6 +16,8 @@
           %p.book-list-item__author= book.main_author
 
       .book-list-item__actions
+        - if local_assigns[:meta].present?
+          %span.book-list-item__meta= meta
         - if @owned_book_ids.present?
           = render partial: "books/widgets/collections_manager_btn", locals: {book: book, full_size: true}
         - if @liked_book_ids.present? && @disliked_book_ids.present?
