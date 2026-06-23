@@ -12,7 +12,6 @@
 //
 //= require jquery2
 //= require jquery.readyselector
-//= require typeahead.js/dist/typeahead.bundle.min
 //= require trix
 //= require dropzone/dist/min/dropzone.min
 //= require masonry-layout/dist/masonry.pkgd.min

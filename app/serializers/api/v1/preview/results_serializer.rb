@@ -21,4 +21,8 @@ class Api::V1::Preview::ResultsSerializer
       end
     end
   end
+
+  def as_json(_options = nil)
+    { results: @results.as_json }
+  end
 end

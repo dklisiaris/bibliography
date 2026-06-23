@@ -74,34 +74,12 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-
-  // typeahead.js wraps the input at runtime.
-  > span.twitter-typeahead {
-    position: static;
-    display: flex !important;
-    flex: 1 1 auto;
-    min-width: 0;
-    width: auto !important;
-
-    .tt-hint,
-    .tt-input,
-    .form-control {
-      width: 100%;
-    }
-  }
-
-  .tt-hint {
-    color: #adb5bd;
-  }
 }
 
 .search-bar--md {
   .search-bar__group {
     > .form-control,
-    > .search-bar__input,
-    > span.twitter-typeahead .form-control,
-    > span.twitter-typeahead .tt-input,
-    > span.twitter-typeahead .tt-hint {
+    > .search-bar__input {
       min-height: 2.5rem;
       padding: 0.5rem 0.875rem;
       font-size: 0.875rem;
@@ -117,10 +95,7 @@
 .search-bar--lg {
   .search-bar__group {
     > .form-control,
-    > .search-bar__input,
-    > span.twitter-typeahead .form-control,
-    > span.twitter-typeahead .tt-input,
-    > span.twitter-typeahead .tt-hint {
+    > .search-bar__input {
       min-height: 3rem;
       padding: 0.625rem 1rem;
       font-size: 1rem;
