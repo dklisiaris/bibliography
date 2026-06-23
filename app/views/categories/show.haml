@@ -1,0 +1,41 @@
+- tags = {title: @category.name}
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- if @category.parent_id.nil?
+  - pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.name => nil}
+- else
+  - pages = {fa('home') => root_url, t('categories.label') => categories_url, @category.parent.name => @category.parent, @category.name => nil}
+
+= content_header(content: render(partial: 'shared/search_form', locals: {action: categories_path, placeholder: t('categories.search')}), breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-8
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title= detone @category.name
+        .index-panel__actions
+          - if user_signed_in?
+            - category_favourited = current_user.likes?(@category)
+            - fav_btn_class = category_favourited ? 'btn-success' : 'btn-outline-primary'
+            - fav_data = {controller: 'favourite', action: 'click->favourite#toggle', toggle: 'tooltip', original_title: category_favourited ? t('categories.favoured') : t('categories.add_to_favourites'), favourite_url_value: favourite_category_path(@category), favourite_record_id_value: @category.id, favourite_kind_value: 'category', favourite_inactive_class_value: 'btn-outline-primary', favourite_add_label_value: t('categories.add_to_favourites'), favourite_favoured_label_value: t('categories.favoured')}
+            = button_tag fa(category_favourited ? 'star' : 'star-o'), type: 'button', class: "btn btn-sm #{fav_btn_class} btn-favourite-category-#{@category.id}", data: fav_data
+          - else
+            = link_to fa('star-o'), new_user_session_path, class: "btn btn-sm btn-outline-primary btn-favourite-category-#{@category.id}", data: {toggle: 'tooltip', original_title: t('categories.add_to_favourites')}
+
+      .index-panel__toolbar
+        .index-panel__pagination
+          = render 'books/widgets/pagination' if @books.respond_to?(:total_pages) && @books.total_pages > 1
+
+      .index-panel__content
+        .book-list
+          = render partial: 'books/book', collection: @books, as: :book
+        = render 'books/widgets/pagination' if @books.respond_to?(:total_pages) && @books.total_pages > 1
+
+  .col-lg-4
+    = render partial: 'categories/category_nav', locals: {title: detone(t('categories.label')), categories: @children, current_category: @category, back_path: @category.parent_id.nil? ? categories_path : @category.parent, back_label: @category.parent_id.nil? ? t('categories.label') : @category.parent.name, new_path: (policy(@category).update? ? new_category_path(parent_id: @category.id) : nil), new_tooltip: t('categories.new_subcategory')}
+    - if policy(@category).update? || policy(@category).destroy?
+      .category-nav-actions
+        - if policy(@category).update?
+          = nav_btn_link_to(name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success')
+        - if policy(@category).destroy?
+          = link_to fa('times'), @category, class: 'btn btn-sm btn-danger btn-icon', method: :delete, data: {confirm: t('u_sure'), toggle: 'tooltip', original_title: t('categories.delete')}

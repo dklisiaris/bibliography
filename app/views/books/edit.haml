@@ -1,0 +1,17 @@
+- pages = {fa('home') => root_url, t('books.label') => books_path, @book.title => book_path(@book), t('books.edit') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-10.col-xl-9
+    %section.index-panel.resource-form
+      %header.index-panel__header
+        %h1.index-panel__title= detone t('books.edit')
+
+      .index-panel__content
+        = render 'form'
+
+        .resource-form__footer-links
+          = link_to t('show'), @book
+          %span.mx-1 |
+          = link_to t('back'), books_path

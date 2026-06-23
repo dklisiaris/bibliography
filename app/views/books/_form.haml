@@ -1,0 +1,112 @@
+= form_for @book, html: {multipart: true, role: 'form'} do |f|
+  - if @book.errors.any?
+    .alert.alert-danger
+      %h2.h6
+        = pluralize(@book.errors.count, 'error')
+        prohibited this book from being saved:
+      %ul.mb-0
+        - @book.errors.full_messages.each do |message|
+          %li= message
+
+  %h2.resource-form__section= t('books.title')
+  .row
+    .col-md-6.mb-3
+      = f.label :title, class: 'form-label'
+      = f.text_field :title, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :subtitle, class: 'form-label'
+      = f.text_field :subtitle, class: 'form-control'
+  .mb-3
+    = f.label :description, class: 'form-label'
+    = f.text_area :description, rows: 8, class: 'form-control'
+
+  %h2.resource-form__section Cover
+  .resource-form__media
+    = image_tag @book.cover, class: 'resource-form__preview', alt: @book.title.presence || t('books.label')
+    .resource-form__media-fields
+      .mb-3
+        = f.label :remote_uploaded_cover_url, 'Upload new cover (URL)', class: 'form-label'
+        = f.text_field :remote_uploaded_cover_url, class: 'form-control', placeholder: 'Cover image URL'
+      .mb-3
+        = f.label :image, class: 'form-label'
+        = f.text_field :image, class: 'form-control'
+
+  %h2.resource-form__section Identifiers
+  .row
+    .col-md-6.mb-3
+      = f.label :isbn, class: 'form-label'
+      = f.text_field :isbn, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :isbn13, class: 'form-label'
+      = f.text_field :isbn13, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :ismn, class: 'form-label'
+      = f.text_field :ismn, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :issn, class: 'form-label'
+      = f.text_field :issn, class: 'form-control'
+
+  %h2.resource-form__section= t('books.series')
+  .row
+    .col-md-6.mb-3
+      = f.label :series_name, class: 'form-label'
+      = f.text_field :series_name, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :series_volume, class: 'form-label'
+      = f.text_field :series_volume, class: 'form-control'
+
+  %h2.resource-form__section= t('books.publication')
+  .row
+    .col-md-6.mb-3
+      = f.label :publication_year, class: 'form-label'
+      = f.number_field :publication_year, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :publication_version, class: 'form-label'
+      = f.number_field :publication_version, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :publication_place, class: 'form-label'
+      = f.text_field :publication_place, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :pages, t('books.pages_label'), class: 'form-label'
+      = f.number_field :pages, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :size, class: 'form-label'
+      = f.text_field :size, class: 'form-control'
+
+  %h2.resource-form__section Format & language
+  .row
+    .col-md-6.mb-3
+      = f.label :cover_type, class: 'form-label'
+      = f.select :cover_type, options_for_select(@cover_types.collect { |s| [s[0].humanize, s[0]] }, selected: @book.cover_type), {}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :format, class: 'form-label'
+      = f.select :format, options_for_select(@formats.collect { |s| [s[0].humanize, s[0]] }, selected: @book.format), {}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :language, class: 'form-label'
+      - language_options = options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: @book.language.present? ? Book::LANGUAGES.index(@book.language.to_sym) : nil)
+      = f.select :language, language_options, {prompt: '-- Select Language --'}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :original_language, class: 'form-label'
+      - original_language_options = options_for_select(Book::LANGUAGES.each_with_index.collect { |lang, i| [lang, i] }, selected: @book.original_language.present? ? Book::LANGUAGES.index(@book.original_language.to_sym) : nil)
+      = f.select :original_language, original_language_options, {prompt: '-- Select Original Language --'}, class: 'form-select'
+    .col-md-6.mb-3
+      = f.label :original_title, class: 'form-label'
+      = f.text_field :original_title, class: 'form-control'
+
+  %h2.resource-form__section Metadata
+  .row
+    .col-md-6.mb-3
+      = f.label :publisher_id, class: 'form-label'
+      = f.text_field :publisher_id, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :extra, class: 'form-label'
+      = f.text_field :extra, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :slug, class: 'form-label'
+      = f.text_field :slug, class: 'form-control'
+    .col-md-6.mb-3
+      = f.label :biblionet_id, class: 'form-label'
+      = f.number_field :biblionet_id, class: 'form-control', readonly: true
+
+  .resource-form__actions
+    = f.submit t('save'), class: 'btn btn-primary'
