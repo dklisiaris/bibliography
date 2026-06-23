@@ -1,0 +1,28 @@
+// ProUI solid alerts (resource forms, admin, community banner).
+
+.alert {
+  color: #fff;
+  border-width: 0;
+  border-radius: 0.1875rem;
+
+  .alert-link {
+    color: #000;
+    opacity: 0.4;
+  }
+}
+
+.alert-danger {
+  background-color: #de815c;
+}
+
+.alert-warning {
+  background-color: #deb25c;
+}
+
+.alert-success {
+  background-color: #afde5c;
+}
+
+.alert-info {
+  background-color: #5cafde;
+}

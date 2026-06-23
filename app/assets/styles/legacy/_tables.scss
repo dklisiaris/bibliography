@@ -1,0 +1,36 @@
+// ProUI table tweaks (book show metadata, admin tables).
+
+.table {
+  tbody + tbody,
+  tbody > tr > td,
+  tbody > tr > th,
+  tfoot > tr > td,
+  tfoot > tr > th,
+  thead > tr > td,
+  thead > tr > th,
+  &.table-bordered,
+  &.table-bordered > tbody > tr > td,
+  &.table-bordered > tbody > tr > th,
+  &.table-bordered > tfoot > tr > td,
+  &.table-bordered > tfoot > tr > th,
+  &.table-bordered > thead > tr > td,
+  &.table-bordered > thead > tr > th {
+    border-color: #ebf1f2;
+  }
+
+  thead > tr > th {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  tbody > tr > td,
+  tbody > tr > th {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  &.table-hover > tbody > tr:hover > td,
+  &.table-hover > tbody > tr:hover > th {
+    background-color: #ebf1f2;
+  }
+}

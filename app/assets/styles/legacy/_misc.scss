@@ -1,0 +1,13 @@
+// Residual ProUI globals not covered by BS5 variables or component partials.
+
+.form-control {
+  box-shadow: none;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+:focus {
+  outline: 0 !important;
+}

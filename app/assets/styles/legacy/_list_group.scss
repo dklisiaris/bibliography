@@ -1,0 +1,28 @@
+// Prizes sidebar list — active item uses site primary.
+
+.list-group-item {
+  border-color: #ebf1f2;
+}
+
+a.list-group-item {
+  &:hover,
+  &:focus {
+    background-color: #f9f9f9;
+  }
+
+  &.active,
+  &.active:focus,
+  &.active:hover {
+    background-color: $primary;
+    border-color: $primary;
+
+    .list-group-item-text {
+      color: #fff;
+    }
+
+    > .badge {
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+    }
+  }
+}

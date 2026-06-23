@@ -1,0 +1,39 @@
+// ProUI modal chrome — animation handled in _bs5_legacy_fixes (.modal.fade.show).
+
+.modal-content {
+  border: none;
+  box-shadow: none;
+}
+
+.modal-header {
+  padding: 1.0625rem 0.9375rem 0.9375rem;
+  border-bottom: none;
+  background-color: #f9f9f9;
+}
+
+.modal-title {
+  font-weight: 300;
+}
+
+.modal-body {
+  padding: 1.25rem 0.9375rem;
+}
+
+.modal-footer {
+  margin-top: 0;
+  padding: 0.5625rem 0.9375rem 0.625rem;
+  border-top: none;
+  background-color: #f9f9f9;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    margin: 3.75rem auto;
+  }
+
+  .modal-footer,
+  .modal-header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

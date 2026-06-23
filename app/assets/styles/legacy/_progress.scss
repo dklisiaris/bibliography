@@ -1,0 +1,39 @@
+// Recommendation progress bar on book show (BS3 class names retained in markup).
+
+.progress {
+  background: rgba(0, 0, 0, 0.1);
+
+  &,
+  .progress-bar {
+    height: 1.125rem;
+    line-height: 1.125rem;
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  &.progress-mini,
+  &.progress-mini .progress-bar {
+    height: 0.4375rem;
+    line-height: 0.4375rem;
+  }
+}
+
+.progress-bar-primary {
+  background-color: $primary;
+}
+
+.progress-bar-success {
+  background-color: #afde5c;
+}
+
+.progress-bar-danger {
+  background-color: #de815c;
+}
+
+.progress-bar-warning {
+  background-color: #deb25c;
+}
+
+.progress-bar-info {
+  background-color: #5cafde;
+}
