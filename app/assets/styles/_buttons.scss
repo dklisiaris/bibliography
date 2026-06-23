@@ -29,12 +29,6 @@
   }
 }
 
-// ProUI ripple — keep for JS compatibility, no visual side effects.
-.btn-effect-ripple {
-  position: relative;
-  overflow: hidden;
-}
-
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: #{$primary};
@@ -60,7 +54,6 @@
   --bs-btn-active-border-color: #c8d4d8;
 }
 
-.btn-default,
 .btn-outline-secondary {
   --bs-btn-color: #6c757d;
   --bs-btn-border-color: #dae5e8;
