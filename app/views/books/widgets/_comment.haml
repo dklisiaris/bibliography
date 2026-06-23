@@ -1,27 +1,15 @@
-%li.media.comment-block{:id => "comment-#{comment.id}"}
-  %a.pull-left{:href => "#{public_profile_path(comment.user.profile.id)}"}
-    = image_tag(comment.user.avatar, alt: "Avatar", height: (40/(1+depth*0.25)).to_s, width: (40/(1+depth*0.25)).to_s, class: "img-circle")
-  .media-body
-    .comment-content
-      %a{:href => "#{public_profile_path(comment.user.profile.id)}"}
-        %strong= comment.user.screen_name
-      %span.text-muted
-        %small
-          %em= time_ago_in_words(comment.created_at)
-      - if policy(comment).destroy?
-        %span.comment-action.delete-comment{:onclick => "deleteComment(#{book.id}, #{comment.id}, #{user.credentials})"}
-          %small
-            %em= fa('trash-o')
-      - if policy(comment).edit? && false
-        %span.comment-action.edit-comment
-          %small
-            %em= fa('pencil')
-      %p= comment.body.html_safe
-    = render partial: 'books/widgets/comments_list',  |
-      locals: {                                       |
-        comments: subcomments,                        |
-        parent_id: comment.id,                        |
-        book: book,                                   |
-        user: user,                                   |
-        depth: depth + 1                              |
-      }                                               |
+- avatar_size = (40 / (1 + depth * 0.25)).round
+%li.book-comment{id: "comment-#{comment.id}"}
+  .book-comment__layout
+    = link_to public_profile_path(comment.user.profile), class: "book-comment__avatar-link" do
+      = image_tag comment.user.avatar, alt: "Avatar", height: avatar_size, width: avatar_size, class: "book-comment__avatar"
+    .book-comment__body
+      .book-comment__header
+        = link_to comment.user.screen_name, public_profile_path(comment.user.profile), class: "book-comment__author"
+        %time.book-comment__time.text-muted{datetime: comment.created_at.iso8601}= time_ago_in_words(comment.created_at)
+        - if policy(comment).destroy?
+          %button.book-comment__delete.delete-comment{type: "button", onclick: "deleteComment(#{book.id}, #{comment.id}, #{user.credentials})", title: t("delete", default: "Delete"), "aria-label": t("delete", default: "Delete")}
+            = fa("trash-o")
+      .book-comment__text= comment.body.html_safe
+      - if subcomments
+        = render partial: "books/widgets/comments_list", locals: {comments: subcomments, parent_id: comment.id, book: book, user: user, depth: depth + 1}

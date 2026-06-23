@@ -58,21 +58,6 @@
   }
 }
 
-.comment-block {
-  display: block;
-}
-
-.comment-content:hover .comment-action{
-  display: block;
-  cursor: pointer;
-}
-
-.comment-action {
-  display: none;
-  float:right;
-  margin-right: 10px;
-}
-
 trix-editor {
   min-height: 286px !important;
 }
@@ -83,16 +68,6 @@ trix-editor {
 
 .review-btns {
   padding-bottom: 15px;
-}
-
-.comments-list h1 {
-  font-size: 26px;
-  margin-top: 8px;
-  margin-bottom: 12px;
-}
-
-.comment-area {
-  resize: vertical;
 }
 
 .filter-group {

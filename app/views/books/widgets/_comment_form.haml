@@ -1,12 +1,13 @@
-%li.media.comment-form-block{:id => "comment-form-block-#{parent_id}"}
-  %a.pull-left{:href => "#{public_profile_path(user.id)}"}
-    %img.img-circle{:alt => "Avatar", :height => "32", :width => "32", :src => "#{user.avatar}"}/
-  .media-body
-    %form.comment-form{:onsubmit => "return false;", :id => "comment-form-#{parent_id}", style: "display:none;"}
-      %textarea.comment-area.form-control{:placeholder => "#{t('comments.write')}", :rows => "2"}
-      %input{:name => "book_id", :type => "hidden", :value => "#{book.id}"}/
-      %input{:name => "parent_id", :type => "hidden", :value => "#{parent_id}"}/
-      %input{:name => "email", :type => "hidden", :value => "#{user.email}"}/
-      %input{:name => "token", :type => "hidden", :value => "#{user.token}"}/
-      %button.post-comment.btn.btn-sm.btn-primary{type: "submit"}= t('comments.post')
-    %button.write-comment-btn.btn.btn-sm.btn-link{:type => "button", :id => "write-comment-btn-#{parent_id}"}= t('comments.write_comment')
+%li.book-comment-form{id: "comment-form-block-#{parent_id}"}
+  .book-comment__layout
+    = link_to public_profile_path(user.profile), class: "book-comment__avatar-link" do
+      = image_tag user.avatar, alt: "Avatar", height: 32, width: 32, class: "book-comment__avatar"
+    .book-comment-form__body
+      %form.book-comment-form__form{id: "comment-form-#{parent_id}", onsubmit: "return false;", style: "display:none;"}
+        %textarea.book-comment-form__textarea.comment-area.form-control{placeholder: t("comments.write"), rows: 2}
+        %input{name: "book_id", type: "hidden", value: book.id}
+        %input{name: "parent_id", type: "hidden", value: parent_id}
+        %input{name: "email", type: "hidden", value: user.email}
+        %input{name: "token", type: "hidden", value: user.token}
+        %button.post-comment.btn.btn-sm.btn-primary{type: "submit"}= t("comments.post")
+      %button.book-comment-form__toggle.write-comment-btn.btn.btn-sm.btn-link{type: "button", id: "write-comment-btn-#{parent_id}"}= t("comments.write_comment")
