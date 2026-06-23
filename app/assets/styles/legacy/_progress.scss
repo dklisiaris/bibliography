@@ -1,7 +1,8 @@
-// Recommendation progress bar on book show (BS3 class names retained in markup).
+// Recommendation progress bar sizing (book show sidebar).
 
 .progress {
   background: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 
   &,
   .progress-bar {
@@ -16,24 +17,4 @@
     height: 0.4375rem;
     line-height: 0.4375rem;
   }
-}
-
-.progress-bar-primary {
-  background-color: $primary;
-}
-
-.progress-bar-success {
-  background-color: #afde5c;
-}
-
-.progress-bar-danger {
-  background-color: #de815c;
-}
-
-.progress-bar-warning {
-  background-color: #deb25c;
-}
-
-.progress-bar-info {
-  background-color: #5cafde;
 }

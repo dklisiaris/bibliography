@@ -7,13 +7,16 @@
 <% end %>
 
 <% if defined? show_progressbar.present? and show_progressbar %>
-<div class="progress progress-mini">
-  <div class=<%= "\"progress-bar progress-bar-success recommendations-bar-#{book.id}\"".html_safe %>
-    role="progressbar"
-    aria-valuenow=<%= "#{book.liked_by_count_cache}" %>
-    aria-valuemin="0" aria-valuemax=<%= "#{book.liked_by_count_cache+book.disliked_by_count_cache}" %>
-    style=<%= (book.liked_by_count_cache+book.disliked_by_count_cache)>0 ? "width:#{(book.liked_by_count_cache/(book.liked_by_count_cache+book.disliked_by_count_cache))*100}%" : "width:0%" %>></div>
-</div>
+  <% total_votes = book.liked_by_count_cache + book.disliked_by_count_cache %>
+  <% recommend_pct = total_votes.positive? ? (book.liked_by_count_cache.to_f / total_votes * 100) : 0 %>
+  <div class="progress progress-mini">
+    <div class="progress-bar bg-success recommendations-bar-<%= book.id %>"
+         role="progressbar"
+         aria-valuenow="<%= book.liked_by_count_cache %>"
+         aria-valuemin="0"
+         aria-valuemax="<%= total_votes %>"
+         style="width: <%= recommend_pct %>%"></div>
+  </div>
 <% end %>
 
 <% if user_signed_in? %>
