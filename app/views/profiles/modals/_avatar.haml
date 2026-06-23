@@ -5,7 +5,7 @@
         %h5.modal-title#avatarModalLabel= t("users.change_avatar")
         %button.btn-close{type: "button", aria: {label: t("close", default: "Close")}, data: {bs_dismiss: "modal"}}
       .modal-body
-        = form_tag profile_path, method: :patch, class: "dropzone profile-upload-dropzone", id: "avatar-dropzone" do
+        = form_tag profile_path, method: :patch, class: "dropzone profile-upload-dropzone", id: "avatar-dropzone", data: {controller: "profile-upload", profile_upload_modal_id_value: "avatarModal"} do
           .dz-message{"data-dz-message" => ""}
             %span= t("drop_to_upload")
             %br/

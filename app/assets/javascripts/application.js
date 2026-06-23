@@ -13,6 +13,5 @@
 //= require jquery2
 //= require jquery.readyselector
 //= require trix
-//= require dropzone/dist/min/dropzone.min
 //= require masonry-layout/dist/masonry.pkgd.min
 //= require_tree .
