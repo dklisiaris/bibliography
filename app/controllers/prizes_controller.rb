@@ -5,7 +5,7 @@ class PrizesController < ApplicationController
 
   def index
     authorize :prize, :index?
-    @prizes = policy_scope(Prize).page(params[:page])
+    @prizes = policy_scope(Prize).includes(:awards).page(params[:page])
 
     respond_with(@prizes)
   end
@@ -46,7 +46,7 @@ class PrizesController < ApplicationController
 
   private
     def set_prize
-      @prize = Prize.find(params[:id])
+      @prize = Prize.includes(awards: :awardable).find(params[:id])
       authorize @prize
     end
 

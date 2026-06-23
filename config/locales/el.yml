@@ -213,6 +213,13 @@ el:
 
   prizes:
     label: "Βραβεία"
+    new: "Νέο βραβείο"
+    edit: "Επεξεργασία βραβείου"
+    awarded_authors: "Βραβευμένοι συγγραφείς"
+    no_awardees_yet: "Δεν υπάρχουν βραβευμένοι συγγραφείς ακόμα."
+    awards_count:
+      one: "1 βράβευση"
+      other: "%{count} βραβεύσεις"
 
   books:
     index:

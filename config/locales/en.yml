@@ -229,6 +229,13 @@ en:
 
   prizes:
     label: "Prizes"
+    new: "New prize"
+    edit: "Edit prize"
+    awarded_authors: "Awarded authors"
+    no_awardees_yet: "No awardees yet."
+    awards_count:
+      one: "1 award"
+      other: "%{count} awards"
 
   books:
     index:

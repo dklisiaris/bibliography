@@ -1,0 +1,31 @@
+- tags = { title: @prize.name }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- pages = {fa('home') => root_url, t('prizes.label') => prizes_path, @prize.name => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row
+  .col-12
+    %article.resource-show
+      - if policy(@prize).update?
+        .resource-show__toolbar
+          = nav_btn_link_to(name: fa('pencil'), url: edit_prize_path(@prize), tooltip: t('prizes.edit', default: 'Edit prize'), style: 'success')
+
+      .resource-show__layout
+        .resource-show__sidebar
+          .resource-show__media-card
+            %span.resource-show__icon{aria: {hidden: true}}
+              %i.fa.fa-trophy
+
+        .resource-show__main
+          %header.resource-show__intro
+            %h1.resource-show__title= detone(@prize.name)
+
+          %section.resource-show__section
+            %h2.resource-show__section-title= t('prizes.awarded_authors', default: 'Awarded authors')
+            - if @prize.awards.any?
+              .resource-show__awards#awards
+                = render partial: 'prizes/awardee', collection: @prize.awards, as: :award
+            - else
+              %p.text-muted.mb-0= t('prizes.no_awardees_yet', default: 'No awardees yet.')
