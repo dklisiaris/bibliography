@@ -421,6 +421,9 @@ en:
   awards:
     label: "Awards"
     new: "New Award"
+    edit: "Edit award"
+    missing_awardee: "Missing awardee"
+    missing_prize: "Missing prize"
 
   gender:
     male: "Male"

@@ -1,0 +1,24 @@
+- tags = { title: t('awards.label') }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+
+- pages = {fa('home') => root_url, t('awards.label') => nil}
+
+= content_header(breadcrumbs: pages)
+
+.row.index-layout
+  .col-12
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title
+          = detone(t('awards.label'))
+          - if @awards.respond_to?(:total_count) && @awards.total_count.present?
+            %span.index-panel__count= " (#{@awards.total_count})"
+
+      .index-panel__toolbar
+        .index-panel__pagination
+          = render partial: 'awards/widgets/pagination', locals: {paginatable: @awards}
+
+      .index-panel__content
+        .award-list
+          = render partial: 'awards/award', collection: @awards, as: :award
+        = render partial: 'awards/widgets/pagination', locals: {paginatable: @awards}

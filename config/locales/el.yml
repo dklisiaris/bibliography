@@ -404,6 +404,9 @@ el:
   awards:
     label: "Βραβεία"
     new: "Νέο Βραβείο"
+    edit: "Επεξεργασία βράβευσης"
+    missing_awardee: "Λείπει ο βραβευμένος"
+    missing_prize: "Λείπει το βραβείο"
 
   gender:
     male: "Άνδρας"
