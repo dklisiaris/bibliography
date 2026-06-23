@@ -12,7 +12,7 @@
           - if policy(@author).update?
             = nav_btn_link_to(name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success')
           - if policy(@author).destroy? && @author.books.count == 0
-            = link_to fa('times'), @author, class: "btn btn-danger", method: :delete, data: {confirm: t('u_sure'), bs_toggle: "tooltip"}, title: t('authors.delete')
+            = link_to fa('times'), @author, class: "btn btn-danger", method: :delete, data: { turbo_confirm: t('u_sure'), bs_toggle: "tooltip"}, title: t('authors.delete')
 
       .resource-show__layout
         = render partial: "authors/author_show_sidebar"

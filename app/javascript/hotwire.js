@@ -1,6 +1,6 @@
 // Hotwire entry (esbuild → app/assets/builds/hotwire.js).
 // Legacy UI still loads Sprockets application.js (jQuery plugins, ProUI app.js).
-import * as Turbo from "@hotwired/turbo"
+import "@hotwired/turbo"
 
 import "./controllers"
 import { initBootstrapBridge } from "./bootstrap_bridge"

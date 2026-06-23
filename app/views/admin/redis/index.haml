@@ -65,7 +65,7 @@
                         = link_to admin_redis_key_path(key_info[:key]), class: 'btn btn-sm btn-primary' do
                           = fa('eye')
                           View
-                        = link_to admin_redis_delete_path(key_info[:key]), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure you want to delete '#{key_info[:key]}'?"} do
+                        = link_to admin_redis_delete_path(key_info[:key]), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo_confirm: "Are you sure you want to delete '#{key_info[:key]}'?"} do
                           = fa('trash')
                           Delete
 

@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery2
-//= require rails-ujs
 //= require jquery.readyselector
 //= require typeahead.js/dist/typeahead.bundle.min
 //= require trix

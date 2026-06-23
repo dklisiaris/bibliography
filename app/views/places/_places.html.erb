@@ -29,7 +29,7 @@
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
         <td><%= link_to t('edit'), [:edit, @publisher, place] if policy(place).update? %></td>
-        <td><%= link_to t('destroy'), [@publisher, place], method: :delete, data: { confirm: 'Are you sure?' } if policy(place).destroy? %></td>
+        <td><%= link_to t('destroy'), [@publisher, place], method: :delete, data: { turbo_confirm: 'Are you sure?' } if policy(place).destroy? %></td>
       </tr>
     <% end %>
   </tbody>

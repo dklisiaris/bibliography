@@ -17,7 +17,7 @@
         - if policy(author).update?
           = link_to fa("pencil"), edit_author_path(author), class: "btn btn-xs btn-success", title: t("edit", default: "Edit")
         - if policy(author).destroy?
-          = link_to fa("times"), author, class: "btn btn-xs btn-danger", method: :delete, data: {confirm: t("u_sure")}
+          = link_to fa("times"), author, class: "btn btn-xs btn-danger", method: :delete, data: { turbo_confirm: t("u_sure")}
         - if policy(author).update?
           %span.author-list-item__admin-id ID: #{author.id}
 

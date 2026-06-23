@@ -13,7 +13,7 @@
         .index-panel__actions
           = nav_btn_link_to(name: fa('cog'), url: edit_shelf_path(@shelf), tooltip: t('shelves.edit'))
           - unless @shelf.built_in
-            = link_to @shelf, class: "btn btn-sm btn-danger btn-icon", method: :delete, data: {confirm: t('u_sure')}, title: t('shelves.delete') do
+            = link_to @shelf, class: "btn btn-sm btn-danger btn-icon", method: :delete, data: { turbo_confirm: t('u_sure')}, title: t('shelves.delete') do
               %i.fa.fa-trash-o{aria: {hidden: true}}
 
       .index-panel__toolbar

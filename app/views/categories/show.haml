@@ -38,4 +38,4 @@
         - if policy(@category).update?
           = nav_btn_link_to(name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success')
         - if policy(@category).destroy?
-          = link_to fa('times'), @category, class: 'btn btn-sm btn-danger btn-icon', method: :delete, data: {confirm: t('u_sure'), bs_toggle: 'tooltip'}, title: t('categories.delete')
+          = link_to fa('times'), @category, class: 'btn btn-sm btn-danger btn-icon', method: :delete, data: { turbo_confirm: t('u_sure'), bs_toggle: 'tooltip'}, title: t('categories.delete')
