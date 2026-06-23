@@ -1,0 +1,34 @@
+%article.book-list-item
+  .book-list-item__media
+    = link_to book, class: "book-list-item__cover-link" do
+      = image_tag(book.cover, alt: book.title, class: "book-list-item__cover", loading: "lazy")
+
+  .book-list-item__content
+    .book-list-item__header
+      .book-list-item__heading
+        %h4.book-list-item__title= link_to book.title, book, class: "book-list-item__title-link"
+
+        - if book.main_writer.present?
+          %p.book-list-item__author= link_to book.main_writer.fullname, book.main_writer, class: "book-list-item__author-link"
+        - elsif book.writers.first.present?
+          %p.book-list-item__author= link_to(book.main_author, book.writers.first, class: "book-list-item__author-link")
+        - else
+          %p.book-list-item__author= book.main_author
+
+      .book-list-item__actions
+        - if @owned_book_ids.present?
+          = render partial: "books/widgets/collections_manager_btn", locals: {book: book, full_size: true}
+        - if @liked_book_ids.present? && @disliked_book_ids.present?
+          = render partial: "books/widgets/recommend_btns", locals: {book: book}
+        - if policy(book).update?
+          %span.book-list-item__admin-id ID: #{book.id}
+
+    %p.book-list-item__stats
+      = t("books.recommended_x_times", count: book.liked_by_count_cache)
+      ·
+      = t("books.in_x_collections", count: book.bookshelves_count)
+      ·
+      = t("books.with_x_views", count: book.views_count)
+
+    - if book.short_description(100).present?
+      %p.book-list-item__description= book.short_description(100)

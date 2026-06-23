@@ -1,93 +1,59 @@
 - tags = { title: @author.fullname, image: image_url(@author.avatar), description: @author.short_biography(140) }
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 - pages = {fa('home') => root_url, t('authors.label') => authors_path, @author.fullname => nil}
-= content_header(                                                |
-  content: render(partial: 'shared/search_form',                                         |
-  locals: {action: authors_path, placeholder: t('authors.search')}), breadcrumbs: pages) |
+
+= content_header(content: render(partial: 'shared/search_form', locals: {action: authors_path, placeholder: t('authors.search')}), breadcrumbs: pages)
+
 .row
-  .col-sm-10.col-sm-offset-1
-    .block.full
-      .block-title
-        .block-options.pull-right
+  .col-12
+    %article.resource-show
+      - if policy(@author).update? || (policy(@author).destroy? && @author.books.count == 0)
+        .resource-show__toolbar
           - if policy(@author).update?
-            = nav_btn_link_to( name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success')
-          = link_to fa('times'), @author, class: "btn btn-effect-ripple btn-danger",                                                                                               |
-            method: :delete, data: { confirm: t('u_sure'), "toggle" => "tooltip", "original-title" => t('authors.delete') } if policy(@author).destroy? and @author.books.count==0 |
-        %h1= detone(@author.fullname)
-      .row
-        .col-sm-3
-          .row
-            .widget
-              .widget-content.themed-background-muted.text-center.clearfix
-                = image_tag(@author.avatar, alt: "author_photo", class: "img-thumbnail")
-              .widget-content.themed-background-muted.text-center
-                = render partial: 'authors/widgets/favourite_btn', locals: {author: @author, liked: @liked}
-                %hr/
-                .row.text-center
-                  .col-xs-6
-                    %h4.widget-heading
-                      %small= t 'books.label'
-                      %br/
-                      = @author.books.count
-                  .col-xs-6
-                    %h4.widget-heading
-                      %small= t 'stats.views'
-                      %br/
-                      = @author.impressions_count || 0
-                  .col-xs-6
-                    %h4.widget-heading
-                      %small= t 'authors.favoured'
-                      %br/
-                      = @author.liked_by_count
-        .col-sm-9
-          %h2
-            = @author.fullname
-            %br/
-            %small= @author.extra_info
-          %hr/
-          %article.description{
-            data: {
-              controller: "read-more",
-              read_more_collapsed_height_value: 80,
-              read_more_more_label_value: t("read_more"),
-              read_more_less_label_value: t("read_less")
+            = nav_btn_link_to(name: fa('pencil'), url: edit_author_path(@author), tooltip: t('authors.edit'), style: 'success')
+          - if policy(@author).destroy? && @author.books.count == 0
+            = link_to fa('times'), @author, class: "btn btn-effect-ripple btn-danger", method: :delete, data: {confirm: t('u_sure'), toggle: "tooltip", original_title: t('authors.delete')}
+
+      .resource-show__layout
+        = render partial: "authors/author_show_sidebar"
+
+        .resource-show__main
+          %header.resource-show__intro
+            %h1.resource-show__title= detone(@author.fullname)
+            - if @author.extra_info.present?
+              %p.resource-show__subtitle= @author.extra_info
+
+          - if @author.biography.present?
+            %article.resource-show__description{
+              data: {
+                controller: "read-more",
+                read_more_collapsed_height_value: 80,
+                read_more_more_label_value: t("read_more"),
+                read_more_less_label_value: t("read_less")
+              }
             }
-          }
-            = @author.biography.html_safe if @author.biography.present?
+              = @author.biography.html_safe
+
           - if @awards.count > 0
-            %h4.sub-header
-              = t('awards.label')
-            - @awards.each do |award|
-              = link_to award.prize.name, award.prize
-              = " (#{award.year})"
-              %br/
+            %section.resource-show__section
+              %h2.resource-show__section-title= t('awards.label')
+              .resource-show__awards
+                - @awards.each do |award|
+                  = link_to("#{award.prize.name} (#{award.year})", award.prize, class: "resource-show__award-link")
+
           - if @writings.present?
-            %h4.sub-header
-              = "#{t('books.label')} - Συγγραφή - (#{@author.writings.count})"
-            = render partial: "shared/pagination", locals: {paginatable: @writings}
-            - if @writings.total_pages > 1
-              %hr/
-            = render :partial =>  "books/book", :collection => @writings, :as => :book
-            = render partial: "shared/pagination", locals: {paginatable: @writings}
-            - if @writings.total_pages > 1 && @contributed_books.present?
-              %hr/
+            = render partial: "shared/resource_show_books_section", locals: {title: "#{t('books.label')} - Συγγραφή (#{@author.writings.count})", books: @writings, paginatable: @writings}
 
           - if @contributed_books.present?
-            %h4.sub-header
-              = "#{t('books.label')} - Συμμετοχή - (#{@author.contributed_books.count})"
-            = render partial: "shared/pagination", locals: {paginatable: @contributed_books}
-            - if @contributed_books.total_pages > 1
-              %hr/
-            = render :partial =>  "books/book", :collection => @contributed_books, :as => :book
-            = render partial: "shared/pagination", locals: {paginatable: @contributed_books}
+            = render partial: "shared/resource_show_books_section", locals: {title: "#{t('books.label')} - Συμμετοχή (#{@author.contributed_books.count})", books: @contributed_books, paginatable: @contributed_books}
 
-          = render 'books/collections_modal' if user_signed_in? && (@writings.present? || @contributed_books.present?)
+      = render 'books/collections_modal' if user_signed_in? && (@writings.present? || @contributed_books.present?)
+
 - if policy(Award).new?
   .row
-    .col-sm-10.col-sm-offset-1
-      .block.full
-        .block-title
-          %h2
-            = detone t('awards.new')
-        .row
+    .col-12
+      %section.index-panel
+        %header.index-panel__header
+          %h2.index-panel__title= detone(t('awards.new'))
+        .index-panel__content
           = render 'awards/form'

@@ -1,0 +1,11 @@
+.category-nav.prize-nav
+  .category-nav__header
+    %h2.category-nav__title= title
+
+  .category-nav__list#load-more-awards-container
+    - if local_assigns[:selected_prize_id].present?
+      = link_to awarded_books_path, class: "category-nav__link category-nav__link--back" do
+        %i.fa.fa-arrow-left{aria: {hidden: true}}
+        %span= t("books.awarded")
+
+    = render partial: "prizes/prize_nav_item", collection: prizes, as: :prize, locals: {selected_prize_id: local_assigns[:selected_prize_id]}

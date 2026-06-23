@@ -1,27 +1,33 @@
 $('.profiles.show').ready(function() {
-  Dropzone.options.mediaDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
+  function handleUploadSuccess(file, response) {
+    if (window.hideBs3Modal) {
+      window.hideBs3Modal(document.getElementById('avatarModal'));
+      window.hideBs3Modal(document.getElementById('coverModal'));
+    }
+
+    var $cover = $('.cover').first();
+    if (response.cover && response.cover.url && $cover.attr("src") !== response.cover.url) {
+      $cover.attr("src", response.cover.url);
+    }
+
+    var $avatar = $('#profileAvatar');
+    if (response.avatar && response.avatar.url && $avatar.length && $avatar.attr("src") !== response.avatar.url) {
+      $avatar.attr("src", response.avatar.url);
+      $('#topHeaderAvatar').attr("src", response.avatar.url);
+    }
+
+    this.removeFile(file);
+  }
+
+  var dropzoneOptions = {
+    paramName: "file",
+    maxFilesize: 2,
     maxFiles: 1,
     init: function() {
-      this.on("success", function(file, response) {
-        $('#avatarModal').modal('hide');
-        $('#coverModal').modal('hide');
-
-        var $cover = $('.cover').first();
-        if($cover.attr("src") !== response.cover.url){
-          $cover.attr("src", response.cover.url);
-        }
-
-        var $avatar = $('#profileAvatar');
-        if(response.avatar.url && $avatar.attr("src") !== response.avatar.url){
-          $avatar.attr("src", response.avatar.url);
-          $('#topHeaderAvatar').attr("src", response.avatar.url);
-        }
-
-        this.removeFile(file);
-
-      });
+      this.on("success", handleUploadSuccess);
     }
   };
+
+  Dropzone.options.avatarDropzone = dropzoneOptions;
+  Dropzone.options.coverDropzone = dropzoneOptions;
 });

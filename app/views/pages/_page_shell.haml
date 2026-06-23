@@ -1,0 +1,10 @@
+- col_class = local_assigns.fetch(:col_class, "col-lg-8 col-xl-7")
+
+.row.index-layout
+  %div{class: col_class}
+    %section.index-panel.static-page
+      %header.index-panel__header
+        %h1.index-panel__title= title
+
+      .index-panel__content.static-page__content
+        = yield

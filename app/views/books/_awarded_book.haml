@@ -1,1 +1,6 @@
-= render partial: 'books/widgets/book', locals: {book: book, title: link_to(book.awards.first.prize.name, awarded_books_path(prize_id: book.awards.first.prize.id), class: ""), subtitle:book.awards.first.year}
+- award = book.awards.first
+- meta = nil
+- if award
+  - meta = local_assigns[:prize_id].present? ? award.year.to_s : "#{award.year} · #{award.prize.name}"
+
+= render partial: "books/widgets/book_card", locals: {book: book, meta: meta}

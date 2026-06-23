@@ -13,4 +13,10 @@ module NavigationHelper
 
     "#{text[0..max_length].strip}..."
   end
+
+  def breadcrumb_label(label)
+    return label if label.respond_to?(:html_safe?) && label.html_safe?
+
+    ellipsize(label.to_s)
+  end
 end

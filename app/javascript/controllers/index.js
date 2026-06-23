@@ -8,6 +8,7 @@ import FavouriteController from "./favourite_controller"
 import CollectionsModalController from "./collections_modal_controller"
 import AutocompleteController from "./autocomplete_controller"
 import FilterSidebarController from "./filter_sidebar_controller"
+import ReviewModalController from "./review_modal_controller"
 
 application.register("flash", FlashController)
 application.register("read-more", ReadMoreController)
@@ -17,6 +18,7 @@ application.register("favourite", FavouriteController)
 application.register("collections-modal", CollectionsModalController)
 application.register("autocomplete", AutocompleteController)
 application.register("filter-sidebar", FilterSidebarController)
+application.register("review-modal", ReviewModalController)
 
 import { submitRecommendation } from "../recommendation"
 import { submitFavourite } from "../favourite"

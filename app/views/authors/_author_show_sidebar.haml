@@ -1,0 +1,17 @@
+%aside.resource-show__sidebar
+  .resource-show__media-card
+    = image_tag(@author.avatar, alt: @author.fullname, class: "resource-show__avatar")
+
+  .resource-show__actions
+    = render partial: "authors/widgets/favourite_btn", locals: {author: @author, liked: @liked}
+
+  .resource-show__stats
+    .resource-show__stat
+      %span.resource-show__stat-label= t("books.label")
+      %span.resource-show__stat-value= @author.books.count
+    .resource-show__stat
+      %span.resource-show__stat-label= t("stats.views")
+      %span.resource-show__stat-value= @author.impressions_count || 0
+    .resource-show__stat
+      %span.resource-show__stat-label= t("authors.favoured")
+      %span.resource-show__stat-value= @author.liked_by_count

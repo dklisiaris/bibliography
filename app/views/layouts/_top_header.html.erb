@@ -19,30 +19,7 @@
               <% if user_signed_in? %>
               <%= top_nav_li(current_user.screen_name, public_profile_path, nil, 'hidden-xs') %>
               <%= top_nav_li('', public_profile_path, 'fa fa-user-circle-o', 'visible-xs') %>
-              <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                <%= image_tag(current_user.avatar, alt: "avatar", id: 'topHeaderAvatar')  %>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-header">
-                    <%= content_tag(:strong, subtext(current_user.try(:profile).try(:username).try(:upcase), 16)) %>
-                  </li>
-
-                  <%= top_nav_dropdown_li(UnicodeUtils.titlecase(t('edit_profile')), edit_profile_path, "fa fa-pencil-square") %>
-
-                  <li class="divider"></li>
-                  <li>
-                    <%= link_to edit_user_registration_path do %>
-                      <i class="fa fa-key fa-fw pull-right"></i><%= t('account.label') %>
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to destroy_user_session_path, :method=>'delete' do %>
-                      <i class="fa fa-power-off fa-fw pull-right"></i><%= t('logout') %>
-                    <% end %>
-                  </li>
-                </ul>
-              </li>
+              <%= render 'layouts/user_menu' %>
               <% else %>
                 <%= top_nav_li(UnicodeUtils.upcase(t('login')), new_user_session_path, nil, 'hidden-xs') %>
                 <%= top_nav_li(UnicodeUtils.upcase(t('signup')), new_user_registration_path, nil, 'hidden-xs') %>

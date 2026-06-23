@@ -1,11 +1,11 @@
 .content-header
-  .row
-    .col-sm-6
-      .header-section
-        - if title
-          %h1= title
-        - if content
-          = content
-    .col-sm-6.hidden-xs
-      .header-section
-        = render partial: 'navigation/breadcrumb', locals: { breadcrumbs: breadcrumbs }
+  - if breadcrumbs.present?
+    .content-header__breadcrumb
+      = render partial: "navigation/breadcrumb", locals: { breadcrumbs: breadcrumbs }
+
+  .content-header__main
+    .header-section
+      - if title
+        %h1.content-header__title= title
+      - if content
+        .content-header__content= content

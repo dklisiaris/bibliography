@@ -1,0 +1,50 @@
+<li class="dropdown">
+  <a href="#"
+     class="dropdown-toggle user-menu-toggle"
+     id="userMenuToggle"
+     role="button"
+     data-bs-toggle="dropdown"
+     aria-expanded="false"
+     aria-label="<%= t('account.label') %>">
+    <%= image_tag(current_user.avatar, alt: "", id: "topHeaderAvatar", class: "user-menu-toggle__avatar") %>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end user-menu" aria-labelledby="userMenuToggle">
+    <li>
+      <div class="user-menu__profile">
+        <%= image_tag(current_user.avatar, alt: "", class: "user-menu__avatar") %>
+        <div class="user-menu__identity">
+          <span class="user-menu__name"><%= current_user.screen_name %></span>
+          <% if current_user.try(:profile).try(:username).present? %>
+            <span class="user-menu__handle">@<%= subtext(current_user.profile.username, 20) %></span>
+          <% end %>
+        </div>
+      </div>
+    </li>
+
+    <li><hr class="dropdown-divider"></li>
+
+    <li>
+      <%= link_to edit_profile_path, class: "dropdown-item" do %>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <span><%= UnicodeUtils.titlecase(t("edit_profile")) %></span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <span><%= t("account.label") %></span>
+      <% end %>
+    </li>
+
+    <li><hr class="dropdown-divider"></li>
+
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "dropdown-item dropdown-item--danger" do %>
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <span><%= t("logout") %></span>
+      <% end %>
+    </li>
+  </ul>
+</li>

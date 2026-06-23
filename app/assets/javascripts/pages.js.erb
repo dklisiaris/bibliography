@@ -52,16 +52,16 @@ var FormsWizard = function() {
           progressBar
             .css('width', '33%')
             .attr('aria-valuenow', '33')
-            .removeClass('progress-bar-info progress-bar-success')
-            .addClass('progress-bar-danger');
+            .removeClass('bg-info bg-success')
+            .addClass('bg-danger');
         } else if (currentStep === 2) {
           $("#progress-first, #progress-third").hide();
           $("#progress-second").show();
           progressBar
             .css('width', '66%')
             .attr('aria-valuenow', '66')
-            .removeClass('progress-bar-danger progress-bar-success')
-            .addClass('progress-bar-info');
+            .removeClass('bg-danger bg-success')
+            .addClass('bg-info');
 
           $('#rateable-books-wrapper').empty();
           $('#rateable-books-wrapper').addClass('loading');
@@ -151,8 +151,8 @@ var FormsWizard = function() {
           progressBar
             .css('width', '100%')
             .attr('aria-valuenow', '100')
-            .removeClass('progress-bar-danger progress-bar-info')
-            .addClass('progress-bar-success');
+            .removeClass('bg-danger bg-info')
+            .addClass('bg-success');
           window.location.replace(window.location.origin);
         }
       }

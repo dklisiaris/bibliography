@@ -1,0 +1,102 @@
+// Compact book rows for sidebar widgets (home, profile).
+
+.book-sidebar-item {
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f4f5;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #f8fafb;
+    }
+  }
+
+  &:last-child &__row {
+    border-bottom: 0;
+  }
+
+  &__cover-link {
+    display: block;
+    flex-shrink: 0;
+    line-height: 0;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &__cover {
+    display: block;
+    width: 56px;
+    height: 70px;
+    margin: 0;
+    object-fit: cover;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 4px rgba(28, 43, 54, 0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    .book-sidebar-item__cover-link:hover &,
+    .book-sidebar-item__cover-link:focus & {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(28, 43, 54, 0.14);
+    }
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0 0 0.25rem;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  &__title-link {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: $primary;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: shade-color($primary, 12%);
+      text-decoration: none;
+    }
+  }
+
+  &__author {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #879599;
+  }
+
+  &__author-link {
+    color: #879599;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+
+  &__action {
+    flex-shrink: 0;
+    align-self: center;
+  }
+}

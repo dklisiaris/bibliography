@@ -1,0 +1,7 @@
+= link_to book, class: "book-card" do
+  .book-card__cover
+    = image_tag(book.cover, alt: book.title, class: "book-card__image", loading: "lazy")
+  .book-card__body
+    %h3.book-card__title= book.title
+    - if local_assigns[:meta].present?
+      %p.book-card__meta= meta

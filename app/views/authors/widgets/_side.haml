@@ -1,35 +1,18 @@
-- no_authors_msg ||= t('no_authors_yet')
+- authors = Array(local_assigns[:authors]).compact
+- no_authors_msg = local_assigns[:empty_message].presence || t("no_authors_yet")
+- cache_stamp = authors.filter_map(&:updated_at).max
 
-- cache([cache_key, authors.map(&:id), authors.map(&:updated_at).max]) do
-  .widget
-    .widget-content.widget-content-mini
-      = fa(icon)
-      %strong= title
-    .widget-content.widget-content-full
-      %table.table.table-borderless.table-vcenter
-        %tbody
-          - authors.each do |author|
-            - cache(author) do
-              %tr
-                %td.text-center{:style => "width: 80px;"}
-                  = link_to image_tag(author.avatar, alt: "author_cover", width: "80", class: "img-thumbnail"), author
-                %td
-                  = link_to author.fullname, author
-                  - if author.masterpiece.present?
-                    %br/
-                    %span.text-muted
-                      %small= "#{t('authors.author_of')}"
-                    = link_to author.masterpiece do
-                      %span
-                        %small= author.masterpiece.try(:title)
-                  %br/
-                  %span.text-muted
-                    %small= "#{author.contributions_count} #{t('books.label')}"
-                -#%td.text-center{:style => "width: 80px;"}
-                  = render partial: 'authors/widgets/favourite_btn', locals: {author: author, liked: liked_ids.blank? ? false : liked_ids.include?(author.id)}
-          - if !authors.any?
-            %tr
-              %td.text-center
-                %span.text-muted
-                  %small= no_authors_msg
+- cache([cache_key, authors.map(&:id), cache_stamp]) do
+  %section.index-sidebar-card
+    .index-sidebar-card__header
+      %h2.index-sidebar-card__title
+        %i.fa{class: "fa-#{icon}", aria: {hidden: true}}
+        = title
 
+    - if authors.any?
+      .index-sidebar-card__list
+        - authors.each do |author|
+          - cache(author) do
+            = render partial: "authors/widgets/author_sidebar_item", locals: {author: author, liked_ids: local_assigns[:liked_ids]}
+    - else
+      .index-sidebar-card__empty= no_authors_msg

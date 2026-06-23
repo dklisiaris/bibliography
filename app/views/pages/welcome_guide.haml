@@ -1,53 +1,28 @@
-/ Progress Bar Wizard Block
-.block
-  / Progress Bars Wizard Title
-  .block-title
-    %h2= detone t('welcome')
-  / END Progress Bar Wizard Title
-  / Progress Wizard Content
-  #progress-wizard.form-horizontal.form-bordered
-    .form-group
-      .col-xs-12
-        .progress.progress-mini.remove-margin
-          #progress-bar-wizard.progress-bar.progress-bar-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", :role => "progressbar", :style => "width: 0"}
-    / END Progress Bar
+= render layout: "pages/page_shell", locals: {title: detone(t("welcome")), col_class: "col-lg-10"} do
+  .static-page__wizard
+    #progress-wizard
+      .progress.mb-3
+        #progress-bar-wizard.progress-bar.bg-danger{role: "progressbar", style: "width: 0", "aria-valuenow": 0, "aria-valuemin": 0, "aria-valuemax": 100}
 
-    %input{:name => "email", :type => "hidden", :value => "#{current_user.email}"}/
-    %input{:name => "token", :type => "hidden", :value => "#{current_user.token}"}/
+      %input{name: "email", type: "hidden", value: current_user.email}
+      %input{name: "token", type: "hidden", value: current_user.token}
 
-    / First Step
-    #progress-first.step
-      .form-group
-        .col-xs-12
-          %span.help-block= t('choose_categories')
-          %hr
-          .row
-            - @featured_categories.each do |category|
-              - selected_klass = current_user.likes?(category) ? "selected" : ""
-              .col-xs-6.col-sm-3
-                %input{:type => "checkbox", :id => "category-#{category.id}", :style => "display: none;"}
-                %label{:for => "category-#{category.id}", :onclick => "javascript:favouriteCategory(#{category.id})", :class => "featured-category #{selected_klass}"}= category.name
-    / END First Step
+      #progress-first.step
+        %p.text-muted.mb-3= t("choose_categories")
+        .row.g-2
+          - @featured_categories.each do |category|
+            - selected_klass = current_user.likes?(category) ? "selected" : ""
+            .col-6.col-sm-3
+              %input{type: "checkbox", id: "category-#{category.id}", style: "display: none;"}
+              %label.featured-category{class: selected_klass, for: "category-#{category.id}", onclick: "javascript:favouriteCategory(#{category.id})"}= category.name
 
-    / Second Step
-    #progress-second.step
-      .form-group
-        .col-xs-12
-          %span.help-block= t('rate_books')
-          %hr
-          #rateable-books-wrapper.loading-wrapper.loading
-    / END Second Step
+      #progress-second.step
+        %p.text-muted.mb-3= t("rate_books")
+        #rateable-books-wrapper.loading-wrapper.loading
 
-    / Third Step
-    #progress-third.step
-      .loading-wrapper.loading
-    / END Third Step
+      #progress-third.step
+        .loading-wrapper.loading
 
-    / Form Buttons
-    .form-group.form-actions
-      .col-md-8
-        %button#back2.btn.btn-effect-ripple.btn-danger{:type => "reset"}= t('back')
-        %button#next2.btn.btn-effect-ripple.btn-primary{:type => "submit"}= t('next')
-    / END Form Buttons
-  / END Progress Bar Wizard Content
-/ END Progress Bar Wizard Block
+      .static-page__wizard-actions
+        %button#back2.btn.btn-outline-secondary{type: "reset"}= t("back")
+        %button#next2.btn.btn-primary{type: "submit"}= t("next")

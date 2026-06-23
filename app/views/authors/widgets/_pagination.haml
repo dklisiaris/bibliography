@@ -1,4 +1,1 @@
-.row
-  .col-xs-12.clearfix
-    .dataTables_paginate.paging_bootstrap
-      = paginate @authors, total_pages: (@authors.total_pages < 1001) ? @authors.total_pages : 1000
+= render partial: "shared/pagination", locals: { paginatable: @authors, total_pages: (@authors.total_pages < 1001) ? @authors.total_pages : 1000 }

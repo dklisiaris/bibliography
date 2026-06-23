@@ -1,0 +1,110 @@
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+  padding: 0.375rem 0 1.25rem;
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-item {
+    list-style: none;
+  }
+
+  .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: $body-color;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dae5e8;
+    border-radius: 0.5rem;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+      background-color: #f4f7f8;
+      border-color: rgba($primary, 0.25);
+      text-decoration: none;
+    }
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    font-weight: 500;
+    background-color: $primary;
+    border-color: $primary;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: shade-color($primary, 8%);
+      border-color: shade-color($primary, 8%);
+    }
+  }
+
+  .page-item.disabled .page-link {
+    color: #adb5bd;
+    background-color: #f4f7f8;
+    border-color: #ebf1f2;
+    pointer-events: none;
+  }
+}
+
+// Top pagination — sit closer to the section title.
+.block-title + .pagination-nav {
+  padding-top: 0.125rem;
+  padding-bottom: 0.625rem;
+}
+
+// Bottom pagination — more room before the block edge.
+.authors-list + .pagination-nav,
+.book-list + .pagination-nav,
+.series-list + .pagination-nav,
+.col-xs-12 + .pagination-nav {
+  padding-top: 0.625rem;
+  padding-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 575px) {
+  .pagination-nav {
+    padding: 0.25rem 0 1rem;
+
+    .page-link {
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.3125rem 0.5rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .block-title + .pagination-nav {
+    padding-top: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .authors-list + .pagination-nav,
+  .book-list + .pagination-nav,
+  .series-list + .pagination-nav,
+  .col-xs-12 + .pagination-nav {
+    padding-top: 0.5rem;
+    padding-bottom: 1.25rem;
+  }
+}

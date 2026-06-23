@@ -1,0 +1,20 @@
+.auth-page
+  %section.index-panel.auth-card
+    %header.index-panel__header
+      %h2.index-panel__title= detone t("devise.passwords.forgot")
+      .index-panel__actions.auth-card__actions
+        = link_to new_user_session_path, class: "btn btn-sm btn-outline-secondary btn-icon", title: t("back_to_login"), data: {toggle: "tooltip"} do
+          %i.fa.fa-user{aria: {hidden: true}}
+
+    .index-panel__content
+      %p.auth-card__hint= t("devise.passwords.send_instructions_short")
+
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post, role: "form"}) do |f|
+        = devise_error_messages!
+
+        .mb-3
+          = f.label :email, class: "form-label"
+          = f.email_field :email, autofocus: true, class: "form-control", placeholder: t("enter_email")
+
+        = button_tag type: "submit", class: "btn btn-primary" do
+          %span= t("devise.passwords.reset")

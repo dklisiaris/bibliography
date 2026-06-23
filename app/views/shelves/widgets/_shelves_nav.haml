@@ -1,0 +1,43 @@
+- shelves = local_assigns.fetch(:shelves) { Shelf.none }
+- link_mode = local_assigns.fetch(:link_mode, :show)
+- active_shelf = local_assigns[:active_shelf]
+- profile = local_assigns[:profile]
+- profile_id = local_assigns[:profile_id]
+- embedded = local_assigns[:embedded]
+- icon = local_assigns[:icon].presence || "th-large"
+- new_path = local_assigns[:new_path]
+- title = local_assigns[:title]
+- show_all_link = local_assigns[:show_all_link]
+
+- nav_class = ["shelf-nav", ("index-sidebar-card" unless embedded), ("shelf-nav--embedded" if embedded)].compact.join(" ")
+
+%div{class: nav_class}
+  %div{class: embedded ? "shelf-nav__header" : "index-sidebar-card__header"}
+    %h2{class: embedded ? "shelf-nav__title" : "index-sidebar-card__title"}
+      %i.fa{class: "fa-#{icon}", aria: {hidden: true}}
+      = title
+    - if new_path.present?
+      = link_to new_path, class: "btn btn-sm btn-primary btn-icon shelf-nav__new", title: t("shelves.new") do
+        %i.fa.fa-plus{aria: {hidden: true}}
+
+  - if shelves.any?
+    - list_class = embedded ? "shelf-nav__grid" : "shelf-nav__list"
+    %div{class: list_class}
+      - if show_all_link.present?
+        .shelf-nav__item
+          - all_active = active_shelf.blank?
+          = link_to show_all_link[:label], show_all_link[:path], class: ["shelf-nav__link", ("shelf-nav__link--active" if all_active)]
+
+      - if shelves.built_in.any?
+        - unless embedded
+          .shelf-nav__section= t("shelves.built_in", default: "Built-in")
+        - shelves.built_in.each do |shelf|
+          = render partial: "shelves/widgets/shelf_nav_item", locals: {shelf: shelf, link_mode: link_mode, profile: profile, profile_id: profile_id, active_shelf: active_shelf}
+
+      - if shelves.user_created.any?
+        - if shelves.built_in.any? && !embedded
+          .shelf-nav__section= t("shelves.custom", default: "Custom")
+        - shelves.user_created.each do |shelf|
+          = render partial: "shelves/widgets/shelf_nav_item", locals: {shelf: shelf, link_mode: link_mode, profile: profile, profile_id: profile_id, active_shelf: active_shelf}
+  - else
+    .shelf-nav__empty= t("shelves.none_yet", default: t("no_books_yet"))

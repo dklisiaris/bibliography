@@ -1,0 +1,33 @@
+// Override ProUI rules in main.css that break Bootstrap 5 JS/CSS.
+
+.dropdown-menu {
+  display: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  &.show,
+  &.open {
+    display: block !important;
+    // Beat ProUI scale(0) without !important so Popper can still translate when needed.
+    transform: scale(1);
+  }
+}
+
+.open > .dropdown-menu {
+  display: block !important;
+  transform: scale(1);
+}
+
+header.navbar,
+.nav.navbar-nav-custom {
+  overflow: visible;
+}
+
+.modal-backdrop.in,
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+// BS5 reboot vs ProUI body — main.css still sets body; hotwire loads after application.css
+// so we do not override body here (B.4 shell will simplify layout CSS).

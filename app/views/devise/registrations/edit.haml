@@ -1,0 +1,92 @@
+- pages = {fa("home") => root_url, t("account.edit") => nil}
+
+= content_header(title: t("account.label"), breadcrumbs: pages)
+
+.row.index-layout
+  .col-lg-8
+    %section.index-panel.account-settings
+      %header.index-panel__header
+        %h2.index-panel__title= UnicodeUtils.upcase(detone(t("account.personal_info")))
+
+      .index-panel__content
+        .account-settings__profile
+          = image_tag(resource.avatar, alt: "avatar", class: "account-settings__avatar")
+          .account-settings__identity
+            %h4
+              %b= resource.screen_name
+              %span.account-settings__email= resource.email
+            %span.account-settings__username
+              Username:
+              %b= resource.profile.username
+
+    %section.index-panel.account-settings
+      %header.index-panel__header
+        %h2.index-panel__title= UnicodeUtils.upcase(detone(t("account.user_edit")))
+
+      .index-panel__content
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, role: "form"}) do |f|
+          = devise_error_messages!
+
+          .mb-3
+            = f.label :email, class: "form-label"
+            = f.email_field :email, autofocus: true, class: "form-control"
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %p.account-settings__hint
+                Currently waiting confirmation for:
+                = resource.unconfirmed_email
+
+          - if current_user.provider != "facebook" && current_user.provider != "google_oauth2"
+            %p.account-settings__hint Leave these fields blank if you don't want to change your password.
+
+            .mb-3
+              = f.label :password, class: "form-label"
+              = f.password_field :password, autocomplete: "off", class: "form-control"
+
+            .mb-3
+              = f.label :password_confirmation, class: "form-label"
+              = f.password_field :password_confirmation, class: "form-control"
+
+            %p.account-settings__hint You must enter your current password to make changes.
+
+            .mb-3
+              = f.label :current_password, class: "form-label"
+              = f.password_field :current_password, class: "form-control"
+
+          = f.submit "Update", class: "btn btn-primary"
+
+    %section.index-panel.account-settings
+      %header.index-panel__header
+        %h2.index-panel__title= UnicodeUtils.upcase(detone(t("account.cancel")))
+
+      .index-panel__content
+        %p.account-settings__hint Unhappy? We'll be sad to see you go.
+        = button_to "Cancel my account", registration_path(resource_name), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure?"}
+
+  .col-lg-4.index-sidebar
+    %section.index-panel.account-settings
+      %header.index-panel__header
+        %h2.index-panel__title
+          %i.fa.fa-lock{aria: {hidden: true}}
+          = UnicodeUtils.upcase(detone(t("account.api_token")))
+
+      .index-panel__content
+        %p.account-settings__hint Use this API Token to access the Bibliography API programmatically:
+        %pre.account-settings__api-key= resource.api_key
+        %p.account-settings__hint Please keep this token secret, and reset the token if compromised.
+        = button_tag "Reset Token", class: "btn btn-outline-danger"
+
+    %section.index-panel.account-settings
+      %header.index-panel__header
+        %h2.index-panel__title
+          %i.fa.fa-envelope{aria: {hidden: true}}
+          = UnicodeUtils.upcase(detone(t("account.notifications")))
+
+      .index-panel__content
+        .form-check.mb-3
+          - if resource.profile.receive_newsletters
+            %input.form-check-input{type: "checkbox", name: "receive_notifications", checked: true}
+          - else
+            %input.form-check-input{type: "checkbox", name: "receive_notifications"}
+          %label.form-check-label{for: "receive_notifications"}= t("account.receive_notifications")
+
+        = button_tag "Save", class: "btn btn-primary"

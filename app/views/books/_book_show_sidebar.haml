@@ -1,0 +1,19 @@
+%aside.book-show__sidebar
+  .book-show__cover-card
+    = image_tag(@book.cover, alt: @book.title, class: "book-show__cover")
+
+  .book-show__actions
+    = render partial: "books/widgets/collections_manager_btn", locals: {book: @book, full_size: true}
+    .book-show__recommend
+      = render partial: "books/widgets/recommend_btns", locals: {book: @book, show_progressbar: true}
+
+  .book-show__stats
+    .book-show__stat
+      %span.book-show__stat-label= t("collections")
+      %span.book-show__stat-value= @bookshelves_count
+    .book-show__stat
+      %span.book-show__stat-label= t("stats.views")
+      %span.book-show__stat-value= @views_count
+    .book-show__stat
+      %span.book-show__stat-label= t("stats.visitors")
+      %span.book-show__stat-value= @viewers_count

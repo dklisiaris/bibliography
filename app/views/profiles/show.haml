@@ -1,0 +1,30 @@
+.profile-show-page{data: {controller: "profile-modal"}}
+  .row.index-layout.home-layout
+    .col-lg-8.profile-show-main
+      = render "profiles/profile_hero"
+
+      = render partial: "books/widgets/grid", locals: {title: " #{t('books.favourite')}", icon: "heart-o", cover_size: "114", books: @favourite_books}
+
+      = render partial: "shelves/widgets/list", locals: {title: " #{t('shelves.collections')}", shelves: @shelves, show_public_path: @show_public_path, profile_id: @profile.id}
+
+      = render partial: "books/widgets/grid", locals: {title: " #{t('books.currently_reading')}", icon: "book", cover_size: "114", books: @currently_reading_books}
+
+      - @activities.each do |activity|
+        = render partial: "books/widgets/activity", locals: {activity: activity} if activity.trackable_type == "Book"
+
+    .col-lg-4.index-sidebar
+      = render "profiles/profile_similarity"
+
+      = render partial: "books/widgets/side", locals: {title: " #{t('books.recommended_by')} #{@profile.username}", icon: "thumbs-o-up", books: @recommended_books}
+
+      = render partial: "authors/widgets/side", locals: {title: " #{t('authors.favourite')}", icon: "user-secret", authors: @recommended_authors, liked_ids: @liked_author_ids, cache_key: "side_user_liked_authors_#{@user.id}"}
+
+      = render partial: "profiles/profile_user_grid", locals: {title: t("users.follows"), users: @following_users, empty_message: t("users.following_nobody")}
+
+      = render partial: "profiles/profile_user_grid", locals: {title: t("users.are_following"), users: @user_followers, empty_message: t("users.nobody_follows")}
+
+  - if user_signed_in?
+    = render "books/collections_modal"
+    - if @user == current_user
+      = render "profiles/modals/avatar"
+      = render "profiles/modals/cover"

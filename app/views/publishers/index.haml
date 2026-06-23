@@ -7,20 +7,22 @@
   content: render(partial: 'shared/search_form',                                               |
   locals: {action: publishers_path, placeholder: t('publishers.search')}), breadcrumbs: pages) |
 
-.row
-  .col-sm-10.col-sm-offset-1
-    .block.full
-      .block-title
-        .block-options.pull-right
-          = nav_btn_link_to( name: fa('plus'), url: new_publisher_path, tooltip: t('publishers.new')) if policy(Publisher).new?
-        %h1
+.row.index-layout
+  .col-12
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title
           = detone t('publishers.label')
-          %small
-             (#{@publishers.total_count})
-      .row
-        = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}
-        %hr/
-        .col-xs-12
-          = render :partial =>  "publishers/publisher", :collection => @publishers, :as => :publisher
-        = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}
+          %span.index-panel__count= " (#{@publishers.total_count})"
+        - if policy(Publisher).new?
+          .index-panel__actions
+            = nav_btn_link_to(name: fa('plus'), url: new_publisher_path, tooltip: t('publishers.new'))
 
+      .index-panel__toolbar
+        .index-panel__pagination
+          = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}
+
+      .index-panel__content
+        .publisher-list
+          = render partial: "publishers/publisher", collection: @publishers, as: :publisher
+        = render partial: "publishers/widgets/pagination", locals: {paginatable: @publishers}

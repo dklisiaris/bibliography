@@ -1,0 +1,38 @@
+.auth-page
+  .auth-page__brand
+    %h1.auth-page__title
+      %i.fa.fa-plus{aria: {hidden: true}}
+      %strong= t("create_account")
+
+  %section.index-panel.auth-card
+    %header.index-panel__header
+      %h2.index-panel__title= detone t("register")
+      .index-panel__actions.auth-card__actions
+        = link_to new_user_session_path, class: "btn btn-sm btn-outline-secondary btn-icon", title: t("back_to_login"), data: {toggle: "tooltip"} do
+          %i.fa.fa-user{aria: {hidden: true}}
+
+    .index-panel__content
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {role: "form", data: {turbo: false}}) do |f|
+        = devise_error_messages!
+
+        .mb-3
+          = f.label :email, class: "form-label"
+          = f.email_field :email, autofocus: true, class: "form-control", placeholder: t("enter_email")
+
+        .mb-3
+          = f.label :password, t("password"), class: "form-label"
+          = f.password_field :password, class: "form-control", placeholder: t("enter_password")
+
+        .mb-3
+          = f.label :password_confirmation, t("password_confirmation"), class: "form-label"
+          = f.password_field :password_confirmation, class: "form-control", placeholder: t("confirm_password")
+
+        = button_tag type: "submit", id: "submit-btn", class: "btn btn-success" do
+          %i.fa.fa-plus{aria: {hidden: true}}
+          %span= t("create_account")
+
+      %hr.auth-card__divider/
+      .auth-card__oauth
+        = render "devise/shared/oauth_buttons"
+
+  = render "devise/shared/auth_footer"

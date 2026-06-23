@@ -1,30 +1,24 @@
-.widget
-  .widget-content.widget-content-mini
-    %span.pull-right.hidden-xs
-      (#{t('some_options')})
-    %i.fa.fa-fw.fa-home
-    %strong= t('welcome')
-  .widget-content
-    .row
-      .col-xs-6.col-sm-4
-        %h4= t('browse')
-        = link_to t('browse_books'), books_path
-        %br/
-        = link_to t('browse_series'), series_index_path
-      .col-xs-6.col-sm-4
-        %h4= t('spruce_up_profile')
-        = link_to t('edit_profile'), edit_profile_path
-        %br/
-        = link_to t('add_member_photo'), public_profile_path
-      .col-xs-6.col-sm-4
-        %h4= t('discover')
-        = link_to "#{t('books.awarded')} #{t('books.label')}", awarded_books_path
-        %br/
-        = link_to "#{t('books.popular')} #{t('books.label')}", trending_books_path
-    -#.push-bit-top
-      %a.btn.btn-effect-ripple.btn-xs.btn-danger{:href => "javascript:void(0)", :style => "overflow: hidden; position: relative;"}
-        %i.fa.fa-facebook
-        Like
-      %a.btn.btn-effect-ripple.btn-xs.btn-primary{:href => "javascript:void(0)", :style => "overflow: hidden; position: relative;"}
-        %i.fa.fa-twitter
-        Tweet
+%section.index-panel.home-welcome
+  %header.index-panel__header
+    %h2.index-panel__title
+      %i.fa.fa-home{aria: {hidden: true}}
+      = t('welcome')
+    %span.home-welcome__hint.hidden-xs= "(#{t('some_options')})"
+
+  .index-panel__content
+    .home-welcome__columns
+      .home-welcome__section
+        %h3.home-welcome__section-title= t('browse')
+        .home-welcome__links
+          = link_to t('browse_books'), books_path
+          = link_to t('browse_series'), series_index_path
+      .home-welcome__section
+        %h3.home-welcome__section-title= t('spruce_up_profile')
+        .home-welcome__links
+          = link_to t('edit_profile'), edit_profile_path
+          = link_to t('add_member_photo'), public_profile_path
+      .home-welcome__section
+        %h3.home-welcome__section-title= t('discover')
+        .home-welcome__links
+          = link_to "#{t('books.awarded')} #{t('books.label')}", awarded_books_path
+          = link_to "#{t('books.popular')} #{t('books.label')}", trending_books_path

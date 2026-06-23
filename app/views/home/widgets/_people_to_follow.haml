@@ -1,10 +1,11 @@
 - if user_signed_in? && @people_to_follow.any?
-  .widget
-    .widget-content.widget-content-mini
-      %strong= t('similar_users')
-    .widget-content.widget-content-full-top-bottom
-      .row
-        - @people_to_follow.each do |u|
-          .col-xs-3
-            .widget-content
-              = link_to image_tag(u.avatar), public_profile_path(u.profile), title: u.screen_name
+  %section.index-sidebar-card
+    .index-sidebar-card__header
+      %h2.index-sidebar-card__title
+        %i.fa.fa-users{aria: {hidden: true}}
+        = t('similar_users')
+
+    .home-people__grid
+      - @people_to_follow.each do |u|
+        = link_to public_profile_path(u.profile), class: "home-people__link", title: u.screen_name do
+          = image_tag(u.avatar, alt: u.screen_name, class: "home-people__avatar", loading: "lazy")

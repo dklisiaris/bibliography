@@ -45,9 +45,13 @@ bundle install
 
 # Install javascript libraries
 rake bower:install
+
+# Hotwire / Bootstrap 5 assets (required — app/assets/builds/ is not committed)
+npm install
+npm run build
 ```
 
-
+For local development with auto-rebuild on JS/CSS changes, use `bin/dev` instead of `rails s`.
 
 All sensitive information is stored in environment variables.
 We use dotenv gem to manage these vars.

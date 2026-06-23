@@ -1,8 +1,8 @@
 - if books.aggs[filter_name].present?
   - if books.aggs[filter_name]["buckets"].count > 0
-    %ul.filter-group
-      %h4.filter-title= title
-      .filter-content{
+    %section.book-filter
+      %h3.book-filter__title= title
+      .book-filter__list{
         data: {
           controller: "read-more",
           read_more_collapsed_height_value: 285,
@@ -13,11 +13,10 @@
         }
       }
         - books.aggs[filter_name]["buckets"].each do |agg|
-          = link_to books_path({q: params['q']}.merge(@filters).merge(filter_name.to_sym => agg["key"]).reject{|k,v| agg["key"].to_s == @filters[filter_name.to_sym] && k == filter_name.to_sym }) do
-            %li
-              .radio
-                %input{:type => "radio", :checked => (agg["key"].to_s == @filters[filter_name.to_sym])}/
-                %label.radio-label
-                  = agg["key"]
-                  %span.grey
-                     (#{agg["doc_count"]})
+          - active = agg["key"].to_s == @filters[filter_name.to_sym]
+          - filter_params = {q: params["q"]}.merge(@filters).merge(filter_name.to_sym => agg["key"]).reject { |k, v| agg["key"].to_s == @filters[filter_name.to_sym] && k == filter_name.to_sym }
+          - link_options = {class: ["book-filter__link", ("book-filter__link--active" if active)]}
+          - link_options[:aria] = {current: "page"} if active
+          = link_to books_path(filter_params), link_options do
+            %span.book-filter__name= agg["key"]
+            %span.book-filter__count= agg["doc_count"]

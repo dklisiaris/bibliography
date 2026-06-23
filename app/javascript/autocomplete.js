@@ -120,12 +120,12 @@ function bookSuggestionTemplate(data) {
 
   return (
     '<div class="tt-result">' +
-    '<div class="tt-result-cover">' +
-    `<img height="48" width="36" src="${image}">` +
+    '<div class="tt-result__cover">' +
+    `<img src="${image}" alt="" loading="lazy">` +
     "</div>" +
-    '<div class="tt-result-details">' +
-    `<strong>${data.title}</strong><br>` +
-    `<span>${data.writer || ""}</span>` +
+    '<div class="tt-result__body">' +
+    `<div class="tt-result__title">${data.title}</div>` +
+    `<div class="tt-result__meta">${data.writer || ""}</div>` +
     "</div>" +
     "</div>"
   )
@@ -134,11 +134,11 @@ function bookSuggestionTemplate(data) {
 function authorSuggestionTemplate(data) {
   return (
     '<div class="tt-result">' +
-    '<div class="tt-result-cover">' +
-    `<img height="48" width="32" src="${data.image}">` +
+    '<div class="tt-result__cover">' +
+    `<img src="${data.image}" alt="" loading="lazy">` +
     "</div>" +
-    '<div class="tt-result-details">' +
-    `<strong>${data.name}</strong><br>` +
+    '<div class="tt-result__body">' +
+    `<div class="tt-result__title">${data.name}</div>` +
     "</div>" +
     "</div>"
   )
@@ -147,32 +147,43 @@ function authorSuggestionTemplate(data) {
 function simpleSuggestionTemplate(data) {
   return (
     '<div class="tt-result">' +
-    '<div class="tt-result-details">' +
-    `<strong>${data.name}</strong><br>` +
+    '<div class="tt-result__body">' +
+    `<div class="tt-result__title">${data.name}</div>` +
     "</div>" +
     "</div>"
   )
 }
 
 function multisearchSuggestionTemplate(data) {
-  let coverElement = ""
-
-  if (data.image) {
-    coverElement =
-      '<div class="tt-result-cover">' +
-      `<img height="48" width="36" src="${data.image}">` +
+  const coverElement = data.image
+    ? '<div class="tt-result__cover">' +
+      `<img src="${data.image}" alt="" loading="lazy">` +
       "</div>"
-  }
+    : ""
 
   return (
     '<div class="tt-result">' +
     coverElement +
-    '<div class="tt-result-details">' +
-    `<strong>${data.title}</strong><br>` +
-    `<span>${data.secondary_title || ""}</span>` +
+    '<div class="tt-result__body">' +
+    `<div class="tt-result__title">${data.title}</div>` +
+    `<div class="tt-result__meta">${data.secondary_title || ""}</div>` +
     "</div>" +
     "</div>"
   )
+}
+
+function attachSearchBarMenu($input) {
+  const $group = $input.closest(".search-bar__group")
+  const $menu = $input.closest(".twitter-typeahead").find(".tt-menu")
+  if (!$group.length || !$menu.length) return
+
+  $menu.css({
+    position: "absolute",
+    top: $group.outerHeight() + 6,
+    left: 0,
+    right: 0,
+    width: "auto",
+  })
 }
 
 function buildSuggestionTemplate(variant) {
@@ -258,6 +269,13 @@ export function initAutocomplete(input, options) {
     window.location.href = datum.url
   })
 
+  $input.on(
+    "typeahead:render typeahead:open typeahead:asyncreceive",
+    () => {
+      attachSearchBarMenu($input)
+    }
+  )
+
   $input.on("typeahead:asyncrequest", () => {
     input.classList.add("loading")
   })
@@ -265,6 +283,8 @@ export function initAutocomplete(input, options) {
   $input.on("typeahead:asynccancel typeahead:asyncreceive", () => {
     input.classList.remove("loading")
   })
+
+  attachSearchBarMenu($input)
 
   return { engine, $input }
 }

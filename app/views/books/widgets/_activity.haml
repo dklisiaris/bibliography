@@ -1,9 +1,10 @@
-.widget
-  .widget-content.widget-content-mini
-    %span.pull-right.text-muted= time_ago_in_words(activity.created_at)
-    = activity_article activity
-    %b= link_to(activity.owner.screen_name, public_profile_path(activity.owner.profile), class: '')
-    = activity_verb activity
-  .widget-content
-    = render partial: "books/book", locals: {book: activity.trackable, rule: false}
+%article.home-activity
+  %header.home-activity__header
+    .home-activity__meta
+      = activity_article activity
+      %b= link_to(activity.owner.screen_name, public_profile_path(activity.owner.profile), class: '')
+      = activity_verb activity
+    %time.home-activity__time= time_ago_in_words(activity.created_at)
 
+  .home-activity__body
+    = render partial: "books/book", locals: {book: activity.trackable, rule: false}

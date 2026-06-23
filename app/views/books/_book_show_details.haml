@@ -1,0 +1,57 @@
+.book-show__details
+  %ul.nav.nav-tabs.book-show__tabs{role: "tablist"}
+    %li.nav-item.active{role: "presentation"}
+      %a.nav-link.active{href: "#book-show-desc", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-desc", "aria-selected" => "true"}
+        = t("books.description")
+    %li.nav-item{role: "presentation"}
+      %a.nav-link{href: "#book-show-marc", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-marc", "aria-selected" => "false"}
+        = t("books.marc_view")
+    %li.nav-item{role: "presentation"}
+      %a.nav-link{href: "#book-show-isbd", "data-toggle" => "tab", role: "tab", "aria-controls" => "book-show-isbd", "aria-selected" => "false"}
+        = t("books.isbd_view")
+
+  .tab-content.book-show__tab-content
+    #book-show-desc.tab-pane.active{role: "tabpanel"}
+      %table.table.table-striped.book-show__table
+        %tbody
+          = @book_presenter.trow(t("books.publication"), @book_presenter.publication)
+          = @book_presenter.trow(t("books.format"), @book.format.humanize) if @book.format
+          = @book_presenter.trow(t("books.series"), @book_presenter.series)
+          = @book_presenter.trow(t("language"), UnicodeUtils.titlecase(@book.language)) if @book.language.present?
+          = @book_presenter.trow(t("books.original_title"), @book.original_title)
+          = @book_presenter.trow(t("books.original_language"), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present?
+          = @book_presenter.trow(t("books.genres"), @book_presenter.genres)
+          = @book_presenter.trow(t("collections"), @book_presenter.collections(@in_shelves)) if user_signed_in?
+          = @book_presenter.trow(t("books.isbn"), @book.isbn)
+          = @book_presenter.trow(t("books.isbn13"), @book.isbn13)
+          = @book_presenter.trow(t("books.ismn"), @book.ismn)
+          = @book_presenter.trow(t("books.issn"), @book.issn)
+          = @book_presenter.trow(t("books.physical_desc"), @book_presenter.physical_description)
+          - if policy(@book).update?
+            = @book_presenter.trow("ID", @book.id)
+            = @book_presenter.trow("Biblionet ID", @book.biblionet_id)
+
+    #book-show-marc.tab-pane{role: "tabpanel"}
+      %table.table.table-striped.table-sm.book-show__table
+        %tbody
+          = @book_presenter.marc_leader
+          = @book_presenter.marc_control_fields
+          = @book_presenter.marc_data_fields
+
+    #book-show-isbd.tab-pane{role: "tabpanel"}
+      %table.table.table-striped.book-show__table
+        %tbody
+          = @book_presenter.trow(t("books.title"), @book_presenter.isbd_title)
+          = @book_presenter.trow(t("authors.main"), @book_presenter.isbd_main_author)
+          = @book_presenter.trow(t("authors.other"), @book_presenter.isdb_other_authors)
+          = @book_presenter.trow(t("books.publication"), @book_presenter.publication)
+          = @book_presenter.trow(t("books.format"), @book.format) if @book.format
+          = @book_presenter.trow(t("books.original_title"), @book.original_title)
+          = @book_presenter.trow(t("books.original_language"), UnicodeUtils.titlecase(@book.original_language)) if @book.original_language.present?
+          = @book_presenter.trow(t("books.series"), [@book.series_name, @book.series_volume].reject(&:blank?).join(" · "))
+          = @book_presenter.trow(t("books.genres"), @book_presenter.genres)
+          = @book_presenter.trow(t("books.isbn"), @book.isbn)
+          = @book_presenter.trow(t("books.isbn13"), @book.isbn13)
+          = @book_presenter.trow(t("books.ismn"), @book.ismn)
+          = @book_presenter.trow(t("books.issn"), @book.issn)
+          = @book_presenter.trow(t("books.physical_desc"), @book_presenter.physical_description)

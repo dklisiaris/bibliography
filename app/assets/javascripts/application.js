@@ -12,7 +12,6 @@
 //
 //= require jquery2
 //= require rails-ujs
-//= require bootstrap-sprockets
 //= require jquery.readyselector
 //= require typeahead.js/dist/typeahead.bundle.min
 //= require trix

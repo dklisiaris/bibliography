@@ -1,12 +1,11 @@
-= form_tag({controller: 'home', action: 'search'}, method: 'get') do
-  .col-xs-12.col-sm-10.col-md-8.col-xl-7.input-group
-    - if params[:q].present?
-      %span.input-group-btn
-        = link_to fa('close'), {controller: 'home', action: 'index'}, class: "btn btn-lg btn-default"
-
-    %span#remote.multisearch{data: {controller: "autocomplete", autocomplete_url_value: "/search?autocomplete=1&q=%QUERY", autocomplete_variant_value: "multisearch", autocomplete_nothing_found_value: t("nothing_found"), autocomplete_publisher_label_value: t("publishers.label_singular"), autocomplete_category_label_value: t("categories.label_singular"), autocomplete_series_label_value: t("series.label_singular")}}
-      = text_field_tag :q, params[:q], class: 'typeahead multisearch-field form-control input-lg', placeholder: t("write_search_terms"), autocomplete: "off", data: {autocomplete_target: "input"}
-
-    %span.input-group-btn
-      = button_tag(type: "submit", name: nil, class: "btn btn-lg btn-effect-ripple btn-primary") do
-        %i.fa.fa-search
+= form_tag({controller: "home", action: "search"}, method: "get", class: "search-bar-form") do
+  .search-bar.search-bar--lg.multisearch
+    .search-bar__container.row
+      .col-xs-12.col-sm-10.col-md-8.col-xl-7
+        .input-group.input-group-lg.search-bar__group{data: {controller: "autocomplete", autocomplete_url_value: "/search?autocomplete=1&q=%QUERY", autocomplete_variant_value: "multisearch", autocomplete_nothing_found_value: t("nothing_found"), autocomplete_publisher_label_value: t("publishers.label_singular"), autocomplete_category_label_value: t("categories.label_singular"), autocomplete_series_label_value: t("series.label_singular")}}
+          - if params[:q].present?
+            = link_to({controller: "home", action: "index"}, class: "btn btn-outline-secondary btn-icon search-bar__clear", title: t("clear", default: "Clear")) do
+              %i.fa.fa-times
+          = text_field_tag :q, params[:q], class: "form-control form-control-lg search-bar__input typeahead multisearch-field", placeholder: t("write_search_terms"), autocomplete: "off", data: {autocomplete_target: "input", multisearch: true}
+          = button_tag(type: "submit", name: nil, class: "btn btn-primary btn-icon search-bar__submit", title: t("search", default: "Search")) do
+            %i.fa.fa-search

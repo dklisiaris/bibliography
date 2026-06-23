@@ -1,0 +1,16 @@
+- link_mode_sym = link_mode.to_sym
+- if link_mode_sym == :my_books
+  - shelf_href = my_books_path(shelf: shelf.id)
+- elsif link_mode_sym == :public
+  - shelf_href = public_shelf_path(profile, shelf)
+- elsif link_mode_sym == :public_list
+  - shelf_href = public_shelf_path(id: profile_id, shelf_id: shelf.id)
+- else
+  - shelf_href = shelf_path(shelf)
+
+- active = active_shelf&.id == shelf.id
+
+.shelf-nav__item
+  = link_to shelf_href, class: ["shelf-nav__link", ("shelf-nav__link--active" if active)] do
+    %span.shelf-nav__name= shelf.screen_name
+    %span.shelf-nav__count= shelf.books.count
