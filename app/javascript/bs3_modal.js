@@ -1,4 +1,4 @@
-// Bootstrap 3 modal show/hide without jQuery (layout/CSS unchanged until BS5 migration).
+// Bootstrap 3 modal show/hide without jQuery (profile avatar/cover modals until migrated).
 
 const BACKDROP_ATTR = "data-bs3-modal-backdrop"
 

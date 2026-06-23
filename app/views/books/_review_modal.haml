@@ -1,10 +1,9 @@
-#reviewModal.modal.fade{role: "dialog", tabindex: "-1", data: {controller: "review-modal"}}
+#reviewModal.modal.fade{role: "dialog", tabindex: "-1", aria: {modal: true, labelledby: "reviewModalLabel"}, data: {controller: "review-modal"}}
   .modal-dialog{role: "document"}
     .modal-content
       .modal-header
-        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->review-modal#close"}}
-          %span= fa("times")
-        %h4.modal-title= t("books.book_review")
+        %h5.modal-title#reviewModalLabel= t("books.book_review")
+        %button.btn-close{type: "button", aria: {label: t("close", default: "Close")}, data: {bs_dismiss: "modal"}}
       .modal-body
         %label.text-muted
           Would you recommend this book?
@@ -17,5 +16,5 @@
           %input{name: "token", type: "hidden", value: "#{current_user.token}"}
 
       .modal-footer
-        %button.btn.btn-sm.btn-danger{type: "button", data: {action: "click->review-modal#close"}}= t("cancel")
+        %button.btn.btn-sm.btn-outline-secondary{type: "button", data: {bs_dismiss: "modal"}}= t("cancel")
         %button#postReviewBtn.btn.btn-sm.btn-primary{type: "submit"}= t("comments.post")

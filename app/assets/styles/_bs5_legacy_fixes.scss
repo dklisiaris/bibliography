@@ -29,5 +29,11 @@ header.navbar,
   opacity: 0.5;
 }
 
+// ProUI main.css fades dialogs with .modal.in; BS5 Modal uses .show
+.modal.fade.show .modal-dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+
 // BS5 reboot vs ProUI body — main.css still sets body; hotwire loads after application.css
 // so we do not override body here (B.4 shell will simplify layout CSS).

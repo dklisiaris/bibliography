@@ -1,5 +1,5 @@
 import { updateTooltip } from "./tooltip"
-import { hideBs3Modal } from "./bs3_modal"
+import { hideModal } from "./modal"
 import { showToast } from "./toast"
 
 function csrfToken() {
@@ -104,7 +104,7 @@ export function collectionDiff(wasChecked, isChecked) {
 }
 
 export function hideCollectionsModal(modalElement) {
-  hideBs3Modal(modalElement)
+  hideModal(modalElement)
 }
 
 export function notifyCollectionsSaved(message) {

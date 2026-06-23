@@ -98,8 +98,8 @@ $('.books.show').ready(function() {
         data: JSON.stringify({ "comment": {"body": comment} }),
         processData: false,
         success: function(data) {
-          if (window.hideBs3Modal) {
-            window.hideBs3Modal(document.getElementById('reviewModal'));
+          if (window.hideModal) {
+            window.hideModal(document.getElementById('reviewModal'));
           }
 
           var commentHtml = buildBookCommentHtml({

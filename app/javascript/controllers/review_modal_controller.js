@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { hideBs3Modal, showBs3Modal } from "../bs3_modal"
+import { hideModal, showModal } from "../modal"
 
 export default class extends Controller {
   connect() {
@@ -16,16 +16,6 @@ export default class extends Controller {
     if (!trigger) return
 
     event.preventDefault()
-    this.open()
-  }
-
-  open(event) {
-    event?.preventDefault()
-    showBs3Modal(this.element)
-  }
-
-  close(event) {
-    event?.preventDefault()
-    hideBs3Modal(this.element)
+    showModal(this.element)
   }
 }

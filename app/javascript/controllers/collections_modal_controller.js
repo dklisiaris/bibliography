@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { hideBs3Modal, showBs3Modal } from "../bs3_modal"
+import { hideModal, showModal } from "../modal"
 import {
   applyCollectionCheckboxes,
   checkedCollectionIds,
@@ -46,7 +46,7 @@ export default class extends Controller {
     if (Number.isNaN(bookId)) return
 
     this.bookId = bookId
-    showBs3Modal(this.element)
+    showModal(this.element)
     this.showLoading()
 
     loadBookCollections(bookId)
@@ -57,13 +57,8 @@ export default class extends Controller {
       .catch(() => {
         this.showCheckboxes()
         notifyCollectionsError(this.errorMessageValue)
-        this.close()
+        hideModal(this.element)
       })
-  }
-
-  close(event) {
-    event?.preventDefault()
-    hideBs3Modal(this.element)
   }
 
   save(event) {
@@ -84,11 +79,11 @@ export default class extends Controller {
       .then(() => {
         updateCollectionsButton(this.bookId, isChecked.length > 0, labels)
         notifyCollectionsSaved(this.successMessageValue)
-        this.close()
+        hideModal(this.element)
       })
       .catch(() => {
         notifyCollectionsError(this.errorMessageValue)
-        this.close()
+        hideModal(this.element)
       })
   }
 

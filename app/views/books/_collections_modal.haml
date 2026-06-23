@@ -1,4 +1,4 @@
-#collectionsModal.modal.fade{:role => "dialog", :tabindex => "-1",
+#collectionsModal.modal.fade{role: "dialog", tabindex: "-1", aria: {modal: true, labelledby: "collectionsModalLabel"},
   data: {
     controller: "collections-modal",
     collections_modal_success_message_value: t('notifications.changes_saved_successfully'),
@@ -8,12 +8,11 @@
     collections_modal_add_tooltip_value: t('shelves.add_to_collections'),
     collections_modal_edit_tooltip_value: t('shelves.edit_collections')
   }}
-  .modal-dialog{:role => "document"}
+  .modal-dialog{role: "document"}
     .modal-content
       .modal-header
-        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->collections-modal#close"}}
-          %span=fa('times')
-        %h4.modal-title=t('shelves.edit_collections')
+        %h5.modal-title#collectionsModalLabel= t('shelves.edit_collections')
+        %button.btn-close{type: "button", aria: {label: t('close', default: 'Close')}, data: {bs_dismiss: "modal"}}
       .modal-body
         %i.fa.fa-asterisk.fa-2x.fa-spin.text-primary{style: "display:none;", data: {collections_modal_target: "spinner"}}
         .row.collections-checkboxes{data: {collections_modal_target: "checkboxes"}}
@@ -24,5 +23,5 @@
                   %input.form-check-input{type: "checkbox", name: "collection-#{shelf.id}", id: "collection-#{shelf.id}"}
                   %label.form-check-label{for: "collection-#{shelf.id}"}= shelf.screen_name
       .modal-footer
-        %button.btn.btn-sm.btn-danger{type: "button", data: {action: "click->collections-modal#close"}}= t('cancel')
+        %button.btn.btn-sm.btn-outline-secondary{type: "button", data: {bs_dismiss: "modal"}}= t('cancel')
         %button#saveCollections.btn.btn-sm.btn-primary{type: "button", data: {action: "click->collections-modal#save"}}= t('save')
