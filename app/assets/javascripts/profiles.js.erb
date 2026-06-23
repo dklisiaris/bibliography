@@ -1,8 +1,8 @@
 $('.profiles.show').ready(function() {
   function handleUploadSuccess(file, response) {
-    if (window.hideBs3Modal) {
-      window.hideBs3Modal(document.getElementById('avatarModal'));
-      window.hideBs3Modal(document.getElementById('coverModal'));
+    if (window.hideModal) {
+      window.hideModal(document.getElementById('avatarModal'));
+      window.hideModal(document.getElementById('coverModal'));
     }
 
     var $cover = $('.cover').first();

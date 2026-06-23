@@ -1,10 +1,9 @@
-#avatarModal.modal.fade{role: "dialog", tabindex: "-1"}
+#avatarModal.modal.fade{role: "dialog", tabindex: "-1", aria: {modal: true, labelledby: "avatarModalLabel"}}
   .modal-dialog{role: "document"}
     .modal-content
       .modal-header
-        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->profile-modal#close"}}
-          %span= fa("times")
-        %h4.modal-title= t("users.change_avatar")
+        %h5.modal-title#avatarModalLabel= t("users.change_avatar")
+        %button.btn-close{type: "button", aria: {label: t("close", default: "Close")}, data: {bs_dismiss: "modal"}}
       .modal-body
         = form_tag profile_path, method: :patch, class: "dropzone profile-upload-dropzone", id: "avatar-dropzone" do
           .dz-message{"data-dz-message" => ""}

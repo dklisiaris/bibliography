@@ -41,7 +41,6 @@ function initBootstrapComponents(root = document) {
   })
 
   root.querySelectorAll(".modal").forEach((el) => {
-    if (el.id === "avatarModal" || el.id === "coverModal") return
     Modal.getOrCreateInstance(el)
   })
 
