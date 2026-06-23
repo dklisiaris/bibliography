@@ -6,31 +6,12 @@ img {
   margin: 0 auto;
 }
 
-.column {
-  @extend .col-md-6;
-  @extend .text-center;
-}
-
-.form {
-  @extend .col-md-6;
-}
-
-.form-centered {
-  @extend .col-md-6;
-  @extend .text-center;
-}
-
 textarea.form-control {
   height: auto;
 }
 
 .pagination {
   margin: 0;
-}
-
-.pagination > li > a {
-  margin-left: 1px !important;
-  margin-right: 1px !important;
 }
 
 .btn-fb {
@@ -78,13 +59,6 @@ textarea.form-control {
 
 .img-thumbnail {
   border-radius: 12px;
-}
-
-#page-content-sidebar {
-  padding: 10px;
-  margin: -10px -12px 10px;
-  background-color: #fff;
-  border-bottom: 2px solid #dae5e8;
 }
 
 .collections-modal__check {

@@ -36,9 +36,9 @@ export function showToast(message, type = "success") {
 
   const close = document.createElement("button")
   close.type = "button"
-  close.className = "close"
+  close.className = "btn-close"
+  close.setAttribute("data-bs-dismiss", "alert")
   close.setAttribute("aria-label", "Close")
-  close.innerHTML = '<span aria-hidden="true">&times;</span>'
   close.addEventListener("click", () => dismissToast(toast))
 
   const body = document.createElement("span")
