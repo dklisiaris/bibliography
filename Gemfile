@@ -87,7 +87,7 @@ group :test do
 end
 
 gem 'autoprefixer-rails', '~> 6.0'
-gem 'font-awesome-sass', '~> 4.7'
+# Icons — Font Awesome 4.7 CSS loaded via npm in hotwire.scss (_vendor.scss).
 
 gem 'pg', '~> 1.5'
 

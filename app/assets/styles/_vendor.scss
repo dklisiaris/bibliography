@@ -1,0 +1,5 @@
+// Vendor CSS (npm) — Font Awesome 4.7 + Trix editor chrome.
+
+$fa-font-path: "./fa-fonts";
+@import "font-awesome/scss/font-awesome";
+@import "trix/dist/trix.css";
