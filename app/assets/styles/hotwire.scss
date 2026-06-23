@@ -38,6 +38,8 @@
 @import "bootstrap/scss/helpers";
 @import "bootstrap/scss/utilities/api";
 
+@import "dropzone/dist/min/dropzone.min.css";
+
 @import "bootstrap_compat";
 @import "legacy";
 @import "buttons";
@@ -53,6 +55,9 @@
 @import "book_filters";
 @import "book_show";
 @import "book_comments";
+@import "trix_editor";
+@import "review_modal";
+@import "typeahead";
 @import "resource_show";
 @import "profile_show";
 @import "profile_form";

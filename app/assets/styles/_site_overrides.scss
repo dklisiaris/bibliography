@@ -1,18 +1,5 @@
 // Site rules moved from framework_and_overrides.css.scss (loaded after Bootstrap 5).
 
-// ProUI link colors previously in main.css; BS5 reboot adds underline on top.
-// Variables disable underline globally; reinforce for content areas that set their own color.
-.book-box a {
-  color: #363636;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    color: #363636;
-    text-decoration: none;
-  }
-}
-
 img {
   max-width: 100%;
   height: auto;
