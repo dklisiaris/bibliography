@@ -9,5 +9,5 @@
         %input{name: "parent_id", type: "hidden", value: parent_id}
         %input{name: "email", type: "hidden", value: user.email}
         %input{name: "token", type: "hidden", value: user.token}
-        %button.post-comment.btn.btn-sm.btn-primary{type: "submit"}= t("comments.post")
-      %button.book-comment-form__toggle.write-comment-btn.btn.btn-sm.btn-link{type: "button", id: "write-comment-btn-#{parent_id}"}= t("comments.write_comment")
+        %button.post-comment.btn.btn-sm.btn-primary{type: "submit", data: {action: "book-comments#postComment"}}= t("comments.post")
+      %button.book-comment-form__toggle.write-comment-btn.btn.btn-sm.btn-link{type: "button", id: "write-comment-btn-#{parent_id}", data: {action: "book-comments#toggleReplyForm"}}= t("comments.write_comment")

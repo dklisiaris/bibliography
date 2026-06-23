@@ -1,5 +1,5 @@
 - avatar_size = (40 / (1 + depth * 0.25)).round
-%li.book-comment{id: "comment-#{comment.id}"}
+%li.book-comment{id: "comment-#{comment.id}", data: {book_id: book.id}}
   .book-comment__layout
     = link_to public_profile_path(comment.user.profile), class: "book-comment__avatar-link" do
       = image_tag comment.user.avatar, alt: "Avatar", height: avatar_size, width: avatar_size, class: "book-comment__avatar"
@@ -8,7 +8,7 @@
         = link_to comment.user.screen_name, public_profile_path(comment.user.profile), class: "book-comment__author"
         %time.book-comment__time.text-muted{datetime: comment.created_at.iso8601}= time_ago_in_words(comment.created_at)
         - if policy(comment).destroy?
-          %button.book-comment__delete.delete-comment{type: "button", onclick: "deleteComment(#{book.id}, #{comment.id}, #{user.credentials})", title: t("delete", default: "Delete"), "aria-label": t("delete", default: "Delete")}
+          %button.book-comment__delete.delete-comment{type: "button", data: {action: "book-comments#delete"}, title: t("delete", default: "Delete"), "aria-label": t("delete", default: "Delete")}
             = fa("trash-o")
       .book-comment__text= comment.body.html_safe
       - if subcomments

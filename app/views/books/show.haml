@@ -4,9 +4,11 @@
 
 = content_header(content: render(partial: 'shared/search_form', locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages)
 
+- book_comment_data = user_signed_in? ? {controller: "book-comments", book_comments_book_id_value: @book.id, book_comments_email_value: current_user.email, book_comments_token_value: current_user.token} : {}
+
 .row
   .col-12
-    %article.book-show
+    %article.book-show{data: book_comment_data}
       - if policy(@book).update?
         .book-show__toolbar
           = nav_btn_link_to(name: fa('pencil'), url: edit_book_path(@book), tooltip: t('books.edit'), style: 'success')

@@ -12,6 +12,10 @@ import ReviewModalController from "./review_modal_controller"
 import AppShellController from "./app_shell_controller"
 import ProfileModalController from "./profile_modal_controller"
 import ProfileUploadController from "./profile_upload_controller"
+import PieChartController from "./pie_chart_controller"
+import BookCommentsController from "./book_comments_controller"
+import ReviewPostController from "./review_post_controller"
+import WelcomeWizardController from "./welcome_wizard_controller"
 
 application.register("flash", FlashController)
 application.register("read-more", ReadMoreController)
@@ -25,28 +29,7 @@ application.register("review-modal", ReviewModalController)
 application.register("app-shell", AppShellController)
 application.register("profile-modal", ProfileModalController)
 application.register("profile-upload", ProfileUploadController)
-
-import { submitRecommendation } from "../recommendation"
-import { submitFavourite } from "../favourite"
-
-// Legacy jQuery callers until migrated to Stimulus.
-window.like = (bookId) =>
-  submitRecommendation(bookId, "like", window.recommendationLabels).catch(() => {})
-window.dislike = (bookId) =>
-  submitRecommendation(bookId, "dislike", window.recommendationLabels).catch(() => {})
-window.favouriteAuthor = (id) =>
-  submitFavourite({
-    url: `/authors/${id}/favourite`,
-    kind: "author",
-    recordId: id,
-    inactiveClass: "btn-outline-secondary",
-    labels: window.favouriteAuthorLabels,
-  }).catch(() => {})
-window.favouriteCategory = (id) =>
-  submitFavourite({
-    url: `/categories/${id}/favourite`,
-    kind: "category",
-    recordId: id,
-    inactiveClass: "btn-primary",
-    labels: window.favouriteCategoryLabels,
-  }).catch(() => {})
+application.register("pie-chart", PieChartController)
+application.register("book-comments", BookCommentsController)
+application.register("review-post", ReviewPostController)
+application.register("welcome-wizard", WelcomeWizardController)
