@@ -93,6 +93,35 @@
   pointer-events: auto;
   margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: flash-toast-in 0.45s ease;
+
+  &.flash-toast--dismissing {
+    animation: flash-toast-out 0.45s ease forwards;
+  }
+}
+
+@keyframes flash-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes flash-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
 .read-more-toggle {

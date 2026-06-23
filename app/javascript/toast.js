@@ -22,16 +22,15 @@ function container() {
 }
 
 function dismissToast(toast) {
-  toast.classList.remove("bounceInRight")
-  toast.classList.add("bounceOutRight")
-  window.setTimeout(() => toast.remove(), 500)
+  toast.classList.add("flash-toast--dismissing")
+  window.setTimeout(() => toast.remove(), 450)
 }
 
 export function showToast(message, type = "success") {
   if (!message) return
 
   const toast = document.createElement("div")
-  toast.className = `alert ${TYPE_CLASSES[type] || TYPE_CLASSES.info} alert-dismissible flash-toast animated bounceInRight`
+  toast.className = `alert ${TYPE_CLASSES[type] || TYPE_CLASSES.info} alert-dismissible flash-toast`
   toast.setAttribute("role", "alert")
 
   const close = document.createElement("button")
