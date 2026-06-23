@@ -7,32 +7,26 @@
 
 - if @search_results.present? && !@search_hits.all? { |_, v| v == 0 }
   - active_klass = @search_hits.find { |_, v| v > 0 }[0]
+  - search_tabs = [{key: "Book", slug: "books", label: t("books.label")}, {key: "Author", slug: "authors", label: t("authors.label")}, {key: "Publisher", slug: "publishers", label: t("publishers.label")}, {key: "Category", slug: "categories", label: t("categories.label")}, {key: "Series", slug: "series", label: t("series.label")}]
 
   .row.index-layout
     .col-12
       %section.index-panel.search-results
         .search-results__tabs
           %ul.nav.nav-tabs.search-results__nav{role: "tablist"}
-            - if @search_hits["Book"] > 0
-              %li.nav-item{role: "presentation", class: ("active" if active_klass == "Book")}
-                = link_to "#{t('books.label')} (#{@search_hits['Book']})", "#search-tab-books", class: ["nav-link", ("active" if active_klass == "Book")], role: "tab", "aria-controls": "search-tab-books"
-            - if @search_hits["Author"] > 0
-              %li.nav-item{role: "presentation", class: ("active" if active_klass == "Author")}
-                = link_to "#{t('authors.label')} (#{@search_hits['Author']})", "#search-tab-authors", class: ["nav-link", ("active" if active_klass == "Author")], role: "tab", "aria-controls": "search-tab-authors"
-            - if @search_hits["Publisher"] > 0
-              %li.nav-item{role: "presentation", class: ("active" if active_klass == "Publisher")}
-                = link_to "#{t('publishers.label')} (#{@search_hits['Publisher']})", "#search-tab-publishers", class: ["nav-link", ("active" if active_klass == "Publisher")], role: "tab", "aria-controls": "search-tab-publishers"
-            - if @search_hits["Category"] > 0
-              %li.nav-item{role: "presentation", class: ("active" if active_klass == "Category")}
-                = link_to "#{t('categories.label')} (#{@search_hits['Category']})", "#search-tab-categories", class: ["nav-link", ("active" if active_klass == "Category")], role: "tab", "aria-controls": "search-tab-categories"
-            - if @search_hits["Series"] > 0
-              %li.nav-item{role: "presentation", class: ("active" if active_klass == "Series")}
-                = link_to "#{t('series.label')} (#{@search_hits['Series']})", "#search-tab-series", class: ["nav-link", ("active" if active_klass == "Series")], role: "tab", "aria-controls": "search-tab-series"
+            - search_tabs.each do |tab|
+              - next unless @search_hits[tab[:key]] > 0
+              - tab_panel_id = "search-tab-#{tab[:slug]}"
+              - tab_button_id = "#{tab_panel_id}-tab"
+              - is_active = active_klass == tab[:key]
+              %li.nav-item{role: "presentation"}
+                %button.nav-link{class: ("active" if is_active), id: tab_button_id, type: "button", role: "tab", data: {bs_toggle: "tab", bs_target: "##{tab_panel_id}"}, aria: {controls: tab_panel_id, selected: is_active}}
+                  = "#{tab[:label]} (#{@search_hits[tab[:key]]})"
 
         .tab-content.search-results__content
           - @search_results.each do |result|
             - if result.klass.to_s == "Book" && @search_hits["Book"] > 0
-              #search-tab-books.tab-pane.fade{role: "tabpanel", class: ("show active" if active_klass == "Book")}
+              #search-tab-books.tab-pane.fade{role: "tabpanel", aria: {labelledby: "search-tab-books-tab"}, class: ("show active" if active_klass == "Book")}
                 .book-list
                   = render partial: "books/book", collection: result.results, as: :book
                   - if result.results.count < @search_hits["Book"]
@@ -43,7 +37,7 @@
                       = link_to t('load_more'), search_path(q: params[:q], search_only: 'books', page: 2, format: :turbo_stream), class: 'btn btn-primary', data: {turbo_stream: true}
 
             - elsif result.klass.to_s == "Author" && @search_hits["Author"] > 0
-              #search-tab-authors.tab-pane.fade{role: "tabpanel", class: ("show active" if active_klass == "Author")}
+              #search-tab-authors.tab-pane.fade{role: "tabpanel", aria: {labelledby: "search-tab-authors-tab"}, class: ("show active" if active_klass == "Author")}
                 .author-list
                   = render partial: "authors/author", collection: result.results, as: :author, locals: {liked_ids: @liked_author_ids}
                   - if result.results.count < @search_hits["Author"]
@@ -54,7 +48,7 @@
                       = link_to t('load_more'), search_path(q: params[:q], search_only: 'authors', page: 2, format: :turbo_stream), class: 'btn btn-primary', data: {turbo_stream: true}
 
             - elsif result.klass.to_s == "Publisher" && @search_hits["Publisher"] > 0
-              #search-tab-publishers.tab-pane.fade{role: "tabpanel", class: ("show active" if active_klass == "Publisher")}
+              #search-tab-publishers.tab-pane.fade{role: "tabpanel", aria: {labelledby: "search-tab-publishers-tab"}, class: ("show active" if active_klass == "Publisher")}
                 .publisher-list
                   = render partial: "publishers/publisher", collection: result.results, as: :publisher
                   - if result.results.count < @search_hits["Publisher"]
@@ -65,7 +59,7 @@
                       = link_to t('load_more'), search_path(q: params[:q], search_only: 'publishers', page: 2, format: :turbo_stream), class: 'btn btn-primary', data: {turbo_stream: true}
 
             - elsif result.klass.to_s == "Category" && @search_hits["Category"] > 0
-              #search-tab-categories.tab-pane.fade{role: "tabpanel", class: ("show active" if active_klass == "Category")}
+              #search-tab-categories.tab-pane.fade{role: "tabpanel", aria: {labelledby: "search-tab-categories-tab"}, class: ("show active" if active_klass == "Category")}
                 .index-panel__content--grids
                   = render partial: "categories/category_with_books", collection: result.results, as: :category
                   - if result.results.count < @search_hits["Category"]
@@ -76,7 +70,7 @@
                       = link_to t('load_more'), search_path(q: params[:q], search_only: 'categories', page: 2, format: :turbo_stream), class: 'btn btn-primary', data: {turbo_stream: true}
 
             - elsif result.klass.to_s == "Series" && @search_hits["Series"] > 0
-              #search-tab-series.tab-pane.fade{role: "tabpanel", class: ("show active" if active_klass == "Series")}
+              #search-tab-series.tab-pane.fade{role: "tabpanel", aria: {labelledby: "search-tab-series-tab"}, class: ("show active" if active_klass == "Series")}
                 .index-panel__content--grids
                   = render partial: "series/series_with_books", collection: result.results, as: :series
                   - if result.results.count < @search_hits["Series"]
