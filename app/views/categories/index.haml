@@ -9,19 +9,8 @@
     - @featured.each do |category|
       = render partial: 'books/widgets/grid',                                         |
         locals: {                                                                     |
-        title: link_to(category.name, category, class: ""),              |
+        title: link_to(category.name, category),                                      |
         books: category.get_popular_books,                                            |
         icon: 'tag'}                                                                  |
   .col-sm-4
-    .block
-      .block-title
-        .block-options.pull-right
-          = nav_btn_link_to( name: fa('plus'), url: new_category_path, tooltip: t('categories.new')) if policy(Category).new?
-        %h1= t('categories.all')
-      .list-group
-        - cache(["root_categories", @categories.map(&:id)]) do
-          = render @categories
-
-
-
-
+    = render partial: "categories/category_nav", locals: { title: t('categories.all'), categories: @categories, new_path: (policy(Category).new? ? new_category_path : nil), new_tooltip: t('categories.new') }

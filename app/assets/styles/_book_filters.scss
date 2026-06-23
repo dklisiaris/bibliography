@@ -1,0 +1,208 @@
+// Books index — filter sidebar (uses shared .index-panel shell).
+
+.book-filters-column {
+  min-width: 0;
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    position: sticky;
+    top: 60px;
+    align-self: flex-start;
+  }
+}
+
+.book-filters {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  max-height: calc(100vh - 70px);
+  background-color: #fff;
+  border: 1px solid #e8eef0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(28, 43, 54, 0.05);
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #ebf1f2;
+    background-color: #fff;
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: $body-color;
+  }
+
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #6c757d;
+    background: transparent;
+    border: 1px solid #dae5e8;
+    border-radius: 0.5rem;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: $body-color;
+      background-color: #f4f7f8;
+      border-color: #c8d4d8;
+    }
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0.25rem 0;
+  }
+}
+
+.book-filter {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  & + & {
+    border-top: 1px solid #f0f4f5;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0.875rem 1.25rem 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #6c757d;
+    overflow-wrap: anywhere;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+    padding-bottom: 0.25rem;
+    overflow: hidden;
+  }
+
+  &__link {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-width: 0;
+    max-width: 100%;
+    padding: 0.625rem 1rem;
+    color: $body-color;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background-color: #f8fafb;
+      color: $primary;
+      text-decoration: none;
+    }
+
+    &--active {
+      background-color: rgba($primary, 0.08);
+      color: $primary;
+      font-weight: 500;
+
+      .book-filter__count {
+        background-color: rgba($primary, 0.15);
+        color: $primary;
+      }
+    }
+  }
+
+  &__name {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  &__count {
+    flex-shrink: 0;
+    padding: 0.125rem 0.4375rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: #6c757d;
+    background-color: #ebf1f2;
+    border-radius: 0.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .read-more-toggle {
+    margin: 0 1rem 0.625rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .book-filters-column {
+    position: static;
+    flex: 0 0 0 !important;
+    width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible;
+  }
+
+  .book-filters {
+    position: fixed;
+    z-index: 1050;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 100vw);
+    max-width: 100vw;
+    max-height: none;
+    border-radius: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    box-shadow: -8px 0 24px rgba(28, 43, 54, 0.18);
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    visibility: hidden;
+    pointer-events: none;
+
+    &.open {
+      transform: translateX(0);
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .book-filters__close {
+    display: none !important;
+  }
+}

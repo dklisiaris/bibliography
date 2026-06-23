@@ -1,23 +1,21 @@
-#reviewModal.modal.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
+#reviewModal.modal.fade{role: "dialog", tabindex: "-1", data: {controller: "review-modal"}}
+  .modal-dialog{role: "document"}
     .modal-content
       .modal-header
-        %button.close{"data-dismiss" => "modal", :type => "button"}
-          %span=fa('times')
-        %h4.modal-title=t('books.book_review')
+        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->review-modal#close"}}
+          %span= fa("times")
+        %h4.modal-title= t("books.book_review")
       .modal-body
         %label.text-muted
           Would you recommend this book?
         .review-btns
-          = render partial: 'books/widgets/recommend_btns', locals: {book: @book}
-        = form_for Comment.new, url: {action: :create}, html: { id: "reviewForm", onsubmit: "return false;"} do |f|
-          = f.trix_editor :body, placeholder: t('books.write_review'), rows: 10
-          %input{:name => "book_id", :type => "hidden", :value => "#{@book.id}"}
-          %input{:name => "email", :type => "hidden", :value => "#{current_user.email}"}
-          %input{:name => "token", :type => "hidden", :value => "#{current_user.token}"}
-
+          = render partial: "books/widgets/recommend_btns", locals: {book: @book}
+        = form_for Comment.new, url: {action: :create}, html: {id: "reviewForm", onsubmit: "return false;"} do |f|
+          = f.trix_editor :body, placeholder: t("books.write_review"), rows: 10
+          %input{name: "book_id", type: "hidden", value: "#{@book.id}"}
+          %input{name: "email", type: "hidden", value: "#{current_user.email}"}
+          %input{name: "token", type: "hidden", value: "#{current_user.token}"}
 
       .modal-footer
-        %button.btn.btn-sm.btn-danger{"data-dismiss" => "modal", :type => "button"}= t('cancel')
-        %button#postReviewBtn.btn.btn-effect-ripple.btn-sm.btn-primary{:type => "submit"}= t('comments.post')
-
+        %button.btn.btn-sm.btn-danger{type: "button", data: {action: "click->review-modal#close"}}= t("cancel")
+        %button#postReviewBtn.btn.btn-effect-ripple.btn-sm.btn-primary{type: "submit"}= t("comments.post")

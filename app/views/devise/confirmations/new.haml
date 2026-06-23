@@ -1,0 +1,17 @@
+.auth-page
+  %section.index-panel.auth-card
+    %header.index-panel__header
+      %h2.index-panel__title Resend confirmation instructions
+
+    .index-panel__content
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post, role: "form"}) do |f|
+        = devise_error_messages!
+
+        .mb-3
+          = f.label :email, class: "form-label"
+          = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"
+
+        = f.submit "Resend confirmation instructions", class: "btn btn-primary"
+
+      .auth-card__links
+        = render "devise/shared/links"

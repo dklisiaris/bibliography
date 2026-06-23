@@ -1,0 +1,156 @@
+// Bibliography button system — BS5-native, overrides ProUI main.css.
+
+.btn {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-width: 1px;
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus,
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.22);
+  }
+
+  &:active,
+  &.active {
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.55;
+  }
+}
+
+// ProUI ripple — keep for JS compatibility, no visual side effects.
+.btn-effect-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #{$primary};
+  --bs-btn-border-color: #{$primary};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{shade-color($primary, 8%)};
+  --bs-btn-hover-border-color: #{shade-color($primary, 8%)};
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #{shade-color($primary, 12%)};
+  --bs-btn-active-border-color: #{shade-color($primary, 12%)};
+  --bs-btn-focus-shadow-rgb: #{red($primary)}, #{green($primary)}, #{blue($primary)};
+}
+
+.btn-secondary,
+.btn-default {
+  --bs-btn-color: #{$body-color};
+  --bs-btn-bg: #fff;
+  --bs-btn-border-color: #dae5e8;
+  --bs-btn-hover-color: #{$body-color};
+  --bs-btn-hover-bg: #f4f7f8;
+  --bs-btn-hover-border-color: #c8d4d8;
+  --bs-btn-active-color: #{$body-color};
+  --bs-btn-active-bg: #ebf1f2;
+  --bs-btn-active-border-color: #c8d4d8;
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: #6c757d;
+  --bs-btn-border-color: #dae5e8;
+  --bs-btn-hover-color: #{$body-color};
+  --bs-btn-hover-bg: #f4f7f8;
+  --bs-btn-hover-border-color: #c8d4d8;
+  --bs-btn-active-color: #{$body-color};
+  --bs-btn-active-bg: #ebf1f2;
+  --bs-btn-active-border-color: #c8d4d8;
+}
+
+.btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #5cb85c;
+  --bs-btn-border-color: #5cb85c;
+  --bs-btn-hover-bg: #{shade-color(#5cb85c, 8%)};
+  --bs-btn-hover-border-color: #{shade-color(#5cb85c, 8%)};
+}
+
+.btn-danger {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #d9534f;
+  --bs-btn-border-color: #d9534f;
+  --bs-btn-hover-bg: #{shade-color(#d9534f, 8%)};
+  --bs-btn-hover-border-color: #{shade-color(#d9534f, 8%)};
+}
+
+.btn-link {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+// Compact actions on book cards, modals, etc.
+.btn-xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  border-radius: 0.5rem;
+
+  i.fa {
+    font-size: 0.75rem;
+  }
+}
+
+.collections-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+
+  i.fa {
+    margin: 0;
+    line-height: 1;
+  }
+
+  &__label.hidden-xs {
+    @media (min-width: 576px) {
+      display: inline !important;
+    }
+  }
+}
+
+// Icon-only square buttons (search submit, clear, toolbar).
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+
+  i.fa {
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+.input-group .btn,
+.block-options .btn,
+.modal-content .btn {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+// Form submit helpers
+.submit,
+input[type="submit"].submit {
+  @extend .btn;
+  @extend .btn-primary;
+}

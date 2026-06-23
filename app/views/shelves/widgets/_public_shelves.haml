@@ -1,15 +1,3 @@
-- icon ||= 'th-large'
-.block.full
-  .block-title
-    %h2
-      = fa(icon)
-      %strong= detone title
-  - shelves.built_in.each do |shelf|
-    = link_to public_shelf_path(profile.id, shelf.id), class: "list-group-item" do
-      %h6.list-group-item-heading
-        = "#{shelf.screen_name} (#{shelf.books.count})"
-  %br
-  - shelves.user_created.each do |shelf|
-    = link_to public_shelf_path(profile.id, shelf.id), class: "list-group-item" do
-      %h6.list-group-item-heading
-        = "#{shelf.screen_name} (#{shelf.books.count})"
+- nav_locals = {title: title, shelves: shelves, link_mode: :public, profile: profile, active_shelf: @shelf}
+- nav_locals[:show_all_link] = {label: detone(t("books.all")), path: public_shelves_path(profile)} if @shelf.present?
+= render partial: "shelves/widgets/shelves_nav", locals: nav_locals

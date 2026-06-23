@@ -55,11 +55,7 @@ var App = function() {
         // Intialize ripple effect on buttons
         rippleEffect($('.btn-effect-ripple'), 'btn-ripple');
 
-        // Initialize Tabs
-        $('[data-toggle="tabs"] a, .enable-tabs a').click(function(e){ e.preventDefault(); $(this).tab('show'); });
-
-        // Initialize Tooltips
-        $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
+        // Tooltips and tabs: bootstrap_bridge.js (hotwire.js)
 
         // Easy Pie Chart
         $('.pie-chart').easyPieChart({

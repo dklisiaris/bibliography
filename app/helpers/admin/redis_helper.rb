@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 module Admin::RedisHelper
-  def type_label_class(type)
+  def type_badge_class(type)
     case type
     when 'string'
-      'primary'
+      'text-bg-primary'
     when 'hash'
-      'info'
+      'text-bg-info'
     when 'list'
-      'success'
+      'text-bg-success'
     when 'set'
-      'warning'
+      'text-bg-warning'
     when 'zset'
-      'danger'
+      'text-bg-danger'
     else
-      'default'
+      'text-bg-secondary'
     end
   end
 
@@ -22,47 +22,44 @@ module Admin::RedisHelper
     total_pages = (total.to_f / per_page).ceil
     return '' if total_pages <= 1
 
-    html = '<nav><ul class="pagination">'
-    
-    # Previous link
+    html = '<ul class="pagination">'
+
     if page > 1
-      html += content_tag(:li) do
-        link_to '&laquo;'.html_safe, admin_redis_path(page: page - 1, pattern: params[:pattern], namespace: params[:namespace])
+      html += content_tag(:li, class: 'page-item') do
+        link_to '&laquo;'.html_safe, admin_redis_path(page: page - 1, pattern: params[:pattern], namespace: params[:namespace]), class: 'page-link', aria: {label: 'Previous'}
       end
     else
-      html += content_tag(:li, class: 'disabled') do
-        content_tag(:span, '&laquo;'.html_safe)
+      html += content_tag(:li, class: 'page-item disabled') do
+        content_tag(:span, '&laquo;'.html_safe, class: 'page-link', aria: {hidden: true})
       end
     end
 
-    # Page numbers
     start_page = [page - 2, 1].max
     end_page = [page + 2, total_pages].min
 
     (start_page..end_page).each do |p|
       if p == page
-        html += content_tag(:li, class: 'active') do
-          content_tag(:span, p)
+        html += content_tag(:li, class: 'page-item active', aria: {current: 'page'}) do
+          content_tag(:span, p, class: 'page-link')
         end
       else
-        html += content_tag(:li) do
-          link_to p, admin_redis_path(page: p, pattern: params[:pattern], namespace: params[:namespace])
+        html += content_tag(:li, class: 'page-item') do
+          link_to p, admin_redis_path(page: p, pattern: params[:pattern], namespace: params[:namespace]), class: 'page-link'
         end
       end
     end
 
-    # Next link
     if page < total_pages
-      html += content_tag(:li) do
-        link_to '&raquo;'.html_safe, admin_redis_path(page: page + 1, pattern: params[:pattern], namespace: params[:namespace])
+      html += content_tag(:li, class: 'page-item') do
+        link_to '&raquo;'.html_safe, admin_redis_path(page: page + 1, pattern: params[:pattern], namespace: params[:namespace]), class: 'page-link', aria: {label: 'Next'}
       end
     else
-      html += content_tag(:li, class: 'disabled') do
-        content_tag(:span, '&raquo;'.html_safe)
+      html += content_tag(:li, class: 'page-item disabled') do
+        content_tag(:span, '&raquo;'.html_safe, class: 'page-link', aria: {hidden: true})
       end
     end
 
-    html += '</ul></nav>'
+    html += '</ul>'
     html.html_safe
   end
 end

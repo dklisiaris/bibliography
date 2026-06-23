@@ -7,37 +7,31 @@
   content: render(partial: 'shared/search_form',                                     |
   locals: {action: books_path, placeholder: t('books.search')}), breadcrumbs: pages) |
 
-.row{data: {controller: "filter-sidebar"}}
-  .col-sm-4.col-sm-push-8.sliding-sidebar-cont
-    .sliding-sidebar#filter-sidebar{data: {filter_sidebar_target: "panel"}}
-      = render partial: 'books/widgets/filter', locals: {title: t('authors.label_singular'), filter_name: "author", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('publishers.label_singular'), filter_name: "publisher", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('categories.label_singular'), filter_name: "category", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('series.label_singular'), filter_name: "series", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('books.publication_year'), filter_name: "publication_year", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('books.format'), filter_name: "format", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('books.original_language'), filter_name: "language", books: @books}
-      = render partial: 'books/widgets/filter', locals: {title: t('books.pages_label'), filter_name: "pages", books: @books}
-  .col-sm-8.col-sm-pull-4
-    .block.full
-      .block-title
-        .block-options.pull-right
-          = nav_btn_link_to( name: fa('plus'), url: new_book_path, tooltip: t('books.new')) if policy(Book).new?
-        %h1
+.row.index-layout{data: {controller: "filter-sidebar"}}
+  .col-sm-8
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title
           = detone t('books.label')
-          %small= " (#{@books.response["hits"]["total"]})"
-      .row
-        .col-xs-12
-          .row
-            .col-xs-10
-              = render "books/widgets/pagination" if defined? @books.total_pages
-            .col-xs-2.visible-xs
-              = button_tag nil, class: 'btn btn-sm btn-primary pull-right filters-trigger', data: {action: "click->filter-sidebar#toggle"} do
-                %i.fa.fa-sliders
-                %span= " #{t('books.filters.label')}"
-          %hr/
-          = render :partial => "books/book", :collection => @books, :as => :book, cached: true
+          %span.index-panel__count= " (#{search_results_total_label(@books)})"
+        - if policy(Book).new?
+          .index-panel__actions
+            = nav_btn_link_to(name: fa('plus'), url: new_book_path, tooltip: t('books.new'))
+
+      .index-panel__toolbar
+        .index-panel__pagination
           = render "books/widgets/pagination" if defined? @books.total_pages
+        = button_tag nil, class: "btn btn-sm btn-primary index-panel__toolbar-action index-panel__toolbar-action--mobile-only visible-xs", data: {action: "click->filter-sidebar#toggle"} do
+          %i.fa.fa-sliders{aria: {hidden: true}}
+          %span= t('books.filters.label')
+
+      .index-panel__content
+        .book-list
+          = render partial: "books/book", collection: @books, as: :book, cached: true
+        = render "books/widgets/pagination" if defined? @books.total_pages
+
+  .col-sm-4.book-filters-column
+    = render partial: "books/widgets/filters_sidebar", locals: {books: @books}
 
 - if user_signed_in?
   = render 'books/collections_modal'

@@ -1,107 +1,107 @@
 - pages = {fa('home') => root_url, 'Admin' => '#', 'Redis Browser' => admin_redis_path, @key => nil}
 
-= content_header( title: 'Redis Key Details', breadcrumbs: pages)
+= content_header(title: 'Redis Key Details', breadcrumbs: pages)
 
-.row
-  .col-md-12
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title
+.row.index-layout
+  .col-12
+    %section.index-panel.admin-redis
+      %header.index-panel__header
+        %h1.index-panel__title
           = fa('key')
           Key:
           %code= @key
-      .panel-body
-        %dl.dl-horizontal
-          %dt Key:
+
+      .index-panel__content
+        %dl.admin-redis__meta-list
+          %dt Key
           %dd
             %code= @key
-          %dt Type:
+          %dt Type
           %dd
-            %span.label{class: "label-#{type_label_class(@key_info[:type])}"}
+            %span.badge{class: type_badge_class(@key_info[:type])}
               = @key_info[:type].upcase
-          %dt Size/Count:
+          %dt Size/Count
           %dd= @key_info[:size]
-          %dt TTL:
+          %dt TTL
           %dd
             - if @key_info[:ttl].is_a?(Integer)
               = distance_of_time_in_words(Time.now, Time.now + @key_info[:ttl])
             - else
               %span.text-muted= @key_info[:ttl]
 
-        %hr
+        %h2.admin-redis__section-title Value
 
-        %h4 Value:
-        .well{style: 'max-height: 600px; overflow-y: auto;'}
+        .admin-redis__value
           - if @key_info[:type] == 'string' && @value.is_a?(Hash)
             %pre= JSON.pretty_generate(@value)
           - elsif @key_info[:type] == 'hash'
-            %table.table.table-bordered.table-condensed
-              %thead
-                %tr
-                  %th Field
-                  %th Value
-              %tbody
-                - @value.each do |field, val|
+            .table-responsive
+              %table.table.table-bordered.table-sm
+                %thead
                   %tr
-                    %td
-                      %code= field
-                    %td
-                      - begin
-                        = JSON.pretty_generate(JSON.parse(val))
-                      - rescue
-                        = val
+                    %th Field
+                    %th Value
+                %tbody
+                  - @value.each do |field, val|
+                    %tr
+                      %td
+                        %code= field
+                      %td
+                        - begin
+                          %pre.mb-0= JSON.pretty_generate(JSON.parse(val))
+                        - rescue
+                          = val
           - elsif @key_info[:type] == 'list'
-            %ol
+            %ol.mb-0
               - @value.each_with_index do |item, idx|
                 %li
                   - begin
-                    = JSON.pretty_generate(JSON.parse(item))
+                    %pre.mb-0= JSON.pretty_generate(JSON.parse(item))
                   - rescue
                     = item
             - if @key_info[:size] > 100
-              %p.text-muted
+              %p.text-muted.mt-2.mb-0
                 %em Showing first 100 items of #{@key_info[:size]}
           - elsif @key_info[:type] == 'set'
-            %ul
+            %ul.mb-0
               - @value.each do |item|
                 %li
                   - begin
-                    = JSON.pretty_generate(JSON.parse(item))
+                    %pre.mb-0= JSON.pretty_generate(JSON.parse(item))
                   - rescue
                     = item
             - if @key_info[:size] > 1000
-              %p.text-muted
+              %p.text-muted.mt-2.mb-0
                 %em Showing first 1000 items of #{@key_info[:size]}
           - elsif @key_info[:type] == 'zset'
-            %table.table.table-bordered.table-condensed
-              %thead
-                %tr
-                  %th Rank
-                  %th Member
-                  %th Score
-              %tbody
-                - @value.each_with_index do |(member, score), idx|
+            .table-responsive
+              %table.table.table-bordered.table-sm
+                %thead
                   %tr
-                    %td= idx + 1
-                    %td
-                      - begin
-                        = JSON.pretty_generate(JSON.parse(member))
-                      - rescue
-                        = member
-                    %td
-                      %strong= score
+                    %th Rank
+                    %th Member
+                    %th Score
+                %tbody
+                  - @value.each_with_index do |(member, score), idx|
+                    %tr
+                      %td= idx + 1
+                      %td
+                        - begin
+                          %pre.mb-0= JSON.pretty_generate(JSON.parse(member))
+                        - rescue
+                          = member
+                      %td
+                        %strong= score
             - if @key_info[:size] > 100
-              %p.text-muted
+              %p.text-muted.mt-2.mb-0
                 %em Showing first 100 items of #{@key_info[:size]}
           - else
             %pre= @value.inspect
 
-        %hr
-
-        .btn-group
-          = link_to admin_redis_path, class: 'btn btn-default' do
+        .admin-redis__footer-actions
+          = link_to admin_redis_path, class: 'btn btn-outline-secondary' do
             = fa('arrow-left')
             Back to List
-          = link_to admin_redis_delete_path(@key), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete '#{@key}'?" } do
+          = link_to admin_redis_delete_path(@key), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete '#{@key}'?"} do
             = fa('trash')
             Delete Key

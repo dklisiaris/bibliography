@@ -1,15 +1,7 @@
 %ul.media-list.push.comments-list{id: parent_id.present? ? "comments-list-#{parent_id}" : "reviews-list" }
   - if depth == 0 && !comments.where(user_id: user.try(:id)).exists?
     - if user_signed_in?
-      = button_tag fa('pencil-square-o') + ' ' + t('comments.write_review'),  |
-        {                                                               |
-          class: "button btn btn-effect-ripple btn-sm btn-primary",     |
-          id: "reviewBtn",                                              |
-          "data-target" => "#reviewModal",                              |
-          "data-toggle" => "modal",                                     |
-          type: "button"                                                |
-        }                                                               |
-      = render 'books/review_modal'
+      = button_tag fa("pencil-square-o") + " " + t("comments.write_review"), class: "button btn btn-effect-ripple btn-sm btn-primary", id: "reviewBtn", type: "button"
     - else
       = link_to t('comments.sign_in_to_review'), new_user_session_path
 

@@ -1,0 +1,13 @@
+%section.resource-show__section
+  %h2.resource-show__section-title= title
+
+  - if paginatable.respond_to?(:total_pages) && paginatable.total_pages > 1
+    .resource-show__section-toolbar
+      = render partial: "shared/pagination", locals: {paginatable: paginatable}
+
+  .book-list
+    = render partial: "books/book", collection: books, as: :book
+
+  - if paginatable.respond_to?(:total_pages) && paginatable.total_pages > 1
+    .resource-show__section-toolbar
+      = render partial: "shared/pagination", locals: {paginatable: paginatable}

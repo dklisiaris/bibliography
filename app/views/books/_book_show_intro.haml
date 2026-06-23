@@ -1,0 +1,20 @@
+%header.book-show__intro
+  %h1.book-show__title= detone(@book.title)
+  - if @book.subtitle.present?
+    %p.book-show__subtitle= @book.subtitle
+
+  - if @book_presenter.writers.present?
+    %p.book-show__byline= @book_presenter.writers
+  - if @book_presenter.contributors.present?
+    %p.book-show__contributors= @book_presenter.contributors
+
+- if @book.description.present?
+  %article.book-show__description{
+    data: {
+      controller: "read-more",
+      read_more_collapsed_height_value: 80,
+      read_more_more_label_value: t("read_more"),
+      read_more_less_label_value: t("read_less")
+    }
+  }
+    = @book.description.html_safe

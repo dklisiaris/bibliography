@@ -1,0 +1,14 @@
+.category-nav
+  .category-nav__header
+    %h2.category-nav__title= title
+    - if local_assigns[:new_path].present?
+      = link_to new_path, class: "btn btn-sm btn-primary btn-icon category-nav__new", title: local_assigns[:new_tooltip], data: {toggle: "tooltip"} do
+        %i.fa.fa-plus
+
+  .category-nav__list
+    - if local_assigns[:back_path]
+      = link_to back_path, class: "category-nav__link category-nav__link--back" do
+        %i.fa.fa-arrow-left{aria: {hidden: true}}
+        %span= back_label
+
+    = render partial: "categories/category", collection: categories, as: :category, locals: {current_category: local_assigns[:current_category]}

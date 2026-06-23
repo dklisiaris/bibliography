@@ -1,0 +1,27 @@
+- tags = { title: @publisher.name }
+- set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
+- pages = {fa('home') => root_url, t('publishers.label') => publishers_path, @publisher.name => nil}
+
+= content_header(content: render(partial: 'shared/search_form', locals: {action: publishers_path, placeholder: t('publishers.search')}), breadcrumbs: pages)
+
+.row
+  .col-12
+    %article.resource-show
+      - if policy(@publisher).update? || (policy(@publisher).destroy? && @publisher.books.count == 0)
+        .resource-show__toolbar
+          - if policy(@publisher).update?
+            = nav_btn_link_to(name: fa('pencil'), url: edit_publisher_path(@publisher), tooltip: t('publishers.edit'), style: 'success')
+          - if policy(@publisher).destroy? && @publisher.books.count == 0
+            = link_to fa('times'), @publisher, class: "btn btn-effect-ripple btn-danger", method: :delete, data: {confirm: t('u_sure'), toggle: "tooltip", original_title: t('publishers.delete')}
+
+      .resource-show__layout
+        = render partial: "publishers/publisher_show_sidebar"
+
+        .resource-show__main
+          %header.resource-show__intro
+            %h1.resource-show__title= detone(@publisher.name)
+            - if @publisher.owner.present?
+              %p.resource-show__subtitle= @publisher.owner
+
+          - if @books.count > 0
+            = render partial: "shared/resource_show_books_section", locals: {title: t('books.label'), books: @books, paginatable: @books}

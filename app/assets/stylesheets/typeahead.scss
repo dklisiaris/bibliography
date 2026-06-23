@@ -82,15 +82,32 @@
   }
 }
 
-#remote input.loading{
+#remote input.loading,
+.search-bar__input.loading,
+.search-bar__group input.loading {
   background-color: #fff;
   background-image: image-url("spinners/spinner3.gif");
   background-size: 25px 25px;
-  background-position:right center;
+  background-position: right center;
   background-repeat: no-repeat;
 }
+
+.search-bar .tt-menu {
+  margin-top: 0.375rem;
+}
+
+.search-bar--lg .tt-menu {
+  margin-top: 0.5rem;
+}
+
 .input-group span.twitter-typeahead {
   display: block !important;
+}
+.input-group.search-bar__group span.twitter-typeahead {
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto !important;
 }
 .input-group span.twitter-typeahead .tt-dropdown-menu {
   top: 32px !important;

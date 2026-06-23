@@ -1,9 +1,4 @@
-.block
-  .block-title
-    %h1= detone t('side_menu.contact')
-  %h2
-    = t('contact_us')
-  %p
-    Για σχόλια, ερωτήσεις και οτιδήποτε χρειαστείτε μπορείτε να μας στείλετε στο παρακάτω email:
-  %p
-    = mail_to "hello@bibliography.gr", "hello@bibliography.gr"
+= render layout: "pages/page_shell", locals: {title: detone(t("side_menu.contact"))} do
+  %h2.static-page__subtitle= t("contact_us")
+  %p Για σχόλια, ερωτήσεις και οτιδήποτε χρειαστείτε μπορείτε να μας στείλετε στο παρακάτω email:
+  %p= mail_to "hello@bibliography.gr", "hello@bibliography.gr"

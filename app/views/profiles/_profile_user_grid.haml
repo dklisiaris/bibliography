@@ -1,0 +1,17 @@
+- users = Array(local_assigns[:users])
+- title = local_assigns[:title]
+- empty_message = local_assigns[:empty_message]
+
+%section.index-sidebar-card
+  .index-sidebar-card__header
+    %h2.index-sidebar-card__title
+      %i.fa.fa-users{aria: {hidden: true}}
+      = title
+
+  - if users.any?
+    .home-people__grid
+      - users.each do |u|
+        = link_to public_profile_path(u.profile), class: "home-people__link", title: u.screen_name do
+          = image_tag(u.avatar, alt: u.screen_name, class: "home-people__avatar", loading: "lazy")
+  - else
+    .index-sidebar-card__empty= empty_message

@@ -1,0 +1,26 @@
+%article.publisher-list-item
+  .publisher-list-item__media
+    = link_to publisher, class: "publisher-list-item__icon-link" do
+      %span.publisher-list-item__icon{aria: {hidden: true}}
+        %i.fa.fa-building
+
+  .publisher-list-item__content
+    .publisher-list-item__header
+      .publisher-list-item__heading
+        %h4.publisher-list-item__title= link_to publisher.name, publisher, class: "publisher-list-item__title-link"
+
+        - if publisher.owner.present?
+          %p.publisher-list-item__meta= publisher.owner
+
+      .publisher-list-item__actions
+        - if policy(publisher).update?
+          = link_to fa("pencil"), edit_publisher_path(publisher), class: "btn btn-effect-ripple btn-xs btn-success", title: t("edit", default: "Edit")
+        - if policy(publisher).destroy?
+          = link_to fa("times"), publisher, class: "btn btn-effect-ripple btn-xs btn-danger", method: :delete, data: {confirm: t("u_sure")}
+        - if policy(publisher).update?
+          %span.publisher-list-item__admin-id ID: #{publisher.id}
+
+    %p.publisher-list-item__stats
+      = t("publishers.x_books", count: publisher.books_count)
+      ·
+      = t("publishers.with_x_views", count: publisher.impressions_count)

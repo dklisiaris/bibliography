@@ -1,0 +1,64 @@
+<%
+  size = (local_assigns[:size] || :md).to_sym
+  param_name = local_assigns[:param_name] || :q
+  query = local_assigns.fetch(:query) { params[param_name] }
+  clear_path = local_assigns[:clear_path] || action
+  input_group_class = size == :lg ? "input-group-lg" : nil
+  input_class = ["form-control", "search-bar__input", "typeahead"]
+  input_class << "form-control-lg" if size == :lg
+
+  autocomplete_urls = {
+    "authors" => "/authors?autocomplete=1&q=%QUERY",
+    "books" => "/books?autocomplete=1&q=%QUERY",
+    "categories" => "/categories?autocomplete=1&q=%QUERY",
+    "publishers" => "/publishers?autocomplete=1&q=%QUERY",
+    "series" => "/series?autocomplete=1&q=%QUERY",
+  }
+  autocomplete_variants = {
+    "authors" => "author",
+    "books" => "book",
+    "categories" => "simple",
+    "publishers" => "simple",
+    "series" => "simple",
+  }
+  autocomplete_url = local_assigns[:autocomplete_url] || autocomplete_urls[controller_name]
+  autocomplete_variant = local_assigns[:autocomplete_variant] || autocomplete_variants[controller_name] || "book"
+  autocomplete_enabled = local_assigns.fetch(:autocomplete, true) && autocomplete_url.present?
+
+  input_data = {}
+  input_data[:autocomplete_target] = "input" if autocomplete_enabled
+  input_data[:multisearch] = true if autocomplete_variant == "multisearch"
+%>
+
+<%= form_tag(action, method: "get", class: "search-bar-form") do %>
+  <div class="search-bar search-bar--<%= size %>">
+    <div class="input-group search-bar__group <%= input_group_class %>"
+      <% if autocomplete_enabled %>
+        data-controller="autocomplete"
+        data-autocomplete-url-value="<%= autocomplete_url %>"
+        data-autocomplete-variant-value="<%= autocomplete_variant %>"
+        data-autocomplete-nothing-found-value="<%= t("nothing_found") %>"
+        <% if autocomplete_variant == "multisearch" %>
+        data-autocomplete-publisher-label-value="<%= t("publishers.label_singular") %>"
+        data-autocomplete-category-label-value="<%= t("categories.label_singular") %>"
+        data-autocomplete-series-label-value="<%= t("series.label_singular") %>"
+        <% end %>
+      <% end %>>
+      <% if query.present? %>
+        <%= link_to clear_path, class: "btn btn-outline-secondary btn-icon search-bar__clear", title: t("clear", default: "Clear") do %>
+          <%= fa("times") %>
+        <% end %>
+      <% end %>
+
+      <%= text_field_tag param_name, query,
+        class: input_class.join(" "),
+        placeholder: placeholder,
+        autocomplete: "off",
+        data: input_data.presence %>
+
+      <%= button_tag type: "submit", name: nil, class: "btn btn-primary btn-icon search-bar__submit", title: t("search", default: "Search") do %>
+        <%= fa("search") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

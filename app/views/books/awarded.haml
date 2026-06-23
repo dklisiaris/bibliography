@@ -2,6 +2,8 @@
 - set_meta_tags tags.merge({og: tags}).merge(twitter: tags)
 
 - pages = {fa('home') => root_url, t('books.label') => books_path, t('books.awarded') => nil}
+- if @selected_prize.present?
+  - pages = {fa('home') => root_url, t('books.label') => books_path, t('books.awarded') => awarded_books_path, @selected_prize.name => nil}
 
 = content_header(                                            |
   content: render(partial: 'shared/search_form',                                     |
@@ -9,22 +11,29 @@
 
 .row
   .col-sm-8
-    = render partial: 'books/awarded_book', :collection => @books, :as => :book
-    - if @books.next_page
-      #load-more-awarded-books-btn-container
-      .row
-        .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3
-          #load-more-awarded-books= link_to t('load_more'), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
-      %hr
-  .col-sm-4
-    .block
-      .block-title
-        %h2= detone t('prizes.label')
-      #load-more-awards-container.group-list
-        = render partial: 'prizes/widgets/prize_group_item', :collection => @prizes, :as => :prize
-      #load-more-awards-btn
-        = link_to t('load_more'), awarded_books_path(load_awards: true, page: 2, format: :turbo_stream), class: 'btn btn-block btn-primary', data: { turbo_stream: true }
+    - if @books.present?
+      %section.book-grid
+        %header.book-grid__header
+          %span.book-grid__icon= fa("trophy")
+          .book-grid__title
+            - if @selected_prize
+              = @selected_prize.name
+            - else
+              = t("books.awarded")
+        .book-grid__items#awarded-books-grid
+          - @books.each do |book|
+            = render partial: "books/awarded_book", locals: {book: book, prize_id: params[:prize_id]}
+        - if @books.next_page
+          .book-grid__footer#load-more-awarded-books-btn-container
+            #load-more-awarded-books= link_to t("load_more"), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: @books.next_page, format: :turbo_stream), class: "book-grid__more", data: {turbo_stream: true}
+    - elsif params[:load_books] != "true"
+      %p.book-grid__empty= t("no_books_yet")
 
+  .col-sm-4
+    = render partial: "prizes/prize_nav", locals: {title: t("prizes.label"), prizes: @prizes, selected_prize_id: params[:prize_id]}
+    - if @prizes&.next_page
+      .prize-nav__footer#load-more-awards-btn
+        = link_to t("load_more"), awarded_books_path(load_awards: true, page: @prizes.next_page, format: :turbo_stream), class: "book-grid__more", data: {turbo_stream: true}
 
 - if user_signed_in?
-  = render 'books/collections_modal'
+  = render "books/collections_modal"

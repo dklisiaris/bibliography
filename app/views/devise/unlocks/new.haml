@@ -1,0 +1,17 @@
+.auth-page
+  %section.index-panel.auth-card
+    %header.index-panel__header
+      %h2.index-panel__title Resend unlock instructions
+
+    .index-panel__content
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post, role: "form"}) do |f|
+        = devise_error_messages!
+
+        .mb-3
+          = f.label :email, class: "form-label"
+          = f.email_field :email, autofocus: true, class: "form-control"
+
+        = f.submit "Resend unlock instructions", class: "btn btn-primary"
+
+      .auth-card__links
+        = render "devise/shared/links"

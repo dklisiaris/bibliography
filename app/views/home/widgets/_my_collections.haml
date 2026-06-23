@@ -1,21 +1,20 @@
-.widget
-  .widget-content.widget-content-mini
-    = fa('th-large')
-    %strong= t('my_collections')
-  .widget-content
-    .row
-      - if user_signed_in?
-        .col-xs-12.col-sm-6
-          = link_to t('shelves.all_collections'), my_books_path
-          %span.grey
-            (#{current_user.books.distinct.count})
-        - @shelves.each do |shelf|
-          .col-xs-12.col-sm-6
-            = link_to shelf.screen_name, shelf
-            %span.grey
-              (#{shelf.books.count})
-      - else
-        .text-center
-          %span.text-muted
-            %small= link_to t('shelves.sign_in_to_create_collections'), new_user_session_path
+%section.index-sidebar-card
+  .index-sidebar-card__header
+    %h2.index-sidebar-card__title
+      %i.fa.fa-th-large{aria: {hidden: true}}
+      = t('my_collections')
 
+  - if user_signed_in?
+    .home-collections__grid
+      .home-collections__item
+        = link_to my_books_path, class: "home-collections__link" do
+          %span.home-collections__name= t('shelves.all_collections')
+          %span.home-collections__count= current_user.books.distinct.count
+      - @shelves.each do |shelf|
+        .home-collections__item
+          = link_to shelf_path(shelf), class: "home-collections__link" do
+            %span.home-collections__name= shelf.screen_name
+            %span.home-collections__count= shelf.books.count
+  - else
+    .index-sidebar-card__empty
+      = link_to t('shelves.sign_in_to_create_collections'), new_user_session_path

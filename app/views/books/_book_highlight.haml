@@ -1,0 +1,33 @@
+- if book.present?
+  .book-highlight
+    .book-highlight__cover
+      = link_to book, class: "book-highlight__cover-link" do
+        = image_tag(book.cover, alt: "", class: "book-highlight__cover-img")
+
+    .book-highlight__body
+      %h3.book-highlight__title
+        = link_to book.title, book, class: "book-highlight__title-link"
+
+      - if book.main_writer.present?
+        %p.book-highlight__author= link_to book.main_writer.fullname, book.main_writer, class: "book-highlight__author-link"
+      - elsif book.writers.first.present?
+        %p.book-highlight__author= link_to(book.main_author, book.writers.first, class: "book-highlight__author-link")
+      - else
+        %p.book-highlight__author= book.main_author
+
+      %p.book-highlight__meta
+        = t("books.recommended_x_times", count: book.liked_by_count_cache)
+        ·
+        = t("books.in_x_collections", count: book.bookshelves_count)
+        ·
+        = t("books.with_x_views", count: book.views_count)
+
+      %p.book-highlight__description= book.short_description(100)
+
+      .book-highlight__actions
+        - if @owned_book_ids.present?
+          = render partial: "books/widgets/collections_manager_btn", locals: {book: book, full_size: true}
+        - if @liked_book_ids.present? && @disliked_book_ids.present?
+          = render partial: "books/widgets/recommend_btns", locals: {book: book}
+        - if policy(book).update?
+          %span.book-highlight__admin-id ID: #{book.id}

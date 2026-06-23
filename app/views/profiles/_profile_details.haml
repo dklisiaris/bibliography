@@ -1,0 +1,43 @@
+- if @profile.is_private?
+  .profile-show__private-notice= t("profile.this_is_private")
+
+.profile-show__details
+  %dl.profile-show__meta
+    - if @profile.details_any?.present?
+      .profile-show__meta-row
+        %dt Details
+        %dd= @profile.details
+    .profile-show__meta-row
+      %dt Activity
+      %dd
+        Member since
+        = I18n.l(@profile.created_at, format: "%b %Y")
+    - if @profile.about_me.present?
+      .profile-show__meta-row
+        %dt= t("profile.about_me")
+        %dd= @profile.about_me
+    - if @profile.about_library.present?
+      .profile-show__meta-row
+        %dt About Library
+        %dd= @profile.about_library
+    - if @profile.website.present?
+      .profile-show__meta-row
+        %dt= t("profile.website")
+        %dd= link_to @profile.website, @profile.website, target: "_blank", rel: "noopener"
+    - if @profile.goodreads.present?
+      .profile-show__meta-row
+        %dt Good Reads
+        %dd= link_to @profile.goodreads, @profile.goodreads, target: "_blank", rel: "noopener"
+    - if @profile.librarything.present?
+      .profile-show__meta-row
+        %dt That Library Thing
+        %dd= link_to @profile.librarything, @profile.librarything, target: "_blank", rel: "noopener"
+
+- if @profile.social_any?
+  .profile-show__social
+    %h2.profile-show__social-title Social
+    .profile-show__social-links
+      = link_to fa("facebook"), @profile.facebook, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Facebook", data: {toggle: "tooltip"} if @profile.facebook.present?
+      = link_to fa("twitter"), @profile.twitter, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Twitter", data: {toggle: "tooltip"} if @profile.twitter.present?
+      = link_to fa("google-plus"), @profile.googleplus, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Google Plus", data: {toggle: "tooltip"} if @profile.googleplus.present?
+      = link_to fa("pinterest"), @profile.pinterest, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Pinterest", data: {toggle: "tooltip"} if @profile.pinterest.present?

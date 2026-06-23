@@ -12,20 +12,23 @@
 
 = content_header( title: "#{t('books.label')} #{of_username(@profile)}", breadcrumbs: pages)
 
-.row
+.row.index-layout
   .col-sm-8
-    .block.full
-      .block-title
-        %h2
+    %section.index-panel
+      %header.index-panel__header
+        %h1.index-panel__title
           = @shelf.present? ? detone(@shelf.screen_name) : detone(t('books.all'))
-          %small
-             (#{@books.total_count})
-      .row
+          %span.index-panel__count= " (#{@books.total_count})"
+
+      .index-panel__toolbar
+        .index-panel__pagination
+          = render "books/widgets/pagination"
+
+      .index-panel__content
+        .book-list
+          = render partial: "books/book", collection: @books, as: :book
         = render "books/widgets/pagination"
-        %hr/
-        .col-xs-12
-          = render :partial =>  "books/book", :collection => @books, :as => :book
-        = render "books/widgets/pagination"
+
   .col-sm-4
     = render partial: 'shelves/widgets/public_shelves', locals: {title: t('collections'), shelves: @shelves, profile: @profile}
 

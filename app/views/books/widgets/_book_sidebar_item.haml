@@ -1,0 +1,17 @@
+.book-sidebar-item
+  .book-sidebar-item__row
+    = link_to book, class: "book-sidebar-item__cover-link" do
+      = image_tag(book.cover, alt: book.title, class: "book-sidebar-item__cover", loading: "lazy")
+
+    .book-sidebar-item__body
+      %p.book-sidebar-item__title
+        = link_to book.title, book, class: "book-sidebar-item__title-link"
+      - if book.main_writer.present?
+        %p.book-sidebar-item__author= link_to book.main_writer.fullname, book.main_writer, class: "book-sidebar-item__author-link"
+      - elsif book.writers.first.present?
+        %p.book-sidebar-item__author= link_to(book.main_author, book.writers.first, class: "book-sidebar-item__author-link")
+      - else
+        %p.book-sidebar-item__author= book.main_author
+
+    .book-sidebar-item__action
+      = render partial: "books/widgets/collections_manager_btn", locals: {book: book}

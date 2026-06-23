@@ -1,0 +1,21 @@
+.index-sidebar-card__item
+  .index-sidebar-card__row
+    .index-sidebar-card__media
+      = link_to author, class: "index-sidebar-card__avatar-link" do
+        = image_tag(author.avatar, alt: author.fullname, class: "index-sidebar-card__avatar", width: 48, height: 48, loading: "lazy")
+
+    .index-sidebar-card__body
+      %h3.index-sidebar-card__name
+        = link_to author.fullname, author, class: "index-sidebar-card__name-link"
+
+      - if author.masterpiece.present?
+        %p.index-sidebar-card__masterpiece
+          %span.index-sidebar-card__masterpiece-label= t("authors.author_of")
+          = link_to author.masterpiece.try(:title), author.masterpiece, class: "index-sidebar-card__masterpiece-link"
+
+      %p.index-sidebar-card__count
+        = t("authors.x_books", count: author.contributions_count)
+
+    - if local_assigns[:liked_ids]
+      .index-sidebar-card__action
+        = render partial: "authors/widgets/favourite_btn", locals: {author: author, liked: liked_ids.include?(author.id)}

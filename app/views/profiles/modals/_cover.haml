@@ -1,19 +1,17 @@
-#coverModal.modal.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
+#coverModal.modal.fade{role: "dialog", tabindex: "-1"}
+  .modal-dialog{role: "document"}
     .modal-content
       .modal-header
-        %button.close{"data-dismiss" => "modal", :type => "button"}
-          %span=fa('times')
-        %h4.modal-title=t('users.change_cover')
+        %button.close{type: "button", aria: {label: "Close"}, data: {action: "click->profile-modal#close"}}
+          %span= fa("times")
+        %h4.modal-title= t("users.change_cover")
       .modal-body
-        = form_tag profile_path, method: :patch, class: "dropzone", id: "media-dropzone" do
+        = form_tag profile_path, method: :patch, class: "dropzone profile-upload-dropzone", id: "cover-dropzone" do
           .dz-message{"data-dz-message" => ""}
-            %span= t('drop_to_upload')
-            %br
-            %span.note
-              (#{t('or_click')})
+            %span= t("drop_to_upload")
+            %br/
+            %span.note= "(#{t('or_click')})"
           .fallback
             = file_field_tag :cover, multiple: false
-          %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
-          %input{:name => "upload_type", :type => "hidden", :value => 'cover'}
-
+          %input{name: "authenticity_token", type: "hidden", value: form_authenticity_token}
+          %input{name: "upload_type", type: "hidden", value: "cover"}

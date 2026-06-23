@@ -1,10 +1,10 @@
-%ul.breadcrumb.breadcrumb-top
-  - unless breadcrumbs.nil? || breadcrumbs.empty?
-    - current_page = breadcrumbs.keys.last
-    - breadcrumbs.each do |key, value|
-      - next if key == current_page
-      - if value.present?
-        %li= link_to ellipsize(key), value
-      - else
-        %li= ellipsize(key)
-    %li= ellipsize(current_page)
+- if breadcrumbs.present?
+  %nav.page-breadcrumb{"aria-label" => t("breadcrumb", default: "Breadcrumb")}
+    %ol.breadcrumb
+      - breadcrumbs.each_with_index do |(label, url), index|
+        - last = index == breadcrumbs.size - 1
+        %li.breadcrumb-item{class: ("active" if last), aria: (last ? {current: "page"} : {})}
+          - if !last && url.present?
+            = link_to breadcrumb_label(label), url, class: "page-breadcrumb__link"
+          - else
+            %span.page-breadcrumb__current= breadcrumb_label(label)

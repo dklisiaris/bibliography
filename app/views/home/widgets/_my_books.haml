@@ -1,16 +1,14 @@
-.widget
-  .widget-content.widget-content-mini
-    %i.fa.fa-fw.fa-book
-    %strong= t('my_books')
-  .widget-content
-    .row
-      - if user_signed_in?
-        .col-xs-12
-          = "#{current_user.books.distinct.count} #{t('books.label')} | #{@shelves.count} #{t('collections')} | #{current_user.writer_ids.uniq.count} #{t('authors.label')}"
-        .col-xs-12
-          = render partial: 'search/search_form', locals: { url: '#', placeholder: t('search_my_books') }
-      - else
-        .text-center
-          %span.text-muted
-            %small= link_to t('books.sign_in_to_save_books'), new_user_session_path
+%section.index-sidebar-card
+  .index-sidebar-card__header
+    %h2.index-sidebar-card__title
+      %i.fa.fa-book{aria: {hidden: true}}
+      = t('my_books')
 
+  - if user_signed_in?
+    %p.home-stats
+      = "#{current_user.books.distinct.count} #{t('books.label')} | #{@shelves.count} #{t('collections')} | #{current_user.writer_ids.uniq.count} #{t('authors.label')}"
+    .home-sidebar-search
+      = render partial: 'search/search_form', locals: {url: '#', placeholder: t('search_my_books')}
+  - else
+    .index-sidebar-card__empty
+      = link_to t('books.sign_in_to_save_books'), new_user_session_path

@@ -1,9 +1,7 @@
 - cache(category) do
-  = link_to category, class: "list-group-item", id: "category_#{category.id}" do
-    %span.badge= "[#{category.ddc}]"
-    %h5.list-group-item-heading
-      = "#{category.name}"
+  - active = local_assigns[:current_category]&.id == category.id
 
-
-
-
+  = link_to category, class: ["category-nav__link", ("category-nav__link--active" if active)], id: "category_#{category.id}" do
+    %span.category-nav__name= category.name
+    - if category.ddc.present?
+      %span.category-nav__code= category.ddc

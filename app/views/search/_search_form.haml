@@ -1,7 +1,6 @@
-%form{action: url, method: "get"}
-  .col-xs-12.input-group
-    %span#remote
-      = text_field_tag :query, params[:query], class: 'typeahead form-control', placeholder: placeholder
-    %span.input-group-btn
-      %button.btn.btn-effect-ripple.btn-primary{name: "button", type: "submit"}
+= form_tag url, method: "get", class: "search-bar-form" do
+  .search-bar.search-bar--md
+    .input-group.search-bar__group
+      = text_field_tag :query, params[:query], class: "form-control search-bar__input typeahead", placeholder: placeholder, autocomplete: "off"
+      = button_tag(type: "submit", name: nil, class: "btn btn-primary btn-icon search-bar__submit", title: t("search", default: "Search")) do
         %i.fa.fa-search

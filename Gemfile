@@ -86,7 +86,6 @@ group :test do
   gem 'simplecov', '~> 0.22', require: false
 end
 
-gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'font-awesome-sass', '~> 4.7'
 

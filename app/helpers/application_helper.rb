@@ -1,24 +1,32 @@
 module ApplicationHelper
 
   def side_nav_li(text, path, icon=nil, blank=false)
-    content_tag(:li) do
-      options = current_page?(path) ? { class: "active" } : {}
+    content_tag(:li, class: ('active' if current_page?(path))) do
+      options = { class: 'app-sidebar__link' }
       options[:target] = '_blank' if blank
-      if icon
-        link_to path, options do
-          "<i class='#{icon} sidebar-nav-icon'></i><span class='sidebar-nav-mini-hide'>#{text}</span>".html_safe
-        end
-      else
-        link_to(text, path, options)
+      link_to path, options do
+        parts = []
+        parts << content_tag(:i, nil, class: "#{icon} app-sidebar__icon sidebar-nav-icon") if icon
+        parts << content_tag(:span, text, class: 'app-sidebar__label sidebar-nav-mini-hide')
+        safe_join(parts)
       end
     end
   end
 
+  def sidebar_section(label)
+    content_tag(:li, class: 'app-sidebar__section sidebar-separator', role: 'presentation') do
+      content_tag(:span, label, class: 'app-sidebar__section-label sidebar-nav-mini-hide')
+    end
+  end
+
   def top_nav_li(text, path, icon=nil, klass='')
-    content_tag(:li) do
-      options = current_page?(path) ? { class: "active #{klass}" } : { class: klass }
-      link_to path, options do
-        "<i class='#{icon}'></i><strong>#{text.upcase}</strong>".html_safe
+    li_class = [klass.presence, ('active' if current_page?(path))].compact.join(' ')
+    content_tag(:li, class: li_class.presence) do
+      link_to path do
+        parts = []
+        parts << content_tag(:i, nil, class: icon) if icon.present?
+        parts << content_tag(:strong, text.upcase) if text.present?
+        safe_join(parts)
       end
     end
   end
@@ -82,6 +90,15 @@ module ApplicationHelper
       converted = converter.convert(word)
       converted.present? ? converted : word
     end.flatten.uniq.join(join_with)
+  end
+
+  # Elasticsearch 7+ returns hits total as { "value" => N, "relation" => "eq"|"gte" }.
+  def search_results_total_label(search_results)
+    total = search_results.response["hits"]["total"]
+    return number_with_delimiter(total.to_i) unless total.is_a?(Hash)
+
+    count = number_with_delimiter(total["value"].to_i)
+    total["relation"] == "gte" ? t("books.results_count.more_than", count: count) : count
   end
 
 end

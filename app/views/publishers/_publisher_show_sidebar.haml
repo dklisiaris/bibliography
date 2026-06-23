@@ -1,0 +1,12 @@
+%aside.resource-show__sidebar
+  .resource-show__media-card
+    %span.resource-show__icon{aria: {hidden: true}}
+      %i.fa.fa-building
+
+  .resource-show__stats.resource-show__stats--duo
+    .resource-show__stat
+      %span.resource-show__stat-label= t("books.label")
+      %span.resource-show__stat-value= @publisher.books.count
+    .resource-show__stat
+      %span.resource-show__stat-label= t("stats.views")
+      %span.resource-show__stat-value= @publisher.impressions_count || 0

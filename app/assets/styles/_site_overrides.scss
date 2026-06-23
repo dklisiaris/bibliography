@@ -1,0 +1,114 @@
+// Site rules moved from framework_and_overrides.css.scss (loaded after Bootstrap 5).
+
+// ProUI main.css link colors load in application.css; BS5 reboot adds underline on top.
+// Variables disable underline globally; reinforce for content areas that set their own color.
+.book-box a {
+  color: #363636;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: #363636;
+    text-decoration: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.column {
+  @extend .col-md-6;
+  @extend .text-center;
+}
+
+.form {
+  @extend .col-md-6;
+}
+
+.form-centered {
+  @extend .col-md-6;
+  @extend .text-center;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+.pagination {
+  margin: 0;
+}
+
+.pagination > li > a {
+  margin-left: 1px !important;
+  margin-right: 1px !important;
+}
+
+.btn-fb {
+  background-color: #3b5998 !important;
+  border-color: #8b9dc3;
+  color: #f7f7f7;
+  font-size: 12px;
+
+  &:hover,
+  &:visited {
+    background-color: #324b81 !important;
+    color: #f7f7f7;
+  }
+}
+
+.btn-gl {
+  background-color: #f44336 !important;
+  border-color: #f6685e;
+  color: #f7f7f7;
+  font-size: 12px;
+
+  &:hover,
+  &:visited {
+    background-color: #d32f2f !important;
+    color: #f7f7f7;
+  }
+}
+
+.header-section form {
+  margin: 0 5px;
+}
+
+// content-header layout lives in _breadcrumb.scss
+
+#sidebar-extra-info {
+  .social-icon {
+    font-size: 24px;
+    color: #fff;
+
+    &:hover {
+      color: #de4b39;
+    }
+  }
+}
+
+.img-thumbnail {
+  border-radius: 12px;
+}
+
+main {
+  @extend .container;
+  background-color: #eee;
+  padding-bottom: 80px;
+  width: 100%;
+  margin-top: 51px;
+}
+
+section {
+  @extend .row;
+  margin-top: 20px;
+}
+
+#page-content-sidebar {
+  padding: 10px;
+  margin: -10px -5px 10px;
+  background-color: #fff;
+  border-bottom: 2px solid #dae5e8;
+}

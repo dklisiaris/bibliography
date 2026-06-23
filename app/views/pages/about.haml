@@ -1,10 +1,8 @@
-.block
-  .block-title
-    %h1= detone t('about_us')
-  %h2= t('pages.about.headline')
-  %p= t('pages.about.intro')
-  %p= t('pages.about.mission')
-  %p= t('pages.about.catalog')
-  %p= t('pages.about.history')
+= render layout: "pages/page_shell", locals: {title: detone(t("about_us"))} do
+  %h2.static-page__subtitle= t("pages.about.headline")
+  %p= t("pages.about.intro")
+  %p= t("pages.about.mission")
+  %p= t("pages.about.catalog")
+  %p= t("pages.about.history")
   %p
-    %strong= t('pages.about.not_a_store')
+    %strong= t("pages.about.not_a_store")

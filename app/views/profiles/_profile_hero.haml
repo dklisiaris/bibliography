@@ -1,0 +1,56 @@
+%section.profile-show
+  .profile-show__cover
+    = image_tag(@profile.cover_safe, alt: "", class: "cover")
+    - if user_signed_in? && @profile.user == current_user
+      %button.profile-show__cover-edit.btn.btn-sm.btn-light{type: "button", data: {action: "click->profile-modal#open", profile_modal_id_param: "coverModal"}}
+        %i.fa.fa-cloud-upload{aria: {hidden: true}}
+        %span= t("users.change_cover")
+
+  .profile-show__hero
+    .profile-show__avatar-wrap
+      - if @profile.user == current_user
+        %button.profile-show__avatar-trigger{type: "button", data: {action: "click->profile-modal#open", profile_modal_id_param: "avatarModal"}}
+          = image_tag(@profile.gravatar, alt: @profile.name, id: "profileAvatar", class: "profile-show__avatar")
+          %span.profile-show__avatar-overlay{aria: {hidden: true}}
+            %i.fa.fa-cloud-upload
+      - else
+        = image_tag(@profile.gravatar, alt: @profile.name, class: "profile-show__avatar")
+
+    %header
+      %h1.profile-show__name= @profile.name
+      %p.profile-show__username= "(#{@profile.username})"
+      %p.profile-show__tagline
+        = t("books.label")
+        = @profile.user.books.distinct.count
+
+    .profile-show__actions
+      - if user_signed_in? && @profile.user != current_user
+        - follow_data = {controller: "follow", action: "click->follow#toggle mouseenter->follow#previewUnfollow mouseleave->follow#resetPreview", follow_url_value: "/library/#{@profile.id}/follow", follow_following_value: current_user.following?(@profile.user), follow_follow_label_value: t("users.follow"), follow_following_label_value: t("users.following"), follow_unfollow_label_value: t("users.unfollow")}
+        - follow_class = "btn btn-sm btn-follow #{current_user.following?(@profile.user) ? 'btn-success' : 'btn-default'}"
+        = button_tag type: "button", class: follow_class, data: follow_data do
+          - if current_user.following?(@profile.user)
+            %i.fa.fa-users{data: {follow_target: "icon"}}
+            %span{data: {follow_target: "label"}}= " #{t('users.following')}"
+          - else
+            %i.fa.fa-user-plus{data: {follow_target: "icon"}}
+            %span{data: {follow_target: "label"}}= " #{t('users.follow')}"
+
+  .profile-show__stats
+    .profile-show__stat
+      %i.fa.fa-book.profile-show__stat-icon{aria: {hidden: true}}
+      %span.profile-show__stat-value= @profile.user.books.distinct.count
+      %span.profile-show__stat-label= t("books.label")
+    .profile-show__stat
+      %i.fa.fa-thumbs-up.profile-show__stat-icon{aria: {hidden: true}}
+      %span.profile-show__stat-value= @profile.user.likes_count + @profile.user.dislikes_count
+      %span.profile-show__stat-label Ratings
+    .profile-show__stat
+      %i.fa.fa-comments.profile-show__stat-icon{aria: {hidden: true}}
+      %span.profile-show__stat-value= @profile.user.comments.count
+      %span.profile-show__stat-label Reviews
+    .profile-show__stat
+      %i.fa.fa-users.profile-show__stat-icon{aria: {hidden: true}}
+      %span.profile-show__stat-value= @profile.user.followers_count
+      %span.profile-show__stat-label Followers
+
+  = render "profiles/profile_details"

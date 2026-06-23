@@ -1,0 +1,5 @@
+- cache(prize) do
+  - active = local_assigns[:selected_prize_id].to_i == prize.id
+
+  = link_to awarded_books_path(prize_id: prize.id), class: ["category-nav__link", ("category-nav__link--active" if active)] do
+    %span.category-nav__name= prize.name

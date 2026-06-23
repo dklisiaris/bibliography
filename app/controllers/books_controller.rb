@@ -119,7 +119,8 @@ class BooksController < ApplicationController
 
     if(!(params[:load_awards] == "true"))
       if(params[:prize_id].present?)
-        @books = Book.includes(:main_writer).joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
+        @selected_prize = Prize.find_by(id: params[:prize_id])
+        @books = Book.includes(:main_writer, awards: :prize).joins(:awards).where("awards.prize_id = ?", params[:prize_id]).page(params[:page]).order("awards.year desc")
       else
         # most_awarded_book_ids = Award.where(awardable_type: "Book").page(params[:page])
         #   .group(:awardable_id).order('count_id desc').count('id').keys

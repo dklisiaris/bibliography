@@ -1,0 +1,51 @@
+$font-family-sans-serif: "Open Sans", sans-serif;
+$headings-font-family: "Open Sans", sans-serif;
+$headings-font-weight: 300;
+$headings-line-height: 1.35;
+
+$primary: #de4b39;
+$body-bg: #ebf1f2;
+$body-color: #1c2b36;
+
+// Match bootstrap-sass 3 / ProUI (BS5 defaults are 16px + underlined links).
+$font-size-base: 0.875rem;
+$line-height-base: 1.428571429;
+
+$link-color: $primary;
+$link-decoration: none;
+$link-hover-color: shade-color($primary, 15%);
+$link-hover-decoration: none;
+
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+
+// Buttons & inputs share Bibliography's soft corners.
+$btn-border-radius: 0.5rem;
+$btn-border-radius-lg: 0.75rem;
+$btn-border-radius-sm: 0.375rem;
+$input-border-radius: 0.5rem;
+$input-border-radius-lg: 0.75rem;
+
+$secondary: #6c757d;
+$secondary-bg: #f4f7f8;
+$secondary-border-subtle: #dae5e8;
+
+$input-btn-padding-y: 0.4375rem;
+$input-btn-padding-x: 0.875rem;
+$input-btn-font-size: $font-size-base;
+$input-btn-line-height: $line-height-base;
+$btn-font-size: $font-size-base;
+$btn-line-height: $line-height-base;
+
+$input-btn-padding-y-sm: 0.3125rem;
+$input-btn-padding-x-sm: 0.625rem;
+$input-btn-font-size-sm: 0.75rem;
+
+$input-btn-padding-y-lg: 0.625rem;
+$input-btn-padding-x-lg: 1rem;
+$input-btn-font-size-lg: 1.125rem;
+
+// ProUI forms — white inputs on gray page background (BS5 ties input-bg to body-bg).
+$input-bg: #fff;
+$input-border-color: #dae5e8;
+$input-focus-border-color: $primary;

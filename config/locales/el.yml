@@ -1,4 +1,9 @@
 el:
+  number:
+    format:
+      delimiter: "."
+      separator: ","
+
   welcome: "Καλώς ήρθατε στο Bibliography GR"
   some_options: "Μερικές επιλογές για να ξεκινήσετε"
   add_books: "Προσθήκη Βιβλίων"
@@ -217,6 +222,8 @@ el:
     new: "Νέο Βιβλίο"
     edit: "Επεξεργασία Βιβλίου"
     all: "Όλα τα βιβλία"
+    results_count:
+      more_than: "πάνω από %{count}"
 
     title: "Τίτλος"
     subtitle: "Υπότιτλος"
@@ -425,6 +432,7 @@ el:
   # Pagination
   views:
     pagination:
+      aria_label: "Σελίδες"
       first: "&laquo;"
       last: "&raquo;"
       previous: "&lsaquo;"

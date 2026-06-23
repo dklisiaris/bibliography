@@ -1,4 +1,7 @@
-.row
-  .col-xs-12.clearfix
-    .dataTables_paginate.paging_bootstrap
+- paginatable = local_assigns[:paginatable]
+- if paginatable.respond_to?(:total_pages) && paginatable.total_pages > 1
+  %nav.pagination-nav{aria: {label: t("views.pagination.aria_label", default: "Pagination")}}
+    - if local_assigns[:total_pages]
+      = paginate paginatable, total_pages: local_assigns[:total_pages]
+    - else
       = paginate paginatable

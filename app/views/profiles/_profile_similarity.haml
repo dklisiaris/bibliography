@@ -1,0 +1,13 @@
+- if user_signed_in? && current_user != @user
+  %section.index-sidebar-card.profile-similarity
+    .index-sidebar-card__header
+      %h2.index-sidebar-card__title
+        %i.fa.fa-bar-chart{aria: {hidden: true}}
+        = t("users.similarity_with")
+        = @profile.username
+
+    .profile-similarity__body
+      .pie-chart.easyPieChart{data: {percent: @normalized_similarity, line_width: 3, bar_color: "#de4b39", track_color: "#f9f9f9"}}
+        %span
+          %strong= "#{@normalized_similarity}%"
+        %canvas{width: 80, height: 80}
