@@ -18,7 +18,7 @@
   "scripts": {
     "build": "npm run build:js && npm run build:css",
     "build:js": "esbuild app/javascript/hotwire.js --bundle --sourcemap --format=esm --outfile=app/assets/builds/hotwire.js --public-path=/assets",
-    "build:css": "sass ./app/assets/styles/hotwire.scss:./app/assets/builds/hotwire.css --no-source-map --load-path=node_modules --quiet-deps",
+    "build:css": "sass ./app/assets/styles/hotwire.scss:./app/assets/builds/hotwire.css --style=compressed --no-source-map --load-path=node_modules --quiet-deps",
     "build:css:watch": "sass ./app/assets/styles/hotwire.scss:./app/assets/builds/hotwire.css --no-source-map --load-path=node_modules --quiet-deps --watch",
     "verify:build": "test -f app/assets/builds/hotwire.js && test -f app/assets/builds/hotwire.css"
   }

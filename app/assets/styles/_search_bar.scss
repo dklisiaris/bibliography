@@ -160,7 +160,7 @@
   }
 
   .tt-dataset {
-    max-height: unquote("min(50vh, 24rem)");
+    max-height: min(50vh, 24rem);
     overflow: auto;
   }
 
