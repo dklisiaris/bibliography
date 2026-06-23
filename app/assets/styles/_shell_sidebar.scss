@@ -1,13 +1,22 @@
-// App shell left sidebar — BS5 nav styling over ProUI layout hooks (#sidebar, .sidebar-nav).
+// App shell left sidebar — BS5 nav styling.
 
-#sidebar.app-sidebar {
+.app-shell__sidebar,
+.app-shell__offcanvas {
+  .app-sidebar__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
   #sidebar-brand {
+    flex-shrink: 0;
     background-color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .sidebar-content {
-    width: 220px;
+    width: 100%;
   }
 
   .sidebar-nav {
@@ -22,6 +31,10 @@
     color: inherit;
     text-align: center;
   }
+}
+
+.app-shell__sidebar {
+  display: flex;
 }
 
 .app-sidebar {
@@ -139,6 +152,7 @@
   }
 
   &__footer {
+    flex-shrink: 0;
     padding: 0.875rem 1rem 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     color: rgba(172, 187, 191, 0.85);
@@ -183,21 +197,31 @@
   }
 }
 
-#page-container.sidebar-visible-lg-mini #sidebar.app-sidebar {
-  .sidebar-content {
-    width: 40px;
-  }
+.app-shell--sidebar-mini {
+  .app-shell__sidebar {
+    .sidebar-nav-mini-hide {
+      display: none !important;
+    }
 
-  .app-sidebar__link {
-    justify-content: center;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-  }
+    .sidebar-nav-mini-show {
+      display: inline !important;
+    }
 
-  .app-sidebar__section {
-    padding: 0.375rem 0;
-    text-align: center;
+    .app-sidebar__link {
+      justify-content: center;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+    }
+
+    .app-sidebar__section {
+      padding: 0.375rem 0;
+      text-align: center;
+    }
   }
+}
+
+.dark-bg {
+  background-color: #131e26;
 }

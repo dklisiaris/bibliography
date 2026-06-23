@@ -116,6 +116,8 @@ en:
     changed_saved_failed: "Something went wrong. Changes failed to save"
 
   side_menu:
+    navigation: "Navigation"
+    toggle_sidebar: "Toggle sidebar"
     discover: "Discover"
     categories: "Categories"
     books: "Books"

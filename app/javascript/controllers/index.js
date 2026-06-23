@@ -9,6 +9,7 @@ import CollectionsModalController from "./collections_modal_controller"
 import AutocompleteController from "./autocomplete_controller"
 import FilterSidebarController from "./filter_sidebar_controller"
 import ReviewModalController from "./review_modal_controller"
+import AppShellController from "./app_shell_controller"
 
 application.register("flash", FlashController)
 application.register("read-more", ReadMoreController)
@@ -19,6 +20,7 @@ application.register("collections-modal", CollectionsModalController)
 application.register("autocomplete", AutocompleteController)
 application.register("filter-sidebar", FilterSidebarController)
 application.register("review-modal", ReviewModalController)
+application.register("app-shell", AppShellController)
 
 import { submitRecommendation } from "../recommendation"
 import { submitFavourite } from "../favourite"

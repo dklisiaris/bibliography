@@ -93,19 +93,6 @@ textarea.form-control {
   border-radius: 12px;
 }
 
-main {
-  @extend .container;
-  background-color: #eee;
-  padding-bottom: 80px;
-  width: 100%;
-  margin-top: 51px;
-}
-
-section {
-  @extend .row;
-  margin-top: 20px;
-}
-
 #page-content-sidebar {
   padding: 10px;
   margin: -10px -5px 10px;

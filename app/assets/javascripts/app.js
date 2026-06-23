@@ -15,6 +15,26 @@ var App = function() {
 
     /* Initialization UI Code */
     var uiInit = function() {
+        if ($('.app-shell').length) {
+            header          = $('.app-shell__navbar');
+            pageContent     = $('#page-content');
+            sidebar         = $('#sidebar');
+
+            if (header.length) {
+                $(window).on('scroll', function(){
+                    if ($(this).scrollTop() > 50) {
+                        header.addClass('navbar-glass');
+                    } else {
+                        header.removeClass('navbar-glass');
+                    }
+                });
+            }
+
+            $(window).on('resize orientationchange', function(){ resizePageContent(); }).resize();
+            rippleEffect($('.btn-effect-ripple'), 'btn-ripple');
+            return;
+        }
+
         // Set variables - Cache some often used Jquery objects in variables */
         page            = $('#page-container');
         header          = $('header');
@@ -195,6 +215,10 @@ var App = function() {
 
     /* Sidebars Functionality */
     var handleSidebar = function(mode){
+        if ($('.app-shell').length) {
+            return;
+        }
+
         if (mode === 'init') {
             // Init sidebars scrolling functionality
             handleSidebar('sidebar-scroll');
@@ -368,17 +392,24 @@ var App = function() {
 
     /* Print functionality - Hides all sidebars, prints the page and then restores them (To fix an issue with CSS print styles in webkit browsers)  */
     var handlePrint = function() {
-        // Store all #page-container classes
-        var pageCls = page.prop('class');
+        var shell = $('.app-shell');
+        var pageCls;
 
-        // Remove all classes from #page-container
-        page.prop('class', '');
+        if (shell.length) {
+            pageCls = shell.prop('class');
+            shell.prop('class', 'app-shell');
+        } else {
+            pageCls = page.prop('class');
+            page.prop('class', '');
+        }
 
-        // Print the page
         window.print();
 
-        // Restore all #page-container classes
-        page.prop('class', pageCls);
+        if (shell.length) {
+            shell.prop('class', pageCls);
+        } else {
+            page.prop('class', pageCls);
+        }
     };
 
     return {
