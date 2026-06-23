@@ -119,12 +119,6 @@
     margin: 0;
     line-height: 1;
   }
-
-  &__label.hidden-xs {
-    @media (min-width: 576px) {
-      display: inline !important;
-    }
-  }
 }
 
 // Icon-only square buttons (search submit, clear, toolbar).

@@ -37,7 +37,7 @@
   .profile-show__social
     %h2.profile-show__social-title Social
     .profile-show__social-links
-      = link_to fa("facebook"), @profile.facebook, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Facebook", data: {toggle: "tooltip"} if @profile.facebook.present?
-      = link_to fa("twitter"), @profile.twitter, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Twitter", data: {toggle: "tooltip"} if @profile.twitter.present?
-      = link_to fa("google-plus"), @profile.googleplus, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Google Plus", data: {toggle: "tooltip"} if @profile.googleplus.present?
-      = link_to fa("pinterest"), @profile.pinterest, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Pinterest", data: {toggle: "tooltip"} if @profile.pinterest.present?
+      = link_to fa("facebook"), @profile.facebook, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Facebook", data: {bs_toggle: "tooltip"} if @profile.facebook.present?
+      = link_to fa("twitter"), @profile.twitter, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Twitter", data: {bs_toggle: "tooltip"} if @profile.twitter.present?
+      = link_to fa("google-plus"), @profile.googleplus, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Google Plus", data: {bs_toggle: "tooltip"} if @profile.googleplus.present?
+      = link_to fa("pinterest"), @profile.pinterest, target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm", title: "Pinterest", data: {bs_toggle: "tooltip"} if @profile.pinterest.present?

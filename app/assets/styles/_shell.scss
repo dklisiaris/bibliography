@@ -130,7 +130,7 @@ body {
       align-items: center;
       min-height: var(--app-shell-header-height);
 
-      &.hidden-xs {
+      &.d-none.d-sm-flex {
         display: none !important;
 
         @media (min-width: 576px) {
@@ -138,7 +138,7 @@ body {
         }
       }
 
-      &.visible-xs {
+      &.d-flex.d-sm-none {
         display: flex !important;
 
         @media (min-width: 576px) {

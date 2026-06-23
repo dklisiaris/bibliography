@@ -22,8 +22,8 @@
 <% if user_signed_in? %>
 <%= button_tag type: "button",
   data: {
-    toggle: "tooltip",
-    placement: "top",
+    bs_toggle: "tooltip",
+    bs_placement: "top",
     action: "click->recommendation#like"
   },
   title: (@liked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.recommend'),
@@ -33,8 +33,8 @@
 
 <%= button_tag type: "button",
   data: {
-    toggle: "tooltip",
-    placement: "top",
+    bs_toggle: "tooltip",
+    bs_placement: "top",
     action: "click->recommendation#dislike"
   },
   title: (@disliked_book_ids.include?(book.id)) ? t('books.remove_recommendation') : t('books.not_recommend'),
@@ -45,18 +45,16 @@
 <% else %>
 
 <%= link_to new_user_session_path,
-"data-toggle" => "tooltip",
-"data-placement" => "top",
-title: t('books.recommend'),
-class: "btn btn-xs btn-like btn-outline-secondary" do %>
+  data: { bs_toggle: "tooltip", bs_placement: "top" },
+  title: t('books.recommend'),
+  class: "btn btn-xs btn-like btn-outline-secondary" do %>
     <i class="fa fa-thumbs-up"></i><strong><span><%= " #{book.liked_by_count_cache}" %></span></strong>
 <% end %>
 
 <%= link_to new_user_session_path,
-"data-toggle" => "tooltip",
-"data-placement" => "top",
-title: t('books.not_recommend'),
-class: "btn btn-xs btn-dislike btn-outline-secondary" do %>
+  data: { bs_toggle: "tooltip", bs_placement: "top" },
+  title: t('books.not_recommend'),
+  class: "btn btn-xs btn-dislike btn-outline-secondary" do %>
     <i class="fa fa-thumbs-down"></i><strong><span><%= " #{book.disliked_by_count_cache}" %></span></strong>
 <% end %>
 

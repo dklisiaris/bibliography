@@ -1,7 +1,7 @@
 .book-filters#filter-sidebar{data: {filter_sidebar_target: "panel"}, role: "complementary", aria: {label: t("books.filters.label")}}
   .book-filters__header
     %h2.book-filters__heading= t("books.filters.label")
-    %button.book-filters__close.visible-xs{type: "button", data: {action: "click->filter-sidebar#toggle"}, aria: {label: t("close", default: "Close")}}
+    %button.book-filters__close{type: "button", data: {action: "click->filter-sidebar#toggle"}, aria: {label: t("close", default: "Close")}}
       %i.fa.fa-times{aria: {hidden: true}}
 
   .book-filters__body

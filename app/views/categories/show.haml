@@ -17,10 +17,10 @@
           - if user_signed_in?
             - category_favourited = current_user.likes?(@category)
             - fav_btn_class = category_favourited ? 'btn-success' : 'btn-outline-primary'
-            - fav_data = {controller: 'favourite', action: 'click->favourite#toggle', toggle: 'tooltip', original_title: category_favourited ? t('categories.favoured') : t('categories.add_to_favourites'), favourite_url_value: favourite_category_path(@category), favourite_record_id_value: @category.id, favourite_kind_value: 'category', favourite_inactive_class_value: 'btn-outline-primary', favourite_add_label_value: t('categories.add_to_favourites'), favourite_favoured_label_value: t('categories.favoured')}
-            = button_tag fa(category_favourited ? 'star' : 'star-o'), type: 'button', class: "btn btn-sm #{fav_btn_class} btn-favourite-category-#{@category.id}", data: fav_data
+            - fav_data = {controller: 'favourite', action: 'click->favourite#toggle', bs_toggle: 'tooltip', favourite_url_value: favourite_category_path(@category), favourite_record_id_value: @category.id, favourite_kind_value: 'category', favourite_inactive_class_value: 'btn-outline-primary', favourite_add_label_value: t('categories.add_to_favourites'), favourite_favoured_label_value: t('categories.favoured')}
+            = button_tag fa(category_favourited ? 'star' : 'star-o'), type: 'button', class: "btn btn-sm #{fav_btn_class} btn-favourite-category-#{@category.id}", title: (category_favourited ? t('categories.favoured') : t('categories.add_to_favourites')), data: fav_data
           - else
-            = link_to fa('star-o'), new_user_session_path, class: "btn btn-sm btn-outline-primary btn-favourite-category-#{@category.id}", data: {toggle: 'tooltip', original_title: t('categories.add_to_favourites')}
+            = link_to fa('star-o'), new_user_session_path, class: "btn btn-sm btn-outline-primary btn-favourite-category-#{@category.id}", title: t('categories.add_to_favourites'), data: {bs_toggle: 'tooltip'}
 
       .index-panel__toolbar
         .index-panel__pagination
@@ -38,4 +38,4 @@
         - if policy(@category).update?
           = nav_btn_link_to(name: fa('pencil'), url: edit_category_path(@category), tooltip: t('categories.edit'), style: 'success')
         - if policy(@category).destroy?
-          = link_to fa('times'), @category, class: 'btn btn-sm btn-danger btn-icon', method: :delete, data: {confirm: t('u_sure'), toggle: 'tooltip', original_title: t('categories.delete')}
+          = link_to fa('times'), @category, class: 'btn btn-sm btn-danger btn-icon', method: :delete, data: {confirm: t('u_sure'), bs_toggle: 'tooltip'}, title: t('categories.delete')

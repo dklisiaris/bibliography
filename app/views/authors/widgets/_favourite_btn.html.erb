@@ -2,11 +2,11 @@
 <%= button_tag fa(liked ? 'star' : 'star-o'),
   type: "button",
   class: "btn btn-xs #{liked ? 'btn-success' : 'btn-outline-secondary'} btn-favourite-author-#{author.id}",
+  title: liked ? t('authors.favoured') : t('authors.add_to_favourites'),
   data: {
     controller: "favourite",
     action: "click->favourite#toggle",
-    toggle: "tooltip",
-    original_title: liked ? t('authors.favoured') : t('authors.add_to_favourites'),
+    bs_toggle: "tooltip",
     favourite_url_value: favourite_author_path(author),
     favourite_record_id_value: author.id,
     favourite_kind_value: "author",
@@ -18,8 +18,7 @@
 <% else %>
 <%= link_to fa('star-o'), new_user_session_path,
   class: "btn btn-xs btn-outline-secondary btn-favourite-author-#{author.id}",
-  data: {
-    "toggle" => "tooltip", "original-title" => t('authors.add_to_favourites')
-  }
+  title: t('authors.add_to_favourites'),
+  data: { bs_toggle: "tooltip" }
 %>
 <% end %>

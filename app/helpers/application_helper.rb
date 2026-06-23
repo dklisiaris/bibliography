@@ -34,7 +34,7 @@ module ApplicationHelper
   def top_nav_dropdown_li(text, path, icon=nil)
     content_tag(:li) do
       link_to path do
-        content_tag(:i, nil, { class: "#{icon} fa-fw pull-right" }) + text
+        content_tag(:i, nil, { class: "#{icon} fa-fw float-end" }) + text
       end
     end
   end

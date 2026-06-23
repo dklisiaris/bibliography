@@ -16,26 +16,6 @@
   float: left !important;
 }
 
-.hidden-xs {
-  @extend .d-none;
-  @extend .d-sm-block;
-}
-
-.visible-xs {
-  @extend .d-block;
-  @extend .d-sm-none;
-}
-
-.hidden-sm {
-  @extend .d-none;
-  @extend .d-md-block;
-}
-
-.visible-sm {
-  @extend .d-block;
-  @extend .d-md-none;
-}
-
 @each $i in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
   .col-xs-#{$i} {
     @extend .col-#{$i};
@@ -133,10 +113,6 @@
   text-align: right !important;
 }
 
-.hidden {
-  display: none !important;
-}
-
 // ProUI sidebar (layout HTML unchanged until B.4)
 // navbar-fixed-top removed — app-shell uses sticky navbar
 
@@ -160,3 +136,4 @@
 .tab-pane.active {
   display: block;
 }
+

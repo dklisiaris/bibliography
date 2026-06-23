@@ -8,7 +8,7 @@
     %header.index-panel__header
       %h2.index-panel__title= detone t("register")
       .index-panel__actions.auth-card__actions
-        = link_to new_user_session_path, class: "btn btn-sm btn-outline-secondary btn-icon", title: t("back_to_login"), data: {toggle: "tooltip"} do
+        = link_to new_user_session_path, class: "btn btn-sm btn-outline-secondary btn-icon", title: t("back_to_login"), data: {bs_toggle: "tooltip"} do
           %i.fa.fa-user{aria: {hidden: true}}
 
     .index-panel__content

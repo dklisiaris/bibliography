@@ -10,7 +10,7 @@
 
 .app-sidebar__scroll
   .sidebar-content.app-sidebar__content
-    %nav.app-sidebar__nav.visible-xs{aria: {label: "Quick links"}}
+    %nav.app-sidebar__nav.d-block.d-sm-none{aria: {label: "Quick links"}}
       %ul.sidebar-nav.app-sidebar__list
         = side_nav_li(t("home"), root_path, "fa fa-home")
         = side_nav_li(t("collections"), shelves_path, "fa fa-folder-open")
