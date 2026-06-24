@@ -32,7 +32,7 @@
                 read_more_less_label_value: t("read_less")
               }
             }
-              = @author.biography.html_safe
+              = sanitized_rich_text(@author.biography)
 
           - if @awards.count > 0
             %section.resource-show__section

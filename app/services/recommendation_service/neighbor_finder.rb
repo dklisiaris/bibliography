@@ -28,10 +28,7 @@ class RecommendationService::NeighborFinder
       .map { |user_id, _similarity| user_id }
 
     # Get relation ordered by similarity
-    neighbors = User.where(id: top_user_ids)
-                    .order(Arel.sql("CASE users.id " +
-                                    top_user_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                                    " END"))
+    neighbors = RecommendationService::OrderedRelation.where_id_in_order(User, top_user_ids)
 
     # Store in Redis (need to convert to array for storage)
     RecommendationService::RedisStore.store_similar_users(@user, neighbors.to_a)

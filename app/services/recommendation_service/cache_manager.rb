@@ -11,12 +11,8 @@ class RecommendationService::CacheManager
     return nil unless cached_ids.present?
     
     # Reconstruct relation from cached IDs
-    table_name = resource_type.constantize.table_name
     resource_type.constantize
-      .where(id: cached_ids)
-      .order(Arel.sql("CASE #{table_name}.id " +
-                      cached_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                      " END"))
+      .then { |model| RecommendationService::OrderedRelation.where_id_in_order(model, cached_ids) }
   end
 
   # Cache recommendations (stores IDs for efficiency)
@@ -36,10 +32,7 @@ class RecommendationService::CacheManager
     return nil unless cached_ids.present?
     
     # Reconstruct relation from cached IDs
-    User.where(id: cached_ids)
-        .order(Arel.sql("CASE users.id " +
-                        cached_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                        " END"))
+    RecommendationService::OrderedRelation.where_id_in_order(User, cached_ids)
   end
 
   # Cache similar users (stores IDs for efficiency)

@@ -92,6 +92,15 @@ module ApplicationHelper
     end.flatten.uniq.join(join_with)
   end
 
+  # Sanitize admin-entered HTML (book descriptions, author bios, comments).
+  def sanitized_rich_text(html)
+    sanitize(
+      html.to_s,
+      tags: %w[p br strong em b i u ul ol li a h2 h3 h4 blockquote div span],
+      attributes: %w[href title class target rel]
+    )
+  end
+
   # Elasticsearch 7+ returns hits total as { "value" => N, "relation" => "eq"|"gte" }.
   def search_results_total_label(search_results)
     total = search_results.response["hits"]["total"]

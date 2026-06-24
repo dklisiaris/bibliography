@@ -14,13 +14,8 @@ class RecommendationService::RedisStore
     item_ids = redis.zrevrange(key, 0, limit - 1).map(&:to_i)
     return resource_type.constantize.none if item_ids.empty?
 
-    # Return relation ordered by Redis ranking (preserve order using CASE)
-    table_name = resource_type.constantize.table_name
-    resource_type.constantize
-      .where(id: item_ids)
-      .order(Arel.sql("CASE #{table_name}.id " +
-                      item_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                      " END"))
+    # Return relation ordered by Redis ranking (preserve order using in_order_of)
+    RecommendationService::OrderedRelation.where_id_in_order(resource_type.constantize, item_ids)
   end
 
   # Store recommendations in Redis
@@ -50,11 +45,8 @@ class RecommendationService::RedisStore
     user_ids = redis.zrevrange(key, 0, limit - 1).map(&:to_i)
     return User.none if user_ids.empty?
 
-    # Return relation ordered by similarity ranking (preserve order using CASE)
-    User.where(id: user_ids)
-        .order(Arel.sql("CASE users.id " +
-                        user_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                        " END"))
+    # Return relation ordered by similarity ranking (preserve order using in_order_of)
+    RecommendationService::OrderedRelation.where_id_in_order(User, user_ids)
   end
 
   # Store similar users in Redis
