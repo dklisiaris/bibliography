@@ -198,6 +198,9 @@ gem 'active_hash_relation'
 # Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible
 gem 'rack-cors', '~> 1.0'
 
+# Rate limiting and blocking of abusive clients (Redis-backed in production/staging)
+gem 'rack-attack', '~> 6.7'
+
 # Threaded comments are now implemented using a custom Commentable concern
 # See app/models/concerns/commentable.rb and app/models/comment.rb
 # gem 'acts_as_commentable_with_threading' # REMOVED - replaced with custom implementation
