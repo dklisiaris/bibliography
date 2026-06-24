@@ -1,7 +1,7 @@
 <% if @books.present? %>
 <%= turbo_stream.prepend "awarded-books-grid" do %>
   <% @books.each do |book| %>
-    <%= render partial: "books/awarded_book", locals: { book: book, prize_id: params[:prize_id] } %>
+    <%= render partial: "books/awarded_book", locals: { book: book, prize_id: @prize_id } %>
   <% end %>
 <% end %>
 
@@ -12,7 +12,7 @@
 
 <% if @prizes.present? %>
 <%= turbo_stream.append "load-more-awards-container" do %>
-  <%= render partial: "prizes/prize_nav_item", collection: @prizes, as: :prize, locals: { selected_prize_id: params[:prize_id] } %>
+  <%= render partial: "prizes/prize_nav_item", collection: @prizes, as: :prize, locals: { selected_prize_id: @prize_id } %>
 <% end %>
 
 <%= turbo_stream.update "load-more-awards-btn" do %>

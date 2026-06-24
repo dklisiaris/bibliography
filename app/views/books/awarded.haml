@@ -22,15 +22,15 @@
               = t("books.awarded")
         .book-grid__items#awarded-books-grid
           - @books.each do |book|
-            = render partial: "books/awarded_book", locals: {book: book, prize_id: params[:prize_id]}
+            = render partial: "books/awarded_book", locals: {book: book, prize_id: @prize_id}
         - if @books.next_page
           .book-grid__footer#load-more-awarded-books-btn-container
-            #load-more-awarded-books= link_to t("load_more"), awarded_books_path(load_books: true, prize_id: params[:prize_id], page: @books.next_page, format: :turbo_stream), class: "book-grid__more", data: {turbo_stream: true}
+            #load-more-awarded-books= link_to t("load_more"), awarded_books_path(load_books: true, prize_id: @prize_id, page: @books.next_page, format: :turbo_stream), class: "book-grid__more", data: {turbo_stream: true}
     - elsif params[:load_books] != "true"
       %p.book-grid__empty= t("no_books_yet")
 
   .col-sm-4
-    = render partial: "prizes/prize_nav", locals: {title: t("prizes.label"), prizes: @prizes, selected_prize_id: params[:prize_id]}
+    = render partial: "prizes/prize_nav", locals: {title: t("prizes.label"), prizes: @prizes, selected_prize_id: @prize_id}
     - if @prizes&.next_page
       .prize-nav__footer#load-more-awards-btn
         = link_to t("load_more"), awarded_books_path(load_awards: true, page: @prizes.next_page, format: :turbo_stream), class: "book-grid__more", data: {turbo_stream: true}
