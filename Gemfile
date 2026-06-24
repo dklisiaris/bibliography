@@ -5,6 +5,10 @@ ruby '3.3.11'
 
 # Match Ruby 3.3 stdlib default gem on production (Passenger activates it before Bundler)
 gem 'base64', '0.2.0'
+# Pin default gems — single resolved version (run `gem cleanup psych erb stringio` if Bundler warns)
+gem 'psych', '5.4.0'
+gem 'stringio', '3.2.0'
+gem 'erb', '6.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 # Use mysql as the database for Active Record
@@ -125,12 +129,13 @@ gem 'kaminari', '~> 1.2'
 
 # Search engine gem on top of elasticsearch
 gem 'searchkick', '~> 5.0'
-gem 'elasticsearch', '~> 7.0'
+gem 'elasticsearch', '~> 7.17', '>= 7.17.10'
 
 # Runs HTTP requests in parallel while cleanly encapsulating handling logic.
-gem 'typhoeus', '~> 1.3'
-# Faraday 2.x is incompatible with typhoeus adapter; pin Faraday to 1.x
-gem 'faraday', '~> 1.10', '>= 1.10.5'
+gem 'typhoeus', '~> 1.4'
+# Faraday 2.x + faraday-typhoeus (elasticsearch 7.17+); CVE-2026-54297 fixed in 2.14.3+
+gem 'faraday', '~> 2.14', '>= 2.14.3'
+gem 'faraday-typhoeus'
 # FFI gem needs to be updated for Ruby 2.7.7 compatibility
 # gem 'ffi', '~> 1.15.0'
 
@@ -259,7 +264,7 @@ gem 'public_activity', '~> 3.0'
 gem 'trix-rails', '~> 2.2', require: 'trix'
 
 # The fastest JSON parser and object serializer.
-gem 'oj', '~> 3.1'
+gem 'oj', '~> 3.17.3'
 
 # Stopwords filter or use some based on Snowball stopwords lists
 gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'
