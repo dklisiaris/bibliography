@@ -65,6 +65,17 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Returns a non-negative integer from params, or nil if missing/invalid (e.g. bot probes).
+  def integer_param(key)
+    value = params[key]
+    return nil if value.blank?
+
+    string = value.to_s
+    return nil unless string.match?(/\A\d+\z/)
+
+    string.to_i
+  end
+
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
 

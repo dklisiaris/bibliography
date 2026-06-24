@@ -165,4 +165,26 @@ RSpec.describe BooksController, :type => :controller do
     end
   end
 
+  describe "GET awarded" do
+    let!(:prize) { create(:prize) }
+    let!(:book) { create(:book) }
+    let!(:award) { create(:award, prize: prize, awardable: book) }
+
+    it "filters books by a valid prize_id" do
+      get :awarded, params: { prize_id: prize.id }
+      expect(response).to have_http_status(:ok)
+      expect(assigns(:prize_id)).to eq(prize.id)
+      expect(assigns(:selected_prize)).to eq(prize)
+      expect(assigns(:books)).to include(book)
+    end
+
+    it "ignores malicious prize_id probes without raising" do
+      malicious = '429) AND aND/**/7202=CAST(%27~%27||(SelECT/**/(CasE/**/when/**/(7202=7202)/**/thEN/**/1/**/ELSE/**/0/**/ENd))::tEXt||%27~%27/**/AS/**/numeRic)-- -'
+      get :awarded, params: { prize_id: malicious }
+      expect(response).to have_http_status(:ok)
+      expect(assigns(:prize_id)).to be_nil
+      expect(assigns(:selected_prize)).to be_nil
+    end
+  end
+
 end
