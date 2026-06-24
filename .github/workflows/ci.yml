@@ -92,7 +92,26 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
+      - name: npm audit
+        run: npm audit --omit=dev --audit-level=moderate
+
       - name: Bundle audit
         run: |
           bundle exec bundle-audit update
           bundle exec bundle-audit check
+
+      - name: Brakeman
+        run: |
+          bundle exec brakeman --no-pager -q -w2 \
+            -i config/brakeman.ignore \
+            --ensure-ignore-notes \
+            --ensure-no-obsolete-ignore-entries

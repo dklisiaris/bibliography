@@ -60,6 +60,7 @@ group :development, :test do
   gem 'byebug', '~> 12.0', platforms: [:mri, :windows]
 
   gem 'bundler-audit', '~> 0.9', require: false
+  gem 'brakeman', '~> 7.0', require: false
   # gem 'binding_of_caller', '~> 1.0'
 
   # gem 'pry-byebug', '~> 3.11'

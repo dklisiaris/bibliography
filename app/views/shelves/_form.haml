@@ -22,8 +22,8 @@
 
           .mb-3
             = f.label :privacy, t('shelves.privacy.label'), class: 'form-label'
-            = f.select :privacy, options_for_select(@privacies.collect { |s|
-              [Shelf.humanize_privacy(s[0]), s[0]] }, selected: @shelf.privacy), {}, class: 'form-select'
+            - privacy_options = @privacies.map { |s| [Shelf.humanize_privacy(s[0]), s[0]] }
+            = f.select :privacy, options_for_select(privacy_options, @shelf.privacy), {}, class: 'form-select'
 
           .mb-3
             .form-check
