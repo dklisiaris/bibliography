@@ -1,7 +1,6 @@
-class BackupRatingsWorker
-  include Sidekiq::Worker
-  sidekiq_options queue: :maintenance, retry: false
+# frozen_string_literal: true
 
+class BackupRatingsJob < MaintenanceJob
   # action can be one of ['like', 'unlike', 'dislike', 'undislike']
   def perform(user_id, rateable_id, rateable_type, action)
     rateable = rateable_type.constantize.find(rateable_id)
@@ -17,12 +16,9 @@ class BackupRatingsWorker
     when 'undislike'
       Rating.undislike(user, rateable)
     else
-      puts "Not acceptable action: #{action}."
+      Rails.logger.warn "BackupRatingsJob: not acceptable action: #{action}"
     end
-    puts "User #{user_id} #{action} #{rateable_type} #{rateable_id}"
 
-
-
+    Rails.logger.info "User #{user_id} #{action} #{rateable_type} #{rateable_id}"
   end
-
 end
