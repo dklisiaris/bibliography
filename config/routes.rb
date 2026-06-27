@@ -111,28 +111,5 @@ Rails.application.routes.draw do
     delete 'redis/:id', to: 'admin/redis#destroy', as: :admin_redis_delete
   end
 
-  # Restful API routes
-  namespace :api do
-    namespace :v1 do
-      resources :books, only: [:index, :show] do
-        collection do
-          get 'my'
-          get 'rated_ids'
-        end
-        resources :comments, except: [:new, :edit]
-      end
-      resources :authors, only: [:index, :show]
-      resources :publishers, only: [:show]
-      resources :categories, only: [:index, :show] do
-        collection do
-          get 'liked_with_books'
-        end
-      end
-      resources :series, only: [:show]
-      resources :sessions, only: [:create]
-      post 'authenticate', to: 'sessions#create'
-    end
-  end
-
   root to: 'home#index'
 end
