@@ -8,6 +8,19 @@ class RecommendationService::SimilarityCalculator
     new(user1, user2, resource_type).jaccard_similarity
   end
 
+  # Jaccard similarity from preloaded like ID sets (avoids per-pair DB queries).
+  def self.jaccard_similarity_from_sets(likes1, likes2)
+    likes1 = Array(likes1)
+    likes2 = Array(likes2)
+    return 0.0 if likes1.empty? || likes2.empty?
+
+    intersection = likes1 & likes2
+    union = likes1 | likes2
+    return 0.0 if union.empty?
+
+    intersection.size.to_f / union.size
+  end
+
   # Calculate similarity considering both likes and dislikes
   # Similarity = (likes_in_common - dislikes_in_common) / total_items
   def self.weighted_similarity(user1, user2, resource_type: 'Book')
@@ -23,17 +36,7 @@ class RecommendationService::SimilarityCalculator
   def jaccard_similarity
     return 0.0 if @user1.id == @user2.id
 
-    user1_likes = liked_items(@user1)
-    user2_likes = liked_items(@user2)
-
-    return 0.0 if user1_likes.empty? || user2_likes.empty?
-
-    intersection = user1_likes & user2_likes
-    union = user1_likes | user2_likes
-
-    return 0.0 if union.empty?
-
-    intersection.size.to_f / union.size
+    self.class.jaccard_similarity_from_sets(liked_items(@user1), liked_items(@user2))
   end
 
   def weighted_similarity
