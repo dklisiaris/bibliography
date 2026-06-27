@@ -40,8 +40,8 @@ class RecommendationService::RedisStore
 
   # Get similar users from Redis
   # Returns ActiveRecord::Relation ordered by similarity score
-  def self.get_similar_users(user, limit)
-    key = similar_users_key(user)
+  def self.get_similar_users(user, limit, resource_type: 'Book')
+    key = similar_users_key(user, resource_type)
     user_ids = redis.zrevrange(key, 0, limit - 1).map(&:to_i)
     return User.none if user_ids.empty?
 
@@ -51,8 +51,8 @@ class RecommendationService::RedisStore
 
   # Store similar users in Redis
   # Accepts either ActiveRecord::Relation or Array
-  def self.store_similar_users(user, similar_users)
-    key = similar_users_key(user)
+  def self.store_similar_users(user, similar_users, resource_type: 'Book')
+    key = similar_users_key(user, resource_type)
     
     # Clear existing
     redis.del(key)
@@ -63,7 +63,11 @@ class RecommendationService::RedisStore
     # Store with similarity scores
     users.each_with_index do |similar_user, index|
       # Calculate similarity score (could be cached separately)
-      similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(user, similar_user)
+      similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(
+        user,
+        similar_user,
+        resource_type: resource_type
+      )
       redis.zadd(key, similarity, similar_user.id)
     end
 
@@ -84,9 +88,17 @@ class RecommendationService::RedisStore
   end
 
   # Clear all recommendations for a user
-  def self.clear_user(user)
-    pattern = "#{REDIS_NAMESPACE}:user:#{user.id}:*"
-    redis.keys(pattern).each { |key| redis.del(key) }
+  def self.clear_user(user, resource_types: RecommendationService::RESOURCE_TYPES)
+    Array(resource_types).each do |resource_type|
+      delete_keys(
+        recommendations_key(user, resource_type),
+        similar_users_key(user, resource_type),
+        legacy_similar_users_key(user)
+      )
+
+      delete_matched("#{REDIS_NAMESPACE}:similarity:#{user.id}:*:#{resource_type.downcase}")
+      delete_matched("#{REDIS_NAMESPACE}:similarity:*:#{user.id}:#{resource_type.downcase}")
+    end
   end
 
   private
@@ -99,7 +111,11 @@ class RecommendationService::RedisStore
     "#{REDIS_NAMESPACE}:user:#{user.id}:recommendations:#{resource_type.downcase}"
   end
 
-  def self.similar_users_key(user)
+  def self.similar_users_key(user, resource_type)
+    "#{REDIS_NAMESPACE}:user:#{user.id}:similar_users:#{resource_type.downcase}"
+  end
+
+  def self.legacy_similar_users_key(user)
     "#{REDIS_NAMESPACE}:user:#{user.id}:similar_users"
   end
 
@@ -107,6 +123,17 @@ class RecommendationService::RedisStore
     # Always use smaller ID first for consistency
     id1, id2 = [user1.id, user2.id].sort
     "#{REDIS_NAMESPACE}:similarity:#{id1}:#{id2}:#{resource_type.downcase}"
+  end
+
+  def self.delete_keys(*keys)
+    keys.compact!
+    redis.del(*keys) if keys.any?
+  end
+
+  def self.delete_matched(pattern)
+    redis.scan_each(match: pattern) do |key|
+      redis.del(key)
+    end
   end
 end
 
