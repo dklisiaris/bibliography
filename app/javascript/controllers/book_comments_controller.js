@@ -39,7 +39,7 @@ export default class extends Controller {
     commentArea.value = ""
     setButtonLoading(button, true, normalHtml)
 
-    fetch(`/api/v1/books/${this.bookIdValue}/comments/`, {
+    fetch(`/books/${this.bookIdValue}/comments`, {
       method: "POST",
       headers: apiAuthHeaders(this.emailValue, this.tokenValue),
       body: JSON.stringify({
@@ -95,7 +95,7 @@ export default class extends Controller {
     const commentId = commentEl.id.replace("comment-", "")
     const bookId = commentEl.dataset.bookId || this.bookIdValue
 
-    fetch(`/api/v1/books/${bookId}/comments/${commentId}`, {
+    fetch(`/books/${bookId}/comments/${commentId}`, {
       method: "DELETE",
       headers: apiAuthHeaders(this.emailValue, this.tokenValue),
     })

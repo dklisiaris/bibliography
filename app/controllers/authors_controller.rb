@@ -32,7 +32,7 @@ class AuthorsController < ApplicationController
     @liked_author_ids = current_user.liked_author_ids if current_user.present?
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
-      render json: @authors, each_serializer: Api::V1::Preview::AuthorSerializer, root: false
+      render json: preview_json(@authors, :author)
     else
       respond_with(@authors)
     end

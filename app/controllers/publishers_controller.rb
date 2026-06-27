@@ -24,7 +24,7 @@ class PublishersController < ApplicationController
     end
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
-      render json: @publishers, each_serializer: Api::V1::Preview::PublisherSerializer, root: false
+      render json: preview_json(@publishers, :publisher)
     else
       respond_with(@publishers)
     end

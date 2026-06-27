@@ -1,8 +1,9 @@
 class BooksController < ApplicationController
-  before_action :set_json_format, only: [:collections, :manage_collections, :like, :dislike]
+  before_action :set_json_format, only: [:collections, :manage_collections, :like, :dislike, :rated_ids]
   before_action :authenticate_user!, only: [:collections, :manage_collections, :like, :dislike]
+  before_action :authenticate_user_from_token!, only: [:rated_ids]
   before_action :set_book
-  skip_before_action :set_book, only: [:index, :new, :create, :my, :latest, :trending, :awarded, :featured]
+  skip_before_action :set_book, only: [:index, :new, :create, :my, :latest, :trending, :awarded, :featured, :rated_ids]
   before_action :set_enums, only: [:new, :edit]
   before_action :set_shelves, only: [:index, :show, :my, :latest, :trending, :awarded, :featured]
   before_action :set_rated_ids, except: [:new, :edit, :create, :update, :destroy]
@@ -10,7 +11,7 @@ class BooksController < ApplicationController
 
 
   #Disable protection for stateless api json response
-  protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike]
+  protect_from_forgery with: :exception, except: [:manage_collections, :like, :dislike, :rated_ids]
 
   respond_to :html
 
@@ -65,7 +66,7 @@ class BooksController < ApplicationController
     # @books_est_count = 20 * @books.total_pages
 
     if params[:q].present? && (is_autocomplete || params[:loadmore].try(:to_i) == 1)
-      render json: @books, each_serializer: Api::V1::Preview::BookSerializer, root: false
+      render json: preview_json(@books, :book)
     else
       # Handle unknown formats gracefully
       respond_to do |format|
@@ -263,6 +264,15 @@ class BooksController < ApplicationController
     end
 
     render json: {status: 200, message: 'ok', likes: @book.liked_by_count, dislikes: @book.disliked_by_count}
+  end
+
+  def rated_ids
+    skip_authorization
+
+    render json: {
+      liked_book_ids: current_user.liked_book_ids,
+      disliked_book_ids: current_user.disliked_book_ids
+    }
   end
 
   def my

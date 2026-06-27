@@ -1,13 +1,14 @@
 class CategoriesController < ApplicationController
-  before_action :set_json_format, only: [:favourite]
+  before_action :set_json_format, only: [:favourite, :liked_with_books]
   before_action :authenticate_user!, only: [:favourite]
+  before_action :authenticate_user_from_token!, only: [:liked_with_books]
   before_action :set_category, only: [:show, :edit, :update, :destroy, :favourite]
   skip_after_action :verify_policy_scoped, only: :index
   before_action :set_rated_ids, only: [:show]
   before_action :set_owned_ids, only: [:show]
 
   #Disable protection for stateless api json response
-  protect_from_forgery with: :exception, except: [:favourite]
+  protect_from_forgery with: :exception, except: [:favourite, :liked_with_books]
 
   respond_to :html
 
@@ -29,7 +30,7 @@ class CategoriesController < ApplicationController
     end
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
-      render json: @featured, each_serializer: Api::V1::Preview::CategorySerializer, root: false
+      render json: preview_json(@featured, :category)
     else
       respond_with(@categories)
     end
@@ -85,6 +86,19 @@ class CategoriesController < ApplicationController
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@category)}
+  end
+
+  def liked_with_books
+    categories = if user_signed_in? && current_user.liked_categories_count > 0
+                   current_user.liked_categories.includes(:books)
+                 else
+                   Category.featured.includes(:books)
+                 end
+
+    categories = policy_scope(categories)
+    skip_authorization
+
+    render json: { categories: categories.map { |category| category_with_books_json(category) } }
   end
 
   private

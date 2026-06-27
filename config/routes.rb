@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :prizes, :contributions, :concerns => :paginatable
 
   resources :books, :concerns => :paginatable do
+    resources :comments, only: [:create, :destroy], controller: :book_comments
+
     member do
       get 'collections'
       post 'collections', to: 'books#manage_collections'
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
       get 'trending'
       get 'awarded'
       get 'latest'
+      get 'rated_ids'
     end
   end
 
@@ -86,6 +89,10 @@ Rails.application.routes.draw do
   get 'tasks/import_botd_candidates', to: 'tasks#import_book_of_the_day_candidates'
 
   resources :categories do
+    collection do
+      get 'liked_with_books'
+    end
+
     member do
       post 'favourite'
     end
@@ -102,29 +109,6 @@ Rails.application.routes.draw do
     get 'redis/stats', to: 'admin/redis#stats', as: :admin_redis_stats
     get 'redis/:id', to: 'admin/redis#show', as: :admin_redis_key
     delete 'redis/:id', to: 'admin/redis#destroy', as: :admin_redis_delete
-  end
-
-  # Restful API routes
-  namespace :api do
-    namespace :v1 do
-      resources :books, only: [:index, :show] do
-        collection do
-          get 'my'
-          get 'rated_ids'
-        end
-        resources :comments, except: [:new, :edit]
-      end
-      resources :authors, only: [:index, :show]
-      resources :publishers, only: [:show]
-      resources :categories, only: [:index, :show] do
-        collection do
-          get 'liked_with_books'
-        end
-      end
-      resources :series, only: [:show]
-      resources :sessions, only: [:create]
-      post 'authenticate', to: 'sessions#create'
-    end
   end
 
   root to: 'home#index'

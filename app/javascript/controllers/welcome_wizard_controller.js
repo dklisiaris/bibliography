@@ -123,7 +123,7 @@ export default class extends Controller {
   }
 
   fetchRatedIds() {
-    return fetch("/api/v1/books/rated_ids/", {
+    return fetch("/books/rated_ids", {
       headers: this.authHeaders(),
     }).then((response) => {
       if (!response.ok) throw new Error("rated_ids failed")
@@ -132,7 +132,7 @@ export default class extends Controller {
   }
 
   fetchCategoriesWithBooks() {
-    return fetch("/api/v1/categories/liked_with_books/", {
+    return fetch("/categories/liked_with_books", {
       headers: this.authHeaders(),
     }).then((response) => {
       if (!response.ok) throw new Error("liked_with_books failed")
