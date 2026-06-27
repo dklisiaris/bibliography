@@ -17,4 +17,4 @@
       read_more_less_label_value: t("read_less")
     }
   }
-    = @book.description.html_safe
+    = sanitized_rich_text(@book.description)

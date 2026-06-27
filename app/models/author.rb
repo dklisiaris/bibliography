@@ -59,10 +59,13 @@ class Author < ActiveRecord::Base
   end
 
   def short_biography(max_chars = 350)
-    if biography.present? && biography.length <= max_chars
-      biography.html_safe
-    elsif biography.present? && biography.length > max_chars
-      "#{biography[0...max_chars]}...".html_safe
+    return unless biography.present?
+
+    plain = ActionView::Base.full_sanitizer.sanitize(biography)
+    if plain.length <= max_chars
+      plain
+    else
+      "#{plain[0...max_chars]}..."
     end
   end
 

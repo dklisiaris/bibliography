@@ -108,6 +108,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.20.1)
       msgpack (~> 1.2)
+    brakeman (7.1.2)
+      racc
     builder (3.3.0)
     bullet (8.1.0)
       activesupport (>= 3.0.0)
@@ -680,6 +682,7 @@ DEPENDENCIES
   bcrypt_pbkdf (>= 1.0, < 2.0)
   better_errors (~> 2.10)
   bootsnap (>= 1.4.4)
+  brakeman (~> 7.0)
   bullet (~> 8.1)
   bundler-audit (~> 0.9)
   byebug (~> 12.0)

@@ -27,12 +27,11 @@ module Recommendable
     # @param count [Integer] Number of items to return
     # @return [ActiveRecord::Relation] Top-rated items
     def top(count: 10)
-      # Join with ratings to count likes, order by count, limit results
-      # Use LEFT JOIN to include items with no ratings (they'll have count 0)
-      table_name_quoted = connection.quote_table_name(table_name)
-      joins("LEFT JOIN ratings ON ratings.rateable_id = #{table_name_quoted}.id AND ratings.rateable_type = #{connection.quote(name)} AND ratings.rate = #{Rating.rates[:like]}")
-        .group("#{table_name_quoted}.id")
-        .order('COUNT(ratings.id) DESC')
+      like_rate = Rating.rates[:like]
+      left_joins(:ratings)
+        .where("ratings.id IS NULL OR ratings.rate = ?", like_rate)
+        .group(:id)
+        .order(Arel.sql("SUM(CASE WHEN ratings.rate = #{like_rate} THEN 1 ELSE 0 END) DESC"))
         .limit(count)
     end
   end

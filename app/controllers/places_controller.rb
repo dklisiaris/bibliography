@@ -19,7 +19,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = @placeable.places.new(place_params)
+    @place = @placeable.places.new(place_attributes)
     authorize @place
     flash[:notice] = "Place created successfully!" if @place.save
 
@@ -27,7 +27,7 @@ class PlacesController < ApplicationController
   end
 
   def update
-    flash[:notice] = "Place updated successfully!" if @place.update(place_params)
+    flash[:notice] = "Place updated successfully!" if @place.update(place_attributes)
     respond_with(@placeable)
   end
 
@@ -43,7 +43,12 @@ class PlacesController < ApplicationController
     end
 
     def place_params
-      params.require(:place).permit(:name, :role, :address, :telephone, :fax, :email, :website, :latitude, :longitude, :placeable_id, :placeable_type)
+      params.require(:place).permit(:name, :address, :telephone, :fax, :email, :website, :latitude, :longitude)
+    end
+
+    # :role is Place venue type (e.g. headquarters), not User authorization — assigned outside permit.
+    def place_attributes
+      place_params.to_h.symbolize_keys.merge(role: params.dig(:place, :role).to_s.strip.presence)
     end
 
     def load_placeable

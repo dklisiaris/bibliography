@@ -10,6 +10,6 @@
         - if policy(comment).destroy?
           %button.book-comment__delete.delete-comment{type: "button", data: {action: "book-comments#delete"}, title: t("delete", default: "Delete"), "aria-label": t("delete", default: "Delete")}
             = fa("trash-o")
-      .book-comment__text= comment.body.html_safe
+      .book-comment__text= sanitized_rich_text(comment.body)
       - if subcomments
         = render partial: "books/widgets/comments_list", locals: {comments: subcomments, parent_id: comment.id, book: book, user: user, depth: depth + 1}
