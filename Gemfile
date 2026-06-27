@@ -190,9 +190,6 @@ gem 'friendly_id', '~> 5.4.0'
 # A ruby library for working with Machine Readable Cataloging
 gem 'marc', '~> 1.0.0'
 
-# Making it easy to serialize models for client-side use
-gem 'active_model_serializers', '~> 0.9.0'
-
 # Simple gem that allows you to run multiple ActiveRecord::Relation using hash
 gem 'active_hash_relation'
 
