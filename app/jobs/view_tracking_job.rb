@@ -34,7 +34,7 @@ class ViewTrackingJob < ApplicationJob
 
     # Update counter cache if impression was created
     if impression.persisted?
-      ViewTracker::CounterCacheUpdater.update(resource)
+      ViewTracker::CounterCacheUpdater.increment(resource)
     end
   end
 end
