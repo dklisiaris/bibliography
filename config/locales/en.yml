@@ -138,7 +138,6 @@ en:
     import: "Import"
     monitoring: "Monitoring"
     tasks: "Tasks"
-    api: "API"
 
     pages: Pages
     about: About

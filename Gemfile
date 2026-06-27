@@ -23,7 +23,6 @@ gem 'terser', '~> 1.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-# bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
 

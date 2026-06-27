@@ -122,7 +122,6 @@ el:
     import: "Εισαγωγή"
     monitoring: "Monitoring"
     tasks: "Εργασίες"
-    api: "API"
 
     pages: Σελίδες
     about: Σχετικά
