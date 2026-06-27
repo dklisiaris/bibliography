@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class ViewTracker::DuplicateChecker
+  USER_WINDOW = 1.hour
+  SESSION_WINDOW = 1.hour
+  IP_WINDOW = 5.minutes
+
   # Check if this view is a duplicate
-  # Uses Redis for fast lookups (optional, can use DB)
   def self.duplicate?(resource:, ip:, session_hash:, user:)
     new(resource, ip, session_hash, user).duplicate?
   end
@@ -15,51 +18,31 @@ class ViewTracker::DuplicateChecker
   end
 
   def duplicate?
-    # Strategy 1: Check by user (if logged in)
-    return true if user_duplicate?
+    return false unless @resource.present?
 
-    # Strategy 2: Check by session (within 1 hour)
-    return true if session_duplicate?
+    matchers = []
+    binds = []
 
-    # Strategy 3: Check by IP (within 5 minutes)
-    return true if ip_duplicate?
+    if @user.present?
+      matchers << "(user_id = ? AND created_at > ?)"
+      binds.push(@user.id, USER_WINDOW.ago)
+    end
 
-    false
-  end
+    if @session_hash.present?
+      matchers << "(session_hash = ? AND created_at > ?)"
+      binds.push(@session_hash, SESSION_WINDOW.ago)
+    end
 
-  private
+    if @ip.present?
+      matchers << "(ip_address = ? AND created_at > ?)"
+      binds.push(@ip, IP_WINDOW.ago)
+    end
 
-  def user_duplicate?
-    return false unless @user.present?
+    return false if matchers.empty?
 
-    # Check if user viewed this resource in last hour
     Impression.where(
       impressionable_type: @resource.class.name,
-      impressionable_id: @resource.id,
-      user_id: @user.id
-    ).where("created_at > ?", 1.hour.ago).exists?
-  end
-
-  def session_duplicate?
-    return false unless @session_hash.present?
-
-    # Check if session viewed this resource in last hour
-    Impression.where(
-      impressionable_type: @resource.class.name,
-      impressionable_id: @resource.id,
-      session_hash: @session_hash
-    ).where("created_at > ?", 1.hour.ago).exists?
-  end
-
-  def ip_duplicate?
-    return false unless @ip.present?
-
-    # Check if IP viewed this resource in last 5 minutes
-    Impression.where(
-      impressionable_type: @resource.class.name,
-      impressionable_id: @resource.id,
-      ip_address: @ip
-    ).where("created_at > ?", 5.minutes.ago).exists?
+      impressionable_id: @resource.id
+    ).where([matchers.join(" OR "), *binds]).exists?
   end
 end
-

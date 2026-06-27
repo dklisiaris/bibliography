@@ -74,7 +74,7 @@ class ViewTracker
     )
 
     # Update counter cache
-    ViewTracker::CounterCacheUpdater.update(@resource) if impression.persisted?
+    ViewTracker::CounterCacheUpdater.increment(@resource) if impression.persisted?
 
     impression
   end
