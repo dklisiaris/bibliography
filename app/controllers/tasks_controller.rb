@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   def import_book_of_the_day_candidates
     authorize :task, :index?
 
-    ImportDailySuggestionsWorker.perform_async(params[:book_titles])
+    ImportDailySuggestionsJob.perform_later(params[:book_titles])
 
     flash[:notice] = t('tasks.content_updating_in_bg')
     redirect_to tasks_path

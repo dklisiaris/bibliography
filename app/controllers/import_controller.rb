@@ -20,7 +20,7 @@ class ImportController < ApplicationController
     end  
 
     content_hash = JSON.parse(file_content)
-    ImportWorker.perform_async(content_hash)
+    ImportJob.perform_later(content_hash)
     
     flash[:notice] = t('import.records_importing_in_bg')
     redirect_to import_path                
@@ -33,7 +33,7 @@ class ImportController < ApplicationController
     file_content = open(params[:url]).read    
 
     content_hash = JSON.parse(file_content)
-    ImportWorker.perform_async(content_hash)
+    ImportJob.perform_later(content_hash)
 
     flash[:notice] = t('import.records_importing_in_bg')
     redirect_to import_path
@@ -44,7 +44,7 @@ class ImportController < ApplicationController
     file_content = params[:content]    
     
     content_hash = JSON.parse(file_content)
-    ImportWorker.perform_async(content_hash)
+    ImportJob.perform_later(content_hash)
 
     flash[:notice] = t('import.records_importing_in_bg')
     redirect_to import_path
@@ -53,7 +53,7 @@ class ImportController < ApplicationController
   def import_from_storage
     authorize :import, :import_stuff?
 
-    StorageImportWorker.perform_async
+    StorageImportJob.perform_later
 
     flash[:notice] = t('import.records_importing_in_bg')
     redirect_to import_path

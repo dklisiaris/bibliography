@@ -73,7 +73,7 @@ class Author < ActiveRecord::Base
     if uploaded_avatar_url.present?
       uploaded_avatar_url
     else
-      AuthorAvatarUploadWorker.perform_async(id) if image.present?
+      AuthorAvatarUploadJob.perform_later(id) if image.present?
       '/no_avatar.jpg'
     end
   end

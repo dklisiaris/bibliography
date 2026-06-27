@@ -78,10 +78,10 @@ class CategoriesController < ApplicationController
 
     if not current_user.likes?(@category)
       current_user.like(@category)
-      BackupRatingsWorker.perform_async(current_user.id, @category.id, 'Category', 'like')
+      BackupRatingsJob.perform_later(current_user.id, @category.id, 'Category', 'like')
     else
       current_user.unlike(@category)
-      BackupRatingsWorker.perform_async(current_user.id, @category.id, 'Category', 'unlike')
+      BackupRatingsJob.perform_later(current_user.id, @category.id, 'Category', 'unlike')
     end
 
     render json: {status: 200, message: 'ok', favourite: current_user.likes?(@category)}

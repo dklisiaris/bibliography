@@ -130,7 +130,7 @@ class Book < ActiveRecord::Base
     if uploaded_cover_url.present?
       uploaded_cover_url
     else
-      BookCoverUploadWorker.perform_async(id) if image.present?
+      BookCoverUploadJob.perform_later(id) if image.present?
       '/no_cover.jpg'
     end
   end
@@ -142,7 +142,7 @@ class Book < ActiveRecord::Base
       if Pathname.new(og_cover_path).exist?
         og_cover
       else
-        BookCoverOgGeneratorWorker.perform_async(id)
+        BookCoverOgGeneratorJob.perform_later(id)
         cover
       end
     else
