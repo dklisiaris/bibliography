@@ -1,27 +1,35 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe Bookshelf, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+require "rails_helper"
+
+RSpec.describe Bookshelf, type: :model do
+  let(:user) { create(:user) }
+  let(:book) { create(:book) }
+  let(:shelf) { user.shelves.first }
+
+  describe ".add_book_to_multiple_bookshelves" do
+    it "adds a book to the user's shelf" do
+      expect {
+        described_class.add_book_to_multiple_bookshelves(book.id, [shelf.id], user)
+      }.to change { described_class.where(book: book, shelf: shelf).count }.by(1)
+    end
+
+    it "ignores shelf ids that do not belong to the user" do
+      other_shelf = create(:shelf)
+
+      expect {
+        described_class.add_book_to_multiple_bookshelves(book.id, [other_shelf.id], user)
+      }.not_to change(described_class, :count)
+    end
+  end
+
+  describe ".remove_book_from_multiple_bookshelves" do
+    it "removes a book from the user's shelf" do
+      described_class.create!(book: book, shelf: shelf)
+
+      expect {
+        described_class.remove_book_from_multiple_bookshelves(book.id, [shelf.id], user)
+      }.to change { described_class.where(book: book, shelf: shelf).count }.by(-1)
+    end
+  end
 end
-
-# == Schema Information
-#
-# Table name: bookshelves
-#
-#  id         :integer          not null, primary key
-#  book_id    :integer
-#  shelf_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_bookshelves_on_book_id               (book_id)
-#  index_bookshelves_on_book_id_and_shelf_id  (book_id,shelf_id) UNIQUE
-#  index_bookshelves_on_shelf_id              (shelf_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (book_id => books.id)
-#  fk_rails_...  (shelf_id => shelves.id)
-#

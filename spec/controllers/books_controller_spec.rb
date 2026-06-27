@@ -165,6 +165,83 @@ RSpec.describe BooksController, :type => :controller do
     end
   end
 
+  describe "POST like" do
+    let(:registered_user) { create(:user) }
+    let(:book) { create(:book) }
+
+    before do
+      sign_in registered_user
+      ActiveJob::Base.queue_adapter = :test
+    end
+
+    it "likes a book and enqueues recommendation refresh" do
+      expect {
+        post :like, params: { id: book.id }, format: :json
+      }.to have_enqueued_job(UpdateRecommendationsJob)
+
+      expect(registered_user.reload.likes?(book)).to be(true)
+      body = JSON.parse(response.body)
+      expect(body["status"]).to eq(200)
+      expect(body["likes"]).to eq(book.reload.liked_by_count)
+    end
+
+    it "unlikes a book when already liked" do
+      registered_user.like(book)
+
+      expect {
+        post :like, params: { id: book.id }, format: :json
+      }.to have_enqueued_job(UpdateRecommendationsJob)
+
+      expect(registered_user.reload.likes?(book)).to be(false)
+    end
+  end
+
+  describe "POST dislike" do
+    let(:registered_user) { create(:user) }
+    let(:book) { create(:book) }
+
+    before do
+      sign_in registered_user
+      ActiveJob::Base.queue_adapter = :test
+    end
+
+    it "dislikes a book and enqueues recommendation refresh" do
+      expect {
+        post :dislike, params: { id: book.id }, format: :json
+      }.to have_enqueued_job(UpdateRecommendationsJob)
+
+      expect(registered_user.reload.dislikes?(book)).to be(true)
+      body = JSON.parse(response.body)
+      expect(body["status"]).to eq(200)
+      expect(body["dislikes"]).to eq(book.reload.disliked_by_count)
+    end
+  end
+
+  describe "POST manage_collections" do
+    let(:registered_user) { create(:user) }
+    let(:book) { create(:book) }
+    let(:shelf) { registered_user.shelves.first }
+
+    before { sign_in registered_user }
+
+    it "adds a book to the user's shelf" do
+      expect {
+        post :manage_collections, params: { id: book.id, to_add: [shelf.id].to_json }, format: :json
+      }.to change { Bookshelf.where(book: book, shelf: shelf).count }.by(1)
+
+      body = JSON.parse(response.body)
+      expect(body["status"]).to eq(200)
+    end
+
+    it "removes a book from the user's shelf" do
+      Bookshelf.create!(book: book, shelf: shelf)
+
+      expect {
+        post :manage_collections, params: { id: book.id, to_remove: [shelf.id].to_json }, format: :json
+      }.to change { Bookshelf.where(book: book, shelf: shelf).count }.by(-1)
+    end
+  end
+
   describe "GET awarded" do
     let!(:prize) { create(:prize) }
     let!(:book) { create(:book) }
