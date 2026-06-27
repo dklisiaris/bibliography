@@ -45,7 +45,7 @@ class Rating < ActiveRecord::Base
   def update_recommendations
     # Update recommendations for this user when they like/dislike items
     # Uses existing ratings persistence - no new tables needed
-    RecommendationService.update_for(user)
+    RecommendationService.update_for(user, resource_type: rateable_type)
   end
 end
 

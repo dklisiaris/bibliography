@@ -28,13 +28,7 @@ class RecommendationService::RecommendationGenerator
       .first(@limit)
       .map { |item_id, _score| item_id }
 
-    # Return relation ordered by score (preserve order using CASE)
-    table_name = @resource_type.constantize.table_name
-    @resource_type.constantize
-      .where(id: top_item_ids)
-      .order(Arel.sql("CASE #{table_name}.id " +
-                      top_item_ids.each_with_index.map { |id, idx| "WHEN #{id} THEN #{idx}" }.join(' ') +
-                      " END"))
+    RecommendationService::OrderedRelation.where_id_in_order(@resource_type.constantize, top_item_ids)
   end
 
   private

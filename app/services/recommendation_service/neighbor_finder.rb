@@ -14,7 +14,7 @@ class RecommendationService::NeighborFinder
 
   def find
     # Try Redis cache first
-    cached = RecommendationService::RedisStore.get_similar_users(@user, @limit)
+    cached = RecommendationService::RedisStore.get_similar_users(@user, @limit, resource_type: @resource_type)
     return cached if cached.any?
 
     # Calculate similarities
@@ -31,7 +31,7 @@ class RecommendationService::NeighborFinder
     neighbors = RecommendationService::OrderedRelation.where_id_in_order(User, top_user_ids)
 
     # Store in Redis (need to convert to array for storage)
-    RecommendationService::RedisStore.store_similar_users(@user, neighbors.to_a)
+    RecommendationService::RedisStore.store_similar_users(@user, neighbors.to_a, resource_type: @resource_type)
 
     neighbors
   end
@@ -50,11 +50,13 @@ class RecommendationService::NeighborFinder
       .pluck(:id)
   
     similarities = {}
-    users_with_ratings.each do |other_user_id|
+    other_users = User.where(id: users_with_ratings).index_by(&:id)
+
+    other_users.each do |other_user_id, other_user|
       # Try cached similarity first
       cached = RecommendationService::RedisStore.get_similarity(
         @user,
-        User.find(other_user_id),
+        other_user,
         @resource_type
       )
       
@@ -62,9 +64,6 @@ class RecommendationService::NeighborFinder
         similarities[other_user_id] = cached
       else
         # Calculate and cache
-        other_user = User.find_by(id: other_user_id)
-        next unless other_user
-        
         similarity = RecommendationService::SimilarityCalculator.jaccard_similarity(
           @user, other_user, resource_type: @resource_type
         )
