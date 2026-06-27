@@ -88,7 +88,7 @@ class HomeController < ApplicationController
       end
 
       if params[:autocomplete].try(:to_i) == 1
-        render json: Api::V1::Preview::ResultsSerializer.new(@search_results)
+        render json: search_results_preview_json(@search_results)
       end
     else
       redirect_to root_path

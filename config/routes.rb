@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :prizes, :contributions, :concerns => :paginatable
 
   resources :books, :concerns => :paginatable do
+    resources :comments, only: [:create, :destroy], controller: :book_comments
+
     member do
       get 'collections'
       post 'collections', to: 'books#manage_collections'
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
       get 'trending'
       get 'awarded'
       get 'latest'
+      get 'rated_ids'
     end
   end
 
@@ -86,6 +89,10 @@ Rails.application.routes.draw do
   get 'tasks/import_botd_candidates', to: 'tasks#import_book_of_the_day_candidates'
 
   resources :categories do
+    collection do
+      get 'liked_with_books'
+    end
+
     member do
       post 'favourite'
     end

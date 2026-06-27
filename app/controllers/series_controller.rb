@@ -16,7 +16,7 @@ class SeriesController < ApplicationController
     end
 
     if params[:autocomplete].try(:to_i) == 1 and params[:q].present?
-      render json: @series, each_serializer: Api::V1::Preview::SeriesSerializer, root: false
+      render json: preview_json(@series, :series)
     else
       respond_with(@series)
     end

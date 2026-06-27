@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  include PreviewJson
 
   # http_basic_authenticate_with name: ENV["SERVER_USERNAME"],
   #   password: ENV["SERVER_PASSWORD"], if: Proc.new{ Rails.env.production? }
@@ -23,6 +24,23 @@ class ApplicationController < ActionController::Base
 
   def set_json_format
     request.format = :json
+  end
+
+  def authenticate_user_from_token!
+    token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
+    user_email = options.blank? ? nil : options[:email]
+    user = user_email && User.find_by(email: user_email)
+
+    if user&.api_key.present? && token.present? && Devise.secure_compare(user.api_key, token)
+      sign_in user, store: false
+    else
+      unauthenticated!
+    end
+  end
+
+  def unauthenticated!
+    response.headers['WWW-Authenticate'] = 'Token realm=Application'
+    render json: { error: 'Bad credentials', status: 401 }, status: 401
   end
 
   def prepare_meta_tags(options={})

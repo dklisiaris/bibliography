@@ -35,7 +35,7 @@ export default class extends Controller {
     const normalHtml = button.innerHTML
     setButtonLoading(button, true, normalHtml)
 
-    fetch(`/api/v1/books/${this.bookIdValue}/comments/`, {
+    fetch(`/books/${this.bookIdValue}/comments`, {
       method: "POST",
       headers: apiAuthHeaders(this.emailValue, this.tokenValue),
       body: JSON.stringify({ comment: { body: comment } }),
