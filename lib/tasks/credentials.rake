@@ -38,7 +38,7 @@ namespace :credentials do
       MAILJET_PASSWORD
       HONEYBADGER_API_KEY
     ]
-    optional = %i[SKYLIGHT_TOKEN SQREEN_TOKEN FACEBOOK_ACCESS_TOKEN]
+    optional = %i[SKYLIGHT_TOKEN SQREEN_TOKEN FACEBOOK_ACCESS_TOKEN GOOGLE_ANALYTICS_ID]
 
     missing = required.reject { |key| secrets[key].present? }
     absent_optional = optional.reject { |key| secrets[key].present? }
@@ -67,7 +67,8 @@ namespace :credentials do
       ),
       "google" => compact_hash(
         "client_id" => section["GOOGLE_CLIENT_ID"],
-        "client_secret" => section["GOOGLE_CLIENT_SECRET"]
+        "client_secret" => section["GOOGLE_CLIENT_SECRET"],
+        "analytics_id" => section["GOOGLE_ANALYTICS_ID"]
       ),
       "mailjet" => compact_hash(
         "username" => section["MAILJET_USERNAME"],

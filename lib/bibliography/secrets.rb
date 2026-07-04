@@ -36,6 +36,8 @@ module Bibliography
             value = from_credentials[key].presence || from_secrets_yml[key]
             options[key] = value if value.present?
           end
+
+          options[:GOOGLE_ANALYTICS_ID] ||= ENV["GOOGLE_ANALYTICS_ID"].presence
         end
       end
 
@@ -54,6 +56,7 @@ module Bibliography
           FACEBOOK_ACCESS_TOKEN: dig(tree, :facebook, :access_token),
           GOOGLE_CLIENT_ID: dig(tree, :google, :client_id),
           GOOGLE_CLIENT_SECRET: dig(tree, :google, :client_secret),
+          GOOGLE_ANALYTICS_ID: dig(tree, :google, :analytics_id),
           MAILJET_USERNAME: dig(tree, :mailjet, :username),
           MAILJET_PASSWORD: dig(tree, :mailjet, :password),
           HONEYBADGER_API_KEY: dig(tree, :honeybadger, :api_key),
