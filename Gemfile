@@ -13,10 +13,8 @@ gem 'erb', '6.0.4'
 gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
-# Use SCSS for stylesheets (sass-rails 6 → sassc-rails; allows Sprockets 4.2+ / Rack 3)
-gem 'sass-rails', '~> 6.0'
-# Minify Sprockets JS in production (Terser supports modern ES in hotwire.js/Turbo)
-gem 'terser', '~> 1.2'
+# Asset pipeline — Propshaft serves prebuilt hotwire.js/css and static images (Dart Sass + esbuild via npm)
+gem 'propshaft', '~> 1.1'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # gem 'mini_racer', platforms: :ruby
@@ -29,11 +27,7 @@ gem 'thor', '~> 1.5'
 # High Performance Haml Implementation
 gem 'hamlit-rails', '~> 0.2.3'
 
-# Rails 7 does not include Sprockets by default; keep the asset pipeline until frontend migration is complete
-gem 'sprockets-rails', '~> 3.4'
-gem 'sprockets', '~> 4.2', '>= 4.2.2'
-
-# Hotwire foundation (coexists with Sprockets legacy assets)
+# Hotwire foundation (JS/CSS built by npm into app/assets/builds/)
 gem 'turbo-rails', '~> 2.0'
 gem 'stimulus-rails', '~> 1.3'
 gem 'jsbundling-rails', '~> 1.3'
@@ -85,7 +79,6 @@ group :test do
   gem 'simplecov', '~> 0.22', require: false
 end
 
-gem 'autoprefixer-rails', '~> 6.0'
 # Icons — Font Awesome 4.7 CSS loaded via npm in hotwire.scss (_vendor.scss).
 
 gem 'pg', '~> 1.5'

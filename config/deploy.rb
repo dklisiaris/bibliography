@@ -86,7 +86,7 @@ namespace :npm do
     end
   end
 
-  desc 'Build Hotwire JS/CSS before Sprockets precompile'
+  desc 'Build Hotwire JS/CSS before Propshaft precompile'
   task :build do
     on roles(:web) do |host|
       within release_path do
