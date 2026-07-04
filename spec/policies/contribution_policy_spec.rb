@@ -9,6 +9,14 @@ RSpec.describe ContributionPolicy, type: :policy do
   let(:user) { build(:user) }
   let(:contribution) { build(:contribution) }
 
+  permissions :index? do
+    it "denies access to everyone" do
+      expect(subject).not_to permit(editor, contribution)
+      expect(subject).not_to permit(user, contribution)
+      expect(subject).not_to permit(nil, contribution)
+    end
+  end
+
   permissions :create?, :update?, :destroy? do
     it "grants access to editors" do
       expect(subject).to permit(editor, contribution)
