@@ -41,5 +41,5 @@
   = render 'books/collections_modal'
   = render 'books/review_modal'
 
-%script{type: 'application/ld+json'}
+%script{type: "application/ld+json", nonce: content_security_policy_nonce}
   = @book_presenter.structured_data.to_json.html_safe

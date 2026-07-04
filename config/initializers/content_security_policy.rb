@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
-# Content Security Policy — report-only (Phase 0).
+# Content Security Policy
 #
-# Sends Content-Security-Policy-Report-Only (not enforced). The browser logs
-# violations in DevTools → Console but does not block scripts/styles/images.
+# Enforced in production/staging; report-only in development/test so local
+# debugging stays frictionless.
 #
-# Expected violations on this legacy stack (fix before enforcing):
-#   - Inline <script> blocks (Google Analytics, flash toasts, JSON-LD)
-#   - Inline event handlers (onclick="javascript:like(...)" etc.)
+# Inline JSON-LD uses per-request nonces (see content_security_policy_nonce_*).
+# Google Analytics loads from hotwire.js (analytics.js) — no inline scripts.
 #
-# To enforce later: set content_security_policy_report_only = false after
-# moving inline JS to assets/nonces and upgrading to Rails 7+.
-#
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 
 Rails.application.config.content_security_policy do |policy|
   policy.default_src     :self, :https
@@ -28,4 +24,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.frame_ancestors :self
 end
 
-Rails.application.config.content_security_policy_report_only = true
+Rails.application.config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
+Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
+
+Rails.application.config.content_security_policy_report_only = Rails.env.local?
