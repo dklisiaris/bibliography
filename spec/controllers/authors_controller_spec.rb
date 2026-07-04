@@ -49,7 +49,19 @@ RSpec.describe AuthorsController, :type => :controller do
     it "renders the :index template" do
       get :index
       expect(response).to render_template :index
-    end     
+    end
+
+    it "returns autocomplete JSON when q and autocomplete params are present" do
+      author = create(:author, firstname: "Homer", lastname: "Simpson")
+      allow(Author).to receive(:search).and_return([author])
+
+      get :index, params: { q: "homer", autocomplete: 1 }, format: :json
+
+      expect(response).to have_http_status(:success)
+      body = JSON.parse(response.body)
+      expect(body.first["id"]).to eq(author.id)
+      expect(body.first["fullname"]).to eq(author.fullname)
+    end
   end
 
   describe "GET show" do
