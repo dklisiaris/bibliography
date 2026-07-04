@@ -17,21 +17,23 @@ RSpec.describe ViewTracker::AnalyticsAggregator do
 
   describe ".views_over_time" do
     it "groups impressions by day using date_trunc" do
-      create_impression(created_at: Time.zone.parse("2026-06-01 10:00"))
-      create_impression(created_at: Time.zone.parse("2026-06-01 18:00"))
-      create_impression(created_at: Time.zone.parse("2026-06-02 09:00"))
+      travel_to Time.zone.parse("2026-06-15 12:00") do
+        create_impression(created_at: Time.zone.parse("2026-06-01 10:00"))
+        create_impression(created_at: Time.zone.parse("2026-06-01 18:00"))
+        create_impression(created_at: Time.zone.parse("2026-06-02 09:00"))
 
-      result = described_class.views_over_time(
-        book,
-        duration: 1.month,
-        interval: :day
-      )
+        result = described_class.views_over_time(
+          book,
+          duration: 1.month,
+          interval: :day
+        )
 
-      day_one = Time.zone.parse("2026-06-01 00:00:00 UTC")
-      day_two = Time.zone.parse("2026-06-02 00:00:00 UTC")
+        day_one = Time.zone.parse("2026-06-01 00:00:00 UTC")
+        day_two = Time.zone.parse("2026-06-02 00:00:00 UTC")
 
-      expect(result[day_one]).to eq(2)
-      expect(result[day_two]).to eq(1)
+        expect(result[day_one]).to eq(2)
+        expect(result[day_two]).to eq(1)
+      end
     end
 
     it "raises for unsupported intervals" do
