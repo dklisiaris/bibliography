@@ -109,7 +109,7 @@ gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'certified', '~> 1.0'
 
 # Authorization
-gem 'pundit', '~> 1.0'
+gem 'pundit', '~> 2.5'
 
 # For models with tree parent-child associations
 gem 'acts_as_tree', '~> 2.1'
