@@ -8,7 +8,7 @@ SimpleCov.start 'rails' do
   add_filter '/lib/tasks/'
   
   # Minimum line coverage — raise gradually as specs are un-skipped (Phase 8).
-  minimum_coverage 40
+  minimum_coverage 55
   
   # Track coverage for app directory
   add_group 'Models', 'app/models'
