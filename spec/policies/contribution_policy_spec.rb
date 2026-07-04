@@ -1,28 +1,43 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe ContributionPolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
+RSpec.describe ContributionPolicy, type: :policy do
+  subject { described_class }
 
-  subject { ContributionPolicy }
+  let(:editor) { build(:user, :editor) }
+  let(:user) { build(:user) }
+  let(:contribution) { build(:contribution) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  permissions :create?, :update?, :destroy? do
+    it "grants access to editors" do
+      expect(subject).to permit(editor, contribution)
+    end
+
+    it "denies access to registered users" do
+      expect(subject).not_to permit(user, contribution)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  describe "Scope" do
+    subject { described_class::Scope.new(user, Contribution.all).resolve }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    let!(:contribution) { create(:contribution) }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context "as editor" do
+      let(:user) { create(:user, :editor) }
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      it "includes all contributions" do
+        expect(subject).to include(contribution)
+      end
+    end
+
+    context "as registered user" do
+      let(:user) { create(:user) }
+
+      it "returns no contributions" do
+        expect(subject).to be_empty
+      end
+    end
   end
 end
