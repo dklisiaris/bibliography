@@ -1,28 +1,21 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe PrizePolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
+RSpec.describe PrizePolicy, type: :policy do
+  subject { described_class }
 
-  subject { PrizePolicy }
+  let(:editor) { build(:user, :editor) }
+  let(:user) { build(:user) }
+  let(:prize) { build(:prize) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :index?, :show? do
+    it "grants access to editors" do
+      expect(subject).to permit(editor, prize)
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "denies access to registered users" do
+      expect(subject).not_to permit(user, prize)
+    end
   end
 end

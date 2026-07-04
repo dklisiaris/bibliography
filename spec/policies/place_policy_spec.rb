@@ -1,28 +1,33 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe PlacePolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
+RSpec.describe PlacePolicy, type: :policy do
+  subject { described_class }
 
-  subject { PlacePolicy }
+  let(:user) { build(:user) }
+  let(:editor) { build(:user, :editor) }
+  let(:place) { create(:place) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  permissions :index? do
+    it "grants access to guests" do
+      expect(subject).to permit(nil, place)
+    end
   end
 
   permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access to guests for persisted records" do
+      expect(subject).to permit(nil, place)
+    end
   end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :create?, :update?, :destroy? do
+    it "denies access to registered users" do
+      expect(subject).not_to permit(user, place)
+    end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access to editors" do
+      expect(subject).to permit(editor, place)
+    end
   end
 end

@@ -36,6 +36,10 @@ class ApplicationPolicy
     user && (user.role == 'editor' || user.role == 'admin')
   end
 
+  def admin?
+    user && user.role == 'admin'
+  end
+
   def belongs_to_current_user?
     user.present? && (record.user == user) #|| record.user.profile.privacy == 'is_public'
   end

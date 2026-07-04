@@ -2,26 +2,25 @@
 
 require "rails_helper"
 
-RSpec.describe CategoryPolicy, type: :policy do
+RSpec.describe PagePolicy, type: :policy do
   subject { described_class }
 
   let(:user) { build(:user) }
   let(:guest) { nil }
-  let(:category) { build(:category) }
 
-  permissions :show? do
+  permissions :privacy_policy?, :about?, :contact? do
     it "grants access to guests" do
-      expect(subject).to permit(guest, category)
+      expect(subject).to permit(guest, :page)
     end
   end
 
-  permissions :favourite? do
+  permissions :welcome_guide? do
     it "denies access to guests" do
-      expect(subject).not_to permit(guest, category)
+      expect(subject).not_to permit(guest, :page)
     end
 
     it "grants access to signed-in users" do
-      expect(subject).to permit(user, category)
+      expect(subject).to permit(user, :page)
     end
   end
 end

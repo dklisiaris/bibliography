@@ -2,9 +2,7 @@
 
 class Admin::RedisController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin
-  skip_after_action :verify_authorized
-  skip_after_action :verify_policy_scoped
+  before_action :authorize_redis_access
 
   def index
     @pattern = params[:pattern].presence || '*'
@@ -48,8 +46,8 @@ class Admin::RedisController < ApplicationController
 
   private
 
-  def require_admin
-    redirect_to root_path, alert: 'Access denied' unless current_user&.role == 'admin'
+  def authorize_redis_access
+    authorize :redis, "#{action_name}?", policy_class: Admin::RedisPolicy
   end
 
   def redis

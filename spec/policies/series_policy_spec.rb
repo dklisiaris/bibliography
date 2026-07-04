@@ -1,28 +1,33 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe SeriesPolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
-
+RSpec.describe SeriesPolicy, type: :policy do
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { build(:user) }
+  let(:editor) { build(:user, :editor) }
+  let(:series) { create(:series) }
+
+  permissions :index? do
+    it "grants access to guests" do
+      expect(subject).to permit(nil, series)
+    end
   end
 
   permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access to guests for persisted records" do
+      expect(subject).to permit(nil, series)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :create?, :update?, :destroy? do
+    it "denies access to registered users" do
+      expect(subject).not_to permit(user, series)
+    end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access to editors" do
+      expect(subject).to permit(editor, series)
+    end
   end
 end

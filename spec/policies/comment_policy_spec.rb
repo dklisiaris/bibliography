@@ -1,28 +1,33 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe CommentPolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
-
+RSpec.describe CommentPolicy, type: :policy do
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  let(:author) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:guest) { nil }
+  let(:book) { create(:book) }
+  let(:comment) { Comment.create!(body: "Nice book", user: author, commentable: book) }
+
+  permissions :create?, :new? do
+    it "denies access to guests" do
+      expect(subject).not_to permit(guest, comment)
+    end
+
+    it "grants access to signed-in users" do
+      expect(subject).to permit(other_user, comment)
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :update?, :edit?, :destroy? do
+    it "grants access to the comment author" do
+      expect(subject).to permit(author, comment)
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "denies access to other users" do
+      expect(subject).not_to permit(other_user, comment)
+    end
   end
 end

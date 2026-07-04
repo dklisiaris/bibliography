@@ -1,28 +1,26 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe PublisherPolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
+RSpec.describe PublisherPolicy, type: :policy do
+  subject { described_class }
 
-  subject { PublisherPolicy }
+  let(:guest) { nil }
+  let(:publisher) { build(:publisher) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  permissions :search? do
+    it "grants access to guests" do
+      expect(subject).to permit(guest, publisher)
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :create?, :update?, :destroy? do
+    it "denies access to registered users" do
+      expect(subject).not_to permit(build(:user), publisher)
+    end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access to editors" do
+      expect(subject).to permit(build(:user, :editor), publisher)
+    end
   end
 end

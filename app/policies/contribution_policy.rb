@@ -1,5 +1,5 @@
 class ContributionPolicy < ApplicationPolicy
-  def index
+  def index?
     false
   end
 
