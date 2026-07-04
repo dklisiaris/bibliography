@@ -37,8 +37,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="turbo-cache-control" content="no-cache">
-    <% unless Rails.env.local? %>
-      <meta name="google-analytics-id" content="UA-61773702-1">
+    <% if (google_analytics_id = Rails.application.secrets.GOOGLE_ANALYTICS_ID).present? %>
+      <meta name="google-analytics-id" content="<%= google_analytics_id %>">
     <% end %>
 
     <%= javascript_include_tag 'hotwire', defer: true, type: 'module', data: { turbo_track: 'reload' } %>

@@ -1,13 +1,20 @@
-// Legacy Universal Analytics (UA-61773702-1). Loaded from the bundle so CSP
-// script-src stays :self / :https without unsafe-inline.
-const GA_ID = "UA-61773702-1"
+// Google Analytics loads from the bundle so CSP script-src stays :self / :https
+// without unsafe-inline. The tracking ID comes from <meta name="google-analytics-id">,
+// set from GOOGLE_ANALYTICS_ID in secrets / ENV (see Bibliography::Secrets).
+
+function googleAnalyticsId() {
+  const meta = document.querySelector('meta[name="google-analytics-id"]')
+  const id = meta?.getAttribute("content")?.trim()
+  return id || null
+}
 
 function analyticsEnabled() {
-  return document.querySelector('meta[name="google-analytics-id"]') !== null
+  return googleAnalyticsId() !== null
 }
 
 function loadGoogleAnalytics() {
-  if (!analyticsEnabled() || typeof window.ga === "function") return
+  const id = googleAnalyticsId()
+  if (!id || typeof window.ga === "function") return
 
   window.ga =
     window.ga ||
@@ -21,7 +28,7 @@ function loadGoogleAnalytics() {
   script.src = "https://www.google-analytics.com/analytics.js"
   document.head.appendChild(script)
 
-  window.ga("create", GA_ID, "auto")
+  window.ga("create", id, "auto")
   window.ga("send", "pageview")
 }
 
