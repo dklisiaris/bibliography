@@ -1,8 +1,9 @@
-class ImportPolicy <  Struct.new(:user, :import)
-  def index?        ; admin?; end
-  def import_stuff? ; admin?; end
+class ImportPolicy < ApplicationPolicy
+  def index?
+    admin?
+  end
 
-  def admin?
-    user && user.role == 'admin'
+  def import_stuff?
+    admin?
   end
 end

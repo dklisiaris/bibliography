@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   include PreviewJson
 
   # http_basic_authenticate_with name: ENV["SERVER_USERNAME"],

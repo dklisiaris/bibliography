@@ -1,28 +1,20 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe TaskPolicy do
+require "rails_helper"
 
-  let(:user) { User.new }
-
+RSpec.describe TaskPolicy, type: :policy do
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:admin) { build(:user, :admin) }
+  let(:user) { build(:user) }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :index? do
+    it "grants access to admins" do
+      expect(subject).to permit(admin, :task)
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "denies access to registered users" do
+      expect(subject).not_to permit(user, :task)
+    end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PagePolicy < Struct.new(:user, :page) # :nodoc:
+class PagePolicy < ApplicationPolicy
   def welcome_guide?
     registered?
   end
@@ -15,11 +15,5 @@ class PagePolicy < Struct.new(:user, :page) # :nodoc:
 
   def contact?
     true
-  end
-
-  private
-
-  def registered?
-    user.present?
   end
 end

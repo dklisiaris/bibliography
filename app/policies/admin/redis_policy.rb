@@ -16,10 +16,4 @@ class Admin::RedisPolicy < ApplicationPolicy
   def stats?
     admin?
   end
-
-  private
-
-  def admin?
-    user && user.role == 'admin'
-  end
 end
