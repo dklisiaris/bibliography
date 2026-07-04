@@ -6,7 +6,7 @@ module PreviewJson
   private
 
   def preview_json(records, type)
-    records.map { |record| public_send("#{type}_preview_json", record) }
+    records.map { |record| send("#{type}_preview_json", record) }
   end
 
   def search_results_preview_json(search_results)

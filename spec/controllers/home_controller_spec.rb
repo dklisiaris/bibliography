@@ -51,9 +51,6 @@ RSpec.describe HomeController, :type => :controller do
         search_result_double(Series, [])
       ]
       stub_multi_search(search_results)
-      allow(controller).to receive(:search_results_preview_json).and_return(
-        { results: { books: [{ id: book.id, title: book.title }] } }
-      )
 
       get :search, params: { q: "test", autocomplete: 1 }, format: :json
 
