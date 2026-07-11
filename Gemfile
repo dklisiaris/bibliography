@@ -20,7 +20,7 @@ gem 'propshaft', '~> 1.1'
 # gem 'mini_racer', platforms: :ruby
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.13'
 # gem 'sdoc', '~> 1.1', group: :doc
 gem 'thor', '~> 1.5'
 
@@ -45,7 +45,7 @@ gem 'cssbundling-rails', '~> 1.4'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', '~> 1.24', require: false
 gem 'rexml', '~> 3.4'
 
 group :development, :test do
@@ -70,7 +70,7 @@ end
 group :test do
   gem 'rspec-rails', '~> 6.0'
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 3.5'
+  gem 'faker', '~> 3.8'
   gem 'capybara', '~> 3.40'
   gem 'database_cleaner-active_record', '~> 2.2'
   gem "launchy", '~> 2.5'
@@ -115,7 +115,7 @@ gem 'piet-binary', '~> 0.2.0'
 gem 'mini_magick', '~> 4.9'
 
 # Json support
-gem 'json', '~> 2.19', '>= 2.19.2'
+gem 'json', '~> 2.20'
 
 # Pagination
 gem 'kaminari', '~> 1.2'
@@ -177,7 +177,7 @@ gem 'acts_as_follower', '~> 0.2'
 gem 'greeklish', '~> 0.0.1'
 
 # The Swiss Army bulldozer of slugging and permalink plugins for ActiveRecord
-gem 'friendly_id', '~> 5.4.0'
+gem 'friendly_id', '~> 5.7'
 
 # A ruby library for working with Machine Readable Cataloging
 gem 'marc', '~> 1.0.0'
@@ -224,7 +224,7 @@ group :development do
   # Remove the following if your server does not use RVM
   gem 'capistrano-rvm'
 
-  gem 'capistrano-sidekiq'
+  gem 'capistrano-sidekiq', '~> 3.2'
   gem 'capistrano-rails-console'
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-faster-assets'
@@ -263,20 +263,20 @@ gem 'oj', '~> 3.17.3'
 gem 'stopwords-filter', '~> 0.4.1', require: 'stopwords'
 
 # Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
-gem 'meta-tags', '~> 2.4'
+gem 'meta-tags', '~> 2.23'
 
 # SitemapGenerator is the easiest way to generate Sitemaps in Ruby.
 gem 'sitemap_generator', '~> 6.1'
 
 # A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface.
-gem 'redis', '~> 5.0'
+gem 'redis', '~> 5.4'
 gem 'redis-namespace', '~> 1.11'
 # gem 'redis-rails', '~> 5.0'
 # Web-based Redis browser
 # gem 'redis-browser', '~> 0.5.1'
 
 # Clean ruby syntax for writing and deploying cron jobs.
-gem 'whenever', '~> 0.9.7'
+gem 'whenever', '~> 0.11'
 
 # Loaded only when ENABLE_BETTER_ERRORS=1 (see config/initializers/production_diagnostics.rb)
 gem 'better_errors', '~> 2.10', require: false
@@ -291,4 +291,5 @@ gem 'honeybadger', '~> 5.28'
 gem 'interactor', '~> 3.0'
 
 # RuboCop is a Ruby code style checking and code formatting tool.
-gem 'rubocop', '~> 1.3', require: false
+gem 'rubocop', '~> 1.88', require: false
+gem 'rubocop-rails', '~> 2.33', require: false
